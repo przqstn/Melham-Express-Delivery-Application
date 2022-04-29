@@ -10,12 +10,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MCC_DeliveryApp">
         <activity
+            android:name=".sample"
+            android:exported="false" />
+        <activity
             android:name=".MainUserActivity"
             android:exported="false"
-            android:label="UserMain"/>
-        <activity android:name=".MainActivity"
+            android:label="UserMain" />
+        <activity
+            android:name=".MainActivity"
             android:exported="true">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
