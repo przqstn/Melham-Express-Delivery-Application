@@ -3,13 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/Glyn/AndroidStudioProjects/MCC-Delivery-Repository/app/src/main/res/drawable/graphics_button_1.xml" value="0.2185" />
-        <entry key="..\:/Users/Glyn/AndroidStudioProjects/MCC-Delivery-Repository/app/src/main/res/layout/activity_main.xml" value="0.25" />
-        <entry key="..\:/Users/Glyn/AndroidStudioProjects/MCC-Delivery-Repository/app/src/main/res/layout/activity_main_user.xml" value="0.25" />
+        <entry key="..\:/Users/KvRem/AndroidStudioProjects/MCC_DeliveryApp/app/src/main/res/layout/activity_sign_up_dashboard.xml" value="0.25833333333333336" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
