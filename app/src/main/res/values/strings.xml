@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">MCC_DeliveryApp</string>
+    <string-array name="cityRider">
+        <item>City you'll drive in</item>
+        <item>Manila</item>
+        <item>Cebu</item>
+        <item>Pampanga</item>
+    </string-array>
+    <string-array name="ridervehicletype">
+        <item>Vehicle Type</item>
+        <item>Motorcycle</item>
+        <item>SUV 300kg</item>
+        <item>Van 600kg</item>
+    </string-array>
+
+    <string name="agreeDriverText"><u>I agree to Melham Express's Terms &amp; Conditions and Privacy Policy</u></string>
 </resources>
