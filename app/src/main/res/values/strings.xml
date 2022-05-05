@@ -2,11 +2,11 @@
     <string name="app_name">MCC_DeliveryApp</string>
 
 
-    <string name="agreeDriverText"><u>I agree to Melham Express's Terms &amp; Conditions and Privacy Policy</u></string>
+    <string name="agreeDriverText"><u>I agree to Melham Express\'s Terms &amp; Conditions and Privacy Policy</u></string>
 
 
     <string-array name="cityRider">
-        <item>City You'll Drive In</item>
+        <item>City You\'ll Drive In</item>
         <item>Manila</item>
         <item>Cebu</item>
         <item>Pampanga</item>
