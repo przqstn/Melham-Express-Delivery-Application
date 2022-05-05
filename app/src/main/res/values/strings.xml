@@ -4,12 +4,14 @@
 
     <string name="agreeDriverText"><u>I agree to Melham Express's Terms &amp; Conditions and Privacy Policy</u></string>
 
+
     <string-array name="cityRider">
         <item>City You'll Drive In</item>
         <item>Manila</item>
         <item>Cebu</item>
         <item>Pampanga</item>
     </string-array>
+
 
     <string-array name="ridervehicletype">
         <item>Vehicle Type</item>

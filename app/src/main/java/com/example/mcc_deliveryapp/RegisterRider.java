@@ -26,6 +26,8 @@ public class RegisterRider extends AppCompatActivity {
 
         Spinner spinCity = findViewById(R.id.spinnerCityDriver);
         Spinner spinVehicle = findViewById(R.id.spinnerVehicleDriver);
+
+        //Getting City Rider Item List
         final List<String> cityList = new ArrayList<String>(R.array.cityRider);
         ArrayAdapter<String> adapterCity = new ArrayAdapter<String>(this,R.layout.spinner_items_1,cityList)
         {
@@ -58,6 +60,8 @@ public class RegisterRider extends AppCompatActivity {
             }
 
         };
+
+        //Getting Vehicle Rider Type Item List
         final List<String> VehicleList = new ArrayList<String>(R.array.ridervehicletype);
         ArrayAdapter<String> adapterVehicle = new ArrayAdapter<String>(this,R.layout.spinner_items_1,VehicleList)
         {
@@ -95,6 +99,7 @@ public class RegisterRider extends AppCompatActivity {
         spinVehicle.setAdapter(adapterVehicle);
         spinCity.setAdapter(adapterCity);
 
+        //Spinner City
         spinCity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -110,6 +115,7 @@ public class RegisterRider extends AppCompatActivity {
             }
         });
 
+        //Spinner Rider Vehicle Type
         spinVehicle.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {

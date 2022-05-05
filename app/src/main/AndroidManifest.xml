@@ -11,7 +11,8 @@
         android:theme="@style/Theme.MCC_DeliveryApp">
         <activity
             android:name=".RegisterRider"
-            android:exported="false" />
+            android:exported="true" >
+        </activity>
         <activity
             android:name=".MainUserActivity"
             android:exported="false"
