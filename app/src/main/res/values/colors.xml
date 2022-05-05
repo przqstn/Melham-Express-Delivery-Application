@@ -10,7 +10,7 @@
 
     <color name="button_color1">#223272</color>
     <color name="icon_color">#A7A9B7</color>
-    <color name="background">#EEEFFA</color>
+    <color name="background_color">#EEEFFA</color>
 
     <color name="strokes">#0E142C</color>
     <color name="textGray">#A7A9B7</color>

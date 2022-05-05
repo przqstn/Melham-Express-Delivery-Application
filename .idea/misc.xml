@@ -3,15 +3,27 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/Cemine/AndroidStudioProjects/MCC-Delivery-Repository/app/src/main/res/layout/activity_main.xml" value="0.1" />
-        <entry key="..\:/Users/Glyn/AndroidStudioProjects/MCC-Delivery-Repository/app/src/main/res/drawable-v24/graphics_edittext_2.xml" value="0.217" />
-        <entry key="..\:/Users/Glyn/AndroidStudioProjects/MCC-Delivery-Repository/app/src/main/res/drawable/graphics_button_1.xml" value="0.217" />
-        <entry key="..\:/Users/Glyn/AndroidStudioProjects/MCC-Delivery-Repository/app/src/main/res/drawable/graphics_edittext_1.xml" value="0.2185" />
-        <entry key="..\:/Users/Glyn/AndroidStudioProjects/MCC-Delivery-Repository/app/src/main/res/layout/activity_login_dashboard.xml" value="0.25" />
-        <entry key="..\:/Users/Glyn/AndroidStudioProjects/MCC-Delivery-Repository/app/src/main/res/layout/activity_main.xml" value="0.14990942028985507" />
-        <entry key="..\:/Users/Glyn/AndroidStudioProjects/MCC-Delivery-Repository/app/src/main/res/layout/activity_register_rider.xml" value="0.25" />
-        <entry key="..\:/Users/Glyn/AndroidStudioProjects/MCC-Delivery-Repository/app/src/main/res/layout/activity_sign_up_dashboard.xml" value="0.25" />
-        <entry key="..\:/Users/Glyn/AndroidStudioProjects/MCC-Delivery-Repository/app/src/main/res/layout/spinner_items_1.xml" value="0.25" />
+        <entry key="..\:/Users/johne/StudioProjects/MCC-Delivery-Repository/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
+        <entry key="..\:/Users/johne/StudioProjects/MCC-Delivery-Repository/app/src/main/res/drawable/edit_text_round.xml" value="0.1" />
+        <entry key="..\:/Users/johne/StudioProjects/MCC-Delivery-Repository/app/src/main/res/drawable/graphics_button_1.xml" value="0.1" />
+        <entry key="..\:/Users/johne/StudioProjects/MCC-Delivery-Repository/app/src/main/res/drawable/ic_baseline_local_phone_24.xml" value="0.1" />
+        <entry key="..\:/Users/johne/StudioProjects/MCC-Delivery-Repository/app/src/main/res/drawable/ic_baseline_lock_24.xml" value="0.1" />
+        <entry key="..\:/Users/johne/StudioProjects/MCC-Delivery-Repository/app/src/main/res/drawable/ic_baseline_person_outline_24.xml" value="0.1" />
+        <entry key="..\:/Users/johne/StudioProjects/MCC-Delivery-Repository/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
+        <entry key="..\:/Users/johne/StudioProjects/MCC-Delivery-Repository/app/src/main/res/drawable/ic_person.xml" value="0.1" />
+        <entry key="..\:/Users/johne/StudioProjects/MCC-Delivery-Repository/app/src/main/res/drawable/tab_indicator.xml" value="0.1" />
+        <entry key="..\:/Users/johne/StudioProjects/MCC-Delivery-Repository/app/src/main/res/font/font.xml" value="0.1648148148148148" />
+        <entry key="..\:/Users/johne/StudioProjects/MCC-Delivery-Repository/app/src/main/res/layout/activity_login.xml" value="0.16" />
+        <entry key="..\:/Users/johne/StudioProjects/MCC-Delivery-Repository/app/src/main/res/layout/activity_login_dashboard.xml" value="0.264" />
+        <entry key="..\:/Users/johne/StudioProjects/MCC-Delivery-Repository/app/src/main/res/layout/activity_main.xml" value="0.152" />
+        <entry key="..\:/Users/johne/StudioProjects/MCC-Delivery-Repository/app/src/main/res/layout/activity_main_user.xml" value="0.2" />
+        <entry key="..\:/Users/johne/StudioProjects/MCC-Delivery-Repository/app/src/main/res/layout/activity_register_rider.xml" value="0.176" />
+        <entry key="..\:/Users/johne/StudioProjects/MCC-Delivery-Repository/app/src/main/res/layout/activity_sample.xml" value="0.17028985507246377" />
+        <entry key="..\:/Users/johne/StudioProjects/MCC-Delivery-Repository/app/src/main/res/layout/activity_sign_up_dashboard.xml" value="0.1" />
+        <entry key="..\:/Users/johne/StudioProjects/MCC-Delivery-Repository/app/src/main/res/layout/fragment_login.xml" value="0.1" />
+        <entry key="..\:/Users/johne/StudioProjects/MCC-Delivery-Repository/app/src/main/res/layout/fragment_sign_in.xml" value="0.264" />
+        <entry key="..\:/Users/johne/StudioProjects/MCC-Delivery-Repository/app/src/main/res/layout/fragment_sign_up.xml" value="0.2" />
+        <entry key="..\:/Users/johne/StudioProjects/MCC-Delivery-Repository/app/src/main/res/layout/spinner_items_1.xml" value="0.1" />
       </map>
     </option>
   </component>
