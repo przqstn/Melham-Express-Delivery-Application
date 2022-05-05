@@ -89,6 +89,7 @@
         android:layout_width="350dp"
         android:layout_height="60dp"
         android:layout_marginTop="60dp"
+        android:textColor="@color/white"
         android:background="@drawable/graphics_button_1"
         android:fontFamily="@font/alegreya"
         android:text="Get Started"
