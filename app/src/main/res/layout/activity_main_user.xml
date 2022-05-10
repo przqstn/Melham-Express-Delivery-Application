@@ -43,6 +43,7 @@
         android:layout_width="327dp"
         android:layout_height="50dp"
         android:textColor="#FAFAFA"
+        android:contentDescription="tabLayout"
         android:background="@drawable/tab_indicator"
         app:tabIndicatorColor="@color/white"
         android:backgroundTint="#FAFAFA"
