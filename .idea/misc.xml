@@ -5,19 +5,26 @@
       <map>
         <entry key="..\:/Users/Cemine/AndroidStudioProjects/MCC-Delivery-Repository/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/Glyn/AndroidStudioProjects/MCC-Delivery-Repository/app/src/main/res/drawable-v24/graphics_edittext_2.xml" value="0.217" />
-        <entry key="..\:/Users/Glyn/AndroidStudioProjects/MCC-Delivery-Repository/app/src/main/res/drawable/edit_text_round.xml" value="0.217" />
         <entry key="..\:/Users/Glyn/AndroidStudioProjects/MCC-Delivery-Repository/app/src/main/res/drawable/graphics_button_1.xml" value="0.217" />
         <entry key="..\:/Users/Glyn/AndroidStudioProjects/MCC-Delivery-Repository/app/src/main/res/drawable/graphics_edittext_1.xml" value="0.2185" />
         <entry key="..\:/Users/Glyn/AndroidStudioProjects/MCC-Delivery-Repository/app/src/main/res/layout/activity_login_dashboard.xml" value="0.25" />
         <entry key="..\:/Users/Glyn/AndroidStudioProjects/MCC-Delivery-Repository/app/src/main/res/layout/activity_main.xml" value="0.14990942028985507" />
-        <entry key="..\:/Users/Glyn/AndroidStudioProjects/MCC-Delivery-Repository/app/src/main/res/layout/activity_main_rider.xml" value="0.25" />
-        <entry key="..\:/Users/Glyn/AndroidStudioProjects/MCC-Delivery-Repository/app/src/main/res/layout/activity_main_user.xml" value="0.17572463768115942" />
         <entry key="..\:/Users/Glyn/AndroidStudioProjects/MCC-Delivery-Repository/app/src/main/res/layout/activity_register_rider.xml" value="0.25" />
         <entry key="..\:/Users/Glyn/AndroidStudioProjects/MCC-Delivery-Repository/app/src/main/res/layout/activity_sign_up_dashboard.xml" value="0.25" />
-        <entry key="..\:/Users/Glyn/AndroidStudioProjects/MCC-Delivery-Repository/app/src/main/res/layout/fragment_rider_phonenum_verify.xml" value="0.25" />
         <entry key="..\:/Users/Glyn/AndroidStudioProjects/MCC-Delivery-Repository/app/src/main/res/layout/spinner_items_1.xml" value="0.25" />
+        <entry key="..\:/Users/KvRem/AndroidStudioProjects/MCC_DeliveryApp/app/src/main/res/drawable/border.xml" value="0.1725" />
+        <entry key="..\:/Users/KvRem/AndroidStudioProjects/MCC_DeliveryApp/app/src/main/res/drawable/bottom_sheet_background.xml" value="0.1725" />
+        <entry key="..\:/Users/KvRem/AndroidStudioProjects/MCC_DeliveryApp/app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.1725" />
+        <entry key="..\:/Users/KvRem/AndroidStudioProjects/MCC_DeliveryApp/app/src/main/res/layout/activity_main.xml" value="0.15885416666666666" />
+        <entry key="..\:/Users/KvRem/AndroidStudioProjects/MCC_DeliveryApp/app/src/main/res/layout/activity_main_rider.xml" value="0.25833333333333336" />
         <entry key="..\:/Users/KvRem/AndroidStudioProjects/MCC_DeliveryApp/app/src/main/res/layout/activity_main_user.xml" value="0.25833333333333336" />
-        <entry key="..\:/Users/KvRem/AndroidStudioProjects/MCC_DeliveryApp/app/src/main/res/layout/fragment_sign_in.xml" value="0.1546875" />
+        <entry key="..\:/Users/KvRem/AndroidStudioProjects/MCC_DeliveryApp/app/src/main/res/layout/activity_register_rider.xml" value="0.25833333333333336" />
+        <entry key="..\:/Users/KvRem/AndroidStudioProjects/MCC_DeliveryApp/app/src/main/res/layout/activity_userdashboard.xml" value="0.24283480979676916" />
+        <entry key="..\:/Users/KvRem/AndroidStudioProjects/MCC_DeliveryApp/app/src/main/res/layout/fragment_rider_phonenum_verify.xml" value="0.25833333333333336" />
+        <entry key="..\:/Users/KvRem/AndroidStudioProjects/MCC_DeliveryApp/app/src/main/res/layout/fragment_sign_in.xml" value="0.264" />
+        <entry key="..\:/Users/KvRem/AndroidStudioProjects/MCC_DeliveryApp/app/src/main/res/layout/fragment_sign_up.xml" value="0.25833333333333336" />
+        <entry key="..\:/Users/KvRem/AndroidStudioProjects/MCC_DeliveryApp/app/src/main/res/layout/fragment_user_phonenum_verify.xml" value="0.25833333333333336" />
+        <entry key="..\:/Users/KvRem/AndroidStudioProjects/MCC_DeliveryApp/app/src/main/res/layout/user_bottom_sheet.xml" value="0.25833333333333336" />
       </map>
     </option>
   </component>

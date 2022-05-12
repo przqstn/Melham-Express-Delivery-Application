@@ -1,4 +1,4 @@
-package com.example.mcc_deliveryapp;
+package com.example.mcc_deliveryapp.User;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;

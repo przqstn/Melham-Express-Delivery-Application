@@ -1,4 +1,4 @@
-package com.example.mcc_deliveryapp;
+package com.example.mcc_deliveryapp.User;
 
 import android.os.Bundle;
 
@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.example.mcc_deliveryapp.R;
 import com.google.android.material.tabs.TabLayout;
 public class MainUserActivity extends AppCompatActivity {
 

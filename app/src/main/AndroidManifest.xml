@@ -10,23 +10,23 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MCC_DeliveryApp">
         <activity
-            android:name=".RegisterRider"
-            android:exported="true" >
-        </activity>
-        <activity
-            android:name=".MainUserActivity"
-            android:exported="true"
-            android:label="UserMain" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            android:name=".User.userdashboard"
+            android:exported="true" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity
+            android:name=".Rider.RegisterRider"
+            android:exported="true"/>
+        <activity
+            android:name=".User.MainUserActivity"
+            android:exported="true"
+            android:label="UserMain"/>
         <activity
             android:name=".MainActivity"
             android:exported="true">
-
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 

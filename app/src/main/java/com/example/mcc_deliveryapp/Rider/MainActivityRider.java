@@ -1,8 +1,10 @@
-package com.example.mcc_deliveryapp;
+package com.example.mcc_deliveryapp.Rider;
+
+import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.os.Bundle;
+import com.example.mcc_deliveryapp.R;
 
 public class MainActivityRider extends AppCompatActivity {
 

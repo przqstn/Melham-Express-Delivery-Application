@@ -1,13 +1,8 @@
-package com.example.mcc_deliveryapp;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
+package com.example.mcc_deliveryapp.Rider;
 
 import android.app.Dialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -21,9 +16,12 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.mcc_deliveryapp.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.gms.tasks.TaskExecutors;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -32,10 +30,6 @@ import com.google.firebase.auth.PhoneAuthProvider;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class RegisterRider extends AppCompatActivity {
@@ -68,15 +62,11 @@ public class RegisterRider extends AppCompatActivity {
         adapterCity.setDropDownViewResource(R.layout.spinner_items_1);
         spinCity.setAdapter(adapterCity);
 
-
         //Getting Vehicle Rider Type Item List
 
         ArrayAdapter<CharSequence> adapterVehicle = ArrayAdapter.createFromResource (this,R.array.ridervehicletype,R.layout.spinner_items_1);
         adapterVehicle.setDropDownViewResource(R.layout.spinner_items_1);
         spinVehicle.setAdapter(adapterVehicle);
-
-
-
 
         //Spinner City
         spinCity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -174,9 +164,13 @@ public class RegisterRider extends AppCompatActivity {
 
             }
         });
+
+
+
         EditText etVerifyCode = (EditText) VerifyNum.findViewById(R.id.etVerify);
         etCode = (EditText) VerifyNum.findViewById(R.id.etVerify);
         Button verify = (Button) VerifyNum.findViewById(R.id.btnVerify);
+
         verify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -190,14 +184,8 @@ public class RegisterRider extends AppCompatActivity {
                 verifyCode(code);
             }
         });
-
-
-
-
-
     }
-    private void sendVerificationCodeToUser(String phoneNo)
-    {
+    private void sendVerificationCodeToUser(String phoneNo) {
         PhoneAuthProvider.getInstance().verifyPhoneNumber("+63" + phoneNo,60, TimeUnit.SECONDS, this,mCallBacks);
     }
 
@@ -231,8 +219,7 @@ public class RegisterRider extends AppCompatActivity {
     };
 
 
-    private void verifyCode(String code)
-    {
+    private void verifyCode(String code) {
         PhoneAuthCredential credential = PhoneAuthProvider.getCredential(verificationCodeBySystem,code);
 
         signInByCredential(credential);
@@ -248,7 +235,7 @@ public class RegisterRider extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful())
                 {
-                    Intent intent = new Intent(RegisterRider.this,MainActivityRider.class);
+                    Intent intent = new Intent(RegisterRider.this, MainActivityRider.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
                 }

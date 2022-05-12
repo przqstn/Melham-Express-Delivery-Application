@@ -14,7 +14,8 @@
 
     <color name="strokes">#0E142C</color>
     <color name="textGray">#A7A9B7</color>
-
+    <color name="secondary_text">#757575</color>
+    <color name="color_divider">#BAB3B9</color>
 
 
 </resources>
