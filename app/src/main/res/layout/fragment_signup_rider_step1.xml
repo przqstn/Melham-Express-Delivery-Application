@@ -21,10 +21,10 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/btnRegRiderInfo"
         android:layout_width="250dp"
         android:layout_height="55dp"
-        android:layout_marginBottom="50dp"
+        android:layout_marginBottom="20dp"
         android:gravity="center"
         android:background="@drawable/graphics_button_1"
         android:textColor="@color/white"
@@ -90,15 +90,18 @@
                 android:textStyle="bold"
                 android:textSize="20sp"
                 android:textColor="@color/black"/>
+
             <EditText
                 android:id="@+id/etRiderDateofBirth"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginBottom="30dp"
-                android:paddingLeft="20dp"
+                android:background="@drawable/graphics_edittext_2"
+                android:editable="false"
+                android:focusable="false"
+                android:clickable="true"
                 android:hint="Date of Birth"
-
-                android:background="@drawable/graphics_edittext_2"/>
+                android:paddingLeft="20dp" />
             <EditText
                 android:id="@+id/etRiderDriverLicense"
                 android:layout_width="match_parent"
@@ -121,21 +124,12 @@
                 android:id="@+id/etRiderCurrentAddress"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_marginBottom="30dp"
+                android:layout_marginBottom="50dp"
                 android:paddingLeft="20dp"
                 android:hint="Current address"
 
                 android:background="@drawable/graphics_edittext_2"/>
 
-            <EditText
-                android:id="@+id/etRiderCity"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginBottom="30dp"
-                android:paddingLeft="20dp"
-                android:hint="City"
-
-                android:background="@drawable/graphics_edittext_2"/>
             <TextView
                 android:id="@+id/txtRiderVehicleInformation"
                 android:layout_width="match_parent"
