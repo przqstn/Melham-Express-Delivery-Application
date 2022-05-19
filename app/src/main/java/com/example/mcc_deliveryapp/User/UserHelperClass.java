@@ -3,8 +3,14 @@ package com.example.mcc_deliveryapp.User;
 public class UserHelperClass {
 	String userFullname,UserPhone,UserPass,UserCPass;
 
+	String passwordHash;
+
 	public UserHelperClass() {
 
+	}
+
+	public UserHelperClass(String passwordHash) {
+		this.passwordHash = passwordHash;
 	}
 
 	public UserHelperClass(String userFullname, String userPhone, String userPass, String userCPass) {
@@ -45,4 +51,13 @@ public class UserHelperClass {
 	public void setUserCPass(String userCPass) {
 		UserCPass = userCPass;
 	}
+
+	public String getPasswordHash() {
+		return passwordHash;
+	}
+
+	public void setPasswordHash(String passwordHash) {
+		this.passwordHash = passwordHash;
+	}
+
 }
