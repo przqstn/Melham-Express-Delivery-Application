@@ -83,7 +83,6 @@ public class RegisterRider extends AppCompatActivity {
         ArrayAdapter<CharSequence> adapterVehicle = ArrayAdapter.createFromResource (this,R.array.ridervehicletype,R.layout.spinner_items_1);
         adapterVehicle.setDropDownViewResource(R.layout.spinner_items_1);
         spinVehicle.setAdapter(adapterVehicle);
-
         //Spinner City
         spinCity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -149,8 +148,6 @@ public class RegisterRider extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-
-
                 if(TextUtils.isEmpty(etPhoneNum.getText().toString()))
                 {
                     etPhoneNum.setError("Required");
@@ -184,7 +181,7 @@ public class RegisterRider extends AppCompatActivity {
         regRiderInfo = new Dialog(RegisterRider.this);
         regRiderInfo.setContentView(R.layout.fragment_signup_rider_step1);
         regRiderInfo.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT);
-        regRiderInfo.setCancelable(false);
+        regRiderInfo.setCancelable(true);
         regRiderInfo.getWindow().getAttributes().windowAnimations = R.style.animation;
 
 
@@ -243,7 +240,6 @@ public class RegisterRider extends AppCompatActivity {
             }
         });
 
-
         btnRegRiderInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -280,7 +276,6 @@ public class RegisterRider extends AppCompatActivity {
 
                 rootie = db.getReference();
 
-
                 HashMap riderInfo = new HashMap<>();
 
                 riderInfo.put("city",spinCity.getSelectedItem().toString());
@@ -294,9 +289,11 @@ public class RegisterRider extends AppCompatActivity {
                 riderInfo.put("vehicleplatenumber",riderVehiclePlateNumber);
                 riderInfo.put("manufactureryear",riderVehicleManufacturerYear);
 
-                rootie.child("Rider").child(userCurrent.getUid()).setValue(riderInfo).addOnCompleteListener(new OnCompleteListener<Void>() {
+                rootie.child("riders").child(userCurrent.getUid()).setValue(riderInfo).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
+                        Intent intent = new Intent(RegisterRider.this, rider_dashboard.class);
+                        startActivity(intent);
                         Toast.makeText(getApplicationContext(),"Registered Successfully",Toast.LENGTH_SHORT).show();
                         regRiderInfo.dismiss();
 
@@ -310,7 +307,8 @@ public class RegisterRider extends AppCompatActivity {
 
     }
 
-    private String getTodaysDate() {
+    private String getTodaysDate()
+    {
         Calendar cal = Calendar.getInstance();
         int year = cal.get(Calendar.YEAR);
         int month = cal.get(Calendar.MONTH);
@@ -328,14 +326,13 @@ public class RegisterRider extends AppCompatActivity {
          return ett.getText().toString();
     }
 
-
-
     private String makeDateString(int day,int month,int year)
     {
         return getMonthFormat(month) + " " + day + " " + year;
     }
 
-    private String getMonthFormat(int month) {
+    private String getMonthFormat(int month)
+    {
         if(month == 1)
             return "JAN";
 
@@ -387,11 +384,13 @@ public class RegisterRider extends AppCompatActivity {
         }
     }
 
-    private void sendVerificationCodeToUser(String phoneNo) {
+    private void sendVerificationCodeToUser(String phoneNo)
+    {
         PhoneAuthProvider.getInstance().verifyPhoneNumber("+63" + phoneNo,60, TimeUnit.SECONDS, this,mCallBacks);
     }
 
-    private PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallBacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+    private PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallBacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks()
+    {
 
         @Override
         public void onCodeSent(@NonNull String s, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
@@ -421,7 +420,8 @@ public class RegisterRider extends AppCompatActivity {
     };
 
 
-    private void verifyCode(String code) {
+    private void verifyCode(String code)
+    {
         PhoneAuthCredential credential = PhoneAuthProvider.getCredential(verificationCodeBySystem,code);
 
         signInByCredential(credential);

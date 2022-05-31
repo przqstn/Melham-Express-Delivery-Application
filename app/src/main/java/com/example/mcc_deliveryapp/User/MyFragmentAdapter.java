@@ -17,6 +17,7 @@ public class MyFragmentAdapter extends FragmentStateAdapter {
     public Fragment createFragment(int position) {
         if (position == 1){
             return new signUpFragment();
+
         }
         return new signInFragment();
     }

@@ -11,9 +11,11 @@
     <color name="button_color1">#223272</color>
     <color name="icon_color">#A7A9B7</color>
     <color name="background_color">#EEEFFA</color>
-
+    <color name="text_details">#B4B4B4</color>
     <color name="strokes">#0E142C</color>
     <color name="textGray">#A7A9B7</color>
+    <color name="border">#C4c4c4</color>
+    <color name="color_background">#CBEEEE</color>
     <color name="secondary_text">#757575</color>
     <color name="color_divider">#BAB3B9</color>
 

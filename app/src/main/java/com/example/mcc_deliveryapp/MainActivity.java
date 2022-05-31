@@ -6,8 +6,6 @@ import android.os.Handler;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.mcc_deliveryapp.User.MainUserActivity;
-
 public class MainActivity extends AppCompatActivity {
 
 	@Override
@@ -16,7 +14,7 @@ public class MainActivity extends AppCompatActivity {
 		setContentView(R.layout.activity_main);
 
 		Handler handler = new Handler();
-		Intent intent = new Intent(this, MainUserActivity.class);
+		Intent intent = new Intent(this, MainActivity2.class);
 		Runnable r = new Runnable() {
 			@Override
 			public void run() {

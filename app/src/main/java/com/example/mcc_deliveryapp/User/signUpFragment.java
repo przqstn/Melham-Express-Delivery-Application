@@ -84,16 +84,18 @@ public class signUpFragment extends Fragment {
 
                 else{
                     root = FirebaseDatabase.getInstance();
-                    DbRef = root.getReference("User Registration");
-
+                    DbRef = root.getReference("users");
                     //Getting the value of The given info in sign up to store in firebase
                     String fullname = editTxt_fullname.getEditableText().toString();
                     String phoneNum = editTxt_phoneNum.getEditableText().toString();
                     String pass = editTxt_password.getEditableText().toString();
                     String Cpass = editTxt_Cpassword.getEditableText().toString();
                     String passwordhash = txt_hashpassword.getText().toString();
+
+
+
                     //user helper class in order to store the the given info in sign up form
-                    UserHelperClass userHelperClass = new UserHelperClass(fullname,phoneNum,passwordhash,passwordhash);
+                    UserHelperClass userHelperClass = new UserHelperClass(fullname,phoneNum,pass,Cpass);
                     DbRef.child(phoneNum).setValue(userHelperClass);
                     Toast.makeText(getContext(),"Account Successfully Created",Toast.LENGTH_SHORT).show();
                     //Implementing the Clear Section in Sign up after the Creation of Account

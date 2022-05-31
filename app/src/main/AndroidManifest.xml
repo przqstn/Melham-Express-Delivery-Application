@@ -10,21 +10,50 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MCC_DeliveryApp">
         <activity
+            android:name=".Rider.rider_dashboard2"
+            android:exported="false" />
+        <activity
+            android:name=".Rider.rider_dashboard1"
+            android:exported="false" />
+        <activity
+            android:name=".Rider.rider_dashboard"
+            android:exported="true" />
+        <activity
+            android:name=".MainActivity2"
+            android:exported="false" />
+        <activity
+            android:name=".User.user_waitingdriver"
+            android:exported="false" />
+        <activity
+            android:name=".User.user_driverfound"
+            android:exported="false"
+            android:label="@string/title_activity_user_driverfound"
+            android:theme="@style/Theme.MCC_DeliveryApp.NoActionBar" />
+        <activity
+            android:name=".User.user_findingrider"
+            android:exported="false" />
+        <activity
+            android:name=".User.user_checkrate"
+            android:exported="false" />
+        <activity
             android:name=".User.userdashboard"
             android:exported="true" />
-
         <activity
             android:name=".Rider.RegisterRider"
-            android:exported="true"/>
+            android:exported="true" />
+        <activity
+            android:name=".Rider.MainActivityRider"
+            android:exported="true" />
         <activity
             android:name=".User.MainUserActivity"
             android:exported="true"
-            android:label="UserMain"/>
+            android:label="UserMain" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

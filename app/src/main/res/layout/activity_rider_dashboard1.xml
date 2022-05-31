@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Rider.rider_dashboard1">
+    <ScrollView
+        android:layout_width="410dp"
+        android:layout_height="598dp"
+        android:layout_marginBottom="30dp"
+        android:paddingBottom="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.178">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/btn_pckup"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:backgroundTint="@color/button_color1"
+                android:drawableRight="@drawable/questionmark"
+                android:fontFamily="@font/alegreya"
+                android:text="(KM) Go Pick Up Now"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="16dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="41dp"
+                android:drawableLeft="@drawable/pckuppoint"
+                android:fontFamily="@font/alegreya"
+                android:gravity="center_vertical"
+                android:text="   Location"
+                android:textColor="@color/black"
+                android:textSize="15dp"
+                tools:layout_editor_absoluteX="25dp"
+                tools:layout_editor_absoluteY="329dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="43dp"
+                android:drawableLeft="@drawable/locationpin"
+                android:fontFamily="@font/alegreya"
+                android:gravity="center_vertical"
+                android:text="   Location"
+                android:textColor="@color/black"
+                android:textSize="15dp"
+                tools:layout_editor_absoluteX="2dp"
+                tools:layout_editor_absoluteY="371dp" />
+
+            <TextView
+                android:layout_width="254dp"
+                android:layout_height="43dp"
+                android:fontFamily="@font/alegreya"
+                android:gravity=""
+                android:text="Type of vehicle:"
+                android:textColor="@color/black"
+                android:textSize="15dp"
+                tools:layout_editor_absoluteX="6dp"
+                tools:layout_editor_absoluteY="410dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="42dp"
+                android:layout_alignBottom="@+id/button"
+                android:background="@drawable/borders03"
+                android:fontFamily="@font/alegreya"
+                android:gravity="center"
+                android:text="remarks"
+                android:textColor="@color/black"
+                android:textSize="15dp"
+                tools:layout_editor_absoluteX="1dp"
+                tools:layout_editor_absoluteY="189dp" />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:fontFamily="@font/alegreya"
+                android:gravity=""
+                android:paddingLeft="190dp"
+                android:text="Price: Amount"
+                android:textColor="@color/black"
+                android:textSize="15dp"
+                tools:layout_editor_absoluteX="1dp"
+                tools:layout_editor_absoluteY="450dp" />
+
+            <Button
+                android:id="@+id/button1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/button_color1"
+                android:drawableRight="@drawable/questionmark"
+                android:fontFamily="@font/alegreya"
+                android:text="Recently pick up"
+                tools:layout_editor_absoluteX="24dp"
+                tools:layout_editor_absoluteY="282dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="41dp"
+                android:drawableLeft="@drawable/pckuppoint"
+                android:fontFamily="@font/alegreya"
+                android:gravity="center_vertical"
+                android:text="   Location"
+                android:textColor="@color/black"
+                android:textSize="15dp"
+                tools:layout_editor_absoluteX="25dp"
+                tools:layout_editor_absoluteY="329dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="43dp"
+                android:drawableLeft="@drawable/locationpin"
+                android:fontFamily="@font/alegreya"
+                android:gravity="center_vertical"
+                android:text="   Location"
+                android:textColor="@color/black"
+                android:textSize="15dp"
+                tools:layout_editor_absoluteX="2dp"
+                tools:layout_editor_absoluteY="371dp" />
+
+            <TextView
+                android:layout_width="254dp"
+                android:layout_height="43dp"
+                android:fontFamily="@font/alegreya"
+                android:gravity=""
+                android:text="Type of vehicle:"
+                android:textColor="@color/black"
+                android:textSize="15dp"
+                tools:layout_editor_absoluteX="6dp"
+                tools:layout_editor_absoluteY="410dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:fontFamily="@font/alegreya"
+                android:gravity=""
+                android:paddingLeft="190dp"
+                android:text="Price: Amount"
+                android:textColor="@color/black"
+                android:textSize="15dp"
+                tools:layout_editor_absoluteX="1dp"
+                tools:layout_editor_absoluteY="450dp" />
+
+
+            <Button
+                android:id="@+id/button2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/button_color1"
+                android:drawableRight="@drawable/questionmark"
+                android:fontFamily="@font/alegreya"
+                android:text="Recently pick up"
+                tools:layout_editor_absoluteX="24dp"
+                tools:layout_editor_absoluteY="282dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="41dp"
+                android:drawableLeft="@drawable/pckuppoint"
+                android:fontFamily="@font/alegreya"
+                android:gravity="center_vertical"
+                android:text="   Location"
+                android:textColor="@color/black"
+                android:textSize="15dp"
+                tools:layout_editor_absoluteX="25dp"
+                tools:layout_editor_absoluteY="329dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="43dp"
+                android:drawableLeft="@drawable/locationpin"
+                android:fontFamily="@font/alegreya"
+                android:gravity="center_vertical"
+                android:text="   Location"
+                android:textColor="@color/black"
+                android:textSize="15dp"
+                tools:layout_editor_absoluteX="2dp"
+                tools:layout_editor_absoluteY="371dp" />
+
+            <TextView
+                android:layout_width="254dp"
+                android:layout_height="43dp"
+                android:fontFamily="@font/alegreya"
+                android:gravity=""
+                android:text="Type of vehicle:"
+                android:textColor="@color/black"
+                android:textSize="15dp"
+                tools:layout_editor_absoluteX="6dp"
+                tools:layout_editor_absoluteY="410dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginBottom="30dp"
+                android:fontFamily="@font/alegreya"
+                android:gravity=""
+                android:paddingLeft="190dp"
+                android:text="Price: Amount"
+                android:textColor="@color/black"
+                android:textSize="15dp"
+                tools:layout_editor_absoluteX="1dp"
+                tools:layout_editor_absoluteY="450dp" />
+
+        </LinearLayout>
+    </ScrollView>
+
+    <ImageButton
+        android:id="@+id/btn_pickup"
+        android:layout_width="75dp"
+        android:layout_height="81dp"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/sdpickup"
+        android:backgroundTint="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.074"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.998"></ImageButton>
+
+    <TextView
+        android:id="@+id/txt_pickup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/alegreya"
+        android:text="Pick up"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.111"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.995" />
+
+    <ImageButton
+        android:id="@+id/btn_records"
+        android:layout_width="75dp"
+        android:layout_height="81dp"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/records"
+        android:backgroundTint="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.357"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.998" />
+
+    <TextView
+        android:id="@+id/txt_records"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/alegreya"
+        android:text="Records"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.367"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.995" />
+
+    <ImageButton
+        android:id="@+id/btn_wallet"
+        android:layout_width="75dp"
+        android:layout_height="81dp"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/wallet"
+        android:backgroundTint="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.642"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/txt_wallet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/alegreya"
+        android:text="Wallet"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.628"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.997" />
+
+    <ImageButton
+        android:id="@+id/btn_profile"
+        android:layout_width="75dp"
+        android:layout_height="81dp"
+        android:backgroundTint="@color/white"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/profile2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.922"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/txt_profile2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/alegreya"
+        android:text="Profile"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.879"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.997" />
+</androidx.constraintlayout.widget.ConstraintLayout>

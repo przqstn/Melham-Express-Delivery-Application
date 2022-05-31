@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Rider.rider_dashboard2">
+
+    <ImageView
+        android:id="@+id/group_2695"
+        android:layout_width="412dp"
+        android:layout_height="200dp"
+        android:layout_alignParentTop="true"
+        android:background="@color/button_color1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/text_kilometer"
+        android:layout_width="203dp"
+        android:layout_height="48dp"
+        android:backgroundTint="@color/button_color1"
+        android:fontFamily="@font/alegreya"
+        android:gravity="center"
+        android:text="(KM) Go Pick Up Now"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.06"></TextView>
+
+    <ImageButton
+        android:id="@+id/btn_back"
+        android:layout_width="68dp"
+        android:layout_height="48dp"
+        android:layout_alignParentTop="true"
+        android:backgroundTint="@color/button_color1"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/backbutton"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.059" />
+
+    <ScrollView
+        android:layout_width="355dp"
+        android:layout_height="464dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="15dp"
+        android:paddingBottom="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.412">
+
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:background="@drawable/borders"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="41dp"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginRight="2dp"
+                    android:background="@color/white"
+                    android:drawableLeft="@drawable/pckuppoint"
+                    android:fontFamily="@font/alegreya"
+                    android:gravity="center_vertical"
+                    android:text="   Location"
+                    android:textColor="@color/black"
+                    android:textSize="15dp"
+                    tools:layout_editor_absoluteX="25dp"
+                    tools:layout_editor_absoluteY="329dp" />
+
+                <TextView
+                    android:id="@+id/txt_pckupaddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="39dp"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginRight="2dp"
+                    android:background="@color/white"
+                    android:gravity="center"
+                    android:text="address"
+                    android:textColor="@color/border"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.493"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.216" />
+
+                <TextView
+                    android:id="@+id/txt_pinpoint"
+                    android:layout_width="match_parent"
+                    android:layout_height="39dp"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginRight="2dp"
+                    android:background="@color/white"
+                    android:fontFamily="@font/alegreya"
+                    android:gravity="center_vertical"
+                    android:text="   Pinpoint"
+                    android:textColor="@color/black"
+                    app:drawableLeftCompat="@drawable/locationpin" />
+
+                <TextView
+                    android:id="@+id/txt_pinaddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="39dp"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginRight="2dp"
+                    android:layout_marginBottom="2dp"
+                    android:background="@color/white"
+                    android:gravity="center"
+                    android:text="address"
+                    android:textColor="@color/border"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.486"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.329" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="200dp"
+                android:layout_marginRight="30dp"
+                android:background="@drawable/borders"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_marginTop="4dp"
+                    android:layout_marginLeft="2dp"
+                    android:id="@+id/txt_vehicle"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:backgroundTint="@color/white"
+                    android:fontFamily="@font/alegreya"
+                    android:text="Type of vehicle:"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:layout_marginLeft="2dp"
+                    android:id="@+id/txt_remark1"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:fontFamily="@font/alegreya"
+                    android:text="remarks:"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:id="@+id/txt_remark"
+                    android:layout_width="match_parent"
+                    android:layout_height="43dp"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginRight="2dp"
+                    android:layout_marginBottom="2dp"
+                    android:background="@drawable/borders"
+                    android:backgroundTint="@color/color_background"
+                    android:contentDescription="@string/app_name"
+                    android:fontFamily="@font/alegreya"
+                    android:text="   "
+                    android:textColor="@color/black" />
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="350dp"
+                android:layout_marginRight="30dp"
+                android:background="@drawable/borders"
+
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txt_payable"
+                    android:layout_width="267dp"
+                    android:layout_height="38dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginLeft="2dp"
+                    android:fontFamily="@font/alegreya"
+                    android:text="Payable By Customer                               ₱Amount"
+                    android:textColor="@color/black" />
+
+
+                <TextView
+                    android:id="@+id/txt_already"
+                    android:layout_width="267dp"
+                    android:layout_height="38dp"
+                    android:fontFamily="@font/alegreya"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginLeft="2dp"
+                    android:text="Already paid                                                  ₱Amount"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:id="@+id/txt_total"
+                    android:layout_width="267dp"
+                    android:layout_height="38dp"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginBottom="2dp"
+                    android:fontFamily="@font/alegreya"
+                    android:text="Total                                                                  ₱Amount"
+                    android:textColor="@color/black" />
+
+
+                <Button
+                    android:id="@+id/btn_takeOrder"
+                    style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+                    android:layout_width="190dp"
+                    android:layout_height="49dp"
+                    android:layout_gravity="bottom"
+                    android:layout_marginLeft="50dp"
+                    android:backgroundTint="@color/button_color1"
+                    android:fontFamily="@font/alegreya"
+                    android:text="Take Order"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </RelativeLayout>
+    </ScrollView>
+
+    <ImageButton
+        android:id="@+id/btn_pickup"
+        android:layout_width="75dp"
+        android:layout_height="81dp"
+        android:backgroundTint="@color/white"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/sdpickup"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.074"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.998" />
+
+    <TextView
+        android:id="@+id/txt_pickup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/alegreya"
+        android:text="Pick up"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.111"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.995" />
+
+    <ImageButton
+        android:id="@+id/btn_records"
+        android:layout_width="75dp"
+        android:layout_height="81dp"
+        android:backgroundTint="@color/white"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/records"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.357"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.998" />
+
+    <TextView
+        android:id="@+id/txt_records"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/alegreya"
+        android:text="Records"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.367"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.995" />
+
+    <ImageButton
+        android:id="@+id/btn_wallet"
+        android:layout_width="75dp"
+        android:layout_height="81dp"
+        android:backgroundTint="@color/white"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/wallet"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.642"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/txt_wallet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/alegreya"
+        android:text="Wallet"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.628"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.997" />
+
+    <ImageButton
+        android:id="@+id/btn_profile"
+        android:layout_width="75dp"
+        android:layout_height="81dp"
+        android:backgroundTint="@color/white"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/profile"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.925"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/txt_profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/alegreya"
+        android:text="Profile"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.879"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.997" />
+</androidx.constraintlayout.widget.ConstraintLayout>

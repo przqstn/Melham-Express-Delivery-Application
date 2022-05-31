@@ -28,22 +28,27 @@
                 android:paddingBottom="25dp"
                 android:paddingLeft="15dp"/>
 
-            <EditText
-                android:textColor="@color/black"
-                android:id="@+id/edTextPhoneNo"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/edit_text_round"
-                android:drawableStart="@drawable/ic_baseline_local_phone_24"
-                android:drawableLeft="@drawable/ic_baseline_local_phone_24"
-                android:drawablePadding="15dp"
-                android:fontFamily="@font/avenir"
-                android:hint="Enter your number"
-                android:inputType="phone"
-                android:paddingLeft="15dp"
-                android:textSize="16dp"
-                android:paddingTop="25dp"
-                android:paddingBottom="25dp"/>
+           <com.google.android.material.textfield.TextInputLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:id="@+id/edTextPhoneNo">
+               <com.google.android.material.textfield.TextInputEditText
+                   android:textColor="@color/black"
+
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:background="@drawable/edit_text_round"
+                   android:drawableStart="@drawable/ic_baseline_local_phone_24"
+                   android:drawableLeft="@drawable/ic_baseline_local_phone_24"
+                   android:drawablePadding="15dp"
+                   android:fontFamily="@font/avenir"
+                   android:hint="Enter your number"
+                   android:inputType="phone"
+                   android:paddingLeft="15dp"
+                   android:textSize="16dp"
+                   android:paddingTop="25dp"
+                   android:paddingBottom="25dp"/>
+           </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
                 android:layout_width="match_parent"
@@ -60,9 +65,10 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/edTextPass"
                 app:passwordToggleEnabled="true">
-                <EditText
-                    android:id="@+id/edTextPass"
+                <com.google.android.material.textfield.TextInputEditText
+
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/edit_text_round"

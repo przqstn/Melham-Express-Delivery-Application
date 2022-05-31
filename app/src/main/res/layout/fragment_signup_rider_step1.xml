@@ -1,164 +1,169 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-
+    android:layout_height="match_parent"
+    android:orientation="vertical">
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
         android:text="Create Your Account"
         android:textColor="@color/black"
         android:textSize="25dp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.152"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/btnRegRiderInfo"
-        android:layout_width="250dp"
-        android:layout_height="55dp"
-        android:layout_marginBottom="20dp"
-        android:gravity="center"
-        android:background="@drawable/graphics_button_1"
-        android:textColor="@color/white"
-        android:fontFamily="@font/alegreya"
-        android:textStyle="bold"
-        android:text="Register"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <ScrollView
+         />
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="500dp"
-        android:layout_marginTop="28dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView">
+        android:layout_height="match_parent">
 
-        <LinearLayout
+
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp">
+            android:layout_height="match_parent"
+            android:layout_marginTop="28dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            >
 
-            <TextView
-                android:id="@+id/txtRiderBasicInfo"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginBottom="25dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp">
 
-                android:text="Basic Information"
-                android:textStyle="bold"
-                android:textSize="20sp"
-                android:textColor="@color/black"/>
+                <TextView
+                    android:id="@+id/txtRiderBasicInfo"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginBottom="25dp"
 
-            <EditText
-                android:id="@+id/etNameRider"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:paddingLeft="20dp"
-                android:hint="Name (as shown in ID)"
-                android:layout_marginBottom="30dp"
-                android:background="@drawable/graphics_edittext_2"/>
+                    android:text="Basic Information"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    android:textColor="@color/black"/>
 
-            <EditText
-                android:id="@+id/etEmailRider"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginBottom="30dp"
-                android:paddingLeft="20dp"
-                android:hint="Email (Optional)"
+                <EditText
+                    android:id="@+id/etNameRider"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:paddingLeft="20dp"
+                    android:hint="Name (as shown in ID)"
+                    android:layout_marginBottom="30dp"
+                    android:background="@drawable/graphics_edittext_1"/>
 
-                android:background="@drawable/graphics_edittext_2"/>
-            <TextView
-                android:id="@+id/txtRiderInformation"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginBottom="25dp"
-                android:text="Tell us about yourself"
-                android:textStyle="bold"
-                android:textSize="20sp"
-                android:textColor="@color/black"/>
+                <EditText
+                    android:id="@+id/etEmailRider"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginBottom="30dp"
+                    android:paddingLeft="20dp"
+                    android:hint="Email (Optional)"
 
-            <EditText
-                android:id="@+id/etRiderDateofBirth"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginBottom="30dp"
-                android:background="@drawable/graphics_edittext_2"
-                android:editable="false"
-                android:focusable="false"
-                android:clickable="true"
-                android:hint="Date of Birth"
-                android:paddingLeft="20dp" />
-            <EditText
-                android:id="@+id/etRiderDriverLicense"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginBottom="30dp"
-                android:paddingLeft="20dp"
-                android:hint="Driver's License Number"
+                    android:background="@drawable/graphics_edittext_1"/>
+                <TextView
+                    android:id="@+id/txtRiderInformation"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginBottom="25dp"
+                    android:text="Tell us about yourself"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    android:textColor="@color/black"/>
 
-                android:background="@drawable/graphics_edittext_2"/>
-            <EditText
-                android:id="@+id/etRiderDriverLicenseExpiry"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginBottom="30dp"
-                android:paddingLeft="20dp"
-                android:hint="Driving license expiry"
+                <EditText
+                    android:id="@+id/etRiderDateofBirth"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginBottom="30dp"
+                    android:background="@drawable/graphics_edittext_1"
+                    android:editable="false"
+                    android:focusable="false"
+                    android:clickable="true"
+                    android:hint="Date of Birth"
+                    android:paddingLeft="20dp" />
+                <EditText
+                    android:id="@+id/etRiderDriverLicense"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginBottom="30dp"
+                    android:paddingLeft="20dp"
+                    android:hint="Driver's License Number"
 
-                android:background="@drawable/graphics_edittext_2"/>
-            <EditText
-                android:id="@+id/etRiderCurrentAddress"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginBottom="50dp"
-                android:paddingLeft="20dp"
-                android:hint="Current address"
+                    android:background="@drawable/graphics_edittext_1"/>
+                <EditText
+                    android:id="@+id/etRiderDriverLicenseExpiry"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginBottom="30dp"
+                    android:paddingLeft="20dp"
+                    android:hint="Driving license expiry"
 
-                android:background="@drawable/graphics_edittext_2"/>
+                    android:background="@drawable/graphics_edittext_1"/>
+                <EditText
+                    android:id="@+id/etRiderCurrentAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginBottom="50dp"
+                    android:paddingLeft="20dp"
+                    android:hint="Current address"
 
-            <TextView
-                android:id="@+id/txtRiderVehicleInformation"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginBottom="25dp"
-                android:text="Add Vehicle Information"
-                android:textStyle="bold"
-                android:textSize="20sp"
-                android:textColor="@color/black"/>
-            <EditText
-                android:id="@+id/etRiderVehicleNumber"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginBottom="30dp"
-                android:paddingLeft="20dp"
-                android:hint="Vehicle Plate Number"
+                    android:background="@drawable/graphics_edittext_1"/>
 
-                android:background="@drawable/graphics_edittext_2"/>
-            <EditText
-                android:id="@+id/etRiderManufactureYear"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginBottom="30dp"
-                android:paddingLeft="20dp"
-                android:hint="Vehicle Manufacture Year"
+                <TextView
+                    android:id="@+id/txtRiderVehicleInformation"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginBottom="25dp"
+                    android:text="Add Vehicle Information"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    android:textColor="@color/black"/>
+                <EditText
+                    android:id="@+id/etRiderVehicleNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginBottom="30dp"
+                    android:paddingLeft="20dp"
+                    android:hint="Vehicle Plate Number"
 
-                android:background="@drawable/graphics_edittext_2"/>
+                    android:background="@drawable/graphics_edittext_1"/>
+                <EditText
+                    android:id="@+id/etRiderManufactureYear"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginBottom="30dp"
+                    android:paddingLeft="20dp"
+                    android:hint="Vehicle Manufacture Year"
+                    android:background="@drawable/graphics_edittext_1"/>
 
-        </LinearLayout>
-    </ScrollView>
+                <LinearLayout
+                    android:layout_marginTop="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center">
+                    <Button
+                        android:layout_marginTop="15dp"
+                        android:id="@+id/btnRegRiderInfo"
+                        android:layout_width="250dp"
+                        android:layout_height="55dp"
+                        android:layout_marginBottom="20dp"
+                        android:gravity="center"
+                        android:background="@drawable/graphics_button_1"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/alegreya"
+                        android:textStyle="bold"
+                        android:text="Register"
+                        android:textSize="20sp"
+                       />
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</LinearLayout>
