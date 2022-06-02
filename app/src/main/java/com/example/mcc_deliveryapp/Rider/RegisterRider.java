@@ -168,7 +168,7 @@ public class RegisterRider extends AppCompatActivity {
 
         EditText etModelVehicle = (EditText) findViewById(R.id.editTextVehicleModel);
         EditText etBrandVehicle = (EditText) findViewById(R.id.editTextVehicleBrand);
-
+        //Spinner Vehicle Brand
         spinBrand.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -271,7 +271,21 @@ public class RegisterRider extends AppCompatActivity {
         regRiderInfo.setCancelable(true);
         regRiderInfo.getWindow().getAttributes().windowAnimations = R.style.animation;
 
+        Dialog successfullyRegistered = new Dialog(RegisterRider.this);
+        successfullyRegistered.setContentView(R.layout.success_dialog);
+        successfullyRegistered.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+        successfullyRegistered.setCancelable(false);
+        successfullyRegistered.getWindow().getAttributes().windowAnimations = R.style.animation;
 
+        Button btnSuccessOkay = successfullyRegistered.findViewById(R.id.btnSuccessRegRider);
+
+        btnSuccessOkay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(RegisterRider.this, MainActivityRider.class);
+                startActivity(intent);
+            }
+        });
 
         EditText etVerifyCode = (EditText) VerifyNum.findViewById(R.id.etVerify);
         etCode = (EditText) VerifyNum.findViewById(R.id.etVerify);
@@ -384,9 +398,8 @@ public class RegisterRider extends AppCompatActivity {
                 rootie.child("riders").child(userCurrent.getUid()).setValue(riderInfo).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                        Intent intent = new Intent(RegisterRider.this, MainActivityRider.class);
-                        startActivity(intent);
-                        Toast.makeText(getApplicationContext(),"Registered Successfully",Toast.LENGTH_SHORT).show();
+
+                        successfullyRegistered.show();
                         regRiderInfo.dismiss();
 
 
