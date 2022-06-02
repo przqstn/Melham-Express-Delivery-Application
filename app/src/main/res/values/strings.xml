@@ -19,6 +19,32 @@
         <item>SUV 300Kg</item>
         <item>Van 600Kg</item>
     </string-array>
+
+    <string-array name="ridervehiclebrandmotorcycle">
+        <item>Brand</item>
+        <item>Yamaha</item>
+        <item>Honda</item>
+        <item>Kawasaki</item>
+        <item>Suzuki</item>
+        <item>Others</item>
+    </string-array>
+    <string-array name="ridervehiclebrandsuvcycle">
+        <item>Brand</item>
+        <item>Honda</item>
+        <item>Toyota</item>
+        <item>Mitsubishi</item>
+        <item>Nissan</item>
+        <item>Others</item>
+    </string-array>
+    <string-array name="ridervehiclebrandvancycle">
+        <item>Brand</item>
+        <item>Toyota</item>
+        <item>Mitsubishi</item>
+        <item>Isuzu</item>
+        <item>Volkswagen</item>
+        <item>Others</item>
+    </string-array>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="title_activity_user_driverfound">user_driverfound</string>
     <!-- Strings used for fragments for navigation -->

@@ -56,11 +56,15 @@ public class RegisterRider extends AppCompatActivity {
 
     String verificationCodeBySystem;
 
+    String vehiclebrandandmodel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         mAuth = FirebaseAuth.getInstance();
+
+
 
         setContentView(R.layout.activity_register_rider);
 
@@ -72,6 +76,7 @@ public class RegisterRider extends AppCompatActivity {
 
         Spinner spinCity = (Spinner) findViewById(R.id.spinnerCityDriver);
         Spinner spinVehicle = (Spinner) findViewById(R.id.spinnerVehicleDriver);
+        Spinner spinBrand = (Spinner) findViewById(R.id.spinnerVehicleBrand);
 
         //Getting City Rider Item List
         ArrayAdapter<CharSequence> adapterCity = ArrayAdapter.createFromResource(this, R.array.cityRider,R.layout.spinner_items_1);
@@ -118,6 +123,29 @@ public class RegisterRider extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 String selectedItemText = (String) adapterView.getItemAtPosition(i);
+
+                if(i == 1)
+                {
+                    ArrayAdapter<CharSequence> adapterBrand = ArrayAdapter.createFromResource(getApplicationContext(), R.array.ridervehiclebrandmotorcycle,R.layout.spinner_items_1);
+                    adapterBrand.setDropDownViewResource(R.layout.spinner_items_1);
+                    spinBrand.setAdapter(adapterBrand);
+                    spinBrand.setVisibility(View.VISIBLE);
+                }
+                else if(i == 2)
+                {
+                    ArrayAdapter<CharSequence> adapterBrand = ArrayAdapter.createFromResource(getApplicationContext(), R.array.ridervehiclebrandsuvcycle,R.layout.spinner_items_1);
+                    adapterBrand.setDropDownViewResource(R.layout.spinner_items_1);
+                    spinBrand.setAdapter(adapterBrand);
+                    spinBrand.setVisibility(View.VISIBLE);
+                }
+                else if(i == 3)
+                {
+                    ArrayAdapter<CharSequence> adapterBrand = ArrayAdapter.createFromResource(getApplicationContext(), R.array.ridervehiclebrandvancycle,R.layout.spinner_items_1);
+                    adapterBrand.setDropDownViewResource(R.layout.spinner_items_1);
+                    spinBrand.setAdapter(adapterBrand);
+                    spinBrand.setVisibility(View.VISIBLE);
+                }
+
                 if(i > 0){
                     Toast.makeText(getApplicationContext(), "Selected : " + selectedItemText, Toast.LENGTH_SHORT).show();
                 }
@@ -125,6 +153,46 @@ public class RegisterRider extends AppCompatActivity {
                     TextView tv = (TextView) view;
                     if (i == 0) {
                         tv.setTextColor(Color.GRAY);
+                        spinBrand.setVisibility(View.GONE);
+                    } else {
+                        tv.setTextColor(Color.BLACK);
+                    }
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        EditText etModelVehicle = (EditText) findViewById(R.id.editTextVehicleModel);
+        EditText etBrandVehicle = (EditText) findViewById(R.id.editTextVehicleBrand);
+
+        spinBrand.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                String selectedItemText = (String) adapterView.getItemAtPosition(i);
+
+                if(i==5)
+                {
+                    etBrandVehicle.setVisibility(View.VISIBLE);
+
+                }
+                else
+                {
+                    etBrandVehicle.setVisibility(View.GONE);
+                }
+
+                if(i > 0){
+                    Toast.makeText(getApplicationContext(), "Selected : " + selectedItemText, Toast.LENGTH_SHORT).show();
+                    etModelVehicle.setVisibility(View.VISIBLE);
+                }
+                else {
+                    TextView tv = (TextView) view;
+                    if (i == 0) {
+                        tv.setTextColor(Color.GRAY);
+                        etModelVehicle.setVisibility(View.GONE);
                     } else {
                         tv.setTextColor(Color.BLACK);
                     }
@@ -168,6 +236,25 @@ public class RegisterRider extends AppCompatActivity {
                 {
                     Toast.makeText(RegisterRider.this,"Please agree on the terms and condition..",Toast.LENGTH_SHORT).show();
                     return;
+                }
+                if(TextUtils.isEmpty(etModelVehicle.getText().toString()))
+                {
+                    Toast.makeText(RegisterRider.this,"Vehicle Model is required.",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if(etBrandVehicle.getVisibility() == View.VISIBLE && TextUtils.isEmpty(etBrandVehicle.getText().toString()))
+                {
+                    Toast.makeText(RegisterRider.this,"Vehicle Brand is required.",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if(etBrandVehicle.getVisibility() == View.VISIBLE)
+                {
+                    vehiclebrandandmodel = etBrandVehicle.getText().toString() + " " + etModelVehicle.getText().toString();
+                }
+                else
+                {
+                    vehiclebrandandmodel = spinBrand.getSelectedItem().toString() + " " + etModelVehicle.getText().toString();
                 }
 
                 sendVerificationCodeToUser(etPhoneNum.getText().toString());
@@ -274,6 +361,10 @@ public class RegisterRider extends AppCompatActivity {
 
                 userCurrent.updateProfile(profileUpdates);
 
+
+
+
+
                 rootie = db.getReference();
 
                 HashMap riderInfo = new HashMap<>();
@@ -288,11 +379,12 @@ public class RegisterRider extends AppCompatActivity {
                 riderInfo.put("currentaddress",riderCurrentAddress);
                 riderInfo.put("vehicleplatenumber",riderVehiclePlateNumber);
                 riderInfo.put("manufactureryear",riderVehicleManufacturerYear);
+                riderInfo.put("vehiclebrandandmodel",vehiclebrandandmodel);
 
                 rootie.child("riders").child(userCurrent.getUid()).setValue(riderInfo).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                        Intent intent = new Intent(RegisterRider.this, rider_dashboard.class);
+                        Intent intent = new Intent(RegisterRider.this, MainActivityRider.class);
                         startActivity(intent);
                         Toast.makeText(getApplicationContext(),"Registered Successfully",Toast.LENGTH_SHORT).show();
                         regRiderInfo.dismiss();

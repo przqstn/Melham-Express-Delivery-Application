@@ -18,7 +18,7 @@
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="100dp"
             tools:srcCompat="@tools:sample/avatars" />
 
         <TextView
@@ -66,6 +66,43 @@
             android:contentDescription="Vehicle"
             android:spinnerMode="dropdown"
             />
+
+        <Spinner
+            android:id="@+id/spinnerVehicleBrand"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="20dp"
+            android:contentDescription="Vehicle"
+            android:spinnerMode="dropdown"
+            android:visibility="gone" />
+
+        <EditText
+            android:id="@+id/editTextVehicleBrand"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="13dp"
+            android:background="@drawable/graphics_edittext_1"
+            android:drawableStart="@drawable/ic_baseline_directions_car_24"
+            android:drawableLeft="@drawable/ic_baseline_directions_car_24"
+            android:drawablePadding="15dp"
+            android:ems="10"
+            android:hint="Specify Brand"
+            android:paddingLeft="15dp"
+            android:visibility="gone" />
+
+        <EditText
+            android:id="@+id/editTextVehicleModel"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="13dp"
+            android:background="@drawable/graphics_edittext_1"
+            android:drawableStart="@drawable/ic_baseline_directions_car_24"
+            android:drawableLeft="@drawable/ic_baseline_directions_car_24"
+            android:drawablePadding="15dp"
+            android:ems="10"
+            android:hint="Specify Model"
+            android:paddingLeft="15dp"
+            android:visibility="gone" />
 
         <CheckBox
             android:id="@+id/checkBoxAgreeRider"
