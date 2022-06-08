@@ -6,26 +6,28 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".User.userdashboard">
+
+
+
+
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/map"
-        android:scaleType="centerCrop"
-        >
-    </ImageView>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <EditText
+        <fragment
+            android:id="@+id/autocomplete_fragment"
             android:layout_width="300dp"
-            android:layout_height="45dp"
+            android:layout_height="48dp"
             android:layout_gravity="center"
             android:layout_marginTop="50dp"
+            android:name=
+                "com.google.android.libraries.places.widget.AutocompleteSupportFragment"
+
             android:background="@drawable/edit_text_round"
             android:backgroundTint="@color/white"
             android:drawableLeft="@drawable/ic_baseline_search_24"
@@ -33,11 +35,35 @@
             android:shadowColor="@color/black"
             android:textStyle="bold"
             app:backgroundTint="@color/white" />
+
+        <TextView
+            android:id="@+id/txtPlaceSample"
+            android:layout_width="300dp"
+            android:layout_gravity="center"
+            android:layout_height="50dp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:text="SAMPLE PLACE"
+
+            />
+
+
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-           android:gravity="center">
+            android:orientation="vertical">
+            <fragment
+                android:id="@+id/mapFrag"
+                android:layout_width="match_parent"
+                android:layout_height="500dp"
+
+                android:name=
+                    "com.google.android.gms.maps.MapFragment"
+
+                app:backgroundTint="@color/white" />
             <Button
+
                 android:id="@+id/btnGetStart"
                 android:layout_width="350dp"
                 android:layout_height="wrap_content"
