@@ -92,4 +92,6 @@ public class user_checkrate extends AppCompatActivity {
 			}
 		});
 	}
+
+
 }

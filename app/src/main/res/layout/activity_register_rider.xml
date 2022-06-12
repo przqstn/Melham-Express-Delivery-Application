@@ -86,6 +86,7 @@
             android:drawableLeft="@drawable/ic_baseline_directions_car_24"
             android:drawablePadding="15dp"
             android:ems="10"
+            android:textColor="@color/black"
             android:hint="Specify Brand"
             android:paddingLeft="15dp"
             android:visibility="gone" />

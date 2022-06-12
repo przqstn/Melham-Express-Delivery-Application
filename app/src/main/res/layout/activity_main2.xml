@@ -19,23 +19,32 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/alegreya"
+                android:text="MELHAM EXPRESS"
+                android:textColor="@color/black"
+                android:textSize="36dp"
+                android:layout_gravity="center"
+                android:padding="20dp"
+                android:textStyle="bold"
+                />
             <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:scaleType="fitXY"
-                android:src="@drawable/splashscreen"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:id="@+id/imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+               android:layout_gravity="center"
+                app:srcCompat="@drawable/logo" />
 
            <LinearLayout
-               android:background="@color/background_color"
                android:padding="20dp"
                android:layout_width="match_parent"
                android:layout_height="match_parent"
                android:orientation="vertical">
 
                <Button
+                   android:textColor="@color/white"
                    android:id="@+id/btn_riderform"
                    android:layout_marginTop="30dp"
                    android:layout_marginBottom="30dp"
@@ -44,6 +53,7 @@
                    android:background="@drawable/graphics_button_1"
                    android:text="Rider"/>
                <Button
+                   android:textColor="@color/white"
                    android:id="@+id/btn_userform"
                    android:layout_width="match_parent"
                    android:layout_height="wrap_content"
@@ -51,11 +61,7 @@
                    android:text="User"/>
 
            </LinearLayout>
-            <ProgressBar
-                android:id="@+id/act2_progressbar"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                />
+
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 

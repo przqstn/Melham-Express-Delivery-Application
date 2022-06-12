@@ -216,7 +216,7 @@ public class signInFragment extends Fragment {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful())
                 {
-                    Intent intent = new Intent(getActivity(),userdashboard.class);
+                    Intent intent = new Intent(getActivity(),user_permission.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
                 }

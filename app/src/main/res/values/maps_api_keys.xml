@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--
+        TODO : before you run your application you need an Google Map API keys
+
+        to get one, follow the direction here
+        https://developers.google.com/maps/documentation/android-sdk/start#get-key
+
+        once you get the API keys (it starts with "AIza") define a new property in your  project's local properties (e.g MAPS_API_KEYS = AIza...)
+        and replace "YOUR_API_KEYS" string in this  file with "${MAPS_API_KEYS}"
+        -->
+    <string name="google_map_api_keys" templatemergeStrategy = "preserve" translatable="false">AIzaSyADbrHx5UL02dbtkEkDMlrBvkv-pk3JfHU</string>
+</resources>
