@@ -45,7 +45,8 @@ public class DirectionFinder {
 
 		return DIRECTION_URL_API + "origin=" + urlOrigin + "&destination=" + urlDestination + "&key=" + GOOGLE_API_KEY;
 	}
-
+// this is the part where the android studio download the raw data file that set in the guideline here are the link that references
+	// the guideline https://developers.google.com/maps/documentation/directions/get-directions
 	private class DownloadRawData extends AsyncTask<String, Void, String> {
 
 		@Override
@@ -81,7 +82,7 @@ public class DirectionFinder {
 			}
 		}
 	}
-
+// reading the rawdata file and converting in to some distance,routes, and etc.
 	private void parseJSon(String data) throws JSONException {
 		if (data == null)
 			return;
@@ -114,7 +115,7 @@ public class DirectionFinder {
 
 		listener.onDirectionFinderSuccess(routes);
 	}
-
+// decoding the polyline or calculating the line that will be generated after the finding;
 	private List<LatLng> decodePolyLine(final String poly) {
 		int len = poly.length();
 		int index = 0;

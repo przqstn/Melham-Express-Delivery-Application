@@ -15,8 +15,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentActivity;
-
 
 import com.example.mcc_deliveryapp.FetchURL;
 import com.example.mcc_deliveryapp.R;
@@ -25,34 +23,26 @@ import com.google.android.gms.common.api.Status;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.libraries.places.api.Places;
-import com.google.android.libraries.places.api.model.AutocompleteSessionToken;
 import com.google.android.libraries.places.api.model.Place;
-import com.google.android.libraries.places.api.model.RectangularBounds;
-import com.google.android.libraries.places.api.model.TypeFilter;
-import com.google.android.libraries.places.api.net.FindAutocompletePredictionsRequest;
 import com.google.android.libraries.places.api.net.PlacesClient;
 import com.google.android.libraries.places.widget.Autocomplete;
 import com.google.android.libraries.places.widget.AutocompleteActivity;
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener;
-import com.google.android.libraries.places.widget.model.AutocompleteActivityMode;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 public class userdashboard extends AppCompatActivity implements OnMapReadyCallback, TaskLoadedCallback {
 
 
 	GoogleMap map;
-
 
 	TextView sampleText;
 

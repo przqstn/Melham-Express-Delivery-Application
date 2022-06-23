@@ -30,7 +30,7 @@
         <entry key="..\:/Users/KvRem/AndroidStudioProjects/MCC_DeliveryApp/app/src/main/res/layout/activity_user_driverfound.xml" value="0.25833333333333336" />
         <entry key="..\:/Users/KvRem/AndroidStudioProjects/MCC_DeliveryApp/app/src/main/res/layout/activity_user_findingrider.xml" value="0.25833333333333336" />
         <entry key="..\:/Users/KvRem/AndroidStudioProjects/MCC_DeliveryApp/app/src/main/res/layout/activity_user_parceltrans.xml" value="0.25833333333333336" />
-        <entry key="..\:/Users/KvRem/AndroidStudioProjects/MCC_DeliveryApp/app/src/main/res/layout/activity_user_parceltransaction.xml" value="0.264" />
+        <entry key="..\:/Users/KvRem/AndroidStudioProjects/MCC_DeliveryApp/app/src/main/res/layout/activity_user_parceltransaction.xml" value="0.2" />
         <entry key="..\:/Users/KvRem/AndroidStudioProjects/MCC_DeliveryApp/app/src/main/res/layout/activity_user_paymentmethod.xml" value="0.16197916666666667" />
         <entry key="..\:/Users/KvRem/AndroidStudioProjects/MCC_DeliveryApp/app/src/main/res/layout/activity_user_permission.xml" value="0.25833333333333336" />
         <entry key="..\:/Users/KvRem/AndroidStudioProjects/MCC_DeliveryApp/app/src/main/res/layout/activity_user_waitingdriver.xml" value="0.25833333333333336" />
@@ -50,11 +50,12 @@
         <entry key="..\:/Users/KvRem/AndroidStudioProjects/MCC_DeliveryApp/app/src/main/res/layout/sedan_dialog.xml" value="0.4" />
         <entry key="..\:/Users/KvRem/AndroidStudioProjects/MCC_DeliveryApp/app/src/main/res/layout/success_dialog.xml" value="0.25833333333333336" />
         <entry key="..\:/Users/KvRem/AndroidStudioProjects/MCC_DeliveryApp/app/src/main/res/layout/truck_dialog.xml" value="0.16197916666666667" />
-        <entry key="..\:/Users/KvRem/AndroidStudioProjects/MCC_DeliveryApp/app/src/main/res/layout/user_adressdetail.xml" value="0.2" />
+        <entry key="..\:/Users/KvRem/AndroidStudioProjects/MCC_DeliveryApp/app/src/main/res/layout/user_adressdetail.xml" value="0.264" />
         <entry key="..\:/Users/KvRem/AndroidStudioProjects/MCC_DeliveryApp/app/src/main/res/layout/user_bottom_sheet.xml" value="0.25833333333333336" />
         <entry key="..\:/Users/KvRem/AndroidStudioProjects/MCC_DeliveryApp/app/src/main/res/layout/user_mapcontent.xml" value="0.25833333333333336" />
         <entry key="..\:/Users/KvRem/AndroidStudioProjects/MCC_DeliveryApp/app/src/main/res/layout/user_paymentdialog.xml" value="0.264" />
         <entry key="..\:/Users/KvRem/AndroidStudioProjects/MCC_DeliveryApp/app/src/main/res/layout/user_permission.xml" value="0.24427083333333333" />
+        <entry key="..\:/Users/KvRem/AndroidStudioProjects/MCC_DeliveryApp/app/src/main/res/layout/user_receiver_address_detail.xml" value="0.25833333333333336" />
       </map>
     </option>
   </component>

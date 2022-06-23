@@ -88,6 +88,8 @@ public class RegisterRider extends AppCompatActivity {
         ArrayAdapter<CharSequence> adapterVehicle = ArrayAdapter.createFromResource (this,R.array.ridervehicletype,R.layout.spinner_items_1);
         adapterVehicle.setDropDownViewResource(R.layout.spinner_items_1);
         spinVehicle.setAdapter(adapterVehicle);
+
+
         //Spinner City
         spinCity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -168,6 +170,7 @@ public class RegisterRider extends AppCompatActivity {
 
         EditText etModelVehicle = (EditText) findViewById(R.id.editTextVehicleModel);
         EditText etBrandVehicle = (EditText) findViewById(R.id.editTextVehicleBrand);
+
         //Spinner Vehicle Brand
         spinBrand.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
