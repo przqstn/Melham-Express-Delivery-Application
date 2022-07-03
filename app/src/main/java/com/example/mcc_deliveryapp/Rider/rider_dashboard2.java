@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.mcc_deliveryapp.R;
 
-public class rider_dashboard2 extends AppCompatActivity {
+public class 	rider_dashboard2 extends AppCompatActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

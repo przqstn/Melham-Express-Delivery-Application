@@ -170,8 +170,8 @@ public class RegisterRider extends AppCompatActivity {
 
         EditText etModelVehicle = (EditText) findViewById(R.id.editTextVehicleModel);
         EditText etBrandVehicle = (EditText) findViewById(R.id.editTextVehicleBrand);
-
         //Spinner Vehicle Brand
+        
         spinBrand.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {

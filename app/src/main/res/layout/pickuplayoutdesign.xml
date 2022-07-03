@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="400dp"
+    app:cardCornerRadius="10dp"
+    app:cardUseCompatPadding="true"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        >
+
+        <RelativeLayout
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/graphics_edittext_1"
+            android:id="@+id/pickuplinearlayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp">
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/pickup"
+                />
+            <TextView
+                android:id="@+id/txt_sender_loc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Sender Location"
+                android:textColor="@color/black"
+                android:layout_marginLeft="20dp"/>
+            <TextView
+                android:id="@+id/txtsendernameID"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sender name: "
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:layout_below="@id/txt_sender_loc" />
+
+            <TextView
+                android:id="@+id/txt_sender_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sender name"
+                android:textColor="@color/black"
+                android:layout_below="@id/txt_sender_loc"
+                android:layout_toRightOf="@id/txtsendernameID"/>
+
+            <TextView
+                android:id="@+id/txtsendercontactID"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sender Contact: "
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:layout_below="@id/txt_sender_name" />
+
+            <TextView
+                android:id="@+id/txt_sender_contact"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Sender Contact"
+                android:textColor="@color/black"
+                android:layout_below="@id/txt_sender_name"
+                android:layout_toRightOf="@id/txtsendercontactID"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/graphics_edittext_1"
+            android:id="@+id/dropofflinearlayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/pickuplinearlayout"
+            android:padding="5dp">
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/location"
+                />
+            <TextView
+                android:id="@+id/txt_receiver_loc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:text="Receiver Location"
+                android:textColor="@color/black" />
+            <TextView
+                android:id="@+id/txtreceivernameID"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Receiver Name: "
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:layout_below="@id/txt_receiver_loc" />
+            <TextView
+                android:id="@+id/txt_receiver_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Receiver name"
+                android:textColor="@color/black"
+                android:layout_below="@id/txt_receiver_loc"
+                android:layout_toRightOf="@id/txtreceivernameID"/>
+
+            <TextView
+                android:id="@+id/txtreceivercontactID"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Receiver Contact: "
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:layout_below="@id/txt_receiver_name" />
+            <TextView
+                android:id="@+id/txt_receiver_contact"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Receiver Contact"
+                android:textColor="@color/black"
+                android:layout_below="@id/txt_receiver_name"
+                android:layout_toRightOf="@id/txtreceivercontactID"/>
+        </RelativeLayout>
+        <LinearLayout
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/graphics_edittext_1"
+            android:padding="5dp"
+            android:id="@+id/vehicletypelinearlayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/dropofflinearlayout"
+            android:orientation="vertical"
+            >
+            <TextView
+                android:id="@+id/txt_vehicletype"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Vehicle Type"
+                android:textColor="#000"
+                android:layout_marginLeft="10dp"/>
+            <TextView
+                android:id="@+id/txt_note"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Notes/Comments"
+                android:textColor="@color/black"
+                android:layout_marginLeft="10dp"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginBottom="5dp"
+            android:id="@+id/pricelinearlayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/vehicletypelinearlayout"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/txt_price"
+                android:padding="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:textSize="15dp"
+                android:textColor="@color/black"
+                android:text="Price : Sample Price 180"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/takeorderlinearlayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/pricelinearlayout"
+            android:orientation="vertical">
+            <Button
+                android:id="@+id/btn_takeOrder"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Take Order"
+                android:textColor="@color/white"
+                android:background="@drawable/graphics_button_1"/>
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

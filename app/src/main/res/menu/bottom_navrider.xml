@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+
+    <item android:title="Pick Up"
+          android:id="@+id/iconpickup"
+          android:icon="@drawable/pickupbox" />
+
+    <item android:title="Record"
+          android:id="@+id/iconrecord"
+          android:icon="@drawable/records"/>
+
+    <item android:title="Wallet"
+          android:id="@+id/iconwallet"
+          android:icon="@drawable/wallet"/>
+
+    <item android:title="Profile"
+        android:id="@+id/iconprofile"
+        android:icon="@drawable/profile2"/>
+
+</menu>

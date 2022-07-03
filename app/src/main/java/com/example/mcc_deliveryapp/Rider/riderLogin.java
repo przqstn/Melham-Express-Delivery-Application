@@ -1,8 +1,5 @@
 package com.example.mcc_deliveryapp.Rider;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -11,9 +8,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.mcc_deliveryapp.R;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -22,7 +21,7 @@ public class riderLogin extends AppCompatActivity {
 
     EditText emailRider,passRider;
     Button btnLogin;
-
+    Button btnRegister;
     FirebaseAuth mAuth;
 
     @Override
@@ -30,10 +29,10 @@ public class riderLogin extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rider_login);
 
-        emailRider = findViewById(R.id.edtTextRiderNumber);
-        passRider = findViewById(R.id.edtTextRiderPassword);
+        emailRider = (EditText) findViewById(R.id.edtTextRiderNumber);
+        passRider = (EditText) findViewById(R.id.edtTextRiderPassword);
         btnLogin = findViewById(R.id.btnLoginRider);
-
+        btnRegister = findViewById(R.id.btnRegisterRider);
         mAuth = FirebaseAuth.getInstance();
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
@@ -43,6 +42,14 @@ public class riderLogin extends AppCompatActivity {
             }
         });
 
+        btnRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(riderLogin.this, RegisterRider.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
 
     }

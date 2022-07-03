@@ -8,7 +8,7 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.mcc_deliveryapp.Rider.RegisterRider;
+import com.example.mcc_deliveryapp.Rider.rider_dashboard;
 import com.example.mcc_deliveryapp.User.MainUserActivity;
 
 import java.util.Timer;
@@ -29,8 +29,8 @@ Timer timer;
 		btnriderform.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				Intent intent = new Intent(MainActivity2.this, RegisterRider.class);
-				startActivity(intent);
+				Intent intent2 = new Intent(MainActivity2.this, rider_dashboard.class);
+				startActivity(intent2);
 				progressDialog = new ProgressDialog(MainActivity2.this);
 				progressDialog.show();
 				progressDialog.setContentView(R.layout.progresslayout);

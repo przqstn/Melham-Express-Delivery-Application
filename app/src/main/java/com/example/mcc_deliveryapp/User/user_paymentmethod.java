@@ -22,7 +22,7 @@ import java.util.HashMap;
 
 public class user_paymentmethod extends AppCompatActivity {
 	FirebaseDatabase db =FirebaseDatabase.getInstance();
-	DatabaseReference root = db.getReference().child("user parcel infos");
+	DatabaseReference root = db.getReference().child("userparcel");
 	EditText notes;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -40,11 +40,11 @@ public class user_paymentmethod extends AppCompatActivity {
 		//getting the save shared preference of receiver
 		String receiverloc =sharedPref.getString("key 4","");
 		String receivercontact =sharedPref.getString("key 5","");
-		String receivername =sharedPref.getString("key 5","");
+		String receivername =sharedPref.getString("key 6","");
 
 		notes = findViewById(R.id.editTextNotes);
 
-		String comment = notes.getEditableText().toString();
+		String comment = notes.getText().toString();
 
 		editTextPayment.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -64,15 +64,15 @@ public class user_paymentmethod extends AppCompatActivity {
 					public void onClick(View view) {
 
 						HashMap<String, String> usermap = new HashMap<>();
-						usermap.put("Comment/Notes", comment);
+						//usermap.put("Comment or Notes", comment);
 
-						usermap.put("sender location", senderloc);
-						usermap.put("sender contact", sendercontact);
-						usermap.put("sender name", sendername);
+						usermap.put("senderlocation", senderloc);
+						usermap.put("sendercontact", sendercontact);
+						usermap.put("sendername", sendername);
 
-						usermap.put("receiver location", receiverloc);
-						usermap.put("receiver contact", receivercontact);
-						usermap.put("receiver name", receivername);
+						usermap.put("receiverlocation", receiverloc);
+						usermap.put("receivercontact", receivercontact);
+						usermap.put("receivername", receivername);
 
 
 						root.push().setValue(usermap);

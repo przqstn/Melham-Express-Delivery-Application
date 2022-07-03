@@ -8,7 +8,6 @@ import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -233,53 +232,7 @@ public class user_parceltransaction extends FragmentActivity implements OnMapRea
 
 
 	}
-// dito tayo natapos mali pa to
-	public void saveinformation (){
-		String sender_address= senderloc.getText().toString();
-		String sender_contact=sendercontact.getText().toString();
-		String sender_name=sendername.getText().toString();
-		String receiver_address=receiverloc.getText().toString();
-		String receiver_contact=receivercontact.getText().toString();
-		String receiver_name=receivername.getText().toString();
 
-		if(TextUtils.isEmpty(senderloc.getText().toString()))
-		{
-			senderloc.setError("Required");
-			return;
-		}else if(TextUtils.isEmpty(sendercontact.getText().toString()))
-		{
-			sendercontact.setError("Required");
-			return;
-		}else if(TextUtils.isEmpty(sendername.getText().toString()))
-		{
-			sendername.setError("Required");
-			return;
-		}else if (TextUtils.isEmpty(receiverloc.getText().toString()))
-		{
-			receiverloc.setError("Required");
-			return;
-		}else if(TextUtils.isEmpty(receivercontact.getText().toString()))
-		{
-			receivercontact.setError("Required");
-			return;
-		}else if (TextUtils.isEmpty(receivername.getText().toString()))
-		{
-			receivername.setError("Required");
-			return;
-		}
-		else{
-			Toast.makeText(this, "Infos save", Toast.LENGTH_SHORT).show();
-//			HashMap<String, String> usermap = new HashMap<>();
-//			usermap.put("Sender Location", sender_address);
-//			usermap.put("Sender Contact", sender_contact);
-//			usermap.put("Sender Name", sender_name);
-//			usermap.put("Receiver Location", receiver_address);
-//			usermap.put("Receiver Contact", receiver_contact);
-//			usermap.put("Receiver Name", receiver_name);
-//			root.push().setValue(usermap);
-		}
-
-	}
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
