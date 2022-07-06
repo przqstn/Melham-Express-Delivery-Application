@@ -13,12 +13,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-
+<TextView
+    android:layout_width="200sp"
+    android:layout_height="20sp"
+    android:text="Hello"/>
         <ImageView
             android:id="@+id/imageView9"
             android:layout_width="match_parent"
             android:layout_height="300dp"
             android:scaleType="centerCrop"
+            android:src="@color/black"
             app:srcCompat="@drawable/topimageriderlogin" />
         <ScrollView
             android:layout_width="match_parent"
