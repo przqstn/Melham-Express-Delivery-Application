@@ -14,12 +14,25 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <TextView
+            android:id="@+id/txtTitleLoginRider"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Login for Rider"
+            android:layout_gravity="center"
+            android:textColor="@color/black"
+            android:textAlignment="center"
+            android:textSize="20dp"
+            android:layout_marginTop="20dp"
+            android:textStyle="bold"/>
+
         <ImageView
             android:id="@+id/imageView9"
             android:layout_width="match_parent"
             android:layout_height="300dp"
             android:scaleType="centerCrop"
             app:srcCompat="@drawable/topimageriderlogin" />
+
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
