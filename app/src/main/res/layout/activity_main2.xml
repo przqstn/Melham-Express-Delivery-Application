@@ -19,17 +19,17 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:fontFamily="@font/alegreya"
-                android:text="MELHAM EXPRESS"
+                android:padding="20dp"
+                android:text="MELHAM EXPRESS 123"
                 android:textColor="@color/black"
                 android:textSize="36dp"
-                android:layout_gravity="center"
-                android:padding="20dp"
-                android:textStyle="bold"
-                />
+                android:textStyle="bold" />
             <ImageView
                 android:id="@+id/imageView"
                 android:layout_width="wrap_content"
