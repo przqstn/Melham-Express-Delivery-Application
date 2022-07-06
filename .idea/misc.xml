@@ -3,9 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/rdrgz/AndroidStudioProjects/MCC-Delivery-Repository/app/src/main/res/layout/activity_main2.xml" value="0.3625" />
-        <entry key="..\:/Users/rdrgz/AndroidStudioProjects/MCC-Delivery-Repository/app/src/main/res/layout/activity_main_user.xml" value="0.18541666666666667" />
-        <entry key="..\:/Users/rdrgz/AndroidStudioProjects/MCC-Delivery-Repository/app/src/main/res/layout/activity_rider_login.xml" value="0.25" />
+        <entry key="..\:/Users/Glyn/AndroidStudioProjects/MCC-Delivery-Repository/app/src/main/res/layout/activity_rider_dashboard.xml" value="0.27291666666666664" />
+        <entry key="..\:/Users/Glyn/AndroidStudioProjects/MCC-Delivery-Repository/app/src/main/res/layout/activity_rider_login.xml" value="0.25" />
+        <entry key="..\:/Users/Glyn/AndroidStudioProjects/MCC-Delivery-Repository/app/src/main/res/layout/activity_user_driverfound.xml" value="0.27291666666666664" />
+        <entry key="..\:/Users/Glyn/AndroidStudioProjects/MCC-Delivery-Repository/app/src/main/res/layout/activity_user_findingrider.xml" value="0.27291666666666664" />
+        <entry key="..\:/Users/Glyn/AndroidStudioProjects/MCC-Delivery-Repository/app/src/main/res/layout/activity_user_parceltransaction.xml" value="0.27291666666666664" />
+        <entry key="..\:/Users/Glyn/AndroidStudioProjects/MCC-Delivery-Repository/app/src/main/res/layout/activity_user_paymentmethod.xml" value="0.27291666666666664" />
+        <entry key="..\:/Users/Glyn/AndroidStudioProjects/MCC-Delivery-Repository/app/src/main/res/layout/activity_userdashboard.xml" value="0.27291666666666664" />
+        <entry key="..\:/Users/Glyn/AndroidStudioProjects/MCC-Delivery-Repository/app/src/main/res/layout/fragment_record_fragment.xml" value="0.27291666666666664" />
       </map>
     </option>
   </component>
