@@ -29,7 +29,7 @@ Timer timer;
 		btnriderform.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				Intent intent2 = new Intent(MainActivity2.this, rider_dashboard.class);
+				Intent intent2 = new Intent(MainActivity2.this, com.example.mcc_deliveryapp.Rider.riderLogin.class);
 				startActivity(intent2);
 				progressDialog = new ProgressDialog(MainActivity2.this);
 				progressDialog.show();
