@@ -11,19 +11,20 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_gravity="center">
 
         <ImageButton
             android:id="@+id/imageButton"
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_width="393dp"
+            android:layout_height="155dp"
             android:background="@drawable/border"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.027" />
+            app:layout_constraintVertical_bias="0.053" />
 
         <ImageView
             android:id="@+id/profile"
@@ -123,8 +124,8 @@
             app:layout_constraintVertical_bias="0.582" />
 
         <TextView
-            android:layout_width="wrap_content"
             android:id="@+id/chat1"
+            android:layout_width="wrap_content"
             android:layout_height="23dp"
             android:drawableLeft="@drawable/chat"
             android:drawablePadding="10dp"
@@ -179,7 +180,7 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.372" />
+            app:layout_constraintVertical_bias="0.352" />
 
         <ImageView
             android:id="@+id/imageView"
@@ -372,8 +373,8 @@
             android:fontFamily="@font/alegreya"
             android:text="sample 1212121"
             android:textColor="@color/black"
-            android:textStyle="bold"
             android:textSize="12sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/imageButton3"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.049"
@@ -403,8 +404,8 @@
             android:fontFamily="@font/alegreya"
             android:text="sample 09119191"
             android:textColor="@color/black"
-            android:textStyle="bold"
             android:textSize="12sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/imageButton3"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.049"
@@ -516,8 +517,6 @@
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 
 
 </LinearLayout>

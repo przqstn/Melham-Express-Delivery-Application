@@ -40,23 +40,24 @@
 
         <EditText
             android:id="@+id/editTextPhoneNumDriver"
-            android:layout_width="match_parent"
+            android:layout_width="355dp"
             android:layout_height="60dp"
+            android:layout_gravity="center"
             android:layout_marginTop="13dp"
             android:background="@drawable/graphics_edittext_1"
             android:drawableStart="@drawable/ic_baseline_phone_in_talk_24"
             android:drawableLeft="@drawable/ic_baseline_phone_in_talk_24"
-            android:drawablePadding="15dp"
-            android:ems="10"
+            android:drawablePadding="16dp"
             android:hint="Enter Your Phone Number"
             android:inputType="phone"
-            android:paddingLeft="15dp"
-            />
+
+            android:paddingLeft="15dp" />
 
         <Spinner
             android:id="@+id/spinnerCityDriver"
-            android:layout_width="match_parent"
+            android:layout_width="354dp"
             android:layout_height="60dp"
+            android:layout_gravity="center"
             android:layout_marginTop="24dp"
             android:background="@drawable/graphics_edittext_1"
             android:contentDescription="City"
@@ -64,8 +65,9 @@
 
         <Spinner
             android:id="@+id/spinnerVehicleDriver"
-            android:layout_width="match_parent"
+            android:layout_width="352dp"
             android:layout_height="60dp"
+            android:layout_gravity="center"
             android:layout_marginTop="20dp"
             android:background="@drawable/graphics_edittext_1"
             android:contentDescription="Vehicle"
@@ -112,12 +114,13 @@
 
         <CheckBox
             android:id="@+id/checkBoxAgreeRider"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="50dp"
+            android:layout_gravity="center"
             android:layout_marginTop="16dp"
-            android:textSize="10sp"
+            android:text="@string/agreeDriverText"
             android:textColor="@color/textGray"
-            android:text="@string/agreeDriverText" />
+            android:textSize="10sp" />
 
         <Button
             android:layout_gravity="center"
