@@ -79,9 +79,6 @@
             android:name=".Rider.RegisterRider"
             android:exported="true" />
         <activity
-            android:name=".Rider.MainActivityRider"
-            android:exported="true" />
-        <activity
             android:name=".User.MainUserActivity"
             android:exported="true"
             android:label="UserMain" />

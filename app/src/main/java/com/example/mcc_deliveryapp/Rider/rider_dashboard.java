@@ -29,11 +29,11 @@ public class rider_dashboard extends AppCompatActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_rider_dashboard);
+
+
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		bottomNavigationView = findViewById(R.id.bottomNav_rider);
-
 		getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,pickupFragment).commit();
-
 		bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
 			@Override
 			public boolean onNavigationItemSelected( MenuItem item) {
@@ -77,6 +77,11 @@ public class rider_dashboard extends AppCompatActivity {
 		Intent intent = new Intent(this,rider_dashboard1.class);
 		startActivity(intent);
 	}
+
+	// Hide both the navigation bar and the status bar.
+// SYSTEM_UI_FLAG_FULLSCREEN is only available on Android 4.1 and higher, but as
+// a general rule, you should design your app to hide the status bar whenever you
+// hide the navigation bar.
 
 //	public void getdata(){
 //		databaseReference.addValueEventListener(new ValueEventListener() {

@@ -17,7 +17,9 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:background="@color/button_color1"
+        android:background="@color/white"
+        app:itemIconTint="@color/button_color1"
+        app:itemTextColor="@color/black"
         app:menu="@menu/bottom_navrider"/>
 
     <FrameLayout

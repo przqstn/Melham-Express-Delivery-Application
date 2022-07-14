@@ -60,9 +60,25 @@
                     android:layout_height="50dp"
                     android:layout_marginBottom="30dp"
                     android:paddingLeft="20dp"
-                    android:hint="Email (Optional)"
-
+                    android:hint="Email"
                     android:background="@drawable/graphics_edittext_1"/>
+               <com.google.android.material.textfield.TextInputLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:id="@+id/etpassRiderL"
+                   app:passwordToggleEnabled="true">
+                   <EditText
+                       app:passwordToggleEnabled="true"
+                       android:id="@+id/etpassRider"
+                       android:layout_width="match_parent"
+                       android:layout_height="50dp"
+                       android:layout_marginBottom="30dp"
+                       android:paddingLeft="20dp"
+                       android:hint="Password"
+                       android:inputType="textPassword"
+                       android:background="@drawable/graphics_edittext_1"/>
+               </com.google.android.material.textfield.TextInputLayout>
+
                 <TextView
                     android:id="@+id/txtRiderInformation"
                     android:layout_width="match_parent"

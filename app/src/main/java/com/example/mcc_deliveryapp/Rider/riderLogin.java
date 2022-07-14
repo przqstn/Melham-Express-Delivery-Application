@@ -78,7 +78,7 @@ public class riderLogin extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful())
                 {
-                    Intent intent = new Intent(riderLogin.this, MainActivityRider.class);
+                    Intent intent = new Intent(riderLogin.this, rider_dashboard.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
                 }

@@ -13,22 +13,33 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 
 import com.example.mcc_deliveryapp.R;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.regex.Pattern;
 
 public class signUpFragment extends Fragment {
-
+    private static final Pattern PASSWORD_PATTERN =
+            Pattern.compile("^" +
+                    "(?=.*[0-9])" +         //at least 1 digit
+                    "(?=.*[a-z])" +         //at least 1 lower case letter
+                    "(?=.*[A-Z])" +         //at least 1 upper case letter
+                    //"(?=.*[a-zA-Z])" +      //any letter
+                    "(?=.*[@#$%^&+=!_.])" +    //at least 1 special character
+                    "(?=\\S+$)" +           //no white spaces
+                    ".{4,}" +               //at least 4 characters
+                    "$");
 
     //setting the value of the given edit_text
     EditText editTxt_fullname,editTxt_phoneNum,editTxt_password,editTxt_Cpassword;
     Button btn_createAcc;
     TextView txt_hashpassword;
 
-
+    TextInputLayout textInputPassword;
    //Database Realtime
     FirebaseDatabase root;
     DatabaseReference DbRef;
@@ -48,10 +59,11 @@ public class signUpFragment extends Fragment {
         editTxt_password = view.findViewById(R.id.edTextPass);
         editTxt_Cpassword = view.findViewById(R.id.edTextConfirmPass);
         btn_createAcc= view.findViewById(R.id.btn_createAccount);
-
+        textInputPassword = view.findViewById(R.id.edTextPassL);
         btn_createAcc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                uservalidatePassword();
                 //Hashing the password and confirm password
                 PasswordHash(editTxt_password.toString());
                 PasswordHash(editTxt_Cpassword.toString());
@@ -106,7 +118,20 @@ public class signUpFragment extends Fragment {
 
         return view;
     }
-    //~~~~~~~~~~~~~~ NEED TO COMMIT ~~~~~~~~~~~~~~~//
+    private boolean uservalidatePassword() {
+        String passwordInput = textInputPassword.getEditText().getText().toString().trim();
+
+        if (passwordInput.isEmpty()) {
+            textInputPassword.setError("Field can't be empty");
+            return false;
+        } else if (!PASSWORD_PATTERN.matcher(passwordInput).matches()) {
+            textInputPassword.setError("Password too weak");
+            return false;
+        } else {
+            textInputPassword.setError(null);
+            return true;
+        }
+    }
     //Clear the Sign up Section
     private void Clear(){
 

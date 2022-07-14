@@ -25,6 +25,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.mcc_deliveryapp.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -38,9 +39,20 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
+import java.util.regex.Pattern;
 
 public class RegisterRider extends AppCompatActivity {
-
+    private static final Pattern PASSWORD_PATTERN =
+            Pattern.compile("^" +
+                    "(?=.*[0-9])" +         //at least 1 digit
+                    "(?=.*[a-z])" +         //at least 1 lower case letter
+                    "(?=.*[A-Z])" +         //at least 1 upper case letter
+                    //"(?=.*[a-zA-Z])" +      //any letter
+                    "(?=.*[@#$%^&+=!_.])" +    //at least 1 special character
+                    "(?=\\S+$)" +           //no white spaces
+                    ".{4,}" +               //at least 4 characters
+                    "$");
+    TextInputLayout textInputPassword;
     FirebaseAuth mAuth;
 
     FirebaseDatabase db = FirebaseDatabase.getInstance();
@@ -170,8 +182,8 @@ public class RegisterRider extends AppCompatActivity {
 
         EditText etModelVehicle = (EditText) findViewById(R.id.editTextVehicleModel);
         EditText etBrandVehicle = (EditText) findViewById(R.id.editTextVehicleBrand);
+
         //Spinner Vehicle Brand
-        
         spinBrand.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -285,7 +297,7 @@ public class RegisterRider extends AppCompatActivity {
         btnSuccessOkay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(RegisterRider.this, MainActivityRider.class);
+                Intent intent = new Intent(RegisterRider.this, riderLogin.class);
                 startActivity(intent);
             }
         });
@@ -313,6 +325,8 @@ public class RegisterRider extends AppCompatActivity {
         Button btnRegRiderInfo = (Button) regRiderInfo.findViewById(R.id.btnRegRiderInfo);
 
         EditText etDatePicker = (EditText) regRiderInfo.findViewById(R.id.etRiderDateofBirth);
+
+        textInputPassword = regRiderInfo.findViewById(R.id.etpassRiderL);
 
         etDatePicker.setText(getTodaysDate());
 
@@ -347,8 +361,10 @@ public class RegisterRider extends AppCompatActivity {
         btnRegRiderInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                validatePassword();
                 checkEmptyEditText(regRiderInfo.findViewById(R.id.etNameRider));
+                checkEmptyEditText(regRiderInfo.findViewById(R.id.etEmailRider));
+                //checkEmptyEditText(regRiderInfo.findViewById(R.id.etpassRider));
                 checkEmptyEditText(regRiderInfo.findViewById(R.id.etRiderDateofBirth));
                 checkEmptyEditText(regRiderInfo.findViewById(R.id.etRiderDriverLicense));
                 checkEmptyEditText(regRiderInfo.findViewById(R.id.etRiderDriverLicenseExpiry));
@@ -365,6 +381,7 @@ public class RegisterRider extends AppCompatActivity {
 
                 String riderName = getTextFromEditText(regRiderInfo.findViewById(R.id.etNameRider));
                 String riderEmail = getTextFromEditText(regRiderInfo.findViewById(R.id.etEmailRider));
+                String riderpass = getTextFromEditText(regRiderInfo.findViewById(R.id.etpassRider));
                 String riderDateofBirth = getTextFromEditText(regRiderInfo.findViewById(R.id.etRiderDateofBirth));
                 String riderDriverLicenseNumber = getTextFromEditText(regRiderInfo.findViewById(R.id.etRiderDriverLicense));
                 String riderDriverLicenseExpiry = getTextFromEditText(regRiderInfo.findViewById(R.id.etRiderDriverLicenseExpiry));
@@ -372,12 +389,10 @@ public class RegisterRider extends AppCompatActivity {
                 String riderVehiclePlateNumber = getTextFromEditText(regRiderInfo.findViewById(R.id.etRiderVehicleNumber));
                 String riderVehicleManufacturerYear = getTextFromEditText(regRiderInfo.findViewById(R.id.etRiderManufactureYear));
 
-
                 FirebaseUser userCurrent = mAuth.getCurrentUser();
                 UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder().setDisplayName(riderName).build();
 
                 userCurrent.updateProfile(profileUpdates);
-
 
 
 
@@ -390,6 +405,7 @@ public class RegisterRider extends AppCompatActivity {
                 riderInfo.put("vehicletype",spinVehicle.getSelectedItem().toString());
                 riderInfo.put("name",riderName);
                 riderInfo.put("email",riderEmail);
+                riderInfo.put("password",riderpass);
                 riderInfo.put("dateofbirth",riderDateofBirth);
                 riderInfo.put("driverlicensenumber",riderDriverLicenseNumber);
                 riderInfo.put("driverlicenseexpiry",riderDriverLicenseExpiry);
@@ -413,8 +429,22 @@ public class RegisterRider extends AppCompatActivity {
         });
 
 
-    }
 
+    }
+    private boolean validatePassword() {
+        String passwordInput = textInputPassword.getEditText().getText().toString().trim();
+
+        if (passwordInput.isEmpty()) {
+            textInputPassword.setError("Field can't be empty");
+            return false;
+        } else if (!PASSWORD_PATTERN.matcher(passwordInput).matches()) {
+            textInputPassword.setError("Password too weak");
+            return false;
+        } else {
+            textInputPassword.setError(null);
+            return true;
+        }
+    }
     private String getTodaysDate()
     {
         Calendar cal = Calendar.getInstance();
@@ -490,6 +520,7 @@ public class RegisterRider extends AppCompatActivity {
             ett.setError("Required");
             hasError = true;
         }
+
     }
 
     private void sendVerificationCodeToUser(String phoneNo)
@@ -526,7 +557,6 @@ public class RegisterRider extends AppCompatActivity {
               Toast.makeText(RegisterRider.this,e.getMessage(),Toast.LENGTH_LONG).show();
         }
     };
-
 
     private void verifyCode(String code)
     {

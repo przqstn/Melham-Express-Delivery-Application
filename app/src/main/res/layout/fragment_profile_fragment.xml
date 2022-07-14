@@ -5,228 +5,310 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Rider.profile_fragment">
-    <androidx.constraintlayout.widget.ConstraintLayout
+
+<androidx.core.widget.NestedScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:background="@color/background_color"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <LinearLayout
+        <ImageView
+            android:id="@+id/group_2695"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0">
-
-            <ImageView
-                android:id="@+id/group_2695"
-                android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:layout_marginBottom="600dp"
-                android:background="#00000000"
-                android:scaleType="fitXY"
-                android:src="@drawable/background"></ImageView>
-
-        </LinearLayout>
+            android:layout_height="150dp"
+            android:background="#00000000"
+            android:scaleType="fitXY"
+            android:src="@drawable/background" />
 
         <TextView
-            android:id="@+id/txt_profile"
-            android:layout_width="99dp"
-            android:layout_height="27dp"
-            android:fontFamily="@font/alegreya"
             android:gravity="center"
+            android:id="@+id/txt_profile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:fontFamily="@font/alegreya"
+            android:padding="5dp"
             android:text="My Profile"
             android:textColor="@color/white"
             android:textSize="20dp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.106" />
+            android:layout_marginTop="16dp"
+            android:textStyle="bold" />
 
         <ImageView
             android:id="@+id/profile_rider"
-            android:layout_width="86dp"
-            android:layout_height="86dp"
-            android:src="@drawable/profilepic"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginBottom="1dp"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.184" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txt_profile"
+            android:layout_marginTop="60dp"
+              android:background="@drawable/borderbutton"
+            android:layout_centerInParent="true"
+            android:src="@drawable/profilepic" />
 
-        <TextView
-            android:id="@+id/txt_name"
-            android:layout_width="188dp"
-            android:layout_height="46dp"
-            android:fontFamily="@font/alegreya"
-            android:gravity="center"
-            android:lineSpacingExtra="-1sp"
-            android:text="Riders name"
-            android:textColor="@color/black"
-            android:textSize="30dp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.497"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.299" />
+        <RelativeLayout
+            android:layout_marginTop="20dp"
+            android:layout_below="@id/group_2695"
+            android:layout_width="wrap_content"
+            android:background="@color/background_color"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="5dp">
+
+                <TextView
+                    android:id="@+id/txt_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/alegreya"
+                    android:gravity="center"
+                    android:text="Riders name"
+                    android:textColor="@color/black"
+                    android:textSize="30dp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:id="@+id/txt_rating"
+                        android:layout_width="75dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:background="@drawable/graphics_edittext_1"
+                        android:fontFamily="@font/alegreya"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:text="Rating \n 4.5"
+                        android:textColor="@color/black"
+                        android:textSize="20dp" />
+
+                    <TextView
+                        android:id="@+id/txt_fans"
+                        android:layout_width="75dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/graphics_edittext_1"
+                        android:gravity="center"
+                        android:layout_margin="5dp"
+                        android:padding="7dp"
+                        android:text="Fans \n 35"
+                        android:textColor="@color/black"
+                        android:textSize="20dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="30dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/borders"
+                        android:orientation="vertical"
+                        android:layout_marginBottom="15dp"
+                        android:padding="5dp">
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+                        <LinearLayout
+                            android:layout_marginRight="100dp"
+                            android:id="@+id/linearvehicle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+                            <TextView
+                                android:id="@+id/txt_vehicle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/alegreya"
+                                android:text="Type of Vehicle:"
+                                android:textColor="@color/black"
+                                android:textSize="15dp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/alegreya"
+                                android:padding="5dp"
+                                android:text="Example:Van"
+                                android:textColor="@color/text_details"
+                                />
+                        </LinearLayout>
+                        <LinearLayout
+
+                            android:id="@+id/linearplatenum"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_toRightOf="@id/linearvehicle"
+                            android:orientation="vertical">
+                            <TextView
+                                android:id="@+id/txt_PlateNum"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/alegreya"
+                                android:text="Plate #:"
+                                android:textColor="@color/black"
+                                android:textSize="15dp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/alegreya"
+                                android:padding="5dp"
+                                android:text="Example:123zxc"
+                                android:textColor="@color/text_details"
+                                />
+                        </LinearLayout>
+                    </RelativeLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/borders"
+                        android:orientation="vertical"
+                        android:layout_marginBottom="15dp"
+                        android:padding="10dp">
+
+                        <TextView
+                            android:id="@+id/txt_location"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/alegreya"
+                            android:text="Location"
+                            android:textColor="@color/black"
+                            android:textSize="15dp"
+                            android:textStyle="bold"
+
+                            />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/alegreya"
+                            android:padding="5dp"
+                            android:text="Example: 123 abc city"
+                            android:textColor="@color/text_details"
+
+                            />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/borders"
+                        android:orientation="vertical"
+                        android:layout_marginBottom="15dp"
+                        android:padding="10dp">
+
+                        <TextView
+                            android:id="@+id/txt_contact"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/alegreya"
+                            android:text="Contact Number"
+                            android:textColor="@color/black"
+                            android:textSize="15dp"
+                            android:textStyle="bold"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/alegreya"
+                            android:padding="5dp"
+                            android:text="Example:00000"
+                            android:textColor="@color/text_details"
+
+                            />
+                    </LinearLayout>
 
 
-        <TextView
-            android:id="@+id/txt_location"
-            android:layout_width="250dp"
-            android:layout_height="49dp"
-            android:text="  Location"
-            android:textSize="12dp"
-            android:textColor="@color/text_details"
-            android:fontFamily="@font/alegreya"
-            android:background="@drawable/borders"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.496"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.565" />
+                </LinearLayout>
 
-        <TextView
-            android:id="@+id/txt_contact"
-            android:layout_width="250dp"
-            android:layout_height="49dp"
-            android:background="@drawable/borders"
-            android:fontFamily="@font/alegreya"
-            android:text="   Contact Number"
-            android:textColor="@color/text_details"
-            android:textSize="12dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.496"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.648"
-            tools:ignore="TextContrastCheck" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/txt_vehicle"
-            android:layout_width="250dp"
-            android:layout_height="49dp"
-            android:text="  Type of Vehicle"
-            android:fontFamily="@font/alegreya"
-            android:textSize="12dp"
-            android:textColor="@color/text_details"
-            android:background="@drawable/borders"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.496"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.48" />
+                    <TextView
+                        android:id="@+id/txt_aboutus"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/alegreya"
+                        android:padding="10dp"
+                        android:text="ABOUT US"
+                        android:textColor="@color/black"
+                        android:textSize="20dp" />
 
-        <TextView
-            android:id="@+id/txt_rating"
-            android:layout_width="73dp"
-            android:layout_height="53dp"
-            android:background="@drawable/graphics_edittext_1"
-            android:fontFamily="@font/alegreya"
-            android:gravity="center"
-            android:text="Rating \n 4.5"
-            android:textColor="@color/black"
-            android:textSize="16dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.396"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.386" />
+                    <LinearLayout
+                        android:layout_gravity="center_vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/edit_text_round">
+                        <Button
+                            android:id="@+id/btn_faq"
+                            style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="75dp"
+                            android:drawableLeft="@drawable/faq"
+                            android:text="FAQ"
+                            android:textColor="@color/black"
+                            android:textSize="15dp" />
+                    </LinearLayout>
 
-        <TextView
-            android:id="@+id/txt_fans"
-            android:layout_width="73dp"
-            android:layout_height="53dp"
-            android:background="@drawable/graphics_edittext_1"
-            android:gravity="center"
-            android:text="Fans \n35"
-            android:textColor="@color/black"
-            android:textSize="16dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.639"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.386" />
+                    <LinearLayout
+                        android:gravity="center_vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/edit_text_round">
+                        <Button
+                            android:id="@+id/btn_privacy"
+                            style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="75dp"
+                            android:background="@color/teal_200"
+                            android:drawableLeft="@drawable/privacy"
+                            android:text="Privacy Policy"
+                            android:textColor="@color/black"
+                            android:textSize="15dp" />
+                    </LinearLayout>
 
-        <TextView
-            android:id="@+id/txt_aboutus"
-            android:layout_width="89dp"
-            android:layout_height="18dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:fontFamily="@font/alegreya"
-            android:gravity="center"
-            android:lineSpacingExtra="-1sp"
-            android:text="ABOUT US"
-            android:textColor="@color/black"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.077"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.705" />
+                    <LinearLayout
+                        android:gravity="center_vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/edit_text_round">
+                        <Button
+                            android:id="@+id/btn_contact"
+                            style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="75dp"
+                            android:drawableLeft="@drawable/contactus"
+                            android:text="Contact Us"
+                            android:textColor="@color/black"
+                            android:textSize="15dp" />
+                    </LinearLayout>
 
-        <Button
-            android:id="@+id/btn_faq"
-            style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
-            android:layout_width="110dp"
-            android:layout_height="48dp"
-            android:background="@color/teal_200"
-            android:drawableLeft="@drawable/faq"
-            android:text="FAQ"
-            android:textColor="@color/black"
-            android:textSize="10dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.232"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.77"/>
 
-        <Button
-            android:id="@+id/btn_privacy"
-            style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
-            android:layout_width="167dp"
-            android:layout_height="47dp"
-            android:background="@color/teal_200"
-            android:drawableLeft="@drawable/privacy"
-            android:text="   Privacy Policy"
-            android:textColor="@color/black"
-            android:textSize="10dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.286"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.845" />
+                </LinearLayout>
+            </LinearLayout>
+        </RelativeLayout>
 
-        <Button
-            android:id="@+id/btn_contact"
-            style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
-            android:layout_width="151dp"
-            android:layout_height="48dp"
-            android:background="@color/teal_200"
-            android:drawableLeft="@drawable/contactus"
-            android:text="Contact Us"
-            android:textColor="@color/black"
-            android:textSize="10dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.269"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.914" />
+    </RelativeLayout>
+</androidx.core.widget.NestedScrollView>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </FrameLayout>

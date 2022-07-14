@@ -72,11 +72,7 @@ public class signInFragment extends Fragment {
                     login_editTxt_password.setError("Required");
                     Toast.makeText(getContext(), "Password is required", Toast.LENGTH_SHORT).show();
                     return;
-                }else{
-
                 }
-
-
 //                name.setText("");
 //                usernum.setText("");
             }
@@ -124,7 +120,7 @@ public class signInFragment extends Fragment {
                         usernum.setText(usernumFromDB);
 
                         EditText etVerifyCode_user = VerifyNum.findViewById(R.id.etVerify_user);
-                        etCode_user = VerifyNum.findViewById(R.id.etVerify_user);
+                        //etCode_user = VerifyNum.findViewById(R.id.etVerify_user);
                         Button verify_user = VerifyNum.findViewById(R.id.btnVerify_user);
                         verify_user.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -133,24 +129,24 @@ public class signInFragment extends Fragment {
                                 if (TextUtils.isEmpty(etVerifyCode_user.getText().toString())){
                                     etVerifyCode_user.setError("Required");
                                     Toast.makeText(getActivity(), "Please Enter The Code.", Toast.LENGTH_SHORT).show();
-                                    return;
+                                }else{
+                                    VerifyCodeUser(code_user);
                                 }
-                                VerifyCodeUser(code_user);
+
                             }
 
                         });
+                        //sendVerificationCodeToUser(Objects.requireNonNull(login_editTxt_phoneNum.getEditText()).getText().toString());
                         sendVerificationCodeToUser(login_editTxt_phoneNum.getEditText().getText().toString());
                         VerifyNum.show();
-
                     }
                     else{
                         login_editTxt_password.setError("Wrong Password");
-                        //login_editTxt_password.requestFocus();
+
                     }
                 }
                 else{
                     login_editTxt_phoneNum.setError("This number is not registered yet");
-                    //login_editTxt_phoneNum.requestFocus();
                 }
 
             }
@@ -162,7 +158,7 @@ public class signInFragment extends Fragment {
         });
     }
     private void sendVerificationCodeToUser(String PhoneNo_User) {
-// ~~~~~~~~~ Set up number for verification ~~~~~~~~~~~~~~ //
+ //~~~~~~~~~ Set up number for verification ~~~~~~~~~~~~~~ //
 //        PhoneAuthOptions options =
 //                PhoneAuthOptions.newBuilder(mAuth)
 //                .setPhoneNumber("+63"+ PhoneNo_User)
@@ -176,7 +172,7 @@ public class signInFragment extends Fragment {
         PhoneAuthProvider.getInstance().verifyPhoneNumber("+63" + PhoneNo_User,60, TimeUnit.SECONDS, getActivity(),mCallBacks);
 
     }
-    private PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallBacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+    private final PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallBacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
 
         @Override
         public void onCodeSent(@NonNull String s, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
