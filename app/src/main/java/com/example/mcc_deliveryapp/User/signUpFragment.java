@@ -23,6 +23,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.regex.Pattern;
 
 public class signUpFragment extends Fragment {
+    //password pattern
     private static final Pattern PASSWORD_PATTERN =
             Pattern.compile("^" +
                     "(?=.*[0-9])" +         //at least 1 digit
@@ -63,10 +64,11 @@ public class signUpFragment extends Fragment {
         btn_createAcc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //calling the user password validation
                 uservalidatePassword();
-                //Hashing the password and confirm password
-                PasswordHash(editTxt_password.toString());
-                PasswordHash(editTxt_Cpassword.toString());
+//                //Hashing the password and confirm password
+//                PasswordHash(editTxt_password.toString());
+//                PasswordHash(editTxt_Cpassword.toString());
                 // Verification for blank space in the user registration form
                 if(TextUtils.isEmpty(editTxt_fullname.getText().toString()))
                 {
@@ -118,6 +120,7 @@ public class signUpFragment extends Fragment {
 
         return view;
     }
+    // user password validation
     private boolean uservalidatePassword() {
         String passwordInput = textInputPassword.getEditText().getText().toString().trim();
 
