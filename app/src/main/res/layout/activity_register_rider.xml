@@ -21,8 +21,8 @@
             android:layout_width="match_parent"
             android:layout_height="328dp"
             android:layout_gravity="left"
-            android:background="#CEDFED"
-            tools:srcCompat="@drawable/topimageriderlogin_2" />
+            android:background="#D3DCFA "
+            app:srcCompat="@drawable/topimageriderlogin_2" />
 
         <TextView
             android:id="@+id/txtRegDriveTitle"
@@ -53,6 +53,40 @@
 
             android:paddingLeft="15dp" />
 
+        <TextView
+            android:id="@+id/pwRequirements"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Password (minimum 6 characters, one uppercase, one lowercase, one number)" />
+
+        <EditText
+            android:id="@+id/pwfield"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPassword" />
+
+        <TextView
+            android:id="@+id/pwStrength"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/togglePW"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="togglePass"
+            android:text="Show" />
+
+        <Button
+            android:id="@+id/button7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:onClick="validatePW"
+            android:text="VALIDATE PASSWORD" />
+
         <Spinner
             android:id="@+id/spinnerCityDriver"
             android:layout_width="354dp"
@@ -80,7 +114,7 @@
             android:layout_marginTop="20dp"
             android:contentDescription="Vehicle"
             android:spinnerMode="dropdown"
-            
+
             android:visibility="gone" />
 
         <EditText

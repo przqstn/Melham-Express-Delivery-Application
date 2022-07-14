@@ -6,7 +6,11 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.InputType;
 import android.text.TextUtils;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -78,6 +82,9 @@ public class RegisterRider extends AppCompatActivity {
         Spinner spinVehicle = (Spinner) findViewById(R.id.spinnerVehicleDriver);
         Spinner spinBrand = (Spinner) findViewById(R.id.spinnerVehicleBrand);
 
+
+
+
         //Getting City Rider Item List
         ArrayAdapter<CharSequence> adapterCity = ArrayAdapter.createFromResource(this, R.array.cityRider,R.layout.spinner_items_1);
         adapterCity.setDropDownViewResource(R.layout.spinner_items_1);
@@ -88,6 +95,7 @@ public class RegisterRider extends AppCompatActivity {
         ArrayAdapter<CharSequence> adapterVehicle = ArrayAdapter.createFromResource (this,R.array.ridervehicletype,R.layout.spinner_items_1);
         adapterVehicle.setDropDownViewResource(R.layout.spinner_items_1);
         spinVehicle.setAdapter(adapterVehicle);
+
 
 
         //Spinner City
@@ -411,8 +419,170 @@ public class RegisterRider extends AppCompatActivity {
 
             }
         });
+Button pwtoggle = findViewById(R.id.togglePW);
+   EditText pwtext =   findViewById(R.id.pwfield);
+        pwtoggle.setOnTouchListener(new View.OnTouchListener() {
+            public boolean onTouch(View v, MotionEvent event) {
+
+                switch ( event.getAction() ) {
+
+                    case MotionEvent.ACTION_UP:
+                        pwtext.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                        break;
+
+                    case MotionEvent.ACTION_DOWN:
+                        pwtext.setInputType(InputType.TYPE_CLASS_TEXT);
+                        break;
+
+                }
+                return true;
+            }
+        });
 
 
+    }
+    //Password Validation
+    public void validatePW(View view){
+        String password = ((EditText)findViewById(R.id.pwfield)).getText().toString();
+        boolean uppercase = !password.equals(password.toLowerCase());
+        boolean lowercase = !password.equals(password.toUpperCase());
+        boolean min6  = password.length() > 5;
+        boolean good = false;
+        //check number of digits, uppercase, and lowercase char for password checking
+        //lowercase not used
+        int digits = 0;
+        int upper = 0;
+        int lower = 0;
+        for (int i = 0; i < password.length(); i++) {
+            char ch = password.charAt(i);
+            if (ch >= 48 && ch <= 57)
+                digits++;
+            else if(ch>='A' && ch<='Z'){
+                upper++;
+            }
+            else if(ch>='a' && ch<='z'){
+                lower++;
+            }
+        }
+        //check if password satisfies conditions
+      if(!uppercase && min6 && digits >= 1)
+        {
+            Toast.makeText(RegisterRider.this,"Must have an uppercase letter",Toast.LENGTH_SHORT).show();
+        }
+        else if(!lowercase && min6 && digits >= 1)
+        {
+            Toast.makeText(RegisterRider.this,"Must have a lowercase letter",Toast.LENGTH_SHORT).show();
+        }
+        else if(!lowercase && !uppercase && !min6 && digits >= 1)
+        {
+            Toast.makeText(RegisterRider.this,"Must have uppercase and lowercase letter",Toast.LENGTH_SHORT).show();
+        }
+        else if (!min6 && lowercase && uppercase && digits >= 1)
+        {
+            Toast.makeText(RegisterRider.this,"Password is too short",Toast.LENGTH_SHORT).show();
+        }
+        else if (!min6 && !lowercase && digits >= 1)
+        {
+            Toast.makeText(RegisterRider.this,"Password is too short and must have lowercase letter",Toast.LENGTH_SHORT).show();
+        }
+        else if (!min6 && !uppercase && digits >= 1)
+        {
+            Toast.makeText(RegisterRider.this,"Password is too short and must have uppercase letter",Toast.LENGTH_SHORT).show();
+        }
+        else if(!uppercase && min6 && digits == 0)
+        {
+            Toast.makeText(RegisterRider.this,"Must have an uppercase letter and number",Toast.LENGTH_SHORT).show();
+        }
+        else if(!lowercase && min6 && digits == 0)
+        {
+            Toast.makeText(RegisterRider.this,"Must have a lowercase letter and number",Toast.LENGTH_SHORT).show();
+        }
+        else if (!min6 && !lowercase && digits == 0)
+        {
+            Toast.makeText(RegisterRider.this,"Password is too short and must have lowercase letter and number",Toast.LENGTH_SHORT).show();
+        }
+        else if (!min6 && !uppercase && digits == 0)
+        {
+            Toast.makeText(RegisterRider.this,"Password is too short and must have uppercase letter and number",Toast.LENGTH_SHORT).show();
+        }
+        else if (digits == 0)
+        {
+            Toast.makeText(RegisterRider.this,"Password must have number",Toast.LENGTH_SHORT).show();
+        }
+        else if (min6 && uppercase && lowercase && digits >=1)
+        {
+            Toast.makeText(RegisterRider.this,"Password is good!",Toast.LENGTH_SHORT).show();
+            good = true;
+        }
+
+        else if (password.length() == 0)
+        {
+            Toast.makeText(RegisterRider.this,"Password cannot be empty",Toast.LENGTH_SHORT).show();
+        }
+
+        String strength = "";
+
+        //check for password strength
+        if (good == true)
+        {
+
+            float lengthscore = 0;
+            float UCscore = 0;
+            float numscore = 0;
+            float strengthscore = 0;
+            if (password.length() == 6)
+            {
+               lengthscore = (float) 0.2;
+            }
+            else if (password.length()>= 7 && password.length() <= 9)
+            {
+                lengthscore = (float) 0.3;
+            }
+            else if (password.length() > 9)
+            {
+                lengthscore = (float) 0.5;
+            }
+
+            if(upper == 2)
+            {
+                UCscore = (float) 0.2;
+            }
+            else if(upper > 2)
+            {
+                UCscore = (float) 0.3;
+            }
+
+            if(digits == 2)
+            {
+                numscore = (float) 0.2;
+            }
+            else if(digits > 2)
+            {
+                numscore = (float) 0.3;
+            }
+            strengthscore = lengthscore + UCscore + numscore;
+
+            if (strengthscore < 0.5)
+            {
+                strength = "Weak";
+            }
+            else if (strengthscore >= 0.5 && strengthscore < 1)
+            {
+                strength = "Moderate";
+            }
+            else if (strengthscore >=1 )
+            {
+                strength = "Strong";
+            }
+            ((TextView)findViewById(R.id.pwStrength)).setText("Password Strength: " + strength);
+
+
+        }
+
+        else if (good == false)
+        {
+            ((TextView)findViewById(R.id.pwStrength)).setText("Password does not satisfy conditions");
+        }
     }
 
     private String getTodaysDate()
