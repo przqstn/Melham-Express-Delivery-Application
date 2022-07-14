@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".Rider.riderLogin">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -17,31 +18,32 @@
         <ImageView
             android:id="@+id/imageView9"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="478dp"
             android:scaleType="centerCrop"
             app:srcCompat="@drawable/topimageriderlogin" />
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="448dp">
+
             <LinearLayout
-                android:gravity="center_horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:gravity="center_horizontal"
                 android:orientation="vertical"
                 app:layout_constraintBottom_toBottomOf="parent">
 
                 <EditText
-                    android:inputType="phone"
-                    android:layout_marginTop="10dp"
                     android:id="@+id/edtTextRiderNumber"
                     android:layout_width="330dp"
                     android:layout_height="60dp"
+                    android:layout_marginTop="10dp"
                     android:background="@drawable/graphics_edittext_1"
                     android:drawableStart="@drawable/phone"
                     android:drawablePadding="16dp"
                     android:fontFamily="@font/avenir"
                     android:hint="Enter your number"
+                    android:inputType="phone"
                     android:padding="15dp"
                     android:textColorHint="#A7A9B7"
                     android:textSize="18dp"
@@ -53,10 +55,10 @@
                     app:layout_constraintVertical_bias="0.063" />
 
                 <EditText
-                    android:layout_marginTop="10dp"
                     android:id="@+id/edtTextRiderPassword"
                     android:layout_width="330dp"
                     android:layout_height="60dp"
+                    android:layout_marginTop="10dp"
                     android:background="@drawable/graphics_edittext_1"
                     android:drawableStart="@drawable/lock"
                     android:drawablePadding="16dp"
@@ -73,10 +75,10 @@
                     app:layout_constraintVertical_bias="0.092" />
 
                 <TextView
-                    android:layout_marginTop="10dp"
                     android:id="@+id/forgotPass"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
                     android:fontFamily="@font/alegreya"
                     android:text="Forgot Password"
                     android:textColor="#68B3F9"
@@ -90,10 +92,10 @@
                     app:layout_constraintVertical_bias="0.043" />
 
                 <Button
-                    android:layout_marginTop="10dp"
                     android:id="@+id/btnLoginRider"
                     android:layout_width="330dp"
                     android:layout_height="60dp"
+                    android:layout_marginTop="10dp"
                     android:background="@drawable/graphics_button_1"
                     android:fontFamily="@font/alegreya"
                     android:text="Log In"
@@ -109,10 +111,10 @@
                     app:layout_constraintVertical_bias="0.311" />
 
                 <Button
-                    android:layout_marginTop="10dp"
                     android:id="@+id/btnRegisterRider"
                     android:layout_width="330dp"
                     android:layout_height="60dp"
+                    android:layout_marginTop="10dp"
                     android:layout_marginBottom="40dp"
                     android:background="@drawable/graphics_button_1"
                     android:fontFamily="@font/alegreya"

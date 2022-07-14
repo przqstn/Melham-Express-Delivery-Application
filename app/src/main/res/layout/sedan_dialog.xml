@@ -45,8 +45,6 @@
             app:layout_constraintVertical_bias="0.018" />
 
 
-
-
         <TextView
             android:id="@+id/txtDropOffAdd"
             android:layout_width="wrap_content"
@@ -162,20 +160,20 @@
             android:id="@+id/imageView6"
             android:layout_width="35dp"
             android:layout_height="35dp"
+            android:src="@drawable/arrow"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.111"
-            android:src="@drawable/arrow" />
+            app:layout_constraintVertical_bias="0.111" />
 
         <TextView
             android:id="@+id/textView15"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="P 500"
             android:fontFamily="@font/alegreya"
+            android:text="P 500"
             android:textColor="@color/black"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/btnSedan"
