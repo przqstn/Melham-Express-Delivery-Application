@@ -72,9 +72,10 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginTop="20dp"
-            android:contentDescription="Brand"
+            android:contentDescription="Vehicle"
             android:spinnerMode="dropdown"
-            />
+            
+            android:visibility="gone" />
 
         <EditText
             android:id="@+id/editTextVehicleBrand"

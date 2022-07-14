@@ -6,7 +6,11 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.InputType;
 import android.text.TextUtils;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -25,7 +29,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.mcc_deliveryapp.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -39,20 +42,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
-import java.util.regex.Pattern;
 
 public class RegisterRider extends AppCompatActivity {
-    private static final Pattern PASSWORD_PATTERN =
-            Pattern.compile("^" +
-                    "(?=.*[0-9])" +         //at least 1 digit
-                    "(?=.*[a-z])" +         //at least 1 lower case letter
-                    "(?=.*[A-Z])" +         //at least 1 upper case letter
-                    //"(?=.*[a-zA-Z])" +      //any letter
-                    "(?=.*[@#$%^&+=!_.])" +    //at least 1 special character
-                    "(?=\\S+$)" +           //no white spaces
-                    ".{4,}" +               //at least 4 characters
-                    "$");
-    TextInputLayout textInputPassword;
+
     FirebaseAuth mAuth;
 
     FirebaseDatabase db = FirebaseDatabase.getInstance();
@@ -90,6 +82,9 @@ public class RegisterRider extends AppCompatActivity {
         Spinner spinVehicle = (Spinner) findViewById(R.id.spinnerVehicleDriver);
         Spinner spinBrand = (Spinner) findViewById(R.id.spinnerVehicleBrand);
 
+
+
+
         //Getting City Rider Item List
         ArrayAdapter<CharSequence> adapterCity = ArrayAdapter.createFromResource(this, R.array.cityRider,R.layout.spinner_items_1);
         adapterCity.setDropDownViewResource(R.layout.spinner_items_1);
@@ -100,6 +95,7 @@ public class RegisterRider extends AppCompatActivity {
         ArrayAdapter<CharSequence> adapterVehicle = ArrayAdapter.createFromResource (this,R.array.ridervehicletype,R.layout.spinner_items_1);
         adapterVehicle.setDropDownViewResource(R.layout.spinner_items_1);
         spinVehicle.setAdapter(adapterVehicle);
+
 
 
         //Spinner City
@@ -182,8 +178,8 @@ public class RegisterRider extends AppCompatActivity {
 
         EditText etModelVehicle = (EditText) findViewById(R.id.editTextVehicleModel);
         EditText etBrandVehicle = (EditText) findViewById(R.id.editTextVehicleBrand);
-
         //Spinner Vehicle Brand
+        
         spinBrand.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -297,7 +293,7 @@ public class RegisterRider extends AppCompatActivity {
         btnSuccessOkay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(RegisterRider.this, riderLogin.class);
+                Intent intent = new Intent(RegisterRider.this, MainActivityRider.class);
                 startActivity(intent);
             }
         });
@@ -325,8 +321,6 @@ public class RegisterRider extends AppCompatActivity {
         Button btnRegRiderInfo = (Button) regRiderInfo.findViewById(R.id.btnRegRiderInfo);
 
         EditText etDatePicker = (EditText) regRiderInfo.findViewById(R.id.etRiderDateofBirth);
-
-        textInputPassword = regRiderInfo.findViewById(R.id.etpassRiderL);
 
         etDatePicker.setText(getTodaysDate());
 
@@ -361,10 +355,8 @@ public class RegisterRider extends AppCompatActivity {
         btnRegRiderInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                validatePassword();
+
                 checkEmptyEditText(regRiderInfo.findViewById(R.id.etNameRider));
-                checkEmptyEditText(regRiderInfo.findViewById(R.id.etEmailRider));
-                //checkEmptyEditText(regRiderInfo.findViewById(R.id.etpassRider));
                 checkEmptyEditText(regRiderInfo.findViewById(R.id.etRiderDateofBirth));
                 checkEmptyEditText(regRiderInfo.findViewById(R.id.etRiderDriverLicense));
                 checkEmptyEditText(regRiderInfo.findViewById(R.id.etRiderDriverLicenseExpiry));
@@ -381,7 +373,6 @@ public class RegisterRider extends AppCompatActivity {
 
                 String riderName = getTextFromEditText(regRiderInfo.findViewById(R.id.etNameRider));
                 String riderEmail = getTextFromEditText(regRiderInfo.findViewById(R.id.etEmailRider));
-                String riderpass = getTextFromEditText(regRiderInfo.findViewById(R.id.etpassRider));
                 String riderDateofBirth = getTextFromEditText(regRiderInfo.findViewById(R.id.etRiderDateofBirth));
                 String riderDriverLicenseNumber = getTextFromEditText(regRiderInfo.findViewById(R.id.etRiderDriverLicense));
                 String riderDriverLicenseExpiry = getTextFromEditText(regRiderInfo.findViewById(R.id.etRiderDriverLicenseExpiry));
@@ -389,10 +380,12 @@ public class RegisterRider extends AppCompatActivity {
                 String riderVehiclePlateNumber = getTextFromEditText(regRiderInfo.findViewById(R.id.etRiderVehicleNumber));
                 String riderVehicleManufacturerYear = getTextFromEditText(regRiderInfo.findViewById(R.id.etRiderManufactureYear));
 
+
                 FirebaseUser userCurrent = mAuth.getCurrentUser();
                 UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder().setDisplayName(riderName).build();
 
                 userCurrent.updateProfile(profileUpdates);
+
 
 
 
@@ -405,7 +398,6 @@ public class RegisterRider extends AppCompatActivity {
                 riderInfo.put("vehicletype",spinVehicle.getSelectedItem().toString());
                 riderInfo.put("name",riderName);
                 riderInfo.put("email",riderEmail);
-                riderInfo.put("password",riderpass);
                 riderInfo.put("dateofbirth",riderDateofBirth);
                 riderInfo.put("driverlicensenumber",riderDriverLicenseNumber);
                 riderInfo.put("driverlicenseexpiry",riderDriverLicenseExpiry);
@@ -427,24 +419,172 @@ public class RegisterRider extends AppCompatActivity {
 
             }
         });
+Button pwtoggle = findViewById(R.id.togglePW);
+   EditText pwtext =   findViewById(R.id.pwfield);
+        pwtoggle.setOnTouchListener(new View.OnTouchListener() {
+            public boolean onTouch(View v, MotionEvent event) {
 
+                switch ( event.getAction() ) {
+
+                    case MotionEvent.ACTION_UP:
+                        pwtext.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                        break;
+
+                    case MotionEvent.ACTION_DOWN:
+                        pwtext.setInputType(InputType.TYPE_CLASS_TEXT);
+                        break;
+
+                }
+                return true;
+            }
+        });
 
 
     }
-    private boolean validatePassword() {
-        String passwordInput = textInputPassword.getEditText().getText().toString().trim();
+    //Password Validation
+    public void validatePW(View view){
+        String password = ((EditText)findViewById(R.id.pwfield)).getText().toString();
+        boolean uppercase = !password.equals(password.toLowerCase());
+        boolean lowercase = !password.equals(password.toUpperCase());
+        boolean min6  = password.length() > 5;
+        boolean good = false;
+        //check number of digits, uppercase, and lowercase char for password checking
+        //lowercase not used
+        int digits = 0;
+        int upper = 0;
+        int lower = 0;
+        for (int i = 0; i < password.length(); i++) {
+            char ch = password.charAt(i);
+            if (ch >= 48 && ch <= 57)
+                digits++;
+            else if(ch>='A' && ch<='Z'){
+                upper++;
+            }
+            else if(ch>='a' && ch<='z'){
+                lower++;
+            }
+        }
+        //check if password satisfies conditions
+      if(!uppercase && min6 && digits >= 1)
+        {
+            Toast.makeText(RegisterRider.this,"Must have an uppercase letter",Toast.LENGTH_SHORT).show();
+        }
+        else if(!lowercase && min6 && digits >= 1)
+        {
+            Toast.makeText(RegisterRider.this,"Must have a lowercase letter",Toast.LENGTH_SHORT).show();
+        }
+        else if(!lowercase && !uppercase && !min6 && digits >= 1)
+        {
+            Toast.makeText(RegisterRider.this,"Must have uppercase and lowercase letter",Toast.LENGTH_SHORT).show();
+        }
+        else if (!min6 && lowercase && uppercase && digits >= 1)
+        {
+            Toast.makeText(RegisterRider.this,"Password is too short",Toast.LENGTH_SHORT).show();
+        }
+        else if (!min6 && !lowercase && digits >= 1)
+        {
+            Toast.makeText(RegisterRider.this,"Password is too short and must have lowercase letter",Toast.LENGTH_SHORT).show();
+        }
+        else if (!min6 && !uppercase && digits >= 1)
+        {
+            Toast.makeText(RegisterRider.this,"Password is too short and must have uppercase letter",Toast.LENGTH_SHORT).show();
+        }
+        else if(!uppercase && min6 && digits == 0)
+        {
+            Toast.makeText(RegisterRider.this,"Must have an uppercase letter and number",Toast.LENGTH_SHORT).show();
+        }
+        else if(!lowercase && min6 && digits == 0)
+        {
+            Toast.makeText(RegisterRider.this,"Must have a lowercase letter and number",Toast.LENGTH_SHORT).show();
+        }
+        else if (!min6 && !lowercase && digits == 0)
+        {
+            Toast.makeText(RegisterRider.this,"Password is too short and must have lowercase letter and number",Toast.LENGTH_SHORT).show();
+        }
+        else if (!min6 && !uppercase && digits == 0)
+        {
+            Toast.makeText(RegisterRider.this,"Password is too short and must have uppercase letter and number",Toast.LENGTH_SHORT).show();
+        }
+        else if (digits == 0)
+        {
+            Toast.makeText(RegisterRider.this,"Password must have number",Toast.LENGTH_SHORT).show();
+        }
+        else if (min6 && uppercase && lowercase && digits >=1)
+        {
+            Toast.makeText(RegisterRider.this,"Password is good!",Toast.LENGTH_SHORT).show();
+            good = true;
+        }
 
-        if (passwordInput.isEmpty()) {
-            textInputPassword.setError("Field can't be empty");
-            return false;
-        } else if (!PASSWORD_PATTERN.matcher(passwordInput).matches()) {
-            textInputPassword.setError("Password too weak");
-            return false;
-        } else {
-            textInputPassword.setError(null);
-            return true;
+        else if (password.length() == 0)
+        {
+            Toast.makeText(RegisterRider.this,"Password cannot be empty",Toast.LENGTH_SHORT).show();
+        }
+
+        String strength = "";
+
+        //check for password strength
+        if (good == true)
+        {
+
+            float lengthscore = 0;
+            float UCscore = 0;
+            float numscore = 0;
+            float strengthscore = 0;
+            if (password.length() == 6)
+            {
+               lengthscore = (float) 0.2;
+            }
+            else if (password.length()>= 7 && password.length() <= 9)
+            {
+                lengthscore = (float) 0.3;
+            }
+            else if (password.length() > 9)
+            {
+                lengthscore = (float) 0.5;
+            }
+
+            if(upper == 2)
+            {
+                UCscore = (float) 0.2;
+            }
+            else if(upper > 2)
+            {
+                UCscore = (float) 0.3;
+            }
+
+            if(digits == 2)
+            {
+                numscore = (float) 0.2;
+            }
+            else if(digits > 2)
+            {
+                numscore = (float) 0.3;
+            }
+            strengthscore = lengthscore + UCscore + numscore;
+
+            if (strengthscore < 0.5)
+            {
+                strength = "Weak";
+            }
+            else if (strengthscore >= 0.5 && strengthscore < 1)
+            {
+                strength = "Moderate";
+            }
+            else if (strengthscore >=1 )
+            {
+                strength = "Strong";
+            }
+            ((TextView)findViewById(R.id.pwStrength)).setText("Password Strength: " + strength);
+
+
+        }
+
+        else if (good == false)
+        {
+            ((TextView)findViewById(R.id.pwStrength)).setText("Password does not satisfy conditions");
         }
     }
+
     private String getTodaysDate()
     {
         Calendar cal = Calendar.getInstance();
@@ -520,7 +660,6 @@ public class RegisterRider extends AppCompatActivity {
             ett.setError("Required");
             hasError = true;
         }
-
     }
 
     private void sendVerificationCodeToUser(String phoneNo)
@@ -557,6 +696,7 @@ public class RegisterRider extends AppCompatActivity {
               Toast.makeText(RegisterRider.this,e.getMessage(),Toast.LENGTH_LONG).show();
         }
     };
+
 
     private void verifyCode(String code)
     {

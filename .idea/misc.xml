@@ -3,19 +3,51 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/Glyn/AndroidStudioProjects/MCC-Delivery-Repository/app/src/main/res/layout/activity_rider_dashboard.xml" value="0.27291666666666664" />
-        <entry key="..\:/Users/Glyn/AndroidStudioProjects/MCC-Delivery-Repository/app/src/main/res/layout/activity_rider_login.xml" value="0.25" />
-        <entry key="..\:/Users/Glyn/AndroidStudioProjects/MCC-Delivery-Repository/app/src/main/res/layout/activity_user_driverfound.xml" value="0.27291666666666664" />
-        <entry key="..\:/Users/Glyn/AndroidStudioProjects/MCC-Delivery-Repository/app/src/main/res/layout/activity_user_findingrider.xml" value="0.27291666666666664" />
-        <entry key="..\:/Users/Glyn/AndroidStudioProjects/MCC-Delivery-Repository/app/src/main/res/layout/activity_user_parceltransaction.xml" value="0.27291666666666664" />
-        <entry key="..\:/Users/Glyn/AndroidStudioProjects/MCC-Delivery-Repository/app/src/main/res/layout/activity_user_paymentmethod.xml" value="0.27291666666666664" />
-        <entry key="..\:/Users/Glyn/AndroidStudioProjects/MCC-Delivery-Repository/app/src/main/res/layout/activity_userdashboard.xml" value="0.27291666666666664" />
-        <entry key="..\:/Users/Glyn/AndroidStudioProjects/MCC-Delivery-Repository/app/src/main/res/layout/fragment_record_fragment.xml" value="0.27291666666666664" />
-        <entry key="..\:/Users/KvRem/AndroidStudioProjects/MCC_DeliveryApp/app/src/main/res/layout/fragment_sign_up.xml" value="0.25833333333333336" />
+        <entry key="..\:/Users/ADMIN/StudioProjects/MCC-Delivery-Repository/app/src/main/res/drawable/border.xml" value="0.2115" />
+        <entry key="..\:/Users/ADMIN/StudioProjects/MCC-Delivery-Repository/app/src/main/res/drawable/borders.xml" value="0.2115" />
+        <entry key="..\:/Users/ADMIN/StudioProjects/MCC-Delivery-Repository/app/src/main/res/drawable/borders03.xml" value="0.2115" />
+        <entry key="..\:/Users/ADMIN/StudioProjects/MCC-Delivery-Repository/app/src/main/res/drawable/graphics_edittext_1.xml" value="0.2115" />
+        <entry key="..\:/Users/ADMIN/StudioProjects/MCC-Delivery-Repository/app/src/main/res/layout/activity_main.xml" value="0.22" />
+        <entry key="..\:/Users/ADMIN/StudioProjects/MCC-Delivery-Repository/app/src/main/res/layout/activity_main2.xml" value="0.2" />
+        <entry key="..\:/Users/ADMIN/StudioProjects/MCC-Delivery-Repository/app/src/main/res/layout/activity_main_rider.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/ADMIN/StudioProjects/MCC-Delivery-Repository/app/src/main/res/layout/activity_main_user.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/ADMIN/StudioProjects/MCC-Delivery-Repository/app/src/main/res/layout/activity_register_rider.xml" value="0.25" />
+        <entry key="..\:/Users/ADMIN/StudioProjects/MCC-Delivery-Repository/app/src/main/res/layout/activity_rider_dashboard.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/ADMIN/StudioProjects/MCC-Delivery-Repository/app/src/main/res/layout/activity_rider_dashboard1.xml" value="0.33" />
+        <entry key="..\:/Users/ADMIN/StudioProjects/MCC-Delivery-Repository/app/src/main/res/layout/activity_rider_dashboard2.xml" value="0.21" />
+        <entry key="..\:/Users/ADMIN/StudioProjects/MCC-Delivery-Repository/app/src/main/res/layout/activity_rider_login.xml" value="0.18" />
+        <entry key="..\:/Users/ADMIN/StudioProjects/MCC-Delivery-Repository/app/src/main/res/layout/activity_user_checkrate.xml" value="0.33" />
+        <entry key="..\:/Users/ADMIN/StudioProjects/MCC-Delivery-Repository/app/src/main/res/layout/activity_user_driverfound.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/ADMIN/StudioProjects/MCC-Delivery-Repository/app/src/main/res/layout/activity_user_findingrider.xml" value="0.17192982456140352" />
+        <entry key="..\:/Users/ADMIN/StudioProjects/MCC-Delivery-Repository/app/src/main/res/layout/activity_user_parceltransaction.xml" value="0.22" />
+        <entry key="..\:/Users/ADMIN/StudioProjects/MCC-Delivery-Repository/app/src/main/res/layout/activity_user_paymentmethod.xml" value="0.25" />
+        <entry key="..\:/Users/ADMIN/StudioProjects/MCC-Delivery-Repository/app/src/main/res/layout/activity_user_permission.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/ADMIN/StudioProjects/MCC-Delivery-Repository/app/src/main/res/layout/activity_user_waitingdriver.xml" value="0.22" />
+        <entry key="..\:/Users/ADMIN/StudioProjects/MCC-Delivery-Repository/app/src/main/res/layout/activity_userdashboard.xml" value="0.22" />
+        <entry key="..\:/Users/ADMIN/StudioProjects/MCC-Delivery-Repository/app/src/main/res/layout/driver_bottom_sheet.xml" value="0.18" />
+        <entry key="..\:/Users/ADMIN/StudioProjects/MCC-Delivery-Repository/app/src/main/res/layout/fragment_pickup_fragment.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/ADMIN/StudioProjects/MCC-Delivery-Repository/app/src/main/res/layout/fragment_profile_fragment.xml" value="0.33" />
+        <entry key="..\:/Users/ADMIN/StudioProjects/MCC-Delivery-Repository/app/src/main/res/layout/fragment_record_fragment.xml" value="0.22" />
+        <entry key="..\:/Users/ADMIN/StudioProjects/MCC-Delivery-Repository/app/src/main/res/layout/fragment_rider_phonenum_verify.xml" value="0.18" />
+        <entry key="..\:/Users/ADMIN/StudioProjects/MCC-Delivery-Repository/app/src/main/res/layout/fragment_sign_in.xml" value="0.2" />
+        <entry key="..\:/Users/ADMIN/StudioProjects/MCC-Delivery-Repository/app/src/main/res/layout/fragment_sign_up.xml" value="0.33" />
+        <entry key="..\:/Users/ADMIN/StudioProjects/MCC-Delivery-Repository/app/src/main/res/layout/fragment_signup_rider_step1.xml" value="0.25" />
+        <entry key="..\:/Users/ADMIN/StudioProjects/MCC-Delivery-Repository/app/src/main/res/layout/fragment_user_phonenum_verify.xml" value="0.17192982456140352" />
+        <entry key="..\:/Users/ADMIN/StudioProjects/MCC-Delivery-Repository/app/src/main/res/layout/fragment_wallet_fragment.xml" value="0.17192982456140352" />
+        <entry key="..\:/Users/ADMIN/StudioProjects/MCC-Delivery-Repository/app/src/main/res/layout/motorcycle_dialog.xml" value="0.2" />
+        <entry key="..\:/Users/ADMIN/StudioProjects/MCC-Delivery-Repository/app/src/main/res/layout/pickuplayoutdesign.xml" value="0.25" />
+        <entry key="..\:/Users/ADMIN/StudioProjects/MCC-Delivery-Repository/app/src/main/res/layout/progresslayout.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/ADMIN/StudioProjects/MCC-Delivery-Repository/app/src/main/res/layout/sedan_dialog.xml" value="0.2" />
+        <entry key="..\:/Users/ADMIN/StudioProjects/MCC-Delivery-Repository/app/src/main/res/layout/spinner_items_1.xml" value="0.17192982456140352" />
+        <entry key="..\:/Users/ADMIN/StudioProjects/MCC-Delivery-Repository/app/src/main/res/layout/truck_dialog.xml" value="0.17192982456140352" />
+        <entry key="..\:/Users/ADMIN/StudioProjects/MCC-Delivery-Repository/app/src/main/res/layout/user_adressdetail.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/ADMIN/StudioProjects/MCC-Delivery-Repository/app/src/main/res/layout/user_mapcontent.xml" value="0.17192982456140352" />
+        <entry key="..\:/Users/ADMIN/StudioProjects/MCC-Delivery-Repository/app/src/main/res/layout/user_paymentdialog.xml" value="0.2" />
+        <entry key="..\:/Users/ADMIN/StudioProjects/MCC-Delivery-Repository/app/src/main/res/layout/user_receiver_address_detail.xml" value="0.20416666666666666" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="11" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
   </component>
 </project>
