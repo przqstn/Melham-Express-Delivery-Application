@@ -293,7 +293,7 @@ public class RegisterRider extends AppCompatActivity {
         btnSuccessOkay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(RegisterRider.this, MainActivityRider.class);
+                Intent intent = new Intent(RegisterRider.this, riderLogin.class);
                 startActivity(intent);
             }
         });
