@@ -3,6 +3,7 @@ package com.example.mcc_deliveryapp;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -42,7 +43,7 @@ Timer timer;
 						progressDialog.dismiss();
 					}
 				},5000);
-
+				Log.d("check", "hello rider!");
 			}
 		});
 
@@ -62,7 +63,7 @@ Timer timer;
 						progressDialog.dismiss();
 					}
 				},5000);
-
+				Log.d("check", "hello user!");
 			}
 		});
 	}
