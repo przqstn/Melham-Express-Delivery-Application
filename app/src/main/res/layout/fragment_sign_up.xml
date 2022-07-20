@@ -31,19 +31,9 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/textView20"
-                        android:layout_width="79dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="335dp"
-                        android:layout_marginRight="335dp"
-                        android:text="TextView"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent" />
-
-                    <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/alegreya"
+                        android:fontFamily="@font/montserrat_medium"
                         android:paddingLeft="5dp"
                         android:paddingTop="15dp"
                         android:paddingBottom="15dp"
@@ -60,7 +50,7 @@
                         android:drawableStart="@drawable/ic_baseline_person_outline_24"
                         android:drawableLeft="@drawable/ic_baseline_person_outline_24"
                         android:drawablePadding="15dp"
-                        android:fontFamily="@font/avenir"
+                        android:fontFamily="@font/montserrat_regular"
                         android:hint="Enter your name"
                         android:paddingLeft="15dp"
                         android:paddingTop="15dp"
@@ -70,7 +60,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/alegreya"
+                        android:fontFamily="@font/montserrat_medium"
                         android:paddingLeft="5dp"
                         android:paddingTop="15dp"
                         android:paddingBottom="15dp"
@@ -87,7 +77,7 @@
                         android:drawableStart="@drawable/ic_baseline_local_phone_24"
                         android:drawableLeft="@drawable/ic_baseline_local_phone_24"
                         android:drawablePadding="15dp"
-                        android:fontFamily="@font/avenir"
+                        android:fontFamily="@font/montserrat_regular"
                         android:hint="Enter your number"
                         android:inputType="phone"
                         android:paddingLeft="15dp"
@@ -98,7 +88,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/alegreya"
+                        android:fontFamily="@font/montserrat_medium"
                         android:paddingLeft="5dp"
                         android:paddingTop="15dp"
                         android:paddingBottom="15dp"
@@ -108,9 +98,9 @@
                         android:textStyle="bold" />
 
                     <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/edTextPassL"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/edTextPassL"
                         app:passwordToggleEnabled="true">
 
                         <EditText
@@ -121,7 +111,7 @@
                             android:drawableStart="@drawable/ic_baseline_lock_24"
                             android:drawableLeft="@drawable/ic_baseline_lock_24"
                             android:drawablePadding="15dp"
-                            android:fontFamily="@font/avenir"
+                            android:fontFamily="@font/montserrat_regular"
                             android:hint="Enter your password"
                             android:inputType="textPassword"
                             android:paddingLeft="15dp"
@@ -133,7 +123,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/alegreya"
+                        android:fontFamily="@font/montserrat_medium"
                         android:paddingLeft="5dp"
                         android:paddingTop="15dp"
                         android:paddingBottom="15dp"
@@ -177,7 +167,7 @@
                         android:layout_marginTop="20dp"
                         android:background="@drawable/graphics_button_1"
                         android:backgroundTint="@color/button_color1"
-                        android:fontFamily="@font/alegreya"
+                        android:fontFamily="@font/montserrat_medium"
                         android:gravity="center"
                         android:text="Create Account"
                         android:textAllCaps="false"
