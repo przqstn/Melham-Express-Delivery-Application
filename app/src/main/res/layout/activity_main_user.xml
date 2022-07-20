@@ -22,27 +22,28 @@
         android:text="Back"
         android:backgroundTint="@color/icon_color"
         />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/alegreya"
+        android:fontFamily="@font/montserrat_medium"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
         android:text="Shipping and Track Anytime"
         android:textColor="@color/black"
         android:textSize="25sp"
-        android:textStyle="bold"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"/>
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/alegreya"
+        android:fontFamily="@font/montserrat_medium"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
         android:text="Get great experience with Melham Express"
         android:textColor="@color/icon_color"
-        android:textSize="18sp"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp" />
+        android:textSize="16sp" />
 
     <com.google.android.material.tabs.TabLayout
         android:layout_gravity="center"

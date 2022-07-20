@@ -7,17 +7,6 @@
     android:background="#EEEFFA"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="match_parent"
-        android:layout_height="55dp"
-        android:paddingLeft="15dp"
-        android:paddingTop="25dp"
-        android:text="Create Your Account"
-        android:textColor="@color/black"
-        android:textSize="25dp"
-        android:textStyle="bold" />
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -38,11 +27,23 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:paddingTop="25dp"
+                    android:text="Create Your Account"
+                    android:textColor="@color/black"
+                    android:textSize="25dp"
+                    android:textStyle="bold" />
+
+                <TextView
                     android:id="@+id/txtRiderBasicInfo"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_marginBottom="25dp"
 
+                    android:fontFamily="@font/montserrat_medium"
                     android:paddingTop="25dp"
                     android:text="Basic Information"
                     android:textColor="@color/black"
@@ -55,8 +56,10 @@
                     android:layout_height="50dp"
                     android:layout_marginBottom="30dp"
                     android:background="@drawable/edit_text_round"
+                    android:fontFamily="@font/montserrat_regular"
                     android:hint="Name (as shown in ID)"
-                    android:paddingLeft="20dp" />
+                    android:paddingLeft="20dp"
+                    android:textSize="18sp" />
 
                 <EditText
                     android:id="@+id/etEmailRider"
@@ -64,15 +67,18 @@
                     android:layout_height="50dp"
                     android:layout_marginBottom="30dp"
                     android:background="@drawable/edit_text_round"
-                    android:hint="Email (Optional)"
+                    android:fontFamily="@font/montserrat_regular"
 
-                    android:paddingLeft="20dp" />
+                    android:hint="Email (Optional)"
+                    android:paddingLeft="20dp"
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/txtRiderInformation"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="25dp"
+                    android:fontFamily="@font/montserrat_medium"
                     android:text="Tell us about yourself"
                     android:textColor="@color/black"
                     android:textSize="20sp"
@@ -87,8 +93,10 @@
                     android:clickable="true"
                     android:editable="false"
                     android:focusable="false"
+                    android:fontFamily="@font/montserrat_regular"
                     android:hint="Date of Birth"
-                    android:paddingLeft="20dp" />
+                    android:paddingLeft="20dp"
+                    android:textSize="18sp" />
 
                 <EditText
                     android:id="@+id/etRiderDriverLicense"
@@ -96,9 +104,11 @@
                     android:layout_height="50dp"
                     android:layout_marginBottom="30dp"
                     android:background="@drawable/edit_text_round"
-                    android:hint="Driver's License Number"
+                    android:fontFamily="@font/montserrat_regular"
 
-                    android:paddingLeft="20dp" />
+                    android:hint="Driver's License Number"
+                    android:paddingLeft="20dp"
+                    android:textSize="18sp" />
 
                 <EditText
                     android:id="@+id/etRiderDriverLicenseExpiry"
@@ -106,9 +116,11 @@
                     android:layout_height="50dp"
                     android:layout_marginBottom="30dp"
                     android:background="@drawable/edit_text_round"
-                    android:hint="Driving license expiry"
+                    android:fontFamily="@font/montserrat_regular"
 
-                    android:paddingLeft="20dp" />
+                    android:hint="Driving license expiry"
+                    android:paddingLeft="20dp"
+                    android:textSize="18sp" />
 
                 <EditText
                     android:id="@+id/etRiderCurrentAddress"
@@ -116,15 +128,18 @@
                     android:layout_height="50dp"
                     android:layout_marginBottom="50dp"
                     android:background="@drawable/edit_text_round"
-                    android:hint="Current address"
+                    android:fontFamily="@font/montserrat_regular"
 
-                    android:paddingLeft="20dp" />
+                    android:hint="Current address"
+                    android:paddingLeft="20dp"
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/txtRiderVehicleInformation"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="25dp"
+                    android:fontFamily="@font/montserrat_medium"
                     android:text="Add Vehicle Information"
                     android:textColor="@color/black"
                     android:textSize="20sp"
@@ -136,9 +151,11 @@
                     android:layout_height="50dp"
                     android:layout_marginBottom="30dp"
                     android:background="@drawable/edit_text_round"
-                    android:hint="Vehicle Plate Number"
+                    android:fontFamily="@font/montserrat_regular"
 
-                    android:paddingLeft="20dp" />
+                    android:hint="Vehicle Plate Number"
+                    android:paddingLeft="20dp"
+                    android:textSize="18sp" />
 
                 <EditText
                     android:id="@+id/etRiderManufactureYear"
@@ -146,8 +163,10 @@
                     android:layout_height="50dp"
                     android:layout_marginBottom="30dp"
                     android:background="@drawable/edit_text_round"
+                    android:fontFamily="@font/montserrat_regular"
                     android:hint="Vehicle Manufacture Year"
-                    android:paddingLeft="20dp" />
+                    android:paddingLeft="20dp"
+                    android:textSize="18sp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -163,12 +182,12 @@
                         android:layout_marginTop="15dp"
                         android:layout_marginBottom="20dp"
                         android:background="@drawable/graphics_button_1"
-                        android:fontFamily="@font/alegreya"
+                        android:fontFamily="@font/montserrat_medium"
                         android:gravity="center"
                         android:text="Register"
+                        android:textAllCaps="false"
                         android:textColor="@color/white"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
+                        android:textSize="20sp" />
                 </LinearLayout>
             </LinearLayout>
         </ScrollView>
