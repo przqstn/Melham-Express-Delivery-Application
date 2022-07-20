@@ -31,16 +31,15 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginLeft="16dp"
                     android:layout_marginTop="12dp"
-                    android:fontFamily="@font/alegreya"
+                    android:fontFamily="@font/montserrat_medium"
                     android:text="Become a driver"
                     android:textColor="@color/black"
                     android:textSize="20sp"
-                    android:textStyle="bold"
-                    />
+                    android:textStyle="bold" />
 
                 <EditText
                     android:id="@+id/editTextPhoneNumDriver"
-                    android:layout_width="355dp"
+                    android:layout_width="350dp"
                     android:layout_height="60dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="13dp"
@@ -48,44 +47,76 @@
                     android:drawableStart="@drawable/ic_baseline_phone_in_talk_24"
                     android:drawableLeft="@drawable/ic_baseline_phone_in_talk_24"
                     android:drawablePadding="16dp"
+                    android:fontFamily="@font/montserrat_regular"
                     android:hint="Enter Your Phone Number"
+
                     android:inputType="phone"
+                    android:paddingLeft="15dp"
+                    android:textSize="16sp" />
 
-                    android:paddingLeft="15dp" />
-
-                <TextView
-                    android:id="@+id/pwRequirements"
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Password (minimum 6 characters, one uppercase, one lowercase, one number)" />
+                    android:id="@+id/edTextPassL"
+                    app:passwordToggleEnabled="true">
 
-                <EditText
-                    android:id="@+id/pwfield"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:inputType="textPassword" />
+                    <EditText
+                        android:id="@+id/pwfield"
+                        android:layout_width="350dp"
+                        android:layout_height="60dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/graphics_edittext_1"
+                        android:drawableStart="@drawable/ic_baseline_lock_24"
+                        android:drawableLeft="@drawable/ic_baseline_lock_24"
+                        android:drawablePadding="15dp"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:hint="Enter your password"
+                        android:inputType="textPassword"
+                        android:paddingLeft="15dp"
+                        android:paddingTop="15dp"
+                        android:paddingBottom="15dp"
+                        android:textSize="16dp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
 
                 <TextView
                     android:id="@+id/pwStrength"
-                    android:layout_width="match_parent"
+                    android:layout_width="355dp"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:textStyle="bold" />
 
-                <Button
-                    android:id="@+id/togglePW"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:onClick="togglePass"
-                    android:text="Show" />
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:passwordToggleEnabled="true">
+
+                    <EditText
+                        android:id="@+id/pwConfirm"
+                        android:layout_width="350dp"
+                        android:layout_height="60dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/graphics_edittext_1"
+                        android:drawableStart="@drawable/ic_baseline_lock_24"
+                        android:drawableLeft="@drawable/ic_baseline_lock_24"
+                        android:drawablePadding="15dp"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:hint="Confirm your password"
+                        android:inputType="textPassword"
+                        android:paddingLeft="15dp"
+                        android:paddingTop="15dp"
+                        android:paddingBottom="15dp"
+                        android:textSize="16dp" />
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <Button
                     android:id="@+id/button7"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:fontFamily="@font/montserrat_regular"
                     android:onClick="validatePW"
-                    android:text="VALIDATE PASSWORD" />
+                    android:text="VALIDATE" />
 
                 <Spinner
                     android:id="@+id/spinnerCityDriver"
@@ -152,23 +183,23 @@
                     android:layout_height="50dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="16dp"
+                    android:fontFamily="@font/montserrat_regular"
                     android:text="@string/agreeDriverText"
                     android:textColor="@color/textGray"
                     android:textSize="10sp" />
 
                 <Button
-                    android:layout_gravity="center"
                     android:id="@+id/btnRegRider"
                     android:layout_width="350dp"
                     android:layout_height="60dp"
+                    android:layout_gravity="center"
                     android:layout_marginTop="60dp"
-                    android:textColor="@color/white"
                     android:background="@drawable/graphics_button_1"
-                    android:fontFamily="@font/alegreya"
+                    android:fontFamily="@font/montserrat_medium"
                     android:text="Get Started"
+                    android:textColor="@color/white"
                     android:textSize="20sp"
-                    android:textStyle="bold"
-                    />
+                    android:textStyle="bold" />
 
             </LinearLayout>
 

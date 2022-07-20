@@ -271,8 +271,6 @@ public class RegisterRider extends AppCompatActivity {
                 sendVerificationCodeToUser(etPhoneNum.getText().toString());
                 VerifyNum.show();
 
-
-
             }
         });
 
@@ -344,10 +342,7 @@ public class RegisterRider extends AppCompatActivity {
                 int style = AlertDialog.THEME_HOLO_LIGHT;
 
                 datePickerDialog = new DatePickerDialog(RegisterRider.this,style,dateSetListener,year,month,day);
-
-
                 datePickerDialog.show();
-
 
             }
         });
@@ -386,10 +381,6 @@ public class RegisterRider extends AppCompatActivity {
 
                 userCurrent.updateProfile(profileUpdates);
 
-
-
-
-
                 rootie = db.getReference();
 
                 HashMap riderInfo = new HashMap<>();
@@ -413,37 +404,19 @@ public class RegisterRider extends AppCompatActivity {
                         successfullyRegistered.show();
                         regRiderInfo.dismiss();
 
-
                     }
                 });
 
             }
         });
-Button pwtoggle = findViewById(R.id.togglePW);
-   EditText pwtext =   findViewById(R.id.pwfield);
-        pwtoggle.setOnTouchListener(new View.OnTouchListener() {
-            public boolean onTouch(View v, MotionEvent event) {
 
-                switch ( event.getAction() ) {
-
-                    case MotionEvent.ACTION_UP:
-                        pwtext.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-                        break;
-
-                    case MotionEvent.ACTION_DOWN:
-                        pwtext.setInputType(InputType.TYPE_CLASS_TEXT);
-                        break;
-
-                }
-                return true;
-            }
-        });
 
 
     }
     //Password Validation
     public void validatePW(View view){
         String password = ((EditText)findViewById(R.id.pwfield)).getText().toString();
+        String pwConfirm = ((EditText)findViewById(R.id.pwConfirm)).getText().toString();
         boolean uppercase = !password.equals(password.toLowerCase());
         boolean lowercase = !password.equals(password.toUpperCase());
         boolean min6  = password.length() > 5;
@@ -467,52 +440,88 @@ Button pwtoggle = findViewById(R.id.togglePW);
         //check if password satisfies conditions
       if(!uppercase && min6 && digits >= 1)
         {
-            Toast.makeText(RegisterRider.this,"Must have an uppercase letter",Toast.LENGTH_SHORT).show();
+            ((EditText)findViewById(R.id.pwfield)).setError("Must have an uppercase letter", null);
+            findViewById(R.id.pwfield).setBackgroundResource(R.drawable.error_border_edittext);
+
         }
         else if(!lowercase && min6 && digits >= 1)
         {
-            Toast.makeText(RegisterRider.this,"Must have a lowercase letter",Toast.LENGTH_SHORT).show();
+            ((EditText)findViewById(R.id.pwfield)).setError("Must have a lowercase letter", null);
+            findViewById(R.id.pwfield).setBackgroundResource(R.drawable.error_border_edittext);
+
         }
         else if(!lowercase && !uppercase && !min6 && digits >= 1)
         {
-            Toast.makeText(RegisterRider.this,"Must have uppercase and lowercase letter",Toast.LENGTH_SHORT).show();
+            ((EditText)findViewById(R.id.pwfield)).setError("Must have uppercase and lowercase letter", null);
+            findViewById(R.id.pwfield).setBackgroundResource(R.drawable.error_border_edittext);
+
         }
         else if (!min6 && lowercase && uppercase && digits >= 1)
         {
-            Toast.makeText(RegisterRider.this,"Password is too short",Toast.LENGTH_SHORT).show();
+            ((EditText)findViewById(R.id.pwfield)).setError("Too short");
+            findViewById(R.id.pwfield).setBackgroundResource(R.drawable.error_border_edittext);
+
         }
         else if (!min6 && !lowercase && digits >= 1)
         {
-            Toast.makeText(RegisterRider.this,"Password is too short and must have lowercase letter",Toast.LENGTH_SHORT).show();
+            ((EditText)findViewById(R.id.pwfield)).setError("Too short and must have lowercase letter", null);
+            findViewById(R.id.pwfield).setBackgroundResource(R.drawable.error_border_edittext);
+
         }
         else if (!min6 && !uppercase && digits >= 1)
         {
-            Toast.makeText(RegisterRider.this,"Password is too short and must have uppercase letter",Toast.LENGTH_SHORT).show();
+            ((EditText)findViewById(R.id.pwfield)).setError("Too short and must have uppercase letter", null);
+            findViewById(R.id.pwfield).setBackgroundResource(R.drawable.error_border_edittext);
+
         }
         else if(!uppercase && min6 && digits == 0)
         {
-            Toast.makeText(RegisterRider.this,"Must have an uppercase letter and number",Toast.LENGTH_SHORT).show();
+            ((EditText)findViewById(R.id.pwfield)).setError("Must have an uppercase letter and number", null);
+            findViewById(R.id.pwfield).setBackgroundResource(R.drawable.error_border_edittext);
+
         }
         else if(!lowercase && min6 && digits == 0)
         {
-            Toast.makeText(RegisterRider.this,"Must have a lowercase letter and number",Toast.LENGTH_SHORT).show();
+            ((EditText)findViewById(R.id.pwfield)).setError("Must have a lowercase letter and number", null);
+            findViewById(R.id.pwfield).setBackgroundResource(R.drawable.error_border_edittext);
+
         }
         else if (!min6 && !lowercase && digits == 0)
         {
-            Toast.makeText(RegisterRider.this,"Password is too short and must have lowercase letter and number",Toast.LENGTH_SHORT).show();
+            ((EditText)findViewById(R.id.pwfield)).setError("Too short and must have lowercase letter and number", null);
+            findViewById(R.id.pwfield).setBackgroundResource(R.drawable.error_border_edittext);
+
         }
         else if (!min6 && !uppercase && digits == 0)
         {
-            Toast.makeText(RegisterRider.this,"Password is too short and must have uppercase letter and number",Toast.LENGTH_SHORT).show();
+            ((EditText)findViewById(R.id.pwfield)).setError("Too short and must have uppercase letter and number", null);
+            findViewById(R.id.pwfield).setBackgroundResource(R.drawable.error_border_edittext);
+
         }
         else if (digits == 0)
         {
-            Toast.makeText(RegisterRider.this,"Password must have number",Toast.LENGTH_SHORT).show();
+            ((EditText)findViewById(R.id.pwfield)).setError("Must have number", null);
+            findViewById(R.id.pwfield).setBackgroundResource(R.drawable.error_border_edittext);
+
+
         }
+        // add confirm password function
         else if (min6 && uppercase && lowercase && digits >=1)
         {
-            Toast.makeText(RegisterRider.this,"Password is good!",Toast.LENGTH_SHORT).show();
-            good = true;
+            //temporary toast
+            if (password.equals(pwConfirm))
+            {
+                Toast.makeText(RegisterRider.this,"Password is good!",Toast.LENGTH_SHORT).show();
+                findViewById(R.id.pwfield).setBackgroundResource(R.drawable.graphics_edittext_1);
+                findViewById(R.id.pwConfirm).setBackgroundResource(R.drawable.graphics_edittext_1);
+                good = true;
+            }
+            else {
+                ((EditText)findViewById(R.id.pwConfirm)).setError("Passwords do not match", null);
+                findViewById(R.id.pwfield).setBackgroundResource(R.drawable.error_border_edittext);
+                findViewById(R.id.pwConfirm).setBackgroundResource(R.drawable.error_border_edittext);
+            }
+
         }
 
         else if (password.length() == 0)
@@ -523,9 +532,8 @@ Button pwtoggle = findViewById(R.id.togglePW);
         String strength = "";
 
         //check for password strength
-        if (good == true)
+        if (good)
         {
-
             float lengthscore = 0;
             float UCscore = 0;
             float numscore = 0;
@@ -542,7 +550,6 @@ Button pwtoggle = findViewById(R.id.togglePW);
             {
                 lengthscore = (float) 0.5;
             }
-
             if(upper == 2)
             {
                 UCscore = (float) 0.2;
@@ -551,7 +558,6 @@ Button pwtoggle = findViewById(R.id.togglePW);
             {
                 UCscore = (float) 0.3;
             }
-
             if(digits == 2)
             {
                 numscore = (float) 0.2;
@@ -575,13 +581,11 @@ Button pwtoggle = findViewById(R.id.togglePW);
                 strength = "Strong";
             }
             ((TextView)findViewById(R.id.pwStrength)).setText("Password Strength: " + strength);
-
-
         }
 
-        else if (good == false)
-        {
+        else {
             ((TextView)findViewById(R.id.pwStrength)).setText("Password does not satisfy conditions");
+
         }
     }
 
@@ -594,8 +598,6 @@ Button pwtoggle = findViewById(R.id.togglePW);
         month = month + 1;
 
         return makeDateString(day,month,year);
-
-
     }
 
     private String getTextFromEditText(EditText et)

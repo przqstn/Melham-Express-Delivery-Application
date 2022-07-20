@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">MCC_DeliveryApp</string>
 
-    <string name="agreeDriverText"><u>I agree to Melham Express\'s Terms &amp; Conditions and Privacy Policy</u></string>
+    <string name="agreeDriverText"><u>I agree to Melham Express\' Terms &amp; Conditions and Privacy Policy</u></string>
 
 
     <string-array name="cityRider">
