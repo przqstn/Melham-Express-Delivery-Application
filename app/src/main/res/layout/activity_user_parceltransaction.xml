@@ -63,17 +63,17 @@
                   app:layout_constraintVertical_bias="0.02" />
 
               <EditText
-                  android:maxLines="1"
                   android:id="@+id/etOrigin"
+                  android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
                   android:layout_width="275dp"
                   android:layout_height="wrap_content"
                   android:background="@drawable/edit_text_round"
                   android:drawableRight="@drawable/gps"
                   android:elevation="5dp"
-                  android:fontFamily="@font/avenir"
+                  android:fontFamily="@font/montserrat_medium"
                   android:hint="Pick up Location"
+                  android:maxLines="1"
                   android:padding="12dp"
-                  android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
                   android:textColor="@color/black"
                   app:layout_constraintBottom_toBottomOf="parent"
                   app:layout_constraintEnd_toEndOf="parent"
@@ -83,16 +83,16 @@
                   app:layout_constraintVertical_bias="0.263" />
 
               <EditText
-                  android:maxLines="1"
                   android:id="@+id/etDestination"
-                  android:layout_width="275dp"
                   android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
+                  android:layout_width="275dp"
                   android:layout_height="wrap_content"
                   android:background="@drawable/edit_text_round"
                   android:drawableRight="@drawable/gps"
                   android:elevation="5dp"
-                  android:fontFamily="@font/avenir"
+                  android:fontFamily="@font/montserrat_medium"
                   android:hint="Package Destination"
+                  android:maxLines="1"
                   android:padding="12dp"
                   app:layout_constraintBottom_toBottomOf="parent"
                   app:layout_constraintEnd_toEndOf="parent"
@@ -116,6 +116,7 @@
             android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_medium"
             android:text="Find path"
             android:id="@+id/btnFindPath" />
         <ImageView
@@ -128,6 +129,7 @@
             android:layout_marginLeft="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_medium"
             android:text="0 km"
             android:id="@+id/tvDistance" />
 
@@ -142,6 +144,7 @@
             android:layout_marginLeft="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_medium"
             android:text="0 min"
             android:id="@+id/tvDuration" />
 

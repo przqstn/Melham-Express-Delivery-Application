@@ -18,25 +18,26 @@
         android:orientation="vertical">
 
         <TextView
-            android:layout_width="match_parent"
             android:id="@+id/btnEditOrder"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:text="Edit order"
             android:drawableStart="@drawable/pencil"
             android:drawablePadding="18dp"
-            android:fontFamily="@font/alegreya"
-            android:textStyle="bold"
-            android:textSize="20sp"/>
+            android:fontFamily="@font/montserrat_medium"
+            android:text="Edit order"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textStyle="normal"
-            android:fontFamily="@font/alegreya"
-            android:textSize="18sp"
+            android:fontFamily="@font/montserrat_regular"
             android:paddingLeft="46dp"
             android:text="Edit drop-offs and recipient details"
-            android:textColor="@color/secondary_text"/>
+            android:textColor="@color/secondary_text"
+            android:textSize="18sp"
+            android:textStyle="normal" />
 
     </LinearLayout>
     
@@ -56,25 +57,26 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/btnFindDriver"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:text="Find a new Driver"
             android:drawableStart="@drawable/rider"
             android:drawablePadding="18dp"
-            android:id="@+id/btnFindDriver"
-            android:fontFamily="@font/alegreya"
-            android:textStyle="bold"
-            android:textSize="20sp"/>
+            android:fontFamily="@font/montserrat_medium"
+            android:text="Find a new Driver"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textStyle="normal"
-            android:fontFamily="@font/alegreya"
-            android:textSize="18sp"
+            android:fontFamily="@font/montserrat_regular"
             android:paddingLeft="50dp"
             android:text="Get matched with a new driver if you’re having any issues"
-            android:textColor="@color/secondary_text"/>
+            android:textColor="@color/secondary_text"
+            android:textSize="18sp"
+            android:textStyle="normal" />
 
     </LinearLayout>
 
@@ -94,17 +96,17 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/btnGetHelp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:text="Get Help"
-            android:id="@+id/btnGetHelp"
             android:layout_marginTop="10dp"
             android:drawableStart="@drawable/ask"
             android:drawablePadding="18dp"
-            android:fontFamily="@font/alegreya"
-            android:textStyle="bold"
-            android:textSize="20sp"/>
+            android:fontFamily="@font/montserrat_medium"
+            android:text="Get Help"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
 
     </LinearLayout>
@@ -125,18 +127,18 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/txtViewCancel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:textColor="@color/black"
-            android:text="Cancel Order"
-            android:id="@+id/txtViewCancel"
             android:layout_gravity="center_vertical"
+            android:layout_marginTop="10dp"
             android:drawableStart="@drawable/multiply"
             android:drawablePadding="18dp"
-            android:fontFamily="@font/alegreya"
-            android:textStyle="bold"
-            android:textSize="20sp"/>
+            android:fontFamily="@font/montserrat_medium"
+            android:text="Cancel Order"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
 
         </LinearLayout>

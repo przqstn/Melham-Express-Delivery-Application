@@ -27,10 +27,10 @@
             android:layout_height="wrap_content" />
 
         <TextView
-            android:fontFamily="@font/alegreya"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            android:fontFamily="@font/montserrat_italic"
             android:text="Loading..."
             android:textSize="20dp"
             android:textStyle="italic" />

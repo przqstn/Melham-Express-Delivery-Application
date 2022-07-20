@@ -19,13 +19,14 @@
 
     <TextView
         android:id="@+id/textView18"
-        android:layout_gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:fontFamily="@font/montserrat_semibold"
         android:text="Successfuly Registered!"
-        android:textStyle="bold"
         android:textColor="@color/black"
         android:textSize="30dp"
+        android:textStyle="bold"
         tools:layout_editor_absoluteX="176dp"
         tools:layout_editor_absoluteY="189dp" />
 
@@ -33,6 +34,7 @@
         android:id="@+id/btnSuccessRegRider"
         android:layout_width="200dp"
         android:layout_height="65dp"
+        android:fontFamily="@font/montserrat_medium"
         android:text="Okay"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"

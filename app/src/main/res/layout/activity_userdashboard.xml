@@ -60,18 +60,20 @@
                     "com.google.android.gms.maps.MapFragment"
 
                 app:backgroundTint="@color/white" />
+
             <Button
 
                 android:id="@+id/btnGetStart"
                 android:layout_width="350dp"
                 android:layout_height="wrap_content"
+                android:layout_gravity="bottom|center"
+                android:layout_marginBottom="30dp"
                 android:background="@drawable/graphics_button_1"
-                android:fontFamily="@font/alegreya"
+                android:fontFamily="@font/montserrat_medium"
                 android:text="Get Started!"
                 android:textAllCaps="false"
                 android:textStyle="bold"
-                android:layout_gravity="bottom"
-                android:layout_marginBottom="30dp"/>
+                android:textColor="@color/white"/>
         </LinearLayout>
 
     </LinearLayout>
