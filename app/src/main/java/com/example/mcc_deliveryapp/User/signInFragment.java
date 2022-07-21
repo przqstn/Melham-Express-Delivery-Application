@@ -66,12 +66,12 @@ public class signInFragment extends Fragment {
                 if (TextUtils.isEmpty(login_editTxt_phoneNum.getEditText().getText().toString())) {
                     login_editTxt_phoneNum.setError("Required");
                     Toast.makeText(getContext(), "Number is required", Toast.LENGTH_SHORT).show();
-                    return;
+
                 }
                 if (TextUtils.isEmpty(login_editTxt_password.getEditText().getText().toString())) {
                     login_editTxt_password.setError("Required");
                     Toast.makeText(getContext(), "Password is required", Toast.LENGTH_SHORT).show();
-                    return;
+
                 }
 //                name.setText("");
 //                usernum.setText("");
@@ -110,7 +110,7 @@ public class signInFragment extends Fragment {
 
                         Dialog VerifyNum = new Dialog(getContext());
                         VerifyNum.setContentView(R.layout.fragment_user_phonenum_verify);
-                        VerifyNum.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);;
+                        VerifyNum.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                         VerifyNum.setCancelable(false);
                         VerifyNum.getWindow().getAttributes().windowAnimations = R.style.animation;
                         TextView name = (TextView) VerifyNum.findViewById(R.id.user_Fullname);
