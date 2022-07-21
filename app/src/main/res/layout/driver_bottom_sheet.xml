@@ -83,7 +83,7 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/imageButton"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintHorizontal_bias="0.574"
             app:layout_constraintStart_toStartOf="@+id/imageButton"
             app:layout_constraintTop_toTopOf="@+id/imageButton"
             app:layout_constraintVertical_bias="0.578" />
@@ -100,7 +100,7 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/imageButton"
             app:layout_constraintEnd_toEndOf="@+id/imageButton"
-            app:layout_constraintHorizontal_bias="0.241"
+            app:layout_constraintHorizontal_bias="0.265"
             app:layout_constraintStart_toStartOf="@+id/imageButton"
             app:layout_constraintTop_toTopOf="@+id/imageButton"
             app:layout_constraintVertical_bias="0.578" />
@@ -109,7 +109,7 @@
             android:id="@+id/textView5"
             android:layout_width="27dp"
             android:layout_height="23dp"
-            android:fontFamily="@font/alegreya"
+            android:fontFamily="@font/montserrat_medium"
             android:gravity="center_horizontal"
             android:paddingTop="3dp"
             android:text="-"
@@ -118,10 +118,10 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/imageButton"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.367"
+            app:layout_constraintHorizontal_bias="0.403"
             app:layout_constraintStart_toStartOf="@+id/imageButton"
             app:layout_constraintTop_toTopOf="@+id/imageButton"
-            app:layout_constraintVertical_bias="0.582" />
+            app:layout_constraintVertical_bias="0.575" />
 
         <TextView
             android:id="@+id/chat1"

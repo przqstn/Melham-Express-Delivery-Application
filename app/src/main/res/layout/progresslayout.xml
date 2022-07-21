@@ -32,7 +32,7 @@
             android:layout_marginTop="10dp"
             android:fontFamily="@font/montserrat_italic"
             android:text="Loading..."
-            android:textSize="20dp"
+            android:textSize="16sp"
             android:textStyle="italic" />
 
     </LinearLayout>

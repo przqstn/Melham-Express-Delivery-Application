@@ -25,7 +25,7 @@
         android:fontFamily="@font/montserrat_semibold"
         android:text="Successfuly Registered!"
         android:textColor="@color/black"
-        android:textSize="30dp"
+        android:textSize="24sp"
         android:textStyle="bold"
         tools:layout_editor_absoluteX="176dp"
         tools:layout_editor_absoluteY="189dp" />
