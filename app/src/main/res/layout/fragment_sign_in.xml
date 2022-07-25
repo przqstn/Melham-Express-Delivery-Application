@@ -20,18 +20,12 @@
             android:gravity="top"
             android:orientation="vertical">
 
-            <View
-                android:id="@+id/view2"
-                android:layout_width="match_parent"
-                android:layout_height="146dp" />
-
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/montserrat_medium"
                 android:paddingLeft="15dp"
-                android:paddingTop="25dp"
-                android:paddingBottom="15dp"
+                android:paddingTop="40dp"
                 android:text="Phone Number"
                 android:textColor="@color/black"
                 android:textSize="16sp"
@@ -65,8 +59,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/montserrat_medium"
                 android:paddingLeft="15dp"
-                android:paddingTop="25dp"
-                android:paddingBottom="15dp"
+                android:paddingTop="40dp"
                 android:text="Password"
                 android:textColor="@color/black"
                 android:textSize="16dp"
@@ -99,10 +92,10 @@
 
             <Button
                 android:id="@+id/btn_login"
-                android:layout_width="330dp"
+                android:layout_width="320dp"
                 android:layout_height="52dp"
                 android:layout_gravity="center"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="30dp"
                 android:background="@drawable/graphics_button_1"
                 android:backgroundTint="@color/button_color1"
                 android:fontFamily="@font/montserrat_medium"

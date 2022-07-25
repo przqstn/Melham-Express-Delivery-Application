@@ -13,25 +13,28 @@
 <LinearLayout
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:paddingHorizontal="20dp"
+    android:paddingTop="20dp">
+
     <Button
-        android:visibility="gone"
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Back"
         android:backgroundTint="@color/icon_color"
-        />
+        android:text="Back"
+        android:visibility="gone" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:fontFamily="@font/montserrat_medium"
-        android:paddingTop="10dp"
+        android:paddingTop="40dp"
         android:paddingBottom="10dp"
         android:text="Shipping and Track Anytime"
         android:textColor="@color/black"
-        android:textSize="25sp"
+        android:textSize="22sp"
         android:textStyle="bold" />
 
     <TextView
@@ -43,12 +46,12 @@
         android:paddingBottom="10dp"
         android:text="Get great experience with Melham Express"
         android:textColor="@color/icon_color"
-        android:textSize="16sp" />
+        android:textSize="12sp" />
 
     <com.google.android.material.tabs.TabLayout
         android:layout_gravity="center"
         android:id="@+id/tabLayout"
-        android:layout_width="327dp"
+        android:layout_width="320dp"
         android:layout_height="50dp"
         android:textColor="#FAFAFA"
         android:contentDescription="tabLayout"

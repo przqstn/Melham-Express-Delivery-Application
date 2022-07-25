@@ -33,9 +33,10 @@
                     android:layout_gravity="center"
                     android:fontFamily="@font/montserrat_bold"
                     android:padding="20dp"
+                    android:layout_marginTop="30dp"
                     android:text="MELHAM EXPRESS"
                     android:textColor="@color/black"
-                    android:textSize="30sp"
+                    android:textSize="28sp"
                     android:textStyle="bold" />
 
                 <ImageView
@@ -43,6 +44,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginBottom="30dp"
                     app:srcCompat="@drawable/logo" />
 
                 <Button
