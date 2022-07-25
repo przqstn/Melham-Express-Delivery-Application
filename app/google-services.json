@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "507558447370",
-    "project_id": "mccdeliveryapp",
-    "storage_bucket": "mccdeliveryapp.appspot.com"
+    "project_number": "922256700616",
+    "project_id": "mcc-delivery-app-f1462",
+    "storage_bucket": "mcc-delivery-app-f1462.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:507558447370:android:bf68800307fd0d0c1592f3",
+        "mobilesdk_app_id": "1:922256700616:android:277aec4a76f21f635621fd",
         "android_client_info": {
           "package_name": "com.example.mcc_deliveryapp"
         }
       },
       "oauth_client": [
         {
-          "client_id": "507558447370-1dghk7f68e6i3qnlk6clnsfl8qtqs2sb.apps.googleusercontent.com",
+          "client_id": "922256700616-bk206o5l7g77jdtk9b08gj41c9k0s8qf.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDUjGjin-oLKJBC5tuKgJuyaSSGIDZaZ6Y"
+          "current_key": "AIzaSyADnt7-904XLjZ__TK3phh0uacfzAkoWho"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "507558447370-1dghk7f68e6i3qnlk6clnsfl8qtqs2sb.apps.googleusercontent.com",
+              "client_id": "922256700616-bk206o5l7g77jdtk9b08gj41c9k0s8qf.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

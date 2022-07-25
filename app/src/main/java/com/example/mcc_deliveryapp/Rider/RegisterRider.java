@@ -179,7 +179,7 @@ public class RegisterRider extends AppCompatActivity {
         EditText etModelVehicle = (EditText) findViewById(R.id.editTextVehicleModel);
         EditText etBrandVehicle = (EditText) findViewById(R.id.editTextVehicleBrand);
         //Spinner Vehicle Brand
-        
+
         spinBrand.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -226,6 +226,9 @@ public class RegisterRider extends AppCompatActivity {
         btnReg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+
+
 
                 if(TextUtils.isEmpty(etPhoneNum.getText().toString()))
                 {
@@ -375,6 +378,7 @@ public class RegisterRider extends AppCompatActivity {
                 String riderVehiclePlateNumber = getTextFromEditText(regRiderInfo.findViewById(R.id.etRiderVehicleNumber));
                 String riderVehicleManufacturerYear = getTextFromEditText(regRiderInfo.findViewById(R.id.etRiderManufactureYear));
 
+                String phonenum = ((EditText)findViewById(R.id.editTextPhoneNumDriver)).getText().toString();
 
                 FirebaseUser userCurrent = mAuth.getCurrentUser();
                 UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder().setDisplayName(riderName).build();
@@ -397,7 +401,8 @@ public class RegisterRider extends AppCompatActivity {
                 riderInfo.put("manufactureryear",riderVehicleManufacturerYear);
                 riderInfo.put("vehiclebrandandmodel",vehiclebrandandmodel);
 
-                rootie.child("riders").child(userCurrent.getUid()).setValue(riderInfo).addOnCompleteListener(new OnCompleteListener<Void>() {
+
+                rootie.child("riders").child(phonenum).setValue(riderInfo).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
 
@@ -438,7 +443,7 @@ public class RegisterRider extends AppCompatActivity {
             }
         }
         //check if password satisfies conditions
-      if(!uppercase && min6 && digits >= 1)
+        if(!uppercase && min6 && digits >= 1)
         {
             ((EditText)findViewById(R.id.pwfield)).setError("Must have an uppercase letter", null);
             findViewById(R.id.pwfield).setBackgroundResource(R.drawable.error_border_edittext);
@@ -540,7 +545,7 @@ public class RegisterRider extends AppCompatActivity {
             float strengthscore = 0;
             if (password.length() == 6)
             {
-               lengthscore = (float) 0.2;
+                lengthscore = (float) 0.2;
             }
             else if (password.length()>= 7 && password.length() <= 9)
             {
@@ -603,7 +608,7 @@ public class RegisterRider extends AppCompatActivity {
     private String getTextFromEditText(EditText et)
     {
         EditText ett = (EditText) et;
-         return ett.getText().toString();
+        return ett.getText().toString();
     }
 
     private String makeDateString(int day,int month,int year)
@@ -695,7 +700,7 @@ public class RegisterRider extends AppCompatActivity {
 
         @Override
         public void onVerificationFailed(@NonNull FirebaseException e) {
-              Toast.makeText(RegisterRider.this,e.getMessage(),Toast.LENGTH_LONG).show();
+            Toast.makeText(RegisterRider.this,e.getMessage(),Toast.LENGTH_LONG).show();
         }
     };
 

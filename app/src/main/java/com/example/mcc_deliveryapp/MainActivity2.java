@@ -16,9 +16,9 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class MainActivity2 extends AppCompatActivity {
-Button btnriderform,btnuserform;
-ProgressDialog progressDialog;
-Timer timer;
+	Button btnriderform,btnuserform;
+	ProgressDialog progressDialog;
+	Timer timer;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
