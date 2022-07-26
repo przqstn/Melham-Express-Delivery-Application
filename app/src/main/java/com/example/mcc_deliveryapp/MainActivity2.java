@@ -43,7 +43,6 @@ public class MainActivity2 extends AppCompatActivity {
 						progressDialog.dismiss();
 					}
 				},5000);
-				Log.d("check", "hello rider!");
 			}
 		});
 
@@ -63,7 +62,6 @@ public class MainActivity2 extends AppCompatActivity {
 						progressDialog.dismiss();
 					}
 				},5000);
-				Log.d("check", "hello user!");
 			}
 		});
 	}
