@@ -38,7 +38,7 @@
                         android:paddingTop="20dp"
                         android:text="Full Name"
                         android:textColor="@color/black"
-                        android:textSize="16dp"
+                        android:textSize="16sp"
                         android:textStyle="bold" />
 
                     <EditText
@@ -54,7 +54,7 @@
                         android:paddingLeft="15dp"
                         android:paddingTop="15dp"
                         android:paddingBottom="15dp"
-                        android:textSize="16dp" />
+                        android:textSize="16sp" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -64,7 +64,7 @@
                         android:paddingTop="30dp"
                         android:text="Phone Number"
                         android:textColor="@color/black"
-                        android:textSize="16dp"
+                        android:textSize="16sp"
                         android:textStyle="bold" />
 
                     <EditText
@@ -81,17 +81,17 @@
                         android:paddingLeft="15dp"
                         android:paddingTop="15dp"
                         android:paddingBottom="15dp"
-                        android:textSize="16dp" />
+                        android:textSize="16sp" />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/montserrat_medium"
                         android:paddingLeft="5dp"
-                        android:paddingTop="50dp"
+                        android:paddingTop="30dp"
                         android:text="Password"
                         android:textColor="@color/black"
-                        android:textSize="16dp"
+                        android:textSize="16sp"
                         android:textStyle="bold" />
 
                     <com.google.android.material.textfield.TextInputLayout
@@ -114,7 +114,7 @@
                             android:paddingLeft="15dp"
                             android:paddingTop="15dp"
                             android:paddingBottom="15dp"
-                            android:textSize="16dp" />
+                            android:textSize="16sp" />
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <TextView
@@ -125,7 +125,7 @@
                         android:paddingTop="30dp"
                         android:text="Confirm Password"
                         android:textColor="@color/black"
-                        android:textSize="16dp"
+                        android:textSize="16sp"
                         android:textStyle="bold" />
 
                     <com.google.android.material.textfield.TextInputLayout
@@ -147,7 +147,7 @@
                             android:paddingLeft="15dp"
                             android:paddingTop="15dp"
                             android:paddingBottom="15dp"
-                            android:textSize="16dp" />
+                            android:textSize="16sp" />
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <TextView
