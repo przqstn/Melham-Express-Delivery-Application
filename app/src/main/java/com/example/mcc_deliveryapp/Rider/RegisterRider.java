@@ -10,6 +10,7 @@ import android.text.InputType;
 import android.text.TextUtils;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,8 +43,21 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
+import java.util.regex.Pattern;
 
 public class RegisterRider extends AppCompatActivity {
+
+    //password pattern
+    private static final Pattern PASSWORD_PATTERN =
+            Pattern.compile("^" +
+                    "(?=.*[0-9])" +         //at least 1 digit
+                    "(?=.*[a-z])" +         //at least 1 lower case letter
+                    "(?=.*[A-Z])" +         //at least 1 upper case letter
+                    //"(?=.*[a-zA-Z])" +      //any letter
+                    "(?=.*[@#$%^&+=!_.])" +    //at least 1 special character
+                    "(?=\\S+$)" +           //no white spaces
+                    ".{4,}" +               //at least 4 characters
+                    "$");
 
     FirebaseAuth mAuth;
 
@@ -62,6 +76,7 @@ public class RegisterRider extends AppCompatActivity {
 
     String vehiclebrandandmodel;
 
+    EditText password, pwConfirm;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,8 +89,8 @@ public class RegisterRider extends AppCompatActivity {
 
         EditText etPhoneNum = (EditText) findViewById(R.id.editTextPhoneNumDriver);
 
-        EditText password = findViewById(R.id.pwfield);
-        EditText pwConfirm = findViewById(R.id.pwConfirm);
+        password = findViewById(R.id.pwfield);
+        pwConfirm = findViewById(R.id.pwConfirm);
 
         Button btnReg = (Button) findViewById(R.id.btnRegRider);
 
@@ -231,8 +246,6 @@ public class RegisterRider extends AppCompatActivity {
             public void onClick(View view) {
 
 
-
-
                 if(TextUtils.isEmpty(etPhoneNum.getText().toString()))
                 {
                     etPhoneNum.setError("Required");
@@ -243,12 +256,15 @@ public class RegisterRider extends AppCompatActivity {
                 {
                     password.setError("Fill up your Password");
                     Toast.makeText(RegisterRider.this,"Password cannot be Empty",Toast.LENGTH_SHORT).show();
+                    return;
                 }
                 if(TextUtils.isEmpty(pwConfirm.getText().toString()))
                 {
                     pwConfirm.setError("Fill up your Confirm Password");
                     Toast.makeText(RegisterRider.this,"Password Confirm cannot be Empty",Toast.LENGTH_SHORT).show();
+                    return;
                 }
+
                 if(spinCity.getSelectedItemId() == 0)
                 {
                     Toast.makeText(RegisterRider.this,"Input a city.",Toast.LENGTH_SHORT).show();
@@ -282,16 +298,24 @@ public class RegisterRider extends AppCompatActivity {
                 else {
                     vehiclebrandandmodel = spinBrand.getSelectedItem().toString() + " " + etModelVehicle.getText().toString();
                 }
-                if(password.getText().toString().equals(pwConfirm.getText().toString())){
+
+                //need further testing for bug
+                if(password.getText().toString().equals(pwConfirm.getText().toString())&&(uservalidatePassword())){
                     sendVerificationCodeToUser(etPhoneNum.getText().toString());
                     VerifyNum.show();
 
-                }else{
+                }else if(password.getText().toString()!=pwConfirm.getText().toString()||(uservalidatePassword())){
                     pwConfirm.setError("Pw is not Match");
                     Toast.makeText(RegisterRider.this,"Password is not Match",Toast.LENGTH_SHORT).show();
+
+                }else{
+                    Log.d("check me", "null");
                 }
+
             }
         });
+
+
 
         regRiderInfo = new Dialog(RegisterRider.this);
         regRiderInfo.setContentView(R.layout.fragment_signup_rider_step1);
@@ -435,6 +459,19 @@ public class RegisterRider extends AppCompatActivity {
 
 
 
+    }
+
+    //test password validation
+    private boolean uservalidatePassword() {
+        String passwordInput = password.getText().toString().trim();
+
+        if(!PASSWORD_PATTERN.matcher(passwordInput).matches()) {
+            password.setError("Password too weak");
+            return false;
+        }else {
+            password.setError(null);
+            return true;
+        }
     }
     /*
     //Password Validation
