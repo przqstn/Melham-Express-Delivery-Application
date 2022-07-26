@@ -2,8 +2,10 @@ package com.example.mcc_deliveryapp.User;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
@@ -11,6 +13,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.mcc_deliveryapp.R;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+
+import android.content.SharedPreferences;
 
 public class user_checkrate extends AppCompatActivity {
 
@@ -22,6 +26,16 @@ public class user_checkrate extends AppCompatActivity {
 		ImageButton btnMotorcycle = findViewById(R.id.btnMotorcycle);
 		ImageButton btnSedan = findViewById(R.id.btnSedan);
 		ImageButton btnTruck = findViewById(R.id.btnTruck);
+
+		//
+		EditText editText = (EditText)findViewById(R.id.editTextPickUp);
+		EditText editText2 = (EditText)findViewById(R.id.editTextDestination);
+		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+		String pickloc =sharedPref.getString("key 1","");
+		String packageloc =sharedPref.getString("key 4","");
+
+		editText.setText(pickloc);
+		editText2.setText(packageloc);
 
 		btnMotorcycle.setOnClickListener(new View.OnClickListener() {
 			@Override
