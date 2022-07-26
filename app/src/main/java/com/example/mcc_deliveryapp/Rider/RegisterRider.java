@@ -74,6 +74,9 @@ public class RegisterRider extends AppCompatActivity {
 
         EditText etPhoneNum = (EditText) findViewById(R.id.editTextPhoneNumDriver);
 
+        EditText password = findViewById(R.id.pwfield);
+        EditText pwConfirm = findViewById(R.id.pwConfirm);
+
         Button btnReg = (Button) findViewById(R.id.btnRegRider);
 
         CheckBox checkRider = (CheckBox) findViewById(R.id.checkBoxAgreeRider);
@@ -236,6 +239,16 @@ public class RegisterRider extends AppCompatActivity {
                     Toast.makeText(RegisterRider.this,"A Number is Required.",Toast.LENGTH_SHORT).show();
                     return;
                 }
+                if(TextUtils.isEmpty(password.getText().toString()))
+                {
+                    password.setError("Fill up your Password");
+                    Toast.makeText(RegisterRider.this,"Password cannot be Empty",Toast.LENGTH_SHORT).show();
+                }
+                if(TextUtils.isEmpty(pwConfirm.getText().toString()))
+                {
+                    pwConfirm.setError("Fill up your Confirm Password");
+                    Toast.makeText(RegisterRider.this,"Password Confirm cannot be Empty",Toast.LENGTH_SHORT).show();
+                }
                 if(spinCity.getSelectedItemId() == 0)
                 {
                     Toast.makeText(RegisterRider.this,"Input a city.",Toast.LENGTH_SHORT).show();
@@ -266,14 +279,17 @@ public class RegisterRider extends AppCompatActivity {
                 {
                     vehiclebrandandmodel = etBrandVehicle.getText().toString() + " " + etModelVehicle.getText().toString();
                 }
-                else
-                {
+                else {
                     vehiclebrandandmodel = spinBrand.getSelectedItem().toString() + " " + etModelVehicle.getText().toString();
                 }
+                if(password.getText().toString().equals(pwConfirm.getText().toString())){
+                    sendVerificationCodeToUser(etPhoneNum.getText().toString());
+                    VerifyNum.show();
 
-                sendVerificationCodeToUser(etPhoneNum.getText().toString());
-                VerifyNum.show();
-
+                }else{
+                    pwConfirm.setError("Pw is not Match");
+                    Toast.makeText(RegisterRider.this,"Password is not Match",Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -420,6 +436,7 @@ public class RegisterRider extends AppCompatActivity {
 
 
     }
+    /*
     //Password Validation
     public void validatePW(View view){
         String password = ((EditText)findViewById(R.id.pwfield)).getText().toString();
@@ -594,7 +611,7 @@ public class RegisterRider extends AppCompatActivity {
             ((TextView)findViewById(R.id.pwStrength)).setText("Password does not satisfy conditions");
 
         }
-    }
+    }*/
 
     private String getTodaysDate()
     {
