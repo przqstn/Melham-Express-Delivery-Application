@@ -19,7 +19,7 @@
                 <ImageView
                     android:id="@+id/imageView"
                     android:layout_width="match_parent"
-                    android:layout_height="328dp"
+                    android:layout_height="345dp"
                     android:layout_gravity="left"
                     android:background="#D3DCFA "
                     app:srcCompat="@drawable/topimageriderlogin_2" />

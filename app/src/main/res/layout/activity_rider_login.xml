@@ -21,15 +21,15 @@
             <ImageView
                 android:id="@+id/imageView9"
                 android:layout_width="match_parent"
-                android:layout_height="478dp"
+                android:layout_height="345dp"
                 android:scaleType="centerCrop"
-                app:srcCompat="@drawable/topimageriderlogin" />
+                app:srcCompat="@drawable/topimageriderlogin_2" />
 
             <EditText
                 android:id="@+id/edtTextRiderNumber"
                 android:layout_width="330dp"
                 android:layout_height="60dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="25dp"
                 android:background="@drawable/edit_text_round"
                 android:drawableStart="@drawable/phone"
                 android:drawablePadding="16dp"
@@ -45,6 +45,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imageView9"
                 app:layout_constraintVertical_bias="0.063" />
+
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
