@@ -7,19 +7,15 @@
     android:orientation="vertical"
     tools:context=".MainActivity2">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <LinearLayout
             android:id="@+id/linearLayout2"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -31,9 +27,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:layout_marginTop="30dp"
                     android:fontFamily="@font/montserrat_bold"
                     android:padding="20dp"
-                    android:layout_marginTop="30dp"
                     android:text="MELHAM EXPRESS"
                     android:textColor="@color/black"
                     android:textSize="28sp"
@@ -41,12 +37,10 @@
 
                 <ImageView
                     android:id="@+id/imageView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="317dp"
+                    android:layout_height="391dp"
                     android:layout_gravity="center"
-                    android:layout_marginTop="30dp"
-                    android:layout_marginBottom="30dp"
-                    app:srcCompat="@drawable/logo" />
+                    app:srcCompat="@drawable/melogo" />
 
                 <Button
                     android:id="@+id/btn_riderform"
@@ -71,8 +65,7 @@
             </LinearLayout>
 
         </LinearLayout>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 
 
 </LinearLayout>
