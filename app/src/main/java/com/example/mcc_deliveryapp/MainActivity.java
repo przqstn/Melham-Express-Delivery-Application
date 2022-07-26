@@ -6,6 +6,10 @@ import android.os.Handler;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.appcheck.FirebaseAppCheck;
+import com.google.firebase.appcheck.safetynet.SafetyNetAppCheckProviderFactory;
+
 public class MainActivity extends AppCompatActivity {
 
 	@Override
@@ -22,6 +26,10 @@ public class MainActivity extends AppCompatActivity {
 				startActivity(intent);
 			}
 		};
+		FirebaseApp.initializeApp(/*context=*/ this);
+		FirebaseAppCheck firebaseAppCheck = FirebaseAppCheck.getInstance();
+		firebaseAppCheck.installAppCheckProviderFactory(
+				SafetyNetAppCheckProviderFactory.getInstance());
 
 		handler.postDelayed(r,3000);
 

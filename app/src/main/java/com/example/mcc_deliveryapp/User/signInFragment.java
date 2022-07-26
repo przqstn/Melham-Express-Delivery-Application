@@ -120,7 +120,7 @@ public class signInFragment extends Fragment {
                         usernum.setText(usernumFromDB);
 
                         EditText etVerifyCode_user = VerifyNum.findViewById(R.id.etVerify_user);
-                        //etCode_user = VerifyNum.findViewById(R.id.etVerify_user);
+                        etCode_user = VerifyNum.findViewById(R.id.etVerify_user);
                         Button verify_user = VerifyNum.findViewById(R.id.btnVerify_user);
                         verify_user.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -177,7 +177,7 @@ public class signInFragment extends Fragment {
         public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
 
             String code_user = phoneAuthCredential.getSmsCode();
-            etCode_user.setText(code_user);
+           etCode_user.setText(code_user);
             if(code_user != null)
             {
                 VerifyCodeUser(code_user);
