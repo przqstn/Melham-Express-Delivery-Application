@@ -10,13 +10,18 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.example.mcc_deliveryapp.R;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -64,9 +69,8 @@ public class signUpFragment extends Fragment {
         btn_createAcc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //calling the user password validation
-                uservalidatePassword();
-//                //Hashing the password and confirm password
+//                calling the user password validation
+//                Hashing the password and confirm password
 //                PasswordHash(editTxt_password.toString());
 //                PasswordHash(editTxt_Cpassword.toString());
                 // Verification for blank space in the user registration form
@@ -106,14 +110,30 @@ public class signUpFragment extends Fragment {
                     String Cpass = editTxt_Cpassword.getEditableText().toString();
                     String passwordhash = txt_hashpassword.getText().toString();
 
+                    // to check if the user already exists
+                    Query accCheck = DbRef.orderByChild("userPhone").equalTo(phoneNum);
+                    accCheck.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot snapshot) {
+                            if (snapshot.exists()) {
+                                Toast.makeText(getContext(), "Account Already Exists. Please Sign In", Toast.LENGTH_SHORT).show();
+                            } else {
+                                if(uservalidatePassword()) {
+                                    //user helper class in order to store the the given info in sign up form
+                                    UserHelperClass userHelperClass = new UserHelperClass(fullname, phoneNum, pass, Cpass);
+                                    DbRef.child(phoneNum).setValue(userHelperClass);
+                                    Toast.makeText(getContext(), "Account Successfully Created", Toast.LENGTH_SHORT).show();
+                                    //Implementing the Clear Section in Sign up after the Creation of Account
+                                    Clear();
+                                }
+                            }
+                        }
 
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
 
-                    //user helper class in order to store the the given info in sign up form
-                    UserHelperClass userHelperClass = new UserHelperClass(fullname,phoneNum,pass,Cpass);
-                    DbRef.child(phoneNum).setValue(userHelperClass);
-                    Toast.makeText(getContext(),"Account Successfully Created",Toast.LENGTH_SHORT).show();
-                    //Implementing the Clear Section in Sign up after the Creation of Account
-                    Clear();
+                        }
+                    });
                 }
             }
         });
