@@ -41,7 +41,7 @@ public class signUpFragment extends Fragment {
     TextView txt_hashpassword;
 
     TextInputLayout textInputPassword;
-   //Database Realtime
+    //Database Realtime
     FirebaseDatabase root;
     DatabaseReference DbRef;
     FirebaseAuth fAuth;

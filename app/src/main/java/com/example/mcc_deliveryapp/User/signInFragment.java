@@ -118,7 +118,10 @@ public class signInFragment extends Fragment {
 
                         name.setText(nameFromDB);
                         usernum.setText(usernumFromDB);
-
+                        Intent intent = new Intent(getActivity(),user_permission.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
+                    /*
                         EditText etVerifyCode_user = VerifyNum.findViewById(R.id.etVerify_user);
                         etCode_user = VerifyNum.findViewById(R.id.etVerify_user);
                         Button verify_user = VerifyNum.findViewById(R.id.btnVerify_user);
@@ -139,6 +142,8 @@ public class signInFragment extends Fragment {
                         //sendVerificationCodeToUser(Objects.requireNonNull(login_editTxt_phoneNum.getEditText()).getText().toString());
                         sendVerificationCodeToUser(login_editTxt_phoneNum.getEditText().getText().toString());
                         VerifyNum.show();
+                        */
+
                     }
                     else{
                         login_editTxt_password.setError("Wrong Password");
@@ -157,6 +162,7 @@ public class signInFragment extends Fragment {
             }
         });
     }
+    /*
     private void sendVerificationCodeToUser(String PhoneNo_User) {
 
         PhoneAuthProvider.getInstance().verifyPhoneNumber("+63" + PhoneNo_User,60, TimeUnit.SECONDS, getActivity(),mCallBacks);
@@ -213,6 +219,6 @@ public class signInFragment extends Fragment {
             }
         });
     }
-
+*/
 
 }
