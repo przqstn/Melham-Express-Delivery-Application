@@ -32,7 +32,7 @@
                     android:layout_marginLeft="16dp"
                     android:layout_marginTop="12dp"
                     android:fontFamily="@font/montserrat_medium"
-                    android:text="Become a driver"
+                    android:text="Become a courier"
                     android:textColor="@color/black"
                     android:textSize="20sp"
                     android:textStyle="bold" />
@@ -43,7 +43,7 @@
                     android:layout_height="60dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="13dp"
-                    android:background="@drawable/graphics_edittext_1"
+                    android:background="@drawable/edit_text_round"
                     android:drawableStart="@drawable/ic_baseline_phone_in_talk_24"
                     android:drawableLeft="@drawable/ic_baseline_phone_in_talk_24"
                     android:drawablePadding="16dp"
@@ -65,7 +65,7 @@
                         android:layout_width="350dp"
                         android:layout_height="60dp"
                         android:layout_gravity="center"
-                        android:background="@drawable/graphics_edittext_1"
+                        android:background="@drawable/edit_text_round"
                         android:drawableStart="@drawable/ic_baseline_lock_24"
                         android:drawableLeft="@drawable/ic_baseline_lock_24"
                         android:drawablePadding="15dp"
@@ -75,7 +75,8 @@
                         android:paddingLeft="15dp"
                         android:paddingTop="15dp"
                         android:paddingBottom="15dp"
-                        android:textSize="16dp" />
+                        android:textSize="16sp"
+                        tools:ignore="SpeakableTextPresentCheck" />
                 </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -96,7 +97,7 @@
                         android:layout_width="350dp"
                         android:layout_height="60dp"
                         android:layout_gravity="center"
-                        android:background="@drawable/graphics_edittext_1"
+                        android:background="@drawable/edit_text_round"
                         android:drawableStart="@drawable/ic_baseline_lock_24"
                         android:drawableLeft="@drawable/ic_baseline_lock_24"
                         android:drawablePadding="15dp"
@@ -106,7 +107,8 @@
                         android:paddingLeft="15dp"
                         android:paddingTop="15dp"
                         android:paddingBottom="15dp"
-                        android:textSize="16dp" />
+                        android:textSize="16sp"
+                        tools:ignore="SpeakableTextPresentCheck" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <Button
@@ -124,7 +126,7 @@
                     android:layout_height="60dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="24dp"
-                    android:background="@drawable/graphics_edittext_1"
+                    android:background="@drawable/edit_text_round"
                     android:contentDescription="City"
                     android:spinnerMode="dropdown" />
 
@@ -134,7 +136,7 @@
                     android:layout_height="60dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="20dp"
-                    android:background="@drawable/graphics_edittext_1"
+                    android:background="@drawable/edit_text_round"
                     android:contentDescription="Vehicle"
                     android:spinnerMode="dropdown" />
 
@@ -179,14 +181,14 @@
 
                 <CheckBox
                     android:id="@+id/checkBoxAgreeRider"
-                    android:layout_width="wrap_content"
+                    android:layout_width="350dp"
                     android:layout_height="50dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="16dp"
                     android:fontFamily="@font/montserrat_regular"
                     android:text="@string/agreeDriverText"
                     android:textColor="@color/textGray"
-                    android:textSize="10sp" />
+                    android:textSize="12sp" />
 
                 <Button
                     android:id="@+id/btnRegRider"
@@ -198,6 +200,7 @@
                     android:background="@drawable/graphics_button_1"
                     android:fontFamily="@font/montserrat_medium"
                     android:text="Get Started"
+                    android:textAllCaps="false"
                     android:textColor="@color/white"
                     android:textSize="20sp"
                     android:textStyle="bold" />

@@ -30,7 +30,7 @@
                 android:layout_width="330dp"
                 android:layout_height="60dp"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/graphics_edittext_1"
+                android:background="@drawable/edit_text_round"
                 android:drawableStart="@drawable/phone"
                 android:drawablePadding="16dp"
                 android:fontFamily="@font/montserrat_regular"
@@ -38,7 +38,7 @@
                 android:inputType="phone"
                 android:padding="15dp"
                 android:textColorHint="#A7A9B7"
-                android:textSize="18dp"
+                android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.493"
@@ -55,9 +55,9 @@
                     android:id="@+id/edtTextRiderPassword"
                     android:layout_width="330dp"
                     android:layout_height="60dp"
-                    android:layout_marginTop="10dp"
                     android:layout_gravity="center"
-                    android:background="@drawable/graphics_edittext_1"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/edit_text_round"
                     android:drawableStart="@drawable/ic_baseline_lock_24"
                     android:drawableLeft="@drawable/ic_baseline_lock_24"
                     android:drawablePadding="15dp"
@@ -67,7 +67,8 @@
                     android:paddingLeft="15dp"
                     android:paddingTop="15dp"
                     android:paddingBottom="15dp"
-                    android:textSize="16dp" />
+                    android:textSize="16sp"
+                    tools:ignore="SpeakableTextPresentCheck" />
             </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -77,9 +78,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/montserrat_medium"
+                android:paddingBottom="10dp"
                 android:text="Forgot Password"
                 android:textColor="#68B3F9"
-                android:textSize="16dp"
+                android:textSize="14sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
