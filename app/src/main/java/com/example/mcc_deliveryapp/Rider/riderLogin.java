@@ -16,20 +16,27 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 public class riderLogin extends AppCompatActivity {
 
-    EditText emailRider,passRider;
+    EditText numberRider,passRider;
     Button btnLogin;
     Button btnRegister;
     FirebaseAuth mAuth;
+    FirebaseDatabase db = FirebaseDatabase.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rider_login);
 
-        emailRider = (EditText) findViewById(R.id.edtTextRiderNumber);
+        numberRider = (EditText) findViewById(R.id.edtTextRiderNumber);
         passRider = (EditText) findViewById(R.id.edtTextRiderPassword);
         btnLogin = findViewById(R.id.btnLoginRider);
         btnRegister = findViewById(R.id.btnRegisterRider);
@@ -56,42 +63,63 @@ public class riderLogin extends AppCompatActivity {
 
     private void loginRider()
     {
-        String email = emailRider.getText().toString();
+        String number = numberRider.getText().toString();
         String pass = passRider.getText().toString();
 
 
-        if(TextUtils.isEmpty(email))
+        if(TextUtils.isEmpty(number))
         {
-            emailRider.setError("Email Required");
-            emailRider.requestFocus();
+            numberRider.setError("Number Required");
+            numberRider.requestFocus();
             return;
         }
         if(TextUtils.isEmpty(pass))
         {
-            passRider.setError("Email Required");
+            passRider.setError("Password Required");
             passRider.requestFocus();
             return;
         }
-
-        mAuth.signInWithEmailAndPassword(email,pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+        String riderNumEntered = numberRider.getText().toString().trim();
+        String riderpassEntered = passRider.getText().toString().trim();
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("riders");
+        Query checkRider = ref.orderByChild("riderphone").equalTo(riderNumEntered);
+        checkRider.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if(task.isSuccessful())
-                {
-                    Intent intent = new Intent(riderLogin.this, rider_dashboard.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    startActivity(intent);
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//get credentials of rider using OTP same as user
+                if (snapshot.exists()) {
+                    numberRider.setError(null);
+                    String riderpass = snapshot.child(riderNumEntered).child("riderpass").getValue(String.class);
+
+
+                    if (riderpass.equals(riderpassEntered))
+                    {
+
+                        Intent intent = new Intent(riderLogin.this, rider_dashboard.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        intent.putExtra("phonenum", riderNumEntered);
+                        startActivity(intent);
+                    }
+
+                    else {
+                        passRider.setError("Wrong Password");
+                        }
+
+
                 }
-                else
-                {
-                    Toast.makeText(riderLogin.this,task.getException().toString(),Toast.LENGTH_LONG).show();
-                }
+
+                else{
+                numberRider.setError("This number is not registered yet");
             }
+            }
+
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+
+
         });
-
-
-
     }
-
-
 }

@@ -158,17 +158,7 @@ public class signInFragment extends Fragment {
         });
     }
     private void sendVerificationCodeToUser(String PhoneNo_User) {
- //~~~~~~~~~ Set up number for verification ~~~~~~~~~~~~~~ //
-//        PhoneAuthOptions options =
-//                PhoneAuthOptions.newBuilder(mAuth)
-//                .setPhoneNumber("+63"+ PhoneNo_User)
-//                .setTimeout(60L, TimeUnit.SECONDS)
-//                .setActivity(getActivity())
-//                .setCallbacks(mCallBacks)
-//                .build();
-//        PhoneAuthProvider.verifyPhoneNumber(options);
 
-//~~~~~~~~~ Verify number that all ready in the firebase ~~~~~~~ //
         PhoneAuthProvider.getInstance().verifyPhoneNumber("+63" + PhoneNo_User,60, TimeUnit.SECONDS, getActivity(),mCallBacks);
 
     }

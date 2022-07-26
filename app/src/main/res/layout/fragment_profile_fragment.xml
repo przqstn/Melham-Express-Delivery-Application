@@ -66,7 +66,6 @@
                     android:layout_gravity="center"
                     android:fontFamily="@font/montserrat_semibold"
                     android:gravity="center"
-                    android:text="Riders name"
                     android:textColor="@color/black"
                     android:textSize="30dp"
                     android:textStyle="bold" />
@@ -142,12 +141,12 @@
                                     android:textStyle="bold" />
 
                                 <TextView
+                                    android:id="@+id/riderVehicle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:fontFamily="@font/montserrat_regular"
                                     android:padding="5dp"
-                                    android:text="Example:Van"
-                                    android:textColor="@color/text_details" />
+                                    android:textColor="@color/strokes" />
                             </LinearLayout>
 
                             <LinearLayout
@@ -170,12 +169,12 @@
                                     android:textStyle="bold" />
 
                                 <TextView
+                                    android:id="@+id/riderPlate"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:fontFamily="@font/montserrat_regular"
                                     android:padding="5dp"
-                                    android:text="Example:123zxc"
-                                    android:textColor="@color/text_details" />
+                                    android:textColor="@color/strokes" />
                             </LinearLayout>
                         </RelativeLayout>
 
@@ -202,14 +201,13 @@
                             />
 
                         <TextView
+                            android:id="@+id/riderAddress"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/montserrat_regular"
                             android:padding="5dp"
-                            android:text="Example: 123 abc city"
-                            android:textColor="@color/text_details"
 
-                            />
+                            android:textColor="@color/strokes" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -231,14 +229,13 @@
                             android:textStyle="bold" />
 
                         <TextView
+                            android:id="@+id/riderNumber"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/montserrat_regular"
                             android:padding="5dp"
-                            android:text="Example:00000"
-                            android:textColor="@color/text_details"
 
-                            />
+                            android:textColor="@color/strokes" />
                     </LinearLayout>
 
 

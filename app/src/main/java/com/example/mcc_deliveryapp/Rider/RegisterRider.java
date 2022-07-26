@@ -377,7 +377,7 @@ public class RegisterRider extends AppCompatActivity {
                 String riderCurrentAddress = getTextFromEditText(regRiderInfo.findViewById(R.id.etRiderCurrentAddress));
                 String riderVehiclePlateNumber = getTextFromEditText(regRiderInfo.findViewById(R.id.etRiderVehicleNumber));
                 String riderVehicleManufacturerYear = getTextFromEditText(regRiderInfo.findViewById(R.id.etRiderManufactureYear));
-
+                String riderpass = ((EditText)findViewById(R.id.pwfield)).getText().toString();
                 String phonenum = ((EditText)findViewById(R.id.editTextPhoneNumDriver)).getText().toString();
 
                 FirebaseUser userCurrent = mAuth.getCurrentUser();
@@ -391,8 +391,10 @@ public class RegisterRider extends AppCompatActivity {
 
                 riderInfo.put("city",spinCity.getSelectedItem().toString());
                 riderInfo.put("vehicletype",spinVehicle.getSelectedItem().toString());
+                riderInfo.put("riderphone",phonenum);
                 riderInfo.put("name",riderName);
                 riderInfo.put("email",riderEmail);
+                riderInfo.put("riderpass",riderpass);
                 riderInfo.put("dateofbirth",riderDateofBirth);
                 riderInfo.put("driverlicensenumber",riderDriverLicenseNumber);
                 riderInfo.put("driverlicenseexpiry",riderDriverLicenseExpiry);
