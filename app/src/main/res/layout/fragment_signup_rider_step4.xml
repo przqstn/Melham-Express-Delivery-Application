@@ -32,46 +32,10 @@
                     android:layout_height="55dp"
                     android:fontFamily="@font/montserrat_semibold"
                     android:paddingTop="25dp"
-                    android:text="Create Your Account"
+                    android:text="Training Video"
                     android:textColor="@color/black"
                     android:textSize="25dp"
                     android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/txtRiderBasicInfo"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_marginBottom="25dp"
-
-                    android:fontFamily="@font/montserrat_medium"
-                    android:paddingTop="25dp"
-                    android:text="Basic Information"
-                    android:textColor="@color/black"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
-
-                <EditText
-                    android:id="@+id/etNameRider"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_marginBottom="30dp"
-                    android:background="@drawable/edit_text_round"
-                    android:fontFamily="@font/montserrat_regular"
-                    android:hint="Name (as shown in ID)"
-                    android:paddingLeft="20dp"
-                    android:textSize="18sp" />
-
-                <EditText
-                    android:id="@+id/etEmailRider"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_marginBottom="30dp"
-                    android:background="@drawable/edit_text_round"
-                    android:fontFamily="@font/montserrat_regular"
-
-                    android:hint="Email (Optional)"
-                    android:paddingLeft="20dp"
-                    android:textSize="18sp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -81,7 +45,7 @@
                     android:orientation="vertical">
 
                     <Button
-                        android:id="@+id/nextstep1"
+                        android:id="@+id/nextstep4"
                         android:layout_width="match_parent"
                         android:layout_height="55dp"
                         android:layout_marginTop="15dp"

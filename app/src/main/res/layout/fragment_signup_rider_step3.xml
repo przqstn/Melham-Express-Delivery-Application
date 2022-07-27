@@ -27,49 +27,36 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/textView"
+                    android:id="@+id/txtRiderVehicleInformation"
                     android:layout_width="match_parent"
-                    android:layout_height="55dp"
-                    android:fontFamily="@font/montserrat_semibold"
-                    android:paddingTop="25dp"
-                    android:text="Create Your Account"
-                    android:textColor="@color/black"
-                    android:textSize="25dp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/txtRiderBasicInfo"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginBottom="25dp"
-
                     android:fontFamily="@font/montserrat_medium"
-                    android:paddingTop="25dp"
-                    android:text="Basic Information"
+                    android:text="Add Vehicle Information"
                     android:textColor="@color/black"
                     android:textSize="20sp"
                     android:textStyle="bold" />
 
                 <EditText
-                    android:id="@+id/etNameRider"
+                    android:id="@+id/etRiderVehicleNumber"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_marginBottom="30dp"
                     android:background="@drawable/edit_text_round"
                     android:fontFamily="@font/montserrat_regular"
-                    android:hint="Name (as shown in ID)"
+
+                    android:hint="Vehicle Plate Number"
                     android:paddingLeft="20dp"
                     android:textSize="18sp" />
 
                 <EditText
-                    android:id="@+id/etEmailRider"
+                    android:id="@+id/etRiderManufactureYear"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_marginBottom="30dp"
                     android:background="@drawable/edit_text_round"
                     android:fontFamily="@font/montserrat_regular"
-
-                    android:hint="Email (Optional)"
+                    android:hint="Vehicle Manufacture Year"
                     android:paddingLeft="20dp"
                     android:textSize="18sp" />
 
@@ -81,8 +68,8 @@
                     android:orientation="vertical">
 
                     <Button
-                        android:id="@+id/nextstep1"
-                        android:layout_width="match_parent"
+                        android:id="@+id/nextstep3"
+                        android:layout_width="250dp"
                         android:layout_height="55dp"
                         android:layout_marginTop="15dp"
                         android:layout_marginBottom="20dp"

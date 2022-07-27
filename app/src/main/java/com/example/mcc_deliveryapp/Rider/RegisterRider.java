@@ -6,12 +6,7 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.text.InputType;
 import android.text.TextUtils;
-import android.text.method.HideReturnsTransformationMethod;
-import android.text.method.PasswordTransformationMethod;
-import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -43,21 +38,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
-import java.util.regex.Pattern;
 
 public class RegisterRider extends AppCompatActivity {
-
-    //password pattern
-    private static final Pattern PASSWORD_PATTERN =
-            Pattern.compile("^" +
-                    "(?=.*[0-9])" +         //at least 1 digit
-                    "(?=.*[a-z])" +         //at least 1 lower case letter
-                    "(?=.*[A-Z])" +         //at least 1 upper case letter
-                    //"(?=.*[a-zA-Z])" +      //any letter
-                    "(?=.*[@#$%^&+=!_.])" +    //at least 1 special character
-                    "(?=\\S+$)" +           //no white spaces
-                    ".{4,}" +               //at least 4 characters
-                    "$");
 
     FirebaseAuth mAuth;
 
@@ -68,7 +50,11 @@ public class RegisterRider extends AppCompatActivity {
 
     DatePickerDialog datePickerDialog;
 
-    Dialog regRiderInfo;
+    Dialog regRiderStep1;
+    Dialog regRiderStep2;
+    Dialog regRiderStep3;
+    Dialog regRiderStep4;
+    Dialog regRiderStep5;
 
     Boolean hasError = false;
 
@@ -83,25 +69,20 @@ public class RegisterRider extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
-
-
         setContentView(R.layout.activity_register_rider);
 
-        EditText etPhoneNum = (EditText) findViewById(R.id.editTextPhoneNumDriver);
+        EditText etPhoneNum = findViewById(R.id.editTextPhoneNumDriver);
 
         password = findViewById(R.id.pwfield);
         pwConfirm = findViewById(R.id.pwConfirm);
 
-        Button btnReg = (Button) findViewById(R.id.btnRegRider);
+        Button btnReg = findViewById(R.id.btnRegRider);
 
-        CheckBox checkRider = (CheckBox) findViewById(R.id.checkBoxAgreeRider);
+        CheckBox checkRider = findViewById(R.id.checkBoxAgreeRider);
 
-        Spinner spinCity = (Spinner) findViewById(R.id.spinnerCityDriver);
-        Spinner spinVehicle = (Spinner) findViewById(R.id.spinnerVehicleDriver);
-        Spinner spinBrand = (Spinner) findViewById(R.id.spinnerVehicleBrand);
-
-
-
+        Spinner spinCity = findViewById(R.id.spinnerCityDriver);
+        Spinner spinVehicle = findViewById(R.id.spinnerVehicleDriver);
+        Spinner spinBrand =  findViewById(R.id.spinnerVehicleBrand);
 
         //Getting City Rider Item List
         ArrayAdapter<CharSequence> adapterCity = ArrayAdapter.createFromResource(this, R.array.cityRider,R.layout.spinner_items_1);
@@ -109,12 +90,9 @@ public class RegisterRider extends AppCompatActivity {
         spinCity.setAdapter(adapterCity);
 
         //Getting Vehicle Rider Type Item List
-
         ArrayAdapter<CharSequence> adapterVehicle = ArrayAdapter.createFromResource (this,R.array.ridervehicletype,R.layout.spinner_items_1);
         adapterVehicle.setDropDownViewResource(R.layout.spinner_items_1);
         spinVehicle.setAdapter(adapterVehicle);
-
-
 
         //Spinner City
         spinCity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -126,7 +104,6 @@ public class RegisterRider extends AppCompatActivity {
                 }
                 else
                 {
-
                     TextView tv = (TextView) view;
                     if(i == 0 )
                     {
@@ -194,8 +171,8 @@ public class RegisterRider extends AppCompatActivity {
             }
         });
 
-        EditText etModelVehicle = (EditText) findViewById(R.id.editTextVehicleModel);
-        EditText etBrandVehicle = (EditText) findViewById(R.id.editTextVehicleBrand);
+        EditText etModelVehicle = findViewById(R.id.editTextVehicleModel);
+        EditText etBrandVehicle = findViewById(R.id.editTextVehicleBrand);
         //Spinner Vehicle Brand
 
         spinBrand.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -244,51 +221,71 @@ public class RegisterRider extends AppCompatActivity {
         btnReg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
+                boolean clear = true;
                 if(TextUtils.isEmpty(etPhoneNum.getText().toString()))
                 {
                     etPhoneNum.setError("Required");
-                    Toast.makeText(RegisterRider.this,"A Number is Required.",Toast.LENGTH_SHORT).show();
+                    etPhoneNum.setBackgroundResource(R.drawable.error_border_edittext);
+                    clear = false;
                     return;
-                }
-                if(TextUtils.isEmpty(password.getText().toString()))
-                {
-                    password.setError("Fill up your Password");
-                    Toast.makeText(RegisterRider.this,"Password cannot be Empty",Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                if(TextUtils.isEmpty(pwConfirm.getText().toString()))
-                {
-                    pwConfirm.setError("Fill up your Confirm Password");
-                    Toast.makeText(RegisterRider.this,"Password Confirm cannot be Empty",Toast.LENGTH_SHORT).show();
-                    return;
+
                 }
 
-                if(spinCity.getSelectedItemId() == 0)
+                else  if(spinCity.getSelectedItemId() == 0)
                 {
-                    Toast.makeText(RegisterRider.this,"Input a city.",Toast.LENGTH_SHORT).show();
+                    spinCity.setBackgroundResource(R.drawable.error_border_edittext);
+                    clear = false;
                     return;
+
                 }
-                if(spinVehicle.getSelectedItemId() == 0)
+                else  if(spinVehicle.getSelectedItemId() == 0)
                 {
-                    Toast.makeText(RegisterRider.this,"Input a type of Vehicle.",Toast.LENGTH_SHORT).show();
+                    spinVehicle.setBackgroundResource(R.drawable.error_border_edittext);
+                    clear = false;
                     return;
+
                 }
-                if(!checkRider.isChecked())
+                else  if(!checkRider.isChecked())
                 {
-                    Toast.makeText(RegisterRider.this,"Please agree on the terms and condition..",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterRider.this,"Please agree on the terms and condition.",Toast.LENGTH_SHORT).show();
+                    clear = false;
                     return;
+
                 }
-                if(TextUtils.isEmpty(etModelVehicle.getText().toString()))
+                else if(TextUtils.isEmpty(etModelVehicle.getText().toString()))
                 {
-                    Toast.makeText(RegisterRider.this,"Vehicle Model is required.",Toast.LENGTH_SHORT).show();
+                    etModelVehicle.setBackgroundResource(R.drawable.error_border_edittext);
+                    clear = false;
                     return;
+
                 }
-                if(etBrandVehicle.getVisibility() == View.VISIBLE && TextUtils.isEmpty(etBrandVehicle.getText().toString()))
+                else if(etBrandVehicle.getVisibility() == View.VISIBLE && TextUtils.isEmpty(etBrandVehicle.getText().toString()))
                 {
-                    Toast.makeText(RegisterRider.this,"Vehicle Brand is required.",Toast.LENGTH_SHORT).show();
+                    etBrandVehicle.setBackgroundResource(R.drawable.error_border_edittext);
+                    clear = false;
                     return;
+
+                }
+                if (password.length() == 0)
+                {
+                    ((EditText)findViewById(R.id.pwfield)).setError("Required", null);
+                    findViewById(R.id.pwfield).setBackgroundResource(R.drawable.error_border_edittext);
+                }
+                if (pwConfirm.length() == 0)
+                {
+                    ((EditText)findViewById(R.id.pwConfirm)).setError("Required", null);
+                    findViewById(R.id.pwConfirm).setBackgroundResource(R.drawable.error_border_edittext);
+                }
+                else
+                {
+                    etPhoneNum.setBackgroundResource(R.drawable.graphics_edittext_1);
+                    etModelVehicle.setBackgroundResource(R.drawable.graphics_edittext_1);
+                    spinVehicle.setBackgroundResource(R.drawable.graphics_edittext_1);
+                    etPhoneNum.setBackgroundResource(R.drawable.graphics_edittext_1);
+                    etBrandVehicle.setBackgroundResource(R.drawable.graphics_edittext_1);
+                    findViewById(R.id.pwConfirm).setBackgroundResource(R.drawable.graphics_edittext_1);
+                    findViewById(R.id.pwfield).setBackgroundResource(R.drawable.graphics_edittext_1);
+                    clear = true;
                 }
 
                 if(etBrandVehicle.getVisibility() == View.VISIBLE)
@@ -299,29 +296,90 @@ public class RegisterRider extends AppCompatActivity {
                     vehiclebrandandmodel = spinBrand.getSelectedItem().toString() + " " + etModelVehicle.getText().toString();
                 }
 
-                //need further testing for bug
-                if(password.getText().toString().equals(pwConfirm.getText().toString())&&(uservalidatePassword())){
-                    sendVerificationCodeToUser(etPhoneNum.getText().toString());
-                    VerifyNum.show();
+                String password = ((EditText)findViewById(R.id.pwfield)).getText().toString();
+                String pwConfirm = ((EditText)findViewById(R.id.pwConfirm)).getText().toString();
+                boolean uppercase = !password.equals(password.toLowerCase());
+                boolean lowercase = !password.equals(password.toUpperCase());
+                boolean min6  = password.length() > 5;
+                boolean PWgood = false;
 
-                }else if(password.getText().toString()!=pwConfirm.getText().toString()||(uservalidatePassword())){
-                    pwConfirm.setError("Pw is not Match");
-                    Toast.makeText(RegisterRider.this,"Password is not Match",Toast.LENGTH_SHORT).show();
+                int digits = 0;
+                int upper = 0;
 
-                }else{
-                    Log.d("check me", "null");
+                for (int i = 0; i < password.length(); i++) {
+                    char ch = password.charAt(i);
+                    if (ch >= 48 && ch <= 57)
+                        digits++;
+                    else if(ch>='A' && ch<='Z'){
+                        upper++;
+                    }
                 }
+                //check if password satisfies conditions
+                if(!uppercase || !lowercase || !min6 || digits == 0)
+                {
+                    ((EditText)findViewById(R.id.pwfield)).setError("Password most have at least 6 characters, one uppercase, lowercase, and number.", null);
+                    findViewById(R.id.pwfield).setBackgroundResource(R.drawable.error_border_edittext);
+
+                }
+
+                // add confirm password function
+                else if (min6 && uppercase && lowercase && digits >=1)
+                {
+
+                    if (password.equals(pwConfirm))
+                    {
+                        findViewById(R.id.pwfield).setBackgroundResource(R.drawable.graphics_edittext_1);
+                        findViewById(R.id.pwConfirm).setBackgroundResource(R.drawable.graphics_edittext_1);
+                        PWgood = true;
+                    }
+                    else {
+                        ((EditText)findViewById(R.id.pwConfirm)).setError("Passwords do not match", null);
+                        findViewById(R.id.pwfield).setBackgroundResource(R.drawable.error_border_edittext);
+                        findViewById(R.id.pwConfirm).setBackgroundResource(R.drawable.error_border_edittext);
+                    }
+
+                }
+
+                if (PWgood && clear)
+                    {
+                        sendVerificationCodeToUser(etPhoneNum.getText().toString());
+                        VerifyNum.show();
+                    }
 
             }
         });
 
 
+//etong part na to yung sa fragment
+        regRiderStep1 = new Dialog(RegisterRider.this);
+        regRiderStep1.setContentView(R.layout.fragment_signup_rider_step1);
+        regRiderStep1.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT);
+        regRiderStep1.setCancelable(true);
+        regRiderStep1.getWindow().getAttributes().windowAnimations = R.style.animation;
 
-        regRiderInfo = new Dialog(RegisterRider.this);
-        regRiderInfo.setContentView(R.layout.fragment_signup_rider_step1);
-        regRiderInfo.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT);
-        regRiderInfo.setCancelable(true);
-        regRiderInfo.getWindow().getAttributes().windowAnimations = R.style.animation;
+        regRiderStep2 = new Dialog(RegisterRider.this);
+        regRiderStep2.setContentView(R.layout.fragment_signup_rider_step2);
+        regRiderStep2.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT);
+        regRiderStep2.setCancelable(true);
+        regRiderStep2.getWindow().getAttributes().windowAnimations = R.style.animation;
+
+        regRiderStep3 = new Dialog(RegisterRider.this);
+        regRiderStep3.setContentView(R.layout.fragment_signup_rider_step3);
+        regRiderStep3.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT);
+        regRiderStep3.setCancelable(true);
+        regRiderStep3.getWindow().getAttributes().windowAnimations = R.style.animation;
+
+        regRiderStep4 = new Dialog(RegisterRider.this);
+        regRiderStep4.setContentView(R.layout.fragment_signup_rider_step4);
+        regRiderStep4.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT);
+        regRiderStep4.setCancelable(true);
+        regRiderStep4.getWindow().getAttributes().windowAnimations = R.style.animation;
+
+        regRiderStep5 = new Dialog(RegisterRider.this);
+        regRiderStep5.setContentView(R.layout.fragment_signup_rider_step5);
+        regRiderStep5.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT);
+        regRiderStep5.setCancelable(true);
+        regRiderStep5.getWindow().getAttributes().windowAnimations = R.style.animation;
 
         Dialog successfullyRegistered = new Dialog(RegisterRider.this);
         successfullyRegistered.setContentView(R.layout.success_dialog);
@@ -339,9 +397,9 @@ public class RegisterRider extends AppCompatActivity {
             }
         });
 
-        EditText etVerifyCode = (EditText) VerifyNum.findViewById(R.id.etVerify);
-        etCode = (EditText) VerifyNum.findViewById(R.id.etVerify);
-        Button verify = (Button) VerifyNum.findViewById(R.id.btnVerify);
+        EditText etVerifyCode =  VerifyNum.findViewById(R.id.etVerify);
+        etCode =  VerifyNum.findViewById(R.id.etVerify);
+        Button verify =  VerifyNum.findViewById(R.id.btnVerify);
 
         verify.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -353,15 +411,18 @@ public class RegisterRider extends AppCompatActivity {
                     Toast.makeText(RegisterRider.this,"Please Enter The Code.",Toast.LENGTH_SHORT).show();
                     return;
                 }
-
                 verifyCode(code);
                 VerifyNum.dismiss();
             }
         });
 
-        Button btnRegRiderInfo = (Button) regRiderInfo.findViewById(R.id.btnRegRiderInfo);
+        Button nextstep1 = regRiderStep1.findViewById(R.id.nextstep1);
+        Button nextstep2 = regRiderStep2.findViewById(R.id.nextstep2);
+        Button nextstep3 = regRiderStep3.findViewById(R.id.nextstep3);
+        Button nextstep4 =  regRiderStep4.findViewById(R.id.nextstep4);
+        Button register = regRiderStep5.findViewById(R.id.register);
 
-        EditText etDatePicker = (EditText) regRiderInfo.findViewById(R.id.etRiderDateofBirth);
+        EditText etDatePicker =  regRiderStep2.findViewById(R.id.etRiderDateofBirth);
 
         etDatePicker.setText(getTodaysDate());
 
@@ -376,220 +437,148 @@ public class RegisterRider extends AppCompatActivity {
                         etDatePicker.setText(date);
                     }
                 };
-
                 Calendar cal = Calendar.getInstance();
                 int year = cal.get(Calendar.YEAR);
                 int month = cal.get(Calendar.MONTH);
                 int day = cal.get(Calendar.DAY_OF_MONTH);
-
                 int style = AlertDialog.THEME_HOLO_LIGHT;
 
                 datePickerDialog = new DatePickerDialog(RegisterRider.this,style,dateSetListener,year,month,day);
                 datePickerDialog.show();
-
             }
         });
 
-        btnRegRiderInfo.setOnClickListener(new View.OnClickListener() {
+        nextstep1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                checkEmptyEditText(regRiderInfo.findViewById(R.id.etNameRider));
-                checkEmptyEditText(regRiderInfo.findViewById(R.id.etRiderDateofBirth));
-                checkEmptyEditText(regRiderInfo.findViewById(R.id.etRiderDriverLicense));
-                checkEmptyEditText(regRiderInfo.findViewById(R.id.etRiderDriverLicenseExpiry));
-                checkEmptyEditText(regRiderInfo.findViewById(R.id.etRiderCurrentAddress));
-                checkEmptyEditText(regRiderInfo.findViewById(R.id.etRiderVehicleNumber));
-                checkEmptyEditText(regRiderInfo.findViewById(R.id.etRiderManufactureYear));
-
+                checkEmptyEditText(regRiderStep1.findViewById(R.id.etNameRider));
                 if(hasError)
                 {
                     hasError = false;
                     return;
-
                 }
 
-                String riderName = getTextFromEditText(regRiderInfo.findViewById(R.id.etNameRider));
-                String riderEmail = getTextFromEditText(regRiderInfo.findViewById(R.id.etEmailRider));
-                String riderDateofBirth = getTextFromEditText(regRiderInfo.findViewById(R.id.etRiderDateofBirth));
-                String riderDriverLicenseNumber = getTextFromEditText(regRiderInfo.findViewById(R.id.etRiderDriverLicense));
-                String riderDriverLicenseExpiry = getTextFromEditText(regRiderInfo.findViewById(R.id.etRiderDriverLicenseExpiry));
-                String riderCurrentAddress = getTextFromEditText(regRiderInfo.findViewById(R.id.etRiderCurrentAddress));
-                String riderVehiclePlateNumber = getTextFromEditText(regRiderInfo.findViewById(R.id.etRiderVehicleNumber));
-                String riderVehicleManufacturerYear = getTextFromEditText(regRiderInfo.findViewById(R.id.etRiderManufactureYear));
-                String riderpass = ((EditText)findViewById(R.id.pwfield)).getText().toString();
-                String phonenum = ((EditText)findViewById(R.id.editTextPhoneNumDriver)).getText().toString();
+                else
+                {
+                    regRiderStep2.show();
+                    regRiderStep1.dismiss();
+                }
 
-                FirebaseUser userCurrent = mAuth.getCurrentUser();
-                UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder().setDisplayName(riderName).build();
+            }
+        });
 
-                userCurrent.updateProfile(profileUpdates);
+        nextstep2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                checkEmptyEditText(regRiderStep2.findViewById(R.id.etRiderDateofBirth));
+                checkEmptyEditText(regRiderStep2.findViewById(R.id.etRiderDriverLicense));
+                checkEmptyEditText(regRiderStep2.findViewById(R.id.etRiderDriverLicenseExpiry));
+                checkEmptyEditText(regRiderStep2.findViewById(R.id.etRiderCurrentAddress));
+                if(hasError)
+                {
+                    hasError = false;
+                    return;
+                }
 
-                rootie = db.getReference();
-
-                HashMap riderInfo = new HashMap<>();
-
-                riderInfo.put("city",spinCity.getSelectedItem().toString());
-                riderInfo.put("vehicletype",spinVehicle.getSelectedItem().toString());
-                riderInfo.put("riderphone",phonenum);
-                riderInfo.put("name",riderName);
-                riderInfo.put("email",riderEmail);
-                riderInfo.put("riderpass",riderpass);
-                riderInfo.put("dateofbirth",riderDateofBirth);
-                riderInfo.put("driverlicensenumber",riderDriverLicenseNumber);
-                riderInfo.put("driverlicenseexpiry",riderDriverLicenseExpiry);
-                riderInfo.put("currentaddress",riderCurrentAddress);
-                riderInfo.put("vehicleplatenumber",riderVehiclePlateNumber);
-                riderInfo.put("manufactureryear",riderVehicleManufacturerYear);
-                riderInfo.put("vehiclebrandandmodel",vehiclebrandandmodel);
-
-
-                rootie.child("riders").child(phonenum).setValue(riderInfo).addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-
-                        successfullyRegistered.show();
-                        regRiderInfo.dismiss();
+                else
+                {
+                    regRiderStep3.show();
+                    regRiderStep2.dismiss();
+                }
 
                     }
                 });
+
+        nextstep3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                checkEmptyEditText(regRiderStep3.findViewById(R.id.etRiderVehicleNumber));
+                checkEmptyEditText(regRiderStep3.findViewById(R.id.etRiderManufactureYear));
+                if(hasError)
+                {
+                    hasError = false;
+                    return;
+                }
+                else
+                {
+                    regRiderStep4.show();
+                    regRiderStep3.dismiss();
+                }
+            }
+        });
+
+        nextstep4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                    regRiderStep5.show();
+                    regRiderStep4.dismiss();
+            }
+        });
+
+        register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String riderName  = getTextFromEditText(regRiderStep1.findViewById(R.id.etNameRider));
+                String riderEmail = getTextFromEditText(regRiderStep1.findViewById(R.id.etEmailRider));
+                String riderDateofBirth = getTextFromEditText(regRiderStep2.findViewById(R.id.etRiderDateofBirth));
+                String riderDriverLicenseNumber = getTextFromEditText(regRiderStep2.findViewById(R.id.etRiderDriverLicense));
+                String riderDriverLicenseExpiry = getTextFromEditText(regRiderStep2.findViewById(R.id.etRiderDriverLicenseExpiry));
+                String riderCurrentAddress = getTextFromEditText(regRiderStep2.findViewById(R.id.etRiderCurrentAddress));
+                String riderVehiclePlateNumber = getTextFromEditText(regRiderStep3.findViewById(R.id.etRiderVehicleNumber));
+                String riderVehicleManufacturerYear = getTextFromEditText(regRiderStep3.findViewById(R.id.etRiderManufactureYear));
+                String riderEMPerson = getTextFromEditText(regRiderStep5.findViewById(R.id.etEmergencyPerson));
+                String riderEMNumber = getTextFromEditText(regRiderStep5.findViewById(R.id.etEmergencyNumber));
+                String phonenum = getTextFromEditText(findViewById(R.id.editTextPhoneNumDriver));
+                String riderpass = getTextFromEditText(findViewById(R.id.pwfield));
+                checkEmptyEditText(regRiderStep5.findViewById(R.id.etEmergencyPerson));
+                checkEmptyEditText(regRiderStep5.findViewById(R.id.etEmergencyNumber));
+                if(hasError)
+                {
+                    hasError = false;
+                    return;
+                }
+                else
+                {
+                    FirebaseUser userCurrent = mAuth.getCurrentUser();
+                    UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder().setDisplayName(String.valueOf(riderName)).build();
+                    userCurrent.updateProfile(profileUpdates);
+                    rootie = db.getReference();
+
+                    HashMap riderInfo = new HashMap<>();
+                    riderInfo.put("city",spinCity.getSelectedItem().toString());
+                    riderInfo.put("vehicletype",spinVehicle.getSelectedItem().toString());
+                    riderInfo.put("riderphone",phonenum);
+                    riderInfo.put("name",riderName);
+                    riderInfo.put("email",riderEmail);
+                    riderInfo.put("riderpass",riderpass);
+                    riderInfo.put("dateofbirth",riderDateofBirth);
+                    riderInfo.put("driverlicensenumber",riderDriverLicenseNumber);
+                    riderInfo.put("driverlicenseexpiry",riderDriverLicenseExpiry);
+                    riderInfo.put("currentaddress",riderCurrentAddress);
+                    riderInfo.put("vehicleplatenumber",riderVehiclePlateNumber);
+                    riderInfo.put("manufactureryear",riderVehicleManufacturerYear);
+                    riderInfo.put("emergencyperson",riderEMPerson);
+                    riderInfo.put("emergencynumber",riderEMNumber);
+                    riderInfo.put("vehiclebrandandmodel",vehiclebrandandmodel);
+
+                    rootie.child("riders").child(phonenum).setValue(riderInfo).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+
+                            successfullyRegistered.show();
+                            regRiderStep5.dismiss();
+                        }
+                    });
+                }
 
             }
         });
 
 
-
     }
 
-    //test password validation
-    private boolean uservalidatePassword() {
-        String passwordInput = password.getText().toString().trim();
-
-        if(!PASSWORD_PATTERN.matcher(passwordInput).matches()) {
-            password.setError("Password too weak");
-            return false;
-        }else {
-            password.setError(null);
-            return true;
-        }
-    }
-    /*
-    //Password Validation
-    public void validatePW(View view){
-        String password = ((EditText)findViewById(R.id.pwfield)).getText().toString();
-        String pwConfirm = ((EditText)findViewById(R.id.pwConfirm)).getText().toString();
-        boolean uppercase = !password.equals(password.toLowerCase());
-        boolean lowercase = !password.equals(password.toUpperCase());
-        boolean min6  = password.length() > 5;
-        boolean good = false;
-        //check number of digits, uppercase, and lowercase char for password checking
-        //lowercase not used
-        int digits = 0;
-        int upper = 0;
-        int lower = 0;
-        for (int i = 0; i < password.length(); i++) {
-            char ch = password.charAt(i);
-            if (ch >= 48 && ch <= 57)
-                digits++;
-            else if(ch>='A' && ch<='Z'){
-                upper++;
-            }
-            else if(ch>='a' && ch<='z'){
-                lower++;
-            }
-        }
-        //check if password satisfies conditions
-        if(!uppercase && min6 && digits >= 1)
-        {
-            ((EditText)findViewById(R.id.pwfield)).setError("Must have an uppercase letter", null);
-            findViewById(R.id.pwfield).setBackgroundResource(R.drawable.error_border_edittext);
-
-        }
-        else if(!lowercase && min6 && digits >= 1)
-        {
-            ((EditText)findViewById(R.id.pwfield)).setError("Must have a lowercase letter", null);
-            findViewById(R.id.pwfield).setBackgroundResource(R.drawable.error_border_edittext);
-
-        }
-        else if(!lowercase && !uppercase && !min6 && digits >= 1)
-        {
-            ((EditText)findViewById(R.id.pwfield)).setError("Must have uppercase and lowercase letter", null);
-            findViewById(R.id.pwfield).setBackgroundResource(R.drawable.error_border_edittext);
-
-        }
-        else if (!min6 && lowercase && uppercase && digits >= 1)
-        {
-            ((EditText)findViewById(R.id.pwfield)).setError("Too short");
-            findViewById(R.id.pwfield).setBackgroundResource(R.drawable.error_border_edittext);
-
-        }
-        else if (!min6 && !lowercase && digits >= 1)
-        {
-            ((EditText)findViewById(R.id.pwfield)).setError("Too short and must have lowercase letter", null);
-            findViewById(R.id.pwfield).setBackgroundResource(R.drawable.error_border_edittext);
-
-        }
-        else if (!min6 && !uppercase && digits >= 1)
-        {
-            ((EditText)findViewById(R.id.pwfield)).setError("Too short and must have uppercase letter", null);
-            findViewById(R.id.pwfield).setBackgroundResource(R.drawable.error_border_edittext);
-
-        }
-        else if(!uppercase && min6 && digits == 0)
-        {
-            ((EditText)findViewById(R.id.pwfield)).setError("Must have an uppercase letter and number", null);
-            findViewById(R.id.pwfield).setBackgroundResource(R.drawable.error_border_edittext);
-
-        }
-        else if(!lowercase && min6 && digits == 0)
-        {
-            ((EditText)findViewById(R.id.pwfield)).setError("Must have a lowercase letter and number", null);
-            findViewById(R.id.pwfield).setBackgroundResource(R.drawable.error_border_edittext);
-
-        }
-        else if (!min6 && !lowercase && digits == 0)
-        {
-            ((EditText)findViewById(R.id.pwfield)).setError("Too short and must have lowercase letter and number", null);
-            findViewById(R.id.pwfield).setBackgroundResource(R.drawable.error_border_edittext);
-
-        }
-        else if (!min6 && !uppercase && digits == 0)
-        {
-            ((EditText)findViewById(R.id.pwfield)).setError("Too short and must have uppercase letter and number", null);
-            findViewById(R.id.pwfield).setBackgroundResource(R.drawable.error_border_edittext);
-
-        }
-        else if (digits == 0)
-        {
-            ((EditText)findViewById(R.id.pwfield)).setError("Must have number", null);
-            findViewById(R.id.pwfield).setBackgroundResource(R.drawable.error_border_edittext);
-
-
-        }
-        // add confirm password function
-        else if (min6 && uppercase && lowercase && digits >=1)
-        {
-            //temporary toast
-            if (password.equals(pwConfirm))
-            {
-                Toast.makeText(RegisterRider.this,"Password is good!",Toast.LENGTH_SHORT).show();
-                findViewById(R.id.pwfield).setBackgroundResource(R.drawable.graphics_edittext_1);
-                findViewById(R.id.pwConfirm).setBackgroundResource(R.drawable.graphics_edittext_1);
-                good = true;
-            }
-            else {
-                ((EditText)findViewById(R.id.pwConfirm)).setError("Passwords do not match", null);
-                findViewById(R.id.pwfield).setBackgroundResource(R.drawable.error_border_edittext);
-                findViewById(R.id.pwConfirm).setBackgroundResource(R.drawable.error_border_edittext);
-            }
-
-        }
-
-        else if (password.length() == 0)
-        {
-            Toast.makeText(RegisterRider.this,"Password cannot be empty",Toast.LENGTH_SHORT).show();
-        }
-
+/*
         String strength = "";
 
         //check for password strength
@@ -646,10 +635,9 @@ public class RegisterRider extends AppCompatActivity {
 
         else {
             ((TextView)findViewById(R.id.pwStrength)).setText("Password does not satisfy conditions");
-
         }
-    }*/
-
+    }
+*/
     private String getTodaysDate()
     {
         Calendar cal = Calendar.getInstance();
@@ -663,7 +651,7 @@ public class RegisterRider extends AppCompatActivity {
 
     private String getTextFromEditText(EditText et)
     {
-        EditText ett = (EditText) et;
+        EditText ett = et;
         return ett.getText().toString();
     }
 
@@ -716,7 +704,7 @@ public class RegisterRider extends AppCompatActivity {
 
     public void checkEmptyEditText(EditText et)
     {
-        EditText ett = (EditText) et;
+        EditText ett = et;
         String etstring = ett.getText().toString();
         if(TextUtils.isEmpty(etstring))
         {
@@ -778,11 +766,8 @@ public class RegisterRider extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful())
                 {
+                    regRiderStep1.show();
 
-                    regRiderInfo.show();
-                    /*Intent intent = new Intent(RegisterRider.this, MainActivityRider.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    startActivity(intent);*/
                 }
                 else
                 {
@@ -790,8 +775,6 @@ public class RegisterRider extends AppCompatActivity {
                 }
             }
         });
-
-
 
     }
 

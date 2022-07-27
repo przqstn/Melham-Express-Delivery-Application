@@ -18,7 +18,7 @@
         <item>Van 600Kg</item>
     </string-array>
 
-    <string-array  name="ridervehiclebrandmotorcycle">
+    <string-array name="ridervehiclebrandmotorcycle">
         <item>Brand</item>
         <item>Yamaha</item>
         <item>Honda</item>
