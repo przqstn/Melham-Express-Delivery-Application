@@ -58,7 +58,7 @@ public class signUpFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_sign_up, container, false);
 
-        // initialization of text
+        // Initialization of text
         txt_hashpassword =view.findViewById(R.id.Hashpassword);
         editTxt_fullname = view.findViewById(R.id.edTextUserName);
         editTxt_phoneNum = view.findViewById(R.id.edTextPhoneNo);
@@ -103,14 +103,14 @@ public class signUpFragment extends Fragment {
                 else{
                     root = FirebaseDatabase.getInstance();
                     DbRef = root.getReference("users");
-                    //Getting the value of The given info in sign up to store in firebase
+                    // Getting the value of The given info in sign up to store in firebase
                     String fullname = editTxt_fullname.getEditableText().toString();
                     String phoneNum = editTxt_phoneNum.getEditableText().toString();
                     String pass = editTxt_password.getEditableText().toString();
                     String Cpass = editTxt_Cpassword.getEditableText().toString();
                     String passwordhash = txt_hashpassword.getText().toString();
 
-                    // to check if the user already exists
+                    // To check if the user already exists
                     Query accCheck = DbRef.orderByChild("userPhone").equalTo(phoneNum);
                     accCheck.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
@@ -155,7 +155,7 @@ public class signUpFragment extends Fragment {
             return true;
         }
     }
-    //Clear the Sign up Section
+    // Clear the Sign up Section
     private void Clear(){
 
         editTxt_fullname.setText("");
@@ -164,7 +164,7 @@ public class signUpFragment extends Fragment {
         editTxt_Cpassword.setText("");
     }
 
-    //Password and Confirm Password Hashing
+    // Password and Confirm Password Hashing
     public void PasswordHash(String password){
 
         try{
