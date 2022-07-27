@@ -140,7 +140,7 @@ public class signUpFragment extends Fragment {
 
         return view;
     }
-    // user password validation
+    // User password validation
     private boolean uservalidatePassword() {
         String passwordInput = textInputPassword.getEditText().getText().toString().trim();
 
