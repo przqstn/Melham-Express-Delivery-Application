@@ -22,7 +22,7 @@ public class rider_dashboard extends AppCompatActivity {
 	pickup_fragment pickupFragment = new pickup_fragment();
 	profile_fragment profile_fragment = new profile_fragment();
 	record_fragment record_fragment = new record_fragment();
-	wallet_fragment wallet_fragment = new wallet_fragment();
+
 
 
 	@Override
@@ -43,9 +43,6 @@ public class rider_dashboard extends AppCompatActivity {
 						return true;
 					case R.id.iconrecord:
 						getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,record_fragment).commit();
-						return true;
-					case R.id.iconwallet:
-						getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,wallet_fragment).commit();
 						return true;
 					case R.id.iconprofile:
 						getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,profile_fragment).commit();
