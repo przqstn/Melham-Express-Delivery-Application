@@ -42,9 +42,7 @@ public class user_paymentmethod extends AppCompatActivity {
 		String receivercontact =sharedPref.getString("key 5","");
 		String receivername =sharedPref.getString("key 6","");
 
-		notes = findViewById(R.id.editTextNotes);
 
-		String comment = notes.getText().toString();
 
 		editTextPayment.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -62,14 +60,13 @@ public class user_paymentmethod extends AppCompatActivity {
 				bottomSheetView.findViewById(R.id.btnPlaceOrder).setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View view) {
-
+						notes = findViewById(R.id.editTextNotes);
+						String comment = notes.getText().toString();
 						HashMap<String, String> usermap = new HashMap<>();
-						//usermap.put("Comment or Notes", comment);
-
+						usermap.put("customernotes", comment);
 						usermap.put("senderlocation", senderloc);
 						usermap.put("sendercontact", sendercontact);
 						usermap.put("sendername", sendername);
-
 						usermap.put("receiverlocation", receiverloc);
 						usermap.put("receivercontact", receivercontact);
 						usermap.put("receivername", receivername);

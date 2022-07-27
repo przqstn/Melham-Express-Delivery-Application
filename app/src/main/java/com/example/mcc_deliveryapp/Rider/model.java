@@ -2,19 +2,27 @@ package com.example.mcc_deliveryapp.Rider;
 
 public class model {
 
-	String receivercontact,receiverlocation,receivername,sendercontact,senderlocation,sendername;
+	String receivercontact,receiverlocation,receivername,sendercontact,senderlocation,sendername, customernotes;
 
 	public model() {
 	}
 
-	public model(String receivercontact, String receiverlocation, String receivername, String sendercontact, String senderlocation, String sendername) {
+
+
+	public model(String receivercontact, String receiverlocation, String receivername, String sendercontact, String senderlocation, String sendername, String customernotes) {
 		this.receivercontact = receivercontact;
 		this.receiverlocation = receiverlocation;
 		this.receivername = receivername;
 		this.sendercontact = sendercontact;
 		this.senderlocation = senderlocation;
 		this.sendername = sendername;
+		this.customernotes = customernotes;
 	}
+
+	public String getCustomerNotes() {
+		return customernotes;
+	}
+
 
 	public String getReceivercontact() {
 		return receivercontact;
@@ -40,6 +48,9 @@ public class model {
 		return sendername;
 	}
 
+	public void setCustomerNotes(String customernotes) {
+		this.customernotes = customernotes;
+	}
 	public void setReceivercontact(String receivercontact) {
 		this.receivercontact = receivercontact;
 	}
