@@ -25,7 +25,8 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/montserrat_medium"
                 android:paddingLeft="15dp"
-                android:paddingTop="40dp"
+                android:paddingTop="20dp"
+                android:paddingBottom="10dp"
                 android:text="Phone Number"
                 android:textColor="@color/black"
                 android:textSize="16sp"
@@ -59,7 +60,8 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/montserrat_medium"
                 android:paddingLeft="15dp"
-                android:paddingTop="40dp"
+                android:paddingTop="20dp"
+                android:paddingBottom="10dp"
                 android:text="Password"
                 android:textColor="@color/black"
                 android:textSize="16sp"
@@ -93,7 +95,7 @@
             <Button
                 android:id="@+id/btn_login"
                 android:layout_width="320dp"
-                android:layout_height="52dp"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="30dp"
                 android:background="@drawable/graphics_button_1"
@@ -101,8 +103,7 @@
                 android:fontFamily="@font/montserrat_medium"
                 android:text="Sign In"
                 android:textAllCaps="false"
-                android:textColor="@color/white"
-                android:textStyle="bold" />
+                android:textColor="@color/white" />
 
         </LinearLayout>
 

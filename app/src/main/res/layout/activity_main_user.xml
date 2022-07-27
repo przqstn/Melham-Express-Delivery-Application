@@ -38,11 +38,10 @@
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/textView2"
-        android:layout_width="374dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center|center_vertical"
         android:fontFamily="@font/montserrat_medium"
-        android:gravity="center"
         android:paddingTop="5dp"
         android:paddingBottom="10dp"
         android:text="Get great experience with Melham Express"

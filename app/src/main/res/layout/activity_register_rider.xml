@@ -3,14 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -19,10 +21,11 @@
                 <ImageView
                     android:id="@+id/imageView"
                     android:layout_width="match_parent"
-                    android:layout_height="345dp"
+                    android:layout_height="285dp"
                     android:layout_gravity="left"
                     android:background="#D3DCFA "
-                    app:srcCompat="@drawable/topimageriderlogin_2" />
+                    android:scaleType="fitEnd"
+                    app:srcCompat="@drawable/topimage" />
 
                 <TextView
                     android:id="@+id/txtRegDriveTitle"
@@ -43,7 +46,7 @@
                     android:layout_height="60dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="13dp"
-                    android:background="@drawable/graphics_edittext_1"
+                    android:background="@drawable/edit_text_round"
                     android:drawableStart="@drawable/ic_baseline_phone_in_talk_24"
                     android:drawableLeft="@drawable/ic_baseline_phone_in_talk_24"
                     android:drawablePadding="16dp"
@@ -55,9 +58,9 @@
                     android:textSize="16sp" />
 
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/edTextPassL"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/edTextPassL"
                     app:passwordToggleEnabled="true">
 
                     <EditText
@@ -65,7 +68,7 @@
                         android:layout_width="350dp"
                         android:layout_height="60dp"
                         android:layout_gravity="center"
-                        android:background="@drawable/graphics_edittext_1"
+                        android:background="@drawable/edit_text_round"
                         android:drawableStart="@drawable/ic_baseline_lock_24"
                         android:drawableLeft="@drawable/ic_baseline_lock_24"
                         android:drawablePadding="15dp"
@@ -97,7 +100,7 @@
                         android:layout_width="350dp"
                         android:layout_height="60dp"
                         android:layout_gravity="center"
-                        android:background="@drawable/graphics_edittext_1"
+                        android:background="@drawable/edit_text_round"
                         android:drawableStart="@drawable/ic_baseline_lock_24"
                         android:drawableLeft="@drawable/ic_baseline_lock_24"
                         android:drawablePadding="15dp"
@@ -117,7 +120,7 @@
                     android:layout_height="60dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="24dp"
-                    android:background="@drawable/graphics_edittext_1"
+                    android:background="@drawable/edit_text_round"
                     android:contentDescription="City"
                     android:spinnerMode="dropdown" />
 
@@ -127,7 +130,7 @@
                     android:layout_height="60dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="20dp"
-                    android:background="@drawable/graphics_edittext_1"
+                    android:background="@drawable/edit_text_round"
                     android:contentDescription="Vehicle"
                     android:spinnerMode="dropdown" />
 
@@ -151,9 +154,9 @@
                     android:drawableLeft="@drawable/ic_baseline_directions_car_24"
                     android:drawablePadding="15dp"
                     android:ems="10"
-                    android:textColor="@color/black"
                     android:hint="Specify Brand"
                     android:paddingLeft="15dp"
+                    android:textColor="@color/black"
                     android:visibility="gone" />
 
                 <EditText
@@ -184,7 +187,7 @@
                 <Button
                     android:id="@+id/btnRegRider"
                     android:layout_width="350dp"
-                    android:layout_height="60dp"
+                    android:layout_height="46dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="30dp"
                     android:layout_marginBottom="30dp"
@@ -193,7 +196,6 @@
                     android:text="Get Started"
                     android:textAllCaps="false"
                     android:textColor="@color/white"
-                    android:textSize="20sp"
                     android:textStyle="bold" />
 
             </LinearLayout>

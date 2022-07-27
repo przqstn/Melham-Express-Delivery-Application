@@ -32,7 +32,7 @@
             android:gravity="center"
             android:padding="15dp"
             android:shadowColor="@color/black"
-            android:text="Awaiting Driver"
+            android:text="Awaiting Courier"
             android:textColor="@color/black"
             android:textSize="18sp"
             android:textStyle="bold"
@@ -57,7 +57,8 @@
             app:layout_constraintHorizontal_bias="0.957"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.005" />
+            app:layout_constraintVertical_bias="0.005"
+            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
         <TextView
             android:id="@+id/textView3"
@@ -72,7 +73,7 @@
             android:paddingLeft="15dp"
             android:paddingRight="10dp"
             android:shadowColor="@color/black"
-            android:text="Driver status here"
+            android:text="Courier status here"
             android:textColor="@color/secondary_text"
             android:textSize="18dp"
             app:backgroundTint="@color/white"
@@ -92,7 +93,8 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.908" />
+            app:layout_constraintVertical_bias="0.908"
+            tools:ignore="SpeakableTextPresentCheck" />
 
         <ImageView
             android:id="@+id/profile"
