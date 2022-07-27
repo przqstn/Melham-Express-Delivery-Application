@@ -214,7 +214,7 @@ public class RegisterRider extends AppCompatActivity {
         Dialog VerifyNum = new Dialog(RegisterRider.this);
         VerifyNum.setContentView(R.layout.fragment_rider_phonenum_verify);
         VerifyNum.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
-        VerifyNum.setCancelable(false);
+        VerifyNum.setCancelable(true);
         VerifyNum.getWindow().getAttributes().windowAnimations = R.style.animation;
 
 
@@ -384,7 +384,7 @@ public class RegisterRider extends AppCompatActivity {
         Dialog successfullyRegistered = new Dialog(RegisterRider.this);
         successfullyRegistered.setContentView(R.layout.success_dialog);
         successfullyRegistered.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
-        successfullyRegistered.setCancelable(false);
+        successfullyRegistered.setCancelable(true);
         successfullyRegistered.getWindow().getAttributes().windowAnimations = R.style.animation;
 
         Button btnSuccessOkay = successfullyRegistered.findViewById(R.id.btnSuccessRegRider);
