@@ -34,8 +34,7 @@
                     android:paddingTop="25dp"
                     android:text="Create Your Account"
                     android:textColor="@color/black"
-                    android:textSize="25dp"
-                    android:textStyle="bold" />
+                    android:textSize="25dp" />
 
                 <TextView
                     android:id="@+id/txtRiderBasicInfo"
@@ -43,18 +42,17 @@
                     android:layout_height="50dp"
                     android:layout_marginBottom="25dp"
 
-                    android:fontFamily="@font/montserrat_medium"
+                    android:fontFamily="@font/montserrat_semibold"
                     android:paddingTop="25dp"
                     android:text="Basic Information"
                     android:textColor="@color/black"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
+                    android:textSize="20sp" />
 
                 <EditText
                     android:id="@+id/etNameRider"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:layout_marginBottom="30dp"
+                    android:layout_marginBottom="25dp"
                     android:background="@drawable/edit_text_round"
                     android:fontFamily="@font/montserrat_regular"
                     android:hint="Name (as shown in ID)"
@@ -65,7 +63,7 @@
                     android:id="@+id/etEmailRider"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:layout_marginBottom="30dp"
+                    android:layout_marginBottom="25dp"
                     android:background="@drawable/edit_text_round"
                     android:fontFamily="@font/montserrat_regular"
 
@@ -83,9 +81,9 @@
                     <Button
                         android:id="@+id/nextstep1"
                         android:layout_width="match_parent"
-                        android:layout_height="55dp"
-                        android:layout_marginTop="15dp"
-                        android:layout_marginBottom="20dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="0dp"
+                        android:layout_marginBottom="0dp"
                         android:background="@drawable/graphics_button_1"
                         android:fontFamily="@font/montserrat_medium"
                         android:gravity="center"
