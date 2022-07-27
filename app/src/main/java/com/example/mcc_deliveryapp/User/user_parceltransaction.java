@@ -50,6 +50,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+///////////////////
+import androidx.core.content.ContextCompat;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.tasks.Task;
+import android.location.Location;
+import com.google.android.gms.tasks.OnCompleteListener;
+import android.util.Log;
+import com.google.android.gms.location.LocationServices;
+
 //import androidx.core.app.ActivityCompat;
 
 public class user_parceltransaction extends FragmentActivity implements OnMapReadyCallback ,DirectionFinderListener{
@@ -74,7 +83,66 @@ public class user_parceltransaction extends FragmentActivity implements OnMapRea
 	EditText receivercontact;
 	EditText receivername;
 
+	///////////
+	private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
+	private boolean locationPermissionGranted;
+	private static final String TAG = user_parceltransaction.class.getSimpleName();
+	private FusedLocationProviderClient fusedLocationProviderClient;
+	private Location lastKnownLocation;
+	private static final int DEFAULT_ZOOM = 15;
+	private final LatLng defaultLocation = new LatLng(-33.8523341, 151.2106085);
 
+
+	private void getDeviceLocation() {
+		/*
+		 * Get the best and most recent location of the device, which may be null in rare
+		 * cases when a location is not available.
+		 */
+		try {
+			if (locationPermissionGranted) {
+				Task<Location> locationResult = fusedLocationProviderClient.getLastLocation();
+				locationResult.addOnCompleteListener(this, new OnCompleteListener<Location>() {
+					@Override
+					public void onComplete(@NonNull Task<Location> task) {
+						if (task.isSuccessful()) {
+							// Set the map's camera position to the current location of the device.
+							lastKnownLocation = task.getResult();
+							if (lastKnownLocation != null) {
+								mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
+										new LatLng(lastKnownLocation.getLatitude(),
+												lastKnownLocation.getLongitude()), DEFAULT_ZOOM));
+							}
+						} else {
+							Log.d(TAG, "Current location is null. Using defaults.");
+							Log.e(TAG, "Exception: %s", task.getException());
+							mMap.moveCamera(CameraUpdateFactory
+									.newLatLngZoom(defaultLocation, DEFAULT_ZOOM));
+							mMap.getUiSettings().setMyLocationButtonEnabled(false);
+						}
+					}
+				});
+			}
+		} catch (SecurityException e)  {
+			Log.e("Exception: %s", e.getMessage(), e);
+		}
+	}
+
+	private void getLocationPermission() {
+		/*
+		 * Request location permission, so that we can get the location of the
+		 * device. The result of the permission request is handled by a callback,
+		 * onRequestPermissionsResult.
+		 */
+		if (ContextCompat.checkSelfPermission(this.getApplicationContext(),
+				android.Manifest.permission.ACCESS_FINE_LOCATION)
+				== PackageManager.PERMISSION_GRANTED) {
+			locationPermissionGranted = true;
+		} else {
+			ActivityCompat.requestPermissions(this,
+					new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
+					PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
+		}
+	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +150,9 @@ public class user_parceltransaction extends FragmentActivity implements OnMapRea
 		setContentView(R.layout.activity_user_parceltransaction);
 
 		Places.initialize(this,apiKey);
+
+		// Construct a FusedLocationProviderClient.
+		fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
 		SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
 		.findFragmentById(R.id.map);
@@ -314,6 +385,7 @@ public class user_parceltransaction extends FragmentActivity implements OnMapRea
 			layoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP, 0);
 			layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
 			layoutParams.setMargins(0, 0, 30, 400);
+
 		}
 
 		mMap.getUiSettings().setZoomControlsEnabled(true);
@@ -345,8 +417,12 @@ public class user_parceltransaction extends FragmentActivity implements OnMapRea
 		}
 		mMap.setMyLocationEnabled(true);
 
+		/////////////////////////////////////////////////////////////////
+		getLocationPermission();
+		getDeviceLocation();
 
 	}
+
 	@Override
 	public void onDirectionFinderStart() {
 		progressDialog = ProgressDialog.show(this, "Please wait.",
