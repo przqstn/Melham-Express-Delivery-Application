@@ -126,15 +126,16 @@
                 android:text="Receiver Contact: "
                 android:textColor="@color/black"
                 android:textStyle="bold" />
+
             <TextView
                 android:id="@+id/txt_receiver_contact"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/txt_receiver_name"
+                android:layout_toRightOf="@id/txtreceivercontactID"
                 android:fontFamily="@font/montserrat_regular"
                 android:text="Receiver Contact"
-                android:textColor="@color/black"
-                android:layout_below="@id/txt_receiver_name"
-                android:layout_toRightOf="@id/txtreceivercontactID"/>
+                android:textColor="@color/black" />
         </RelativeLayout>
         <LinearLayout
             android:layout_marginBottom="5dp"

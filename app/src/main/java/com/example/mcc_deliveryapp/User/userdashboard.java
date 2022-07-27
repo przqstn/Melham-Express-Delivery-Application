@@ -50,7 +50,7 @@ public class userdashboard extends AppCompatActivity implements OnMapReadyCallba
 
 	int PLACE_PICKER_REQUEST = 1;
 
-	String apiKey = "AIzaSyADbrHx5UL02dbtkEkDMlrBvkv-pk3JfHU";
+	String apiKey = "AIzaSyDFYoFiFN4xRMjixR8LQ5ve3nnDiJioj_Y";
 
 	Polyline currentPolyLine;
 
