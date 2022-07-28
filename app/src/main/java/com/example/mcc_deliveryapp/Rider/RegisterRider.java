@@ -5,7 +5,6 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -16,7 +15,6 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,8 +34,6 @@ import com.google.firebase.auth.PhoneAuthProvider;
 import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 
 import java.util.Calendar;
 import java.util.HashMap;
@@ -135,21 +131,35 @@ public class RegisterRider extends AppCompatActivity {
 
                 if(i == 1)
                 {
-                    ArrayAdapter<CharSequence> adapterBrand = ArrayAdapter.createFromResource(getApplicationContext(), R.array.ridervehiclebrandmotorcycle,R.layout.spinner_items_1);
+                    ArrayAdapter<CharSequence> adapterBrand = ArrayAdapter.createFromResource(getApplicationContext(), R.array.ridervehiclebrandMC,R.layout.spinner_items_1);
                     adapterBrand.setDropDownViewResource(R.layout.spinner_items_1);
                     spinBrand.setAdapter(adapterBrand);
                     spinBrand.setVisibility(View.VISIBLE);
                 }
                 else if(i == 2)
                 {
-                    ArrayAdapter<CharSequence> adapterBrand = ArrayAdapter.createFromResource(getApplicationContext(), R.array.ridervehiclebrandsuvcycle,R.layout.spinner_items_1);
+                    ArrayAdapter<CharSequence> adapterBrand = ArrayAdapter.createFromResource(getApplicationContext(), R.array.ridervehiclebrandSedan,R.layout.spinner_items_1);
                     adapterBrand.setDropDownViewResource(R.layout.spinner_items_1);
                     spinBrand.setAdapter(adapterBrand);
                     spinBrand.setVisibility(View.VISIBLE);
                 }
                 else if(i == 3)
                 {
-                    ArrayAdapter<CharSequence> adapterBrand = ArrayAdapter.createFromResource(getApplicationContext(), R.array.ridervehiclebrandvancycle,R.layout.spinner_items_1);
+                    ArrayAdapter<CharSequence> adapterBrand = ArrayAdapter.createFromResource(getApplicationContext(), R.array.ridervehiclebrandSUV,R.layout.spinner_items_1);
+                    adapterBrand.setDropDownViewResource(R.layout.spinner_items_1);
+                    spinBrand.setAdapter(adapterBrand);
+                    spinBrand.setVisibility(View.VISIBLE);
+                }
+                else if(i == 4)
+                {
+                    ArrayAdapter<CharSequence> adapterBrand = ArrayAdapter.createFromResource(getApplicationContext(), R.array.ridervehiclebrandMPV,R.layout.spinner_items_1);
+                    adapterBrand.setDropDownViewResource(R.layout.spinner_items_1);
+                    spinBrand.setAdapter(adapterBrand);
+                    spinBrand.setVisibility(View.VISIBLE);
+                }
+                else if(i == 5)
+                {
+                    ArrayAdapter<CharSequence> adapterBrand = ArrayAdapter.createFromResource(getApplicationContext(), R.array.ridervehiclebrandSmallTruck,R.layout.spinner_items_1);
                     adapterBrand.setDropDownViewResource(R.layout.spinner_items_1);
                     spinBrand.setAdapter(adapterBrand);
                     spinBrand.setVisibility(View.VISIBLE);
@@ -522,7 +532,6 @@ public class RegisterRider extends AppCompatActivity {
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
 
                 String riderName  = getTextFromEditText(regRiderStep1.findViewById(R.id.etNameRider));
                 String riderEmail = getTextFromEditText(regRiderStep1.findViewById(R.id.etEmailRider));
