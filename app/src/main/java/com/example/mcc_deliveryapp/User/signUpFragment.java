@@ -28,18 +28,6 @@ import java.security.NoSuchAlgorithmException;
 import java.util.regex.Pattern;
 
 public class signUpFragment extends Fragment {
-    //password pattern
-    private static final Pattern PASSWORD_PATTERN =
-            Pattern.compile("^" +
-                    "(?=.*[0-9])" +         //at least 1 digit
-                    "(?=.*[a-z])" +         //at least 1 lower case letter
-                    "(?=.*[A-Z])" +         //at least 1 upper case letter
-                    //"(?=.*[a-zA-Z])" +      //any letter
-                    "(?=.*[@#$%^&+=!_.])" +    //at least 1 special character
-                    "(?=\\S+$)" +           //no white spaces
-                    ".{4,}" +               //at least 4 characters
-                    "$");
-
     //setting the value of the given edit_text
     EditText editTxt_fullname,editTxt_phoneNum,editTxt_password,editTxt_Cpassword;
     Button btn_createAcc;
@@ -50,7 +38,6 @@ public class signUpFragment extends Fragment {
     FirebaseDatabase root;
     DatabaseReference DbRef;
     FirebaseAuth fAuth;
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -74,33 +61,81 @@ public class signUpFragment extends Fragment {
 //                PasswordHash(editTxt_password.toString());
 //                PasswordHash(editTxt_Cpassword.toString());
                 // Verification for blank space in the user registration form
+
+                boolean clear = true;
+
                 if(TextUtils.isEmpty(editTxt_fullname.getText().toString()))
                 {
                     editTxt_fullname.setError("Required");
+                    clear = false;
                     return;
                 }
                 else if(TextUtils.isEmpty(editTxt_phoneNum.getText().toString()))
                 {
                     editTxt_phoneNum.setError("Required");
+                    clear = false;
                     return;
                 }
                 else if(TextUtils.isEmpty(editTxt_password.getText().toString()))
                 {
                     editTxt_password.setError("Required");
+                    clear = false;
                     return;
                 }
                 else if(TextUtils.isEmpty(editTxt_Cpassword.getText().toString()))
                 {
                     editTxt_Cpassword.setError("Required");
-                    return;
-                }
-                else if(!editTxt_Cpassword.getText().toString().equals(editTxt_password.getText().toString()))
-                {
-                    editTxt_Cpassword.setError("Password Not Match");
+                    clear = false;
                     return;
                 }
 
-                else{
+                else
+                {
+                    clear = true;
+                }
+                String password = editTxt_password.getText().toString();
+                String pwConfirm = editTxt_Cpassword.getText().toString();
+                boolean uppercase = !password.equals(password.toLowerCase());
+                boolean lowercase = !password.equals(password.toUpperCase());
+                boolean min6  = password.length() > 5;
+                boolean PWgood = false;
+
+                int digits = 0;
+                int upper = 0;
+
+                for (int i = 0; i < password.length(); i++) {
+                    char ch = password.charAt(i);
+                    if (ch >= 48 && ch <= 57)
+                        digits++;
+                    else if(ch>='A' && ch<='Z'){
+                        upper++;
+                    }
+                }
+                //check if password satisfies conditions
+                if(!uppercase || !lowercase || !min6 || digits == 0)
+                {
+                    editTxt_password.setError("Password most have at least 6 characters, one uppercase, lowercase, and number.");
+
+                }
+
+                // add confirm password function
+                else if (min6 && uppercase && lowercase && digits >=1)
+                {
+
+                    if (password.equals(pwConfirm))
+                    {
+
+                        PWgood = true;
+                    }
+                    else {
+                        editTxt_Cpassword.setError("Passwords do not match");
+
+                    }
+
+                }
+
+
+                if(PWgood && clear){
                     root = FirebaseDatabase.getInstance();
                     DbRef = root.getReference("users");
                     // Getting the value of The given info in sign up to store in firebase
@@ -117,18 +152,17 @@ public class signUpFragment extends Fragment {
                         public void onDataChange(DataSnapshot snapshot) {
                             if (snapshot.exists()) {
                                 Toast.makeText(getContext(), "Account Already Exists. Please Sign In", Toast.LENGTH_SHORT).show();
-                            } else {
-                                if(uservalidatePassword()) {
+                            }
+                            else {
                                     //user helper class in order to store the the given info in sign up form
                                     UserHelperClass userHelperClass = new UserHelperClass(fullname, phoneNum, pass, Cpass);
                                     DbRef.child(phoneNum).setValue(userHelperClass);
                                     Toast.makeText(getContext(), "Account Successfully Created", Toast.LENGTH_SHORT).show();
                                     //Implementing the Clear Section in Sign up after the Creation of Account
                                     Clear();
-                                }
+
                             }
                         }
-
                         @Override
                         public void onCancelled(@NonNull DatabaseError error) {
 
@@ -140,21 +174,7 @@ public class signUpFragment extends Fragment {
 
         return view;
     }
-    // User password validation
-    private boolean uservalidatePassword() {
-        String passwordInput = textInputPassword.getEditText().getText().toString().trim();
 
-        if (passwordInput.isEmpty()) {
-            textInputPassword.setError("Field can't be empty");
-            return false;
-        } else if (!PASSWORD_PATTERN.matcher(passwordInput).matches()) {
-            textInputPassword.setError("Password too weak");
-            return false;
-        } else {
-            textInputPassword.setError(null);
-            return true;
-        }
-    }
     // Clear the Sign up Section
     private void Clear(){
 

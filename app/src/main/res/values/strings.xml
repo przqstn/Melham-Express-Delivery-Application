@@ -14,11 +14,13 @@
     <string-array name="ridervehicletype">
         <item>Vehicle Type</item>
         <item>Motorcycle</item>
+        <item>Sedan 200kg</item>
         <item>SUV 300Kg</item>
-        <item>Van 600Kg</item>
+        <item>MPV 600Kg</item>
+        <item>Small Truck 1000Kg</item>
     </string-array>
 
-    <string-array name="ridervehiclebrandmotorcycle">
+    <string-array name="ridervehiclebrandMC">
         <item>Brand</item>
         <item>Yamaha</item>
         <item>Honda</item>
@@ -26,7 +28,8 @@
         <item>Suzuki</item>
         <item>Others</item>
     </string-array>
-    <string-array name="ridervehiclebrandsuvcycle">
+
+    <string-array name="ridervehiclebrandSedan">
         <item>Brand</item>
         <item>Honda</item>
         <item>Toyota</item>
@@ -34,12 +37,31 @@
         <item>Nissan</item>
         <item>Others</item>
     </string-array>
-    <string-array name="ridervehiclebrandvancycle">
+
+    <string-array name="ridervehiclebrandSUV">
+        <item>Brand</item>
+        <item>Honda</item>
+        <item>Toyota</item>
+        <item>Mitsubishi</item>
+        <item>Nissan</item>
+        <item>Others</item>
+    </string-array>
+
+    <string-array name="ridervehiclebrandMPV">
         <item>Brand</item>
         <item>Toyota</item>
         <item>Mitsubishi</item>
         <item>Isuzu</item>
         <item>Volkswagen</item>
+        <item>Others</item>
+    </string-array>
+
+    <string-array name="ridervehiclebrandSmallTruck">
+        <item>Brand</item>
+        <item>Toyota</item>
+        <item>Mitsubishi</item>
+        <item>Isuzu</item>
+        <item>Foton</item>
         <item>Others</item>
     </string-array>
 
