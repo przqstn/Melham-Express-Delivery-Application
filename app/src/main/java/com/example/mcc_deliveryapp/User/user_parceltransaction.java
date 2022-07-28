@@ -90,7 +90,7 @@ public class user_parceltransaction extends FragmentActivity implements OnMapRea
 	private FusedLocationProviderClient fusedLocationProviderClient;
 	private Location lastKnownLocation;
 	private static final int DEFAULT_ZOOM = 15;
-	private final LatLng defaultLocation = new LatLng(-33.8523341, 151.2106085);
+	private final LatLng defaultLocation = new LatLng(14.594197, 120.970414);
 
 
 	private void getDeviceLocation() {
@@ -107,6 +107,7 @@ public class user_parceltransaction extends FragmentActivity implements OnMapRea
 						if (task.isSuccessful()) {
 							// Set the map's camera position to the current location of the device.
 							lastKnownLocation = task.getResult();
+
 							if (lastKnownLocation != null) {
 								mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
 										new LatLng(lastKnownLocation.getLatitude(),
@@ -178,6 +179,7 @@ public class user_parceltransaction extends FragmentActivity implements OnMapRea
 				Intent intent = new Autocomplete.IntentBuilder(AutocompleteActivityMode.FULLSCREEN, field)
 						.setCountry("PH")
 						.build(user_parceltransaction.this);
+
 				//start activity result
 				startActivityForResult(intent, 1);
 
@@ -477,6 +479,12 @@ public class user_parceltransaction extends FragmentActivity implements OnMapRea
 				polylineOptions.add(route.points.get(i));
 
 			polylinePaths.add(mMap.addPolyline(polylineOptions));
+
+			SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+			SharedPreferences.Editor editor = sharedPref.edit();
+			editor.putString("key 8",route.distance.text);
+			editor.apply();
+
 		}
 	}
 }
