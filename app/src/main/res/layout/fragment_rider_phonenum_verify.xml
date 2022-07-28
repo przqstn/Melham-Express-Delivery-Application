@@ -25,7 +25,7 @@
             app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.41" />
+            app:layout_constraintVertical_bias="0.336" />
 
         <EditText
             android:id="@+id/etVerify"
@@ -42,12 +42,13 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.495"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/textView3"
+            app:layout_constraintVertical_bias="0.039" />
 
         <Button
             android:id="@+id/btnVerify"
             android:layout_width="200dp"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
             android:background="@drawable/graphics_button_1"
             android:fontFamily="@font/montserrat_medium"
             android:text="Verify"
@@ -58,8 +59,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.597" />
+            app:layout_constraintTop_toBottomOf="@+id/etVerify"
+            app:layout_constraintVertical_bias="0.039" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>
