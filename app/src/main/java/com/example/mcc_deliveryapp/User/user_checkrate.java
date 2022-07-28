@@ -71,14 +71,16 @@ public class user_checkrate extends AppCompatActivity {
 						);
 				// Specify the layout you are using.
 //				setContentView(R.layout.motorcycle_dialog);
-//
-//				// Load and use views afterwards
-				TextView tv1 = bottomSheetView.findViewById(R.id.txtFeeMotorcycle);
-
-
 				String convertFloat =String.valueOf(calculateFare(distance, 0));
 
+//				// Load and use views afterwards
+				TextView tv1 = bottomSheetView.findViewById(R.id.txtFeeMotorcycle);
+				TextView tv2 = bottomSheetView.findViewById(R.id.txtPickUpAdd);
+				TextView tv3 = bottomSheetView.findViewById(R.id.txtDropOffAdd);
+
 				tv1.setText(convertFloat);
+				tv2.setText(senderloc);
+				tv3.setText(receiverloc);
 
 				bottomSheetView.findViewById(R.id.btnConfirm).setOnClickListener(new View.OnClickListener() {
 					@Override
@@ -110,13 +112,15 @@ public class user_checkrate extends AppCompatActivity {
 								(LinearLayout)findViewById(R.id.sedan_sheet_dialog)
 						);
 
-				// Load and use views afterwards
-				TextView tv1 = bottomSheetView.findViewById(R.id.textView15);
-
-
 				String convertFloat =String.valueOf(calculateFare(distance, 1));
 
+				TextView tv1 = bottomSheetView.findViewById(R.id.textView15);
+				TextView tv2 = bottomSheetView.findViewById(R.id.txtPickUpAdd);
+				TextView tv3 = bottomSheetView.findViewById(R.id.txtDropOffAdd);
+
 				tv1.setText(convertFloat);
+				tv2.setText(senderloc);
+				tv3.setText(receiverloc);
 
 				bottomSheetView.findViewById(R.id.btnConfirm).setOnClickListener(new View.OnClickListener() {
 					@Override
@@ -145,13 +149,15 @@ public class user_checkrate extends AppCompatActivity {
 								(LinearLayout)findViewById(R.id.truck_sheet_dialog)
 						);
 
-				// Load and use views afterwards
-				TextView tv1 = bottomSheetView.findViewById(R.id.txtChargeTruck);
-
-
 				String convertFloat =String.valueOf(calculateFare(distance, 2));
 
+				TextView tv1 = bottomSheetView.findViewById(R.id.txtChargeTruck);
+				TextView tv2 = bottomSheetView.findViewById(R.id.txtPickUpAdd);
+				TextView tv3 = bottomSheetView.findViewById(R.id.txtDropOffAdd);
+
 				tv1.setText(convertFloat);
+				tv2.setText(senderloc);
+				tv3.setText(receiverloc);
 
 				bottomSheetView.findViewById(R.id.btnConfirm).setOnClickListener(new View.OnClickListener() {
 					@Override
