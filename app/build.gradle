@@ -65,6 +65,7 @@ dependencies {
     implementation 'androidx.navigation:navigation-fragment:2.3.5'
     implementation 'androidx.navigation:navigation-ui:2.3.5'
     implementation 'com.google.firebase:firebase-appcheck:16.0.0'
+    implementation 'com.google.firebase:firebase-storage:20.0.1'
 
 
     testImplementation 'junit:junit:4.+'

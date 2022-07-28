@@ -5,6 +5,7 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -15,6 +16,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,6 +36,8 @@ import com.google.firebase.auth.PhoneAuthProvider;
 import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.Calendar;
 import java.util.HashMap;
@@ -419,7 +423,7 @@ public class RegisterRider extends AppCompatActivity {
         Button nextstep1 = regRiderStep1.findViewById(R.id.nextstep1);
         Button nextstep2 = regRiderStep2.findViewById(R.id.nextstep2);
         Button nextstep3 = regRiderStep3.findViewById(R.id.nextstep3);
-        Button nextstep4 =  regRiderStep4.findViewById(R.id.nextstep4);
+        Button nextstep4 = regRiderStep4.findViewById(R.id.nextstep4);
         Button register = regRiderStep5.findViewById(R.id.register);
 
         EditText etDatePicker =  regRiderStep2.findViewById(R.id.etRiderDateofBirth);
@@ -518,6 +522,8 @@ public class RegisterRider extends AppCompatActivity {
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+
                 String riderName  = getTextFromEditText(regRiderStep1.findViewById(R.id.etNameRider));
                 String riderEmail = getTextFromEditText(regRiderStep1.findViewById(R.id.etEmailRider));
                 String riderDateofBirth = getTextFromEditText(regRiderStep2.findViewById(R.id.etRiderDateofBirth));
@@ -532,6 +538,8 @@ public class RegisterRider extends AppCompatActivity {
                 String riderpass = getTextFromEditText(findViewById(R.id.pwfield));
                 checkEmptyEditText(regRiderStep5.findViewById(R.id.etEmergencyPerson));
                 checkEmptyEditText(regRiderStep5.findViewById(R.id.etEmergencyNumber));
+
+
                 if(hasError)
                 {
                     hasError = false;

@@ -76,6 +76,26 @@
                     android:layout_height="wrap_content"
                     android:text="Insert file uploading here" />
 
+                <ImageView
+                    android:id="@+id/profilepic"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:srcCompat="@tools:sample/avatars" />
+
+                <Button
+                    android:id="@+id/uploadpictest"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="@drawable/graphics_button_1"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:gravity="center"
+                    android:text="UPLOAD PIC"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="20sp" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -96,7 +116,9 @@
                         android:textAllCaps="false"
                         android:textColor="@color/white"
                         android:textSize="20sp" />
+
                 </LinearLayout>
+
             </LinearLayout>
         </ScrollView>
 
