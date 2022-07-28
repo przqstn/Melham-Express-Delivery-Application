@@ -424,7 +424,6 @@ public class RegisterRider extends AppCompatActivity {
 
         EditText etDatePicker =  regRiderStep2.findViewById(R.id.etRiderDateofBirth);
 
-        etDatePicker.setText(getTodaysDate());
 
         etDatePicker.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -638,16 +637,6 @@ public class RegisterRider extends AppCompatActivity {
         }
     }
 */
-    private String getTodaysDate()
-    {
-        Calendar cal = Calendar.getInstance();
-        int year = cal.get(Calendar.YEAR);
-        int month = cal.get(Calendar.MONTH);
-        int day = cal.get(Calendar.DAY_OF_MONTH);
-        month = month + 1;
-
-        return makeDateString(day,month,year);
-    }
 
     private String getTextFromEditText(EditText et)
     {

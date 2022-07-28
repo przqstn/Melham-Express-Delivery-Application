@@ -21,9 +21,10 @@
             <ImageView
                 android:id="@+id/imageView9"
                 android:layout_width="match_parent"
-                android:layout_height="345dp"
-                android:scaleType="centerCrop"
-                app:srcCompat="@drawable/topimageriderlogin_2" />
+                android:layout_height="285dp"
+                android:background="#D3DCFA "
+                android:scaleType="fitEnd"
+                app:srcCompat="@drawable/topimage" />
 
             <EditText
                 android:id="@+id/edtTextRiderNumber"
@@ -93,15 +94,14 @@
 
             <Button
                 android:id="@+id/btnLoginRider"
-                android:layout_width="330dp"
-                android:layout_height="60dp"
+                android:layout_width="329dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/graphics_button_1"
                 android:fontFamily="@font/montserrat_medium"
                 android:text="Log In"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
-                android:textSize="18dp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -113,7 +113,7 @@
             <Button
                 android:id="@+id/btnRegisterRider"
                 android:layout_width="330dp"
-                android:layout_height="60dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="40dp"
                 android:background="@drawable/graphics_button_1"
@@ -121,7 +121,6 @@
                 android:text="Register"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
-                android:textSize="18dp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

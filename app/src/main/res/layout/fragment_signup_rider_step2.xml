@@ -31,17 +31,17 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="25dp"
-                    android:fontFamily="@font/montserrat_medium"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:paddingTop="25dp"
                     android:text="Tell us about yourself"
                     android:textColor="@color/black"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
+                    android:textSize="20sp" />
 
                 <EditText
                     android:id="@+id/etRiderDateofBirth"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:layout_marginBottom="30dp"
+                    android:layout_marginBottom="25dp"
                     android:background="@drawable/edit_text_round"
                     android:clickable="true"
                     android:editable="false"
@@ -55,7 +55,7 @@
                     android:id="@+id/etRiderDriverLicense"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:layout_marginBottom="30dp"
+                    android:layout_marginBottom="25dp"
                     android:background="@drawable/edit_text_round"
                     android:fontFamily="@font/montserrat_regular"
 
@@ -67,7 +67,7 @@
                     android:id="@+id/etRiderDriverLicenseExpiry"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:layout_marginBottom="30dp"
+                    android:layout_marginBottom="25dp"
                     android:background="@drawable/edit_text_round"
                     android:fontFamily="@font/montserrat_regular"
 
@@ -79,7 +79,7 @@
                     android:id="@+id/etRiderCurrentAddress"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:layout_marginBottom="50dp"
+                    android:layout_marginBottom="25dp"
                     android:background="@drawable/edit_text_round"
                     android:fontFamily="@font/montserrat_regular"
 
@@ -96,10 +96,10 @@
 
                     <Button
                         android:id="@+id/nextstep2"
-                        android:layout_width="250dp"
-                        android:layout_height="55dp"
-                        android:layout_marginTop="15dp"
-                        android:layout_marginBottom="20dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="0dp"
+                        android:layout_marginBottom="0dp"
                         android:background="@drawable/graphics_button_1"
                         android:fontFamily="@font/montserrat_medium"
                         android:gravity="center"

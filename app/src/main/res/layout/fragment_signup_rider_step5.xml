@@ -30,18 +30,18 @@
                     android:id="@+id/textView"
                     android:layout_width="match_parent"
                     android:layout_height="55dp"
+                    android:layout_marginBottom="25dp"
                     android:fontFamily="@font/montserrat_semibold"
                     android:paddingTop="25dp"
                     android:text="Last thing to verify"
                     android:textColor="@color/black"
-                    android:textSize="25dp"
-                    android:textStyle="bold" />
+                    android:textSize="25dp" />
 
                 <EditText
                     android:id="@+id/etEmergencyPerson"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:layout_marginBottom="30dp"
+                    android:layout_marginBottom="25dp"
                     android:background="@drawable/edit_text_round"
                     android:fontFamily="@font/montserrat_regular"
                     android:hint="Emergency Contact Person"
@@ -52,7 +52,7 @@
                     android:id="@+id/etEmergencyNumber"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:layout_marginBottom="30dp"
+                    android:layout_marginBottom="25dp"
                     android:background="@drawable/edit_text_round"
                     android:fontFamily="@font/montserrat_regular"
 
@@ -68,8 +68,7 @@
                     android:fontFamily="@font/montserrat_medium"
                     android:text="Supporting Documents"
                     android:textColor="@color/black"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
+                    android:textSize="20sp" />
 
                 <TextView
                     android:id="@+id/textView24"
@@ -87,7 +86,7 @@
                     <Button
                         android:id="@+id/register"
                         android:layout_width="match_parent"
-                        android:layout_height="55dp"
+                        android:layout_height="wrap_content"
                         android:layout_marginTop="15dp"
                         android:layout_marginBottom="20dp"
                         android:background="@drawable/graphics_button_1"
