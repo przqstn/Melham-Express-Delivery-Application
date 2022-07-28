@@ -3,14 +3,14 @@ package com.example.mcc_deliveryapp.Rider;
 public class model {
 
 	String receivercontact,receiverlocation,receivername,sendercontact,senderlocation,
-			vehicletype, sendername, customernotes;
+			vehicletype, sendername, customernotes, fee;
 
 	public model() {
 	}
 
 	public model(String receivercontact, String receiverlocation, String receivername,
 				 String sendercontact, String senderlocation, String sendername,
-				 String vehicletype, String customernotes) {
+				 String vehicletype, String customernotes, String fee) {
 		this.receivercontact = receivercontact;
 		this.receiverlocation = receiverlocation;
 		this.receivername = receivername;
@@ -19,7 +19,10 @@ public class model {
 		this.sendername = sendername;
 		this.vehicletype = vehicletype;
 		this.customernotes = customernotes;
+		this.fee = fee;
 	}
+
+	public String getFee() {return fee;}
 
 	public String getVehicletype() {return vehicletype;}
 
@@ -50,6 +53,8 @@ public class model {
 	public String getSendername() {
 		return sendername;
 	}
+
+	public void setFee(String fee) {this.fee = fee;}
 
 	public void setVehicletype(String vehicletype) {this.vehicletype = vehicletype;}
 
