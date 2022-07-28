@@ -79,7 +79,6 @@ public class user_checkrate extends AppCompatActivity {
 				String convertFloat =String.valueOf(calculateFare(distance, 0));
 
 				tv1.setText(convertFloat);
-				System.out.println(convertFloat);
 
 				bottomSheetView.findViewById(R.id.btnConfirm).setOnClickListener(new View.OnClickListener() {
 					@Override
@@ -111,11 +110,19 @@ public class user_checkrate extends AppCompatActivity {
 								(LinearLayout)findViewById(R.id.sedan_sheet_dialog)
 						);
 
+				// Load and use views afterwards
+				TextView tv1 = bottomSheetView.findViewById(R.id.textView15);
+
+
+				String convertFloat =String.valueOf(calculateFare(distance, 1));
+
+				tv1.setText(convertFloat);
+
 				bottomSheetView.findViewById(R.id.btnConfirm).setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View view) {
 						pushData(sendernotes, senderloc, sendercontact, sendername, receiverloc,
-								receivercontact, receivername ,"Sedan", "",
+								receivercontact, receivername ,"Sedan", convertFloat,
 								parcelstatus, ridername, ridernum);
 						Intent intent = new Intent(user_checkrate.this,user_findingrider.class);
 						startActivity(intent);
@@ -137,11 +144,20 @@ public class user_checkrate extends AppCompatActivity {
 								R.layout.truck_dialog,
 								(LinearLayout)findViewById(R.id.truck_sheet_dialog)
 						);
+
+				// Load and use views afterwards
+				TextView tv1 = bottomSheetView.findViewById(R.id.txtChargeTruck);
+
+
+				String convertFloat =String.valueOf(calculateFare(distance, 2));
+
+				tv1.setText(convertFloat);
+
 				bottomSheetView.findViewById(R.id.btnConfirm).setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View view) {
 						pushData(sendernotes, senderloc, sendercontact, sendername, receiverloc,
-								receivercontact, receivername ,"Truck", "",
+								receivercontact, receivername ,"Small Truck", convertFloat,
 								parcelstatus, ridername, ridernum);
 						Intent intent = new Intent(user_checkrate.this,user_findingrider.class);
 						startActivity(intent);
@@ -193,10 +209,24 @@ public class user_checkrate extends AppCompatActivity {
 				finalFare = (greatFive * 5) + (5 * 6) + base;
 			}
 			else {
-				finalFare = 49 + (6 * removekm);
+				finalFare = base + (6 * removekm);
 			}
+		} else if (type == 1) {
+			float base = 100;
+			if (removekm > 5){
+				greatFive = removekm - 5;
+				finalFare = (greatFive * 15) + (5 * 18) + base;
+			}
+			else {
+				finalFare = base + (18 * removekm);
+			}
+		} else if (type == 2) {
+			float base = 340;
+			finalFare = base + (25 * removekm);
 		}
+
 		return finalFare;
+
 	}
 	public static String orderID(){
 		//generate random UUIDs
