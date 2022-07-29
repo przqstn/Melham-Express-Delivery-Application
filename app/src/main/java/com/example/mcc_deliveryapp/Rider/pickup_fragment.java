@@ -13,10 +13,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mcc_deliveryapp.R;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 public class pickup_fragment extends Fragment {
@@ -26,13 +28,7 @@ public class pickup_fragment extends Fragment {
 	String riderNum;
 	String riderName;
 	String riderVehicle;
-	String receiverLoc;
-	String receiverName;
-	String customerNotes;
-	String senderContact;
-	String senderLoc;
-	String senderName;
-	String vehicleType;
+	String orderID;
 
 
 	@Override
@@ -44,54 +40,102 @@ public class pickup_fragment extends Fragment {
 		recyclerView_pickup = view.findViewById(R.id.Recycleview_pickup);
 		recyclerView_pickup.setLayoutManager(new LinearLayoutManager(getContext()));
 
-		DatabaseReference ref = FirebaseDatabase.getInstance().getReference("riders");
-		//FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
 		Intent intent = getActivity().getIntent();
 		riderPhoneNum = intent.getStringExtra("phonenum");
-		ref.addValueEventListener(new ValueEventListener() {
-			@Override
-			public void onDataChange(@NonNull DataSnapshot snapshot) {
-				for (DataSnapshot ds: snapshot.getChildren()) {
-					if (ds.child("riderphone").getValue().equals(riderPhoneNum)){
-						riderName = ds.child("name").getValue(String.class);
-						riderVehicle = ds.child("vehicletype").getValue(String.class);
-					}
-				}
-			}
-			@Override
-			public void onCancelled(@NonNull DatabaseError error) {
+		System.out.println(riderPhoneNum);
 
-			}
-		});
-//		System.out.println(riderPhoneNum);
-//		System.out.println(riderName+riderVehicle);
+		final FirebaseDatabase database = FirebaseDatabase.getInstance();
+		final DatabaseReference dr = database.getReference().child("riders");
+		Query query = dr.orderByChild("riderphone").equalTo(riderPhoneNum);
+
+		query.addChildEventListener(
+				new ChildEventListener() {
+					@Override
+					public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+						DatabaseReference ddf = dr.child(dataSnapshot.getKey()).child("parcelstatus");
+						riderVehicle = dataSnapshot.child("vehicletype").getValue(String.class);
+						riderName = dataSnapshot.child("name").getValue(String.class);
+						System.out.println(riderVehicle + "start");
+					}
+
+					@Override
+					public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+					}
+
+					@Override
+					public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+					}
+
+					@Override
+					public void onCancelled(@NonNull DatabaseError error) {
+
+					}
+
+					@Override
+					public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+					}
+				});
+
+		System.out.println(riderName + "-" + riderVehicle);
 
 		FirebaseRecyclerOptions<model> options =
 				new FirebaseRecyclerOptions.Builder<model>()
 						.setQuery(FirebaseDatabase.getInstance().getReference()
-								.child("userparcel").orderByChild("vehicletype").equalTo(riderVehicle),model.class ).build();
+										.child("userparcel").orderByChild("parcelstatus").equalTo("Pending"+riderVehicle)
+//								.child("userparcel").orderByChild("parcelstatus").equalTo("Pending")
+								,model.class ).build();
 
 		myadapter = new myadapter(options);
 		myadapter.getRiderNum(riderPhoneNum);
+		myadapter.getRiderName(riderName);
 		recyclerView_pickup.setAdapter(myadapter);
 
 		return view;
 
 	}
-	public void getParcelInfo(String riderNum, String receiverLoc, String receiverName,
-							  String customerNotes, String senderContact, String senderLoc,
-							  String senderName, String vehicleType){
-		this.riderNum = riderNum;
-		this.receiverLoc = receiverLoc;
-		this.receiverName = receiverName;
-		this.customerNotes = customerNotes;
-		this.senderContact = senderContact;
-		this.senderLoc = senderLoc;
-		this.senderName = senderName;
-		this.vehicleType = vehicleType;
-		System.out.println(riderNum + receiverLoc + receiverName + customerNotes + senderContact
-				+ senderLoc + senderName + vehicleType);
+
+	public void getParcelInfo(String rnum, String orderID, String rname){
+		this.riderNum = rnum;
+		this.orderID = orderID;
+		this.riderName = rname;
+		System.out.println(rnum + "  " + orderID + " " + rname);
+
+		final FirebaseDatabase database = FirebaseDatabase.getInstance();
+		final DatabaseReference dr = database.getReference().child("userparcel");
+		Query query = dr.orderByChild("OrderID").equalTo(orderID);
+
+		query.addChildEventListener(
+				new ChildEventListener() {
+					@Override
+					public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+						dr.child(dataSnapshot.getKey()).child("parcelstatus").setValue("Ongoing"+riderNum);
+						dr.child(dataSnapshot.getKey()).child("ridernum").setValue(riderNum);
+						dr.child(dataSnapshot.getKey()).child("ridername").setValue(riderName);
+					}
+
+					@Override
+					public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+					}
+
+					@Override
+					public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+					}
+
+					@Override
+					public void onCancelled(@NonNull DatabaseError error) {
+
+					}
+
+//					@Override
+//					public void onCancelled(FirebaseError firebaseError) {
+//					}
+
+					@Override
+					public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+					}
+				});
 	}
 
 	@Override

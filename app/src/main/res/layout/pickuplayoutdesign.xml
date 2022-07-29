@@ -181,6 +181,12 @@
                 android:textColor="@color/black"
                 android:fontFamily="@font/montserrat_medium"
                 android:text="Price : Sample Price 180"/>
+
+            <TextView
+                android:id="@+id/id_order"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="TextView" />
         </LinearLayout>
         <LinearLayout
             android:id="@+id/takeorderlinearlayout"

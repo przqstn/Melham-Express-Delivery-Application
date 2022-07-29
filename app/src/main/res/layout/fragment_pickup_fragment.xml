@@ -5,9 +5,9 @@
     android:layout_height="match_parent"
     tools:context=".Rider.pickup_fragment">
 
-<androidx.recyclerview.widget.RecyclerView
-    android:id="@+id/Recycleview_pickup"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/Recycleview_pickup"
+        android:layout_width="match_parent"
+        android:layout_height="664dp" />
 
 </FrameLayout>
