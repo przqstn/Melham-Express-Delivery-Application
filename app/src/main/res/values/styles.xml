@@ -27,5 +27,9 @@
         <item name="android:textColor">@color/black</item>
     </style>
 
+    <style name="AppTheme." parent="Theme.MaterialComponents.Light.NoActionBar">
+        <color name="white">#FFFFFF</color>
+        <color name="app_color">#223272</color>
+    </style>
 
 </resources>
