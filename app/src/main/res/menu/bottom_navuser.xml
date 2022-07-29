@@ -2,22 +2,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/iconhome"
+        android:id="@+id/iconhomeuser"
         android:icon="@drawable/icon_home"
-        android:title="@string/home"/>
+        android:title="@string/home" />
 
     <item
-        android:id="@+id/iconpickup"
-        android:icon="@drawable/icon_inventory"
-        android:title="@string/pick_up"/>
-
-    <item
-        android:id="@+id/iconrecord"
+        android:id="@+id/iconrecorduser"
         android:icon="@drawable/icon_history"
         android:title="@string/record" />
 
     <item
-        android:id="@+id/iconprofile"
+        android:id="@+id/iconprofileuser"
         android:icon="@drawable/ic_round_perm_identity_24"
         android:title="@string/profile" />
 

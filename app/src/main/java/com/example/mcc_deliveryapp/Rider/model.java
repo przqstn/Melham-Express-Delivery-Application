@@ -3,14 +3,15 @@ package com.example.mcc_deliveryapp.Rider;
 public class model {
 
 	String receivercontact,receiverlocation,receivername,sendercontact,senderlocation,
-			vehicletype, sendername, customernotes, fee;
+			vehicletype, sendername, customernotes, fee, OrderID, parcelstatus, ridernum, ridername;
 
 	public model() {
 	}
 
 	public model(String receivercontact, String receiverlocation, String receivername,
 				 String sendercontact, String senderlocation, String sendername,
-				 String vehicletype, String customernotes, String fee) {
+				 String vehicletype, String customernotes, String fee, String OrderID,
+				 String parcelstatus, String ridernum, String ridername) {
 		this.receivercontact = receivercontact;
 		this.receiverlocation = receiverlocation;
 		this.receivername = receivername;
@@ -20,7 +21,19 @@ public class model {
 		this.vehicletype = vehicletype;
 		this.customernotes = customernotes;
 		this.fee = fee;
+		this.OrderID = OrderID;
+		this.parcelstatus = parcelstatus;
+		this.ridernum = ridernum;
+		this.ridername = ridername;
 	}
+
+	public String getRidername() {return ridername;}
+
+	public String getRidernum() {return ridernum;}
+
+	public String getParcelstatus() {return parcelstatus;}
+
+	public String getOrderID() {return OrderID;}
 
 	public String getFee() {return fee;}
 
@@ -34,9 +47,7 @@ public class model {
 		return receivercontact;
 	}
 
-	public String getReceiverlocation() {
-		return receiverlocation;
-	}
+	public String getReceiverlocation() {return receiverlocation;}
 
 	public String getReceivername() {
 		return receivername;
@@ -53,6 +64,14 @@ public class model {
 	public String getSendername() {
 		return sendername;
 	}
+
+	public void setRidername(String ridername) {this.ridername = ridername;}
+
+	public void setRidernum(String ridernum) {this.ridernum = ridernum;}
+
+	public void setParcelstatus(String parcelstatus) {this.parcelstatus = parcelstatus;}
+
+	public void setOrderID(String orderID) {OrderID = orderID;}
 
 	public void setFee(String fee) {this.fee = fee;}
 

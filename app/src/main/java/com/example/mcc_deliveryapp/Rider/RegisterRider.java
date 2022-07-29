@@ -3,8 +3,10 @@ package com.example.mcc_deliveryapp.Rider;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -15,16 +17,21 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.mcc_deliveryapp.R;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -34,9 +41,14 @@ import com.google.firebase.auth.PhoneAuthProvider;
 import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 public class RegisterRider extends AppCompatActivity {
@@ -63,9 +75,22 @@ public class RegisterRider extends AppCompatActivity {
     String vehiclebrandandmodel;
 
     EditText password, pwConfirm;
+
+    //commits
+    ImageView vehiclefront;
+    Uri imageUri;
+    FirebaseStorage storage;
+    StorageReference storageReference;
+    //
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //commits
+        storage = FirebaseStorage.getInstance();
+        storageReference = storage.getReference();
+
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -361,6 +386,7 @@ public class RegisterRider extends AppCompatActivity {
                     }
 
             }
+
         });
 
 
@@ -403,6 +429,7 @@ public class RegisterRider extends AppCompatActivity {
 
         Button btnSuccessOkay = successfullyRegistered.findViewById(R.id.btnSuccessRegRider);
 
+
         btnSuccessOkay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -430,11 +457,23 @@ public class RegisterRider extends AppCompatActivity {
             }
         });
 
+
         Button nextstep1 = regRiderStep1.findViewById(R.id.nextstep1);
         Button nextstep2 = regRiderStep2.findViewById(R.id.nextstep2);
         Button nextstep3 = regRiderStep3.findViewById(R.id.nextstep3);
         Button nextstep4 = regRiderStep4.findViewById(R.id.nextstep4);
         Button register = regRiderStep5.findViewById(R.id.register);
+
+        //for image upload
+        vehiclefront = regRiderStep5.findViewById(R.id.vehiclefront);
+        vehiclefront.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                choosePicture();
+            }
+        });
+
 
         EditText etDatePicker =  regRiderStep2.findViewById(R.id.etRiderDateofBirth);
 
@@ -530,6 +569,7 @@ public class RegisterRider extends AppCompatActivity {
         });
 
         register.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
 
@@ -548,6 +588,13 @@ public class RegisterRider extends AppCompatActivity {
                 checkEmptyEditText(regRiderStep5.findViewById(R.id.etEmergencyPerson));
                 checkEmptyEditText(regRiderStep5.findViewById(R.id.etEmergencyNumber));
 
+                vehiclefront.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        choosePicture();
+                    }
+                });
 
                 if(hasError)
                 {
@@ -578,6 +625,8 @@ public class RegisterRider extends AppCompatActivity {
                     riderInfo.put("emergencynumber",riderEMNumber);
                     riderInfo.put("vehiclebrandandmodel",vehiclebrandandmodel);
 
+
+
                     rootie.child("riders").child(phonenum).setValue(riderInfo).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
@@ -588,12 +637,65 @@ public class RegisterRider extends AppCompatActivity {
                     });
                 }
 
-            }
-        });
 
+            }
+
+        });
 
     }
 
+    //for image upload
+    private void choosePicture() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(intent, 1);
+    }
+    //for image upload
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==1 && resultCode==RESULT_OK && data!=null && data.getData()!=null){
+            imageUri=data.getData();
+            vehiclefront.setImageURI(imageUri);
+            uploadPicture();
+        }
+    }
+    //for image upload
+    private void uploadPicture() {
+        final ProgressDialog pd= new ProgressDialog(this);
+        pd.setTitle("Uploading Image");
+        pd.show();
+
+        final String randomKey = UUID.randomUUID().toString();
+        StorageReference riversRef=storageReference.child("images/"+randomKey);
+
+        riversRef.putFile(imageUri)
+                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        pd.dismiss();
+                        Snackbar.make(findViewById(android.R.id.content), "Image Uploaded.", Snackbar.LENGTH_LONG).show();
+
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        pd.dismiss();
+                        Toast.makeText(getApplicationContext(), "Failed to Upload", Toast.LENGTH_LONG).show();
+                    }
+                })
+                .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
+                        double progressPercent = (100.00 * snapshot.getBytesTransferred() / snapshot.getTotalByteCount());
+                        pd.setMessage("Percentage: " + (int) progressPercent +"%");
+                    }
+                });
+
+
+    }
 /*
         String strength = "";
 
