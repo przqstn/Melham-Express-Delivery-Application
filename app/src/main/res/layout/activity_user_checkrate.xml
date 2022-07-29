@@ -5,10 +5,66 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".User.user_checkrate"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/background_color">
    <androidx.constraintlayout.widget.ConstraintLayout
        android:layout_width="match_parent"
-       android:layout_height="match_parent">
+       android:layout_height="match_parent"
+       android:paddingBottom="12dp">
+
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="125dp"
+           android:orientation="horizontal"
+           android:elevation="2dp"
+           android:translationZ="50dp"
+           android:paddingTop="15dp"
+           android:paddingBottom="5dp"
+           android:background="@drawable/handbook"
+           app:layout_constraintEnd_toEndOf="parent"
+           app:layout_constraintStart_toStartOf="parent"
+           app:layout_constraintTop_toTopOf="parent">
+
+           <LinearLayout
+               android:layout_width="200dp"
+               android:layout_height="match_parent"
+               android:orientation="vertical"
+               android:layout_marginVertical="20dp"
+               android:layout_marginLeft ="45dp"
+               android:layout_marginRight="5dp">
+
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_gravity="center_vertical"
+                   android:layout_marginEnd="10dp"
+                   android:layout_weight="1"
+                   android:gravity="center_vertical"
+                   android:fontFamily="@font/montserrat_bold"
+                   android:text="New Order"
+                   android:textColor="#000000" />
+
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_marginEnd="10dp"
+                   android:layout_weight="1"
+                   android:fontFamily="@font/montserrat_regular"
+                   android:text="Make a new order anytime &amp; anywhere"
+                   android:textColor="#06144E"
+                   android:textSize="12sp" />
+           </LinearLayout>
+
+
+           <ImageView
+               android:layout_width="100dp"
+               android:layout_height="match_parent"
+               android:gravity="center_vertical"
+               android:src="@drawable/online_groceries_decor"/>
+
+
+       </LinearLayout>
+
        <ImageView
            android:id="@+id/imageView"
            android:layout_width="35dp"
@@ -16,33 +72,22 @@
            android:src="@drawable/pickup"
            app:layout_constraintBottom_toBottomOf="parent"
            app:layout_constraintEnd_toEndOf="parent"
-           app:layout_constraintHorizontal_bias="0.071"
+           app:layout_constraintHorizontal_bias="0.069"
            app:layout_constraintStart_toStartOf="parent"
            app:layout_constraintTop_toTopOf="parent"
-           app:layout_constraintVertical_bias="0.264" />
-
-       <ImageView
-           android:layout_width="match_parent"
-           android:layout_height="194dp"
-           android:src="@drawable/handbook"
-           app:layout_constraintBottom_toBottomOf="parent"
-           app:layout_constraintEnd_toEndOf="parent"
-           app:layout_constraintHorizontal_bias="0.0"
-           app:layout_constraintStart_toStartOf="parent"
-           app:layout_constraintTop_toTopOf="parent"
-           app:layout_constraintVertical_bias="0.0" />
+           app:layout_constraintVertical_bias="0.219" />
 
        <ImageView
            android:id="@+id/imageView2"
            android:layout_width="6dp"
-           android:layout_height="50dp"
+           android:layout_height="40dp"
            android:src="@drawable/line"
            app:layout_constraintBottom_toBottomOf="parent"
            app:layout_constraintEnd_toEndOf="parent"
-           app:layout_constraintHorizontal_bias="0.103"
+           app:layout_constraintHorizontal_bias="0.1"
            app:layout_constraintStart_toStartOf="parent"
            app:layout_constraintTop_toBottomOf="@+id/imageView"
-           app:layout_constraintVertical_bias="0.027" />
+           app:layout_constraintVertical_bias="0.0" />
 
        <ImageView
            android:id="@+id/imageView3"
@@ -51,10 +96,10 @@
            android:src="@drawable/location"
            app:layout_constraintBottom_toBottomOf="parent"
            app:layout_constraintEnd_toEndOf="parent"
-           app:layout_constraintHorizontal_bias="0.071"
+           app:layout_constraintHorizontal_bias="0.069"
            app:layout_constraintStart_toStartOf="parent"
            app:layout_constraintTop_toBottomOf="@+id/imageView2"
-           app:layout_constraintVertical_bias="0.02" />
+           app:layout_constraintVertical_bias="0.0" />
 
        <EditText
            android:id="@+id/editTextPickUp"
@@ -67,41 +112,43 @@
            android:hint="Pick up Location"
            android:padding="12dp"
            android:textColor="@color/black"
+           android:textSize="14sp"
            app:layout_constraintBottom_toBottomOf="parent"
            app:layout_constraintEnd_toEndOf="parent"
-           app:layout_constraintHorizontal_bias="0.296"
+           app:layout_constraintHorizontal_bias="0.293"
            app:layout_constraintStart_toEndOf="@+id/imageView"
            app:layout_constraintTop_toTopOf="parent"
-           app:layout_constraintVertical_bias="0.263" />
+           app:layout_constraintVertical_bias="0.21" />
 
        <EditText
            android:id="@+id/editTextDestination"
            android:layout_width="275dp"
            android:layout_height="52dp"
+           android:layout_marginBottom="20dp"
            android:background="@drawable/edit_text_round"
            android:drawableRight="@drawable/gps"
            android:elevation="10dp"
            android:fontFamily="@font/montserrat_medium"
            android:hint="Package Destination"
            android:padding="12dp"
+           android:textSize="14sp"
            app:layout_constraintBottom_toBottomOf="parent"
            app:layout_constraintEnd_toEndOf="parent"
-           app:layout_constraintHorizontal_bias="0.296"
+           app:layout_constraintHorizontal_bias="0.293"
            app:layout_constraintStart_toEndOf="@+id/imageView3"
            app:layout_constraintTop_toBottomOf="@+id/editTextPickUp"
-           app:layout_constraintVertical_bias="0.088" />
+           app:layout_constraintVertical_bias="0.034" />
 
        <ImageButton
            android:id="@+id/btnMotorcycle"
            android:layout_width="320dp"
-           android:layout_height="90dp"
+           android:layout_height="83dp"
+           android:layout_marginTop="20dp"
            android:background="@drawable/borderbutton"
-           app:layout_constraintBottom_toBottomOf="parent"
            app:layout_constraintEnd_toEndOf="parent"
-           app:layout_constraintHorizontal_bias="0.494"
+           app:layout_constraintHorizontal_bias="0.493"
            app:layout_constraintStart_toStartOf="parent"
-           app:layout_constraintTop_toBottomOf="@+id/editTextDestination"
-           app:layout_constraintVertical_bias="0.117" />
+           app:layout_constraintTop_toBottomOf="@+id/editTextDestination" />
 
        <TextView
            android:id="@+id/textView6"
@@ -110,10 +157,10 @@
            android:background="@drawable/edit_text_round"
            app:layout_constraintBottom_toBottomOf="@+id/btnMotorcycle"
            app:layout_constraintEnd_toEndOf="@+id/btnMotorcycle"
-           app:layout_constraintHorizontal_bias="0.061"
+           app:layout_constraintHorizontal_bias="0.06"
            app:layout_constraintStart_toStartOf="@+id/btnMotorcycle"
            app:layout_constraintTop_toTopOf="@+id/btnMotorcycle"
-           app:layout_constraintVertical_bias="0.533" />
+           app:layout_constraintVertical_bias="0.5" />
 
        <ImageView
            android:id="@+id/imageView5"
@@ -159,14 +206,35 @@
        <ImageButton
            android:id="@+id/btnSedan"
            android:layout_width="320dp"
-           android:layout_height="90dp"
+           android:layout_height="83dp"
+           android:layout_marginTop="10dp"
            android:background="@drawable/borderbutton"
-           app:layout_constraintBottom_toBottomOf="parent"
            app:layout_constraintEnd_toEndOf="parent"
-           app:layout_constraintHorizontal_bias="0.494"
+           app:layout_constraintHorizontal_bias="0.5"
            app:layout_constraintStart_toStartOf="parent"
-           app:layout_constraintTop_toBottomOf="@+id/btnMotorcycle"
-           app:layout_constraintVertical_bias="0.101" />
+           app:layout_constraintTop_toBottomOf="@+id/btnMotorcycle" />
+
+       <ImageButton
+           android:id="@+id/btnSUV"
+           android:layout_width="320dp"
+           android:layout_height="83dp"
+           android:layout_marginTop="10dp"
+           android:background="@drawable/borderbutton"
+           app:layout_constraintEnd_toEndOf="parent"
+           app:layout_constraintHorizontal_bias="0.5"
+           app:layout_constraintStart_toStartOf="parent"
+           app:layout_constraintTop_toBottomOf="@+id/btnSedan" />
+
+       <ImageButton
+           android:id="@+id/btnSUV2"
+           android:layout_width="320dp"
+           android:layout_height="83dp"
+           android:layout_marginTop="10dp"
+           android:background="@drawable/borderbutton"
+           app:layout_constraintEnd_toEndOf="parent"
+           app:layout_constraintHorizontal_bias="0.5"
+           app:layout_constraintStart_toStartOf="parent"
+           app:layout_constraintTop_toBottomOf="@+id/btnSUV" />
 
        <TextView
            android:id="@+id/textView8"
@@ -175,10 +243,34 @@
            android:background="@drawable/edit_text_round"
            app:layout_constraintBottom_toBottomOf="@+id/btnSedan"
            app:layout_constraintEnd_toEndOf="@+id/btnSedan"
-           app:layout_constraintHorizontal_bias="0.061"
+           app:layout_constraintHorizontal_bias="0.06"
            app:layout_constraintStart_toStartOf="@+id/btnSedan"
            app:layout_constraintTop_toTopOf="@+id/btnSedan"
-           app:layout_constraintVertical_bias="0.566" />
+           app:layout_constraintVertical_bias="0.5" />
+
+       <TextView
+           android:id="@+id/textView28"
+           android:layout_width="60dp"
+           android:layout_height="60dp"
+           android:background="@drawable/edit_text_round"
+           app:layout_constraintBottom_toBottomOf="@+id/btnSUV"
+           app:layout_constraintEnd_toEndOf="@+id/btnSUV"
+           app:layout_constraintHorizontal_bias="0.06"
+           app:layout_constraintStart_toStartOf="@+id/btnSUV"
+           app:layout_constraintTop_toTopOf="@+id/btnSUV"
+           app:layout_constraintVertical_bias="0.5" />
+
+       <TextView
+           android:id="@+id/textView31"
+           android:layout_width="60dp"
+           android:layout_height="60dp"
+           android:background="@drawable/edit_text_round"
+           app:layout_constraintBottom_toBottomOf="@+id/btnSUV2"
+           app:layout_constraintEnd_toEndOf="@+id/btnSUV2"
+           app:layout_constraintHorizontal_bias="0.06"
+           app:layout_constraintStart_toStartOf="@+id/btnSUV2"
+           app:layout_constraintTop_toTopOf="@+id/btnSUV2"
+           app:layout_constraintVertical_bias="0.5" />
 
        <ImageView
            android:layout_width="30dp"
@@ -188,6 +280,26 @@
            app:layout_constraintEnd_toEndOf="@+id/textView8"
            app:layout_constraintStart_toStartOf="@+id/textView8"
            app:layout_constraintTop_toTopOf="@+id/textView8" />
+
+       <ImageView
+           android:id="@+id/imageView10"
+           android:layout_width="30dp"
+           android:layout_height="30dp"
+           android:src="@drawable/suv"
+           app:layout_constraintBottom_toBottomOf="@+id/textView28"
+           app:layout_constraintEnd_toEndOf="@+id/textView28"
+           app:layout_constraintStart_toStartOf="@+id/textView28"
+           app:layout_constraintTop_toTopOf="@+id/textView28" />
+
+       <ImageView
+           android:id="@+id/imageView11"
+           android:layout_width="30dp"
+           android:layout_height="30dp"
+           android:src="@drawable/mpv"
+           app:layout_constraintBottom_toBottomOf="@+id/textView31"
+           app:layout_constraintEnd_toEndOf="@+id/textView31"
+           app:layout_constraintStart_toStartOf="@+id/textView31"
+           app:layout_constraintTop_toTopOf="@+id/textView31" />
 
        <TextView
            android:id="@+id/textView9"
@@ -201,6 +313,34 @@
            app:layout_constraintHorizontal_bias="0.29"
            app:layout_constraintStart_toEndOf="@+id/textView8"
            app:layout_constraintTop_toBottomOf="@+id/textView10"
+           app:layout_constraintVertical_bias="0.0" />
+
+       <TextView
+           android:id="@+id/textView30"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:fontFamily="@font/montserrat_regular"
+           android:text="Max: 300 kg\n4 x 3.2 x 2.8 Meter Up to 300kg"
+           android:textColor="@color/secondary_text"
+           app:layout_constraintBottom_toBottomOf="@+id/btnSUV"
+           app:layout_constraintEnd_toEndOf="@+id/btnSUV"
+           app:layout_constraintHorizontal_bias="0.31"
+           app:layout_constraintStart_toEndOf="@+id/textView28"
+           app:layout_constraintTop_toBottomOf="@+id/textView29"
+           app:layout_constraintVertical_bias="0.0" />
+
+       <TextView
+           android:id="@+id/textView33"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:fontFamily="@font/montserrat_regular"
+           android:text="Max: 600 kg\n7 x 4 x 3.5 Meter Up to 600kg"
+           android:textColor="@color/secondary_text"
+           app:layout_constraintBottom_toBottomOf="@+id/btnSUV2"
+           app:layout_constraintEnd_toEndOf="@+id/btnSUV2"
+           app:layout_constraintHorizontal_bias="0.31"
+           app:layout_constraintStart_toEndOf="@+id/textView31"
+           app:layout_constraintTop_toBottomOf="@+id/textView32"
            app:layout_constraintVertical_bias="0.0" />
 
        <TextView
@@ -219,17 +359,49 @@
            app:layout_constraintTop_toTopOf="@+id/btnSedan"
            app:layout_constraintVertical_bias="0.253" />
 
+       <TextView
+           android:id="@+id/textView29"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_marginStart="8dp"
+           android:fontFamily="@font/montserrat_semibold"
+           android:text="SUV"
+           android:textColor="@color/black"
+           android:textSize="18sp"
+           android:textStyle="bold"
+           app:layout_constraintBottom_toBottomOf="@+id/btnSUV"
+           app:layout_constraintEnd_toEndOf="@+id/btnSUV"
+           app:layout_constraintHorizontal_bias="0.005"
+           app:layout_constraintStart_toEndOf="@+id/textView28"
+           app:layout_constraintTop_toTopOf="@+id/btnSUV"
+           app:layout_constraintVertical_bias="0.242" />
+
+       <TextView
+           android:id="@+id/textView32"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:fontFamily="@font/montserrat_semibold"
+           android:text="MPV"
+           android:textColor="@color/black"
+           android:textSize="18sp"
+           android:textStyle="bold"
+           app:layout_constraintBottom_toBottomOf="@+id/btnSUV2"
+           app:layout_constraintEnd_toEndOf="@+id/btnSUV2"
+           app:layout_constraintHorizontal_bias="0.043"
+           app:layout_constraintStart_toEndOf="@+id/textView31"
+           app:layout_constraintTop_toTopOf="@+id/btnSUV2"
+           app:layout_constraintVertical_bias="0.213" />
+
        <ImageButton
            android:id="@+id/btnTruck"
            android:layout_width="320dp"
-           android:layout_height="90dp"
+           android:layout_height="83dp"
+           android:layout_marginTop="10dp"
            android:background="@drawable/borderbutton"
-           app:layout_constraintBottom_toBottomOf="parent"
            app:layout_constraintEnd_toEndOf="parent"
-           app:layout_constraintHorizontal_bias="0.494"
+           app:layout_constraintHorizontal_bias="0.5"
            app:layout_constraintStart_toStartOf="parent"
-           app:layout_constraintTop_toBottomOf="@+id/btnSedan"
-           app:layout_constraintVertical_bias="0.227" />
+           app:layout_constraintTop_toBottomOf="@+id/btnSUV2" />
 
        <TextView
            android:id="@+id/textView13"
@@ -257,7 +429,7 @@
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
            android:fontFamily="@font/montserrat_semibold"
-           android:text="Truck"
+           android:text="Small Truck"
            android:textColor="@color/black"
            android:textSize="18dp"
            android:textStyle="bold"
@@ -280,5 +452,7 @@
            app:layout_constraintStart_toEndOf="@+id/textView13"
            app:layout_constraintTop_toBottomOf="@+id/textView14"
            app:layout_constraintVertical_bias="0.0" />
+
+
    </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>
