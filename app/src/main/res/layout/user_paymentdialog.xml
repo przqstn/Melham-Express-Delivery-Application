@@ -70,7 +70,6 @@
             android:id="@+id/cashPayment"
             android:layout_width="300dp"
             android:layout_height="45dp"
-            android:layout_marginBottom="240dp"
             android:background="@drawable/borders03"
             android:backgroundTint="@color/white"
             android:drawableStart="@drawable/iconcash"
@@ -85,39 +84,7 @@
             app:layout_constraintHorizontal_bias="0.495"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView5"
-            app:layout_constraintVertical_bias="0.106" />
-
-        <TextView
-            android:id="@+id/textView6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/montserrat_medium"
-            android:text="Total"
-            android:textColor="@color/black"
-            android:textSize="15dp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.147"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cashPayment"
-            app:layout_constraintVertical_bias="0.167" />
-
-        <TextView
-            android:id="@+id/txtViewFare"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/montserrat_medium"
-            android:text="Sample Fare P 100"
-            android:textColor="@color/black"
-            android:textSize="15dp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.794"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cashPayment"
-            app:layout_constraintVertical_bias="0.163" />
+            app:layout_constraintVertical_bias="0.28" />
 
         <Button
             android:id="@+id/btnPlaceOrder"
