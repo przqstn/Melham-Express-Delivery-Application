@@ -15,7 +15,7 @@ public class rider_dashboard1 extends AppCompatActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_rider_dashboard1);
-		Button button = (Button) findViewById(R.id.btn_pckup);
+		Button button = (Button) findViewById(R.id.btn_complete);
 		button.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
