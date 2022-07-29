@@ -196,6 +196,21 @@
             app:layout_constraintTop_toTopOf="@+id/btnTruck"
             app:layout_constraintVertical_bias="0.43" />
 
+        <TextView
+            android:id="@+id/editTextTextPersonName"
+            android:layout_width="20dp"
+            android:layout_height="24dp"
+            android:ems="10"
+            android:fontFamily="@font/montserrat_medium"
+            android:inputType="textPersonName"
+            android:text="₱"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toBottomOf="@+id/btnTruck"
+            app:layout_constraintEnd_toStartOf="@+id/txtChargeTruck"
+            app:layout_constraintTop_toTopOf="@+id/btnTruck"
+            app:layout_constraintVertical_bias="0.439" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
