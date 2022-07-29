@@ -105,7 +105,7 @@
             android:id="@+id/textView8"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:background="@drawable/edit_text_round"
+            android:background="@drawable/bg_icons"
             app:layout_constraintBottom_toBottomOf="@+id/btnSedan"
             app:layout_constraintEnd_toEndOf="@+id/btnSedan"
             app:layout_constraintHorizontal_bias="0.061"

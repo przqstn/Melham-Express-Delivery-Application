@@ -104,7 +104,7 @@
         android:id="@+id/textView6"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:background="@drawable/edit_text_round"
+        android:background="@drawable/bg_icons"
         app:layout_constraintBottom_toBottomOf="@+id/btnMotorcycle"
         app:layout_constraintEnd_toEndOf="@+id/btnMotorcycle"
         app:layout_constraintHorizontal_bias="0.061"
