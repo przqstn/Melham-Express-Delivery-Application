@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/truck_sheet_dialog"
+    android:id="@+id/sedan_sheet_dialog"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="300dp"
@@ -34,7 +34,7 @@
             app:layout_constraintHorizontal_bias="0.511"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.101"  />
+            app:layout_constraintVertical_bias="0.101" />
 
         <TextView
             android:id="@+id/textView17"
@@ -90,67 +90,67 @@
             app:layout_constraintVertical_bias="0.018" />
 
         <ImageButton
-            android:id="@+id/btnTruck"
+            android:id="@+id/btnSedan"
             android:layout_width="335dp"
             android:layout_height="90dp"
             android:background="@drawable/borderbutton"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.494"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.519" />
+            app:layout_constraintVertical_bias="0.552" />
 
         <TextView
-            android:id="@+id/textView13"
+            android:id="@+id/textView8"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:background="@drawable/bg_icons"
-            app:layout_constraintBottom_toBottomOf="@+id/btnTruck"
-            app:layout_constraintEnd_toEndOf="@+id/btnTruck"
-            app:layout_constraintHorizontal_bias="0.065"
-            app:layout_constraintStart_toStartOf="@+id/btnTruck"
-            app:layout_constraintTop_toTopOf="@+id/btnTruck"
-            app:layout_constraintVertical_bias="0.533" />
+            app:layout_constraintBottom_toBottomOf="@+id/btnSedan"
+            app:layout_constraintEnd_toEndOf="@+id/btnSedan"
+            app:layout_constraintHorizontal_bias="0.061"
+            app:layout_constraintStart_toStartOf="@+id/btnSedan"
+            app:layout_constraintTop_toTopOf="@+id/btnSedan"
+            app:layout_constraintVertical_bias="0.566" />
 
         <ImageView
-            android:id="@+id/imageView7"
+            android:id="@+id/imageView4"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:src="@drawable/truck"
-            app:layout_constraintBottom_toBottomOf="@+id/textView13"
-            app:layout_constraintEnd_toEndOf="@+id/textView13"
-            app:layout_constraintStart_toStartOf="@+id/textView13"
-            app:layout_constraintTop_toTopOf="@+id/textView13" />
+            android:src="@drawable/mpv"
+            app:layout_constraintBottom_toBottomOf="@+id/textView8"
+            app:layout_constraintEnd_toEndOf="@+id/textView8"
+            app:layout_constraintStart_toStartOf="@+id/textView8"
+            app:layout_constraintTop_toTopOf="@+id/textView8" />
 
         <TextView
-            android:id="@+id/textView14"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/montserrat_medium"
-            android:text="Truck"
-            android:textColor="@color/black"
-            android:textSize="18dp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/btnTruck"
-            app:layout_constraintEnd_toEndOf="@+id/btnTruck"
-            app:layout_constraintHorizontal_bias="0.048"
-            app:layout_constraintStart_toEndOf="@+id/textView13"
-            app:layout_constraintTop_toTopOf="@+id/btnTruck"
-            app:layout_constraintVertical_bias="0.238" />
-
-        <TextView
+            android:id="@+id/textView9"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat_regular"
-            android:text="Max: 1000 kg\n2.1 x 1.2 x 1.2 Meter Up to 1000kg"
+            android:text="Max:  600 kg\n7 x 4 x 3.5 Meter Up to 600kg"
             android:textColor="@color/secondary_text"
-            app:layout_constraintBottom_toBottomOf="@+id/btnTruck"
-            app:layout_constraintEnd_toEndOf="@+id/btnTruck"
-            app:layout_constraintHorizontal_bias="0.285"
-            app:layout_constraintStart_toEndOf="@+id/textView13"
-            app:layout_constraintTop_toBottomOf="@+id/textView14"
+            app:layout_constraintBottom_toBottomOf="@+id/btnSedan"
+            app:layout_constraintEnd_toEndOf="@+id/btnSedan"
+            app:layout_constraintHorizontal_bias="0.302"
+            app:layout_constraintStart_toEndOf="@+id/textView8"
+            app:layout_constraintTop_toBottomOf="@+id/textView10"
             app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_medium"
+            android:text="MPV"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/btnSedan"
+            app:layout_constraintEnd_toEndOf="@+id/btnSedan"
+            app:layout_constraintHorizontal_bias="0.059"
+            app:layout_constraintStart_toEndOf="@+id/textView8"
+            app:layout_constraintTop_toTopOf="@+id/btnSedan"
+            app:layout_constraintVertical_bias="0.283" />
 
         <Button
             android:id="@+id/btnConfirm"
@@ -166,51 +166,35 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnTruck"
+            app:layout_constraintTop_toBottomOf="@+id/btnSedan"
             app:layout_constraintVertical_bias="0.404" />
 
         <ImageView
             android:id="@+id/imageView6"
             android:layout_width="35dp"
             android:layout_height="35dp"
+            android:src="@drawable/arrow"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.111"
-            android:src="@drawable/arrow" />
+            app:layout_constraintVertical_bias="0.111" />
 
         <TextView
-            android:id="@+id/txtChargeTruck"
+            android:id="@+id/textView15"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat_medium"
-            android:text="Fee"
+            android:text="P 500"
             android:textColor="@color/black"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/btnTruck"
-            app:layout_constraintEnd_toEndOf="@+id/btnTruck"
-            app:layout_constraintHorizontal_bias="0.923"
-            app:layout_constraintStart_toStartOf="@+id/btnTruck"
-            app:layout_constraintTop_toTopOf="@+id/btnTruck"
-            app:layout_constraintVertical_bias="0.43" />
-
-        <TextView
-            android:id="@+id/editTextTextPersonName"
-            android:layout_width="20dp"
-            android:layout_height="24dp"
-            android:ems="10"
-            android:fontFamily="@font/montserrat_medium"
-            android:inputType="textPersonName"
-            android:text="₱"
-            android:textColor="@color/black"
-            android:textSize="15sp"
-            app:layout_constraintBottom_toBottomOf="@+id/btnTruck"
-            app:layout_constraintEnd_toStartOf="@+id/txtChargeTruck"
-            app:layout_constraintTop_toTopOf="@+id/btnTruck"
-            app:layout_constraintVertical_bias="0.439" />
-
+            app:layout_constraintBottom_toBottomOf="@+id/btnSedan"
+            app:layout_constraintEnd_toEndOf="@+id/btnSedan"
+            app:layout_constraintHorizontal_bias="0.927"
+            app:layout_constraintStart_toStartOf="@+id/btnSedan"
+            app:layout_constraintTop_toTopOf="@+id/btnSedan"
+            app:layout_constraintVertical_bias="0.45" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

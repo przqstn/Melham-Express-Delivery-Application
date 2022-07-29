@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="10dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginBottom="20dp"
+    android:scrollbars="vertical"
+    app:cardCornerRadius="20dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="405dp"
+            android:layout_height="381dp"
+            android:padding="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/btn_complete"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:backgroundTint="@color/button_color1"
+                    android:drawableRight="@drawable/questionmark"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:text="Completed"
+                    android:textColor="#FFFFFF"
+                    tools:layout_editor_absoluteX="0dp"
+                    tools:layout_editor_absoluteY="16dp" />
+
+                <TextView
+                    android:id="@+id/pickupLocation"
+                    android:layout_width="match_parent"
+                    android:layout_height="81dp"
+                    android:drawableLeft="@drawable/pckuppoint"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:gravity="center_vertical"
+                    android:text="   Location"
+                    android:textColor="@color/black"
+                    android:textSize="15dp"
+                    tools:layout_editor_absoluteX="25dp"
+                    tools:layout_editor_absoluteY="329dp" />
+
+                <TextView
+                    android:id="@+id/dropOffLocation"
+                    android:layout_width="match_parent"
+                    android:layout_height="75dp"
+                    android:drawableLeft="@drawable/locationpin"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:gravity="center_vertical"
+                    android:text="   Location"
+                    android:textColor="@color/black"
+                    android:textSize="15dp"
+                    tools:layout_editor_absoluteX="2dp"
+                    tools:layout_editor_absoluteY="371dp" />
+
+                <TextView
+                    android:id="@+id/vehicleRecord"
+                    android:layout_width="match_parent"
+                    android:layout_height="43dp"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:gravity=""
+                    android:text="Type of vehicle:"
+                    android:textColor="@color/black"
+                    android:textSize="15dp"
+                    tools:layout_editor_absoluteX="6dp"
+                    tools:layout_editor_absoluteY="410dp" />
+
+                <TextView
+                    android:id="@+id/remarkRecord"
+                    android:layout_width="match_parent"
+                    android:layout_height="58dp"
+                    android:layout_alignBottom="@+id/button"
+                    android:background="@drawable/borders03"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:gravity="center"
+                    android:text="remarks"
+                    android:textColor="@color/black"
+                    android:textSize="15dp"
+                    tools:layout_editor_absoluteX="1dp"
+                    tools:layout_editor_absoluteY="189dp" />
+
+
+                <TextView
+                    android:id="@+id/priceRecord"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:gravity=""
+                    android:paddingLeft="190dp"
+                    android:textAlignment="viewEnd"
+                    android:textColor="@color/black"
+                    android:textSize="15dp"
+                    tools:layout_editor_absoluteX="1dp"
+                    tools:layout_editor_absoluteY="450dp" />
+
+            </LinearLayout>
+        </RelativeLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>
