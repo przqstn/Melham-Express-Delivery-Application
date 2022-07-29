@@ -20,6 +20,7 @@ import java.util.Objects;
 public class myadapter extends FirebaseRecyclerAdapter<model,myadapter.myviewholder> {
 
 	String riderNum;
+	String riderName;
 
 	public myadapter(@NonNull FirebaseRecyclerOptions<model> options) {
 		super(Objects.requireNonNull(options));
@@ -35,6 +36,7 @@ public class myadapter extends FirebaseRecyclerAdapter<model,myadapter.myviewhol
 		holder.senderlocation.setText(model.getSenderlocation());
 		holder.vehicletype.setText(model.getVehicletype());
 		holder.fee.setText(model.getFee());
+		holder.orderID.setText(model.getOrderID());
 		holder.customernotes.setText("Notes:" + model.getCustomerNotes());
 	}
 
@@ -51,17 +53,21 @@ public class myadapter extends FirebaseRecyclerAdapter<model,myadapter.myviewhol
 		return riderNum;
 	}
 
+	public String getRiderName(String riderName){
+		this.riderName = riderName;
+		return riderName;
+	}
+
 	public class myviewholder extends RecyclerView.ViewHolder {
 
 
 		TextView receivercontact,receiverlocation,receivername,sendercontact,senderlocation,
-				sendername, vehicletype, customernotes, fee, btn_takeOrder;
+				sendername, vehicletype, customernotes, fee, btn_takeOrder, orderID;
 
 		//Database Realtime
 		FirebaseDatabase root;
 		DatabaseReference DbRef;
 		FirebaseAuth mAuth;
-		String userID;
 		pickup_fragment pickup_fragment;
 
 		public myviewholder(@NonNull View itemView) {
@@ -75,21 +81,14 @@ public class myadapter extends FirebaseRecyclerAdapter<model,myadapter.myviewhol
 			sendername = itemView.findViewById(R.id.txt_sender_name);
 			vehicletype = itemView.findViewById(R.id.txt_vehicletype);
 			fee = itemView.findViewById(R.id.txt_price);
+			orderID = itemView.findViewById(R.id.id_order);
 			btn_takeOrder = itemView.findViewById(R.id.btn_takeOrder);
 			btn_takeOrder.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
-					System.out.println(sendername.getText().toString());
-					String receiverLoc = receiverlocation.getText().toString();
-					String receiverName = receivername.getText().toString();
-					String customerNotes = customernotes.getText().toString();
-					String senderContact = sendercontact.getText().toString();
-					String senderLoc = senderlocation.getText().toString();
-					String senderName = sendername.getText().toString();
-					String vehicleType = vehicletype.getText().toString();
 					pickup_fragment pickup_fragment = new pickup_fragment();
-					pickup_fragment.getParcelInfo(riderNum,receiverLoc,receiverName,customerNotes,
-							senderContact,senderLoc,senderName,vehicleType);
+					pickup_fragment.getParcelInfo(riderNum, orderID.getText().toString(), riderName);
+//					System.out.println(t1 + receivername.getText().toString());
 				}
 			});
 		}
