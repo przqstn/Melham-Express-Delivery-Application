@@ -7,28 +7,35 @@
     android:orientation="vertical"
     tools:context=".Rider.rider_dashboard">
 
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:layout_gravity="bottom"
-        android:id="@+id/bottomNav_rider"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:background="@color/white"
-        app:itemIconTint="@color/button_color1"
-        app:itemTextColor="@color/black"
-        app:menu="@menu/bottom_navrider"/>
-
     <FrameLayout
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toTopOf="@+id/bottomNav_rider"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNav_user"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
+
     </FrameLayout>
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNav_user"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="@color/white"
+        app:itemIconTint="@drawable/nav_item_color_selected"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/bottom_navrider"
+        app:itemTextAppearanceActive="@style/ActiveBottomNavigationViewTextStyle"
+        app:itemTextAppearanceInactive="@style/InactiveBottomNavigationViewTextStyle"
+        app:labelVisibilityMode="labeled">
+
+    </com.google.android.material.bottomnavigation.BottomNavigationView>
+
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
 <!--
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -367,4 +374,3 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 -->
-</androidx.coordinatorlayout.widget.CoordinatorLayout>

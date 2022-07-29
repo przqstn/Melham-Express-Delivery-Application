@@ -16,4 +16,20 @@
     <style name="BottomSheetStyle" parent="Widget.Design.BottomSheet.Modal">
         <item name="android:background">@android:color/transparent</item>
     </style>
+
+    <style name="ActiveBottomNavigationViewTextStyle">
+        <item name="android:fontFamily">@font/montserrat_semibold</item>
+        <item name="android:textColor">@color/app_color</item>
+    </style>
+
+    <style name="InactiveBottomNavigationViewTextStyle">
+        <item name="android:fontFamily">@font/montserrat_medium</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="AppTheme." parent="Theme.MaterialComponents.Light.NoActionBar">
+        <color name="white">#FFFFFF</color>
+        <color name="app_color">#223272</color>
+    </style>
+
 </resources>
