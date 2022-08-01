@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -28,6 +29,7 @@ public class courierHomeFragment extends Fragment {
     String riderName;
     String riderVehicle;
     String orderID;
+    TextView welcome_name;
 
 
     @Override
@@ -38,6 +40,8 @@ public class courierHomeFragment extends Fragment {
 
         recyclerView_pickup = view.findViewById(R.id.Recycleview_home);
         recyclerView_pickup.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        welcome_name =  view.findViewById(R.id.hi_user_);
 
         Intent intent = getActivity().getIntent();
         riderPhoneNum = intent.getStringExtra("phonenum");
@@ -53,8 +57,7 @@ public class courierHomeFragment extends Fragment {
                         DatabaseReference ddf = dr.child(dataSnapshot.getKey()).child("parcelstatus");
                         riderVehicle = dataSnapshot.child("vehicletype").getValue(String.class);
                         riderName = dataSnapshot.child("name").getValue(String.class);
-                        System.out.println("Vehicle: " + riderVehicle);
-                        System.out.println("Name of Rider: " + riderName);
+                        welcome_name.setText("Hi, " + riderName);
                     }
 
                     @Override
