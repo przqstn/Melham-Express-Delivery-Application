@@ -38,6 +38,9 @@ public class rider_dashboard extends AppCompatActivity {
 			@Override
 			public boolean onNavigationItemSelected( MenuItem item) {
 				switch (item.getItemId()){
+					case R.id.iconhome:
+						getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,pickupFragment).commit();
+						return true;
 					case R.id.iconpickup:
 						getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,pickupFragment).commit();
 						return true;
