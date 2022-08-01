@@ -85,4 +85,7 @@
     <string name="profile">Profile</string>
     <!-- Strings used for fragments for navigation -->
 
+    <string name="welcome_">Welcome!</string>
+
+    <string name="hi_user">Hi User!</string>
 </resources>

@@ -31,4 +31,15 @@
 
     </style>
 
+    <style name="hi_user">
+        <item name="android:textSize">30sp</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
+    <style name="welcome_">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:background">@android:color/transparent</item>
+    </style>
 </resources>
