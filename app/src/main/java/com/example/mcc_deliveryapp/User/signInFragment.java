@@ -42,9 +42,6 @@ public class signInFragment extends Fragment {
     FirebaseDatabase db = FirebaseDatabase.getInstance();
     DatabaseReference root;
 
-    EditText etCode_user;
-
-    String verificationCodeBySystem_user;
 
     TextInputLayout login_editTxt_phoneNum, login_editTxt_password;
     Button btn_Login;
@@ -127,29 +124,6 @@ public class signInFragment extends Fragment {
                         intent.putExtra("phonenum", usernumFromDB);
                         startActivity(intent);
 
-                    /*
-                        EditText etVerifyCode_user = VerifyNum.findViewById(R.id.etVerify_user);
-                        etCode_user = VerifyNum.findViewById(R.id.etVerify_user);
-                        Button verify_user = VerifyNum.findViewById(R.id.btnVerify_user);
-                        verify_user.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                String code_user = etVerifyCode_user.getText().toString();
-                                if (TextUtils.isEmpty(etVerifyCode_user.getText().toString())){
-                                    etVerifyCode_user.setError("Required");
-                                    Toast.makeText(getActivity(), "Please Enter The Code.", Toast.LENGTH_SHORT).show();
-                                }else{
-                                    VerifyCodeUser(code_user);
-                                }
-
-                            }
-
-                        });
-                        //sendVerificationCodeToUser(Objects.requireNonNull(login_editTxt_phoneNum.getEditText()).getText().toString());
-                        sendVerificationCodeToUser(login_editTxt_phoneNum.getEditText().getText().toString());
-                        VerifyNum.show();
-                        */
-
                     }
                     else{
                         login_editTxt_password.setError("Wrong Password");
@@ -168,63 +142,4 @@ public class signInFragment extends Fragment {
             }
         });
     }
-    /*
-    private void sendVerificationCodeToUser(String PhoneNo_User) {
-
-        PhoneAuthProvider.getInstance().verifyPhoneNumber("+63" + PhoneNo_User,60, TimeUnit.SECONDS, getActivity(),mCallBacks);
-
-    }
-    private final PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallBacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
-
-        @Override
-        public void onCodeSent(@NonNull String s, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
-            super.onCodeSent(s, forceResendingToken);
-
-            verificationCodeBySystem_user = s;
-            Toast.makeText(getContext(),"Code Sent.",Toast.LENGTH_SHORT).show();
-
-        }
-
-        @Override
-        public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
-
-            String code_user = phoneAuthCredential.getSmsCode();
-           etCode_user.setText(code_user);
-            if(code_user != null)
-            {
-                VerifyCodeUser(code_user);
-            }
-        }
-
-        @Override
-        public void onVerificationFailed(@NonNull FirebaseException e) {
-            Toast.makeText(getContext(),e.getMessage(),Toast.LENGTH_LONG).show();
-        }
-    };
-    private void VerifyCodeUser(String code) {
-        PhoneAuthCredential credential = PhoneAuthProvider.getCredential(verificationCodeBySystem_user,code);
-
-        signInByCredential(credential);
-
-    }
-    private void signInByCredential(PhoneAuthCredential credential) {
-        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-        firebaseAuth.signInWithCredential(credential).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if(task.isSuccessful())
-                {
-                    Intent intent = new Intent(getActivity(),user_permission.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    startActivity(intent);
-                }
-                else
-                {
-                    Toast.makeText(getContext(),task.getException().getMessage(),Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-    }
-*/
-
 }

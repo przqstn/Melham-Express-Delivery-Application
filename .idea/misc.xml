@@ -114,7 +114,7 @@
         <entry key="..\:/Users/rdrgz/AndroidStudioProjects/MCC Delivery App 2/app/src/main/res/layout/activity_rider_dashboard2.xml" value="0.3625" />
         <entry key="..\:/Users/rdrgz/AndroidStudioProjects/MCC Delivery App 2/app/src/main/res/layout/activity_rider_login.xml" value="0.33" />
         <entry key="..\:/Users/rdrgz/AndroidStudioProjects/MCC Delivery App 2/app/src/main/res/layout/activity_user_dashboard.xml" value="0.14487179487179488" />
-        <entry key="..\:/Users/rdrgz/AndroidStudioProjects/MCC Delivery App 2/app/src/main/res/layout/activity_user_home.xml" value="0.29743589743589743" />
+        <entry key="..\:/Users/rdrgz/AndroidStudioProjects/MCC Delivery App 2/app/src/main/res/layout/activity_user_home.xml" value="0.22" />
         <entry key="..\:/Users/rdrgz/AndroidStudioProjects/MCC Delivery App 2/app/src/main/res/layout/activity_user_waitingdriver.xml" value="0.3625" />
         <entry key="..\:/Users/rdrgz/AndroidStudioProjects/MCC Delivery App 2/app/src/main/res/layout/activity_userdashboard.xml" value="0.3625" />
         <entry key="..\:/Users/rdrgz/AndroidStudioProjects/MCC Delivery App 2/app/src/main/res/layout/courierhome.xml" value="0.18" />
@@ -125,14 +125,18 @@
         <entry key="..\:/Users/rdrgz/AndroidStudioProjects/MCC Delivery App 2/app/src/main/res/layout/fragment_sign_up.xml" value="0.3625" />
         <entry key="..\:/Users/rdrgz/AndroidStudioProjects/MCC Delivery App 2/app/src/main/res/layout/fragment_signup_rider_step1.xml" value="0.3625" />
         <entry key="..\:/Users/rdrgz/AndroidStudioProjects/MCC Delivery App 2/app/src/main/res/layout/fragment_signup_rider_step5.xml" value="0.2006340579710145" />
+        <entry key="..\:/Users/rdrgz/AndroidStudioProjects/MCC Delivery App 2/app/src/main/res/layout/fragment_user_phonenum_verify.xml" value="0.29743589743589743" />
+        <entry key="..\:/Users/rdrgz/AndroidStudioProjects/MCC Delivery App 2/app/src/main/res/layout/layout_bottom_sheet.xml" value="0.29743589743589743" />
         <entry key="..\:/Users/rdrgz/AndroidStudioProjects/MCC Delivery App 2/app/src/main/res/layout/mpv_dialog.xml" value="0.29743589743589743" />
-        <entry key="..\:/Users/rdrgz/AndroidStudioProjects/MCC Delivery App 2/app/src/main/res/layout/ongoinglayoutdesign.xml" value="0.67" />
+        <entry key="..\:/Users/rdrgz/AndroidStudioProjects/MCC Delivery App 2/app/src/main/res/layout/ongoinglayoutdesign.xml" value="0.33" />
         <entry key="..\:/Users/rdrgz/AndroidStudioProjects/MCC Delivery App 2/app/src/main/res/layout/pickuplayoutdesign.xml" value="0.29743589743589743" />
         <entry key="..\:/Users/rdrgz/AndroidStudioProjects/MCC Delivery App 2/app/src/main/res/layout/sedan_dialog.xml" value="0.29743589743589743" />
+        <entry key="..\:/Users/rdrgz/AndroidStudioProjects/MCC Delivery App 2/app/src/main/res/layout/success_dialog.xml" value="0.29743589743589743" />
         <entry key="..\:/Users/rdrgz/AndroidStudioProjects/MCC Delivery App 2/app/src/main/res/layout/suv_dialog.xml" value="0.29743589743589743" />
         <entry key="..\:/Users/rdrgz/AndroidStudioProjects/MCC Delivery App 2/app/src/main/res/layout/truck_dialog.xml" value="0.29743589743589743" />
         <entry key="..\:/Users/rdrgz/AndroidStudioProjects/MCC Delivery App 2/app/src/main/res/layout/user_adressdetail.xml" value="0.3625" />
-        <entry key="..\:/Users/rdrgz/AndroidStudioProjects/MCC Delivery App 2/app/src/main/res/layout/userhome.xml" value="0.14536340852130325" />
+        <entry key="..\:/Users/rdrgz/AndroidStudioProjects/MCC Delivery App 2/app/src/main/res/layout/user_paymentdialog.xml" value="0.29743589743589743" />
+        <entry key="..\:/Users/rdrgz/AndroidStudioProjects/MCC Delivery App 2/app/src/main/res/layout/userhome.xml" value="0.25" />
         <entry key="..\:/Users/rdrgz/AndroidStudioProjects/MCC Delivery App 2/app/src/main/res/menu/bottom_navrider.xml" value="0.33" />
         <entry key="..\:/Users/rdrgz/AndroidStudioProjects/MCC Delivery App 2/app/src/main/res/menu/bottom_navuser.xml" value="0.14487179487179488" />
       </map>
