@@ -34,10 +34,16 @@ Button btn_permission;
 		setContentView(R.layout.activity_user_permission);
 
 		btn_permission = findViewById(R.id.btn_user_permission);
-
+		Intent intent = getIntent();
+		String name = intent.getStringExtra("username");
+		String phonenum = intent.getStringExtra("phonenum");
 		if(ContextCompat.checkSelfPermission(user_permission.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)
 		{
-			startActivity(new Intent(user_permission.this, user_parceltransaction.class));
+			Intent home = new Intent(user_permission.this,user_home.class);
+			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+			intent.putExtra("phonenum", phonenum);
+			intent.putExtra("username", name);
+			startActivity(home);
 			finish();
 			return;
 		}
@@ -50,8 +56,12 @@ Button btn_permission;
 						.withListener(new PermissionListener() {
 							@Override
 							public void onPermissionGranted(PermissionGrantedResponse permissionGrantedResponse) {
-							startActivity(new Intent(user_permission.this, user_parceltransaction.class));
-							finish();
+								Intent home = new Intent(user_permission.this,user_home.class);
+								intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+								intent.putExtra("phonenum", phonenum);
+								intent.putExtra("username", name);
+								startActivity(home);
+								finish();
 							}
 
 							@Override
