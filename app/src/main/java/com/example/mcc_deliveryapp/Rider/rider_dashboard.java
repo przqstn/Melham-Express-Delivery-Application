@@ -22,7 +22,7 @@ public class rider_dashboard extends AppCompatActivity {
 	pickup_fragment pickupFragment = new pickup_fragment();
 	profile_fragment profile_fragment = new profile_fragment();
 	record_fragment record_fragment = new record_fragment();
-
+	courierHomeFragment courierHomeFragment = new courierHomeFragment();
 
 
 	@Override
@@ -33,13 +33,13 @@ public class rider_dashboard extends AppCompatActivity {
 
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		bottomNavigationView = findViewById(R.id.bottomNav_rider);
-		getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,pickupFragment).commit();
+		getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,courierHomeFragment).commit();
 		bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
 			@Override
 			public boolean onNavigationItemSelected( MenuItem item) {
 				switch (item.getItemId()){
 					case R.id.iconhome:
-						getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,pickupFragment).commit();
+						getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,courierHomeFragment).commit();
 						return true;
 					case R.id.iconpickup:
 						getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,pickupFragment).commit();

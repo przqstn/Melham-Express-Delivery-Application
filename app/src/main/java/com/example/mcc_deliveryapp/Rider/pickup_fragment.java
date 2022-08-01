@@ -19,7 +19,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
 
 public class pickup_fragment extends Fragment {
 	RecyclerView recyclerView_pickup;
@@ -55,7 +54,8 @@ public class pickup_fragment extends Fragment {
 						DatabaseReference ddf = dr.child(dataSnapshot.getKey()).child("parcelstatus");
 						riderVehicle = dataSnapshot.child("vehicletype").getValue(String.class);
 						riderName = dataSnapshot.child("name").getValue(String.class);
-						System.out.println(riderVehicle + "start");
+						System.out.println("Vehicle: " + riderVehicle);
+						System.out.println("Name of Rider: " + riderName);
 					}
 
 					@Override
