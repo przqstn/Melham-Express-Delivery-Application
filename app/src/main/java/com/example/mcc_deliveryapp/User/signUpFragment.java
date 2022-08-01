@@ -186,7 +186,6 @@ public class signUpFragment extends Fragment {
 
     // Password and Confirm Password Hashing
     public void PasswordHash(String password){
-
         try{
             //Create hash
             MessageDigest digest = java.security.MessageDigest.getInstance("MD5");
