@@ -28,6 +28,7 @@ public class pickup_fragment extends Fragment {
 	String riderName;
 	String riderVehicle;
 	String orderID;
+	private DatabaseReference mDatabase;
 
 
 	@Override
@@ -35,27 +36,32 @@ public class pickup_fragment extends Fragment {
 							 Bundle savedInstanceState) {
 		// Inflate the layout for this fragment
 		View view =  inflater.inflate(R.layout.fragment_pickup_fragment, container, false);
+		// ...
+		mDatabase = FirebaseDatabase.getInstance().getReference();
 
 		recyclerView_pickup = view.findViewById(R.id.Recycleview_pickup);
 		recyclerView_pickup.setLayoutManager(new LinearLayoutManager(getContext()));
 
 		Intent intent = getActivity().getIntent();
 		riderPhoneNum = intent.getStringExtra("phonenum");
-		System.out.println(riderPhoneNum);
+		riderVehicle = intent.getStringExtra("vehicle");
+		riderName = intent.getStringExtra("name");
+		System.out.println(riderVehicle + "aaaaaaaaaa");
 
-		final FirebaseDatabase database = FirebaseDatabase.getInstance();
-		final DatabaseReference dr = database.getReference().child("riders");
+		FirebaseDatabase database = FirebaseDatabase.getInstance();
+		DatabaseReference dr = database.getReference().child("riders");
 		Query query = dr.orderByChild("riderphone").equalTo(riderPhoneNum);
+
 
 		query.addChildEventListener(
 				new ChildEventListener() {
 					@Override
 					public void onChildAdded(DataSnapshot dataSnapshot, String s) {
 						DatabaseReference ddf = dr.child(dataSnapshot.getKey()).child("parcelstatus");
-						riderVehicle = dataSnapshot.child("vehicletype").getValue(String.class);
-						riderName = dataSnapshot.child("name").getValue(String.class);
-						System.out.println("Vehicle: " + riderVehicle);
-						System.out.println("Name of Rider: " + riderName);
+//						riderVehicle = dataSnapshot.child("vehicletype").getValue(String.class);
+//						riderName = dataSnapshot.child("name").getValue(String.class);
+//						System.out.println("Vehicle: " + riderVehicle);
+//						System.out.println("Name of Rider: " + riderName);
 					}
 
 					@Override

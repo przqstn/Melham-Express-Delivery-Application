@@ -90,7 +90,8 @@ public class riderLogin extends AppCompatActivity {
                 if (snapshot.exists()) {
                     numberRider.setError(null);
                     String riderpass = snapshot.child(riderNumEntered).child("riderpass").getValue(String.class);
-
+                    String ridervehicle = snapshot.child(riderNumEntered).child("vehicletype").getValue(String.class);
+                    String ridername = snapshot.child(riderNumEntered).child("name").getValue(String.class);
 
                     if (riderpass.equals(riderpassEntered))
                     {
@@ -98,6 +99,8 @@ public class riderLogin extends AppCompatActivity {
                         Intent intent = new Intent(riderLogin.this, rider_dashboard.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         intent.putExtra("phonenum", riderNumEntered);
+                        intent.putExtra("vehicle", ridervehicle);
+                        intent.putExtra("name", ridername);
                         startActivity(intent);
                     }
 
