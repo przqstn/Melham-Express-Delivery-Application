@@ -56,7 +56,7 @@ public class rider_dashboard extends AppCompatActivity {
 			}
 		});
 
-
+//
 //		ImageButton button = (ImageButton) findViewById(R.id.btn_pickup);
 //		button.setOnClickListener(new View.OnClickListener() {
 //			@Override

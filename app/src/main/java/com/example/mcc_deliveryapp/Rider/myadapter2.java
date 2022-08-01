@@ -42,7 +42,7 @@ public class myadapter2 extends FirebaseRecyclerAdapter<model, myadapter2.myview
 	@NonNull
 	@Override
 	public myviewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-		View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.ongoinglayoutdesign,parent,false);
+		View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.ongoing_courierlayoutdesign,parent,false);
 		return new myviewholder(view);
 
 	}

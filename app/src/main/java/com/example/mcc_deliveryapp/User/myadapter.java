@@ -9,7 +9,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mcc_deliveryapp.R;
-import com.example.mcc_deliveryapp.Rider.pickup_fragment;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
@@ -44,7 +43,7 @@ public class myadapter extends FirebaseRecyclerAdapter<model,myadapter.myviewhol
 	@NonNull
 	@Override
 	public myviewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-		View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.ongoinglayoutdesign,parent,false);
+		View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.ongoing_courierlayoutdesign,parent,false);
 		return new myviewholder(view);
 
 	}

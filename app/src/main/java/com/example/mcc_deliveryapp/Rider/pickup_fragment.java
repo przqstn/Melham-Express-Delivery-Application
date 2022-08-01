@@ -77,7 +77,7 @@ public class pickup_fragment extends Fragment {
 					}
 				});
 
-		System.out.println(riderName + "-" + riderVehicle);
+		System.out.println(riderName + "--" + riderVehicle);
 
 		FirebaseRecyclerOptions<model> options =
 				new FirebaseRecyclerOptions.Builder<model>()

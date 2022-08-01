@@ -123,10 +123,6 @@ public class courierHomeFragment extends Fragment {
 
                     }
 
-//					@Override
-//					public void onCancelled(FirebaseError firebaseError) {
-//					}
-
                     @Override
                     public void onChildChanged(DataSnapshot dataSnapshot, String s) {
                     }
