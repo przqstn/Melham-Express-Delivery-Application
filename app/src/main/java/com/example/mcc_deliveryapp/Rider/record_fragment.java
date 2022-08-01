@@ -44,9 +44,9 @@ public class record_fragment extends Fragment {
 
 		// It is a class provide by the FirebaseUI to make a
 		// query in the database to fetch appropriate data
-		FirebaseRecyclerOptions<record_fetch> options
-				= new FirebaseRecyclerOptions.Builder<record_fetch>()
-				.setQuery(mbase, record_fetch.class)
+		FirebaseRecyclerOptions<model> options
+				= new FirebaseRecyclerOptions.Builder<model>()
+				.setQuery(mbase, model.class)
 				.build();
 		// Connecting object of required Adapter class to
 		// the Adapter class itself
