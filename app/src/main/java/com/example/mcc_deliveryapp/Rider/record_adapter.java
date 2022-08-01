@@ -15,10 +15,10 @@ import com.firebase.ui.database.FirebaseRecyclerOptions;
 // FirebaseUI. it provides functions to bind, adapt and show
 // database contents in a Recycler View
 public class record_adapter extends FirebaseRecyclerAdapter<
-        record_fetch, record_adapter.recordViewholder> {
+        model, record_adapter.recordViewholder> {
 
     public record_adapter(
-            @NonNull FirebaseRecyclerOptions<record_fetch> options) {
+            @NonNull FirebaseRecyclerOptions<model> options) {
         super(options);
     }
     // Function to bind the view in Card view(here
@@ -27,12 +27,12 @@ public class record_adapter extends FirebaseRecyclerAdapter<
     @Override
     protected void
     onBindViewHolder(@NonNull recordViewholder holder,
-                     int position, @NonNull record_fetch model)
+                     int position, @NonNull model model)
     {
 
 
 //        holder.OrderID.setText(model.getOrderID());
-        holder.customernotes.setText(model.getCustomernotes());
+        holder.customernotes.setText(model.getCustomerNotes());
         holder.fee.setText(model.getFee());
 //        holder.parcelstatus.setText(model.getParcelstatus());
 //        holder.receivercontact.setText(model.getReceivercontact());
@@ -43,7 +43,7 @@ public class record_adapter extends FirebaseRecyclerAdapter<
 //        holder.sendercontact.setText(model.getSendercontact());
         holder.senderlocation.setText(model.getSenderlocation());
 //        holder.sendername.setText(model.getSendername());
-        holder.vehicle.setText(model.getVehicle());
+        holder.vehicle.setText(model.getVehicletype());
     }
 
     // Function to tell the class about the Card view

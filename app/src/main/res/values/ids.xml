@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="suv_sheet_dialog" type="id" />
+    <item name="mpv_sheet_dialog" type="id" />
+</resources>

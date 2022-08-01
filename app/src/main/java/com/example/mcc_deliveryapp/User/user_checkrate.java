@@ -34,6 +34,8 @@ public class user_checkrate extends AppCompatActivity {
 
 		ImageButton btnMotorcycle = findViewById(R.id.btnMotorcycle);
 		ImageButton btnSedan = findViewById(R.id.btnSedan);
+		ImageButton btnSUV = findViewById(R.id.btnSUV);
+		ImageButton btnMPV = findViewById(R.id.btnMPV);
 		ImageButton btnTruck = findViewById(R.id.btnTruck);
 
 		//
@@ -58,6 +60,7 @@ public class user_checkrate extends AppCompatActivity {
 		editText.setText(senderloc);
 		editText2.setText(receiverloc);
 
+		// motorcycle
 		btnMotorcycle.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
@@ -93,12 +96,12 @@ public class user_checkrate extends AppCompatActivity {
 					}
 				});
 
-				// temporarily disabled dialog box
 				bottomSheetDialog.setContentView(bottomSheetView);
 				bottomSheetDialog.show();
 			}
 		});
 
+		//Sedan
 		btnSedan.setOnClickListener(new View.OnClickListener() {
 			@SuppressLint("SetTextI18n")
 			@Override
@@ -137,6 +140,85 @@ public class user_checkrate extends AppCompatActivity {
 			}
 		});
 
+		//SUV
+		btnSUV.setOnClickListener(new View.OnClickListener() {
+			@SuppressLint("SetTextI18n")
+			@Override
+			public void onClick(View view) {
+				final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(
+						user_checkrate.this,R.style.BottomSheetDialogTheme
+				);
+				View bottomSheetView = LayoutInflater.from(getApplicationContext())
+						.inflate(
+								R.layout.suv_dialog,
+								(LinearLayout)findViewById(R.id.suv_sheet_dialog)
+						);
+
+				String convertFloat =String.valueOf(calculateFare(distance, 2));
+
+				TextView tv1 = bottomSheetView.findViewById(R.id.textView15);
+				TextView tv2 = bottomSheetView.findViewById(R.id.txtPickUpAdd);
+				TextView tv3 = bottomSheetView.findViewById(R.id.txtDropOffAdd);
+
+				tv1.setText(convertFloat);
+				tv2.setText(senderloc);
+				tv3.setText(receiverloc);
+
+				bottomSheetView.findViewById(R.id.btnConfirm).setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View view) {
+						pushData(sendernotes, senderloc, sendercontact, sendername, receiverloc,
+								receivercontact, receivername ,"SUV", convertFloat,
+								parcelstatus, ridername, ridernum);
+						Intent intent = new Intent(user_checkrate.this,user_findingrider.class);
+						startActivity(intent);
+					}
+				});
+				bottomSheetDialog.setContentView(bottomSheetView);
+				bottomSheetDialog.show();
+			}
+		});
+
+		//MPV
+		btnMPV.setOnClickListener(new View.OnClickListener() {
+			@SuppressLint("SetTextI18n")
+			@Override
+			public void onClick(View view) {
+				final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(
+						user_checkrate.this,R.style.BottomSheetDialogTheme
+				);
+				View bottomSheetView = LayoutInflater.from(getApplicationContext())
+						.inflate(
+								R.layout.mpv_dialog,
+								(LinearLayout)findViewById(R.id.mpv_sheet_dialog)
+						);
+
+				String convertFloat =String.valueOf(calculateFare(distance, 3));
+
+				TextView tv1 = bottomSheetView.findViewById(R.id.textView15);
+				TextView tv2 = bottomSheetView.findViewById(R.id.txtPickUpAdd);
+				TextView tv3 = bottomSheetView.findViewById(R.id.txtDropOffAdd);
+
+				tv1.setText(convertFloat);
+				tv2.setText(senderloc);
+				tv3.setText(receiverloc);
+
+				bottomSheetView.findViewById(R.id.btnConfirm).setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View view) {
+						pushData(sendernotes, senderloc, sendercontact, sendername, receiverloc,
+								receivercontact, receivername ,"MPV", convertFloat,
+								parcelstatus, ridername, ridernum);
+						Intent intent = new Intent(user_checkrate.this,user_findingrider.class);
+						startActivity(intent);
+					}
+				});
+				bottomSheetDialog.setContentView(bottomSheetView);
+				bottomSheetDialog.show();
+			}
+		});
+
+		// Truck
 		btnTruck.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
@@ -149,7 +231,7 @@ public class user_checkrate extends AppCompatActivity {
 								(LinearLayout)findViewById(R.id.truck_sheet_dialog)
 						);
 
-				String convertFloat =String.valueOf(calculateFare(distance, 2));
+				String convertFloat =String.valueOf(calculateFare(distance, 4));
 
 				TextView tv1 = bottomSheetView.findViewById(R.id.txtChargeTruck);
 				TextView tv2 = bottomSheetView.findViewById(R.id.txtPickUpAdd);
@@ -208,6 +290,7 @@ public class user_checkrate extends AppCompatActivity {
 		float finalFare = 0;
 		float greatFive;
 
+		// motorcycle
 		if (type == 0) {
 			float base = 49;
 			if (removekm > 5){
@@ -217,6 +300,8 @@ public class user_checkrate extends AppCompatActivity {
 			else {
 				finalFare = base + (6 * removekm);
 			}
+
+		// Sedan
 		} else if (type == 1) {
 			float base = 100;
 			if (removekm > 5){
@@ -226,7 +311,19 @@ public class user_checkrate extends AppCompatActivity {
 			else {
 				finalFare = base + (18 * removekm);
 			}
+
+		// SUV
 		} else if (type == 2) {
+			float base = 115;
+			finalFare = base + (removekm * 20);
+
+		// MPV
+		} else if (type == 3) {
+			float base = 250;
+			finalFare = base + (removekm * 25);
+
+		// Small Truck
+		} else if (type == 4) {
 			float base = 340;
 			finalFare = base + (25 * removekm);
 		}
