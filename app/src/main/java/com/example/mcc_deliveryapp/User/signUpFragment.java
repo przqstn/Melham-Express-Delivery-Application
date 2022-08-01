@@ -1,5 +1,7 @@
 package com.example.mcc_deliveryapp.User;
 
+import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -13,9 +15,17 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.example.mcc_deliveryapp.MainActivity2;
 import com.example.mcc_deliveryapp.R;
+import com.example.mcc_deliveryapp.Rider.RegisterRider;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.FirebaseException;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.PhoneAuthCredential;
+import com.google.firebase.auth.PhoneAuthProvider;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -25,19 +35,27 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 
 public class signUpFragment extends Fragment {
     //setting the value of the given edit_text
     EditText editTxt_fullname,editTxt_phoneNum,editTxt_password,editTxt_Cpassword;
     Button btn_createAcc;
-    TextView txt_hashpassword;
-
+    String verificationCodeBySystem_user;
     TextInputLayout textInputPassword;
+    EditText etCode_user;
+    TextView userName, userNumber;
     //Database Realtime
     FirebaseDatabase root;
     DatabaseReference DbRef;
     FirebaseAuth fAuth;
+
+    String fullname;
+    String phoneNum;
+    String pass;
+    String Cpass;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -46,7 +64,7 @@ public class signUpFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_sign_up, container, false);
 
         // Initialization of text
-        txt_hashpassword =view.findViewById(R.id.Hashpassword);
+
         editTxt_fullname = view.findViewById(R.id.edTextUserName);
         editTxt_phoneNum = view.findViewById(R.id.edTextPhoneNo);
         editTxt_password = view.findViewById(R.id.edTextPass);
@@ -56,11 +74,6 @@ public class signUpFragment extends Fragment {
         btn_createAcc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                calling the user password validation
-//                Hashing the password and confirm password
-//                PasswordHash(editTxt_password.toString());
-//                PasswordHash(editTxt_Cpassword.toString());
-                // Verification for blank space in the user registration form
 
                 boolean clear = true;
 
@@ -117,7 +130,6 @@ public class signUpFragment extends Fragment {
                     editTxt_password.setError("Password most have at least 6 characters, one uppercase, lowercase, and number.");
 
                 }
-
                 // add confirm password function
                 else if (min6 && uppercase && lowercase && digits >=1)
                 {
@@ -139,11 +151,11 @@ public class signUpFragment extends Fragment {
                     root = FirebaseDatabase.getInstance();
                     DbRef = root.getReference("users");
                     // Getting the value of The given info in sign up to store in firebase
-                    String fullname = editTxt_fullname.getEditableText().toString();
-                    String phoneNum = editTxt_phoneNum.getEditableText().toString();
-                    String pass = editTxt_password.getEditableText().toString();
-                    String Cpass = editTxt_Cpassword.getEditableText().toString();
-                    String passwordhash = txt_hashpassword.getText().toString();
+                    fullname = editTxt_fullname.getEditableText().toString();
+                    phoneNum = editTxt_phoneNum.getEditableText().toString();
+                    pass = editTxt_password.getEditableText().toString();
+                    Cpass = editTxt_Cpassword.getEditableText().toString();
+
 
                     // To check if the user already exists
                     Query accCheck = DbRef.orderByChild("userPhone").equalTo(phoneNum);
@@ -154,13 +166,33 @@ public class signUpFragment extends Fragment {
                                 Toast.makeText(getContext(), "Account Already Exists. Please Sign In", Toast.LENGTH_SHORT).show();
                             }
                             else {
-                                    //user helper class in order to store the the given info in sign up form
-                                    UserHelperClass userHelperClass = new UserHelperClass(fullname, phoneNum, pass, Cpass);
-                                    DbRef.child(phoneNum).setValue(userHelperClass);
-                                    Toast.makeText(getContext(), "Account Successfully Created", Toast.LENGTH_SHORT).show();
-                                    //Implementing the Clear Section in Sign up after the Creation of Account
-                                    Clear();
+                                Dialog VerifyNum = new Dialog(getContext());
+                                VerifyNum.setContentView(R.layout.fragment_user_phonenum_verify);
+                                VerifyNum.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                                VerifyNum.setCancelable(false);
+                                VerifyNum.getWindow().getAttributes().windowAnimations = R.style.animation;
+                                etCode_user = VerifyNum.findViewById(R.id.etVerify_user);
+                                userName= VerifyNum.findViewById(R.id.user_Fullname);
+                                userNumber= VerifyNum.findViewById(R.id.user_ContactNo);
+                                userName.setText(fullname);
+                                userNumber.setText(phoneNum);
+                                Button verify_user = VerifyNum.findViewById(R.id.btnVerify_user);
 
+                                verify_user.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                    public void onClick(View view) {
+                                        String code_user = etCode_user.getText().toString();
+                                        if (TextUtils.isEmpty(etCode_user.getText().toString())){
+                                            etCode_user.setError("Required");
+                                            Toast.makeText(getActivity(), "Please Enter The Code.", Toast.LENGTH_SHORT).show();
+                                        }else{
+                                                VerifyCodeUser(code_user);
+                                        }
+                                        }
+                                    });
+                                    //sendVerificationCodeToUser(Objects.requireNonNull(login_editTxt_phoneNum.getEditText()).getText().toString());
+                                    sendVerificationCodeToUser(editTxt_phoneNum.getText().toString());
+                                    VerifyNum.show();
                             }
                         }
                         @Override
@@ -184,28 +216,68 @@ public class signUpFragment extends Fragment {
         editTxt_Cpassword.setText("");
     }
 
-    // Password and Confirm Password Hashing
-    public void PasswordHash(String password){
-        try{
-            //Create hash
-            MessageDigest digest = java.security.MessageDigest.getInstance("MD5");
-            digest.update(password.getBytes());
-            byte messageDigest[] = digest.digest();
+    private void sendVerificationCodeToUser(String PhoneNo_User) {
 
-            StringBuffer MD5Hash = new StringBuffer();
-            for (int i = 0; i < messageDigest.length; i++)
-            {
-                String h = Integer.toHexString(0xFF & messageDigest[i]);
-                while (h.length()< 2 )
-                    h = "0" + h;
-                MD5Hash.append(h);
-            }
-            txt_hashpassword.setText(MD5Hash);
+        PhoneAuthProvider.getInstance().verifyPhoneNumber("+63" + PhoneNo_User,60, TimeUnit.SECONDS, getActivity(),mCallBacks);
 
-        }
-        catch (NoSuchAlgorithmException e)
-        {
-            e.printStackTrace();
-        }
     }
+    private final PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallBacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+
+        @Override
+        public void onCodeSent(@NonNull String s, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
+            super.onCodeSent(s, forceResendingToken);
+
+            verificationCodeBySystem_user = s;
+            Toast.makeText(getContext(),"Code Sent.",Toast.LENGTH_SHORT).show();
+
+        }
+
+        @Override
+        public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
+
+            String code_user = phoneAuthCredential.getSmsCode();
+           etCode_user.setText(code_user);
+            if(code_user != null)
+            {
+                VerifyCodeUser(code_user);
+            }
+        }
+
+        @Override
+        public void onVerificationFailed(@NonNull FirebaseException e) {
+            Toast.makeText(getContext(),e.getMessage(),Toast.LENGTH_LONG).show();
+        }
+    };
+    private void VerifyCodeUser(String code) {
+        PhoneAuthCredential credential = PhoneAuthProvider.getCredential(verificationCodeBySystem_user,code);
+
+        signInByCredential(credential);
+
+    }
+    private void signInByCredential(PhoneAuthCredential credential) {
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+        firebaseAuth.signInWithCredential(credential).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if(task.isSuccessful())
+                {
+
+                   //user helper class in order to store the the given info in sign up form
+                  UserHelperClass userHelperClass = new UserHelperClass(fullname, phoneNum, pass, Cpass);
+                  DbRef.child(phoneNum).setValue(userHelperClass);
+                  Toast.makeText(getContext(), "Account Successfully Created", Toast.LENGTH_SHORT).show();
+                  //Implementing the Clear Section in Sign up after the Creation of Account
+                  Intent intent = new Intent(getActivity(), MainActivity2.class);
+                  intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                  startActivity(intent);
+                  Clear();
+                }
+                else
+                {
+                    Toast.makeText(getContext(),task.getException().getMessage(),Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
 }
