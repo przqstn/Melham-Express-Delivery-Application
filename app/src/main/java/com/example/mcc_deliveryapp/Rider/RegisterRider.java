@@ -77,7 +77,9 @@ public class RegisterRider extends AppCompatActivity {
     EditText password, pwConfirm;
 
     //commits
-    ImageView vehiclefront;
+    ImageView vFrontbtn, vSidebtn, vBackbtn, vCertRegbtn, vProfbtn, vPClearancebtn;
+    Boolean frontClicked=false, sideCliked=false, backClicked=false, certRegClicked=false,
+            profClicked=false, pClearanceClicked=false;
     Uri imageUri;
     FirebaseStorage storage;
     StorageReference storageReference;
@@ -463,17 +465,57 @@ public class RegisterRider extends AppCompatActivity {
         Button nextstep3 = regRiderStep3.findViewById(R.id.nextstep3);
         Button nextstep4 = regRiderStep4.findViewById(R.id.nextstep4);
         Button register = regRiderStep5.findViewById(R.id.register);
-
+        //ImageView vFrontbtn, vSidebtn, vBackbtn, vCertRegbtn, vProfbtn, vPClearancebtn;
+        //Boolean frontClicked, sideCliked, backClicked, certRegClicked, profClicked, pClearanceClicked;
         //for image upload
-        vehiclefront = regRiderStep5.findViewById(R.id.vehiclefront);
-        vehiclefront.setOnClickListener(new View.OnClickListener() {
+        vFrontbtn = regRiderStep5.findViewById(R.id.imgfront);
+        vFrontbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 choosePicture();
+                frontClicked=true;
             }
         });
-
+        vSidebtn = regRiderStep5.findViewById(R.id.imgside);
+        vSidebtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                choosePicture();
+                sideCliked=true;
+            }
+        });
+        vBackbtn = regRiderStep5.findViewById(R.id.imgback);
+        vBackbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                choosePicture();
+                backClicked=true;
+            }
+        });
+        vCertRegbtn = regRiderStep5.findViewById(R.id.imgcert);
+        vCertRegbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                choosePicture();
+                certRegClicked=true;
+            }
+        });
+        vProfbtn = regRiderStep5.findViewById(R.id.imgprofile);
+        vProfbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                choosePicture();
+                profClicked=true;
+            }
+        });
+        vPClearancebtn = regRiderStep5.findViewById(R.id.imgclearance);
+        vPClearancebtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                choosePicture();
+                pClearanceClicked=true;
+            }
+        });
 
         EditText etDatePicker =  regRiderStep2.findViewById(R.id.etRiderDateofBirth);
 
@@ -588,13 +630,6 @@ public class RegisterRider extends AppCompatActivity {
                 checkEmptyEditText(regRiderStep5.findViewById(R.id.etEmergencyPerson));
                 checkEmptyEditText(regRiderStep5.findViewById(R.id.etEmergencyNumber));
 
-                vehiclefront.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-
-                        choosePicture();
-                    }
-                });
 
                 if(hasError)
                 {
@@ -657,8 +692,32 @@ public class RegisterRider extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode==1 && resultCode==RESULT_OK && data!=null && data.getData()!=null){
             imageUri=data.getData();
-            vehiclefront.setImageURI(imageUri);
-            uploadPicture();
+            if(frontClicked){
+                vFrontbtn.setImageURI(imageUri);
+                uploadPicture();
+                frontClicked=false;
+            }else if(sideCliked){
+                vSidebtn.setImageURI(imageUri);
+                uploadPicture();
+                sideCliked=false;
+            }else if(backClicked){
+                vBackbtn.setImageURI(imageUri);
+                uploadPicture();
+                backClicked=false;
+            }else if(certRegClicked){
+                vCertRegbtn.setImageURI(imageUri);
+                uploadPicture();
+                certRegClicked=false;
+            }else if(profClicked){
+                vProfbtn.setImageURI(imageUri);
+                uploadPicture();
+                profClicked=false;
+            }else if(pClearanceClicked){
+                vPClearancebtn.setImageURI(imageUri);
+                uploadPicture();
+                pClearanceClicked=false;
+            }
+
         }
     }
     //for image upload
