@@ -16,6 +16,8 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.example.mcc_deliveryapp.R;
+import com.example.mcc_deliveryapp.Rider.riderLogin;
+import com.example.mcc_deliveryapp.Rider.rider_dashboard;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
@@ -118,9 +120,13 @@ public class signInFragment extends Fragment {
 
                         name.setText(nameFromDB);
                         usernum.setText(usernumFromDB);
+
                         Intent intent = new Intent(getActivity(),user_permission.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        intent.putExtra("username", nameFromDB);
+                        intent.putExtra("phonenum", usernumFromDB);
                         startActivity(intent);
+
                     /*
                         EditText etVerifyCode_user = VerifyNum.findViewById(R.id.etVerify_user);
                         etCode_user = VerifyNum.findViewById(R.id.etVerify_user);
