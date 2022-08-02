@@ -40,9 +40,10 @@ Button btn_permission;
 		if(ContextCompat.checkSelfPermission(user_permission.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)
 		{
 			Intent home = new Intent(user_permission.this,user_home.class);
-			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-			intent.putExtra("phonenum", phonenum);
-			intent.putExtra("username", name);
+			home.putExtra("phonenum", phonenum);
+			home.putExtra("username", name);
+			System.out.println("Permission " + name + phonenum);
+
 			startActivity(home);
 			finish();
 			return;
