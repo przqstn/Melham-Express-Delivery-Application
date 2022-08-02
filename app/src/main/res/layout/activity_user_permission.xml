@@ -19,9 +19,9 @@
         android:padding="20dp">
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/ic_launcher" />
+            android:layout_width="116dp"
+            android:layout_height="71dp"
+            android:src="@drawable/androidhead" />
 
         <TextView
             android:layout_width="match_parent"
