@@ -2,10 +2,12 @@ package com.example.mcc_deliveryapp.User;
 
 import android.Manifest;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
@@ -32,6 +34,12 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+
+
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
@@ -91,59 +99,6 @@ public class user_parceltransaction extends FragmentActivity implements OnMapRea
 	private Location lastKnownLocation;
 	private static final int DEFAULT_ZOOM = 15;
 	private final LatLng defaultLocation = new LatLng(14.594197, 120.970414);
-
-
-	private void getDeviceLocation() {
-		/*
-		 * Get the best and most recent location of the device, which may be null in rare
-		 * cases when a location is not available.
-		 */
-		try {
-			if (locationPermissionGranted) {
-				Task<Location> locationResult = fusedLocationProviderClient.getLastLocation();
-				locationResult.addOnCompleteListener(this, new OnCompleteListener<Location>() {
-					@Override
-					public void onComplete(@NonNull Task<Location> task) {
-						if (task.isSuccessful()) {
-							// Set the map's camera position to the current location of the device.
-							lastKnownLocation = task.getResult();
-
-							if (lastKnownLocation != null) {
-								mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
-										new LatLng(lastKnownLocation.getLatitude(),
-												lastKnownLocation.getLongitude()), DEFAULT_ZOOM));
-							}
-						} else {
-							Log.d(TAG, "Current location is null. Using defaults.");
-							Log.e(TAG, "Exception: %s", task.getException());
-							mMap.moveCamera(CameraUpdateFactory
-									.newLatLngZoom(defaultLocation, DEFAULT_ZOOM));
-							mMap.getUiSettings().setMyLocationButtonEnabled(false);
-						}
-					}
-				});
-			}
-		} catch (SecurityException e)  {
-			Log.e("Exception: %s", e.getMessage(), e);
-		}
-	}
-
-	private void getLocationPermission() {
-		/*
-		 * Request location permission, so that we can get the location of the
-		 * device. The result of the permission request is handled by a callback,
-		 * onRequestPermissionsResult.
-		 */
-		if (ContextCompat.checkSelfPermission(this.getApplicationContext(),
-				android.Manifest.permission.ACCESS_FINE_LOCATION)
-				== PackageManager.PERMISSION_GRANTED) {
-			locationPermissionGranted = true;
-		} else {
-			ActivityCompat.requestPermissions(this,
-					new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
-					PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
-		}
-	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -302,8 +257,59 @@ public class user_parceltransaction extends FragmentActivity implements OnMapRea
 //			}
 //		});
 
+	}
 
 
+	private void getDeviceLocation() {
+		/*
+		 * Get the best and most recent location of the device, which may be null in rare
+		 * cases when a location is not available.
+		 */
+		try {
+			if (locationPermissionGranted) {
+				Task<Location> locationResult = fusedLocationProviderClient.getLastLocation();
+				locationResult.addOnCompleteListener(this, new OnCompleteListener<Location>() {
+					@Override
+					public void onComplete(@NonNull Task<Location> task) {
+						if (task.isSuccessful()) {
+							// Set the map's camera position to the current location of the device.
+							lastKnownLocation = task.getResult();
+
+							if (lastKnownLocation != null) {
+								mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
+										new LatLng(lastKnownLocation.getLatitude(),
+												lastKnownLocation.getLongitude()), DEFAULT_ZOOM));
+							}
+						} else {
+							Log.d(TAG, "Current location is null. Using defaults.");
+							Log.e(TAG, "Exception: %s", task.getException());
+							mMap.moveCamera(CameraUpdateFactory
+									.newLatLngZoom(defaultLocation, DEFAULT_ZOOM));
+							mMap.getUiSettings().setMyLocationButtonEnabled(false);
+						}
+					}
+				});
+			}
+		} catch (SecurityException e)  {
+			Log.e("Exception: %s", e.getMessage(), e);
+		}
+	}
+
+	private void getLocationPermission() {
+		/*
+		 * Request location permission, so that we can get the location of the
+		 * device. The result of the permission request is handled by a callback,
+		 * onRequestPermissionsResult.
+		 */
+		if (ContextCompat.checkSelfPermission(this.getApplicationContext(),
+				android.Manifest.permission.ACCESS_FINE_LOCATION)
+				== PackageManager.PERMISSION_GRANTED) {
+			locationPermissionGranted = true;
+		} else {
+			ActivityCompat.requestPermissions(this,
+					new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
+					PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
+		}
 	}
 
 
@@ -449,6 +455,15 @@ public class user_parceltransaction extends FragmentActivity implements OnMapRea
 		}
 	}
 
+	private BitmapDescriptor bitmapDescriptorFromVector(Context context, int vectorResId) {
+		Drawable vectorDrawable = ContextCompat.getDrawable(context, vectorResId);
+		vectorDrawable.setBounds(0, 0, vectorDrawable.getIntrinsicWidth(), vectorDrawable.getIntrinsicHeight());
+		Bitmap bitmap = Bitmap.createBitmap(vectorDrawable.getIntrinsicWidth(), vectorDrawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+		Canvas canvas = new Canvas(bitmap);
+		vectorDrawable.draw(canvas);
+		return BitmapDescriptorFactory.fromBitmap(bitmap);
+	}
+
 	@Override
 	public void onDirectionFinderSuccess(List<Route> routes) {
 		progressDialog.dismiss();
@@ -462,11 +477,11 @@ public class user_parceltransaction extends FragmentActivity implements OnMapRea
 			((TextView) findViewById(R.id.tvDistance)).setText(route.distance.text);
 
 			originMarkers.add(mMap.addMarker(new MarkerOptions()
-					.icon(BitmapDescriptorFactory.fromResource(R.drawable.pickup))
+					.icon(bitmapDescriptorFromVector(user_parceltransaction.this, R.drawable.pickup))
 					.title(route.startAddress)
 					.position(route.startLocation)));
 			destinationMarkers.add(mMap.addMarker(new MarkerOptions()
-					.icon(BitmapDescriptorFactory.fromResource(R.drawable.location))
+					.icon(bitmapDescriptorFromVector(user_parceltransaction.this, R.drawable.location))
 					.title(route.endAddress)
 					.position(route.endLocation)));
 
