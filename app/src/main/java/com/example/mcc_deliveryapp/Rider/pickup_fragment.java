@@ -118,6 +118,8 @@ public class pickup_fragment extends Fragment {
 						dr.child(dataSnapshot.getKey()).child("parcelstatus").setValue("Ongoing"+riderNum);
 						dr.child(dataSnapshot.getKey()).child("ridernum").setValue(riderNum);
 						dr.child(dataSnapshot.getKey()).child("ridername").setValue(riderName);
+						String userdefnum = dataSnapshot.child("defaultUserNum").getValue().toString();
+						dr.child(dataSnapshot.getKey()).child("userParcelStatus").setValue("Ongoing"+userdefnum);
 					}
 
 					@Override
