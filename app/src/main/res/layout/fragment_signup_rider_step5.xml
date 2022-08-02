@@ -286,6 +286,7 @@
                 android:background="@drawable/graphics_button_1"
                 android:fontFamily="@font/montserrat_medium"
                 android:gravity="center"
+                android:onClick="register"
                 android:text="Register"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
