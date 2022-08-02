@@ -27,6 +27,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.mcc_deliveryapp.R;
+import com.example.mcc_deliveryapp.User.UserHelperClass;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -52,52 +53,42 @@ import com.google.firebase.storage.UploadTask;
 
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 public class RegisterRider extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
-    private FirebaseDatabase db;
-    private DatabaseReference root;
+    private FirebaseDatabase db = FirebaseDatabase.getInstance();
+    private DatabaseReference rootie;
     private DatePickerDialog datePickerDialog;
-    private Dialog regRiderStep1, regRiderStep2, regRiderStep3, regRiderStep4, regRiderStep5,
-            successfullyRegistered, VerifyNum;
-    private Boolean hasError = false, frontImgClicked =false, sideImgClicked =false,
-            backImgClicked =false, certRegImgClicked =false, profImgClicked =false,
-            pClearanceImgClicked =false;
-    private String verificationCodeBySystem, vehiclebrandandmodel, setImgName;
-    private EditText password, pwConfirm, etCode, etPhoneNum, etVerifyCode, etDatePicker,
-            etBrandVehicle, etModelVehicle;
-    private ImageView imgFront, imgSide, imgBack, imgCertReg, imgProfPic, imgClearance;
+    private Dialog regRiderStep1, regRiderStep2, regRiderStep3, regRiderStep4, regRiderStep5;
+    private Boolean hasError = false;
+    private String verificationCodeBySystem, vehiclebrandandmodel;
+    private EditText password, pwConfirm, etCode;
+    private ImageView vFrontbtn, vSidebtn, vBackbtn, vCertRegbtn, vProfbtn, vPClearancebtn;
+    private Boolean frontClicked=false, sideCliked=false, backClicked=false, certRegClicked=false,
+            profClicked=false, pClearanceClicked=false;
     private Uri imageUri;
     private FirebaseStorage storage;
     private StorageReference storageReference;
-    private Spinner spinCity, spinVehicle, spinBrand;
-    private CheckBox checkRider;
-    private Button btnReg, btnSuccessOkay, verify, nextstep1, nextstep2, nextstep3, nextstep4,
-            register;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register_rider);
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
-        db = FirebaseDatabase.getInstance();
         mAuth = FirebaseAuth.getInstance();
-        etPhoneNum = findViewById(R.id.editTextPhoneNumDriver);
+        setContentView(R.layout.activity_register_rider);
+        EditText etPhoneNum = findViewById(R.id.editTextPhoneNumDriver);
         password = findViewById(R.id.pwfield);
         pwConfirm = findViewById(R.id.pwConfirm);
-        btnReg = findViewById(R.id.btnRegRider);
-        checkRider = findViewById(R.id.checkBoxAgreeRider);
-        spinCity = findViewById(R.id.spinnerCityDriver);
-        spinVehicle = findViewById(R.id.spinnerVehicleDriver);
-        spinBrand =  findViewById(R.id.spinnerVehicleBrand);
-        etVerifyCode =  VerifyNum.findViewById(R.id.etVerify);
-        etCode =  VerifyNum.findViewById(R.id.etVerify);
-        etDatePicker =  regRiderStep2.findViewById(R.id.etRiderDateofBirth);
-        verify =  VerifyNum.findViewById(R.id.btnVerify);
+        Button btnReg = findViewById(R.id.btnRegRider);
+        CheckBox checkRider = findViewById(R.id.checkBoxAgreeRider);
+        Spinner spinCity = findViewById(R.id.spinnerCityDriver);
+        Spinner spinVehicle = findViewById(R.id.spinnerVehicleDriver);
+        Spinner spinBrand =  findViewById(R.id.spinnerVehicleBrand);
 
         //Getting City Rider Item List
         ArrayAdapter<CharSequence> adapterCity = ArrayAdapter.createFromResource(this, R.array.cityRider,R.layout.spinner_items_1);
@@ -200,8 +191,8 @@ public class RegisterRider extends AppCompatActivity {
             }
         });
 
-        etModelVehicle = findViewById(R.id.editTextVehicleModel);
-        etBrandVehicle = findViewById(R.id.editTextVehicleBrand);
+        EditText etModelVehicle = findViewById(R.id.editTextVehicleModel);
+        EditText etBrandVehicle = findViewById(R.id.editTextVehicleBrand);
         //Spinner Vehicle Brand
         spinBrand.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -239,11 +230,12 @@ public class RegisterRider extends AppCompatActivity {
             }
         });
 
-        VerifyNum = new Dialog(RegisterRider.this);
+        Dialog VerifyNum = new Dialog(RegisterRider.this);
         VerifyNum.setContentView(R.layout.fragment_rider_phonenum_verify);
         VerifyNum.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
         VerifyNum.setCancelable(true);
         VerifyNum.getWindow().getAttributes().windowAnimations = R.style.animation;
+
 
         btnReg.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -367,33 +359,32 @@ public class RegisterRider extends AppCompatActivity {
                 }
 
                 if (PWgood && clear)
-                    {
+                {
 
-                        db = FirebaseDatabase.getInstance();
-                        root = db.getReference("riders");
-                        // Getting the value of The given info in sign up to store in firebase
-                        String phoneNum = etPhoneNum.getEditableText().toString();
-                        Query accCheck = root.orderByChild("riderphone").equalTo(phoneNum);
-                        // To check if the rider already exists
-                        accCheck.addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(DataSnapshot snapshot) {
-                                if (snapshot.exists()) {
-                                    Toast.makeText(btnReg.getContext(), "Account Already Exists. Please Sign In", Toast.LENGTH_SHORT).show();
-                                }
-                                else{
-                                    sendVerificationCodeToUser(etPhoneNum.getText().toString());
-                                    regRiderStep1.show();
-                                    //VerifyNum.show();
-                                }
-
-                           }
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError error) {
-
+                    db = FirebaseDatabase.getInstance();
+                    rootie = db.getReference("riders");
+                    // Getting the value of The given info in sign up to store in firebase
+                    String phoneNum = etPhoneNum.getEditableText().toString();
+                    Query accCheck = rootie.orderByChild("riderphone").equalTo(phoneNum);
+                    // To check if the rider already exists
+                    accCheck.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot snapshot) {
+                            if (snapshot.exists()) {
+                                Toast.makeText(btnReg.getContext(), "Account Already Exists. Please Sign In", Toast.LENGTH_SHORT).show();
                             }
-                        });
-                    }
+                            else{
+                                sendVerificationCodeToUser(etPhoneNum.getText().toString());
+                                VerifyNum.show();
+                            }
+
+                        }
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+                }
 
             }
 
@@ -429,13 +420,13 @@ public class RegisterRider extends AppCompatActivity {
         regRiderStep5.setCancelable(true);
         regRiderStep5.getWindow().getAttributes().windowAnimations = R.style.animation;
 
-        successfullyRegistered = new Dialog(RegisterRider.this);
+        Dialog successfullyRegistered = new Dialog(RegisterRider.this);
         successfullyRegistered.setContentView(R.layout.success_dialog);
         successfullyRegistered.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
         successfullyRegistered.setCancelable(true);
         successfullyRegistered.getWindow().getAttributes().windowAnimations = R.style.animation;
 
-        btnSuccessOkay = successfullyRegistered.findViewById(R.id.btnSuccessRegRider);
+        Button btnSuccessOkay = successfullyRegistered.findViewById(R.id.btnSuccessRegRider);
 
 
         btnSuccessOkay.setOnClickListener(new View.OnClickListener() {
@@ -446,8 +437,10 @@ public class RegisterRider extends AppCompatActivity {
             }
         });
 
+        EditText etVerifyCode =  VerifyNum.findViewById(R.id.etVerify);
+        etCode =  VerifyNum.findViewById(R.id.etVerify);
+        Button verify =  VerifyNum.findViewById(R.id.btnVerify);
 
-        //verify button
         verify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -456,7 +449,7 @@ public class RegisterRider extends AppCompatActivity {
                 {
                     etVerifyCode.setError("Required");
                     Toast.makeText(RegisterRider.this,"Please Enter The Code.",Toast.LENGTH_SHORT).show();
-                   return;
+                    return;
                 }
                 verifyCode(code);
                 VerifyNum.dismiss();
@@ -464,67 +457,68 @@ public class RegisterRider extends AppCompatActivity {
         });
 
 
-        nextstep1 = regRiderStep1.findViewById(R.id.nextstep1);
-        nextstep2 = regRiderStep2.findViewById(R.id.nextstep2);
-        nextstep3 = regRiderStep3.findViewById(R.id.nextstep3);
-        nextstep4 = regRiderStep4.findViewById(R.id.nextstep4);
-        register = regRiderStep5.findViewById(R.id.register);
+        Button nextstep1 = regRiderStep1.findViewById(R.id.nextstep1);
+        Button nextstep2 = regRiderStep2.findViewById(R.id.nextstep2);
+        Button nextstep3 = regRiderStep3.findViewById(R.id.nextstep3);
+        Button nextstep4 = regRiderStep4.findViewById(R.id.nextstep4);
+        Button register = regRiderStep5.findViewById(R.id.register);
         //for image upload
         //vehicle front button
-        imgFront = regRiderStep5.findViewById(R.id.imgfront);
-        imgFront.setOnClickListener(new View.OnClickListener() {
+        vFrontbtn = regRiderStep5.findViewById(R.id.imgfront);
+        vFrontbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 choosePicture();
-                frontImgClicked =true;
+                frontClicked=true;
             }
         });
         //vehicle side button
-        imgSide = regRiderStep5.findViewById(R.id.imgside);
-        imgSide.setOnClickListener(new View.OnClickListener() {
+        vSidebtn = regRiderStep5.findViewById(R.id.imgside);
+        vSidebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 choosePicture();
-                sideImgClicked =true;
+                sideCliked=true;
             }
         });
         //vehicle back button
-        imgBack = regRiderStep5.findViewById(R.id.imgback);
-        imgBack.setOnClickListener(new View.OnClickListener() {
+        vBackbtn = regRiderStep5.findViewById(R.id.imgback);
+        vBackbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 choosePicture();
-                backImgClicked =true;
+                backClicked=true;
             }
         });
         //vehicle cert reg button
-        imgCertReg = regRiderStep5.findViewById(R.id.imgcert);
-        imgCertReg.setOnClickListener(new View.OnClickListener() {
+        vCertRegbtn = regRiderStep5.findViewById(R.id.imgcert);
+        vCertRegbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 choosePicture();
-                certRegImgClicked =true;
+                certRegClicked=true;
             }
         });
         //vehicle profile photo button
-        imgProfPic = regRiderStep5.findViewById(R.id.imgprofile);
-        imgProfPic.setOnClickListener(new View.OnClickListener() {
+        vProfbtn = regRiderStep5.findViewById(R.id.imgprofile);
+        vProfbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 choosePicture();
-                profImgClicked =true;
+                profClicked=true;
             }
         });
         //vehicle police clearance button
-        imgClearance = regRiderStep5.findViewById(R.id.imgclearance);
-        imgClearance.setOnClickListener(new View.OnClickListener() {
+        vPClearancebtn = regRiderStep5.findViewById(R.id.imgclearance);
+        vPClearancebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 choosePicture();
-                pClearanceImgClicked =true;
+                pClearanceClicked=true;
             }
         });
-        //date picker button
+
+        EditText etDatePicker =  regRiderStep2.findViewById(R.id.etRiderDateofBirth);
         etDatePicker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -585,8 +579,8 @@ public class RegisterRider extends AppCompatActivity {
                     regRiderStep2.dismiss();
                 }
 
-                    }
-                });
+            }
+        });
 
         nextstep3.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -610,70 +604,76 @@ public class RegisterRider extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                    regRiderStep5.show();
-                    regRiderStep4.dismiss();
+                regRiderStep5.show();
+                regRiderStep4.dismiss();
             }
         });
 
-    }
+        register.setOnClickListener(new View.OnClickListener() {
 
-    public void register(View view){
-        String riderName  = getTextFromEditText(regRiderStep1.findViewById(R.id.etNameRider));
-        String riderEmail = getTextFromEditText(regRiderStep1.findViewById(R.id.etEmailRider));
-        String riderDateofBirth = getTextFromEditText(regRiderStep2.findViewById(R.id.etRiderDateofBirth));
-        String riderDriverLicenseNumber = getTextFromEditText(regRiderStep2.findViewById(R.id.etRiderDriverLicense));
-        String riderDriverLicenseExpiry = getTextFromEditText(regRiderStep2.findViewById(R.id.etRiderDriverLicenseExpiry));
-        String riderCurrentAddress = getTextFromEditText(regRiderStep2.findViewById(R.id.etRiderCurrentAddress));
-        String riderVehiclePlateNumber = getTextFromEditText(regRiderStep3.findViewById(R.id.etRiderVehicleNumber));
-        String riderVehicleManufacturerYear = getTextFromEditText(regRiderStep3.findViewById(R.id.etRiderManufactureYear));
-        String riderEMPerson = getTextFromEditText(regRiderStep5.findViewById(R.id.etEmergencyPerson));
-        String riderEMNumber = getTextFromEditText(regRiderStep5.findViewById(R.id.etEmergencyNumber));
-        String phonenum = getTextFromEditText(findViewById(R.id.editTextPhoneNumDriver));
-        String riderpass = getTextFromEditText(findViewById(R.id.pwfield));
-        checkEmptyEditText(regRiderStep5.findViewById(R.id.etEmergencyPerson));
-        checkEmptyEditText(regRiderStep5.findViewById(R.id.etEmergencyNumber));
+            @Override
+            public void onClick(View view) {
 
-        if(hasError)
-        {
-            hasError = false;
-            return;
-        }
-        else
-        {
-            FirebaseUser userCurrent = mAuth.getCurrentUser();
-            UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder().setDisplayName(String.valueOf(riderName)).build();
-            userCurrent.updateProfile(profileUpdates);
-            root = db.getReference();
-
-            HashMap riderInfo = new HashMap<>();
-            riderInfo.put("city",spinCity.getSelectedItem().toString());
-            riderInfo.put("vehicletype",spinVehicle.getSelectedItem().toString());
-            riderInfo.put("riderphone",phonenum);
-            riderInfo.put("name",riderName);
-            riderInfo.put("email",riderEmail);
-            riderInfo.put("riderpass",riderpass);
-            riderInfo.put("dateofbirth",riderDateofBirth);
-            riderInfo.put("driverlicensenumber",riderDriverLicenseNumber);
-            riderInfo.put("driverlicenseexpiry",riderDriverLicenseExpiry);
-            riderInfo.put("currentaddress",riderCurrentAddress);
-            riderInfo.put("vehicleplatenumber",riderVehiclePlateNumber);
-            riderInfo.put("manufactureryear",riderVehicleManufacturerYear);
-            riderInfo.put("emergencyperson",riderEMPerson);
-            riderInfo.put("emergencynumber",riderEMNumber);
-            riderInfo.put("vehiclebrandandmodel",vehiclebrandandmodel);
+                String riderName  = getTextFromEditText(regRiderStep1.findViewById(R.id.etNameRider));
+                String riderEmail = getTextFromEditText(regRiderStep1.findViewById(R.id.etEmailRider));
+                String riderDateofBirth = getTextFromEditText(regRiderStep2.findViewById(R.id.etRiderDateofBirth));
+                String riderDriverLicenseNumber = getTextFromEditText(regRiderStep2.findViewById(R.id.etRiderDriverLicense));
+                String riderDriverLicenseExpiry = getTextFromEditText(regRiderStep2.findViewById(R.id.etRiderDriverLicenseExpiry));
+                String riderCurrentAddress = getTextFromEditText(regRiderStep2.findViewById(R.id.etRiderCurrentAddress));
+                String riderVehiclePlateNumber = getTextFromEditText(regRiderStep3.findViewById(R.id.etRiderVehicleNumber));
+                String riderVehicleManufacturerYear = getTextFromEditText(regRiderStep3.findViewById(R.id.etRiderManufactureYear));
+                String riderEMPerson = getTextFromEditText(regRiderStep5.findViewById(R.id.etEmergencyPerson));
+                String riderEMNumber = getTextFromEditText(regRiderStep5.findViewById(R.id.etEmergencyNumber));
+                String phonenum = getTextFromEditText(findViewById(R.id.editTextPhoneNumDriver));
+                String riderpass = getTextFromEditText(findViewById(R.id.pwfield));
+                checkEmptyEditText(regRiderStep5.findViewById(R.id.etEmergencyPerson));
+                checkEmptyEditText(regRiderStep5.findViewById(R.id.etEmergencyNumber));
 
 
-
-            root.child("riders").child(phonenum).setValue(riderInfo).addOnCompleteListener(new OnCompleteListener<Void>() {
-                @Override
-                public void onComplete(@NonNull Task<Void> task) {
-
-                    successfullyRegistered.show();
-                    regRiderStep5.dismiss();
+                if(hasError)
+                {
+                    hasError = false;
+                    return;
                 }
+                else
+                {
+                    FirebaseUser userCurrent = mAuth.getCurrentUser();
+                    UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder().setDisplayName(String.valueOf(riderName)).build();
+                    userCurrent.updateProfile(profileUpdates);
+                    rootie = db.getReference();
 
-            });
-        }
+                    HashMap riderInfo = new HashMap<>();
+                    riderInfo.put("city",spinCity.getSelectedItem().toString());
+                    riderInfo.put("vehicletype",spinVehicle.getSelectedItem().toString());
+                    riderInfo.put("riderphone",phonenum);
+                    riderInfo.put("name",riderName);
+                    riderInfo.put("email",riderEmail);
+                    riderInfo.put("riderpass",riderpass);
+                    riderInfo.put("dateofbirth",riderDateofBirth);
+                    riderInfo.put("driverlicensenumber",riderDriverLicenseNumber);
+                    riderInfo.put("driverlicenseexpiry",riderDriverLicenseExpiry);
+                    riderInfo.put("currentaddress",riderCurrentAddress);
+                    riderInfo.put("vehicleplatenumber",riderVehiclePlateNumber);
+                    riderInfo.put("manufactureryear",riderVehicleManufacturerYear);
+                    riderInfo.put("emergencyperson",riderEMPerson);
+                    riderInfo.put("emergencynumber",riderEMNumber);
+                    riderInfo.put("vehiclebrandandmodel",vehiclebrandandmodel);
+
+
+
+                    rootie.child("riders").child(phonenum).setValue(riderInfo).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+
+                            successfullyRegistered.show();
+                            regRiderStep5.dismiss();
+                        }
+                    });
+                }
+            }
+
+        });
+
     }
 
     //to set image
@@ -689,37 +689,33 @@ public class RegisterRider extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode==1 && resultCode==RESULT_OK && data!=null && data.getData()!=null){
             imageUri=data.getData();
-            if(frontImgClicked){
-                imgFront.setImageURI(imageUri);
-                setImgName="front_vehicle";
+
+            if(frontClicked){
+                vFrontbtn.setImageURI(imageUri);
                 uploadPicture();
-                frontImgClicked =false;
-            }else if(sideImgClicked){
-                imgSide.setImageURI(imageUri);
-                setImgName="side_vehicle";
+                frontClicked=false;
+            }else if(sideCliked){
+                vSidebtn.setImageURI(imageUri);
                 uploadPicture();
-                sideImgClicked =false;
-            }else if(backImgClicked){
-                imgBack.setImageURI(imageUri);
-                setImgName="back_vehicle";
+                sideCliked=false;
+            }else if(backClicked){
+                vBackbtn.setImageURI(imageUri);
                 uploadPicture();
-                backImgClicked =false;
-            }else if(certRegImgClicked){
-                imgCertReg.setImageURI(imageUri);
-                setImgName="cert_registration";
+                backClicked=false;
+            }else if(certRegClicked){
+                vCertRegbtn.setImageURI(imageUri);
                 uploadPicture();
-                certRegImgClicked =false;
-            }else if(profImgClicked){
-                imgProfPic.setImageURI(imageUri);
-                setImgName="profile_picture";
+                certRegClicked=false;
+            }else if(profClicked){
+                vProfbtn.setImageURI(imageUri);
                 uploadPicture();
-                profImgClicked =false;
-            }else if(pClearanceImgClicked){
-                imgClearance.setImageURI(imageUri);
-                setImgName="Brgy_Clearance";
+                profClicked=false;
+            }else if(pClearanceClicked){
+                vPClearancebtn.setImageURI(imageUri);
                 uploadPicture();
-                pClearanceImgClicked =false;
+                pClearanceClicked=false;
             }
+
         }
     }
     //upload method
@@ -727,13 +723,17 @@ public class RegisterRider extends AppCompatActivity {
         final ProgressDialog pd= new ProgressDialog(this);
         pd.setTitle("Uploading Image");
         pd.show();
-        StorageReference riversRef=storageReference.child(etPhoneNum.getText().toString()+"/"+setImgName);
+
+        final String randomKey = UUID.randomUUID().toString();
+        StorageReference riversRef=storageReference.child("images/"+randomKey);
+
         riversRef.putFile(imageUri)
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                         pd.dismiss();
                         Snackbar.make(findViewById(android.R.id.content), "Image Uploaded.", Snackbar.LENGTH_LONG).show();
+
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -753,6 +753,66 @@ public class RegisterRider extends AppCompatActivity {
 
 
     }
+/*
+        String strength = "";
+
+        //check for password strength
+        if (good)
+        {
+            float lengthscore = 0;
+            float UCscore = 0;
+            float numscore = 0;
+            float strengthscore = 0;
+            if (password.length() == 6)
+            {
+                lengthscore = (float) 0.2;
+            }
+            else if (password.length()>= 7 && password.length() <= 9)
+            {
+                lengthscore = (float) 0.3;
+            }
+            else if (password.length() > 9)
+            {
+                lengthscore = (float) 0.5;
+            }
+            if(upper == 2)
+            {
+                UCscore = (float) 0.2;
+            }
+            else if(upper > 2)
+            {
+                UCscore = (float) 0.3;
+            }
+            if(digits == 2)
+            {
+                numscore = (float) 0.2;
+            }
+            else if(digits > 2)
+            {
+                numscore = (float) 0.3;
+            }
+            strengthscore = lengthscore + UCscore + numscore;
+
+            if (strengthscore < 0.5)
+            {
+                strength = "Weak";
+            }
+            else if (strengthscore >= 0.5 && strengthscore < 1)
+            {
+                strength = "Moderate";
+            }
+            else if (strengthscore >=1 )
+            {
+                strength = "Strong";
+            }
+            ((TextView)findViewById(R.id.pwStrength)).setText("Password Strength: " + strength);
+        }
+
+        else {
+            ((TextView)findViewById(R.id.pwStrength)).setText("Password does not satisfy conditions");
+        }
+    }
+*/
 
     private String getTextFromEditText(EditText et)
     {
