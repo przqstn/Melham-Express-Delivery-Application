@@ -9,7 +9,6 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -28,7 +27,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.mcc_deliveryapp.R;
-import com.example.mcc_deliveryapp.User.UserHelperClass;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -54,23 +52,23 @@ import com.google.firebase.storage.UploadTask;
 
 import java.util.Calendar;
 import java.util.HashMap;
-import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 public class RegisterRider extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private FirebaseDatabase db;
-    private DatabaseReference rootie;
+    private DatabaseReference root;
     private DatePickerDialog datePickerDialog;
     private Dialog regRiderStep1, regRiderStep2, regRiderStep3, regRiderStep4, regRiderStep5,
             successfullyRegistered, VerifyNum;
-    private Boolean hasError = false, frontClicked=false, sideCliked=false, backClicked=false,
-            certRegClicked=false, profClicked=false, pClearanceClicked=false;
+    private Boolean hasError = false, frontImgClicked =false, sideImgClicked =false,
+            backImgClicked =false, certRegImgClicked =false, profImgClicked =false,
+            pClearanceImgClicked =false;
     private String verificationCodeBySystem, vehiclebrandandmodel, setImgName;
     private EditText password, pwConfirm, etCode, etPhoneNum, etVerifyCode, etDatePicker,
             etBrandVehicle, etModelVehicle;
-    private ImageView vFrontbtn, vSidebtn, vBackbtn, vCertRegbtn, vProfbtn, vPClearancebtn;
+    private ImageView imgFront, imgSide, imgBack, imgCertReg, imgProfPic, imgClearance;
     private Uri imageUri;
     private FirebaseStorage storage;
     private StorageReference storageReference;
@@ -96,6 +94,10 @@ public class RegisterRider extends AppCompatActivity {
         spinCity = findViewById(R.id.spinnerCityDriver);
         spinVehicle = findViewById(R.id.spinnerVehicleDriver);
         spinBrand =  findViewById(R.id.spinnerVehicleBrand);
+        etVerifyCode =  VerifyNum.findViewById(R.id.etVerify);
+        etCode =  VerifyNum.findViewById(R.id.etVerify);
+        etDatePicker =  regRiderStep2.findViewById(R.id.etRiderDateofBirth);
+        verify =  VerifyNum.findViewById(R.id.btnVerify);
 
         //Getting City Rider Item List
         ArrayAdapter<CharSequence> adapterCity = ArrayAdapter.createFromResource(this, R.array.cityRider,R.layout.spinner_items_1);
@@ -368,10 +370,10 @@ public class RegisterRider extends AppCompatActivity {
                     {
 
                         db = FirebaseDatabase.getInstance();
-                        rootie = db.getReference("riders");
+                        root = db.getReference("riders");
                         // Getting the value of The given info in sign up to store in firebase
                         String phoneNum = etPhoneNum.getEditableText().toString();
-                        Query accCheck = rootie.orderByChild("riderphone").equalTo(phoneNum);
+                        Query accCheck = root.orderByChild("riderphone").equalTo(phoneNum);
                         // To check if the rider already exists
                         accCheck.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
@@ -444,10 +446,8 @@ public class RegisterRider extends AppCompatActivity {
             }
         });
 
-        etVerifyCode =  VerifyNum.findViewById(R.id.etVerify);
-        etCode =  VerifyNum.findViewById(R.id.etVerify);
-        verify =  VerifyNum.findViewById(R.id.btnVerify);
 
+        //verify button
         verify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -471,61 +471,60 @@ public class RegisterRider extends AppCompatActivity {
         register = regRiderStep5.findViewById(R.id.register);
         //for image upload
         //vehicle front button
-        vFrontbtn = regRiderStep5.findViewById(R.id.imgfront);
-        vFrontbtn.setOnClickListener(new View.OnClickListener() {
+        imgFront = regRiderStep5.findViewById(R.id.imgfront);
+        imgFront.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 choosePicture();
-                frontClicked=true;
+                frontImgClicked =true;
             }
         });
         //vehicle side button
-        vSidebtn = regRiderStep5.findViewById(R.id.imgside);
-        vSidebtn.setOnClickListener(new View.OnClickListener() {
+        imgSide = regRiderStep5.findViewById(R.id.imgside);
+        imgSide.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 choosePicture();
-                sideCliked=true;
+                sideImgClicked =true;
             }
         });
         //vehicle back button
-        vBackbtn = regRiderStep5.findViewById(R.id.imgback);
-        vBackbtn.setOnClickListener(new View.OnClickListener() {
+        imgBack = regRiderStep5.findViewById(R.id.imgback);
+        imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 choosePicture();
-                backClicked=true;
+                backImgClicked =true;
             }
         });
         //vehicle cert reg button
-        vCertRegbtn = regRiderStep5.findViewById(R.id.imgcert);
-        vCertRegbtn.setOnClickListener(new View.OnClickListener() {
+        imgCertReg = regRiderStep5.findViewById(R.id.imgcert);
+        imgCertReg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 choosePicture();
-                certRegClicked=true;
+                certRegImgClicked =true;
             }
         });
         //vehicle profile photo button
-        vProfbtn = regRiderStep5.findViewById(R.id.imgprofile);
-        vProfbtn.setOnClickListener(new View.OnClickListener() {
+        imgProfPic = regRiderStep5.findViewById(R.id.imgprofile);
+        imgProfPic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 choosePicture();
-                profClicked=true;
+                profImgClicked =true;
             }
         });
         //vehicle police clearance button
-        vPClearancebtn = regRiderStep5.findViewById(R.id.imgclearance);
-        vPClearancebtn.setOnClickListener(new View.OnClickListener() {
+        imgClearance = regRiderStep5.findViewById(R.id.imgclearance);
+        imgClearance.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 choosePicture();
-                pClearanceClicked=true;
+                pClearanceImgClicked =true;
             }
         });
-
-        etDatePicker =  regRiderStep2.findViewById(R.id.etRiderDateofBirth);
+        //date picker button
         etDatePicker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -644,7 +643,7 @@ public class RegisterRider extends AppCompatActivity {
             FirebaseUser userCurrent = mAuth.getCurrentUser();
             UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder().setDisplayName(String.valueOf(riderName)).build();
             userCurrent.updateProfile(profileUpdates);
-            rootie = db.getReference();
+            root = db.getReference();
 
             HashMap riderInfo = new HashMap<>();
             riderInfo.put("city",spinCity.getSelectedItem().toString());
@@ -665,7 +664,7 @@ public class RegisterRider extends AppCompatActivity {
 
 
 
-            rootie.child("riders").child(phonenum).setValue(riderInfo).addOnCompleteListener(new OnCompleteListener<Void>() {
+            root.child("riders").child(phonenum).setValue(riderInfo).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
 
@@ -690,36 +689,36 @@ public class RegisterRider extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode==1 && resultCode==RESULT_OK && data!=null && data.getData()!=null){
             imageUri=data.getData();
-            if(frontClicked){
-                vFrontbtn.setImageURI(imageUri);
+            if(frontImgClicked){
+                imgFront.setImageURI(imageUri);
                 setImgName="front_vehicle";
                 uploadPicture();
-                frontClicked=false;
-            }else if(sideCliked){
-                vSidebtn.setImageURI(imageUri);
+                frontImgClicked =false;
+            }else if(sideImgClicked){
+                imgSide.setImageURI(imageUri);
                 setImgName="side_vehicle";
                 uploadPicture();
-                sideCliked=false;
-            }else if(backClicked){
-                vBackbtn.setImageURI(imageUri);
+                sideImgClicked =false;
+            }else if(backImgClicked){
+                imgBack.setImageURI(imageUri);
                 setImgName="back_vehicle";
                 uploadPicture();
-                backClicked=false;
-            }else if(certRegClicked){
-                vCertRegbtn.setImageURI(imageUri);
+                backImgClicked =false;
+            }else if(certRegImgClicked){
+                imgCertReg.setImageURI(imageUri);
                 setImgName="cert_registration";
                 uploadPicture();
-                certRegClicked=false;
-            }else if(profClicked){
-                vProfbtn.setImageURI(imageUri);
+                certRegImgClicked =false;
+            }else if(profImgClicked){
+                imgProfPic.setImageURI(imageUri);
                 setImgName="profile_picture";
                 uploadPicture();
-                profClicked=false;
-            }else if(pClearanceClicked){
-                vPClearancebtn.setImageURI(imageUri);
+                profImgClicked =false;
+            }else if(pClearanceImgClicked){
+                imgClearance.setImageURI(imageUri);
                 setImgName="Brgy_Clearance";
                 uploadPicture();
-                pClearanceClicked=false;
+                pClearanceImgClicked =false;
             }
         }
     }
