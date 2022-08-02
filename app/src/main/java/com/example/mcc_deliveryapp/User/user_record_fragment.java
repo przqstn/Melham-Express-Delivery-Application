@@ -1,66 +1,116 @@
 package com.example.mcc_deliveryapp.User;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.mcc_deliveryapp.R;
+import com.example.mcc_deliveryapp.Rider.model;
+import com.example.mcc_deliveryapp.Rider.record_adapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link user_record_fragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class user_record_fragment extends Fragment {
+    private RecyclerView recyclerView;
+    private String userNum;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public user_record_fragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment user_record_fragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static user_record_fragment newInstance(String param1, String param2) {
-        user_record_fragment fragment = new user_record_fragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
+    record_adapter2 adapter; // Create Object of the Adapter class
+    DatabaseReference mbase; // Create object of the
+    // Firebase Realtime Database
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_user_record_fragment, container, false);
+        View view = inflater.inflate(R.layout.fragment_user_record_fragment, container, false);
+
+
+        mbase = FirebaseDatabase.getInstance().getReference().child("userparcel");
+
+        System.out.println(mbase);
+        recyclerView = view.findViewById(R.id.recycler_record2);
+
+        // To display the Recycler view linearly
+        recyclerView.setLayoutManager(
+                new LinearLayoutManager(getContext()));
+
+        Intent intent = getActivity().getIntent();
+        userNum = intent.getStringExtra("phonenum");
+
+
+        Query query = mbase.orderByChild("ridernum").equalTo(userNum);
+
+        query.addChildEventListener(
+                new ChildEventListener() {
+                    @Override
+                    public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                        DatabaseReference ddf = mbase.child(dataSnapshot.getKey()).child("parcelstatus");
+                    }
+
+                    @Override
+                    public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+                    }
+
+                    @Override
+                    public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+
+                    @Override
+                    public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                    }
+                });
+
+        // It is a class provide by the FirebaseUI to make a
+        // query in the database to fetch appropriate data
+        FirebaseRecyclerOptions<model> options
+                = new FirebaseRecyclerOptions.Builder<model>()
+                .setQuery(FirebaseDatabase.getInstance().getReference()
+                        .child("userparcel").orderByChild("userParcelStatus")
+                        .equalTo("Completed"+userNum), model.class)
+                .build();
+
+        // Connecting object of required Adapter class to
+        // the Adapter class itself
+        adapter = new record_adapter2(options);
+        // Connecting Adapter class with the Recycler view*/
+        recyclerView.setAdapter(adapter);
+        return view;
+    }
+
+    // Function to tell the app to start getting
+    // data from database on starting of the activity
+    @Override
+    public void onStart()
+    {
+        super.onStart();
+        adapter.startListening();
+    }
+
+    // Function to tell the app to stop getting
+    // data from database on stopping of the activity
+    @Override
+    public void onStop()
+    {
+        super.onStop();
+        adapter.stopListening();
     }
 }
