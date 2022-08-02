@@ -80,7 +80,7 @@ public class user_parceltransaction extends FragmentActivity implements OnMapRea
 	private List<Marker> destinationMarkers = new ArrayList<>();
 	private List<Polyline> polylinePaths = new ArrayList<>();
 	private ProgressDialog progressDialog;
-	ImageView address_dialog;
+	Button address_dialog;
 	View mapview;
 	String apiKey = "AIzaSyADbrHx5UL02dbtkEkDMlrBvkv-pk3JfHU";
 	EditText senderloc;
@@ -122,7 +122,7 @@ public class user_parceltransaction extends FragmentActivity implements OnMapRea
 		btnFindPath = (Button) findViewById(R.id.btnFindPath);
 		etOrigin = (EditText) findViewById(R.id.etOrigin);
 		etDestination =  (EditText) findViewById(R.id.etDestination);
-		address_dialog = (ImageView) findViewById(R.id.img_addressbtndialog);
+		address_dialog = (Button) findViewById(R.id.img_addressbtndialog);
 
 		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
 // this is for pick up location listener

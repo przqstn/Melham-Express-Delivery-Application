@@ -22,6 +22,7 @@
     <color name="secondary_text">#757575</color>
     <color name="color_divider">#BAB3B9</color>
     <color name="color_transparent">#00FFFFFF</color>
+    <color name="opaque_appcolor">#32223272</color>
 
 
 </resources>
