@@ -57,6 +57,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 ///////////////////
 import androidx.core.content.ContextCompat;
@@ -91,7 +92,6 @@ public class user_parceltransaction extends FragmentActivity implements OnMapRea
 	EditText receivercontact;
 	EditText receivername;
 
-	///////////
 	private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
 	private boolean locationPermissionGranted;
 	private static final String TAG = user_parceltransaction.class.getSimpleName();
@@ -107,12 +107,15 @@ public class user_parceltransaction extends FragmentActivity implements OnMapRea
 
 		Places.initialize(this,apiKey);
 
+		Intent intent = getIntent();
+		String userNumber = intent.getStringExtra("phonenum");
 		// Construct a FusedLocationProviderClient.
 		fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
 		SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
 		.findFragmentById(R.id.map);
-		mapview = mapFragment.getView();
+		assert mapFragment != null;
+		mapview = Objects.requireNonNull(mapFragment).getView();
 		mapFragment.getMapAsync(this);
 
 
@@ -199,7 +202,7 @@ public class user_parceltransaction extends FragmentActivity implements OnMapRea
 							editor.putString("key 1",sender_loc);
 							editor.putString("key 2",sender_contact);
 							editor.putString("key 3",sender_name);
-							editor.commit();
+							editor.apply();
 						}
 						String destination = etDestination.getText().toString();
 						View bottomSheetView2 = LayoutInflater.from(getApplicationContext())
@@ -229,10 +232,11 @@ public class user_parceltransaction extends FragmentActivity implements OnMapRea
 									String receiver_name=receivername.getText().toString();
 
 									SharedPreferences.Editor editor = sharedPref.edit();
-									editor.putString("key 4",receiver_loc);
-									editor.putString("key 5",receiver_contact);
-									editor.putString("key 6",receiver_name);
-									editor.commit();
+									editor.putString("key 4", receiver_loc);
+									editor.putString("key 5", receiver_contact);
+									editor.putString("key 6", receiver_name);
+									editor.putString("key 9", userNumber);
+									editor.apply();
 								}
 
 								Intent intent = new Intent(user_parceltransaction.this,user_paymentmethod.class);
