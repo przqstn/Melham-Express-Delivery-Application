@@ -40,12 +40,15 @@
             android:exported="false" />
         <activity
             android:name=".User.user_parceltransaction"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".User.user_paymentmethod"
             android:exported="false" />
         <activity
             android:name=".User.user_permission"
+            android:exported="false" />
+        <activity
+            android:name=".User.user_navigation"
             android:exported="false" />
         <activity
             android:name=".Rider.rider_dashboard2"
@@ -55,7 +58,7 @@
             android:exported="false" />
         <activity
             android:name=".Rider.rider_dashboard"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".MainActivity2"
             android:exported="false" />

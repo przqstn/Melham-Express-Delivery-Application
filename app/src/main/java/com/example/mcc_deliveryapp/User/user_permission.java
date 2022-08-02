@@ -39,7 +39,7 @@ Button btn_permission;
 		String phonenum = intent.getStringExtra("phonenum");
 		if(ContextCompat.checkSelfPermission(user_permission.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)
 		{
-			Intent home = new Intent(user_permission.this,user_home.class);
+			Intent home = new Intent(user_permission.this,user_navigation.class);
 			home.putExtra("phonenum", phonenum);
 			home.putExtra("username", name);
 			System.out.println("Permission " + name + phonenum);
@@ -57,10 +57,10 @@ Button btn_permission;
 						.withListener(new PermissionListener() {
 							@Override
 							public void onPermissionGranted(PermissionGrantedResponse permissionGrantedResponse) {
-								Intent home = new Intent(user_permission.this,user_home.class);
-								intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-								intent.putExtra("phonenum", phonenum);
-								intent.putExtra("username", name);
+								Intent home = new Intent(user_permission.this,user_navigation.class);
+								home.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+								home.putExtra("phonenum", phonenum);
+								home.putExtra("username", name);
 								startActivity(home);
 								finish();
 							}
