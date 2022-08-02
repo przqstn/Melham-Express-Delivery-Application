@@ -27,7 +27,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.mcc_deliveryapp.R;
-import com.example.mcc_deliveryapp.User.UserHelperClass;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -65,10 +64,10 @@ public class RegisterRider extends AppCompatActivity {
     private Dialog regRiderStep1, regRiderStep2, regRiderStep3, regRiderStep4, regRiderStep5;
     private Boolean hasError = false;
     private String verificationCodeBySystem, vehiclebrandandmodel;
-    private EditText password, pwConfirm, etCode;
-    private ImageView vFrontbtn, vSidebtn, vBackbtn, vCertRegbtn, vProfbtn, vPClearancebtn;
-    private Boolean frontClicked=false, sideCliked=false, backClicked=false, certRegClicked=false,
-            profClicked=false, pClearanceClicked=false;
+    private EditText password, pwConfirm, etCode, etPhoneNum;
+    private ImageView frontImg, sideImg, backImg, certRegImg, profImg, clearanceImg;
+    private Boolean frontImgClicked =false, sideImgClicked =false, backImgClicked =false,
+            certRegImgClicked =false, profImgClicked=false, clearanceImgClicked =false;
     private Uri imageUri;
     private FirebaseStorage storage;
     private StorageReference storageReference;
@@ -81,7 +80,7 @@ public class RegisterRider extends AppCompatActivity {
         storageReference = storage.getReference();
         mAuth = FirebaseAuth.getInstance();
         setContentView(R.layout.activity_register_rider);
-        EditText etPhoneNum = findViewById(R.id.editTextPhoneNumDriver);
+        etPhoneNum = findViewById(R.id.editTextPhoneNumDriver);
         password = findViewById(R.id.pwfield);
         pwConfirm = findViewById(R.id.pwConfirm);
         Button btnReg = findViewById(R.id.btnRegRider);
@@ -464,57 +463,57 @@ public class RegisterRider extends AppCompatActivity {
         Button register = regRiderStep5.findViewById(R.id.register);
         //for image upload
         //vehicle front button
-        vFrontbtn = regRiderStep5.findViewById(R.id.imgfront);
-        vFrontbtn.setOnClickListener(new View.OnClickListener() {
+        frontImg = regRiderStep5.findViewById(R.id.imgfront);
+        frontImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 choosePicture();
-                frontClicked=true;
+                frontImgClicked =true;
             }
         });
         //vehicle side button
-        vSidebtn = regRiderStep5.findViewById(R.id.imgside);
-        vSidebtn.setOnClickListener(new View.OnClickListener() {
+        sideImg = regRiderStep5.findViewById(R.id.imgside);
+        sideImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 choosePicture();
-                sideCliked=true;
+                sideImgClicked =true;
             }
         });
         //vehicle back button
-        vBackbtn = regRiderStep5.findViewById(R.id.imgback);
-        vBackbtn.setOnClickListener(new View.OnClickListener() {
+        backImg = regRiderStep5.findViewById(R.id.imgback);
+        backImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 choosePicture();
-                backClicked=true;
+                backImgClicked =true;
             }
         });
         //vehicle cert reg button
-        vCertRegbtn = regRiderStep5.findViewById(R.id.imgcert);
-        vCertRegbtn.setOnClickListener(new View.OnClickListener() {
+        certRegImg = regRiderStep5.findViewById(R.id.imgcert);
+        certRegImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 choosePicture();
-                certRegClicked=true;
+                certRegImgClicked =true;
             }
         });
         //vehicle profile photo button
-        vProfbtn = regRiderStep5.findViewById(R.id.imgprofile);
-        vProfbtn.setOnClickListener(new View.OnClickListener() {
+        profImg = regRiderStep5.findViewById(R.id.imgprofile);
+        profImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 choosePicture();
-                profClicked=true;
+                profImgClicked =true;
             }
         });
         //vehicle police clearance button
-        vPClearancebtn = regRiderStep5.findViewById(R.id.imgclearance);
-        vPClearancebtn.setOnClickListener(new View.OnClickListener() {
+        clearanceImg = regRiderStep5.findViewById(R.id.imgclearance);
+        clearanceImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 choosePicture();
-                pClearanceClicked=true;
+                clearanceImgClicked =true;
             }
         });
 
@@ -684,38 +683,43 @@ public class RegisterRider extends AppCompatActivity {
         startActivityForResult(intent, 1);
     }
     //get image data
+    String imgName;
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode==1 && resultCode==RESULT_OK && data!=null && data.getData()!=null){
             imageUri=data.getData();
-
-            if(frontClicked){
-                vFrontbtn.setImageURI(imageUri);
+            if(frontImgClicked){
+                frontImg.setImageURI(imageUri);
+                imgName="front_image";
                 uploadPicture();
-                frontClicked=false;
-            }else if(sideCliked){
-                vSidebtn.setImageURI(imageUri);
+                frontImgClicked =false;
+            }else if(sideImgClicked){
+                sideImg.setImageURI(imageUri);
+                imgName="side_image";
                 uploadPicture();
-                sideCliked=false;
-            }else if(backClicked){
-                vBackbtn.setImageURI(imageUri);
+                sideImgClicked =false;
+            }else if(backImgClicked){
+                backImg.setImageURI(imageUri);
+                imgName="back_image";
                 uploadPicture();
-                backClicked=false;
-            }else if(certRegClicked){
-                vCertRegbtn.setImageURI(imageUri);
+                backImgClicked =false;
+            }else if(certRegImgClicked){
+                certRegImg.setImageURI(imageUri);
+                imgName="certReg_image";
                 uploadPicture();
-                certRegClicked=false;
-            }else if(profClicked){
-                vProfbtn.setImageURI(imageUri);
+                certRegImgClicked =false;
+            }else if(profImgClicked){
+                profImg.setImageURI(imageUri);
+                imgName="profile_image";
                 uploadPicture();
-                profClicked=false;
-            }else if(pClearanceClicked){
-                vPClearancebtn.setImageURI(imageUri);
+                profImgClicked =false;
+            }else if(clearanceImgClicked){
+                clearanceImg.setImageURI(imageUri);
+                imgName="clearance_image";
                 uploadPicture();
-                pClearanceClicked=false;
+                clearanceImgClicked =false;
             }
-
         }
     }
     //upload method
@@ -724,8 +728,7 @@ public class RegisterRider extends AppCompatActivity {
         pd.setTitle("Uploading Image");
         pd.show();
 
-        final String randomKey = UUID.randomUUID().toString();
-        StorageReference riversRef=storageReference.child("images/"+randomKey);
+        StorageReference riversRef=storageReference.child(etPhoneNum.getText().toString()+"/"+imgName);
 
         riversRef.putFile(imageUri)
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -753,66 +756,6 @@ public class RegisterRider extends AppCompatActivity {
 
 
     }
-/*
-        String strength = "";
-
-        //check for password strength
-        if (good)
-        {
-            float lengthscore = 0;
-            float UCscore = 0;
-            float numscore = 0;
-            float strengthscore = 0;
-            if (password.length() == 6)
-            {
-                lengthscore = (float) 0.2;
-            }
-            else if (password.length()>= 7 && password.length() <= 9)
-            {
-                lengthscore = (float) 0.3;
-            }
-            else if (password.length() > 9)
-            {
-                lengthscore = (float) 0.5;
-            }
-            if(upper == 2)
-            {
-                UCscore = (float) 0.2;
-            }
-            else if(upper > 2)
-            {
-                UCscore = (float) 0.3;
-            }
-            if(digits == 2)
-            {
-                numscore = (float) 0.2;
-            }
-            else if(digits > 2)
-            {
-                numscore = (float) 0.3;
-            }
-            strengthscore = lengthscore + UCscore + numscore;
-
-            if (strengthscore < 0.5)
-            {
-                strength = "Weak";
-            }
-            else if (strengthscore >= 0.5 && strengthscore < 1)
-            {
-                strength = "Moderate";
-            }
-            else if (strengthscore >=1 )
-            {
-                strength = "Strong";
-            }
-            ((TextView)findViewById(R.id.pwStrength)).setText("Password Strength: " + strength);
-        }
-
-        else {
-            ((TextView)findViewById(R.id.pwStrength)).setText("Password does not satisfy conditions");
-        }
-    }
-*/
 
     private String getTextFromEditText(EditText et)
     {
