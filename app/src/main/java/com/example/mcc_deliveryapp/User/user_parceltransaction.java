@@ -109,6 +109,7 @@ public class user_parceltransaction extends FragmentActivity implements OnMapRea
 
 		Intent intent = getIntent();
 		String userNumber = intent.getStringExtra("phonenum");
+		String userName = intent.getStringExtra("username");
 		// Construct a FusedLocationProviderClient.
 		fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
@@ -236,6 +237,7 @@ public class user_parceltransaction extends FragmentActivity implements OnMapRea
 									editor.putString("key 5", receiver_contact);
 									editor.putString("key 6", receiver_name);
 									editor.putString("key 9", userNumber);
+									editor.putString("key 10", userName);
 									editor.apply();
 								}
 

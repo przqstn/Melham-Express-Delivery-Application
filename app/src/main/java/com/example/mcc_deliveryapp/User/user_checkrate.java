@@ -60,6 +60,7 @@ public class user_checkrate extends AppCompatActivity {
 		String sendernotes =sharedPref.getString("key 7","");
 		String distance =sharedPref.getString("key 8","");
 		String userDefaultNumber =sharedPref.getString("key 9","");
+		String userDefaultName = sharedPref.getString("key 10","");
 		String parcelstatus = "Pending";
 		String ridername = "Searching";
 		String ridernum = "Searching";
@@ -100,6 +101,8 @@ public class user_checkrate extends AppCompatActivity {
 								receivercontact, receivername ,"Motorcycle", convertFloat,
 								parcelstatus, ridername, ridernum, userDefaultNumber);
 						Intent intent = new Intent(user_checkrate.this, user_navigation.class);
+						intent.putExtra("phonenum", userDefaultNumber);
+						intent.putExtra("username", userDefaultName);
 						startActivity(intent);
 					}
 				});
@@ -140,6 +143,8 @@ public class user_checkrate extends AppCompatActivity {
 								receivercontact, receivername ,"Sedan", convertFloat,
 								parcelstatus, ridername, ridernum, userDefaultNumber);
 						Intent intent = new Intent(user_checkrate.this, user_navigation.class);
+						intent.putExtra("phonenum", userDefaultNumber);
+						intent.putExtra("username", userDefaultName);
 						startActivity(intent);
 					}
 				});
@@ -179,6 +184,8 @@ public class user_checkrate extends AppCompatActivity {
 								receivercontact, receivername ,"SUV", convertFloat,
 								parcelstatus, ridername, ridernum, userDefaultNumber);
 						Intent intent = new Intent(user_checkrate.this, user_navigation.class);
+						intent.putExtra("phonenum", userDefaultNumber);
+						intent.putExtra("username", userDefaultName);
 						startActivity(intent);
 					}
 				});
@@ -218,6 +225,8 @@ public class user_checkrate extends AppCompatActivity {
 								receivercontact, receivername ,"MPV", convertFloat,
 								parcelstatus, ridername, ridernum, userDefaultNumber);
 						Intent intent = new Intent(user_checkrate.this, user_navigation.class);
+						intent.putExtra("phonenum", userDefaultNumber);
+						intent.putExtra("username", userDefaultName);
 						startActivity(intent);
 					}
 				});
@@ -256,6 +265,9 @@ public class user_checkrate extends AppCompatActivity {
 								receivercontact, receivername ,"Small Truck", convertFloat,
 								parcelstatus, ridername, ridernum, userDefaultNumber);
 						Intent intent = new Intent(user_checkrate.this, user_navigation.class);
+						intent.putExtra("phonenum", userDefaultNumber);
+						intent.putExtra("username", userDefaultName);
+
 						startActivity(intent);
 
 					}
