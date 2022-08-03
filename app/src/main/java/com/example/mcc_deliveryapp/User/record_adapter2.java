@@ -58,7 +58,7 @@ public class record_adapter2 extends FirebaseRecyclerAdapter<
     {
         View view
                 = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.recordlayoutdesign, parent, false);
+                .inflate(R.layout.userrecordlayoutdesign, parent, false);
         return new recordViewholder(view);
     }
 
