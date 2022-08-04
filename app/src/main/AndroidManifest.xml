@@ -15,9 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MCC_DeliveryApp">
         <activity
-
-            android:name=".User.user_track_rider"
-
+            android:name=".Rider.take_order"
             android:exported="false" />
         <activity
             android:name=".User.user_home"
