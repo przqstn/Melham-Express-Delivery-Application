@@ -46,7 +46,7 @@ public class profile_fragment extends Fragment {
 		Intent intent = getActivity().getIntent();
 		phone = intent.getStringExtra("phonenum");
 
-//rework to get current user id instead of using for loop
+		//rework to get current user id instead of using for loop
 		//authenticate current user if method is implemented in the rider log in page
 		ref.addValueEventListener(new ValueEventListener() {
 			@Override
@@ -59,11 +59,8 @@ public class profile_fragment extends Fragment {
 						RiderAddress.setText(ds.child("currentaddress").getValue(String.class));
 						RiderNumber.setText(ds.child("riderphone").getValue(String.class));
 					}
-
 				}
-
 			}
-
 
 			@Override
 			public void onCancelled(@NonNull DatabaseError error) {

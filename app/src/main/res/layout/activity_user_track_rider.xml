@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".User.user_parceltransaction">
+
+    <LinearLayout
+        android:id="@+id/map_linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="50dp"
+        android:orientation="vertical">
+
+        <fragment
+            android:id="@+id/map"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="707dp" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:elevation="5dp"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/riderphone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Courier Phone Number"
+            android:inputType="phone" />
+
+        <Button
+            android:id="@+id/tracktest"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TRACK" />
+
+        <Button
+            android:id="@+id/backbutton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="BACK" />
+    </LinearLayout>
+
+    <!--<ImageView
+        android:id="@+id/img_addressbtndialog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/map_linearLayout"
+        android:src="@drawable/ic_baseline_horizontal_rule_24" />-->
+
+
+
+    <!--  <include layout="@layout/user_mapcontent" /> -->
+</RelativeLayout>
