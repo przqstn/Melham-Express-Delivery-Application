@@ -3,7 +3,8 @@ package com.example.mcc_deliveryapp.Rider;
 public class model {
 
 	String receivercontact,receiverlocation,receivername,sendercontact,senderlocation,
-			vehicletype, sendername, customernotes, fee, OrderID, parcelstatus, ridernum, ridername;
+			vehicletype, sendername, customernotes, fee, OrderID, parcelstatus, ridernum, ridername,
+			userParcelStatus, defaultUserNum, DatePlace;
 
 	public model() {
 	}
@@ -11,7 +12,8 @@ public class model {
 	public model(String receivercontact, String receiverlocation, String receivername,
 				 String sendercontact, String senderlocation, String sendername,
 				 String vehicletype, String customernotes, String fee, String OrderID,
-				 String parcelstatus, String ridernum, String ridername) {
+				 String parcelstatus, String ridernum, String ridername, String userParcelStatus,
+				 String defaultUserNum, String DatePlace) {
 		this.receivercontact = receivercontact;
 		this.receiverlocation = receiverlocation;
 		this.receivername = receivername;
@@ -25,7 +27,16 @@ public class model {
 		this.parcelstatus = parcelstatus;
 		this.ridernum = ridernum;
 		this.ridername = ridername;
+		this.userParcelStatus = userParcelStatus;
+		this.defaultUserNum = defaultUserNum;
+		this.DatePlace = DatePlace;
 	}
+
+	public String getDatePlace() {return DatePlace;}
+
+	public String getDefaultUserNum() {return defaultUserNum;}
+
+	public String getUserParcelStatus() {return userParcelStatus;}
 
 	public String getRidername() {return ridername;}
 
@@ -65,6 +76,12 @@ public class model {
 		return sendername;
 	}
 
+	public void setDatePlace(String datePlace) {DatePlace = datePlace;}
+
+	public void setDefaultUserNum(String defaultUserNum) {this.defaultUserNum = defaultUserNum;}
+
+	public void setUserParcelStatus(String userParcelStatus) {this.userParcelStatus = userParcelStatus;}
+
 	public void setRidername(String ridername) {this.ridername = ridername;}
 
 	public void setRidernum(String ridernum) {this.ridernum = ridernum;}
@@ -85,9 +102,7 @@ public class model {
 		this.receivercontact = receivercontact;
 	}
 
-	public void setReceiverlocation(String receiverlocation) {
-		this.receiverlocation = receiverlocation;
-	}
+	public void setReceiverlocation(String receiverlocation) {this.receiverlocation = receiverlocation;}
 
 	public void setReceivername(String receivername) {
 		this.receivername = receivername;
