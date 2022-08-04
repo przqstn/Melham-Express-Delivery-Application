@@ -1,8 +1,11 @@
 package com.example.mcc_deliveryapp.User;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -11,15 +14,25 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.mcc_deliveryapp.R;
 import com.example.mcc_deliveryapp.Rider.model;
 import com.example.mcc_deliveryapp.Rider.myadapter2;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.firebase.storage.FileDownloadTask;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
+import java.io.File;
+import java.io.IOException;
 
 public class user_home_fragment extends Fragment {
     String userPhoneNum, userName;
@@ -27,6 +40,8 @@ public class user_home_fragment extends Fragment {
     Button bookOrder;
     RecyclerView recyclerView_pickup;
     home_adapter home_adapter;
+    StorageReference storageReference;
+
     Button trackOrder;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -69,6 +84,29 @@ public class user_home_fragment extends Fragment {
             }
         });
 
+
+        //retrieved courier's profile picture from firebase storage
+        storageReference= FirebaseStorage.getInstance().getReference().child("user/"+userPhoneNum+"/profile_image.jpg");
+        try{
+            final File file= File.createTempFile("profile_image", "jpg");
+            storageReference.getFile(file)
+                    .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                            //Toast.makeText(profile_rider.getContext(), "Retrieved", Toast.LENGTH_SHORT).show();
+                            Bitmap bitmap= BitmapFactory.decodeFile(file.getAbsolutePath());
+                            ((ImageView)view.findViewById(R.id.home_logo2)).setImageBitmap(bitmap);
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+
+                        }
+                    });
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+
         trackOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -79,6 +117,7 @@ public class user_home_fragment extends Fragment {
                 startActivity(intent);
             }
         });
+
 
         return view;
     }
