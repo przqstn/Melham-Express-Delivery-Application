@@ -34,7 +34,7 @@
                     android:paddingTop="25dp"
                     android:text="Training Video"
                     android:textColor="@color/black"
-                    android:textSize="25dp" />
+                    android:textSize="20sp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -55,7 +55,7 @@
                         android:text="Next"
                         android:textAllCaps="false"
                         android:textColor="@color/white"
-                        android:textSize="20sp" />
+                        android:textSize="16sp" />
                 </LinearLayout>
             </LinearLayout>
         </ScrollView>
