@@ -20,6 +20,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
@@ -126,7 +127,20 @@ public class user_parceltransaction extends FragmentActivity implements OnMapRea
 		address_dialog = (Button) findViewById(R.id.img_addressbtndialog);
 
 		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
-// this is for pick up location listener
+
+		// This callback will only be called when MyFragment is at least Started.
+		OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
+			@Override
+			public void handleOnBackPressed() {
+				Intent intent = new Intent(user_parceltransaction.this,user_permission.class);
+				intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+				intent.putExtra("username", userName);
+				intent.putExtra("phonenum", userNumber);
+				startActivity(intent);
+			}
+		};
+		this.getOnBackPressedDispatcher().addCallback(this, callback);
+
 		etOrigin.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
@@ -291,7 +305,7 @@ public class user_parceltransaction extends FragmentActivity implements OnMapRea
 							Log.e(TAG, "Exception: %s", task.getException());
 							mMap.moveCamera(CameraUpdateFactory
 									.newLatLngZoom(defaultLocation, DEFAULT_ZOOM));
-							mMap.getUiSettings().setMyLocationButtonEnabled(false);
+							mMap.getUiSettings().setMyLocationButtonEnabled(true);
 						}
 					}
 				});
