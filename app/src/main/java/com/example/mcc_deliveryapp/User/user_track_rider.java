@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.mcc_deliveryapp.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -101,9 +102,15 @@ public class user_track_rider extends FragmentActivity implements OnMapReadyCall
 
                         inputNum = riderphone.getText().toString();
                         Marker marker = (Marker) markerMap.get(inputNum);
-                        LatLng pos = marker.getPosition();
-                        LatLngBounds lockOn = new LatLngBounds(pos, pos);
-                        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(pos, DEFAULT_ZOOM));
+
+                        if (marker != null) {
+                            LatLng pos = marker.getPosition();
+                            LatLngBounds lockOn = new LatLngBounds(pos, pos);
+                            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(pos, DEFAULT_ZOOM));
+                        }
+                        else {
+                            Toast.makeText(getBaseContext(), "Phone number not registered", Toast.LENGTH_SHORT).show();
+                        }
 
 
                     }
