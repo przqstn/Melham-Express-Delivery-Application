@@ -1,11 +1,15 @@
 package com.example.mcc_deliveryapp.Rider;
 
+import android.content.Context;
+import android.content.Intent;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mcc_deliveryapp.R;
@@ -21,6 +25,7 @@ public class myadapter extends FirebaseRecyclerAdapter<model,myadapter.myviewhol
 
 	String riderNum;
 	String riderName;
+	String riderVehicle;
 
 	public myadapter(@NonNull FirebaseRecyclerOptions<model> options) {
 		super(Objects.requireNonNull(options));
@@ -69,6 +74,7 @@ public class myadapter extends FirebaseRecyclerAdapter<model,myadapter.myviewhol
 		DatabaseReference DbRef;
 		FirebaseAuth mAuth;
 		pickup_fragment pickup_fragment;
+		Context context;
 
 		public myviewholder(@NonNull View itemView) {
 			super(itemView);
@@ -89,6 +95,23 @@ public class myadapter extends FirebaseRecyclerAdapter<model,myadapter.myviewhol
 					pickup_fragment pickup_fragment = new pickup_fragment();
 					pickup_fragment.getParcelInfo(riderNum, orderID.getText().toString(), riderName);
 //					System.out.println(t1 + receivername.getText().toString());
+				}
+			});
+			CardView cv = (CardView) itemView.findViewById(R.id.courier_pickup_card);
+
+			context = itemView.getContext();
+
+			cv.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					System.out.println("Card clicked!");
+					Intent intent = new Intent(context, take_order.class);
+					intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+					intent.putExtra("phonenum", riderNum);
+					intent.putExtra("username", riderName);
+					intent.putExtra("vehicle", vehicletype.getText().toString());
+					intent.putExtra("orderID", orderID.getText().toString());
+					context.startActivity(intent);
 				}
 			});
 		}
