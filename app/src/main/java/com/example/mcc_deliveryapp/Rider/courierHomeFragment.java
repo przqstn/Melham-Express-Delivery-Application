@@ -104,7 +104,7 @@ public class courierHomeFragment extends Fragment {
 
 
         //retrieved courier's profile picture from firebase storage
-        storageReference= FirebaseStorage.getInstance().getReference().child(riderPhoneNum+"/profile_image.jpg");
+        storageReference= FirebaseStorage.getInstance().getReference().child("rider/"+riderPhoneNum+"/profile_image.jpg");
         try{
             final File file= File.createTempFile("profile_image", "jpg");
             storageReference.getFile(file)

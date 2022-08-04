@@ -691,22 +691,22 @@ public class RegisterRider extends AppCompatActivity {
             imageUri=data.getData();
             if(frontImgClicked){
                 frontImg.setImageURI(imageUri);
-                imgName="front_image";
+                imgName="front_image.jpg";
                 uploadPicture();
                 frontImgClicked =false;
             }else if(sideImgClicked){
                 sideImg.setImageURI(imageUri);
-                imgName="side_image";
+                imgName="side_image.jpg";
                 uploadPicture();
                 sideImgClicked =false;
             }else if(backImgClicked){
                 backImg.setImageURI(imageUri);
-                imgName="back_image";
+                imgName="back_image.jpg";
                 uploadPicture();
                 backImgClicked =false;
             }else if(certRegImgClicked){
                 certRegImg.setImageURI(imageUri);
-                imgName="certReg_image";
+                imgName="certReg_image.jpg";
                 uploadPicture();
                 certRegImgClicked =false;
             }else if(profImgClicked){
@@ -716,7 +716,7 @@ public class RegisterRider extends AppCompatActivity {
                 profImgClicked =false;
             }else if(clearanceImgClicked){
                 clearanceImg.setImageURI(imageUri);
-                imgName="clearance_image";
+                imgName="clearance_image.jpg";
                 uploadPicture();
                 clearanceImgClicked =false;
             }
