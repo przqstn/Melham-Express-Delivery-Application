@@ -44,6 +44,7 @@ public class user_track_rider extends FragmentActivity implements OnMapReadyCall
     HashMap markerMap = new HashMap();
     String inputNum = null;
     Button back;
+    String userPhoneNum, userName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +64,11 @@ public class user_track_rider extends FragmentActivity implements OnMapReadyCall
         track = findViewById(R.id.tracktest);
         riderphone = findViewById(R.id.riderphone);
         back = findViewById(R.id.backbutton);
+
+        Intent intent = getIntent();
+        userPhoneNum = intent.getStringExtra("phonenum");
+        userName = intent.getStringExtra("username");
+
         checkUser.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -134,8 +140,11 @@ public class user_track_rider extends FragmentActivity implements OnMapReadyCall
             @Override
             public void onClick(View view) {
 
-                Intent intent = new Intent(user_track_rider.this, user_home_fragment.class);
+                Intent intent = new Intent(user_track_rider.this, user_navigation.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                intent.putExtra("phonenum", userPhoneNum);
+                intent.putExtra("username", userName);
+
                 startActivity(intent);
 
 

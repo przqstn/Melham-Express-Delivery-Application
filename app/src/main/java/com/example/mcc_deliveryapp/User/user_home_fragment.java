@@ -74,6 +74,8 @@ public class user_home_fragment extends Fragment {
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(),user_track_rider.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                intent.putExtra("phonenum", userPhoneNum);
+                intent.putExtra("username", userName);
                 startActivity(intent);
             }
         });
