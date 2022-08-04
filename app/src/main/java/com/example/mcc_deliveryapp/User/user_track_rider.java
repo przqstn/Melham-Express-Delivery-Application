@@ -38,17 +38,20 @@ import java.util.ArrayList;
 public class user_track_rider extends FragmentActivity implements OnMapReadyCallback {
     private GoogleMap mMap;
     private DatabaseReference databaseReference;
+    private DatabaseReference riderReference;
     private static final int DEFAULT_ZOOM = 18;
     Button track;
     EditText riderphone;
     HashMap markerMap = new HashMap();
     String inputNum = null;
     Button back;
-    String userPhoneNum, userName;
+    String userPhoneNum, userName, riderNumber;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
+        Intent intent = getIntent();
+        userPhoneNum = intent.getStringExtra("phonenum");
+        userName = intent.getStringExtra("username");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_track_rider);
 
@@ -57,19 +60,34 @@ public class user_track_rider extends FragmentActivity implements OnMapReadyCall
         mapFragment.getMapAsync((OnMapReadyCallback) this);
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, PackageManager.PERMISSION_GRANTED);
 
+        databaseReference = FirebaseDatabase.getInstance().getReference("userparcel");
+        riderReference = FirebaseDatabase.getInstance().getReference("riders");
+        Query checkUser = databaseReference.orderByChild("defaultUserNum");
+        Query checkRider = riderReference.orderByChild("riderphone");
 
-        databaseReference = FirebaseDatabase.getInstance().getReference("riders");
-        Query checkUser = databaseReference.orderByChild("riderphone");
-
-        track = findViewById(R.id.tracktest);
-        riderphone = findViewById(R.id.riderphone);
         back = findViewById(R.id.backbutton);
 
-        Intent intent = getIntent();
-        userPhoneNum = intent.getStringExtra("phonenum");
-        userName = intent.getStringExtra("username");
 
-        checkUser.addValueEventListener(new ValueEventListener() {
+
+checkUser.addValueEventListener(new ValueEventListener() {
+    @Override
+    public void onDataChange(@NonNull DataSnapshot snapshot) {
+        for (DataSnapshot parcelSnapshot : snapshot.getChildren()) {
+                if (parcelSnapshot.child("defaultUserNum").getValue().equals(userPhoneNum))
+                {
+                    riderNumber = parcelSnapshot.child("ridernum").getValue(String.class);
+
+                }
+        }
+    }
+
+    @Override
+    public void onCancelled(@NonNull DatabaseError error) {
+
+    }
+});
+
+        checkRider.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 List<String> latitudes = new ArrayList<>(Collections.emptyList());
@@ -78,19 +96,25 @@ public class user_track_rider extends FragmentActivity implements OnMapReadyCall
 
                 mMap.clear();
                 for (DataSnapshot locationSnapshot : dataSnapshot.getChildren()) {
-                    String latitude = locationSnapshot.child("latitude").getValue().toString();
-                    latitudes.add(latitude);
-                }
-
-                for (DataSnapshot locationSnapshot : dataSnapshot.getChildren()) {
-                    String longitude = locationSnapshot.child("longitude").getValue().toString();
-                    longitudes.add(longitude);
-
+                    if (locationSnapshot.child("riderphone").getValue().equals(riderNumber))
+                    {
+                        String latitude = locationSnapshot.child("latitude").getValue().toString();
+                        latitudes.add(latitude);
+                    }
                 }
                 for (DataSnapshot locationSnapshot : dataSnapshot.getChildren()) {
-                    String riderphone = locationSnapshot.child("riderphone").getValue().toString();
-                    riderphonenum.add(riderphone);
-
+                    if (locationSnapshot.child("riderphone").getValue().equals(riderNumber))
+                    {
+                        String longitude = locationSnapshot.child("longitude").getValue().toString();
+                        longitudes.add(longitude);
+                    }
+                }
+                for (DataSnapshot locationSnapshot : dataSnapshot.getChildren()) {
+                    if (locationSnapshot.child("riderphone").getValue().equals(riderNumber))
+                    {
+                        String riderphone = locationSnapshot.child("riderphone").getValue().toString();
+                        riderphonenum.add(riderphone);
+                    }
                 }
 
                 for (int i = 0; i < latitudes.size(); i++) {
@@ -99,43 +123,17 @@ public class user_track_rider extends FragmentActivity implements OnMapReadyCall
                             .position(latLng)
                             .title(riderphonenum.get(i)));
                     markerMap.put(riderphonenum.get(i), marker);
-
                 }
 
-                track.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
 
-                        inputNum = riderphone.getText().toString();
-                        Marker marker = (Marker) markerMap.get(inputNum);
-
-                        if (marker != null) {
-                            LatLng pos = marker.getPosition();
-                            LatLngBounds lockOn = new LatLngBounds(pos, pos);
-                            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(pos, DEFAULT_ZOOM));
-                        }
-                        else {
-                            Toast.makeText(getBaseContext(), "Phone number not registered", Toast.LENGTH_SHORT).show();
-                        }
-
-
-                    }
-                });
-                if (inputNum != null) {
-                    Marker marker = (Marker) markerMap.get(inputNum);
-                    LatLng pos = marker.getPosition();
-                    LatLngBounds lockOn = new LatLngBounds(pos, pos);
-                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(pos, DEFAULT_ZOOM));
-                }
             }
-
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
         });
-//test
+
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -147,9 +145,35 @@ public class user_track_rider extends FragmentActivity implements OnMapReadyCall
 
                 startActivity(intent);
 
+            }
+        });
+/* bale eto yung dating button tinanggal ko na muna
+        track.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                inputNum = riderphone.getText().toString();
+                Marker marker = (Marker) markerMap.get(inputNum);
+
+                if (marker != null) {
+                    LatLng pos = marker.getPosition();
+                    LatLngBounds lockOn = new LatLngBounds(pos, pos);
+                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(pos, DEFAULT_ZOOM));
+                }
+                else {
+                    Toast.makeText(getBaseContext(), "Phone number not registered", Toast.LENGTH_SHORT).show();
+                }
+
 
             }
         });
+        if (inputNum != null) {
+            Marker marker = (Marker) markerMap.get(inputNum);
+            LatLng pos = marker.getPosition();
+            LatLngBounds lockOn = new LatLngBounds(pos, pos);
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(pos, DEFAULT_ZOOM));
+        }
+        */
     }
 
     @Override
@@ -158,5 +182,7 @@ mMap = googleMap;
 mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(getApplicationContext(), R.raw.customize_maps_style));
 
     }
+
+
 }
 

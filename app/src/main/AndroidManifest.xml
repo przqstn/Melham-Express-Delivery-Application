@@ -18,6 +18,10 @@
             android:name=".Rider.rider_ongoing_order"
             android:exported="false" />
         <activity
+
+            android:name=".User.user_track_rider"
+            android:exported="false" />
+        <activity
             android:name=".Rider.take_order"
             android:exported="false" />
         <activity
