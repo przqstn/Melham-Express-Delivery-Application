@@ -71,6 +71,8 @@ public class user_home_fragment extends Fragment {
                                 ,model.class ).build();
 
         home_adapter = new home_adapter(options);
+        home_adapter.getUserNum(userPhoneNum);
+        home_adapter.getUserName(userName);
         recyclerView_pickup.setAdapter(home_adapter);
 
         bookOrder.setOnClickListener(new View.OnClickListener() {
