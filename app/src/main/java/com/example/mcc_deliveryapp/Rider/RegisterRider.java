@@ -711,7 +711,7 @@ public class RegisterRider extends AppCompatActivity {
                 certRegImgClicked =false;
             }else if(profImgClicked){
                 profImg.setImageURI(imageUri);
-                imgName="profile_image";
+                imgName="profile_image.jpg";
                 uploadPicture();
                 profImgClicked =false;
             }else if(clearanceImgClicked){
