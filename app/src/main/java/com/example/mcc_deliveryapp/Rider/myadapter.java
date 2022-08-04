@@ -88,15 +88,6 @@ public class myadapter extends FirebaseRecyclerAdapter<model,myadapter.myviewhol
 			vehicletype = itemView.findViewById(R.id.txt_vehicletype);
 			fee = itemView.findViewById(R.id.txt_price);
 			orderID = itemView.findViewById(R.id.id_order);
-			btn_takeOrder = itemView.findViewById(R.id.btn_takeOrder);
-			btn_takeOrder.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View view) {
-					pickup_fragment pickup_fragment = new pickup_fragment();
-					pickup_fragment.getParcelInfo(riderNum, orderID.getText().toString(), riderName);
-//					System.out.println(t1 + receivername.getText().toString());
-				}
-			});
 			CardView cv = (CardView) itemView.findViewById(R.id.courier_pickup_card);
 
 			context = itemView.getContext();

@@ -1,11 +1,14 @@
 package com.example.mcc_deliveryapp.Rider;
 
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mcc_deliveryapp.R;
@@ -36,6 +39,7 @@ public class myadapter2 extends FirebaseRecyclerAdapter<model, myadapter2.myview
 		holder.senderlocation.setText(model.getSenderlocation());
 		holder.vehicletype.setText(model.getVehicletype());
 		holder.fee.setText(model.getFee());
+		holder.orderID.setText(model.getOrderID());
 		holder.customernotes.setText("Notes:" + model.getCustomerNotes());
 	}
 
@@ -61,13 +65,14 @@ public class myadapter2 extends FirebaseRecyclerAdapter<model, myadapter2.myview
 
 
 		TextView receivercontact,receiverlocation,receivername,sendercontact,senderlocation,
-				sendername, vehicletype, customernotes, fee;
+				sendername, vehicletype, customernotes,fee, orderID;
 
 		//Database Realtime
 		FirebaseDatabase root;
 		DatabaseReference DbRef;
 		FirebaseAuth mAuth;
 		pickup_fragment pickup_fragment;
+		Context context;
 
 		public myviewholder(@NonNull View itemView) {
 			super(itemView);
@@ -80,6 +85,24 @@ public class myadapter2 extends FirebaseRecyclerAdapter<model, myadapter2.myview
 			sendername = itemView.findViewById(R.id.txt_sender_name);
 			vehicletype = itemView.findViewById(R.id.txt_vehicletype);
 			fee = itemView.findViewById(R.id.txt_price);
+			orderID = itemView.findViewById(R.id.home_orderID);
+			CardView cv = (CardView) itemView.findViewById(R.id.courier_home_card);
+
+			context = itemView.getContext();
+
+			cv.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					System.out.println("Card clicked!");
+					Intent intent = new Intent(context, rider_ongoing_order.class);
+					intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+					intent.putExtra("phonenum", riderNum);
+					intent.putExtra("username", riderName);
+					intent.putExtra("vehicle", vehicletype.getText().toString());
+					intent.putExtra("orderID", orderID.getText().toString());
+					context.startActivity(intent);
+				}
+			});
 		}
 	}
 }
