@@ -16,6 +16,8 @@
         android:theme="@style/Theme.MCC_DeliveryApp">
         <activity
             android:name=".User.user_ongoing_order_details"
+            android:name=".Rider.rider_takeorder_map"
+
             android:exported="false" />
         <activity
             android:name=".Rider.rider_ongoing_order"
