@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/courier_pickup_card"
     android:layout_width="match_parent"
-    android:layout_height="400dp"
+    android:layout_height="300dp"
     app:cardCornerRadius="10dp"
     app:cardUseCompatPadding="true">
 
@@ -193,23 +193,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="TextView" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/takeorderlinearlayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/pricelinearlayout"
-            android:orientation="vertical">
-
-            <Button
-                android:id="@+id/btn_takeOrder"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/graphics_button_1"
-                android:fontFamily="@font/montserrat_medium"
-                android:text="Take Order"
-                android:textColor="@color/white" />
         </LinearLayout>
 
     </RelativeLayout>
