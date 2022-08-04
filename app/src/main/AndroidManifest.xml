@@ -15,11 +15,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MCC_DeliveryApp">
         <activity
-            android:name=".Rider.rider_ongoing_order"
+            android:name=".Rider.rider_takeorder_map"
             android:exported="false" />
         <activity
-
-            android:name=".User.user_track_rider"
+            android:name=".Rider.rider_ongoing_order"
             android:exported="false" />
         <activity
             android:name=".Rider.take_order"
