@@ -137,7 +137,7 @@ public class take_order extends AppCompatActivity {
                             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
                             }
                         });
-                Intent intent = new Intent(take_order.this, rider_ongoing_order.class);
+                Intent intent = new Intent(take_order.this, rider_takeorder_map.class);
                 intent.putExtra("phonenum", phonenum);
                 intent.putExtra("username", name);
                 intent.putExtra("vehicle", riderVehicle);
