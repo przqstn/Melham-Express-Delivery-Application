@@ -1,15 +1,19 @@
 package com.example.mcc_deliveryapp.User;
 
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mcc_deliveryapp.R;
 import com.example.mcc_deliveryapp.Rider.model;
+import com.example.mcc_deliveryapp.Rider.take_order;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
@@ -20,8 +24,7 @@ import java.util.Objects;
 
 public class home_adapter extends FirebaseRecyclerAdapter<model, home_adapter.myviewholder> {
 
-	String riderNum;
-	String riderName;
+	String userNum, userName;
 
 	public home_adapter(@NonNull FirebaseRecyclerOptions<model> options) {
 		super(Objects.requireNonNull(options));
@@ -37,38 +40,40 @@ public class home_adapter extends FirebaseRecyclerAdapter<model, home_adapter.my
 		holder.senderlocation.setText(model.getSenderlocation());
 		holder.vehicletype.setText(model.getVehicletype());
 		holder.fee.setText(model.getFee());
+		holder.orderID.setText(model.getOrderID());
 		holder.customernotes.setText("Notes:" + model.getCustomerNotes());
 	}
 
 	@NonNull
 	@Override
 	public myviewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-		View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.ongoing_courierlayoutdesign,parent,false);
+		View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.ongoing_userlayoutdesign,parent,false);
 		return new myviewholder(view);
 
 	}
 
-	public String getRiderNum(String riderNum){
-		this.riderNum = riderNum;
-		return riderNum;
+	public String getUserNum(String userNum){
+		this.userNum = userNum;
+		return userNum;
 	}
 
-	public String getRiderName(String riderName){
-		this.riderName = riderName;
-		return riderName;
+	public String getUserName(String userName){
+		this.userName = userName;
+		return userName;
 	}
 
 	public class myviewholder extends RecyclerView.ViewHolder {
 
 
 		TextView receivercontact,receiverlocation,receivername,sendercontact,senderlocation,
-				sendername, vehicletype, customernotes, fee;
+				sendername, vehicletype, customernotes,fee, orderID;
 
 		//Database Realtime
 		FirebaseDatabase root;
 		DatabaseReference DbRef;
 		FirebaseAuth mAuth;
 		com.example.mcc_deliveryapp.Rider.pickup_fragment pickup_fragment;
+		Context context;
 
 		public myviewholder(@NonNull View itemView) {
 			super(itemView);
@@ -81,6 +86,23 @@ public class home_adapter extends FirebaseRecyclerAdapter<model, home_adapter.my
 			sendername = itemView.findViewById(R.id.txt_sender_name);
 			vehicletype = itemView.findViewById(R.id.txt_vehicletype);
 			fee = itemView.findViewById(R.id.txt_price);
+			orderID = itemView.findViewById(R.id.user_home_orderID);
+			CardView cv = (CardView) itemView.findViewById(R.id.user_home_card);
+
+			context = itemView.getContext();
+
+			cv.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					System.out.println("Card clicked!"+userNum+userName+orderID.getText().toString());
+					Intent intent = new Intent(context, user_ongoing_order_details.class);
+					intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+					intent.putExtra("phonenum", userNum);
+					intent.putExtra("username", userName);
+					intent.putExtra("orderID", orderID.getText().toString());
+					context.startActivity(intent);
+				}
+			});
 		}
 	}
 
