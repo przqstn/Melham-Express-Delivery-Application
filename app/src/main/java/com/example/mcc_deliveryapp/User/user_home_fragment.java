@@ -43,8 +43,7 @@ public class user_home_fragment extends Fragment {
     StorageReference storageReference;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_user_home_fragment, container, false);
 
@@ -102,7 +101,8 @@ public class user_home_fragment extends Fragment {
 
                         }
                     });
-        }catch (IOException e){
+        }
+        catch (IOException e){
             e.printStackTrace();
         }
 

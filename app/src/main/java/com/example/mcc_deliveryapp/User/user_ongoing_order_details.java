@@ -3,6 +3,7 @@ package com.example.mcc_deliveryapp.User;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -24,7 +25,6 @@ public class user_ongoing_order_details extends AppCompatActivity {
             receiverContact, vehicleType, senderNote, orderPrice;
     TextView senderloc, sendername, sendercontact, receiverloc, receivername, receivercontact,
             order_id, rider_name, vehicletype, usernote, parcelprice, plate_number;
-    ;
     Button btn_cancelOrder, btn_trackCourier;
 
     @Override
@@ -46,11 +46,11 @@ public class user_ongoing_order_details extends AppCompatActivity {
         order_id = findViewById(R.id.parcelorder_ID2);
         rider_name = findViewById(R.id.rider_name);
         vehicletype = findViewById(R.id.vehicle_details);
-        plate_number = findViewById(R.id.plate_number);
         usernote = findViewById(R.id.note_rider2);
         parcelprice = findViewById(R.id.txt_price2);
         btn_cancelOrder = findViewById(R.id.btn_cancelOrder);
         btn_trackCourier = findViewById(R.id.btn_trackCourier);
+        plate_number = findViewById(R.id.plate_number);
 
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         final DatabaseReference dr = database.getReference().child("userparcel");
@@ -67,7 +67,7 @@ public class user_ongoing_order_details extends AppCompatActivity {
                         receiverName = dataSnapshot.child("receivername").getValue(String.class);
                         receiverLocation = dataSnapshot.child("receiverlocation").getValue(String.class);
                         receiverContact = dataSnapshot.child("receivercontact").getValue(String.class);
-//                        riderName = dataSnapshot.child("ridername").getValue(String.class);
+                        riderName = dataSnapshot.child("ridername").getValue(String.class);
                         vehicleType = dataSnapshot.child("vehicletype").getValue(String.class);
                         senderNote = dataSnapshot.child("customernotes").getValue(String.class);
                         orderPrice = dataSnapshot.child("fee").getValue(String.class);
@@ -79,8 +79,9 @@ public class user_ongoing_order_details extends AppCompatActivity {
 
                         query.addChildEventListener(
                                 new ChildEventListener() {
+                                    @SuppressLint("SetTextI18n")
                                     @Override
-                                    public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                                    public void onChildAdded(@NonNull DataSnapshot dataSnapshot, String s) {
                                         riderName = dataSnapshot.child("name").getValue(String.class);
                                         riderBrandModel = dataSnapshot.child("vehiclebrandandmodel").getValue(String.class);
                                         riderPlateNumber = dataSnapshot.child("vehicleplatenumber").getValue(String.class);
@@ -90,7 +91,7 @@ public class user_ongoing_order_details extends AppCompatActivity {
                                     }
 
                                     @Override
-                                    public void onChildRemoved(DataSnapshot dataSnapshot) {
+                                    public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
 
                                     }
 
@@ -141,35 +142,13 @@ public class user_ongoing_order_details extends AppCompatActivity {
         btn_trackCourier.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final FirebaseDatabase database = FirebaseDatabase.getInstance();
-                final DatabaseReference dr = database.getReference().child("userparcel");
-                Query query = dr.orderByChild("OrderID").equalTo(orderID);
-
-                query.addChildEventListener(
-                        new ChildEventListener() {
-                            @Override
-                            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                                System.out.println("Track Courier Button Clicked!");
-                            }
-
-                            @Override
-                            public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-                            }
-
-                            @Override
-                            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-                            }
-
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError error) {
-
-                            }
-
-                            @Override
-                            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-                            }
-                        });
+                Intent intent = new Intent(user_ongoing_order_details.this, user_track_rider.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                intent.putExtra("orderID",  orderID);
+                intent.putExtra("phonenum", phonenum);
+                intent.putExtra("username", name);
+                intent.putExtra("ridername",  riderName);
+                startActivity(intent);
             }
         });
 

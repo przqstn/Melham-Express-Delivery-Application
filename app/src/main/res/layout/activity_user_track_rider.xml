@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".User.user_parceltransaction">
+
+    <LinearLayout
+        android:id="@+id/map_linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="50dp"
+        android:orientation="vertical">
+
+        <fragment
+            android:id="@+id/map"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="738dp" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:elevation="5dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/RiderName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Rider Name" />
+
+        <TextView
+            android:id="@+id/RiderVehicle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Rider Vehicle" />
+
+        <TextView
+            android:id="@+id/RiderPlate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Plate Number" />
+
+        <Button
+            android:id="@+id/backbutton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="BACK" />
+    </LinearLayout>
+
+    <!--<ImageView
+        android:id="@+id/img_addressbtndialog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/map_linearLayout"
+        android:src="@drawable/ic_baseline_horizontal_rule_24" />-->
+
+
+
+    <!--  <include layout="@layout/user_mapcontent" /> -->
+</RelativeLayout>

@@ -473,7 +473,9 @@
                         android:background="@drawable/graphics_button_1"
                         android:fontFamily="@font/montserrat_medium"
                         android:text="Cancel Order"
-                        android:textColor="@color/white" />
+                        android:textColor="@color/white"
+                        android:visibility="visible" />
+
                 </LinearLayout>
 
             </LinearLayout>
