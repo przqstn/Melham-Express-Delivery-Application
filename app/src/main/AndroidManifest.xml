@@ -35,9 +35,6 @@
         <activity
             android:name=".Rider.take_order"
             android:exported="false" />
-        <activity
-            android:name=".User.user_home"
-            android:exported="false" />
 
         <!--
              TODO: Before you run your application, you need a Google Maps API key.
@@ -73,34 +70,14 @@
             android:name=".User.user_navigation"
             android:exported="false" />
         <activity
-            android:name=".Rider.rider_dashboard2"
-            android:exported="false" />
-        <activity
-            android:name=".Rider.rider_dashboard1"
-            android:exported="false" />
-        <activity
             android:name=".Rider.rider_dashboard"
             android:exported="true" />
         <activity
             android:name=".MainActivity2"
             android:exported="false" />
         <activity
-            android:name=".User.user_waitingdriver"
-            android:exported="false" />
-        <activity
-            android:name=".User.user_driverfound"
-            android:exported="false"
-            android:label="@string/title_activity_user_driverfound"
-            android:theme="@style/Theme.MCC_DeliveryApp.NoActionBar" />
-        <activity
-            android:name=".User.user_findingrider"
-            android:exported="false" />
-        <activity
             android:name=".User.user_checkrate"
             android:exported="false" />
-        <activity
-            android:name=".User.userdashboard"
-            android:exported="true" />
         <activity
             android:name=".Rider.RegisterRider"
             android:exported="true" />
