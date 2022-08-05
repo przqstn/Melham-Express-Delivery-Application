@@ -42,10 +42,8 @@ public class user_home_fragment extends Fragment {
     home_adapter home_adapter;
     StorageReference storageReference;
 
-    Button trackOrder;
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_user_home_fragment, container, false);
 
@@ -56,7 +54,6 @@ public class user_home_fragment extends Fragment {
         userPhoneNum = intent.getStringExtra("phonenum");
         userName = intent.getStringExtra("username");
         bookOrder = view.findViewById(R.id.bookOrder);
-        trackOrder = view.findViewById(R.id.testTrack);
 
         welcomeText = view.findViewById(R.id.hi_user_2);
 
@@ -86,7 +83,6 @@ public class user_home_fragment extends Fragment {
             }
         });
 
-
         //retrieved courier's profile picture from firebase storage
         storageReference= FirebaseStorage.getInstance().getReference().child("user/"+userPhoneNum+"/profile_image.jpg");
         try{
@@ -105,21 +101,10 @@ public class user_home_fragment extends Fragment {
 
                         }
                     });
-        }catch (IOException e){
+        }
+        catch (IOException e){
             e.printStackTrace();
         }
-
-        trackOrder.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(),user_track_rider.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                intent.putExtra("phonenum", userPhoneNum);
-                intent.putExtra("username", userName);
-                startActivity(intent);
-            }
-        });
-
 
         return view;
     }
