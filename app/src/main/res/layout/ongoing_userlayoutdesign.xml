@@ -158,6 +158,8 @@
                 android:fontFamily="@font/montserrat_medium"
                 android:text="Vehicle Type"
                 android:textColor="#000" />
+                android:textColor="#000"
+                android:layout_marginLeft="10dp"/>
 
             <TextView
                 android:id="@+id/txt_note"
