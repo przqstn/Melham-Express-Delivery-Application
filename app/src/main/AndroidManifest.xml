@@ -29,6 +29,9 @@
         <activity
             android:name=".User.user_home"
             android:exported="false" />
+        <activity
+            android:name=".User.user_track_rider"
+            android:exported="false"/>
         <!--
              TODO: Before you run your application, you need a Google Maps API key.
 
