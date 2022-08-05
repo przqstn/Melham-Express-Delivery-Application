@@ -43,14 +43,12 @@ import java.util.ArrayList;
 
 public class user_track_rider extends FragmentActivity implements OnMapReadyCallback {
     private GoogleMap mMap;
-    private DatabaseReference databaseReference;
-    private DatabaseReference riderReference;
     private static final int DEFAULT_ZOOM = 18;
 
     HashMap markerMap = new HashMap();
     Button back;
     String riderNumber, orderID, phonenum, name, riderName;
-    TextView riderNameUI;
+    TextView riderNameUI, riderVehicleUI, riderPlateUI;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Intent intent = getIntent();
@@ -65,13 +63,17 @@ public class user_track_rider extends FragmentActivity implements OnMapReadyCall
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync((OnMapReadyCallback) this);
 
-        databaseReference = FirebaseDatabase.getInstance().getReference("userparcel");
-        riderReference = FirebaseDatabase.getInstance().getReference("riders");
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("userparcel");
+        DatabaseReference riderReference = FirebaseDatabase.getInstance().getReference("riders");
         Query checkUser = databaseReference.orderByChild("OrderID");
         Query checkRider = riderReference.orderByChild("riderphone");
         riderNameUI =  findViewById(R.id.RiderName);
+        riderVehicleUI =  findViewById(R.id.RiderVehicle);
+        riderPlateUI =  findViewById(R.id.RiderPlate);
+
         back = findViewById(R.id.backbutton);
-      riderNameUI.setText(riderName);
+        riderNameUI.setText(riderName);
+
 
 
 checkUser.addValueEventListener(new ValueEventListener() {
@@ -103,6 +105,8 @@ checkUser.addValueEventListener(new ValueEventListener() {
                 for (DataSnapshot locationSnapshot : dataSnapshot.getChildren()) {
                     if (locationSnapshot.child("riderphone").getValue().equals(riderNumber))
                     {
+                        riderVehicleUI.setText(locationSnapshot.child("vehicletype").getValue().toString());
+                        riderPlateUI.setText(locationSnapshot.child("vehicleplatenumber").getValue().toString());
                         String latitude = locationSnapshot.child("latitude").getValue().toString();
                         latitudes.add(latitude);
                     }
