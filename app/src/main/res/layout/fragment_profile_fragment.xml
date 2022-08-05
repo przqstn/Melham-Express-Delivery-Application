@@ -21,34 +21,35 @@
                 android:layout_width="match_parent"
                 android:layout_height="287dp"
                 android:background="#00000000"
+                android:contentDescription="header"
                 android:scaleType="fitXY"
                 android:src="@drawable/background" />
 
-            <TextView
-                android:id="@+id/txt_profile"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+            <Button
+                android:id="@+id/btnRider_EditProfile"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_alignParentEnd="true"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="0dp"
-                android:fontFamily="@font/montserrat_semibold"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:background="@color/color_transparent"
+                android:drawableStart="@drawable/edit_icon"
                 android:gravity="center"
-                android:padding="5dp"
-                android:textColor="@color/white"
-                android:textSize="20dp"
-                android:textStyle="bold" />
+                android:padding="10dp"
+                tools:ignore="SpeakableTextPresentCheck" />
 
             <ImageView
                 android:id="@+id/profile_user"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/txt_profile"
+                android:layout_alignBottom="@+id/group_2695"
                 android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
                 android:layout_marginStart="35dp"
-                android:layout_marginTop="145dp"
-                android:layout_marginEnd="295dp"
+                android:layout_marginTop="199dp"
+                android:layout_marginEnd="292dp"
+                android:layout_marginBottom="24dp"
                 android:background="@drawable/borderbutton"
                 android:src="@drawable/profilepic" />
 
@@ -239,6 +240,20 @@
 
                                 android:textColor="@color/strokes" />
                         </LinearLayout>
+
+                        <Button
+                            android:id="@+id/btnRider_Logout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="35dp"
+                            android:layout_marginVertical="40dp"
+                            android:background="@drawable/graphics_button_1"
+                            android:drawableStart="@drawable/logout_icon"
+                            android:fontFamily="@font/montserrat_medium"
+                            android:paddingHorizontal="60dp"
+                            android:text="Log Out"
+                            android:textAllCaps="false"
+                            android:textColor="@color/white" />
 
 
                     </LinearLayout>
