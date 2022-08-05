@@ -728,7 +728,7 @@ public class RegisterRider extends AppCompatActivity {
         pd.setTitle("Uploading Image");
         pd.show();
 
-        StorageReference riversRef=storageReference.child(etPhoneNum.getText().toString()+"/"+imgName);
+        StorageReference riversRef=storageReference.child("rider/"+etPhoneNum.getText().toString()+"/"+imgName);
 
         riversRef.putFile(imageUri)
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
