@@ -129,7 +129,15 @@ checkUser.addValueEventListener(new ValueEventListener() {
                             .title(riderphonenum.get(i)));
                     markerMap.put(riderphonenum.get(i), marker);
                 }
-
+                Marker marker = (Marker) markerMap.get(riderNumber);
+                if (marker != null) {
+                    LatLng pos = marker.getPosition();
+//                    LatLngBounds lockOn = new LatLngBounds(pos, pos);
+                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(pos, DEFAULT_ZOOM));
+                }
+                else {
+                    Toast.makeText(getBaseContext(), "Phone number not registered", Toast.LENGTH_SHORT).show();
+                }
 
             }
 
