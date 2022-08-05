@@ -19,11 +19,13 @@ import com.google.firebase.database.Query;
 
 public class user_ongoing_order_details extends AppCompatActivity {
 
-    String name, phonenum, orderID, riderName, riderVehicle, senderName, senderLocation, senderContact,
-            receiverName, receiverLocation, receiverContact, vehicleType, senderNote, orderPrice;
+    String name, phonenum, orderID, riderName, ridernum, riderPlateNumber, riderBrandModel,
+            senderName, senderLocation, senderContact, receiverName, receiverLocation,
+            receiverContact, vehicleType, senderNote, orderPrice;
     TextView senderloc, sendername, sendercontact, receiverloc, receivername, receivercontact,
-            order_id, rider_name, vehicletype, usernote, parcelprice;
-    Button btn_cancelOrder;
+            order_id, rider_name, vehicletype, usernote, parcelprice, plate_number;
+    ;
+    Button btn_cancelOrder, btn_trackCourier;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,9 +46,11 @@ public class user_ongoing_order_details extends AppCompatActivity {
         order_id = findViewById(R.id.parcelorder_ID2);
         rider_name = findViewById(R.id.rider_name);
         vehicletype = findViewById(R.id.vehicle_details);
+        plate_number = findViewById(R.id.plate_number);
         usernote = findViewById(R.id.note_rider2);
         parcelprice = findViewById(R.id.txt_price2);
         btn_cancelOrder = findViewById(R.id.btn_cancelOrder);
+        btn_trackCourier = findViewById(R.id.btn_trackCourier);
 
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         final DatabaseReference dr = database.getReference().child("userparcel");
@@ -63,10 +67,47 @@ public class user_ongoing_order_details extends AppCompatActivity {
                         receiverName = dataSnapshot.child("receivername").getValue(String.class);
                         receiverLocation = dataSnapshot.child("receiverlocation").getValue(String.class);
                         receiverContact = dataSnapshot.child("receivercontact").getValue(String.class);
-                        riderName = dataSnapshot.child("ridername").getValue(String.class);
+//                        riderName = dataSnapshot.child("ridername").getValue(String.class);
                         vehicleType = dataSnapshot.child("vehicletype").getValue(String.class);
                         senderNote = dataSnapshot.child("customernotes").getValue(String.class);
                         orderPrice = dataSnapshot.child("fee").getValue(String.class);
+                        ridernum = dataSnapshot.child("ridernum").getValue(String.class);
+
+                        final FirebaseDatabase database2 = FirebaseDatabase.getInstance();
+                        final DatabaseReference dr2 = database2.getReference().child("riders");
+                        Query query = dr2.orderByChild("riderphone").equalTo(ridernum);
+
+                        query.addChildEventListener(
+                                new ChildEventListener() {
+                                    @Override
+                                    public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                                        riderName = dataSnapshot.child("name").getValue(String.class);
+                                        riderBrandModel = dataSnapshot.child("vehiclebrandandmodel").getValue(String.class);
+                                        riderPlateNumber = dataSnapshot.child("vehicleplatenumber").getValue(String.class);
+                                        rider_name.setText(riderName);
+                                        vehicletype.setText(vehicleType + " ("+ riderBrandModel + ")");
+                                        plate_number.setText("Plate Number: "+ riderPlateNumber);
+                                    }
+
+                                    @Override
+                                    public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+                                    }
+
+                                    @Override
+                                    public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
+
+                                    }
+
+                                    @Override
+                                    public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                                    }
+                                });
+
                         sendername.setText(senderName);
                         senderloc.setText(senderLocation);
                         sendercontact.setText(senderContact);
@@ -74,8 +115,6 @@ public class user_ongoing_order_details extends AppCompatActivity {
                         receiverloc.setText(receiverLocation);
                         receivercontact.setText(receiverContact);
                         order_id.setText(orderID);
-                        rider_name.setText(riderName);
-                        vehicletype.setText(vehicleType);
                         usernote.setText(senderNote);
                         parcelprice.setText(orderPrice);
                     }
@@ -98,6 +137,41 @@ public class user_ongoing_order_details extends AppCompatActivity {
                     public void onChildChanged(DataSnapshot dataSnapshot, String s) {
                     }
                 });
+
+        btn_trackCourier.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final FirebaseDatabase database = FirebaseDatabase.getInstance();
+                final DatabaseReference dr = database.getReference().child("userparcel");
+                Query query = dr.orderByChild("OrderID").equalTo(orderID);
+
+                query.addChildEventListener(
+                        new ChildEventListener() {
+                            @Override
+                            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                                System.out.println("Track Courier Button Clicked!");
+                            }
+
+                            @Override
+                            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+                            }
+
+                            @Override
+                            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+
+                            @Override
+                            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                            }
+                        });
+            }
+        });
 
         btn_cancelOrder.setOnClickListener(new View.OnClickListener() {
             @Override
