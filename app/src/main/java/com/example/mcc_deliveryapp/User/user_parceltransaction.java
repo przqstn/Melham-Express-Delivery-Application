@@ -93,7 +93,7 @@ public class user_parceltransaction extends FragmentActivity implements OnMapRea
 
 	Button address_dialog;
 	View mapview;
-	String apiKey = "AIzaSyADbrHx5UL02dbtkEkDMlrBvkv-pk3JfHU";
+	String apiKey = "AIzaSyDFYoFiFN4xRMjixR8LQ5ve3nnDiJioj_Y";
 	EditText senderloc;
 	EditText sendercontact;
 	EditText sendername;

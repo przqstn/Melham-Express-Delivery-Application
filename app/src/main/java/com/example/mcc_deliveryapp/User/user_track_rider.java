@@ -6,14 +6,19 @@ import androidx.fragment.app.FragmentActivity;
 
 import android.Manifest;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mcc_deliveryapp.R;
+import com.example.mcc_deliveryapp.User.Module.Route;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -23,6 +28,7 @@ import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -43,14 +49,16 @@ public class user_track_rider extends FragmentActivity implements OnMapReadyCall
 
     HashMap markerMap = new HashMap();
     Button back;
-    String riderNumber, orderID, phonenum, name;
-
+    String riderNumber, orderID, phonenum, name, riderName;
+    TextView riderNameUI;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Intent intent = getIntent();
         orderID = intent.getStringExtra("orderID");
         name = intent.getStringExtra("username");
         phonenum = intent.getStringExtra("phonenum");
+        riderName = intent.getStringExtra("ridername");
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_track_rider);
 
@@ -61,9 +69,9 @@ public class user_track_rider extends FragmentActivity implements OnMapReadyCall
         riderReference = FirebaseDatabase.getInstance().getReference("riders");
         Query checkUser = databaseReference.orderByChild("OrderID");
         Query checkRider = riderReference.orderByChild("riderphone");
-
+        riderNameUI =  findViewById(R.id.RiderName);
         back = findViewById(R.id.backbutton);
-
+      riderNameUI.setText(riderName);
 
 
 checkUser.addValueEventListener(new ValueEventListener() {
@@ -142,6 +150,8 @@ checkUser.addValueEventListener(new ValueEventListener() {
                 startActivity(intent);
             }
         });
+
+
        /* bale eto yung dating button tinanggal ko na muna
         track.setOnClickListener(new View.OnClickListener() {
             @Override

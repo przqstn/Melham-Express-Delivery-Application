@@ -150,6 +150,7 @@ public class user_ongoing_order_details extends AppCompatActivity {
                 intent.putExtra("orderID",  orderID);
                 intent.putExtra("phonenum", phonenum);
                 intent.putExtra("username", name);
+                intent.putExtra("ridername",  riderName);
                 startActivity(intent);
             }
         });
