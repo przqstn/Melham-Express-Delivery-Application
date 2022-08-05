@@ -193,7 +193,7 @@
                 android:layout_gravity="right"
                 android:fontFamily="@font/montserrat_medium"
                 android:padding="10dp"
-                android:text="Price : Sample Price 180"
+                android:text="Price : 180"
                 android:textColor="@color/black"
                 android:textSize="15dp" />
 

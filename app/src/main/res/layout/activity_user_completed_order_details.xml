@@ -337,31 +337,43 @@
                     </androidx.cardview.widget.CardView>
 
                     <RelativeLayout
-                        android:layout_width="300dp"
+                        android:id="@+id/courier_details"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
                         android:layout_marginTop="50dp"
-                        android:padding="5dp">
+                        android:layout_marginBottom="15dp">
 
                         <TextView
                             android:id="@+id/rider_name"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/montserrat_bold"
                             android:text="Rider Name Goes Here"
+                            android:textAlignment="center"
                             android:textColor="@color/black"
                             android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/vehicle_details"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_below="@id/rider_name"
-                            android:fontFamily="@font/montserrat_medium"
+                            android:fontFamily="@font/montserrat_regular"
                             android:text="Vehicle Details Go Here"
+                            android:textAlignment="center"
                             android:textColor="@color/black"
                             android:textStyle="bold" />
 
+                        <TextView
+                            android:id="@+id/plate_number"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/vehicle_details"
+                            android:fontFamily="@font/montserrat_regular"
+                            android:text="Plate Number"
+                            android:textAlignment="center"
+                            android:textColor="@color/black"
+                            android:textStyle="bold" />
                     </RelativeLayout>
 
                 </androidx.cardview.widget.CardView>

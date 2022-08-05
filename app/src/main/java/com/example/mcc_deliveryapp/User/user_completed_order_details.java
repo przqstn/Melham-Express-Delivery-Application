@@ -19,10 +19,11 @@ import com.google.firebase.database.Query;
 
 public class user_completed_order_details extends AppCompatActivity {
 
-    String name, phonenum, orderID, riderName, riderVehicle, senderName, senderLocation, senderContact,
+    String name, phonenum, orderID, riderName, riderBrandModel, riderPlateNumber,
+            riderVehicle, senderName, senderLocation, senderContact, ridernum,
             receiverName, receiverLocation, receiverContact, vehicleType, senderNote, orderPrice;
     TextView senderloc, sendername, sendercontact, receiverloc, receivername, receivercontact,
-            order_id, rider_name, vehicletype, usernote, parcelprice;
+            order_id, rider_name, vehicletype, usernote, parcelprice, plate_number;
     Button btn_cancelOrder;
 
     @Override
@@ -46,6 +47,7 @@ public class user_completed_order_details extends AppCompatActivity {
         vehicletype = findViewById(R.id.vehicle_details);
         usernote = findViewById(R.id.note_rider2);
         parcelprice = findViewById(R.id.txt_price2);
+        plate_number = findViewById(R.id.plate_number);
         btn_cancelOrder = findViewById(R.id.btn_cancelOrder);
 
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -63,10 +65,48 @@ public class user_completed_order_details extends AppCompatActivity {
                         receiverName = dataSnapshot.child("receivername").getValue(String.class);
                         receiverLocation = dataSnapshot.child("receiverlocation").getValue(String.class);
                         receiverContact = dataSnapshot.child("receivercontact").getValue(String.class);
-                        riderName = dataSnapshot.child("ridername").getValue(String.class);
+//                        riderName = dataSnapshot.child("ridername").getValue(String.class);
                         vehicleType = dataSnapshot.child("vehicletype").getValue(String.class);
                         senderNote = dataSnapshot.child("customernotes").getValue(String.class);
                         orderPrice = dataSnapshot.child("fee").getValue(String.class);
+                        ridernum = dataSnapshot.child("ridernum").getValue(String.class);
+
+                        final FirebaseDatabase database2 = FirebaseDatabase.getInstance();
+                        final DatabaseReference dr2 = database2.getReference().child("riders");
+                        Query query = dr2.orderByChild("riderphone").equalTo(ridernum);
+                        System.out.println(phonenum);
+
+                        query.addChildEventListener(
+                                new ChildEventListener() {
+                                    @Override
+                                    public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                                        riderName = dataSnapshot.child("name").getValue(String.class);
+                                        riderBrandModel = dataSnapshot.child("vehiclebrandandmodel").getValue(String.class);
+                                        riderPlateNumber = dataSnapshot.child("vehicleplatenumber").getValue(String.class);
+                                        rider_name.setText(riderName);
+                                        vehicletype.setText(vehicleType + " ("+ riderBrandModel + ")");
+                                        plate_number.setText("Plate Number: "+ riderPlateNumber);
+                                    }
+
+                                    @Override
+                                    public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+                                    }
+
+                                    @Override
+                                    public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
+
+                                    }
+
+                                    @Override
+                                    public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                                    }
+                                });
+
                         sendername.setText(senderName);
                         senderloc.setText(senderLocation);
                         sendercontact.setText(senderContact);
@@ -74,8 +114,6 @@ public class user_completed_order_details extends AppCompatActivity {
                         receiverloc.setText(receiverLocation);
                         receivercontact.setText(receiverContact);
                         order_id.setText(orderID);
-                        rider_name.setText(riderName);
-                        vehicletype.setText(vehicleType);
                         usernote.setText(senderNote);
                         parcelprice.setText(orderPrice);
                     }

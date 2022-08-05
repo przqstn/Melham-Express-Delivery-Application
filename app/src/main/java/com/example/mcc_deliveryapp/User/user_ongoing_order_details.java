@@ -23,7 +23,7 @@ public class user_ongoing_order_details extends AppCompatActivity {
             receiverName, receiverLocation, receiverContact, vehicleType, senderNote, orderPrice;
     TextView senderloc, sendername, sendercontact, receiverloc, receivername, receivercontact,
             order_id, rider_name, vehicletype, usernote, parcelprice;
-    Button btn_cancelOrder, btn_trackOrder;
+    Button btn_cancelOrder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +47,6 @@ public class user_ongoing_order_details extends AppCompatActivity {
         usernote = findViewById(R.id.note_rider2);
         parcelprice = findViewById(R.id.txt_price2);
         btn_cancelOrder = findViewById(R.id.btn_cancelOrder);
-        btn_trackOrder = findViewById(R.id.btn_trackOrder);
 
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         final DatabaseReference dr = database.getReference().child("userparcel");
@@ -138,19 +137,6 @@ public class user_ongoing_order_details extends AppCompatActivity {
                 intent.putExtra("phonenum", phonenum);
                 intent.putExtra("username", name);
                 intent.putExtra("orderID", orderID);
-                startActivity(intent);
-            }
-        });
-
-        btn_trackOrder.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(user_ongoing_order_details.this, user_track_rider.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                intent.putExtra("orderID",  orderID);
-                intent.putExtra("phonenum", phonenum);
-                intent.putExtra("username", name);
-                intent.putExtra("ridername",  riderName);
                 startActivity(intent);
             }
         });
