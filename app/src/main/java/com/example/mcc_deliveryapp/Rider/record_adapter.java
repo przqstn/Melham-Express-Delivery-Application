@@ -1,12 +1,16 @@
 package com.example.mcc_deliveryapp.Rider;
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mcc_deliveryapp.R;
+import com.example.mcc_deliveryapp.User.user_completed_order_details;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 
@@ -16,6 +20,8 @@ import com.firebase.ui.database.FirebaseRecyclerOptions;
 // database contents in a Recycler View
 public class record_adapter extends FirebaseRecyclerAdapter<
         model, record_adapter.recordViewholder> {
+
+    String userNum, userName;
 
     public record_adapter(
             @NonNull FirebaseRecyclerOptions<model> options) {
@@ -44,6 +50,7 @@ public class record_adapter extends FirebaseRecyclerAdapter<
         holder.senderlocation.setText(model.getSenderlocation());
 //        holder.sendername.setText(model.getSendername());
         holder.vehicle.setText(model.getVehicletype());
+        holder.orderID.setText(model.getOrderID());
     }
 
     // Function to tell the class about the Card view
@@ -59,11 +66,23 @@ public class record_adapter extends FirebaseRecyclerAdapter<
         return new recordViewholder(view);
     }
 
+    public String getUserNum(String userNum){
+        this.userNum = userNum;
+        return userNum;
+    }
+
+    public String getUserName(String userName){
+        this.userName = userName;
+        return userName;
+    }
+
+
     // Sub Class to create references of the views in Crad
     // view (here "person.xml")
     class recordViewholder
             extends RecyclerView.ViewHolder {
-        TextView senderlocation, receiverlocation, customernotes, fee, vehicle ;
+        TextView senderlocation, receiverlocation, customernotes, fee, orderID, vehicle ;
+        Context context;
         public recordViewholder(@NonNull View itemView)
         {
             super(itemView);
@@ -73,6 +92,23 @@ public class record_adapter extends FirebaseRecyclerAdapter<
             customernotes = itemView.findViewById(R.id.remarkRecord);
             vehicle = itemView.findViewById(R.id.vehicleRecord);
             fee = itemView.findViewById(R.id.priceRecord);
+            orderID = itemView.findViewById(R.id.courier_record_orderID);
+            CardView cv = (CardView) itemView.findViewById(R.id.courier_record_card);
+
+            context = itemView.getContext();
+
+            cv.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context, rider_completed_order.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    intent.putExtra("phonenum", userNum);
+                    intent.putExtra("username", userName);
+                    intent.putExtra("orderID", orderID.getText().toString());
+                    intent.putExtra("vehicle", vehicle.getText().toString());
+                    context.startActivity(intent);
+                }
+            });
         }
     }
 }
