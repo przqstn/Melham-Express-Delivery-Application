@@ -26,7 +26,7 @@ import com.example.mcc_deliveryapp.R;
 
 public class record_fragment extends Fragment {
 	private RecyclerView recyclerView;
-	private String riderPhoneNum;
+	private String riderPhoneNum, riderName;
 
 	record_adapter
 			adapter; // Create Object of the Adapter class
@@ -53,18 +53,18 @@ public class record_fragment extends Fragment {
 
 		Intent intent = getActivity().getIntent();
 		riderPhoneNum = intent.getStringExtra("phonenum");
+//		riderName = intent.getStringExtra("username");
 
 
-		Query query = mbase.orderByChild("ridernum").equalTo(riderPhoneNum);
+		final FirebaseDatabase database = FirebaseDatabase.getInstance();
+		final DatabaseReference dr = database.getReference().child("riders");
+		Query query = dr.orderByChild("riderphone").equalTo(riderPhoneNum);
 
 		query.addChildEventListener(
 				new ChildEventListener() {
 					@Override
 					public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-						DatabaseReference ddf = mbase.child(dataSnapshot.getKey()).child("parcelstatus");
-//						riderVehicle = dataSnapshot.child("vehicletype").getValue(String.class);
-//						riderName = dataSnapshot.child("name").getValue(String.class);
-//						System.out.println(riderVehicle + "start");
+						riderName = dataSnapshot.child("name").getValue(String.class);
 					}
 
 					@Override
@@ -98,6 +98,8 @@ public class record_fragment extends Fragment {
 		// Connecting object of required Adapter class to
 		// the Adapter class itself
 		adapter = new record_adapter(options);
+		adapter.getUserNum(riderPhoneNum);
+		adapter.getUserName(riderName);
 		// Connecting Adapter class with the Recycler view*/
 		recyclerView.setAdapter(adapter);
 		return view;

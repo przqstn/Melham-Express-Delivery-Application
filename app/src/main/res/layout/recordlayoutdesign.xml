@@ -2,6 +2,7 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/courier_record_card"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="10dp"
@@ -67,6 +68,12 @@
                     android:textSize="15dp"
                     tools:layout_editor_absoluteX="2dp"
                     tools:layout_editor_absoluteY="371dp" />
+
+                <TextView
+                    android:id="@+id/courier_record_orderID"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="TextView" />
 
                 <TextView
                     android:id="@+id/vehicleRecord"

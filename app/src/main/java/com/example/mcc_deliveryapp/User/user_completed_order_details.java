@@ -17,18 +17,18 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 
-public class user_ongoing_order_details extends AppCompatActivity {
+public class user_completed_order_details extends AppCompatActivity {
 
     String name, phonenum, orderID, riderName, riderVehicle, senderName, senderLocation, senderContact,
             receiverName, receiverLocation, receiverContact, vehicleType, senderNote, orderPrice;
     TextView senderloc, sendername, sendercontact, receiverloc, receivername, receivercontact,
             order_id, rider_name, vehicletype, usernote, parcelprice;
-    Button btn_cancelOrder, btn_trackOrder;
+    Button btn_cancelOrder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_ongoing_order_details);
+        setContentView(R.layout.activity_user_completed_order_details);
 
         Intent intent = getIntent();
         name = intent.getStringExtra("username");
@@ -47,7 +47,6 @@ public class user_ongoing_order_details extends AppCompatActivity {
         usernote = findViewById(R.id.note_rider2);
         parcelprice = findViewById(R.id.txt_price2);
         btn_cancelOrder = findViewById(R.id.btn_cancelOrder);
-        btn_trackOrder = findViewById(R.id.btn_trackOrder);
 
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         final DatabaseReference dr = database.getReference().child("userparcel");
@@ -99,66 +98,12 @@ public class user_ongoing_order_details extends AppCompatActivity {
                     public void onChildChanged(DataSnapshot dataSnapshot, String s) {
                     }
                 });
-
-        btn_cancelOrder.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                final FirebaseDatabase database = FirebaseDatabase.getInstance();
-                final DatabaseReference dr = database.getReference().child("userparcel");
-                Query query = dr.orderByChild("OrderID").equalTo(orderID);
-
-                query.addChildEventListener(
-                        new ChildEventListener() {
-                            @Override
-                            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                                dr.child(dataSnapshot.getKey()).child("parcelstatus").setValue("Cancelled"+phonenum);
-                                String userdefnum = dataSnapshot.child("defaultUserNum").getValue().toString();
-                                dr.child(dataSnapshot.getKey()).child("userParcelStatus").setValue("Cancelled"+userdefnum);
-                            }
-
-                            @Override
-                            public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-                            }
-
-                            @Override
-                            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-                            }
-
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError error) {
-
-                            }
-
-                            @Override
-                            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-                            }
-                        });
-                Intent intent = new Intent(user_ongoing_order_details.this, user_navigation.class);
-                intent.putExtra("phonenum", phonenum);
-                intent.putExtra("username", name);
-                intent.putExtra("orderID", orderID);
-                startActivity(intent);
-            }
-        });
-
-        btn_trackOrder.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(user_ongoing_order_details.this, user_track_rider.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                intent.putExtra("orderID",  orderID);
-                intent.putExtra("phonenum", phonenum);
-                intent.putExtra("username", name);
-                startActivity(intent);
-            }
-        });
     }
 
     @Override
     public void onBackPressed()
     {
-        Intent intent = new Intent(user_ongoing_order_details.this, user_navigation.class);
+        Intent intent = new Intent(user_completed_order_details.this, user_navigation.class);
         intent.putExtra("phonenum", phonenum);
         intent.putExtra("username", name);
         intent.putExtra("orderID", orderID);

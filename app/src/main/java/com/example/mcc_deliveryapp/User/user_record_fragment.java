@@ -25,7 +25,7 @@ import com.google.firebase.database.Query;
 
 public class user_record_fragment extends Fragment {
     private RecyclerView recyclerView;
-    private String userNum;
+    private String userNum, userName;
 
     record_adapter2 adapter; // Create Object of the Adapter class
     DatabaseReference mbase; // Create object of the
@@ -49,6 +49,7 @@ public class user_record_fragment extends Fragment {
 
         Intent intent = getActivity().getIntent();
         userNum = intent.getStringExtra("phonenum");
+        userName = intent.getStringExtra("username");
 
 
         Query query = mbase.orderByChild("ridernum").equalTo(userNum);
@@ -92,6 +93,8 @@ public class user_record_fragment extends Fragment {
         // the Adapter class itself
         adapter = new record_adapter2(options);
         // Connecting Adapter class with the Recycler view*/
+        adapter.getUserNum(userNum);
+        adapter.getUserName(userName);
         recyclerView.setAdapter(adapter);
         return view;
     }
