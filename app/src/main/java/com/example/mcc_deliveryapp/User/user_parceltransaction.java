@@ -8,6 +8,8 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
@@ -48,16 +50,21 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.libraries.places.api.Places;
+import com.google.android.libraries.places.api.model.LocationBias;
+import com.google.android.libraries.places.api.model.LocationRestriction;
 import com.google.android.libraries.places.api.model.Place;
+import com.google.android.libraries.places.api.model.RectangularBounds;
 import com.google.android.libraries.places.widget.Autocomplete;
 import com.google.android.libraries.places.widget.AutocompleteActivity;
 import com.google.android.libraries.places.widget.model.AutocompleteActivityMode;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 
 ///////////////////
@@ -81,6 +88,9 @@ public class user_parceltransaction extends FragmentActivity implements OnMapRea
 	private List<Marker> destinationMarkers = new ArrayList<>();
 	private List<Polyline> polylinePaths = new ArrayList<>();
 	private ProgressDialog progressDialog;
+	Geocoder geocoder;
+	List<Address> addresses;
+
 	Button address_dialog;
 	View mapview;
 	String apiKey = "AIzaSyADbrHx5UL02dbtkEkDMlrBvkv-pk3JfHU";
@@ -152,8 +162,9 @@ public class user_parceltransaction extends FragmentActivity implements OnMapRea
 				Intent intent = new Autocomplete.IntentBuilder(AutocompleteActivityMode.FULLSCREEN, field)
 						.setCountry("PH")
 						.build(user_parceltransaction.this);
-
+				intent.putExtra("Initial Location", lastKnownLocation);
 				//start activity result
+				etDestination.setText("");
 				startActivityForResult(intent, 1);
 
 
@@ -299,6 +310,16 @@ public class user_parceltransaction extends FragmentActivity implements OnMapRea
 								mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
 										new LatLng(lastKnownLocation.getLatitude(),
 												lastKnownLocation.getLongitude()), DEFAULT_ZOOM));
+								geocoder = new Geocoder(user_parceltransaction.this, Locale.getDefault());
+								try {
+									addresses = geocoder.getFromLocation(
+											lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude(), 1);
+								} catch (IOException e) {
+									e.printStackTrace();
+								}
+
+								String address = addresses.get(0).getAddressLine(0);
+								etOrigin.setText(address);
 							}
 						} else {
 							Log.d(TAG, "Current location is null. Using defaults.");
@@ -499,7 +520,10 @@ public class user_parceltransaction extends FragmentActivity implements OnMapRea
 			originMarkers.add(mMap.addMarker(new MarkerOptions()
 					.icon(bitmapDescriptorFromVector(user_parceltransaction.this, R.drawable.pickup))
 					.title(route.startAddress)
-					.position(route.startLocation)));
+					.position(route.startLocation)
+
+			));
+
 			destinationMarkers.add(mMap.addMarker(new MarkerOptions()
 					.icon(bitmapDescriptorFromVector(user_parceltransaction.this, R.drawable.location))
 					.title(route.endAddress)
@@ -517,7 +541,16 @@ public class user_parceltransaction extends FragmentActivity implements OnMapRea
 
 			SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
 			SharedPreferences.Editor editor = sharedPref.edit();
+
+			String startAdd = route.startLocation.toString().replace("lat/lng: (", "")
+					.replace(")","");
+			String endAdd = route.endLocation.toString().replace("lat/lng: (", "")
+					.replace(")","");
+
+
 			editor.putString("key 8",route.distance.text);
+			editor.putString("key 11", startAdd);
+			editor.putString("key 12", endAdd);
 			editor.apply();
 
 		}
