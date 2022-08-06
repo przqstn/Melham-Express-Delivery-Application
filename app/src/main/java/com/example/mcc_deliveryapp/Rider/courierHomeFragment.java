@@ -118,7 +118,7 @@ public class courierHomeFragment extends Fragment {
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(recyclerView_pickup.getContext(), "Retrieved", Toast.LENGTH_SHORT).show();
+
                         }
                     });
         }catch (IOException e){

@@ -94,7 +94,7 @@ public class profile_fragment extends Fragment {
 					}).addOnFailureListener(new OnFailureListener() {
 						@Override
 						public void onFailure(@NonNull Exception e) {
-							Toast.makeText(profile_rider.getContext(), "failed", Toast.LENGTH_SHORT).show();
+
 						}
 					});
 		}catch (IOException e){
