@@ -8,6 +8,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="red">#F20606</color>
+    <color name="gray">#878181</color>
 
     <color name="app_color">#223272</color>
     <color name="button_color1">#223272</color>
@@ -23,6 +24,7 @@
     <color name="color_divider">#BAB3B9</color>
     <color name="color_transparent">#00FFFFFF</color>
     <color name="opaque_appcolor">#32223272</color>
+
 
 
 </resources>
