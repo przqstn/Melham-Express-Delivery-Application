@@ -110,7 +110,7 @@ public class user_profile_fragment extends Fragment {
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(profile_user.getContext(), "failed", Toast.LENGTH_SHORT).show();
+
                         }
                     });
         }catch (IOException e){
