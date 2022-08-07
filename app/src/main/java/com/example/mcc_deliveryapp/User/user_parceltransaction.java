@@ -1,6 +1,7 @@
 package com.example.mcc_deliveryapp.User;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -11,6 +12,7 @@ import android.graphics.drawable.Drawable;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
+import android.os.PowerManager;
 import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -107,6 +109,7 @@ public class user_parceltransaction extends FragmentActivity implements OnMapRea
 	private static final int DEFAULT_ZOOM = 15;
 	private final LatLng defaultLocation = new LatLng(15.594197, 120.970414);
 
+	@SuppressLint("WakelockTimeout")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -132,6 +135,11 @@ public class user_parceltransaction extends FragmentActivity implements OnMapRea
 		address_dialog = (Button) findViewById(R.id.img_addressbtndialog);
 
 		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+
+		//prevent lock screen
+		PowerManager powerManager = (PowerManager)this.getSystemService(Context.POWER_SERVICE);
+		@SuppressLint("InvalidWakeLockTag") PowerManager.WakeLock wakeLock = powerManager.newWakeLock(PowerManager.FULL_WAKE_LOCK, "My Lock");
+		wakeLock.acquire(10*60*1000L /*10 minutes*/);
 
 		// This callback will only be called when MyFragment is at least Started.
 		OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
@@ -279,6 +287,10 @@ public class user_parceltransaction extends FragmentActivity implements OnMapRea
 								}
 
 								Intent intent = new Intent(user_parceltransaction.this,user_paymentmethod.class);
+								// release lock prevention
+								if (wakeLock.isHeld())
+									wakeLock.release();
+
 								startActivity(intent);
 							}
 						});
@@ -405,6 +417,19 @@ public class user_parceltransaction extends FragmentActivity implements OnMapRea
 	public void sendRequest() {
 		String origin = etOrigin.getText().toString();
 		String destination = etDestination.getText().toString();
+		geocoder = new Geocoder(user_parceltransaction.this, Locale.getDefault());
+		try {
+			addresses = geocoder.getFromLocation(
+					lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude(), 1);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		String address = addresses.get(0).getAddressLine(0);
+
+		if (origin == address) {
+			origin = lastKnownLocation.getLatitude() + "," +lastKnownLocation.getLongitude();
+		}
 
 		if (origin.isEmpty()) {
 			Toast.makeText(this, "Please enter origin address!", Toast.LENGTH_SHORT).show();

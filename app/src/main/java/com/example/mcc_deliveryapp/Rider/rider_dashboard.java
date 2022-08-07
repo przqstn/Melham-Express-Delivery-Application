@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -23,6 +24,7 @@ public class rider_dashboard extends AppCompatActivity {
 	profile_fragment profile_fragment = new profile_fragment();
 	record_fragment record_fragment = new record_fragment();
 	courierHomeFragment courierHomeFragment = new courierHomeFragment();
+	private long pressedTime;
 
 
 	@Override
@@ -56,5 +58,15 @@ public class rider_dashboard extends AppCompatActivity {
 			}
 		});
 
+	}
+	@Override
+	public void onBackPressed() {
+		if (pressedTime + 2000 > System.currentTimeMillis()) {
+			super.onBackPressed();
+			finishAffinity();
+		} else {
+			Toast.makeText(getBaseContext(), "Press back again to exit", Toast.LENGTH_SHORT).show();
+		}
+		pressedTime = System.currentTimeMillis();
 	}
 }
