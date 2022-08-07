@@ -28,6 +28,8 @@ import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
 
 import com.example.mcc_deliveryapp.R;
+import com.example.mcc_deliveryapp.Rider.rider_ongoing_order;
+import com.example.mcc_deliveryapp.Rider.rider_takeorder_map;
 import com.example.mcc_deliveryapp.User.Module.DirectionFinder;
 import com.example.mcc_deliveryapp.User.Module.DirectionFinderListener;
 import com.example.mcc_deliveryapp.User.Module.Route;
@@ -81,7 +83,6 @@ import com.google.android.gms.location.LocationServices;
 public class user_parceltransaction extends FragmentActivity implements OnMapReadyCallback ,DirectionFinderListener{
 
 	GoogleMap mMap;
-	private Button btnFindPath;
 	private EditText etOrigin;
 	private EditText etDestination;
 	private List<Marker> originMarkers = new ArrayList<>();
@@ -92,16 +93,11 @@ public class user_parceltransaction extends FragmentActivity implements OnMapRea
 	List<Address> addresses;
 
 	Button address_dialog;
-	View mapview;
+	View mapview, locationButton;
 	String apiKey = "AIzaSyDFYoFiFN4xRMjixR8LQ5ve3nnDiJioj_Y";
-	EditText senderloc;
-	EditText sendercontact;
-	EditText sendername;
+	EditText senderloc, sendercontact, sendername;
 
-
-	EditText receiverloc;
-	EditText receivercontact;
-	EditText receivername;
+	EditText receiverloc, receivercontact, receivername;
 
 	private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
 	private boolean locationPermissionGranted;
@@ -109,7 +105,7 @@ public class user_parceltransaction extends FragmentActivity implements OnMapRea
 	private FusedLocationProviderClient fusedLocationProviderClient;
 	private Location lastKnownLocation;
 	private static final int DEFAULT_ZOOM = 15;
-	private final LatLng defaultLocation = new LatLng(14.594197, 120.970414);
+	private final LatLng defaultLocation = new LatLng(15.594197, 120.970414);
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -130,8 +126,7 @@ public class user_parceltransaction extends FragmentActivity implements OnMapRea
 		mapview = Objects.requireNonNull(mapFragment).getView();
 		mapFragment.getMapAsync(this);
 
-
-		btnFindPath = (Button) findViewById(R.id.btnFindPath);
+		locationButton = ((View) mapview.findViewById(Integer.parseInt("1")).getParent()).findViewById(Integer.parseInt("2"));
 		etOrigin = (EditText) findViewById(R.id.etOrigin);
 		etDestination =  (EditText) findViewById(R.id.etDestination);
 		address_dialog = (Button) findViewById(R.id.img_addressbtndialog);
@@ -165,6 +160,23 @@ public class user_parceltransaction extends FragmentActivity implements OnMapRea
 				intent.putExtra("Initial Location", lastKnownLocation);
 				//start activity result
 				etDestination.setText("");
+				if (originMarkers != null) {
+					for (Marker marker : originMarkers) {
+						marker.remove();
+					}
+				}
+
+				if (destinationMarkers != null) {
+					for (Marker marker : destinationMarkers) {
+						marker.remove();
+					}
+				}
+
+				if (polylinePaths != null) {
+					for (Polyline polyline:polylinePaths ) {
+						polyline.remove();
+					}
+				}
 				startActivityForResult(intent, 1);
 
 
@@ -272,8 +284,6 @@ public class user_parceltransaction extends FragmentActivity implements OnMapRea
 						});
 						bottomSheetDialog.setContentView(bottomSheetView2);
 						bottomSheetDialog.show();
-//						Intent intent = new Intent(user_parceltransaction.this,user_paymentmethod.class);
-//						startActivity(intent);
 					}
 				});
 				bottomSheetDialog.setContentView(bottomSheetView);
@@ -281,12 +291,6 @@ public class user_parceltransaction extends FragmentActivity implements OnMapRea
 			}
 		});
 
-//		btnFindPath.setOnClickListener(new View.OnClickListener() {
-//			@Override
-//			public void onClick(View v) {
-//				sendRequest();
-//			}
-//		});
 
 	}
 
@@ -426,7 +430,6 @@ public class user_parceltransaction extends FragmentActivity implements OnMapRea
 		if (mapview != null &&
 				mapview.findViewById(Integer.parseInt("1")) != null) {
 			// Get the button view
-			View locationButton = ((View) mapview.findViewById(Integer.parseInt("1")).getParent()).findViewById(Integer.parseInt("2"));
 			// and next place it, on bottom right (as Google Maps app)
 			RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams)
 					locationButton.getLayoutParams();
@@ -434,6 +437,7 @@ public class user_parceltransaction extends FragmentActivity implements OnMapRea
 			layoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP, 0);
 			layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
 			layoutParams.setMargins(0, 0, 30, 400);
+
 
 		}
 
@@ -465,8 +469,36 @@ public class user_parceltransaction extends FragmentActivity implements OnMapRea
 			return;
 		}
 		mMap.setMyLocationEnabled(true);
+		mMap.getUiSettings().setMyLocationButtonEnabled(true);
 
-		/////////////////////////////////////////////////////////////////
+		mMap.setOnMyLocationButtonClickListener(new GoogleMap.OnMyLocationButtonClickListener() {
+			@Override
+			public boolean onMyLocationButtonClick() {
+				if (mapview != null) {
+					getDeviceLocation();
+					etDestination.setText("");
+					if (originMarkers != null) {
+						for (Marker marker : originMarkers) {
+							marker.remove();
+						}
+					}
+
+					if (destinationMarkers != null) {
+						for (Marker marker : destinationMarkers) {
+							marker.remove();
+						}
+					}
+
+					if (polylinePaths != null) {
+						for (Polyline polyline:polylinePaths ) {
+							polyline.remove();
+						}
+					}
+				}
+				return false;
+			}
+		});
+
 		getLocationPermission();
 		getDeviceLocation();
 
