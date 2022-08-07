@@ -331,13 +331,8 @@ public class rider_takeorder_map extends FragmentActivity implements OnMapReadyC
                 e.printStackTrace();
             }
 
-
-            String addressRider = addressesRider.get(0).getAddressLine(0);
-            String addressStart = addressesStart.get(0).getAddressLine(0);
-
             String test1 = Double.toString(riderLocation.latitude) + "," + riderLocation.longitude;
             String test2 = Double.toString(startLocation.latitude) + "," + startLocation.longitude;
-            System.out.println(test1 + "aaaaa" + test2);
             try {
                 new DirectionFinder(this, test1, test2).execute();
             } catch (UnsupportedEncodingException e) {
