@@ -18,12 +18,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.mcc_deliveryapp.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -45,7 +43,7 @@ public class user_profile_fragment extends Fragment {
     //
     Uri imageUri;
     FirebaseStorage storage;
-    StorageReference storageReference, sr;
+    StorageReference storageReference, imageReference;
 
     ImageView profile_user;
 
@@ -96,14 +94,13 @@ public class user_profile_fragment extends Fragment {
         });
 
         //retrieved courier's profile picture from firebase storage
-        sr = FirebaseStorage.getInstance().getReference().child("user/"+phone+"/profile_image.jpg");
+        imageReference = FirebaseStorage.getInstance().getReference().child("user/"+phone+"/profile_image.jpg");
         try{
             final File file= File.createTempFile("profile_image", "jpg");
-            sr.getFile(file)
+            imageReference.getFile(file)
                     .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                            //Toast.makeText(profile_rider.getContext(), "Retrieved", Toast.LENGTH_SHORT).show();
                             Bitmap bitmap= BitmapFactory.decodeFile(file.getAbsolutePath());
                             ((ImageView)view.findViewById(R.id.profile_user)).setImageBitmap(bitmap);
                         }
