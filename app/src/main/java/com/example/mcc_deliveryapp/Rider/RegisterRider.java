@@ -660,8 +660,8 @@ public class RegisterRider extends AppCompatActivity {
                     riderInfo.put("latitude","");
                     riderInfo.put("longitude","");
                     // Please check these lines
-//                    riderInfo.put("rider_total", 0);
-//                    riderInfo.put("rider_count", 0);
+//                    riderInfo.put("rate_total", 0);
+//                    riderInfo.put("rate_count", 0);
 
 
                     rootie.child("riders").child(phonenum).setValue(riderInfo).addOnCompleteListener(new OnCompleteListener<Void>() {
