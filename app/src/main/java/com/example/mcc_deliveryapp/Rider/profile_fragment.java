@@ -70,9 +70,9 @@ public class profile_fragment extends Fragment {
 						RiderPlate.setText(ds.child("vehicleplatenumber").getValue(String.class));
 						RiderAddress.setText(ds.child("currentaddress").getValue(String.class));
 						RiderNumber.setText(ds.child("riderphone").getValue(String.class));
-						if (ds.child("rate_total").getValue(int.class) != null){
-							total = ds.child("rate_total").getValue(int.class);
-							count = ds.child("rate_count").getValue(int.class);
+						if (ds.child("rate_total").getValue(float.class) != null){
+							total = ds.child("rate_total").getValue(float.class);
+							count = ds.child("rate_count").getValue(float.class);
 							float final_rating = total/count;
 							String final_rating_string = String.valueOf(final_rating);
 							if (final_rating_string == "NaN"){

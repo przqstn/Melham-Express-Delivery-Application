@@ -24,7 +24,7 @@ import com.google.firebase.database.Query;
 
 public class RateDialog extends AppCompatDialogFragment {
     String name, phonenum, orderID, ridernum;
-    int rateTotal, rateCount;
+    float rateTotal, rateCount;
     RatingBar ratingbar;
     Button submit_rating;
 
@@ -71,10 +71,10 @@ public class RateDialog extends AppCompatDialogFragment {
                                         new ChildEventListener() {
                                             @Override
                                             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, String s) {
-                                                rateTotal = dataSnapshot.child("rate_total").getValue(int.class);
-                                                rateCount = dataSnapshot.child("rate_count").getValue(int.class);
+                                                rateTotal = dataSnapshot.child("rate_total").getValue(float.class);
+                                                rateCount = dataSnapshot.child("rate_count").getValue(float.class);
                                                 dr2.child(dataSnapshot.getKey()).child("rate_total").setValue(rateTotal+ratingbar.getRating());
-                                                dr2.child(dataSnapshot.getKey()).child("rate_count").setValue(rateCount+1);
+                                                dr2.child(dataSnapshot.getKey()).child("rate_count").setValue(rateCount+1.0);
                                             }
 
                                             @Override
