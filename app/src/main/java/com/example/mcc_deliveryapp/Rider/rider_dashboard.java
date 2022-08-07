@@ -33,7 +33,7 @@ public class rider_dashboard extends AppCompatActivity {
 		setContentView(R.layout.activity_rider_dashboard);
 
 
-		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+//		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		bottomNavigationView = findViewById(R.id.bottomNav_rider);
 		getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, courierHomeFragment).commit();
 		bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
