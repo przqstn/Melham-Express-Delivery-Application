@@ -6,7 +6,7 @@
     tools:context=".Rider.courierHomeFragment"
     >
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -102,6 +102,6 @@
             </RelativeLayout>
         </ScrollView>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </RelativeLayout>
 </LinearLayout>
 
