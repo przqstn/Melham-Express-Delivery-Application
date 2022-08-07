@@ -1,34 +1,30 @@
 package com.example.mcc_deliveryapp.User;
 
 import androidx.annotation.NonNull;
-import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
-import android.Manifest;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
-import android.graphics.Color;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mcc_deliveryapp.R;
-import com.example.mcc_deliveryapp.User.Module.Route;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -47,7 +43,7 @@ public class user_track_rider extends FragmentActivity implements OnMapReadyCall
 
     HashMap markerMap = new HashMap();
     Button back;
-    String riderNumber, orderID, phonenum, name, riderName;
+    String riderNumber, orderID, phonenum, name, riderName, riderVehicle;
     TextView riderNameUI, riderVehicleUI, riderPlateUI;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,42 +103,90 @@ checkUser.addValueEventListener(new ValueEventListener() {
                     {
                         riderVehicleUI.setText(locationSnapshot.child("vehicletype").getValue().toString());
                         riderPlateUI.setText(locationSnapshot.child("vehicleplatenumber").getValue().toString());
+                        riderVehicle = (locationSnapshot.child("vehicletype").getValue().toString());
                         String latitude = locationSnapshot.child("latitude").getValue().toString();
-                        latitudes.add(latitude);
-                    }
-                }
-                for (DataSnapshot locationSnapshot : dataSnapshot.getChildren()) {
-                    if (locationSnapshot.child("riderphone").getValue().equals(riderNumber))
-                    {
-                        String longitude = locationSnapshot.child("longitude").getValue().toString();
-                        longitudes.add(longitude);
-                    }
-                }
-                for (DataSnapshot locationSnapshot : dataSnapshot.getChildren()) {
-                    if (locationSnapshot.child("riderphone").getValue().equals(riderNumber))
-                    {
                         String riderphone = locationSnapshot.child("riderphone").getValue().toString();
+                        String longitude = locationSnapshot.child("longitude").getValue().toString();
+                        latitudes.add(latitude);
+                        longitudes.add(longitude);
                         riderphonenum.add(riderphone);
+                        if (riderVehicle.equals("Motorcycle"))
+                        {
+                            for (int i = 0; i < latitudes.size(); i++) {
+                                LatLng latLng = new LatLng(Double.parseDouble(latitudes.get(i)), Double.parseDouble(longitudes.get(i)));
+                                Marker marker = mMap.addMarker(new MarkerOptions()
+                                        .icon(bitmapDescriptorFromVector(user_track_rider.this, R.drawable.motorcycle))
+                                        .position(latLng)
+                                        .title(riderphonenum.get(i)));
+                                markerMap.put(riderphonenum.get(i), marker);
+                            }
+
+                        }
+                        else if (riderVehicle.equals("Sedan"))
+                        {
+                            for (int i = 0; i < latitudes.size(); i++) {
+                                LatLng latLng = new LatLng(Double.parseDouble(latitudes.get(i)), Double.parseDouble(longitudes.get(i)));
+                                Marker marker = mMap.addMarker(new MarkerOptions()
+                                        .icon(bitmapDescriptorFromVector(user_track_rider.this, R.drawable.sedan))
+                                        .position(latLng)
+                                        .title(riderphonenum.get(i)));
+                                markerMap.put(riderphonenum.get(i), marker);
+                            }
+
+                        }
+                        else if (riderVehicle.equals("SUV"))
+                        {
+                            for (int i = 0; i < latitudes.size(); i++) {
+                                LatLng latLng = new LatLng(Double.parseDouble(latitudes.get(i)), Double.parseDouble(longitudes.get(i)));
+                                Marker marker = mMap.addMarker(new MarkerOptions()
+                                        .icon(bitmapDescriptorFromVector(user_track_rider.this, R.drawable.suv))
+                                        .position(latLng)
+                                        .title(riderphonenum.get(i)));
+                                markerMap.put(riderphonenum.get(i), marker);
+                            }
+
+                        }
+                        else if (riderVehicle.equals("MPV"))
+                        {
+                            for (int i = 0; i < latitudes.size(); i++) {
+                                LatLng latLng = new LatLng(Double.parseDouble(latitudes.get(i)), Double.parseDouble(longitudes.get(i)));
+                                Marker marker = mMap.addMarker(new MarkerOptions()
+                                        .icon(bitmapDescriptorFromVector(user_track_rider.this, R.drawable.mpv))
+                                        .position(latLng)
+                                        .title(riderphonenum.get(i)));
+                                markerMap.put(riderphonenum.get(i), marker);
+                            }
+
+                        }
+                        else if (riderVehicle.equals("Small Truck"))
+                        {
+                            for (int i = 0; i < latitudes.size(); i++) {
+                                LatLng latLng = new LatLng(Double.parseDouble(latitudes.get(i)), Double.parseDouble(longitudes.get(i)));
+                                Marker marker = mMap.addMarker(new MarkerOptions()
+                                        .icon(bitmapDescriptorFromVector(user_track_rider.this, R.drawable.truck))
+                                        .position(latLng)
+                                        .title(riderphonenum.get(i)));
+                                markerMap.put(riderphonenum.get(i), marker);
+                            }
+
+                        }
+                        Marker marker = (Marker) markerMap.get(riderNumber);
+                        if (marker != null) {
+                            LatLng pos = marker.getPosition();
+                            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(pos, DEFAULT_ZOOM));
+                        }
                     }
-                }
 
-                for (int i = 0; i < latitudes.size(); i++) {
-                    LatLng latLng = new LatLng(Double.parseDouble(latitudes.get(i)), Double.parseDouble(longitudes.get(i)));
-                    Marker marker = mMap.addMarker(new MarkerOptions()
-                            .position(latLng)
-                            .title(riderphonenum.get(i)));
-                    markerMap.put(riderphonenum.get(i), marker);
                 }
-                Marker marker = (Marker) markerMap.get(riderNumber);
-                if (marker != null) {
-                    LatLng pos = marker.getPosition();
-//                    LatLngBounds lockOn = new LatLngBounds(pos, pos);
-                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(pos, DEFAULT_ZOOM));
-                }
-                else {
-                    Toast.makeText(getBaseContext(), "Phone number not registered", Toast.LENGTH_SHORT).show();
-                }
+}
 
+            private BitmapDescriptor bitmapDescriptorFromVector(user_track_rider user_track_rider, int vectorResId) {
+                Drawable vectorDrawable = ContextCompat.getDrawable(user_track_rider, vectorResId);
+                vectorDrawable.setBounds(0, 0, vectorDrawable.getIntrinsicWidth(), vectorDrawable.getIntrinsicHeight());
+                Bitmap bitmap = Bitmap.createBitmap(vectorDrawable.getIntrinsicWidth(), vectorDrawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+                Canvas canvas = new Canvas(bitmap);
+                vectorDrawable.draw(canvas);
+                return BitmapDescriptorFactory.fromBitmap(bitmap);
             }
 
             @Override
@@ -163,34 +207,6 @@ checkUser.addValueEventListener(new ValueEventListener() {
             }
         });
 
-
-       /* bale eto yung dating button tinanggal ko na muna
-        track.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                inputNum = riderphone.getText().toString();
-                Marker marker = (Marker) markerMap.get(inputNum);
-
-                if (marker != null) {
-                    LatLng pos = marker.getPosition();
-                    LatLngBounds lockOn = new LatLngBounds(pos, pos);
-                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(pos, DEFAULT_ZOOM));
-                }
-                else {
-                    Toast.makeText(getBaseContext(), "Phone number not registered", Toast.LENGTH_SHORT).show();
-                }
-
-
-            }
-        });
-        if (inputNum != null) {
-            Marker marker = (Marker) markerMap.get(inputNum);
-            LatLng pos = marker.getPosition();
-            LatLngBounds lockOn = new LatLngBounds(pos, pos);
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(pos, DEFAULT_ZOOM));
-        }
-      */
     }
 
     @Override
@@ -199,7 +215,6 @@ checkUser.addValueEventListener(new ValueEventListener() {
         mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(getApplicationContext(), R.raw.customize_maps_style));
 
     }
-
 
 }
 

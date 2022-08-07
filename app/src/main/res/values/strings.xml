@@ -14,10 +14,10 @@
     <string-array name="ridervehicletype">
         <item>Vehicle Type</item>
         <item>Motorcycle</item>
-        <item>Sedan 200kg</item>
-        <item>SUV 300Kg</item>
-        <item>MPV 600Kg</item>
-        <item>Small Truck 1000Kg</item>
+        <item>Sedan</item>
+        <item>SUV</item>
+        <item>MPV</item>
+        <item>Small Truck</item>
     </string-array>
 
     <string-array name="ridervehiclebrandMC">

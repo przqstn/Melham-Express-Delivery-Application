@@ -4,17 +4,12 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/drawable-v24/ic_baseline_arrow_back.xml" value="0.2555" />
-        <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/drawable/addphoto.xml" value="0.252" />
-        <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/drawable/edit_icon.xml" value="0.2555" />
-        <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/drawable/edit_icon2.xml" value="0.23" />
         <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/drawable/handbook.xml" value="0.2495" />
         <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/drawable/ic_baseline_arrow_back.xml" value="0.2555" />
-        <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/drawable/logout_icon.xml" value="0.2555" />
         <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/drawable/menudot.xml" value="0.2555" />
         <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/drawable/motorcycle.xml" value="0.2555" />
         <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/drawable/mpv.xml" value="0.2555" />
         <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/drawable/online_groceries_decor.xml" value="0.2555" />
-        <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/drawable/profilepic.xml" value="0.234" />
         <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/drawable/sedan.xml" value="0.2555" />
         <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/drawable/suv.xml" value="0.2555" />
         <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/drawable/tab_indicator.xml" value="0.2555" />
@@ -23,25 +18,17 @@
         <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/layout/activity_user_dashboard.xml" value="0.2222222222222222" />
         <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/layout/activity_user_driverfound.xml" value="0.219435736677116" />
         <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/layout/activity_user_findingrider.xml" value="0.264" />
-        <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/layout/activity_user_navigation.xml" value="0.2222222222222222" />
         <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/layout/activity_user_parceltransaction.xml" value="0.264" />
         <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/layout/activity_user_paymentmethod.xml" value="0.264" />
         <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/layout/activity_user_permission.xml" value="0.264" />
         <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/layout/activity_user_waitingdriver.xml" value="0.264" />
         <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/layout/activity_userdashboard.xml" value="0.264" />
         <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/layout/driver_bottom_sheet.xml" value="0.10989583333333333" />
-        <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/layout/fragment_editprofile_fragment.xml" value="0.29502151198524895" />
-        <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/layout/fragment_profile_fragment.xml" value="0.2" />
-        <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/layout/fragment_sign_in.xml" value="0.2222222222222222" />
         <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/layout/fragment_signup_rider_step5_try.xml" value="0.1" />
-        <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/layout/fragment_user_home_fragment.xml" value="0.1" />
         <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/layout/motorcycle_dialog.xml" value="0.2222222222222222" />
         <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/layout/success_dialog.xml" value="0.2222222222222222" />
         <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/layout/suv_dialog.xml" value="0.2222222222222222" />
         <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/layout/truck_dialog.xml" value="0.2222222222222222" />
-        <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/layout/userrecorddesign.xml" value="0.2222222222222222" />
-        <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/menu/bottom_navrider.xml" value="0.2222222222222222" />
-        <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/menu/bottom_navuser.xml" value="0.2222222222222222" />
         <entry key="..\:/Coding Projects/MCC_Delivery_App/app/src/main/res/layout/activity_rider_dashboard.xml" value="0.20153985507246377" />
         <entry key="..\:/Coding Projects/MCC_Delivery_App/app/src/main/res/layout/activity_user_home.xml" value="0.22146739130434784" />
         <entry key="..\:/Coding Projects/MCC_Delivery_App/app/src/main/res/layout/activity_user_navbar.xml" value="0.20153985507246377" />
@@ -212,9 +199,18 @@
         <entry key="..\:/Users/rdrgz/AndroidStudioProjects/MCC Delivery App 2/app/src/main/res/layout/userhome.xml" value="0.14536340852130325" />
         <entry key="..\:/Users/rdrgz/AndroidStudioProjects/MCC Delivery App 2/app/src/main/res/menu/bottom_navrider.xml" value="0.33" />
         <entry key="..\:/Users/rdrgz/AndroidStudioProjects/MCC Delivery App 2/app/src/main/res/menu/bottom_navuser.xml" value="0.14487179487179488" />
+        <entry key="..\:/Users/rdrgz/AndroidStudioProjects/MCC_Delivery_App/app/src/main/res/layout/activity_user_checkrate.xml" value="0.33" />
         <entry key="..\:/Users/rdrgz/AndroidStudioProjects/MCC_Delivery_App/app/src/main/res/layout/activity_user_navbar.xml" value="0.276268115942029" />
         <entry key="..\:/Users/rdrgz/AndroidStudioProjects/MCC_Delivery_App/app/src/main/res/layout/activity_user_navigation.xml" value="0.276268115942029" />
+        <entry key="..\:/Users/rdrgz/AndroidStudioProjects/MCC_Delivery_App/app/src/main/res/layout/fragment_courier_home.xml" value="0.3625" />
+        <entry key="..\:/Users/rdrgz/AndroidStudioProjects/MCC_Delivery_App/app/src/main/res/layout/fragment_editprofile_fragment.xml" value="0.3625" />
+        <entry key="..\:/Users/rdrgz/AndroidStudioProjects/MCC_Delivery_App/app/src/main/res/layout/fragment_profile_fragment.xml" value="0.3625" />
+        <entry key="..\:/Users/rdrgz/AndroidStudioProjects/MCC_Delivery_App/app/src/main/res/layout/fragment_record_fragment.xml" value="0.3625" />
         <entry key="..\:/Users/rdrgz/AndroidStudioProjects/MCC_Delivery_App/app/src/main/res/layout/fragment_user_home_fragment.xml" value="0.276268115942029" />
+        <entry key="..\:/Users/rdrgz/AndroidStudioProjects/MCC_Delivery_App/app/src/main/res/layout/fragment_user_profile_fragment.xml" value="0.276268115942029" />
+        <entry key="..\:/Users/rdrgz/AndroidStudioProjects/MCC_Delivery_App/app/src/main/res/layout/fragment_user_record_fragment.xml" value="0.276268115942029" />
+        <entry key="..\:/Users/rdrgz/AndroidStudioProjects/MCC_Delivery_App/app/src/main/res/layout/ongoing_courierlayoutdesign.xml" value="0.276268115942029" />
+        <entry key="..\:/Users/rdrgz/AndroidStudioProjects/MCC_Delivery_App/app/src/main/res/layout/ongoing_userlayoutdesign.xml" value="0.276268115942029" />
       </map>
     </option>
   </component>
