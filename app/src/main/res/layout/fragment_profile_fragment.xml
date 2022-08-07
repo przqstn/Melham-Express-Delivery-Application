@@ -69,7 +69,7 @@
                 android:fontFamily="@font/montserrat_medium"
                 android:gravity="center"
                 android:padding="7dp"
-                android:text="Ratings \n 4.5"
+                android:text="Ratings \n N/A"
                 android:textColor="@color/black"
                 android:textSize="14sp" />
 

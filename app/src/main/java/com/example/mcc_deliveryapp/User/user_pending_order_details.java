@@ -1,8 +1,9 @@
-package com.example.mcc_deliveryapp.Rider;
+package com.example.mcc_deliveryapp.User;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -17,24 +18,24 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 
-public class rider_ongoing_order extends AppCompatActivity {
+public class user_pending_order_details extends AppCompatActivity {
 
-    String name, phonenum, orderID, riderVehicle, senderName, senderLocation, senderContact,
-            receiverName, receiverLocation, receiverContact, vehicleType, senderNote, orderPrice;
+    String name, phonenum, orderID,
+            senderName, senderLocation, senderContact, receiverName, receiverLocation,
+            receiverContact, vehicleType, senderNote, orderPrice;
     TextView senderloc, sendername, sendercontact, receiverloc, receivername, receivercontact,
             order_id, vehicletype, usernote, parcelprice;
-    Button btn_takeOrder;
+    Button btn_cancelOrder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_rider_ongoing_order);
+        setContentView(R.layout.activity_user_pending_order_details);
 
         Intent intent = getIntent();
         name = intent.getStringExtra("username");
         phonenum = intent.getStringExtra("phonenum");
         orderID = intent.getStringExtra("orderID");
-        riderVehicle = intent.getStringExtra("vehicle");
 
         senderloc = findViewById(R.id.sender_loc2);
         sendername = findViewById(R.id.sender_name2);
@@ -43,10 +44,10 @@ public class rider_ongoing_order extends AppCompatActivity {
         receivername = findViewById(R.id.receiver_name2);
         receivercontact = findViewById(R.id.receiver_contact2);
         order_id = findViewById(R.id.parcelorder_ID2);
-        vehicletype = findViewById(R.id.vehicle2);
+        vehicletype = findViewById(R.id.vehicle_details);
         usernote = findViewById(R.id.note_rider2);
         parcelprice = findViewById(R.id.txt_price2);
-        btn_takeOrder = findViewById(R.id.btn_completeOrder);
+        btn_cancelOrder = findViewById(R.id.btn_cancelOrder);
 
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         final DatabaseReference dr = database.getReference().child("userparcel");
@@ -66,6 +67,7 @@ public class rider_ongoing_order extends AppCompatActivity {
                         vehicleType = dataSnapshot.child("vehicletype").getValue(String.class);
                         senderNote = dataSnapshot.child("customernotes").getValue(String.class);
                         orderPrice = dataSnapshot.child("fee").getValue(String.class);
+
                         sendername.setText(senderName);
                         senderloc.setText(senderLocation);
                         sendercontact.setText(senderContact);
@@ -73,7 +75,6 @@ public class rider_ongoing_order extends AppCompatActivity {
                         receiverloc.setText(receiverLocation);
                         receivercontact.setText(receiverContact);
                         order_id.setText(orderID);
-                        vehicletype.setText(vehicleType);
                         usernote.setText(senderNote);
                         parcelprice.setText(orderPrice);
                     }
@@ -97,7 +98,7 @@ public class rider_ongoing_order extends AppCompatActivity {
                     }
                 });
 
-        btn_takeOrder.setOnClickListener(new View.OnClickListener() {
+        btn_cancelOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 final FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -108,7 +109,9 @@ public class rider_ongoing_order extends AppCompatActivity {
                         new ChildEventListener() {
                             @Override
                             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                                dr.child(dataSnapshot.getKey()).child("parcelstatus").setValue("Completed"+phonenum);
+                                dr.child(dataSnapshot.getKey()).child("parcelstatus").setValue("Cancelled"+phonenum);
+                                String userdefnum = dataSnapshot.child("defaultUserNum").getValue().toString();
+                                dr.child(dataSnapshot.getKey()).child("userParcelStatus").setValue("Cancelled"+userdefnum);
                             }
 
                             @Override
@@ -129,10 +132,10 @@ public class rider_ongoing_order extends AppCompatActivity {
                             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
                             }
                         });
-                Intent intent = new Intent(rider_ongoing_order.this, rider_dashboard.class);
+                Intent intent = new Intent(user_pending_order_details.this, user_navigation.class);
                 intent.putExtra("phonenum", phonenum);
                 intent.putExtra("username", name);
-                intent.putExtra("vehicle", riderVehicle);
+//                intent.putExtra("orderID", orderID);
                 startActivity(intent);
             }
         });
@@ -141,10 +144,10 @@ public class rider_ongoing_order extends AppCompatActivity {
     @Override
     public void onBackPressed()
     {
-        Intent intent = new Intent(rider_ongoing_order.this, rider_dashboard.class);
+        Intent intent = new Intent(user_pending_order_details.this, user_navigation.class);
         intent.putExtra("phonenum", phonenum);
         intent.putExtra("username", name);
-        intent.putExtra("vehicle", riderVehicle);
+//        intent.putExtra("orderID", orderID);
         startActivity(intent);
     }
 }

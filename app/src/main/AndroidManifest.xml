@@ -16,6 +16,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MCC_DeliveryApp">
         <activity
+            android:name=".User.user_pending_order_details"
+            android:exported="false" />
+        <activity
             android:name=".Rider.rider_completed_order"
             android:exported="false" />
         <activity
@@ -36,7 +39,6 @@
         <activity
             android:name=".Rider.take_order"
             android:exported="false" />
-
         <!--
              TODO: Before you run your application, you need a Google Maps API key.
 

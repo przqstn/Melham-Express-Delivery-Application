@@ -4,13 +4,16 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.mcc_deliveryapp.R;
+import com.example.mcc_deliveryapp.Rider.RegisterRider;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -25,7 +28,7 @@ public class user_ongoing_order_details extends AppCompatActivity {
             receiverContact, vehicleType, senderNote, orderPrice;
     TextView senderloc, sendername, sendercontact, receiverloc, receivername, receivercontact,
             order_id, rider_name, vehicletype, usernote, parcelprice, plate_number;
-    Button btn_cancelOrder, btn_trackCourier;
+    Button btn_userOrderCompleted, btn_trackCourier;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +51,7 @@ public class user_ongoing_order_details extends AppCompatActivity {
         vehicletype = findViewById(R.id.vehicle_details);
         usernote = findViewById(R.id.note_rider2);
         parcelprice = findViewById(R.id.txt_price2);
-        btn_cancelOrder = findViewById(R.id.btn_cancelOrder);
+        btn_userOrderCompleted = findViewById(R.id.btn_userOrderCompleted);
         btn_trackCourier = findViewById(R.id.btn_trackCourier);
         plate_number = findViewById(R.id.plate_number);
 
@@ -152,7 +155,7 @@ public class user_ongoing_order_details extends AppCompatActivity {
             }
         });
 
-        btn_cancelOrder.setOnClickListener(new View.OnClickListener() {
+        btn_userOrderCompleted.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 final FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -163,9 +166,8 @@ public class user_ongoing_order_details extends AppCompatActivity {
                         new ChildEventListener() {
                             @Override
                             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                                dr.child(dataSnapshot.getKey()).child("parcelstatus").setValue("Cancelled"+phonenum);
-                                String userdefnum = dataSnapshot.child("defaultUserNum").getValue().toString();
-                                dr.child(dataSnapshot.getKey()).child("userParcelStatus").setValue("Cancelled"+userdefnum);
+                                openRateDialog();
+
                             }
 
                             @Override
@@ -186,13 +188,18 @@ public class user_ongoing_order_details extends AppCompatActivity {
                             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
                             }
                         });
-                Intent intent = new Intent(user_ongoing_order_details.this, user_navigation.class);
-                intent.putExtra("phonenum", phonenum);
-                intent.putExtra("username", name);
-                intent.putExtra("orderID", orderID);
-                startActivity(intent);
+//                Intent intent = new Intent(user_ongoing_order_details.this, user_navigation.class);
+//                intent.putExtra("phonenum", phonenum);
+//                intent.putExtra("username", name);
+//                intent.putExtra("orderID", orderID);
+//                startActivity(intent);
             }
         });
+    }
+
+    public void openRateDialog() {
+        RateDialog rateDialog = new RateDialog();
+        rateDialog.show(getSupportFragmentManager(), "Rate Courier Dialog");
     }
 
     @Override

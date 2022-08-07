@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_color"
-    tools:context=".User.user_ongoing_order_details">
+    tools:context=".User.user_pending_order_details">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -327,104 +327,6 @@
                                 android:background="#223272"
                                 android:fontFamily="@font/montserrat_bold"
                                 android:padding="10dp"
-                                android:text="Courier Details"
-                                android:textAlignment="center"
-                                android:textColor="@color/white"
-                                android:textSize="15dp" />
-
-                        </LinearLayout>
-
-                    </androidx.cardview.widget.CardView>
-
-                    <RelativeLayout
-                        android:layout_width="300dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="45dp"
-                        android:padding="5dp">
-
-                        <RelativeLayout
-                            android:id="@+id/courier_details"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-                            <TextView
-                                android:id="@+id/rider_name"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/montserrat_bold"
-                                android:text="Rider Name Goes Here"
-                                android:textAlignment="center"
-                                android:textColor="@color/black"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:id="@+id/vehicle_details"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_below="@id/rider_name"
-                                android:fontFamily="@font/montserrat_regular"
-                                android:text="Vehicle Details Go Here"
-                                android:textAlignment="center"
-                                android:textColor="@color/black"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:id="@+id/plate_number"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_below="@id/vehicle_details"
-                                android:fontFamily="@font/montserrat_regular"
-                                android:text="Plate Number"
-                                android:textAlignment="center"
-                                android:textColor="@color/black"
-                                android:textStyle="bold" />
-                        </RelativeLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="30dp"
-                            android:layout_below="@id/courier_details"
-                            android:layout_gravity="center_horizontal"
-                            android:layout_marginTop="15dp"
-                            android:layout_marginBottom="10dp">
-
-                            <Button
-                                android:id="@+id/btn_trackCourier"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:background="@drawable/graphics_button_1"
-                                android:fontFamily="@font/montserrat_medium"
-                                android:text="Track Courier"
-                                android:textColor="@color/white" />
-                        </LinearLayout>
-
-                    </RelativeLayout>
-
-                </androidx.cardview.widget.CardView>
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="340dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    app:cardCornerRadius="10dp"
-                    app:cardUseCompatPadding="true">
-
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:layout_gravity="center_horizontal">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:background="#223272"
-                                android:fontFamily="@font/montserrat_bold"
-                                android:padding="10dp"
                                 android:text="Remarks"
                                 android:textAlignment="center"
                                 android:textColor="@color/white"
@@ -467,12 +369,12 @@
                     android:layout_marginBottom="50dp">
 
                     <Button
-                        android:id="@+id/btn_userOrderCompleted"
+                        android:id="@+id/btn_cancelOrder"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/graphics_button_1"
                         android:fontFamily="@font/montserrat_medium"
-                        android:text="Order Completed"
+                        android:text="Cancel Order"
                         android:textColor="@color/white"
                         android:visibility="visible" />
 

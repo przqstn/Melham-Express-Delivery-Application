@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -39,6 +40,24 @@ public class record_fragment extends Fragment {
 						 Bundle savedInstanceState)
 	{
 		View view =  inflater.inflate(R.layout.fragment_record_fragment, container, false);
+
+		TabLayout tabLayout = (TabLayout) view.findViewById(R.id.courier_tabs); // get the reference of TabLayout
+		tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+			@Override
+			public void onTabSelected(TabLayout.Tab tab) {
+// called when tab selected
+			}
+
+			@Override
+			public void onTabUnselected(TabLayout.Tab tab) {
+// called when tab unselected
+			}
+
+			@Override
+			public void onTabReselected(TabLayout.Tab tab) {
+// called when a tab is reselected
+			}
+		});
 
 		// Create a instance of the database and get
 		// its reference
