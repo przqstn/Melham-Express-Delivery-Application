@@ -3,20 +3,230 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/background_color">
 
-    <ImageView
-        android:id="@+id/group_"
+    <LinearLayout
+        android:id="@+id/riderProfileLayout1"
         android:layout_width="match_parent"
         android:layout_height="287dp"
-        android:background="#00000000"
-        android:contentDescription="header"
-        android:scaleType="fitXY"
-        android:src="@drawable/background"
+        android:background="@drawable/background"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/linearLayout3"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/profile_user"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:layout_gravity="bottom"
+            android:layout_marginStart="35dp"
+            android:layout_marginBottom="24dp"
+            android:background="@drawable/borderbutton"
+            android:contentDescription="@string/hi_user"
+            android:padding="1dp"
+            android:src="@drawable/profilepic" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginStart="-30dp"
+            android:background="@color/color_transparent"
+            android:elevation="2dp"
+            android:padding="20dp"
+            android:src="@drawable/addphoto"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <TextView
+            android:id="@+id/txt_name"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="12dp"
+            android:layout_marginStart="-15dp"
+            android:layout_marginEnd="40dp"
+            android:fontFamily="@font/montserrat_semibold"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="30dp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="@+id/riderProfileLayout1"
+        app:layout_constraintVertical_bias="0.0"
+        tools:ignore="SpeakableTextPresentCheck">
+
+        <LinearLayout
+            android:id="@+id/riderProfileLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="287dp"
+            android:orientation="vertical"
+            android:paddingHorizontal="30dp"
+            android:paddingVertical="30dp">
+
+            <RelativeLayout
+                android:id="@+id/edit1"
+                android:layout_width="match_parent"
+                android:layout_height="75dp"
+                android:layout_marginVertical="15dp"
+                android:background="@drawable/borders"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <LinearLayout
+                    android:id="@+id/vehicle_edit"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginEnd="120dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textView111"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:text="Type of Vehicle"
+                        tools:ignore="TextContrastCheck" />
+
+                    <TextView
+                        android:id="@+id/riderVehicle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:padding="5dp"
+                        android:textColor="@color/strokes" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/plateNum_edit"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="-100dp"
+                    android:layout_toEndOf="@+id/vehicle_edit"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/txt_PlateNum"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:text="Plate #"
+                        tools:ignore="TextContrastCheck" />
+
+                    <TextView
+                        android:id="@+id/riderPlate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:padding="5dp"
+                        android:textColor="@color/strokes" />
+
+                </LinearLayout>
+
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/edit2"
+                android:layout_width="match_parent"
+                android:layout_height="75dp"
+                android:layout_marginBottom="15dp"
+                android:background="@drawable/borders"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+                <TextView
+                    android:id="@+id/textView112"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:text="Contact Number"
+                    tools:ignore="TextContrastCheck" />
+
+                <TextView
+                    android:id="@+id/riderNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:padding="5dp"
+                    android:textColor="@color/strokes" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/edit3"
+                android:layout_width="match_parent"
+                android:layout_height="75dp"
+                android:layout_marginBottom="35dp"
+                android:background="@drawable/borders"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+
+                <TextView
+                    android:id="@+id/textView113"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:text="Location"
+                    tools:ignore="TextContrastCheck" />
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/riderAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/color_transparent"
+                    android:drawableEnd="@drawable/edit_icon2"
+                    android:drawableTint="@color/strokes"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:paddingVertical="5dp"
+                    android:paddingEnd="10dp"
+                    android:textColor="@color/strokes"
+                    tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btn_saveChanges"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginHorizontal="70dp"
+                android:layout_marginVertical="8dp"
+                android:background="@drawable/graphics_button_1"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="Save Changes"
+                android:textAllCaps="false"
+                android:textColor="@color/white" />
+
+            <Button
+                android:id="@+id/btn_cancelChanges"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginHorizontal="70dp"
+                android:layout_marginVertical="8dp"
+                android:background="@drawable/graphics_button_1"
+                android:backgroundTint="@color/gray"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="Cancel"
+                android:textAllCaps="false"
+                android:textColor="@color/white" />
+
+
+        </LinearLayout>
+    </ScrollView>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

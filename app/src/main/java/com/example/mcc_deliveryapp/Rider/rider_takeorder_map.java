@@ -68,7 +68,7 @@ public class rider_takeorder_map extends FragmentActivity implements OnMapReadyC
 
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_track_rider);
+        setContentView(R.layout.activity_rider_trackmap);
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
