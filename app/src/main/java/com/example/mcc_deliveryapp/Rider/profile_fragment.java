@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,7 +37,9 @@ public class profile_fragment extends Fragment {
 	float total, count;
 
 	private StorageReference storageReference;
-	ImageView profile_rider;
+	private ImageView profile_rider;
+
+    private ImageButton btn_editProfile;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -50,6 +53,7 @@ public class profile_fragment extends Fragment {
 		RiderAddress =  view.findViewById(R.id.riderAddress);
 		RiderNumber =  view.findViewById(R.id.riderNumber);
 		profile_rider = view.findViewById(R.id.profile_user);
+		btn_editProfile = view.findViewById(R.id.btnRider_EditProfile);
 		rating = view.findViewById(R.id.txt_ratings);
 
 		DatabaseReference ref = FirebaseDatabase.getInstance().getReference("riders");
@@ -105,7 +109,7 @@ public class profile_fragment extends Fragment {
 						public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
 							//Toast.makeText(profile_rider.getContext(), "Retrieved", Toast.LENGTH_SHORT).show();
 							Bitmap bitmap= BitmapFactory.decodeFile(file.getAbsolutePath());
-							((ImageView)view.findViewById(R.id.profile_user)).setImageBitmap(bitmap);
+							profile_rider.setImageBitmap(bitmap);
 						}
 					}).addOnFailureListener(new OnFailureListener() {
 						@Override
@@ -117,6 +121,18 @@ public class profile_fragment extends Fragment {
 			e.printStackTrace();
 		}
 
+		btn_editProfile.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				Intent intent = new Intent(view.getContext(), editprofile_fragment.class);
+				intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP);
+				intent.putExtra("riderphone", phone);
+				intent.putExtra("name", RiderName.getText().toString());
+				intent.putExtra("vehicletype", RiderVehicle.getText().toString());
+				intent.putExtra("platenumber", RiderPlate.getText().toString());
+				view.getContext().startActivity(intent);
+			}
+		});
 
 		return view;
 

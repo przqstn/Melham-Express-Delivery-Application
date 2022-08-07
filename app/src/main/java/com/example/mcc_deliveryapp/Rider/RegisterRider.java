@@ -76,10 +76,10 @@ public class RegisterRider extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_register_rider);
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
         mAuth = FirebaseAuth.getInstance();
-        setContentView(R.layout.activity_register_rider);
         etPhoneNum = findViewById(R.id.editTextPhoneNumDriver);
         password = findViewById(R.id.pwfield);
         pwConfirm = findViewById(R.id.pwConfirm);
