@@ -33,6 +33,7 @@ public class profile_fragment extends Fragment {
 	TextView RiderName, RiderVehicle, RiderPlate, RiderAddress, RiderNumber, rating;
 	static final String Rider = "riders";
 	String phone;
+	float total, count;
 
 	private StorageReference storageReference;
 	ImageView profile_rider;
@@ -69,16 +70,20 @@ public class profile_fragment extends Fragment {
 						RiderPlate.setText(ds.child("vehicleplatenumber").getValue(String.class));
 						RiderAddress.setText(ds.child("currentaddress").getValue(String.class));
 						RiderNumber.setText(ds.child("riderphone").getValue(String.class));
-						float total = ds.child("rate_total").getValue(int.class);
-						float count = ds.child("rate_count").getValue(int.class);
-						float final_rating = total/count;
-						String final_rating_string = String.valueOf(final_rating);
-						if (final_rating_string == "NaN"){
-							rating.setText("N/A");
+						if (ds.child("rate_total").getValue(int.class) != null){
+							total = ds.child("rate_total").getValue(int.class);
+							count = ds.child("rate_count").getValue(int.class);
+							float final_rating = total/count;
+							String final_rating_string = String.valueOf(final_rating);
+							if (final_rating_string == "NaN"){
+								rating.setText("N/A");
+							}
+							else {
+								rating.setText(final_rating_string);
+							}
 						}
-						else {
-							rating.setText(final_rating_string);
-						}
+
+
 					}
 				}
 			}
