@@ -45,8 +45,8 @@ public class user_checkrate extends AppCompatActivity {
 		ImageButton btnTruck = findViewById(R.id.btnTruck);
 
 		//
-		EditText editText = (EditText)findViewById(R.id.editTextPickUp);
-		EditText editText2 = (EditText)findViewById(R.id.editTextDestination);
+		EditText editText = findViewById(R.id.editTextPickUp);
+		EditText editText2 = findViewById(R.id.editTextDestination);
 
 		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
 		//getting the save shared preference of sender

@@ -220,10 +220,10 @@ public class user_parceltransaction extends FragmentActivity implements OnMapRea
 						.inflate(R.layout.user_adressdetail, (LinearLayout)findViewById(R.id.Sender_addressDetailsDialog)
 						);
 
-				senderloc = (EditText) bottomSheetView.findViewById(R.id.sender_edTextAddress);
+				senderloc = bottomSheetView.findViewById(R.id.sender_edTextAddress);
 				senderloc.setText(origin);
-				sendercontact = (EditText)bottomSheetView.findViewById(R.id.sender_edTextPhoneNumber);
-				sendername = (EditText)bottomSheetView.findViewById(R.id.sender_name);
+				sendercontact = bottomSheetView.findViewById(R.id.sender_edTextPhoneNumber);
+				sendername = bottomSheetView.findViewById(R.id.sender_name);
 
 
 
