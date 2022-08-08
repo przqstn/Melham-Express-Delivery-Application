@@ -4,7 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:orientation="vertical"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@drawable/prompt_dialog_radius"
+    android:paddingVertical="60dp"
+    android:paddingHorizontal="25dp">
 
 
     <ImageView

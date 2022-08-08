@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/courier_home_card"
     android:layout_width="match_parent"
-    android:layout_height="280dp"
+    android:layout_height="wrap_content"
     app:cardCornerRadius="10dp"
     app:cardUseCompatPadding="true">
 
@@ -12,12 +12,40 @@
         android:layout_height="wrap_content"
         android:padding="10dp">
 
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            app:cardCornerRadius="10dp"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#223272"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:padding="10dp"
+                    android:text="Ongoing Order"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="15dp" />
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
         <RelativeLayout
             android:id="@+id/pickuplinearlayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
             android:layout_marginBottom="5dp"
-            android:background="@drawable/graphics_edittext_1"
             android:padding="5dp">
 
             <ImageView
@@ -37,42 +65,22 @@
             <TextView
                 android:id="@+id/txtsendernameID"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/txt_sender_loc"
-                android:fontFamily="@font/montserrat_medium"
-                android:text="Sender name: "
-                android:textColor="@color/black"
-                android:textStyle="bold" />
+                android:layout_height="wrap_content"/>
 
             <TextView
                 android:id="@+id/txt_sender_name"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/txt_sender_loc"
-                android:layout_toRightOf="@id/txtsendernameID"
-                android:fontFamily="@font/montserrat_regular"
-                android:text="Sender name"
-                android:textColor="@color/black" />
+                android:layout_height="wrap_content" />
 
             <TextView
                 android:id="@+id/txtsendercontactID"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/txt_sender_name"
-                android:fontFamily="@font/montserrat_medium"
-                android:text="Sender Contact: "
-                android:textColor="@color/black"
-                android:textStyle="bold" />
+                android:layout_height="wrap_content" />
 
             <TextView
                 android:id="@+id/txt_sender_contact"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/txt_sender_name"
-                android:layout_toRightOf="@id/txtsendercontactID"
-                android:fontFamily="@font/montserrat_regular"
-                android:text="Sender Contact"
-                android:textColor="@color/black" />
+                android:layout_height="wrap_content" />
 
         </RelativeLayout>
 
@@ -82,7 +90,6 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/pickuplinearlayout"
             android:layout_marginBottom="5dp"
-            android:background="@drawable/graphics_edittext_1"
             android:padding="5dp">
 
             <ImageView
@@ -102,42 +109,22 @@
             <TextView
                 android:id="@+id/txtreceivernameID"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/txt_receiver_loc"
-                android:fontFamily="@font/montserrat_medium"
-                android:text="Receiver Name: "
-                android:textColor="@color/black"
-                android:textStyle="bold" />
+                android:layout_height="wrap_content" />
 
             <TextView
                 android:id="@+id/txt_receiver_name"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/txt_receiver_loc"
-                android:layout_toRightOf="@id/txtreceivernameID"
-                android:fontFamily="@font/montserrat_regular"
-                android:text="Receiver name"
-                android:textColor="@color/black" />
+                android:layout_height="wrap_content" />
 
             <TextView
                 android:id="@+id/txtreceivercontactID"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/txt_receiver_name"
-                android:fontFamily="@font/montserrat_medium"
-                android:text="Receiver Contact: "
-                android:textColor="@color/black"
-                android:textStyle="bold" />
+                android:layout_height="wrap_content" />
 
             <TextView
                 android:id="@+id/txt_receiver_contact"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/txt_receiver_name"
-                android:layout_toRightOf="@id/txtreceivercontactID"
-                android:fontFamily="@font/montserrat_regular"
-                android:text="Receiver Contact"
-                android:textColor="@color/black" />
+                android:layout_height="wrap_content" />
         </RelativeLayout>
 
         <LinearLayout
@@ -146,7 +133,6 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/dropofflinearlayout"
             android:layout_marginBottom="5dp"
-            android:background="@drawable/graphics_edittext_1"
             android:orientation="vertical"
             android:padding="5dp">
 
@@ -156,17 +142,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:fontFamily="@font/montserrat_medium"
-                android:text="Vehicle Type"
+                android:text="Type of Vehicle:"
                 android:textColor="#000" />
 
             <TextView
                 android:id="@+id/txt_note"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:fontFamily="@font/montserrat_medium"
-                android:text="Notes/Comments"
-                android:textColor="@color/black" />
+                android:layout_height="wrap_content" />
 
         </LinearLayout>
 
@@ -182,7 +164,10 @@
                 android:id="@+id/user_home_orderID"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:text="Order ID: ..."
+                android:drawableEnd="@drawable/ic_baseline_content_copy_24"
+
+                />
 
             <TextView
                 android:id="@+id/txt_price"
@@ -191,6 +176,7 @@
                 android:layout_gravity="right"
                 android:fontFamily="@font/montserrat_medium"
                 android:padding="10dp"
+                android:layout_marginRight="95dp"
                 android:text="Price : Sample Price 180"
                 android:textColor="@color/black"
                 android:textSize="15dp" />
