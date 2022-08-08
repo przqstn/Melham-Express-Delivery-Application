@@ -84,8 +84,14 @@ public class editprofile_fragment extends AppCompatActivity {
                 root=FirebaseDatabase.getInstance().getReference().child("riders");
                 viewAddress = findViewById(R.id.riderAddress);
                 HashMap hashMap = new HashMap();
-                hashMap.put("currentaddress", viewAddress.getEditableText().toString());
-                root.child(phoneNum).updateChildren(hashMap);
+
+
+                if(viewAddress.getEditableText().toString()==null||viewAddress.getEditableText().toString().equals("")){
+                    Toast.makeText(getApplicationContext(), "null", Toast.LENGTH_LONG).show();
+                }else{
+                    hashMap.put("currentaddress", viewAddress.getEditableText().toString());
+                    root.child(phoneNum).updateChildren(hashMap);
+                }
 
             }
         });
