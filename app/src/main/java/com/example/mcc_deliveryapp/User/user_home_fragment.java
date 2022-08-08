@@ -90,12 +90,12 @@ public class user_home_fragment extends Fragment {
                             recyclerView_pickup.setVisibility(View.VISIBLE);
                         }
                     }
-                    else
-                    {
-                        emptyHome.setVisibility(View.VISIBLE);
-                        emptyText.setVisibility(View.VISIBLE);
-                        recyclerView_pickup.setVisibility(View.GONE);
-                    }
+//                    else
+//                    {
+//                        emptyHome.setVisibility(View.VISIBLE);
+//                        emptyText.setVisibility(View.VISIBLE);
+//                        recyclerView_pickup.setVisibility(View.GONE);
+//                    }
                 }
             }
 
