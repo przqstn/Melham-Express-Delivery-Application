@@ -38,7 +38,7 @@
         android:text="Back to edit"
         android:textAllCaps="false"
         android:textColor="@color/white"
-        android:textSize="14dp" />
+        android:textSize="14sp" />
 
     <Button
         android:id="@+id/btn_cancelAll"
@@ -51,6 +51,6 @@
         android:text="Cancel All"
         android:textAllCaps="false"
         android:textColor="@color/white"
-        android:textSize="14dp" />
+        android:textSize="14sp" />
 
 </LinearLayout>
