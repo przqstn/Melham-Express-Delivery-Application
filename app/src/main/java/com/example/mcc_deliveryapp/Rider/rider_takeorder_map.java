@@ -322,7 +322,6 @@ public class rider_takeorder_map extends FragmentActivity implements OnMapReadyC
 
     public void sendRequest() {
         geocoder = new Geocoder(this, Locale.getDefault());
-        String test1, test2, test3;
         if (riderLocation != null) {
             try {
                 addressesRider = geocoder.getFromLocation(riderLocation.latitude, riderLocation.longitude, 1);
@@ -331,9 +330,9 @@ public class rider_takeorder_map extends FragmentActivity implements OnMapReadyC
                 e.printStackTrace();
             }
 
-            test1 = riderLocation.latitude + "," + riderLocation.longitude;
-            test2 = startLocation.latitude + "," + startLocation.longitude;
-            test3 = endLocation.latitude + "," + endLocation.longitude;
+            String test1 = riderLocation.latitude + "," + riderLocation.longitude;
+            String test2 = startLocation.latitude + "," + startLocation.longitude;
+            String test3 = endLocation.latitude + "," + endLocation.longitude;
 
             if (locationStatus == 0) {
                 try {
