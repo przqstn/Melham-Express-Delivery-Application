@@ -20,6 +20,7 @@
         <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/drawable/online_groceries_decor.xml" value="0.2555" />
         <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/drawable/profilepic.xml" value="0.234" />
         <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/drawable/prompt_dialog_radius.xml" value="0.2545" />
+        <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/drawable/question_mark_circle.xml" value="0.2475" />
         <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/drawable/sedan.xml" value="0.2555" />
         <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/drawable/suv.xml" value="0.2555" />
         <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/drawable/tab_indicator.xml" value="0.2555" />
@@ -35,6 +36,7 @@
         <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/layout/activity_user_permission.xml" value="0.264" />
         <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/layout/activity_user_waitingdriver.xml" value="0.264" />
         <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/layout/activity_userdashboard.xml" value="0.264" />
+        <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/layout/cancel_edit_dialog.xml" value="0.2212962962962963" />
         <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/layout/driver_bottom_sheet.xml" value="0.10989583333333333" />
         <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/layout/fragment_editprofile_fragment.xml" value="0.176" />
         <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/layout/fragment_profile_fragment.xml" value="0.2" />
@@ -55,6 +57,8 @@
         <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/layout/rate_courier_dialog.xml" value="0.2222222222222222" />
         <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/layout/recordlayoutdesign.xml" value="0.2222222222222222" />
         <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/layout/saved_dialog.xml" value="0.264" />
+        <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/layout/sedan_dialog.xml" value="0.2222222222222222" />
+        <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/layout/spinner_items_1.xml" value="0.2222222222222222" />
         <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/layout/success_dialog.xml" value="0.2222222222222222" />
         <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/layout/suv_dialog.xml" value="0.2222222222222222" />
         <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/layout/truck_dialog.xml" value="0.2222222222222222" />
