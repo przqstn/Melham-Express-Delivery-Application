@@ -39,6 +39,7 @@
         <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/layout/fragment_profile_fragment.xml" value="0.2" />
         <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/layout/fragment_rider_phonenum_verify.xml" value="0.2222222222222222" />
         <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/layout/fragment_sign_in.xml" value="0.2222222222222222" />
+        <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/layout/fragment_signup_rider_step5.xml" value="0.2222222222222222" />
         <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/layout/fragment_signup_rider_step5_try.xml" value="0.1" />
         <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/layout/fragment_user_editprofile_fragment.xml" value="0.2222222222222222" />
         <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/layout/fragment_user_home_fragment.xml" value="0.1" />
@@ -49,7 +50,7 @@
         <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/layout/progresslayout.xml" value="0.2222222222222222" />
         <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/layout/rate_courier_dialog.xml" value="0.2222222222222222" />
         <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/layout/recordlayoutdesign.xml" value="0.2222222222222222" />
-        <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/layout/saved_dialog.xml" value="0.2" />
+        <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/layout/saved_dialog.xml" value="0.4" />
         <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/layout/success_dialog.xml" value="0.2222222222222222" />
         <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/layout/suv_dialog.xml" value="0.2222222222222222" />
         <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/layout/truck_dialog.xml" value="0.2222222222222222" />
