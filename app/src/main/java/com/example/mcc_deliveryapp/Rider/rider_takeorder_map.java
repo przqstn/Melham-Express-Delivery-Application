@@ -99,6 +99,7 @@ public class rider_takeorder_map extends FragmentActivity implements OnMapReadyC
         orderID = intent.getStringExtra("orderID");
         riderVehicle = intent.getStringExtra("vehicle");
 
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rider_trackmap);
 
@@ -288,6 +289,12 @@ public class rider_takeorder_map extends FragmentActivity implements OnMapReadyC
             ((TextView) findViewById(R.id.tvDuration)).setText(route.duration.text);
             ((TextView) findViewById(R.id.tvDistance)).setText(route.distance.text);
 
+            originMarkers.add(mMap.addMarker(new MarkerOptions()
+                    .icon(bitmapDescriptorFromVector(rider_takeorder_map.this, R.drawable.pickup))
+                    .title(route.startAddress)
+                    .position(route.startLocation)
+            ));
+
             destinationMarkers.add(mMap.addMarker(new MarkerOptions()
                     .icon(bitmapDescriptorFromVector(rider_takeorder_map.this, R.drawable.location))
                     .title(route.endAddress)
@@ -367,13 +374,13 @@ public class rider_takeorder_map extends FragmentActivity implements OnMapReadyC
             // for ActivityCompat#requestPermissions for more details.
             return;
         }
-        mMap.setMyLocationEnabled(true);
+
         mMap.getUiSettings().setZoomControlsEnabled(true);
 
         LocationListener locationListener = new LocationListener() {
             @Override
             public void onLocationChanged(Location location) {
-
+                onDirectionFinderStart();
                 riderReference.child(phonenum).child("latitude").setValue(location.getLatitude());
                 riderReference.child(phonenum).child("longitude").setValue(location.getLongitude());
 
