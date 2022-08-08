@@ -62,6 +62,8 @@ public class user_home_fragment extends Fragment {
         emptyText = view.findViewById(R.id.emptyText);
         welcomeText.setText("Hi, "+ userName);
 
+        // These lines of code calls the database
+
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
 
         FirebaseRecyclerOptions<model> options =
