@@ -307,7 +307,6 @@
                     android:id="@+id/order_complete_layout"
                     android:layout_width="250dp"
                     android:layout_height="50dp"
-                    android:layout_below="@id/pricelinearlayout"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="25dp">
 
