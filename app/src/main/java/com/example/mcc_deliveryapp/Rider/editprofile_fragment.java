@@ -37,7 +37,7 @@ public class editprofile_fragment extends AppCompatActivity {
     private ImageView profilePic;
     private TextView viewphoneNum, viewname, viewvehicleType, viewplateNum, viewAddress;
     private DatabaseReference root;
-    private String phoneNum, imgName, address;
+    private String phoneNum, imgName;
     private Uri imageUri;
     private FirebaseStorage storage;
     private StorageReference storageReference;
@@ -70,7 +70,6 @@ public class editprofile_fragment extends AppCompatActivity {
         viewplateNum=findViewById(R.id.riderPlate);
         viewplateNum.setText(plateNum);
 
-        address = intent.getStringExtra("address");
 
 
         btnUpload.setOnClickListener(new View.OnClickListener() {
@@ -187,6 +186,7 @@ public class editprofile_fragment extends AppCompatActivity {
             }
         });
     }
+
     private void choosePicture() {
         Intent intent = new Intent();
         intent.setType("image/*");
