@@ -96,7 +96,7 @@ public class user_parceltransaction extends FragmentActivity implements OnMapRea
 
 	Button address_dialog;
 	View mapview, locationButton;
-	String apiKey = "AIzaSyDFYoFiFN4xRMjixR8LQ5ve3nnDiJioj_Y";
+	String GOOGLE_API_KEY = "AIzaSyDFYoFiFN4xRMjixR8LQ5ve3nnDiJioj_Y";
 	EditText senderloc, sendercontact, sendername;
 
 	EditText receiverloc, receivercontact, receivername;
@@ -115,7 +115,7 @@ public class user_parceltransaction extends FragmentActivity implements OnMapRea
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_user_parceltransaction);
 
-		Places.initialize(this,apiKey);
+		Places.initialize(this,GOOGLE_API_KEY);
 
 		Intent intent = getIntent();
 		String userNumber = intent.getStringExtra("phonenum");
@@ -220,10 +220,10 @@ public class user_parceltransaction extends FragmentActivity implements OnMapRea
 						.inflate(R.layout.user_adressdetail, (LinearLayout)findViewById(R.id.Sender_addressDetailsDialog)
 						);
 
-				senderloc = (EditText) bottomSheetView.findViewById(R.id.sender_edTextAddress);
+				senderloc = bottomSheetView.findViewById(R.id.sender_edTextAddress);
 				senderloc.setText(origin);
-				sendercontact = (EditText)bottomSheetView.findViewById(R.id.sender_edTextPhoneNumber);
-				sendername = (EditText)bottomSheetView.findViewById(R.id.sender_name);
+				sendercontact = bottomSheetView.findViewById(R.id.sender_edTextPhoneNumber);
+				sendername = bottomSheetView.findViewById(R.id.sender_name);
 
 
 
@@ -427,10 +427,9 @@ public class user_parceltransaction extends FragmentActivity implements OnMapRea
 
 		String address = addresses.get(0).getAddressLine(0);
 
-		if (origin == address) {
+		if (origin.equals(address)) {
 			origin = lastKnownLocation.getLatitude() + "," +lastKnownLocation.getLongitude();
 		}
-
 		if (origin.isEmpty()) {
 			Toast.makeText(this, "Please enter origin address!", Toast.LENGTH_SHORT).show();
 			return;

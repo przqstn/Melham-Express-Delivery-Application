@@ -81,12 +81,13 @@ public class rider_takeorder_map extends FragmentActivity implements OnMapReadyC
     private List<Polyline> polylinePaths = new ArrayList<>();
     List<Address> addressesRider, addressesStart, addressesEnd;
     Geocoder geocoder;
+    private int locationStatus = 0;
 
     private LatLng riderLocation;
     private GoogleMap mMap;
     private DatabaseReference riderReference;
     private static final int DEFAULT_ZOOM = 18;
-    Button back;
+    Button back, pickedComplete;
 
 
     @SuppressLint("WakelockTimeout")
@@ -112,6 +113,7 @@ public class rider_takeorder_map extends FragmentActivity implements OnMapReadyC
         Query checkRider = riderReference.orderByChild("riderphone");
 
         back = findViewById(R.id.backbutton);
+        pickedComplete = findViewById(R.id.pickedComplete);
 
         //prevent lock screen
         PowerManager powerManager = (PowerManager) this.getSystemService(Context.POWER_SERVICE);
@@ -208,7 +210,7 @@ public class rider_takeorder_map extends FragmentActivity implements OnMapReadyC
             @Override
             public void onClick(View view) {
 
-                Intent intent = new Intent(rider_takeorder_map.this, rider_ongoing_order.class);
+                Intent intent = new Intent(rider_takeorder_map.this, rider_dashboard.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 intent.putExtra("phonenum", phonenum);
                 intent.putExtra("username", name);
@@ -223,38 +225,39 @@ public class rider_takeorder_map extends FragmentActivity implements OnMapReadyC
 
             }
         });
-/* bale eto yung dating button tinanggal ko na muna
-        track.setOnClickListener(new View.OnClickListener() {
+
+        pickedComplete.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View view) {
+                if (locationStatus == 0){
+                    locationStatus = 1;
+                    pickedComplete.setText("Parcel Delivered");
+                    sendRequest();
+                } else if (locationStatus == 1){
+                    Intent intent = new Intent(rider_takeorder_map.this, rider_ongoing_order.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    intent.putExtra("phonenum", phonenum);
+                    intent.putExtra("username", name);
+                    intent.putExtra("vehicle", riderVehicle);
+                    intent.putExtra("orderID", orderID);
 
-                inputNum = riderphone.getText().toString();
-                Marker marker = (Marker) markerMap.get(inputNum);
-
-                if (marker != null) {
-                    LatLng pos = marker.getPosition();
-                    LatLngBounds lockOn = new LatLngBounds(pos, pos);
-                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(pos, DEFAULT_ZOOM));
+                    //release lock screen prevention
+                    if (wakeLock.isHeld())
+                        wakeLock.release();
+                    locationStatus = 0;
+                    pickedComplete.setText("Parcel Picked Up");
+                    startActivity(intent);
                 }
-                else {
-                    Toast.makeText(getBaseContext(), "Phone number not registered", Toast.LENGTH_SHORT).show();
-                }
-
-
             }
         });
-        if (inputNum != null) {
-            Marker marker = (Marker) markerMap.get(inputNum);
-            LatLng pos = marker.getPosition();
-            LatLngBounds lockOn = new LatLngBounds(pos, pos);
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(pos, DEFAULT_ZOOM));
-        }
-        */
+
     }
 
 
     private BitmapDescriptor bitmapDescriptorFromVector(Context context, int vectorResId) {
         Drawable vectorDrawable = ContextCompat.getDrawable(context, vectorResId);
+        assert vectorDrawable != null;
         vectorDrawable.setBounds(0, 0, vectorDrawable.getIntrinsicWidth(), vectorDrawable.getIntrinsicHeight());
         Bitmap bitmap = Bitmap.createBitmap(vectorDrawable.getIntrinsicWidth(), vectorDrawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(bitmap);
@@ -295,10 +298,6 @@ public class rider_takeorder_map extends FragmentActivity implements OnMapReadyC
             ((TextView) findViewById(R.id.tvDuration)).setText(route.duration.text);
             ((TextView) findViewById(R.id.tvDistance)).setText(route.distance.text);
 
-//            originMarkers.add(mMap.addMarker(new MarkerOptions()
-//                    .position(route.startLocation)
-//            ));
-
             destinationMarkers.add(mMap.addMarker(new MarkerOptions()
                     .icon(bitmapDescriptorFromVector(rider_takeorder_map.this, R.drawable.location))
                     .title(route.endAddress)
@@ -331,12 +330,22 @@ public class rider_takeorder_map extends FragmentActivity implements OnMapReadyC
                 e.printStackTrace();
             }
 
-            String test1 = Double.toString(riderLocation.latitude) + "," + riderLocation.longitude;
-            String test2 = Double.toString(startLocation.latitude) + "," + startLocation.longitude;
-            try {
-                new DirectionFinder(this, test1, test2).execute();
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
+            String test1 = riderLocation.latitude + "," + riderLocation.longitude;
+            String test2 = startLocation.latitude + "," + startLocation.longitude;
+            String test3 = endLocation.latitude + "," + endLocation.longitude;
+
+            if (locationStatus == 0) {
+                try {
+                    new DirectionFinder(this, test1, test2).execute();
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
+            } else if((locationStatus == 1)){
+                try {
+                    new DirectionFinder(this, test1, test3).execute();
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
@@ -356,9 +365,6 @@ public class rider_takeorder_map extends FragmentActivity implements OnMapReadyC
             // position on right bottom
             layoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP, 0);
             layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
-
-
-
         }
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
