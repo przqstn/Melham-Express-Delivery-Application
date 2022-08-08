@@ -110,18 +110,6 @@ public class editprofile_fragment extends AppCompatActivity {
                                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                                     pd.dismiss();
 
-                                    final Dialog dialog = new Dialog(btnSaveChanges.getContext());
-                                    dialog.setContentView(R.layout.saved_dialog);
-                                    dialog.setCancelable(false);
-                                    Button viewProfile = dialog.findViewById(R.id.btn_viewProfile);
-                                    viewProfile.setOnClickListener(new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View view) {
-                                            onBackPressed();
-                                        }
-                                    });
-                                    dialog.show();
-
                                 }
                             })
                             .addOnFailureListener(new OnFailureListener() {
@@ -141,6 +129,17 @@ public class editprofile_fragment extends AppCompatActivity {
                 } else {
                     //
                 }
+                final Dialog dialog = new Dialog(btnSaveChanges.getContext());
+                dialog.setContentView(R.layout.saved_dialog);
+                dialog.setCancelable(false);
+                Button viewProfile = dialog.findViewById(R.id.btn_viewProfile);
+                viewProfile.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        onBackPressed();
+                    }
+                });
+                dialog.show();
             }
         });
 
