@@ -38,10 +38,10 @@ public class home_adapter extends FirebaseRecyclerAdapter<model, home_adapter.my
 		holder.sendercontact.setText(model.getSendercontact());
 		holder.sendername.setText(model.getSendername());
 		holder.senderlocation.setText(model.getSenderlocation());
-		holder.vehicletype.setText(model.getVehicletype());
+//		holder.vehicletype.setText(model.getVehicletype());
 		holder.fee.setText(model.getFee());
 		holder.orderID.setText(model.getOrderID());
-		holder.customernotes.setText("Notes:" + model.getCustomerNotes());
+//		holder.customernotes.setText("Notes:" + model.getCustomerNotes());
 	}
 
 	@NonNull
@@ -80,11 +80,11 @@ public class home_adapter extends FirebaseRecyclerAdapter<model, home_adapter.my
 			receivercontact = itemView.findViewById(R.id.txt_receiver_contact);
 			receiverlocation = itemView.findViewById(R.id.txt_receiver_loc);
 			receivername = itemView.findViewById(R.id.txt_receiver_name);
-			customernotes = itemView.findViewById(R.id.txt_note);
+//			customernotes = itemView.findViewById(R.id.txt_note);
 			sendercontact = itemView.findViewById(R.id.txt_sender_contact);
 			senderlocation = itemView.findViewById(R.id.txt_sender_loc);
 			sendername = itemView.findViewById(R.id.txt_sender_name);
-			vehicletype = itemView.findViewById(R.id.txt_vehicletype);
+//			vehicletype = itemView.findViewById(R.id.txt_vehicletype);
 			fee = itemView.findViewById(R.id.txt_price);
 			orderID = itemView.findViewById(R.id.user_home_orderID);
 			CardView cv = (CardView) itemView.findViewById(R.id.user_home_card);
