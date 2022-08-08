@@ -176,6 +176,7 @@ public class editprofile_fragment extends AppCompatActivity {
                     btnCancel.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
+                            dialog.dismiss();
                             onBackPressed();
                         }
                     });
