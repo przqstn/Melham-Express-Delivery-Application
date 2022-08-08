@@ -123,12 +123,6 @@ public class courierHomeFragment extends Fragment {
                             recyclerView_pickup.setVisibility(View.VISIBLE);
                         }
                     }
-//                    else
-//                    {
-//                        emptyCourier.setVisibility(View.VISIBLE);
-//                        emptyTextCourier.setVisibility(View.VISIBLE);
-//                        recyclerView_pickup.setVisibility(View.GONE);
-//                    }
                 }
             }
 

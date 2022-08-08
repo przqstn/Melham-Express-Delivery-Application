@@ -82,7 +82,6 @@
                     android:textAppearance="@style/welcome_"
                     android:translationY="-0.61sp" />
 
-
             </RelativeLayout>
         </ScrollView>
 
