@@ -37,7 +37,7 @@ public class editprofile_fragment extends AppCompatActivity {
     private ImageView profilePic;
     private TextView viewphoneNum, viewname, viewvehicleType, viewplateNum, viewAddress;
     private DatabaseReference root;
-    private String phoneNum, imgName, address;
+    private String phoneNum, imgName;
     private Uri imageUri;
     private FirebaseStorage storage;
     private StorageReference storageReference;
@@ -70,7 +70,6 @@ public class editprofile_fragment extends AppCompatActivity {
         viewplateNum=findViewById(R.id.riderPlate);
         viewplateNum.setText(plateNum);
 
-        address = intent.getStringExtra("address");
 
 
         btnUpload.setOnClickListener(new View.OnClickListener() {
@@ -158,10 +157,36 @@ public class editprofile_fragment extends AppCompatActivity {
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //
+                if(!TextUtils.isEmpty(viewAddress.getEditableText().toString())||imageUri!=null) {
+                    final Dialog dialog = new Dialog(btnCancel.getContext());
+                    dialog.setContentView(R.layout.cancel_edit_dialog);
+                    dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                    dialog.getWindow().getAttributes().windowAnimations = R.style.animation;
+                    dialog.setCancelable(false);
+                    Button btnEdit = dialog.findViewById(R.id.btn_backToEdit);
+                    Button btnCancel = dialog.findViewById(R.id.btn_cancelAll);
+
+                    btnEdit.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            dialog.dismiss();
+                        }
+                    });
+
+                    btnCancel.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            onBackPressed();
+                        }
+                    });
+                    dialog.show();
+                }else{
+                    onBackPressed();
+                }
             }
         });
     }
+
     private void choosePicture() {
         Intent intent = new Intent();
         intent.setType("image/*");

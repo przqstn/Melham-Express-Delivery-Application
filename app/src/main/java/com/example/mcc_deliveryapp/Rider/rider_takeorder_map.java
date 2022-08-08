@@ -183,19 +183,9 @@ public class rider_takeorder_map extends FragmentActivity implements OnMapReadyC
                     LatLng latLng = new LatLng(Double.parseDouble(latitudes.get(i)), Double.parseDouble(longitudes.get(i)));
                     mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, DEFAULT_ZOOM));
 
-//                    Marker marker = mMap.addMarker(new MarkerOptions()
-//                            .position(latLng)
-//                            .title(riderphonenum.get(i)));
-//                    markerMap.put(riderphonenum.get(i), marker);
                 }
 
                 sendRequest();
-
-//                Marker marker = (Marker) markerMap.get(phonenum);
-//                if (marker != null) {
-//                    LatLng pos = marker.getPosition();
-//                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(pos, DEFAULT_ZOOM));
-//                }
 
 
             }
