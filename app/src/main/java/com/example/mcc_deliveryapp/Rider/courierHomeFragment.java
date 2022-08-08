@@ -105,25 +105,30 @@ public class courierHomeFragment extends Fragment {
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("userparcel");
         Query checkUser = databaseReference.orderByChild("ridernum").equalTo(riderPhoneNum);
 
+        myadapter2 = new myadapter2(options);
+        myadapter2.getRiderNum(riderPhoneNum);
+        myadapter2.getRiderName(riderName);
+        recyclerView_pickup.setAdapter(myadapter2);
+
         checkUser.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot parcelSnapshot : snapshot.getChildren()) {
                     if (parcelSnapshot.child("ridernum").getValue().equals(riderPhoneNum))
                     {
-                        if (parcelSnapshot.child("userParcelStatus").getValue().equals("Ongoing"+riderPhoneNum))
+                        if (parcelSnapshot.child("parcelstatus").getValue().equals("Ongoing"+riderPhoneNum))
                         {
                             emptyCourier.setVisibility(View.GONE);
                             emptyTextCourier.setVisibility(View.GONE);
                             recyclerView_pickup.setVisibility(View.VISIBLE);
                         }
                     }
-                    else
-                    {
-                        emptyCourier.setVisibility(View.VISIBLE);
-                        emptyTextCourier.setVisibility(View.VISIBLE);
-                        recyclerView_pickup.setVisibility(View.GONE);
-                    }
+//                    else
+//                    {
+//                        emptyCourier.setVisibility(View.VISIBLE);
+//                        emptyTextCourier.setVisibility(View.VISIBLE);
+//                        recyclerView_pickup.setVisibility(View.GONE);
+//                    }
                 }
             }
 
@@ -132,12 +137,6 @@ public class courierHomeFragment extends Fragment {
 
             }
         });
-
-        myadapter2 = new myadapter2(options);
-        myadapter2.getRiderNum(riderPhoneNum);
-        myadapter2.getRiderName(riderName);
-        recyclerView_pickup.setAdapter(myadapter2);
-
 
         //retrieved courier's profile picture from firebase storage
         storageReference= FirebaseStorage.getInstance().getReference().child("rider/"+riderPhoneNum+"/profile_image.jpg");
