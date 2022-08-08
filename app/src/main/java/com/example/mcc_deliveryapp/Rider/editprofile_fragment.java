@@ -35,7 +35,7 @@ public class editprofile_fragment extends AppCompatActivity {
     private ImageView profilePic;
     private TextView viewphoneNum, viewname, viewvehicleType, viewplateNum, viewAddress;
     private DatabaseReference root;
-    private String phoneNum, imgName;
+    private String phoneNum, imgName, address;
     private Uri imageUri;
     private FirebaseStorage storage;
     private StorageReference storageReference;
@@ -68,6 +68,9 @@ public class editprofile_fragment extends AppCompatActivity {
         viewplateNum=findViewById(R.id.riderPlate);
         viewplateNum.setText(plateNum);
 
+        address = intent.getStringExtra("address");
+
+
         btnUpload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -87,12 +90,45 @@ public class editprofile_fragment extends AppCompatActivity {
 
 
                 if(viewAddress.getEditableText().toString()==null||viewAddress.getEditableText().toString().equals("")){
-                    Toast.makeText(getApplicationContext(), "null", Toast.LENGTH_LONG).show();
+                    hashMap.put("currentaddress", address);
+                    root.child(phoneNum).updateChildren(hashMap);
                 }else{
                     hashMap.put("currentaddress", viewAddress.getEditableText().toString());
                     root.child(phoneNum).updateChildren(hashMap);
                 }
 
+                if (imageUri != null) {
+                    final ProgressDialog pd = new ProgressDialog(btnSaveChanges.getContext());
+                    pd.setTitle("Uploading Image");
+                    pd.show();
+
+                    StorageReference riversRef = storageReference.child("rider/" + phoneNum + "/" + imgName);
+                    riversRef.putFile(imageUri)
+                            .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                @Override
+                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                    pd.dismiss();
+                                    Snackbar.make(findViewById(android.R.id.content), "Image Uploaded.", Snackbar.LENGTH_LONG).show();
+
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    pd.dismiss();
+                                    Toast.makeText(getApplicationContext(), "Failed to Upload", Toast.LENGTH_LONG).show();
+                                }
+                            })
+                            .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                                @Override
+                                public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
+                                    double progressPercent = (100.00 * snapshot.getBytesTransferred() / snapshot.getTotalByteCount());
+                                    pd.setMessage("Percentage: " + (int) progressPercent + "%");
+                                }
+                            });
+                } else {
+                    //
+                }
             }
         });
 
@@ -118,39 +154,8 @@ public class editprofile_fragment extends AppCompatActivity {
             imageUri=data.getData();
             profilePic.setImageURI(imageUri);
             imgName="profile_image.jpg";
-            uploadPicture();
+
         }
     }
-    //upload method
-    private void uploadPicture() {
-        final ProgressDialog pd= new ProgressDialog(this);
-        pd.setTitle("Uploading Image");
-        pd.show();
-        StorageReference riversRef=storageReference.child("rider/"+phoneNum+"/"+imgName);
-        riversRef.putFile(imageUri)
-                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        pd.dismiss();
-                        Snackbar.make(findViewById(android.R.id.content), "Image Uploaded.", Snackbar.LENGTH_LONG).show();
 
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        pd.dismiss();
-                        Toast.makeText(getApplicationContext(), "Failed to Upload", Toast.LENGTH_LONG).show();
-                    }
-                })
-                .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
-                        double progressPercent = (100.00 * snapshot.getBytesTransferred() / snapshot.getTotalByteCount());
-                        pd.setMessage("Percentage: " + (int) progressPercent +"%");
-                    }
-                });
-
-
-    }
 }
