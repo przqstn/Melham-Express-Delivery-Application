@@ -58,7 +58,8 @@
             android:resource="@array/preloaded_fonts" />
         <activity
             android:name=".Rider.editprofile_fragment"
-            android:exported="true"/>
+            android:exported="true"
+            android:windowSoftInputMode="stateHidden"/>
         <activity
             android:name=".Rider.riderLogin"
             android:exported="false" />
