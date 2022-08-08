@@ -427,10 +427,9 @@ public class user_parceltransaction extends FragmentActivity implements OnMapRea
 
 		String address = addresses.get(0).getAddressLine(0);
 
-		if (origin == address) {
+		if (origin.equals(address)) {
 			origin = lastKnownLocation.getLatitude() + "," +lastKnownLocation.getLongitude();
 		}
-
 		if (origin.isEmpty()) {
 			Toast.makeText(this, "Please enter origin address!", Toast.LENGTH_SHORT).show();
 			return;
