@@ -1,10 +1,15 @@
 package com.example.mcc_deliveryapp.Rider;
 
+import android.Manifest;
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +22,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.example.mcc_deliveryapp.R;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -28,6 +35,7 @@ import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.io.ByteArrayOutputStream;
 import java.util.HashMap;
 
 public class editprofile_fragment extends AppCompatActivity {
@@ -41,6 +49,8 @@ public class editprofile_fragment extends AppCompatActivity {
     private Uri imageUri;
     private FirebaseStorage storage;
     private StorageReference storageReference;
+
+    private Bitmap bitmap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,14 +81,43 @@ public class editprofile_fragment extends AppCompatActivity {
         viewplateNum.setText(plateNum);
 
 
+        if(ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA},
+                    100);
+        }
 
         btnUpload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                storage=FirebaseStorage.getInstance();
+                /*storage=FirebaseStorage.getInstance();
                 storageReference=storage.getReference();
                 choosePicture();
-                System.out.println("hello");
+                System.out.println("hello");*/
+                final Dialog dialog = new Dialog(btnUpload.getContext());
+                dialog.setContentView(R.layout.upload_photo_fragment);
+                dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+                dialog.getWindow().getAttributes().windowAnimations = R.style.animation;
+                dialog.setCancelable(true);
+                dialog.show();
+                Button btn_Upload = dialog.findViewById(R.id.btn_Upload);
+                Button btn_takePhoto = dialog.findViewById(R.id.btn_takePhoto);
+
+                btn_Upload.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        storage=FirebaseStorage.getInstance();
+                        storageReference=storage.getReference();
+                        choosePicture();
+                    }
+                });
+
+                btn_takePhoto.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                        startActivityForResult(intent, 2);
+                    }
+                });
             }
         });
 
@@ -105,12 +144,13 @@ public class editprofile_fragment extends AppCompatActivity {
                         }
                     });
                 }
-                if(imageUri!=null){
+                if(imageUri!=null) {
                     final ProgressDialog pd = new ProgressDialog(btnSaveChanges.getContext());
                     pd.setTitle("Uploading Image");
                     pd.show();
 
                     StorageReference riversRef = storageReference.child("rider/" + phoneNum + "/" + imgName);
+
                     riversRef.putFile(imageUri)
                             .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                                 @Override
@@ -134,6 +174,7 @@ public class editprofile_fragment extends AppCompatActivity {
                                 }
                             });
                 }
+
                 if(!TextUtils.isEmpty(viewAddress.getEditableText().toString())){
                     hashMap.put("currentaddress", viewAddress.getEditableText().toString());
                     root.child(phoneNum).updateChildren(hashMap);
@@ -196,16 +237,17 @@ public class editprofile_fragment extends AppCompatActivity {
         startActivityForResult(intent, 1);
     }
 
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode==1 && resultCode==RESULT_OK && data!=null && data.getData()!=null){
             imageUri=data.getData();
             profilePic.setImageURI(imageUri);
-            imgName="profile_image.jpg";
-
+        }else if(requestCode==2 && resultCode==RESULT_OK && data!=null && data.getData()!=null){
+            Bitmap bitmap = (Bitmap) data.getExtras().get("data");
+            profilePic.setImageBitmap(bitmap);
         }
+        imgName="profile_image.jpg";
     }
 
 }
