@@ -96,7 +96,7 @@ public class user_parceltransaction extends FragmentActivity implements OnMapRea
 
 	Button address_dialog;
 	View mapview, locationButton;
-	String apiKey = "AIzaSyDFYoFiFN4xRMjixR8LQ5ve3nnDiJioj_Y";
+	String GOOGLE_API_KEY = "AIzaSyDFYoFiFN4xRMjixR8LQ5ve3nnDiJioj_Y";
 	EditText senderloc, sendercontact, sendername;
 
 	EditText receiverloc, receivercontact, receivername;
@@ -115,7 +115,7 @@ public class user_parceltransaction extends FragmentActivity implements OnMapRea
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_user_parceltransaction);
 
-		Places.initialize(this,apiKey);
+		Places.initialize(this,GOOGLE_API_KEY);
 
 		Intent intent = getIntent();
 		String userNumber = intent.getStringExtra("phonenum");
