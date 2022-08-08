@@ -1,20 +1,35 @@
 package com.example.mcc_deliveryapp.User;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
+import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.location.Geocoder;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mcc_deliveryapp.R;
+import com.example.mcc_deliveryapp.Rider.rider_takeorder_map;
+import com.example.mcc_deliveryapp.User.Module.DirectionFinder;
+import com.example.mcc_deliveryapp.User.Module.DirectionFinderListener;
+import com.example.mcc_deliveryapp.User.Module.Route;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -25,6 +40,8 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polyline;
+import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -32,14 +49,22 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Locale;
 
-public class user_track_rider extends FragmentActivity implements OnMapReadyCallback {
+public class user_track_rider extends FragmentActivity implements OnMapReadyCallback, DirectionFinderListener {
     private GoogleMap mMap;
     private static final int DEFAULT_ZOOM = 18;
+    View mapview, locationButton;
+    String userLatitude, userLongitude, riderLatitude, riderLongitude;
+    private List<Marker> originMarkers = new ArrayList<>();
+    private List<Marker> destinationMarkers = new ArrayList<>();
+    private List<Polyline> polylinePaths = new ArrayList<>();
 
     HashMap markerMap = new HashMap();
     Button back;
@@ -104,80 +129,79 @@ checkUser.addValueEventListener(new ValueEventListener() {
                         riderVehicleUI.setText(locationSnapshot.child("vehicletype").getValue().toString());
                         riderPlateUI.setText(locationSnapshot.child("vehicleplatenumber").getValue().toString());
                         riderVehicle = (locationSnapshot.child("vehicletype").getValue().toString());
-                        String latitude = locationSnapshot.child("latitude").getValue().toString();
+                        riderLatitude = locationSnapshot.child("latitude").getValue().toString();
                         String riderphone = locationSnapshot.child("riderphone").getValue().toString();
-                        String longitude = locationSnapshot.child("longitude").getValue().toString();
-                        latitudes.add(latitude);
-                        longitudes.add(longitude);
+                        riderLongitude = locationSnapshot.child("longitude").getValue().toString();
+                        latitudes.add(riderLatitude);
+                        longitudes.add(riderLongitude);
                         riderphonenum.add(riderphone);
-                        if (riderVehicle.equals("Motorcycle"))
-                        {
-                            for (int i = 0; i < latitudes.size(); i++) {
-                                LatLng latLng = new LatLng(Double.parseDouble(latitudes.get(i)), Double.parseDouble(longitudes.get(i)));
-                                Marker marker = mMap.addMarker(new MarkerOptions()
-                                        .icon(bitmapDescriptorFromVector(user_track_rider.this, R.drawable.motorcycle))
-                                        .position(latLng)
-                                        .title(riderphonenum.get(i)));
-                                markerMap.put(riderphonenum.get(i), marker);
-                            }
+                        switch (riderVehicle) {
+                            case "Motorcycle":
+                                for (int i = 0; i < latitudes.size(); i++) {
+                                    LatLng latLng = new LatLng(Double.parseDouble(latitudes.get(i)), Double.parseDouble(longitudes.get(i)));
+                                    Marker marker = mMap.addMarker(new MarkerOptions()
+                                            .icon(bitmapDescriptorFromVector(user_track_rider.this, R.drawable.motorcycle))
+                                            .position(latLng)
+                                            .title(riderphonenum.get(i)));
+                                    markerMap.put(riderphonenum.get(i), marker);
+                                }
 
-                        }
-                        else if (riderVehicle.equals("Sedan"))
-                        {
-                            for (int i = 0; i < latitudes.size(); i++) {
-                                LatLng latLng = new LatLng(Double.parseDouble(latitudes.get(i)), Double.parseDouble(longitudes.get(i)));
-                                Marker marker = mMap.addMarker(new MarkerOptions()
-                                        .icon(bitmapDescriptorFromVector(user_track_rider.this, R.drawable.sedan))
-                                        .position(latLng)
-                                        .title(riderphonenum.get(i)));
-                                markerMap.put(riderphonenum.get(i), marker);
-                            }
+                                break;
+                            case "Sedan":
+                                for (int i = 0; i < latitudes.size(); i++) {
+                                    LatLng latLng = new LatLng(Double.parseDouble(latitudes.get(i)), Double.parseDouble(longitudes.get(i)));
+                                    Marker marker = mMap.addMarker(new MarkerOptions()
+                                            .icon(bitmapDescriptorFromVector(user_track_rider.this, R.drawable.sedan))
+                                            .position(latLng)
+                                            .title(riderphonenum.get(i)));
+                                    markerMap.put(riderphonenum.get(i), marker);
+                                }
 
-                        }
-                        else if (riderVehicle.equals("SUV"))
-                        {
-                            for (int i = 0; i < latitudes.size(); i++) {
-                                LatLng latLng = new LatLng(Double.parseDouble(latitudes.get(i)), Double.parseDouble(longitudes.get(i)));
-                                Marker marker = mMap.addMarker(new MarkerOptions()
-                                        .icon(bitmapDescriptorFromVector(user_track_rider.this, R.drawable.suv))
-                                        .position(latLng)
-                                        .title(riderphonenum.get(i)));
-                                markerMap.put(riderphonenum.get(i), marker);
-                            }
+                                break;
+                            case "SUV":
+                                for (int i = 0; i < latitudes.size(); i++) {
+                                    LatLng latLng = new LatLng(Double.parseDouble(latitudes.get(i)), Double.parseDouble(longitudes.get(i)));
+                                    Marker marker = mMap.addMarker(new MarkerOptions()
+                                            .icon(bitmapDescriptorFromVector(user_track_rider.this, R.drawable.suv))
+                                            .position(latLng)
+                                            .title(riderphonenum.get(i)));
+                                    markerMap.put(riderphonenum.get(i), marker);
+                                }
 
-                        }
-                        else if (riderVehicle.equals("MPV"))
-                        {
-                            for (int i = 0; i < latitudes.size(); i++) {
-                                LatLng latLng = new LatLng(Double.parseDouble(latitudes.get(i)), Double.parseDouble(longitudes.get(i)));
-                                Marker marker = mMap.addMarker(new MarkerOptions()
-                                        .icon(bitmapDescriptorFromVector(user_track_rider.this, R.drawable.mpv))
-                                        .position(latLng)
-                                        .title(riderphonenum.get(i)));
-                                markerMap.put(riderphonenum.get(i), marker);
-                            }
+                                break;
+                            case "MPV":
+                                for (int i = 0; i < latitudes.size(); i++) {
+                                    LatLng latLng = new LatLng(Double.parseDouble(latitudes.get(i)), Double.parseDouble(longitudes.get(i)));
+                                    Marker marker = mMap.addMarker(new MarkerOptions()
+                                            .icon(bitmapDescriptorFromVector(user_track_rider.this, R.drawable.mpv))
+                                            .position(latLng)
+                                            .title(riderphonenum.get(i)));
+                                    markerMap.put(riderphonenum.get(i), marker);
+                                }
 
-                        }
-                        else if (riderVehicle.equals("Small Truck"))
-                        {
-                            for (int i = 0; i < latitudes.size(); i++) {
-                                LatLng latLng = new LatLng(Double.parseDouble(latitudes.get(i)), Double.parseDouble(longitudes.get(i)));
-                                Marker marker = mMap.addMarker(new MarkerOptions()
-                                        .icon(bitmapDescriptorFromVector(user_track_rider.this, R.drawable.truck))
-                                        .position(latLng)
-                                        .title(riderphonenum.get(i)));
-                                markerMap.put(riderphonenum.get(i), marker);
-                            }
+                                break;
+                            case "Small Truck":
+                                for (int i = 0; i < latitudes.size(); i++) {
+                                    LatLng latLng = new LatLng(Double.parseDouble(latitudes.get(i)), Double.parseDouble(longitudes.get(i)));
+                                    Marker marker = mMap.addMarker(new MarkerOptions()
+                                            .icon(bitmapDescriptorFromVector(user_track_rider.this, R.drawable.truck))
+                                            .position(latLng)
+                                            .title(riderphonenum.get(i)));
+                                    markerMap.put(riderphonenum.get(i), marker);
+                                }
 
+                                break;
                         }
                         Marker marker = (Marker) markerMap.get(riderNumber);
                         if (marker != null) {
                             LatLng pos = marker.getPosition();
                             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(pos, DEFAULT_ZOOM));
                         }
+
                     }
 
                 }
+//                sendRequest();
 }
 
             private BitmapDescriptor bitmapDescriptorFromVector(user_track_rider user_track_rider, int vectorResId) {
@@ -210,10 +234,151 @@ checkUser.addValueEventListener(new ValueEventListener() {
     }
 
     @Override
-    public void onMapReady(GoogleMap googleMap) {
+    public void onMapReady(@NonNull GoogleMap googleMap) {
         mMap = googleMap;
         mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(getApplicationContext(), R.raw.customize_maps_style));
 
+        // this is for location button position
+        if (mapview != null &&
+                mapview.findViewById(Integer.parseInt("1")) != null) {
+            // Get the button view
+            // and next place it, on bottom right (as Google Maps app)
+            RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams)
+                    locationButton.getLayoutParams();
+            // position on right bottom
+            layoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP, 0);
+            layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
+        }
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        mMap.setMyLocationEnabled(true);
+        mMap.getUiSettings().setZoomControlsEnabled(true);
+
+        LocationListener locationListener = new LocationListener() {
+            @Override
+            public void onLocationChanged(Location location) {
+
+                userLatitude = String.valueOf(location.getLatitude());
+                userLongitude = String.valueOf(location.getLongitude());
+                sendRequest();
+            }
+
+            @Override
+            public void onStatusChanged(String s, int i, Bundle bundle) {
+            }
+
+            @Override
+            public void onProviderEnabled(String s) {
+            }
+
+            @Override
+            public void onProviderDisabled(String s) {
+            }
+        };
+
+        LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                return;
+            }
+        }
+
+        try {
+            long MIN_TIME = 1000;
+            long MIN_DIST = 5;
+            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, MIN_TIME, MIN_DIST, locationListener);
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, MIN_TIME, MIN_DIST, locationListener);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+    private BitmapDescriptor bitmapDescriptorFromVector(Context context, int vectorResId) {
+        Drawable vectorDrawable = ContextCompat.getDrawable(context, vectorResId);
+        assert vectorDrawable != null;
+        vectorDrawable.setBounds(0, 0, vectorDrawable.getIntrinsicWidth(), vectorDrawable.getIntrinsicHeight());
+        Bitmap bitmap = Bitmap.createBitmap(vectorDrawable.getIntrinsicWidth(), vectorDrawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        vectorDrawable.draw(canvas);
+        return BitmapDescriptorFactory.fromBitmap(bitmap);
+    }
+
+    @Override
+    public void onDirectionFinderStart() {
+
+        if (originMarkers != null) {
+            for (Marker marker : originMarkers) {
+                marker.remove();
+            }
+        }
+
+        if (destinationMarkers != null) {
+            for (Marker marker : destinationMarkers) {
+                marker.remove();
+            }
+        }
+
+        if (polylinePaths != null) {
+            for (Polyline polyline:polylinePaths ) {
+                polyline.remove();
+            }
+        }
+    }
+
+    @Override
+    public void onDirectionFinderSuccess(List<Route> routes) {
+        polylinePaths = new ArrayList<>();
+        originMarkers = new ArrayList<>();
+        destinationMarkers = new ArrayList<>();
+
+        for (Route route : routes) {
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(route.startLocation, 16));
+
+            destinationMarkers.add(mMap.addMarker(new MarkerOptions()
+                    .icon(bitmapDescriptorFromVector(user_track_rider.this, R.drawable.location))
+                    .title(route.endAddress)
+                    .position(route.endLocation)));
+
+            PolylineOptions polylineOptions = new PolylineOptions().
+                    geodesic(true).
+                    color(Color.BLUE).
+                    width(10);
+
+//            polylineOptions.add(riderLocation);
+            for (int i = 0; i < route.points.size(); i++)
+                polylineOptions.add(route.points.get(i));
+
+
+            polylinePaths.add(mMap.addPolyline(polylineOptions));
+
+
+
+        }
+    }
+
+
+    public void sendRequest() {
+        if (userLatitude != null) {
+            String test1 = userLatitude + "," + userLongitude;
+            String test2 = riderLatitude + "," + riderLongitude;
+            System.out.println(test1 + test2);
+
+            try {
+                new DirectionFinder(this, test2, test1).execute();
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
 }
