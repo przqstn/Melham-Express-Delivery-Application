@@ -1,5 +1,7 @@
 package com.example.mcc_deliveryapp.User;
 
+import static android.content.ContentValues.TAG;
+
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -19,6 +21,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
@@ -30,6 +33,8 @@ import com.example.mcc_deliveryapp.Rider.rider_takeorder_map;
 import com.example.mcc_deliveryapp.User.Module.DirectionFinder;
 import com.example.mcc_deliveryapp.User.Module.DirectionFinderListener;
 import com.example.mcc_deliveryapp.User.Module.Route;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -42,6 +47,8 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -66,6 +73,12 @@ public class user_track_rider extends FragmentActivity implements OnMapReadyCall
     private List<Marker> destinationMarkers = new ArrayList<>();
     private List<Polyline> polylinePaths = new ArrayList<>();
 
+    private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
+    private boolean locationPermissionGranted;
+    private Location lastKnownLocation;
+    private final LatLng defaultLocation = new LatLng(15.594197, 120.970414);
+    private FusedLocationProviderClient fusedLocationProviderClient;
+
     HashMap markerMap = new HashMap();
     Button back;
     String riderNumber, orderID, phonenum, name, riderName, riderVehicle;
@@ -78,6 +91,7 @@ public class user_track_rider extends FragmentActivity implements OnMapReadyCall
         phonenum = intent.getStringExtra("phonenum");
         riderName = intent.getStringExtra("ridername");
 
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_track_rider);
 
@@ -97,23 +111,25 @@ public class user_track_rider extends FragmentActivity implements OnMapReadyCall
 
 
 
-checkUser.addValueEventListener(new ValueEventListener() {
-    @Override
-    public void onDataChange(@NonNull DataSnapshot snapshot) {
-        for (DataSnapshot parcelSnapshot : snapshot.getChildren()) {
-                if (parcelSnapshot.child("OrderID").getValue().equals(orderID))
-                {
-                    riderNumber = parcelSnapshot.child("ridernum").getValue(String.class);
 
-                }
+
+        checkUser.addValueEventListener(new ValueEventListener() {
+        @Override
+        public void onDataChange(@NonNull DataSnapshot snapshot) {
+            for (DataSnapshot parcelSnapshot : snapshot.getChildren()) {
+                    if (parcelSnapshot.child("OrderID").getValue().equals(orderID))
+                    {
+                        riderNumber = parcelSnapshot.child("ridernum").getValue(String.class);
+
+                    }
+            }
         }
-    }
 
-    @Override
-    public void onCancelled(@NonNull DatabaseError error) {
+        @Override
+        public void onCancelled(@NonNull DatabaseError error) {
 
-    }
-});
+            }
+        });
 
         checkRider.addValueEventListener(new ValueEventListener() {
             @Override
@@ -201,7 +217,6 @@ checkUser.addValueEventListener(new ValueEventListener() {
                     }
 
                 }
-//                sendRequest();
 }
 
             private BitmapDescriptor bitmapDescriptorFromVector(user_track_rider user_track_rider, int vectorResId) {
@@ -222,7 +237,7 @@ checkUser.addValueEventListener(new ValueEventListener() {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(user_track_rider.this, user_navigation.class);
+                Intent intent = new Intent(user_track_rider.this, user_ongoing_order_details.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 intent.putExtra("orderID",  orderID);
                 intent.putExtra("phonenum", phonenum);
@@ -233,11 +248,65 @@ checkUser.addValueEventListener(new ValueEventListener() {
 
     }
 
+    private void getDeviceLocation() {
+        /*
+         * Get the best and most recent location of the device, which may be null in rare
+         * cases when a location is not available.
+         */
+        try {
+            if (locationPermissionGranted) {
+                Task<Location> locationResult = fusedLocationProviderClient.getLastLocation();
+                locationResult.addOnCompleteListener(this, new OnCompleteListener<Location>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Location> task) {
+                        if (task.isSuccessful()) {
+                            // Set the map's camera position to the current location of the device.
+                            lastKnownLocation = task.getResult();
+
+                            if (lastKnownLocation != null) {
+                                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
+                                        new LatLng(lastKnownLocation.getLatitude(),
+                                                lastKnownLocation.getLongitude()), DEFAULT_ZOOM));
+
+                            }
+                        } else {
+                            Log.d(TAG, "Current location is null. Using defaults.");
+                            Log.e(TAG, "Exception: %s", task.getException());
+                            mMap.moveCamera(CameraUpdateFactory
+                                    .newLatLngZoom(defaultLocation, DEFAULT_ZOOM));
+                            mMap.getUiSettings().setMyLocationButtonEnabled(true);
+                        }
+                    }
+                });
+            }
+        } catch (SecurityException e)  {
+            Log.e("Exception: %s", e.getMessage(), e);
+        }
+    }
+
+    private void getLocationPermission() {
+        /*
+         * Request location permission, so that we can get the location of the
+         * device. The result of the permission request is handled by a callback,
+         * onRequestPermissionsResult.
+         */
+        if (ContextCompat.checkSelfPermission(this.getApplicationContext(),
+                android.Manifest.permission.ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED) {
+            locationPermissionGranted = true;
+        } else {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
+                    PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
+        }
+    }
+
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
         mMap = googleMap;
         mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(getApplicationContext(), R.raw.customize_maps_style));
-
+        getLocationPermission();
+        getDeviceLocation();
         // this is for location button position
         if (mapview != null &&
                 mapview.findViewById(Integer.parseInt("1")) != null) {
@@ -260,7 +329,6 @@ checkUser.addValueEventListener(new ValueEventListener() {
             // for ActivityCompat#requestPermissions for more details.
             return;
         }
-        mMap.setMyLocationEnabled(true);
         mMap.getUiSettings().setZoomControlsEnabled(true);
 
         LocationListener locationListener = new LocationListener() {
@@ -343,6 +411,11 @@ checkUser.addValueEventListener(new ValueEventListener() {
 
         for (Route route : routes) {
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(route.startLocation, 16));
+            originMarkers.add(mMap.addMarker(new MarkerOptions()
+                            .icon(bitmapDescriptorFromVector(user_track_rider.this, R.drawable.pickup))
+                            .title(route.startAddress)
+                            .position(route.startLocation)
+            ));
 
             destinationMarkers.add(mMap.addMarker(new MarkerOptions()
                     .icon(bitmapDescriptorFromVector(user_track_rider.this, R.drawable.location))

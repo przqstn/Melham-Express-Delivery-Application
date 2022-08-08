@@ -129,6 +129,7 @@
                         android:paddingVertical="5dp"
                         android:paddingEnd="10dp"
                         android:textColor="@color/strokes"
+                        android:textSize="14sp"
                         tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
                 </LinearLayout>
                 <LinearLayout
@@ -158,6 +159,7 @@
                         android:paddingVertical="5dp"
                         android:paddingEnd="10dp"
                         android:textColor="@color/strokes"
+                        android:textSize="14sp"
                         tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
                 </LinearLayout>
 
