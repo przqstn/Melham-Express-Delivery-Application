@@ -144,8 +144,6 @@
                 android:fontFamily="@font/montserrat_medium"
                 android:text="Type of Vehicle:"
                 android:textColor="#000" />
-                android:textColor="#000"
-                android:layout_marginLeft="10dp"/>
 
             <TextView
                 android:id="@+id/txt_note"
@@ -166,7 +164,8 @@
                 android:id="@+id/user_home_orderID"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Order ID: " />
+                android:text="Order ID: "
+                android:drawableEnd="@drawable/ic_baseline_content_copy_24"/>
 
             <TextView
                 android:id="@+id/txt_price"

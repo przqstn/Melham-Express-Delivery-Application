@@ -165,6 +165,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Order ID: ..."
+                android:drawableEnd="@drawable/ic_baseline_content_copy_24"
 
                 />
 
