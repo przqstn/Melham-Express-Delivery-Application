@@ -1,116 +1,172 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".User.user_profile_fragment">
+    android:background="@color/background_color">
 
-    <androidx.core.widget.NestedScrollView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <RelativeLayout
-            android:background="@color/background_color"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/riderProfileLayout1"
+        app:layout_constraintVertical_bias="0.0"
+        tools:ignore="SpeakableTextPresentCheck">
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/group_2695"
+            <LinearLayout
+                android:id="@+id/riderProfileLayout1"
+                android:layout_gravity="top"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:background="#00000000"
-                android:scaleType="fitXY"
-                android:src="@drawable/background" />
+                android:layout_height="287dp"
+                android:background="@drawable/background"
+                android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/txt_profile2"
+
+                <ImageView
+                    android:id="@+id/profile_user"
+                    android:layout_width="65dp"
+                    android:layout_height="65dp"
+                    android:layout_gravity="bottom"
+                    android:layout_marginStart="35dp"
+                    android:layout_marginBottom="24dp"
+                    android:background="@drawable/borderbutton"
+                    android:contentDescription="@string/hi_user"
+                    android:padding="1dp"
+                    android:src="@drawable/profilepic" />
+
+                <TextView
+                    android:id="@+id/user_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="65dp"
+                    android:layout_gravity="bottom"
+                    android:layout_marginStart="18dp"
+                    android:layout_marginEnd="40dp"
+                    android:layout_marginBottom="12dp"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/white"
+                    android:textSize="24dp"
+                    android:textStyle="bold" />
+
+                <ImageButton
+                    android:id="@+id/btnUser_EditProfile"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_gravity="end"
+                    android:layout_marginStart="-70dp"
+                    android:background="@color/color_transparent"
+                    android:padding="10dp"
+                    android:src="@drawable/edit_icon"
+                    tools:ignore="SpeakableTextPresentCheck" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/riderProfileLayout2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="0dp"
-                android:fontFamily="@font/montserrat_semibold"
-                android:gravity="center"
-                android:padding="5dp"
-                android:text="My Profile"
-                android:textColor="@color/white"
-                android:textSize="20dp"
-                android:textStyle="bold" />
-
-            <ImageView
-                android:id="@+id/profile_user"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/txt_profile2"
-                android:layout_marginTop="60dp"
-                android:background="@drawable/borderbutton"
-                android:layout_centerInParent="true"
-                android:src="@drawable/profilepic" />
-
-            <RelativeLayout
-                android:layout_marginTop="20dp"
-                android:layout_below="@id/group_2695"
-                android:layout_width="wrap_content"
-                android:background="@color/background_color"
-                android:layout_height="wrap_content">
+                android:orientation="vertical"
+                android:paddingHorizontal="30dp"
+                android:paddingVertical="30dp">
 
                 <LinearLayout
+                    android:id="@+id/edit1"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="75dp"
+                    android:layout_marginBottom="15dp"
+                    android:background="@drawable/borders"
                     android:orientation="vertical"
-                    android:padding="5dp">
+                    android:padding="10dp">
 
                     <TextView
-                        android:id="@+id/user_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:fontFamily="@font/montserrat_semibold"
-                        android:gravity="center"
-                        android:textColor="@color/black"
-                        android:textSize="30dp"
-                        android:textStyle="bold" />
+                        android:fontFamily="@font/montserrat_medium"
+                        android:text="Contact Number:"
+                        tools:ignore="TextContrastCheck" />
 
-
-                    <LinearLayout
+                    <TextView
+                        android:id="@+id/user_number"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        android:padding="30dp">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginBottom="15dp"
-                            android:background="@drawable/borders"
-                            android:orientation="vertical"
-                            android:padding="10dp">
-
-                            <TextView
-                                android:id="@+id/txt_contact"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/montserrat_medium"
-                                android:text="Contact Number"
-                                android:textColor="@color/black"
-                                android:textSize="14sp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:id="@+id/user_number"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/montserrat_regular"
-                                android:padding="5dp"
-
-                                android:textColor="@color/strokes" />
-                        </LinearLayout>
-                    </LinearLayout>
+                        android:fontFamily="@font/montserrat_medium"
+                        android:padding="5dp"
+                        android:textColor="@color/strokes" />
                 </LinearLayout>
-            </RelativeLayout>
+                <LinearLayout
+                    android:id="@+id/edit2"
+                    android:layout_width="match_parent"
+                    android:layout_height="75dp"
+                    android:layout_marginBottom="15dp"
+                    android:background="@drawable/borders"
+                    android:orientation="vertical"
+                    android:padding="10dp">
 
-        </RelativeLayout>
-    </androidx.core.widget.NestedScrollView>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:text="Primary Address:"
+                        tools:ignore="TextContrastCheck" />
+
+                    <TextView
+                        android:id="@+id/user_primary_add"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:padding="5dp"
+                        android:textColor="@color/strokes" />
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/edit3"
+                    android:layout_width="match_parent"
+                    android:layout_height="75dp"
+                    android:layout_marginBottom="15dp"
+                    android:background="@drawable/borders"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:text="Secondary Address:"
+                        tools:ignore="TextContrastCheck"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:padding="5dp"
+                        android:textColor="@color/strokes" />
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/btnRider_Logout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="35dp"
+                    android:layout_marginTop="40dp"
+                    android:background="@drawable/graphics_button_1"
+                    android:drawableStart="@drawable/logout_icon"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:paddingHorizontal="60dp"
+                    android:text="Log Out"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white" />
 
 
-</FrameLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

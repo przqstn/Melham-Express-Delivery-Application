@@ -30,12 +30,15 @@
         <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/layout/activity_user_waitingdriver.xml" value="0.264" />
         <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/layout/activity_userdashboard.xml" value="0.264" />
         <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/layout/driver_bottom_sheet.xml" value="0.10989583333333333" />
-        <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/layout/fragment_editprofile_fragment.xml" value="0.29502151198524895" />
+        <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/layout/fragment_editprofile_fragment.xml" value="0.176" />
         <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/layout/fragment_profile_fragment.xml" value="0.2" />
         <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/layout/fragment_sign_in.xml" value="0.2222222222222222" />
         <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/layout/fragment_signup_rider_step5_try.xml" value="0.1" />
+        <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/layout/fragment_user_editprofile_fragment.xml" value="0.2222222222222222" />
         <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/layout/fragment_user_home_fragment.xml" value="0.1" />
+        <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/layout/fragment_user_profile_fragment.xml" value="0.176" />
         <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/layout/motorcycle_dialog.xml" value="0.2222222222222222" />
+        <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/layout/progresslayout.xml" value="0.2222222222222222" />
         <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/layout/success_dialog.xml" value="0.2222222222222222" />
         <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/layout/suv_dialog.xml" value="0.2222222222222222" />
         <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/layout/truck_dialog.xml" value="0.2222222222222222" />
