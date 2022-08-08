@@ -31,7 +31,7 @@
                     android:fontFamily="@font/montserrat_bold"
                     android:padding="10dp"
                     android:text="Ongoing Order"
-                    android:textAlignment="center"
+                    android:textAlignment="textStart"
                     android:textColor="@color/white"
                     android:textSize="15dp" />
 
@@ -57,7 +57,7 @@
                 android:id="@+id/txt_sender_loc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
+                android:paddingStart="30dp"
                 android:fontFamily="@font/montserrat_medium"
                 android:text="Sender Location"
                 android:textColor="@color/black" />
@@ -101,7 +101,7 @@
                 android:id="@+id/txt_receiver_loc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
+                android:paddingStart="30dp"
                 android:fontFamily="@font/montserrat_medium"
                 android:text="Receiver Location"
                 android:textColor="@color/black" />
@@ -164,20 +164,24 @@
                 android:id="@+id/user_home_orderID"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingStart="20dp"
+                android:paddingEnd="10dp"
+                android:fontFamily="@font/montserrat_medium"
+                android:textColor="@color/black"
                 android:text="Order ID: ..."
                 android:drawableEnd="@drawable/ic_baseline_content_copy_24"
-
+                android:drawableTint="@color/textGray"
                 />
 
             <TextView
                 android:id="@+id/txt_price"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
                 android:fontFamily="@font/montserrat_medium"
                 android:padding="10dp"
-                android:layout_marginRight="95dp"
-                android:text="Price : Sample Price 180"
+                android:textAlignment="center"
+                android:text="Price : 180"
                 android:textColor="@color/black"
                 android:textSize="15dp" />
 
