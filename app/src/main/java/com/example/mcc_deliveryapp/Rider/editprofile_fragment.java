@@ -5,7 +5,9 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -89,17 +91,23 @@ public class editprofile_fragment extends AppCompatActivity {
                 HashMap hashMap = new HashMap();
 
 
-                if(viewAddress.getEditableText().toString()==null||viewAddress.getEditableText().toString().equals("")){
-                    hashMap.put("currentaddress", address);
-                    root.child(phoneNum).updateChildren(hashMap);
-                }else{
-                    hashMap.put("currentaddress", viewAddress.getEditableText().toString());
-                    root.child(phoneNum).updateChildren(hashMap);
+                if(TextUtils.isEmpty(viewAddress.getEditableText().toString())&&imageUri==null){
+                    final Dialog dialog = new Dialog(btnSaveChanges.getContext());
+                    dialog.setContentView(R.layout.saved_dialog);
+                    dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+                    dialog.getWindow().getAttributes().windowAnimations = R.style.animation;
+                    dialog.setCancelable(false);
+                    Button viewProfile = dialog.findViewById(R.id.btn_viewProfile);
+                    viewProfile.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            onBackPressed();
+                        }
+                    });
+                    dialog.show();
                 }
-
-                if (imageUri != null) {
+                if(imageUri!=null){
                     final ProgressDialog pd = new ProgressDialog(btnSaveChanges.getContext());
-
                     pd.setTitle("Uploading Image");
                     pd.show();
 
@@ -126,11 +134,15 @@ public class editprofile_fragment extends AppCompatActivity {
                                     pd.setMessage("Percentage: " + (int) progressPercent + "%");
                                 }
                             });
-                } else {
-                    //
+                }
+                if(!TextUtils.isEmpty(viewAddress.getEditableText().toString())){
+                    hashMap.put("currentaddress", viewAddress.getEditableText().toString());
+                    root.child(phoneNum).updateChildren(hashMap);
                 }
                 final Dialog dialog = new Dialog(btnSaveChanges.getContext());
                 dialog.setContentView(R.layout.saved_dialog);
+                dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+                dialog.getWindow().getAttributes().windowAnimations = R.style.animation;
                 dialog.setCancelable(false);
                 Button viewProfile = dialog.findViewById(R.id.btn_viewProfile);
                 viewProfile.setOnClickListener(new View.OnClickListener() {
