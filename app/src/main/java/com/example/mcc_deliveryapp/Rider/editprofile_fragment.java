@@ -1,5 +1,6 @@
 package com.example.mcc_deliveryapp.Rider;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
@@ -18,7 +19,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.mcc_deliveryapp.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -99,6 +99,7 @@ public class editprofile_fragment extends AppCompatActivity {
 
                 if (imageUri != null) {
                     final ProgressDialog pd = new ProgressDialog(btnSaveChanges.getContext());
+
                     pd.setTitle("Uploading Image");
                     pd.show();
 
@@ -108,7 +109,18 @@ public class editprofile_fragment extends AppCompatActivity {
                                 @Override
                                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                                     pd.dismiss();
-                                    Snackbar.make(findViewById(android.R.id.content), "Image Uploaded.", Snackbar.LENGTH_LONG).show();
+
+                                    final Dialog dialog = new Dialog(btnSaveChanges.getContext());
+                                    dialog.setContentView(R.layout.saved_dialog);
+                                    dialog.setCancelable(false);
+                                    Button viewProfile = dialog.findViewById(R.id.btn_viewProfile);
+                                    viewProfile.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            onBackPressed();
+                                        }
+                                    });
+                                    dialog.show();
 
                                 }
                             })
