@@ -8,60 +8,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".User.user_record_fragment">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_below="@+id/courier_tabs_layout"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:ignore="MissingConstraints">
+        android:layout_gravity="center|top"
+        android:layout_marginTop="50dp"
+        android:orientation="vertical">
 
-        <LinearLayout
-            android:id="@+id/courier_tabs_layout"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_record2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <com.google.android.material.tabs.TabLayout
-                android:id="@+id/user_tabs"
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent">
-
-                <com.google.android.material.tabs.TabItem
-                    android:id="@+id/courier_tab1"
-                    android:text="Pending"
-                    android:layout_height="300dp"
-                    android:layout_width="match_parent"/>
-
-                <com.google.android.material.tabs.TabItem
-                    android:id="@+id/courier_tab2"
-                    android:text="Completed"
-                    android:layout_height="300dp"
-                    android:layout_width="match_parent"/>
-
-                <com.google.android.material.tabs.TabItem
-                    android:id="@+id/courier_tab3"
-                    android:text="Cancelled"
-                    android:layout_height="300dp"
-                    android:layout_width="match_parent"/>
-
-            </com.google.android.material.tabs.TabLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_below="@+id/courier_tabs_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler_record2"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-        </LinearLayout>
-
-    </RelativeLayout>
+    </LinearLayout>
 
 </FrameLayout>
