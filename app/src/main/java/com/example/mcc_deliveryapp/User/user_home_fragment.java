@@ -16,17 +16,18 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.mcc_deliveryapp.R;
 import com.example.mcc_deliveryapp.Rider.model;
-import com.example.mcc_deliveryapp.Rider.myadapter2;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -36,11 +37,12 @@ import java.io.IOException;
 
 public class user_home_fragment extends Fragment {
     String userPhoneNum, userName;
-    TextView welcomeText;
+    TextView welcomeText, emptyText;
     Button bookOrder;
     RecyclerView recyclerView_pickup;
     home_adapter home_adapter;
     StorageReference storageReference;
+    ImageView emptyHome;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -56,7 +58,8 @@ public class user_home_fragment extends Fragment {
         bookOrder = view.findViewById(R.id.bookOrder);
 
         welcomeText = view.findViewById(R.id.hi_user_2);
-
+        emptyHome = view.findViewById(R.id.emptyImage);
+        emptyText = view.findViewById(R.id.emptyText);
         welcomeText.setText("Hi, "+ userName);
 
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -66,11 +69,41 @@ public class user_home_fragment extends Fragment {
                         .setQuery(FirebaseDatabase.getInstance().getReference()
                                         .child("userparcel").orderByChild("userParcelStatus").equalTo("Ongoing"+userPhoneNum)
                                 ,model.class ).build();
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("userparcel");
+        Query checkUser = databaseReference.orderByChild("defaultUserNum");
 
         home_adapter = new home_adapter(options);
         home_adapter.getUserNum(userPhoneNum);
         home_adapter.getUserName(userName);
         recyclerView_pickup.setAdapter(home_adapter);
+
+        checkUser.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot parcelSnapshot : snapshot.getChildren()) {
+                    if (parcelSnapshot.child("defaultUserNum").getValue().equals(userPhoneNum))
+                    {
+                        if (parcelSnapshot.child("userParcelStatus").getValue().equals("Ongoing"+userPhoneNum))
+                        {
+                            emptyHome.setVisibility(View.GONE);
+                            emptyText.setVisibility(View.GONE);
+                            recyclerView_pickup.setVisibility(View.VISIBLE);
+                        }
+                    }
+                    else
+                    {
+                        emptyHome.setVisibility(View.VISIBLE);
+                        emptyText.setVisibility(View.VISIBLE);
+                        recyclerView_pickup.setVisibility(View.GONE);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
         bookOrder.setOnClickListener(new View.OnClickListener() {
             @Override

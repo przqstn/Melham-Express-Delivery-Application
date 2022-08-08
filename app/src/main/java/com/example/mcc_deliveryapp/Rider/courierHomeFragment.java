@@ -3,6 +3,7 @@ package com.example.mcc_deliveryapp.Rider;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.Image;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,6 +27,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -41,8 +43,9 @@ public class courierHomeFragment extends Fragment {
     String riderName;
     String riderVehicle;
     String orderID;
-    TextView welcome_name;
+    TextView welcome_name, emptyTextCourier;
     StorageReference storageReference;
+    ImageView emptyCourier;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -51,6 +54,8 @@ public class courierHomeFragment extends Fragment {
         View view =  inflater.inflate(R.layout.fragment_courier_home, container, false);
 
         recyclerView_pickup = view.findViewById(R.id.Recycleview_home);
+        emptyCourier = view.findViewById(R.id.emptyCourier);
+        emptyTextCourier = view.findViewById(R.id.emptyTextCourier);
         recyclerView_pickup.setLayoutManager(new LinearLayoutManager(getContext()));
 
         welcome_name =  view.findViewById(R.id.hi_user_);
@@ -97,6 +102,37 @@ public class courierHomeFragment extends Fragment {
                                         .child("userparcel").orderByChild("parcelstatus").equalTo("Ongoing"+riderPhoneNum)
                                 ,model.class ).build();
 
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("userparcel");
+        Query checkUser = databaseReference.orderByChild("ridernum").equalTo(riderPhoneNum);
+
+        checkUser.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot parcelSnapshot : snapshot.getChildren()) {
+                    if (parcelSnapshot.child("ridernum").getValue().equals(riderPhoneNum))
+                    {
+                        if (parcelSnapshot.child("userParcelStatus").getValue().equals("Ongoing"+riderPhoneNum))
+                        {
+                            emptyCourier.setVisibility(View.GONE);
+                            emptyTextCourier.setVisibility(View.GONE);
+                            recyclerView_pickup.setVisibility(View.VISIBLE);
+                        }
+                    }
+                    else
+                    {
+                        emptyCourier.setVisibility(View.VISIBLE);
+                        emptyTextCourier.setVisibility(View.VISIBLE);
+                        recyclerView_pickup.setVisibility(View.GONE);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
         myadapter2 = new myadapter2(options);
         myadapter2.getRiderNum(riderPhoneNum);
         myadapter2.getRiderName(riderName);
@@ -128,7 +164,34 @@ public class courierHomeFragment extends Fragment {
         return view;
 
     }
+/*
+     checkUser.addValueEventListener(new ValueEventListener() {
+        @Override
+        public void onDataChange(@NonNull DataSnapshot snapshot) {
+            for (DataSnapshot parcelSnapshot : snapshot.getChildren()) {
+                if (parcelSnapshot.child("defaultUserNum").getValue().equals(userPhoneNum))
+                {
+                    if (parcelSnapshot.child("userParcelStatus").getValue().equals("Ongoing"+userPhoneNum))
+                    {
+                        emptyHome.setVisibility(View.GONE);
+                        emptyText.setVisibility(View.GONE);
+                        recyclerView_pickup.setVisibility(View.VISIBLE);
+                    }
+                }
+                else
+                {
+                    emptyHome.setVisibility(View.VISIBLE);
+                    emptyText.setVisibility(View.VISIBLE);
+                    recyclerView_pickup.setVisibility(View.GONE);
+                }
+            }
+        }
 
+        @Override
+        public void onCancelled(@NonNull DatabaseError error) {
+        }
+    });
+ */
     public void getParcelInfo(String rnum, String orderID, String rname){
         this.riderNum = rnum;
         this.orderID = orderID;
