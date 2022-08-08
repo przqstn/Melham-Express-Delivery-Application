@@ -3,10 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context=".Rider.rider_dashboard1"
+    tools:context=".User.user_home_fragment"
     >
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -122,12 +122,21 @@
                 android:id="@+id/user_home_recycler"
                 android:layout_width="match_parent"
                 android:layout_height="297dp"
-                android:layout_marginTop="170dp" />
+                android:layout_marginTop="170dp"
+                tools:visibility="visible"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="250dp">
 
             <ImageView
                 android:id="@+id/emptyImage"
-                android:layout_width="207dp"
-                android:layout_height="149dp"
+                android:layout_width="253dp"
+                android:layout_height="205dp"
                 android:layout_gravity="center|fill_vertical"
                 android:src="@drawable/userhomebox"
                 tools:visibility="visible" />
@@ -141,10 +150,10 @@
                 android:textAlignment="center"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                tools:visibility="gone" />
+                tools:visibility="visible" />
 
         </LinearLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </FrameLayout>
 </LinearLayout>
 
