@@ -18,7 +18,7 @@
             android:id="@+id/map"
             android:name="com.google.android.gms.maps.SupportMapFragment"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="641dp" />
 
     </LinearLayout>
 
@@ -29,6 +29,12 @@
         android:layout_alignParentBottom="true"
         android:elevation="5dp"
         android:orientation="vertical">
+
+        <Button
+            android:id="@+id/pickedComplete"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Parcel Picked Up" />
 
         <Button
             android:id="@+id/backbutton"
