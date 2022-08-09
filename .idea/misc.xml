@@ -20,7 +20,6 @@
         <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/drawable/online_groceries_decor.xml" value="0.2555" />
         <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/drawable/profilepic.xml" value="0.234" />
         <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/drawable/prompt_dialog_radius.xml" value="0.2545" />
-        <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/drawable/question_mark_circle.xml" value="0.2475" />
         <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/drawable/sedan.xml" value="0.2555" />
         <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/drawable/suv.xml" value="0.2555" />
         <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/drawable/tab_indicator.xml" value="0.2555" />
@@ -36,9 +35,8 @@
         <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/layout/activity_user_permission.xml" value="0.264" />
         <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/layout/activity_user_waitingdriver.xml" value="0.264" />
         <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/layout/activity_userdashboard.xml" value="0.264" />
-        <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/layout/cancel_edit_dialog.xml" value="0.2212962962962963" />
         <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/layout/driver_bottom_sheet.xml" value="0.10989583333333333" />
-        <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/layout/fragment_editprofile_fragment.xml" value="0.2" />
+        <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/layout/fragment_editprofile_fragment.xml" value="0.176" />
         <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/layout/fragment_profile_fragment.xml" value="0.2" />
         <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/layout/fragment_rider_phonenum_verify.xml" value="0.2222222222222222" />
         <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/layout/fragment_sign_in.xml" value="0.2222222222222222" />
@@ -57,12 +55,9 @@
         <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/layout/rate_courier_dialog.xml" value="0.2222222222222222" />
         <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/layout/recordlayoutdesign.xml" value="0.2222222222222222" />
         <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/layout/saved_dialog.xml" value="0.264" />
-        <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/layout/sedan_dialog.xml" value="0.2222222222222222" />
-        <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/layout/spinner_items_1.xml" value="0.2222222222222222" />
         <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/layout/success_dialog.xml" value="0.2222222222222222" />
         <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/layout/suv_dialog.xml" value="0.2222222222222222" />
         <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/layout/truck_dialog.xml" value="0.2222222222222222" />
-        <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/layout/upload_photo_fragment.xml" value="0.19900497512437812" />
         <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/layout/user_paymentdialog.xml" value="0.2222222222222222" />
         <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/layout/user_receiver_address_detail.xml" value="0.2222222222222222" />
         <entry key="..\:/Android Studio/MCC_Delivery_App/app/src/main/res/layout/userrecorddesign.xml" value="0.2222222222222222" />
@@ -182,11 +177,65 @@
         <entry key="..\:/Users/DELL/StudioProjects/MCC-Delivery-Repository/app/src/main/res/layout/user_paymentdialog.xml" value="0.5" />
         <entry key="..\:/Users/DELL/StudioProjects/MCC-Delivery-Repository/app/src/main/res/layout/user_receiver_address_detail.xml" value="0.5" />
         <entry key="..\:/Users/DELL/StudioProjects/MCC_Delivery_App/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.1" />
+        <entry key="..\:/Users/DELL/StudioProjects/MCC_Delivery_App/app/src/main/res/layout/activity_main.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/DELL/StudioProjects/MCC_Delivery_App/app/src/main/res/layout/activity_main2.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/DELL/StudioProjects/MCC_Delivery_App/app/src/main/res/layout/activity_main_user.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/DELL/StudioProjects/MCC_Delivery_App/app/src/main/res/layout/activity_register_rider.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/DELL/StudioProjects/MCC_Delivery_App/app/src/main/res/layout/activity_rider_completed_order.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/DELL/StudioProjects/MCC_Delivery_App/app/src/main/res/layout/activity_rider_dashboard.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/DELL/StudioProjects/MCC_Delivery_App/app/src/main/res/layout/activity_rider_login.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/DELL/StudioProjects/MCC_Delivery_App/app/src/main/res/layout/activity_rider_ongoing_order.xml" value="0.33" />
+        <entry key="..\:/Users/DELL/StudioProjects/MCC_Delivery_App/app/src/main/res/layout/activity_rider_trackmap.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/DELL/StudioProjects/MCC_Delivery_App/app/src/main/res/layout/activity_take_order.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/DELL/StudioProjects/MCC_Delivery_App/app/src/main/res/layout/activity_user_checkrate.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/DELL/StudioProjects/MCC_Delivery_App/app/src/main/res/layout/activity_user_completed_order_details.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/DELL/StudioProjects/MCC_Delivery_App/app/src/main/res/layout/activity_user_navigation.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/DELL/StudioProjects/MCC_Delivery_App/app/src/main/res/layout/activity_user_ongoing_order_details.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/DELL/StudioProjects/MCC_Delivery_App/app/src/main/res/layout/activity_user_parceltransaction.xml" value="0.33" />
+        <entry key="..\:/Users/DELL/StudioProjects/MCC_Delivery_App/app/src/main/res/layout/activity_user_paymentmethod.xml" value="0.5" />
+        <entry key="..\:/Users/DELL/StudioProjects/MCC_Delivery_App/app/src/main/res/layout/activity_user_pending_order_details.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/DELL/StudioProjects/MCC_Delivery_App/app/src/main/res/layout/activity_user_permission.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/DELL/StudioProjects/MCC_Delivery_App/app/src/main/res/layout/activity_user_track_rider.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/DELL/StudioProjects/MCC_Delivery_App/app/src/main/res/layout/cancel_edit_dialog.xml" value="0.5" />
+        <entry key="..\:/Users/DELL/StudioProjects/MCC_Delivery_App/app/src/main/res/layout/courier_record_header_cancelled.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/DELL/StudioProjects/MCC_Delivery_App/app/src/main/res/layout/courier_record_header_completed.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/DELL/StudioProjects/MCC_Delivery_App/app/src/main/res/layout/fragment_courier_home.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/DELL/StudioProjects/MCC_Delivery_App/app/src/main/res/layout/fragment_editprofile_fragment.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/DELL/StudioProjects/MCC_Delivery_App/app/src/main/res/layout/fragment_forgot_password.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/DELL/StudioProjects/MCC_Delivery_App/app/src/main/res/layout/fragment_pickup_fragment.xml" value="0.19537037037037036" />
         <entry key="..\:/Users/DELL/StudioProjects/MCC_Delivery_App/app/src/main/res/layout/fragment_profile_fragment.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/DELL/StudioProjects/MCC_Delivery_App/app/src/main/res/layout/fragment_record_fragment.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/DELL/StudioProjects/MCC_Delivery_App/app/src/main/res/layout/fragment_rider_phonenum_verify.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/DELL/StudioProjects/MCC_Delivery_App/app/src/main/res/layout/fragment_sign_in.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/DELL/StudioProjects/MCC_Delivery_App/app/src/main/res/layout/fragment_sign_up.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/DELL/StudioProjects/MCC_Delivery_App/app/src/main/res/layout/fragment_signup_rider_step1.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/DELL/StudioProjects/MCC_Delivery_App/app/src/main/res/layout/fragment_signup_rider_step2.xml" value="0.19722222222222222" />
+        <entry key="..\:/Users/DELL/StudioProjects/MCC_Delivery_App/app/src/main/res/layout/fragment_signup_rider_step3.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/DELL/StudioProjects/MCC_Delivery_App/app/src/main/res/layout/fragment_signup_rider_step4.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/DELL/StudioProjects/MCC_Delivery_App/app/src/main/res/layout/fragment_signup_rider_step5.xml" value="0.19722222222222222" />
+        <entry key="..\:/Users/DELL/StudioProjects/MCC_Delivery_App/app/src/main/res/layout/fragment_update_password.xml" value="0.33" />
+        <entry key="..\:/Users/DELL/StudioProjects/MCC_Delivery_App/app/src/main/res/layout/fragment_user_editprofile_fragment.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/DELL/StudioProjects/MCC_Delivery_App/app/src/main/res/layout/fragment_user_home_fragment.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/DELL/StudioProjects/MCC_Delivery_App/app/src/main/res/layout/fragment_user_phonenum_verify.xml" value="0.33" />
+        <entry key="..\:/Users/DELL/StudioProjects/MCC_Delivery_App/app/src/main/res/layout/fragment_user_profile_fragment.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/DELL/StudioProjects/MCC_Delivery_App/app/src/main/res/layout/motorcycle_dialog.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/DELL/StudioProjects/MCC_Delivery_App/app/src/main/res/layout/mpv_dialog.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/DELL/StudioProjects/MCC_Delivery_App/app/src/main/res/layout/ongoing_courierlayoutdesign.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/DELL/StudioProjects/MCC_Delivery_App/app/src/main/res/layout/ongoing_userlayoutdesign.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/DELL/StudioProjects/MCC_Delivery_App/app/src/main/res/layout/pickuplayoutdesign.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/DELL/StudioProjects/MCC_Delivery_App/app/src/main/res/layout/progresslayout.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/DELL/StudioProjects/MCC_Delivery_App/app/src/main/res/layout/rate_courier_dialog.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/DELL/StudioProjects/MCC_Delivery_App/app/src/main/res/layout/recordlayoutdesign.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/DELL/StudioProjects/MCC_Delivery_App/app/src/main/res/layout/saved_dialog.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/DELL/StudioProjects/MCC_Delivery_App/app/src/main/res/layout/sedan_dialog.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/DELL/StudioProjects/MCC_Delivery_App/app/src/main/res/layout/spinner_items_1.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/DELL/StudioProjects/MCC_Delivery_App/app/src/main/res/layout/success_dialog.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/DELL/StudioProjects/MCC_Delivery_App/app/src/main/res/layout/suv_dialog.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/DELL/StudioProjects/MCC_Delivery_App/app/src/main/res/layout/truck_dialog.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/DELL/StudioProjects/MCC_Delivery_App/app/src/main/res/layout/upload_photo_fragment.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/DELL/StudioProjects/MCC_Delivery_App/app/src/main/res/layout/user_adressdetail.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/DELL/StudioProjects/MCC_Delivery_App/app/src/main/res/layout/user_receiver_address_detail.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/DELL/StudioProjects/MCC_Delivery_App/app/src/main/res/layout/userrecordlayoutdesign.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/DELL/StudioProjects/MCC_Delivery_App/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1" />
         <entry key="..\:/Users/PC/AndroidStudioProjects/MCC_Delivery_App/app/src/main/res/drawable-v24/ic_menu_gallery.xml" value="0.122" />
         <entry key="..\:/Users/PC/AndroidStudioProjects/MCC_Delivery_App/app/src/main/res/layout/activity_main.xml" value="0.17916666666666667" />
@@ -238,51 +287,9 @@
         <entry key="..\:/Users/rdrgz/AndroidStudioProjects/MCC Delivery App 2/app/src/main/res/layout/userhome.xml" value="0.14536340852130325" />
         <entry key="..\:/Users/rdrgz/AndroidStudioProjects/MCC Delivery App 2/app/src/main/res/menu/bottom_navrider.xml" value="0.33" />
         <entry key="..\:/Users/rdrgz/AndroidStudioProjects/MCC Delivery App 2/app/src/main/res/menu/bottom_navuser.xml" value="0.14487179487179488" />
-        <entry key="..\:/Users/rdrgz/AndroidStudioProjects/MCC_Delivery_App/app/src/main/res/layout/activity_main_user.xml" value="0.30932971014492755" />
-        <entry key="..\:/Users/rdrgz/AndroidStudioProjects/MCC_Delivery_App/app/src/main/res/layout/activity_register_rider.xml" value="0.2962962962962963" />
-        <entry key="..\:/Users/rdrgz/AndroidStudioProjects/MCC_Delivery_App/app/src/main/res/layout/activity_rider_login.xml" value="0.30932971014492755" />
-        <entry key="..\:/Users/rdrgz/AndroidStudioProjects/MCC_Delivery_App/app/src/main/res/layout/activity_user_completed_order_details.xml" value="0.30932971014492755" />
         <entry key="..\:/Users/rdrgz/AndroidStudioProjects/MCC_Delivery_App/app/src/main/res/layout/activity_user_navbar.xml" value="0.276268115942029" />
         <entry key="..\:/Users/rdrgz/AndroidStudioProjects/MCC_Delivery_App/app/src/main/res/layout/activity_user_navigation.xml" value="0.276268115942029" />
-        <entry key="..\:/Users/rdrgz/AndroidStudioProjects/MCC_Delivery_App/app/src/main/res/layout/activity_user_parceltransaction.xml" value="0.1762917933130699" />
-        <entry key="..\:/Users/rdrgz/AndroidStudioProjects/MCC_Delivery_App/app/src/main/res/layout/activity_user_paymentmethod.xml" value="0.1762917933130699" />
-        <entry key="..\:/Users/rdrgz/AndroidStudioProjects/MCC_Delivery_App/app/src/main/res/layout/activity_user_permission.xml" value="0.1762917933130699" />
-        <entry key="..\:/Users/rdrgz/AndroidStudioProjects/MCC_Delivery_App/app/src/main/res/layout/activity_user_track_rider.xml" value="0.1762917933130699" />
-        <entry key="..\:/Users/rdrgz/AndroidStudioProjects/MCC_Delivery_App/app/src/main/res/layout/cancel_edit_dialog.xml" value="0.1762917933130699" />
-        <entry key="..\:/Users/rdrgz/AndroidStudioProjects/MCC_Delivery_App/app/src/main/res/layout/courier_record_header_cancelled.xml" value="0.67" />
-        <entry key="..\:/Users/rdrgz/AndroidStudioProjects/MCC_Delivery_App/app/src/main/res/layout/courier_record_header_completed.xml" value="0.1762917933130699" />
-        <entry key="..\:/Users/rdrgz/AndroidStudioProjects/MCC_Delivery_App/app/src/main/res/layout/fragment_courier_home.xml" value="0.33" />
-        <entry key="..\:/Users/rdrgz/AndroidStudioProjects/MCC_Delivery_App/app/src/main/res/layout/fragment_editprofile_fragment.xml" value="0.1762917933130699" />
-        <entry key="..\:/Users/rdrgz/AndroidStudioProjects/MCC_Delivery_App/app/src/main/res/layout/fragment_forgot_password.xml" value="0.1762917933130699" />
-        <entry key="..\:/Users/rdrgz/AndroidStudioProjects/MCC_Delivery_App/app/src/main/res/layout/fragment_pickup_fragment.xml" value="0.1762917933130699" />
-        <entry key="..\:/Users/rdrgz/AndroidStudioProjects/MCC_Delivery_App/app/src/main/res/layout/fragment_profile_fragment.xml" value="0.1762917933130699" />
-        <entry key="..\:/Users/rdrgz/AndroidStudioProjects/MCC_Delivery_App/app/src/main/res/layout/fragment_record_fragment.xml" value="0.33" />
-        <entry key="..\:/Users/rdrgz/AndroidStudioProjects/MCC_Delivery_App/app/src/main/res/layout/fragment_rider_phonenum_verify.xml" value="0.1762917933130699" />
-        <entry key="..\:/Users/rdrgz/AndroidStudioProjects/MCC_Delivery_App/app/src/main/res/layout/fragment_sign_in.xml" value="0.4222222222222222" />
-        <entry key="..\:/Users/rdrgz/AndroidStudioProjects/MCC_Delivery_App/app/src/main/res/layout/fragment_sign_up.xml" value="0.30932971014492755" />
-        <entry key="..\:/Users/rdrgz/AndroidStudioProjects/MCC_Delivery_App/app/src/main/res/layout/fragment_signup_rider_step4.xml" value="0.1762917933130699" />
-        <entry key="..\:/Users/rdrgz/AndroidStudioProjects/MCC_Delivery_App/app/src/main/res/layout/fragment_signup_rider_step5.xml" value="0.1762917933130699" />
-        <entry key="..\:/Users/rdrgz/AndroidStudioProjects/MCC_Delivery_App/app/src/main/res/layout/fragment_update_password.xml" value="0.33" />
-        <entry key="..\:/Users/rdrgz/AndroidStudioProjects/MCC_Delivery_App/app/src/main/res/layout/fragment_user_editprofile_fragment.xml" value="0.25" />
         <entry key="..\:/Users/rdrgz/AndroidStudioProjects/MCC_Delivery_App/app/src/main/res/layout/fragment_user_home_fragment.xml" value="0.276268115942029" />
-        <entry key="..\:/Users/rdrgz/AndroidStudioProjects/MCC_Delivery_App/app/src/main/res/layout/fragment_user_phonenum_verify.xml" value="0.1762917933130699" />
-        <entry key="..\:/Users/rdrgz/AndroidStudioProjects/MCC_Delivery_App/app/src/main/res/layout/fragment_user_profile_fragment.xml" value="0.1762917933130699" />
-        <entry key="..\:/Users/rdrgz/AndroidStudioProjects/MCC_Delivery_App/app/src/main/res/layout/fragment_user_record_fragment.xml" value="0.22" />
-        <entry key="..\:/Users/rdrgz/AndroidStudioProjects/MCC_Delivery_App/app/src/main/res/layout/motorcycle_dialog.xml" value="0.1762917933130699" />
-        <entry key="..\:/Users/rdrgz/AndroidStudioProjects/MCC_Delivery_App/app/src/main/res/layout/mpv_dialog.xml" value="0.1762917933130699" />
-        <entry key="..\:/Users/rdrgz/AndroidStudioProjects/MCC_Delivery_App/app/src/main/res/layout/pickuplayoutdesign.xml" value="0.1762917933130699" />
-        <entry key="..\:/Users/rdrgz/AndroidStudioProjects/MCC_Delivery_App/app/src/main/res/layout/progresslayout.xml" value="0.1762917933130699" />
-        <entry key="..\:/Users/rdrgz/AndroidStudioProjects/MCC_Delivery_App/app/src/main/res/layout/rate_courier_dialog.xml" value="0.1762917933130699" />
-        <entry key="..\:/Users/rdrgz/AndroidStudioProjects/MCC_Delivery_App/app/src/main/res/layout/recordlayoutdesign.xml" value="0.1762917933130699" />
-        <entry key="..\:/Users/rdrgz/AndroidStudioProjects/MCC_Delivery_App/app/src/main/res/layout/sedan_dialog.xml" value="0.1762917933130699" />
-        <entry key="..\:/Users/rdrgz/AndroidStudioProjects/MCC_Delivery_App/app/src/main/res/layout/spinner_items_1.xml" value="0.1762917933130699" />
-        <entry key="..\:/Users/rdrgz/AndroidStudioProjects/MCC_Delivery_App/app/src/main/res/layout/suv_dialog.xml" value="0.1762917933130699" />
-        <entry key="..\:/Users/rdrgz/AndroidStudioProjects/MCC_Delivery_App/app/src/main/res/layout/truck_dialog.xml" value="0.1762917933130699" />
-        <entry key="..\:/Users/rdrgz/AndroidStudioProjects/MCC_Delivery_App/app/src/main/res/layout/upload_photo_fragment.xml" value="0.1762917933130699" />
-        <entry key="..\:/Users/rdrgz/AndroidStudioProjects/MCC_Delivery_App/app/src/main/res/layout/user_adressdetail.xml" value="0.1762917933130699" />
-        <entry key="..\:/Users/rdrgz/AndroidStudioProjects/MCC_Delivery_App/app/src/main/res/layout/user_paymentdialog.xml" value="0.1762917933130699" />
-        <entry key="..\:/Users/rdrgz/AndroidStudioProjects/MCC_Delivery_App/app/src/main/res/layout/user_receiver_address_detail.xml" value="0.1762917933130699" />
-        <entry key="..\:/Users/rdrgz/AndroidStudioProjects/MCC_Delivery_App/app/src/main/res/layout/userrecordlayoutdesign.xml" value="0.1762917933130699" />
       </map>
     </option>
   </component>
