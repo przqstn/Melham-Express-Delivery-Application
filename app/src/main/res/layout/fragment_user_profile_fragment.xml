@@ -142,6 +142,7 @@
                         tools:ignore="TextContrastCheck"/>
 
                     <TextView
+                        android:id="@+id/user_secondary_address"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/montserrat_medium"
