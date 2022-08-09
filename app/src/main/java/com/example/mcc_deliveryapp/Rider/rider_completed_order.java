@@ -23,9 +23,9 @@ public class rider_completed_order extends AppCompatActivity {
 
     String name, phonenum, orderID, riderVehicle, senderName, senderLocation, senderContact,
             receiverName, receiverLocation, receiverContact, vehicleType, senderNote, orderPrice,
-            defaultUserNum, customer_Name;
+            defaultUserNum, customer_Name, orderPlaced;
     TextView senderloc, sendername, sendercontact, receiverloc, receivername, receivercontact,
-            order_id, vehicletype, usernote, parcelprice, customerName;
+            order_id, vehicletype, usernote, parcelprice, customerName, order_placed;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +48,7 @@ public class rider_completed_order extends AppCompatActivity {
         vehicletype = findViewById(R.id.vehicle2);
         usernote = findViewById(R.id.note_rider2);
         parcelprice = findViewById(R.id.txt_price2);
+        order_placed = findViewById(R.id.order_placed);
         customerName = findViewById(R.id.customer_name);
 
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -68,6 +69,7 @@ public class rider_completed_order extends AppCompatActivity {
                         vehicleType = dataSnapshot.child("vehicletype").getValue(String.class);
                         senderNote = dataSnapshot.child("customernotes").getValue(String.class);
                         orderPrice = dataSnapshot.child("fee").getValue(String.class);
+                        orderPlaced = dataSnapshot.child("DatePlace").getValue(String.class);
                         defaultUserNum = dataSnapshot.child("defaultUserNum").getValue(String.class);
 
                         final FirebaseDatabase database2 = FirebaseDatabase.getInstance();
@@ -113,6 +115,7 @@ public class rider_completed_order extends AppCompatActivity {
                         vehicletype.setText(vehicleType);
                         usernote.setText(senderNote);
                         parcelprice.setText(orderPrice);
+                        order_placed.setText(orderPlaced);
                     }
 
                     @Override

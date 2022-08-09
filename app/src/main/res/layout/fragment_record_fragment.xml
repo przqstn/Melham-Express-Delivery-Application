@@ -8,10 +8,27 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Rider.record_fragment">
 
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/riderRecordTab"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Completed" />
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cancelled" />
+
+    </com.google.android.material.tabs.TabLayout>
+
     <LinearLayout
-        android:layout_below="@+id/courier_tabs_layout"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="550dp"
+        android:layout_below="@+id/courier_tabs_layout"
         android:layout_gravity="center|top"
         android:layout_marginTop="50dp"
         android:orientation="vertical">
