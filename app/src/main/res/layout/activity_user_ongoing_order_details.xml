@@ -373,7 +373,7 @@
                         android:layout_width="300dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="45dp"
+                        android:layout_marginTop="50dp"
                         android:padding="5dp">
 
                         <RelativeLayout
@@ -381,13 +381,23 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
 
+                            <de.hdodenhof.circleimageview.CircleImageView
+                                android:id="@+id/user_profile_ongoing"
+                                android:layout_width="65dp"
+                                android:layout_height="65dp"
+                                android:layout_marginBottom="12dp"
+                                android:background="@drawable/profile_ellipse"
+                                android:padding="1dp"
+                                android:src="@drawable/rounded" />
+
                             <TextView
                                 android:id="@+id/rider_name"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/montserrat_bold"
+                                android:paddingStart="70dp"
                                 android:text="Rider Name Goes Here"
-                                android:textAlignment="center"
+                                android:textAlignment="textStart"
                                 android:textColor="@color/black"
                                 android:textSize="18dp"
                                 android:textStyle="bold" />
@@ -398,8 +408,9 @@
                                 android:layout_height="wrap_content"
                                 android:layout_below="@id/rider_name"
                                 android:fontFamily="@font/montserrat_regular"
+                                android:paddingStart="70dp"
                                 android:text="Vehicle Details Go Here"
-                                android:textAlignment="center"
+                                android:textAlignment="textStart"
                                 android:textColor="@color/black"
                                 android:textStyle="bold" />
 
@@ -409,8 +420,9 @@
                                 android:layout_height="wrap_content"
                                 android:layout_below="@id/vehicle_details"
                                 android:fontFamily="@font/montserrat_regular"
+                                android:paddingStart="70dp"
                                 android:text="Plate Number"
-                                android:textAlignment="center"
+                                android:textAlignment="textStart"
                                 android:textColor="@color/black"
                                 android:textStyle="bold" />
                         </RelativeLayout>
@@ -421,7 +433,7 @@
                             android:layout_height="wrap_content"
                             android:layout_below="@id/courier_details"
                             android:layout_gravity="center_horizontal"
-                            android:layout_marginTop="15dp"
+                            android:layout_marginTop="5dp"
                             android:layout_marginBottom="10dp"
                             android:orientation="vertical">
 
