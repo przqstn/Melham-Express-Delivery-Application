@@ -5,18 +5,29 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.mcc_deliveryapp.R;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.firebase.storage.FileDownloadTask;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
+import java.io.File;
+import java.io.IOException;
 
 public class rider_completed_order extends AppCompatActivity {
 
@@ -26,6 +37,9 @@ public class rider_completed_order extends AppCompatActivity {
             defaultUserNum, customer_Name, orderPlaced;
     TextView senderloc, sendername, sendercontact, receiverloc, receivername, receivercontact,
             order_id, vehicletype, usernote, parcelprice, customerName, order_placed;
+
+    ImageView profilePic; // line 41 added variable
+    StorageReference storageReference; // line 42 added storageReference
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +51,7 @@ public class rider_completed_order extends AppCompatActivity {
         phonenum = intent.getStringExtra("phonenum");
         orderID = intent.getStringExtra("orderID");
         riderVehicle = intent.getStringExtra("vehicle");
+        String getSenderContact = intent.getStringExtra("senderContact"); // line 40 Added getSenderContact variable
 
         senderloc = findViewById(R.id.sender_loc2);
         sendername = findViewById(R.id.sender_name2);
@@ -50,6 +65,29 @@ public class rider_completed_order extends AppCompatActivity {
         parcelprice = findViewById(R.id.txt_price2);
         order_placed = findViewById(R.id.order_placed);
         customerName = findViewById(R.id.customer_name);
+
+        profilePic = findViewById(R.id.rider_profile_completed_order); // line 69 ImageView declaration
+
+        // line 72 - 90 image retrieved for profile picture
+        storageReference= FirebaseStorage.getInstance().getReference().child("user/"+getSenderContact+"/profile_image.jpg");
+        try{
+            final File file= File.createTempFile("profile_image", "jpg");
+            storageReference.getFile(file)
+                    .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                            Bitmap bitmap= BitmapFactory.decodeFile(file.getAbsolutePath());
+                            profilePic.setImageBitmap(bitmap);
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+
+                        }
+                    });
+        }catch (IOException e){
+            e.printStackTrace();
+        }
 
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         final DatabaseReference dr = database.getReference().child("userparcel");

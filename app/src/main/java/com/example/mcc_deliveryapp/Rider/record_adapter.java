@@ -103,6 +103,7 @@ public class record_adapter extends FirebaseRecyclerAdapter<
                     intent.putExtra("username", userName);
                     intent.putExtra("orderID", orderID.getText().toString());
                     intent.putExtra("vehicle", vehicletype.getText().toString());
+                    intent.putExtra("senderContact", sendercontact.getText().toString()); // line 106 Added intent.putExtra
                     context.startActivity(intent);
                 }
             });

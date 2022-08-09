@@ -118,7 +118,6 @@ public class profile_fragment extends Fragment {
 					.addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
 						@Override
 						public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-							//Toast.makeText(profile_rider.getContext(), "Retrieved", Toast.LENGTH_SHORT).show();
 							Bitmap bitmap= BitmapFactory.decodeFile(file.getAbsolutePath());
 							profile_rider.setImageBitmap(bitmap);
 						}

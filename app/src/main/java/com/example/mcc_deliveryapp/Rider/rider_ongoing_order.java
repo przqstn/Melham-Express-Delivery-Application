@@ -5,20 +5,30 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.mcc_deliveryapp.R;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.firebase.storage.FileDownloadTask;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
+import java.io.File;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
@@ -33,6 +43,9 @@ public class rider_ongoing_order extends AppCompatActivity {
             order_id, vehicletype, usernote, parcelprice, customer_name, order_placed;
     Button btn_CompleteOrder, btn_cancelOrderRider, btn_MessageCustomer, btn_CallCustomer;
 
+    StorageReference storageReference; // line 46 Storage Reference
+    ImageView profilePic; // Line 47 Added ImageView
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +56,7 @@ public class rider_ongoing_order extends AppCompatActivity {
         phonenum = intent.getStringExtra("phonenum");
         orderID = intent.getStringExtra("orderID");
         riderVehicle = intent.getStringExtra("vehicle");
+        String getSenderContact = intent.getStringExtra("senderContact"); // Added variable
 
         senderloc = findViewById(R.id.sender_loc2);
         sendername = findViewById(R.id.sender_name2);
@@ -61,6 +75,30 @@ public class rider_ongoing_order extends AppCompatActivity {
         btn_CompleteOrder = findViewById(R.id.btn_completeOrder);
         btn_cancelOrderRider = findViewById(R.id.btn_cancelOrderRider);
 
+        profilePic = findViewById(R.id.rider_profile_ongoing); // line 78 ImageView declaration
+
+        // line 80 - 100 image retrieved for profile picture
+        storageReference=FirebaseStorage.getInstance().getReference().child("user/"+getSenderContact+"/profile_image.jpg");
+        try{
+            final File file= File.createTempFile("profile_image", "jpg");
+            storageReference.getFile(file)
+                    .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+
+                            Bitmap bitmap= BitmapFactory.decodeFile(file.getAbsolutePath());
+                            profilePic.setImageBitmap(bitmap);
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+
+                        }
+                    });
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         final DatabaseReference dr = database.getReference().child("userparcel");
         Query query = dr.orderByChild("OrderID").equalTo(orderID);
@@ -68,11 +106,13 @@ public class rider_ongoing_order extends AppCompatActivity {
 
         query.addChildEventListener(
                 new ChildEventListener() {
+
                     @Override
                     public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                         senderName = dataSnapshot.child("sendername").getValue(String.class);
                         senderLocation = dataSnapshot.child("senderlocation").getValue(String.class);
                         senderContact = dataSnapshot.child("sendercontact").getValue(String.class);
+
                         receiverName = dataSnapshot.child("receivername").getValue(String.class);
                         receiverLocation = dataSnapshot.child("receiverlocation").getValue(String.class);
                         receiverContact = dataSnapshot.child("receivercontact").getValue(String.class);
@@ -144,6 +184,7 @@ public class rider_ongoing_order extends AppCompatActivity {
                     @Override
                     public void onChildChanged(DataSnapshot dataSnapshot, String s) {
                     }
+
                 });
 
         btn_MessageCustomer.setOnClickListener(new View.OnClickListener() {
