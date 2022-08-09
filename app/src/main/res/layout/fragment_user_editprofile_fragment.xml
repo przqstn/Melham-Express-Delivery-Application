@@ -23,7 +23,7 @@
             android:orientation="vertical">
 
             <LinearLayout
-                android:id="@+id/riderProfileLayout1"
+                android:id="@+id/ProfileLayout1"
                 android:layout_gravity="top"
                 android:layout_width="match_parent"
                 android:layout_height="287dp"
@@ -71,7 +71,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/riderProfileLayout2"
+                android:id="@+id/ProfileLayout2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
