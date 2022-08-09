@@ -15,6 +15,7 @@ import android.location.Criteria;
 import android.location.Geocoder;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.PowerManager;
 import android.preference.PreferenceManager;
@@ -30,6 +31,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.OnBackPressedCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
@@ -128,7 +131,7 @@ public class user_parceltransaction extends FragmentActivity implements Location
 		setContentView(R.layout.activity_user_parceltransaction);
 
 		Places.initialize(this, GOOGLE_API_KEY);
-
+		requestPermission();
 		Intent intent = getIntent();
 		String userNumber = intent.getStringExtra("phonenum");
 		String userName = intent.getStringExtra("username");
@@ -321,6 +324,44 @@ public class user_parceltransaction extends FragmentActivity implements Location
 
 	}
 
+	public void requestPermission(){
+		ActivityResultLauncher<String[]> locationPermissionRequest =
+				registerForActivityResult(new ActivityResultContracts
+								.RequestMultiplePermissions(), result -> {
+					Boolean fineLocationGranted = null;
+					if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+						fineLocationGranted = result.getOrDefault(
+								Manifest.permission.ACCESS_FINE_LOCATION, false);
+					}
+					Boolean coarseLocationGranted = null;
+					if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+						coarseLocationGranted = result.getOrDefault(
+										Manifest.permission.ACCESS_COARSE_LOCATION,false);
+					}
+					if (fineLocationGranted != null && fineLocationGranted) {
+								// Precise location access granted.
+							} else if (coarseLocationGranted != null && coarseLocationGranted) {
+								// Only approximate location access granted.
+							} else {
+								// No location access granted.
+							}
+						}
+				);
+
+// ...
+
+// Before you perform the actual permission request, check whether your app
+// already has the permissions, and whether your app needs to show a permission
+// rationale dialog. For more details, see Request permissions.
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+			locationPermissionRequest.launch(new String[] {
+					Manifest.permission.ACCESS_FINE_LOCATION,
+					Manifest.permission.ACCESS_COARSE_LOCATION,
+					Manifest.permission.ACCESS_BACKGROUND_LOCATION
+			});
+		}
+	}
+
 	public static boolean isLocationEnabled(Context context) {
 		int locationMode = 0;
 		String locationProviders;
@@ -345,7 +386,7 @@ public class user_parceltransaction extends FragmentActivity implements Location
 		if (isLocationEnabled(this)) {
 			locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
 			criteria = new Criteria();
-			bestProvider = String.valueOf(locationManager.getBestProvider(criteria, true)).toString();
+			bestProvider = String.valueOf(locationManager.getBestProvider(criteria, true));
 
 			//You can still do this if you like, you might get lucky:
 			if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -360,7 +401,7 @@ public class user_parceltransaction extends FragmentActivity implements Location
 			}
 			Location location = locationManager.getLastKnownLocation(bestProvider);
 			if (location != null) {
-				Log.e("TAG", "GPS is on");
+//				Log.e("TAG", "GPS is on");
 				latitude = location.getLatitude();
 				longitude = location.getLongitude();
 				lastKnownLocation = new LatLng(latitude, longitude);
@@ -380,45 +421,46 @@ public class user_parceltransaction extends FragmentActivity implements Location
 			mMap.moveCamera(CameraUpdateFactory
 					.newLatLngZoom(defaultLocation, DEFAULT_ZOOM));
 			mMap.getUiSettings().setMyLocationButtonEnabled(true);
-			createLocationRequest();
-			LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder();
-			SettingsClient client = LocationServices.getSettingsClient(this);
-			Task<LocationSettingsResponse> task = client.checkLocationSettings(builder.build());
-			task.addOnSuccessListener(this, new OnSuccessListener<LocationSettingsResponse>() {
-				@Override
-				public void onSuccess(LocationSettingsResponse locationSettingsResponse) {
-					requestLoc();
-				}
-			});
-
-			task.addOnFailureListener(this, new OnFailureListener() {
-				private static final int REQUEST_CHECK_SETTINGS = 0x1;
-
-				@Override
-				public void onFailure(@NonNull Exception e) {
-					if (e instanceof ResolvableApiException) {
-						// Location settings are not satisfied, but this can be fixed
-						// by showing the user a dialog.
-						try {
-							// Show the dialog by calling startResolutionForResult(),
-							// and check the result in onActivityResult().
-							ResolvableApiException resolvable = (ResolvableApiException) e;
-							resolvable.startResolutionForResult(user_parceltransaction.this, REQUEST_CHECK_SETTINGS);
-						} catch (IntentSender.SendIntentException sendEx) {
-							// Ignore the error.
-						}
-					}
-				}
-			});
+//			requestPermission();
+//			createLocationRequest();
+//			LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder();
+//			SettingsClient client = LocationServices.getSettingsClient(this);
+//			Task<LocationSettingsResponse> task = client.checkLocationSettings(builder.build());
+//			task.addOnSuccessListener(this, new OnSuccessListener<LocationSettingsResponse>() {
+//				@Override
+//				public void onSuccess(LocationSettingsResponse locationSettingsResponse) {
+//					requestLoc();
+//				}
+//			});
+//
+//			task.addOnFailureListener(this, new OnFailureListener() {
+//				private static final int REQUEST_CHECK_SETTINGS = 0x1;
+//
+//				@Override
+//				public void onFailure(@NonNull Exception e) {
+//					if (e instanceof ResolvableApiException) {
+//						// Location settings are not satisfied, but this can be fixed
+//						// by showing the user a dialog.
+//						try {
+//							// Show the dialog by calling startResolutionForResult(),
+//							// and check the result in onActivityResult().
+//							ResolvableApiException resolvable = (ResolvableApiException) e;
+//							resolvable.startResolutionForResult(user_parceltransaction.this, REQUEST_CHECK_SETTINGS);
+//						} catch (IntentSender.SendIntentException sendEx) {
+//							// Ignore the error.
+//						}
+//					}
+//				}
+//			});
 		}
 	}
-
-	protected void createLocationRequest() {
-		LocationRequest locationRequest = LocationRequest.create();
-		locationRequest.setInterval(10000);
-		locationRequest.setFastestInterval(5000);
-		locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-	}
+//
+//	protected void createLocationRequest() {
+//		LocationRequest locationRequest = LocationRequest.create();
+//		locationRequest.setInterval(10000);
+//		locationRequest.setFastestInterval(5000);
+//		locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+//	}
 
 	@Override
 	protected void onPause() {
