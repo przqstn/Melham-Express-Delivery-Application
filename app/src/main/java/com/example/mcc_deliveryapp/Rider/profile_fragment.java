@@ -88,8 +88,10 @@ public class profile_fragment extends Fragment {
 							df.setRoundingMode(RoundingMode.CEILING);
 
 							String final_rating_string = df.format(final_rating);
-							if (final_rating_string == "NaN"){
+							System.out.println(final_rating_string);
+							if (final_rating_string.equals("-NaN")){
 								rating.setText("N/A");
+
 							}
 							else {
 								rating.setText(final_rating_string);
@@ -147,7 +149,9 @@ public class profile_fragment extends Fragment {
 			@Override
 			public void onClick(View view) {
 				Intent intent = new Intent(view.getContext(), MainActivity2.class);
-				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|
+								Intent.FLAG_ACTIVITY_CLEAR_TASK |
+								Intent.FLAG_ACTIVITY_NEW_TASK);
 				view.getContext().startActivity(intent);
 			}
 		});

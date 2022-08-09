@@ -52,7 +52,7 @@ public class user_profile_fragment extends Fragment {
     private ImageView profile_user;
 
     private ImageButton btn_editProfile;
-    private Button btnRider_Logout;
+    private Button btnUser_Logout;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -60,10 +60,10 @@ public class user_profile_fragment extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_user_profile_fragment, container, false);
         profile_user = view.findViewById(R.id.profile_user);
-        userName = view.findViewById(R.id.user_name);
+        userName = view.findViewById(R.id.txt_name);
         userPhone =  view.findViewById(R.id.user_number);
         btn_editProfile = view.findViewById(R.id.btnUser_EditProfile);
-        btnRider_Logout = view.findViewById(R.id.btnRider_Logout);
+        btnUser_Logout = view.findViewById(R.id.btnUser_Logout);
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
 
@@ -135,11 +135,13 @@ public class user_profile_fragment extends Fragment {
             }
         });
 
-        btnRider_Logout.setOnClickListener(new View.OnClickListener() {
+        btnUser_Logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), MainActivity2.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|
+                                Intent.FLAG_ACTIVITY_CLEAR_TASK |
+                                Intent.FLAG_ACTIVITY_NEW_TASK);
                 view.getContext().startActivity(intent);
             }
         });
