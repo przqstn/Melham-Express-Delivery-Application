@@ -6,9 +6,51 @@
     android:backgroundTint="@color/payment_dialog"
     android:background="@drawable/bottom_sheet_background"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="350dp">
+        android:layout_height="204dp">
+
+        <!--        <TextView-->
+        <!--            android:id="@+id/walletPayment"-->
+        <!--            android:layout_width="300dp"-->
+        <!--            android:layout_height="45dp"-->
+        <!--            android:background="@drawable/borders03"-->
+        <!--            android:backgroundTint="@color/white"-->
+        <!--            android:drawableStart="@drawable/iconwallet"-->
+        <!--            android:drawablePadding="15dp"-->
+        <!--            android:fontFamily="@font/montserrat_medium"-->
+        <!--            android:foregroundGravity="center_vertical"-->
+        <!--            android:padding="10dp"-->
+        <!--            android:text="Wallet"-->
+        <!--            android:textSize="18dp"-->
+        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintHorizontal_bias="0.495"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            app:layout_constraintTop_toBottomOf="@+id/textView5"-->
+        <!--            app:layout_constraintVertical_bias="0.078" />-->
+
+        <!--        <TextView-->
+        <!--            android:id="@+id/onlinePayment"-->
+        <!--            android:layout_width="300dp"-->
+        <!--            android:layout_height="45dp"-->
+        <!--            android:layout_marginBottom="244dp"-->
+        <!--            android:background="@drawable/borders03"-->
+        <!--            android:backgroundTint="@color/white"-->
+        <!--            android:drawableStart="@drawable/iconmobile"-->
+        <!--            android:drawablePadding="15dp"-->
+        <!--            android:fontFamily="@font/montserrat_medium"-->
+        <!--            android:foregroundGravity="center_vertical"-->
+        <!--            android:padding="10dp"-->
+        <!--            android:text="Online Payment"-->
+        <!--            android:textSize="18dp"-->
+        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintHorizontal_bias="0.495"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            app:layout_constraintTop_toBottomOf="@+id/walletPayment"-->
+        <!--            app:layout_constraintVertical_bias="0.06" />-->
 
         <TextView
             android:id="@+id/textView5"
@@ -21,50 +63,10 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.048" />
-
-<!--        <TextView-->
-<!--            android:id="@+id/walletPayment"-->
-<!--            android:layout_width="300dp"-->
-<!--            android:layout_height="45dp"-->
-<!--            android:background="@drawable/borders03"-->
-<!--            android:backgroundTint="@color/white"-->
-<!--            android:drawableStart="@drawable/iconwallet"-->
-<!--            android:drawablePadding="15dp"-->
-<!--            android:fontFamily="@font/montserrat_medium"-->
-<!--            android:foregroundGravity="center_vertical"-->
-<!--            android:padding="10dp"-->
-<!--            android:text="Wallet"-->
-<!--            android:textSize="18dp"-->
-<!--            app:layout_constraintBottom_toBottomOf="parent"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintHorizontal_bias="0.495"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toBottomOf="@+id/textView5"-->
-<!--            app:layout_constraintVertical_bias="0.078" />-->
-
-<!--        <TextView-->
-<!--            android:id="@+id/onlinePayment"-->
-<!--            android:layout_width="300dp"-->
-<!--            android:layout_height="45dp"-->
-<!--            android:layout_marginBottom="244dp"-->
-<!--            android:background="@drawable/borders03"-->
-<!--            android:backgroundTint="@color/white"-->
-<!--            android:drawableStart="@drawable/iconmobile"-->
-<!--            android:drawablePadding="15dp"-->
-<!--            android:fontFamily="@font/montserrat_medium"-->
-<!--            android:foregroundGravity="center_vertical"-->
-<!--            android:padding="10dp"-->
-<!--            android:text="Online Payment"-->
-<!--            android:textSize="18dp"-->
-<!--            app:layout_constraintBottom_toBottomOf="parent"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintHorizontal_bias="0.495"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toBottomOf="@+id/walletPayment"-->
-<!--            app:layout_constraintVertical_bias="0.06" />-->
+            app:layout_constraintVertical_bias="0.087" />
 
         <TextView
             android:id="@+id/cashPayment"
@@ -84,7 +86,7 @@
             app:layout_constraintHorizontal_bias="0.495"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView5"
-            app:layout_constraintVertical_bias="0.28" />
+            app:layout_constraintVertical_bias="0.16" />
 
         <Button
             android:id="@+id/btnPlaceOrder"
