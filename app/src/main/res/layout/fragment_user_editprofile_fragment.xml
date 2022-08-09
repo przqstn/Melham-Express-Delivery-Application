@@ -38,10 +38,10 @@
                     android:layout_gravity="bottom"
                     android:layout_marginStart="35dp"
                     android:layout_marginBottom="24dp"
-                    android:background="@drawable/borderbutton"
+                    android:background="@drawable/profile_ellipse"
                     android:contentDescription="@string/hi_user"
                     android:padding="1dp"
-                    android:src="@drawable/profilepic" />
+                    android:src="@drawable/rounded" />
 
                 <ImageButton
                     android:layout_width="wrap_content"

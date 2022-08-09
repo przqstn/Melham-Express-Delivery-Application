@@ -36,23 +36,23 @@
                     app:srcCompat="@drawable/background" />
 
                 <ImageView
-                    android:layout_width="57dp"
-                    android:layout_height="58dp"
+                    android:layout_width="77dp"
+                    android:layout_height="77dp"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentTop="true"
-                    android:layout_marginLeft="27dp"
-                    android:layout_marginTop="61dp"
-                    android:background="@drawable/borderbutton"/>
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="48dp"
+                    android:background="@drawable/profile_ellipse" />
 
                 <ImageView
                     android:id="@+id/home_logo2"
-                    android:layout_width="53.34dp"
-                    android:layout_height="53.34dp"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentTop="true"
-                    android:layout_marginLeft="28.83dp"
-                    android:layout_marginTop="62.83dp"
-                    android:src="@drawable/profilepic" />
+                    android:layout_marginLeft="22.83dp"
+                    android:layout_marginTop="50.83dp"
+                    android:src="@drawable/rounded" />
 
                 <TextView
                     android:id="@+id/hi_user_2"
