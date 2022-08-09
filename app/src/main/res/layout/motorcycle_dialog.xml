@@ -5,100 +5,129 @@
     android:id="@+id/motorcycle_sheet_dialog"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="300dp"
+    android:layout_height="350dp"
     android:background="@drawable/bottom_sheet_background">
 
 
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="300dp">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
 
-    <TextView
-        android:id="@+id/txtPickUpAdd"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_locations"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="240dp"
+            android:layout_marginHorizontal="25dp"
+            android:gravity="center"
+            android:paddingTop="30dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-        android:layout_width="141dp"
-        android:layout_height="43dp"
-        android:layout_alignParentRight="true"
-        android:layout_marginStart="4dp"
-        android:ellipsize="marquee"
-        android:fadingEdge="horizontal"
-        android:fontFamily="@font/montserrat_medium"
-        android:marqueeRepeatLimit="marquee_forever"
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-        android:text="Pick Up\nAddress Here"
-        android:textColor="@color/black"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/imageView6"
-        app:layout_constraintHorizontal_bias="0.511"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.101" />
+                <TextView
+                    android:id="@+id/txtPickUpAdd"
+                    android:layout_width="wrap_content"
+                    android:maxWidth="130dp"
+                    android:layout_height="50dp"
+                    android:maxLines="2"
+                    android:ellipsize="marquee"
+                    android:fadingEdge="horizontal"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:text="Pick Up\nAddress Here"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/textView17"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/montserrat_regular"
-        android:text="Pick Up"
-        android:textColor="@color/secondary_text"
-        android:textSize="15sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.073"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtPickUpAdd"
-        app:layout_constraintVertical_bias="0.023" />
+                <TextView
+                    android:id="@+id/textView17"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:text="Pick Up"
+                    android:layout_marginVertical="2dp"
+                    android:layout_gravity="start"
+                    android:textColor="@color/secondary_text"
+                    android:textSize="14sp" />
 
-    <TextView
-        android:id="@+id/txtDropOffAdd"
+            </LinearLayout>
 
-        android:layout_width="163dp"
-        android:layout_height="44dp"
-        android:layout_alignParentRight="true"
-        android:layout_marginStart="4dp"
-        android:ellipsize="marquee"
-        android:fadingEdge="horizontal"
-        android:fontFamily="@font/montserrat_medium"
-        android:marqueeRepeatLimit="marquee_forever"
+            <ImageView
+                android:id="@+id/imageView6"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center"
+                android:src="@drawable/arrow"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintVertical_bias="0.2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        android:text="Destination\nAddress Here"
-        android:textColor="@color/black"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.857"
-        app:layout_constraintStart_toEndOf="@+id/imageView6"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.101" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="end"
+                android:gravity="center"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/montserrat_regular"
-        android:text="Destination"
-        android:textColor="@color/secondary_text"
-        android:textSize="15sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.753"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtDropOffAdd"
-        app:layout_constraintVertical_bias="0.018" />
+                <TextView
+                    android:id="@+id/txtDropOffAdd"
+                    android:layout_width="wrap_content"
+                    android:maxWidth="130dp"
+                    android:layout_height="50dp"
+                    android:layout_alignParentRight="true"
+                    android:ellipsize="marquee"
+                    android:fadingEdge="horizontal"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:maxLines="2"
+                    android:text="Destination\nAddress Here"
+                    android:textAlignment="textEnd"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
-    <ImageButton
-        android:id="@+id/btnMotorcycle"
-        android:layout_width="335dp"
-        android:layout_height="90dp"
-        android:background="@drawable/borderbutton"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.571" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="textEnd"
+                    android:layout_gravity="end"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:text="Destination"
+                    android:layout_marginVertical="2dp"
+                    android:textColor="@color/secondary_text"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageButton
+            android:id="@+id/btnMotorcycle"
+            android:layout_width="335dp"
+            android:layout_height="90dp"
+            android:background="@drawable/borderbutton"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layout_locations"
+            app:layout_constraintVertical_bias="0.245" />
 
     <TextView
         android:id="@+id/textView6"
@@ -186,17 +215,6 @@
         app:layout_constraintStart_toStartOf="@+id/btnMotorcycle"
         app:layout_constraintTop_toTopOf="@+id/btnMotorcycle"
         app:layout_constraintVertical_bias="0.422" />
-
-    <ImageView
-        android:id="@+id/imageView6"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:src="@drawable/arrow"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.124" />
 
     <TextView
         android:id="@+id/editTextTextPersonName"
