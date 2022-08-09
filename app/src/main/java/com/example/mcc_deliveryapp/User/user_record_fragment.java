@@ -16,6 +16,7 @@ import com.example.mcc_deliveryapp.R;
 import com.example.mcc_deliveryapp.Rider.model;
 import com.example.mcc_deliveryapp.Rider.record_adapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -26,6 +27,7 @@ import com.google.firebase.database.Query;
 public class user_record_fragment extends Fragment {
     private RecyclerView recyclerView;
     private String userNum, userName;
+    private TabLayout tabLayout;
 
     record_adapter2 adapter; // Create Object of the Adapter class
     DatabaseReference mbase; // Create object of the
@@ -36,6 +38,7 @@ public class user_record_fragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_user_record_fragment, container, false);
+        tabLayout = view.findViewById(R.id.userRecordTab);
 
 
         mbase = FirebaseDatabase.getInstance().getReference().child("userparcel");
@@ -95,7 +98,37 @@ public class user_record_fragment extends Fragment {
         // Connecting Adapter class with the Recycler view*/
         adapter.getUserNum(userNum);
         adapter.getUserName(userName);
-        recyclerView.setAdapter(adapter);
+
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                int position = tab.getPosition();
+
+                if (position == 0)
+                {
+
+                }
+                else if (position == 1)
+                {
+                    recyclerView.setAdapter(adapter);
+
+                }
+                else if (position == 2)
+                {
+                }
+
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+
         return view;
     }
 
