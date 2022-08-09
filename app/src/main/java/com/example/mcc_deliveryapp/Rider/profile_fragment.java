@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -15,6 +16,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.example.mcc_deliveryapp.MainActivity2;
 import com.example.mcc_deliveryapp.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -42,6 +44,7 @@ public class profile_fragment extends Fragment {
 	private ImageView profile_rider;
 
     private ImageButton btn_editProfile;
+	private Button btnRider_Logout;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -56,6 +59,7 @@ public class profile_fragment extends Fragment {
 		RiderNumber =  view.findViewById(R.id.riderNumber);
 		profile_rider = view.findViewById(R.id.profile_user);
 		btn_editProfile = view.findViewById(R.id.btnRider_EditProfile);
+		btnRider_Logout = view.findViewById(R.id.btnRider_Logout);
 		rating = view.findViewById(R.id.txt_ratings);
 
 		DatabaseReference ref = FirebaseDatabase.getInstance().getReference("riders");
@@ -135,6 +139,15 @@ public class profile_fragment extends Fragment {
 				intent.putExtra("name", RiderName.getText().toString());
 				intent.putExtra("vehicletype", RiderVehicle.getText().toString());
 				intent.putExtra("platenumber", RiderPlate.getText().toString());
+				view.getContext().startActivity(intent);
+			}
+		});
+
+		btnRider_Logout.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				Intent intent = new Intent(view.getContext(), MainActivity2.class);
+				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
 				view.getContext().startActivity(intent);
 			}
 		});
