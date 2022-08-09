@@ -238,8 +238,13 @@
         <entry key="..\:/Users/rdrgz/AndroidStudioProjects/MCC Delivery App 2/app/src/main/res/layout/userhome.xml" value="0.14536340852130325" />
         <entry key="..\:/Users/rdrgz/AndroidStudioProjects/MCC Delivery App 2/app/src/main/res/menu/bottom_navrider.xml" value="0.33" />
         <entry key="..\:/Users/rdrgz/AndroidStudioProjects/MCC Delivery App 2/app/src/main/res/menu/bottom_navuser.xml" value="0.14487179487179488" />
+        <entry key="..\:/Users/rdrgz/AndroidStudioProjects/MCC_Delivery_App/app/src/main/res/layout/activity_register_rider.xml" value="0.2962962962962963" />
+        <entry key="..\:/Users/rdrgz/AndroidStudioProjects/MCC_Delivery_App/app/src/main/res/layout/activity_rider_login.xml" value="0.30932971014492755" />
         <entry key="..\:/Users/rdrgz/AndroidStudioProjects/MCC_Delivery_App/app/src/main/res/layout/activity_user_navbar.xml" value="0.276268115942029" />
         <entry key="..\:/Users/rdrgz/AndroidStudioProjects/MCC_Delivery_App/app/src/main/res/layout/activity_user_navigation.xml" value="0.276268115942029" />
+        <entry key="..\:/Users/rdrgz/AndroidStudioProjects/MCC_Delivery_App/app/src/main/res/layout/fragment_sign_in.xml" value="0.4222222222222222" />
+        <entry key="..\:/Users/rdrgz/AndroidStudioProjects/MCC_Delivery_App/app/src/main/res/layout/fragment_sign_up.xml" value="0.30932971014492755" />
+        <entry key="..\:/Users/rdrgz/AndroidStudioProjects/MCC_Delivery_App/app/src/main/res/layout/fragment_update_password.xml" value="0.33" />
         <entry key="..\:/Users/rdrgz/AndroidStudioProjects/MCC_Delivery_App/app/src/main/res/layout/fragment_user_home_fragment.xml" value="0.276268115942029" />
       </map>
     </option>

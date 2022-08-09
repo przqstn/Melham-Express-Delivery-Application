@@ -92,6 +92,25 @@
                     app:passwordToggleEnabled="false" />
             </com.google.android.material.textfield.TextInputLayout>
 
+            <TextView
+                android:id="@+id/forgotPassUser"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/montserrat_medium"
+                android:paddingBottom="10dp"
+                android:text="Forgot Password"
+                android:textAlignment="center"
+                android:textColor="#68B3F9"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.158"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edtTextRiderPassword"
+                app:layout_constraintVertical_bias="0.043" />
+
             <Button
                 android:id="@+id/btn_login"
                 android:layout_width="320dp"

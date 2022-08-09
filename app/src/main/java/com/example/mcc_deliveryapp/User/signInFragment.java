@@ -16,16 +16,16 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.example.mcc_deliveryapp.R;
-import com.example.mcc_deliveryapp.Rider.riderLogin;
-import com.example.mcc_deliveryapp.Rider.rider_dashboard;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -33,15 +33,21 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
 
 public class signInFragment extends Fragment {
     FirebaseAuth mAuth;
 
-    FirebaseDatabase db = FirebaseDatabase.getInstance();
-    DatabaseReference root;
+    FirebaseDatabase db;
 
+    DatabaseReference root;
+    EditText numberUser;
+    Button forgotPassnext, btnVerify, updatePW;
+    TextView forgotPass;
+    String verificationCodeBySystem;
+    Dialog ForgotPW, VerifyNum, UpdatePW;
 
     TextInputLayout login_editTxt_phoneNum, login_editTxt_password;
     Button btn_Login;
@@ -50,12 +56,33 @@ public class signInFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_sign_in, container, false);
-
         login_editTxt_phoneNum = view.findViewById(R.id.edTextPhoneNo);
         login_editTxt_password = view.findViewById(R.id.edTextPass);
         btn_Login = view.findViewById(R.id.btn_login);
+        forgotPass = view.findViewById(R.id.forgotPassUser);
+        ForgotPW = new Dialog(getActivity());
+        ForgotPW.setContentView(R.layout.fragment_forgot_password);
+        ForgotPW.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+        ForgotPW.setCancelable(true);
+        ForgotPW.getWindow().getAttributes().windowAnimations = R.style.animation;
 
+        VerifyNum = new Dialog(getActivity());
+        VerifyNum.setContentView(R.layout.fragment_rider_phonenum_verify);
+        VerifyNum.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+        VerifyNum.setCancelable(true);
+        VerifyNum.getWindow().getAttributes().windowAnimations = R.style.animation;
 
+        UpdatePW = new Dialog(getActivity());
+        UpdatePW.setContentView(R.layout.fragment_update_password);
+        UpdatePW.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+        UpdatePW.setCancelable(true);
+        UpdatePW.getWindow().getAttributes().windowAnimations = R.style.animation;
+        EditText etVerifyCode =  VerifyNum.findViewById(R.id.etVerify);
+
+        btnVerify = VerifyNum.findViewById(R.id.btnVerify);
+        forgotPassnext = ForgotPW.findViewById(R.id.forgotPassnext);
+        numberUser = ForgotPW.findViewById(R.id.forgotNumber);
+        updatePW = UpdatePW.findViewById(R.id.updatePW);
 
         btn_Login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,10 +99,139 @@ public class signInFragment extends Fragment {
                     Toast.makeText(getContext(), "Password is required", Toast.LENGTH_SHORT).show();
 
                 }
-//                name.setText("");
-//                usernum.setText("");
+
             }
 
+        });
+
+        forgotPass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ForgotPW.show();
+
+            }
+        });
+        forgotPassnext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                db = FirebaseDatabase.getInstance();
+                root = db.getReference("users");
+                String userNumF = getTextFromEditText(ForgotPW.findViewById(R.id.forgotNumber));
+                Query accCheck = root.orderByChild("userPhone").equalTo(userNumF);
+                accCheck.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot snapshot) {
+                        if (snapshot.exists()) {
+                            VerifyNum.show();
+                            ForgotPW.dismiss();
+                            sendVerificationCodeToUser(userNumF);
+                        }
+
+                        else{
+                            Toast.makeText(forgotPassnext.getContext(), "Account does not exist.", Toast.LENGTH_SHORT).show();
+
+                        }
+
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
+            }
+
+            private String getTextFromEditText(EditText et)
+            {
+                EditText ett = et;
+                return ett.getText().toString();
+            }
+        });
+
+        btnVerify.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String code = etVerifyCode.getText().toString();
+                if(TextUtils.isEmpty(etVerifyCode.getText().toString()))
+                {
+                    etVerifyCode.setError("Required");
+                    Toast.makeText(getActivity(),"Please Enter The Code.",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                verifyCode(code);
+                VerifyNum.dismiss();
+            }
+        });
+
+        updatePW.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                EditText pwfield = UpdatePW.findViewById(R.id.pwfield2);
+                EditText pwconfirm = UpdatePW.findViewById(R.id.pwConfirm2);
+                String userNumF = getTextFromEditText(ForgotPW.findViewById(R.id.forgotNumber));
+                String password = pwfield.getText().toString();
+                String pwConfirm = pwconfirm.getText().toString();
+                boolean uppercase = !password.equals(password.toLowerCase());
+                boolean lowercase = !password.equals(password.toUpperCase());
+                boolean min6  = password.length() > 5;
+                boolean PWgood = false;
+
+                int digits = 0;
+                int upper = 0;
+
+                for (int i = 0; i < password.length(); i++) {
+                    char ch = password.charAt(i);
+                    if (ch >= 48 && ch <= 57)
+                        digits++;
+                    else if(ch>='A' && ch<='Z'){
+                        upper++;
+                    }
+                }
+                if(!uppercase || !lowercase || !min6 || digits == 0)
+                {
+                    pwfield.setError("Password most have at least 6 characters, one uppercase, lowercase, and number.", null);
+                    pwfield.setBackgroundResource(R.drawable.error_border_edittext);
+
+                }
+
+                else if (min6 && uppercase && lowercase && digits >=1)
+                {
+
+                    if (password.equals(pwConfirm))
+                    {
+                        pwfield.setBackgroundResource(R.drawable.graphics_edittext_1);
+                        pwconfirm.setBackgroundResource(R.drawable.graphics_edittext_1);
+                        PWgood = true;
+                    }
+                    else {
+                        pwconfirm.setError("Passwords do not match", null);
+                        pwfield.setBackgroundResource(R.drawable.error_border_edittext);
+                        pwconfirm.setBackgroundResource(R.drawable.error_border_edittext);
+                    }
+
+                }
+
+                if (PWgood)
+                {
+                    db = FirebaseDatabase.getInstance();
+                    HashMap userInfo = new HashMap();
+                    userInfo.put("userPass",password);
+                    root.child(userNumF).updateChildren(userInfo);
+                    Toast.makeText(getActivity(),"Password Updated",Toast.LENGTH_SHORT).show();
+                    numberUser.setText("");
+                    pwfield.setText("");
+                    pwconfirm.setText("");
+                    UpdatePW.dismiss();
+
+                }
+
+            }
+
+            private String getTextFromEditText(EditText et)
+            {
+                EditText ett = et;
+                return ett.getText().toString();
+            }
         });
         return view;
 
@@ -141,5 +297,63 @@ public class signInFragment extends Fragment {
 
             }
         });
+    }
+    private void sendVerificationCodeToUser(String phoneNo)
+    {
+        PhoneAuthProvider.getInstance().verifyPhoneNumber("+63" + phoneNo,60, TimeUnit.SECONDS, getActivity(),mCallBacks);
+    }
+
+    private PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallBacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks()
+    {
+
+        @Override
+        public void onCodeSent(@NonNull String s, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
+            super.onCodeSent(s, forceResendingToken);
+
+            verificationCodeBySystem = s;
+            Toast.makeText(getActivity(),"Code Sent.",Toast.LENGTH_SHORT).show();
+
+        }
+
+        @Override
+        public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
+
+
+            String code = phoneAuthCredential.getSmsCode();
+            if(code != null)
+            {
+                verifyCode(code);
+            }
+        }
+
+        @Override
+        public void onVerificationFailed(@NonNull FirebaseException e) {
+            Toast.makeText(getActivity(),e.getMessage(),Toast.LENGTH_LONG).show();
+        }
+    };
+
+
+    private void verifyCode(String code)
+    {
+        PhoneAuthCredential credential = PhoneAuthProvider.getCredential(verificationCodeBySystem,code);
+        signInByCredential(credential);
+
+
+    }
+
+    private void signInByCredential(PhoneAuthCredential credential)
+    {
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+        firebaseAuth.signInWithCredential(credential).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if(task.isSuccessful())
+                {
+                    UpdatePW.show();
+
+                }
+            }
+        });
+
     }
 }
