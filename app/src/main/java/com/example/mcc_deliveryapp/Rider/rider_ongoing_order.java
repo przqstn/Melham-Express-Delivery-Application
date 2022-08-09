@@ -123,7 +123,7 @@ public class rider_ongoing_order extends AppCompatActivity {
                         order_id.setText(orderID);
                         vehicletype.setText(vehicleType);
                         usernote.setText(senderNote);
-                        parcelprice.setText(orderPrice);
+                        parcelprice.setText("₱"+orderPrice);
                         order_placed.setText(orderPlaced);
                     }
 

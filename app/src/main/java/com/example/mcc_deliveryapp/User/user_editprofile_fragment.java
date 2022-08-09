@@ -12,7 +12,6 @@ import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -45,17 +44,15 @@ public class user_editprofile_fragment extends AppCompatActivity {
     public static final int CAMERA_PERM_CODE = 2;
     public static final int CAMERA_REQUEST_CODE = 3;
 
-    private String currentPhotoPath, imgName;
     private TextView viewPhoneNum, viewFullName;
-    private EditText editPrimaryAddress, editSecondaryAddress;
+    private String phoneNum, currentPhotoPath, imgName;
     private ImageButton btnUpload;
-    private ImageView profilePic;
     private Uri imageUri;
-    private Button btnSaveChanges;
+    private ImageView profilePic;
+    private Button btnSaveChanges, btnCancel;
     private DatabaseReference root;
     private FirebaseStorage storage;
     private StorageReference storageReference;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,18 +62,18 @@ public class user_editprofile_fragment extends AppCompatActivity {
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
 
-        viewPhoneNum.findViewById(R.id.txt_name);
-        viewFullName.findViewById(R.id.user_number);
-        btnUpload.findViewById(R.id.btn_Upload);
-        profilePic.findViewById(R.id.profile_user);
-        btnSaveChanges.findViewById(R.id.btn_saveChanges);
-        editPrimaryAddress.findViewById(R.id.edit_primary);
-        editSecondaryAddress.findViewById(R.id.edit_secondary);
+        btnUpload = findViewById(R.id.btn_Upload);
+        profilePic = findViewById(R.id.profile_user);
+        btnSaveChanges = findViewById(R.id.btn_saveChanges);
+        btnCancel = findViewById(R.id.btn_cancelChanges);
 
         Intent intent = getIntent();
-        String phoneNum=intent.getStringExtra("userPhone");
+        phoneNum = intent.getStringExtra("userPhone");
+        viewPhoneNum=findViewById(R.id.user_number);
         viewPhoneNum.setText(phoneNum);
-        String fullName=intent.getStringExtra("userFullname");
+
+        String fullName = intent.getStringExtra("userFullname");
+        viewFullName=findViewById(R.id.txt_name);
         viewFullName.setText(fullName);
 
         btnUpload.setOnClickListener(new View.OnClickListener() {
@@ -113,14 +110,10 @@ public class user_editprofile_fragment extends AppCompatActivity {
         btnSaveChanges.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //root= FirebaseDatabase.getInstance().getReference().child("riders");
+                //HashMap hashMap = new HashMap();
 
-                root= FirebaseDatabase.getInstance().getReference().child("users");
-                HashMap hashMap = new HashMap();
-                String primaryAddress=editPrimaryAddress.getEditableText().toString();
-                String secondaryAddress=editSecondaryAddress.getEditableText().toString();
-
-                if(TextUtils.isEmpty(primaryAddress)&&TextUtils.isEmpty(secondaryAddress)
-                        && imageUri==null){
+                if(imageUri==null){
                     final Dialog dialog = new Dialog(btnSaveChanges.getContext());
                     dialog.setContentView(R.layout.saved_dialog);
                     dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -165,12 +158,11 @@ public class user_editprofile_fragment extends AppCompatActivity {
                                 }
                             });
                 }
-                if(!TextUtils.isEmpty(primaryAddress)){
 
-                }
-                if(!TextUtils.isEmpty(secondaryAddress)){
-
-                }
+                /*if(!TextUtils.isEmpty(editAddress.getEditableText().toString())){
+                    hashMap.put("currentaddress", editAddress.getEditableText().toString());
+                    root.child(phoneNum).updateChildren(hashMap);
+                }*/
 
                 final Dialog dialog = new Dialog(btnSaveChanges.getContext());
                 dialog.setContentView(R.layout.saved_dialog);
@@ -188,8 +180,40 @@ public class user_editprofile_fragment extends AppCompatActivity {
 
             }
         });
-    }
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(imageUri!=null) {
+                    final Dialog dialog = new Dialog(btnCancel.getContext());
+                    dialog.setContentView(R.layout.cancel_edit_dialog);
+                    dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                    dialog.getWindow().getAttributes().windowAnimations = R.style.animation;
+                    dialog.setCancelable(false);
+                    Button btnEdit = dialog.findViewById(R.id.btn_backToEdit);
+                    Button btnCancel = dialog.findViewById(R.id.btn_cancelAll);
+                    dialog.show();
+                    btnEdit.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            dialog.dismiss();
+                        }
+                    });
 
+                    btnCancel.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            dialog.dismiss();
+                            onBackPressed();
+                        }
+                    });
+
+                }else{
+                    onBackPressed();
+                }
+            }
+        });
+
+    }
     private void choosePicture() {
         Intent intent = new Intent();
         intent.setType("image/*");

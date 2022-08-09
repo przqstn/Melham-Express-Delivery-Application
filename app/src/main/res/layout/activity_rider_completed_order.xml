@@ -382,13 +382,25 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
 
+                            <de.hdodenhof.circleimageview.CircleImageView
+                                android:id="@+id/rider_profile_completed_order"
+                                android:layout_width="65dp"
+                                android:layout_height="65dp"
+                                android:layout_marginBottom="12dp"
+                                android:background="@drawable/profile_ellipse"
+                                android:textAlignment="textStart"
+                                android:padding="1dp"
+                                android:src="@drawable/rounded" />
+
                             <TextView
                                 android:id="@+id/customer_name"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/montserrat_bold"
                                 android:text="Customer Name Goes Here"
-                                android:textAlignment="center"
+                                android:textAlignment="textStart"
+                                android:paddingStart="70dp"
+                                android:paddingTop="10dp"
                                 android:textColor="@color/black"
                                 android:textSize="18dp"
                                 android:textStyle="bold" />
