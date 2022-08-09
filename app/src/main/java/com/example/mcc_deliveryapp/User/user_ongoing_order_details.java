@@ -2,15 +2,22 @@ package com.example.mcc_deliveryapp.User;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.telephony.SmsManager;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.mcc_deliveryapp.R;
 import com.example.mcc_deliveryapp.Rider.RegisterRider;
@@ -28,7 +35,9 @@ public class user_ongoing_order_details extends AppCompatActivity {
             receiverContact, vehicleType, senderNote, orderPrice;
     TextView senderloc, sendername, sendercontact, receiverloc, receivername, receivercontact,
             order_id, rider_name, vehicletype, usernote, parcelprice, plate_number;
-    Button btn_userOrderCompleted, btn_trackCourier;
+    Button btn_userOrderCompleted, btn_trackCourier, btn_message_courier, btn_call_courier;
+
+    private static final int MY_PERMISSIONS_REQUEST_SEND_SMS =0 ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +63,8 @@ public class user_ongoing_order_details extends AppCompatActivity {
         btn_userOrderCompleted = findViewById(R.id.btn_userOrderCompleted);
         btn_trackCourier = findViewById(R.id.btn_trackCourier);
         plate_number = findViewById(R.id.plate_number);
+        btn_message_courier = findViewById(R.id.message_courier);
+        btn_call_courier = findViewById(R.id.call_courier);
 
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         final DatabaseReference dr = database.getReference().child("userparcel");
@@ -151,6 +162,42 @@ public class user_ongoing_order_details extends AppCompatActivity {
                 intent.putExtra("phonenum", phonenum);
                 intent.putExtra("username", name);
                 intent.putExtra("ridername",  riderName);
+                startActivity(intent);
+            }
+        });
+
+        btn_trackCourier.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(user_ongoing_order_details.this, user_track_rider.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                intent.putExtra("orderID",  orderID);
+                intent.putExtra("phonenum", phonenum);
+                intent.putExtra("username", name);
+                intent.putExtra("ridername",  riderName);
+                startActivity(intent);
+            }
+        });
+
+        btn_message_courier.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String textnum = ridernum;
+                Intent intent = new Intent(Intent.ACTION_SENDTO);
+                intent.setType("vnd.android-dir/mms-sms");
+                intent.setData(Uri.parse("sms:" + textnum));
+                startActivity(intent);
+            }
+        });
+
+
+        btn_call_courier.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                System.out.println("Calling");
+                String callnum = ridernum;
+                Intent intent = new Intent(Intent.ACTION_DIAL);
+                intent.setData(Uri.parse("tel:" + callnum));
                 startActivity(intent);
             }
         });
