@@ -91,7 +91,7 @@ import android.util.Log;
 import com.google.android.gms.location.LocationServices;
 
 
-public class user_parceltransaction extends FragmentActivity implements OnMapReadyCallback, DirectionFinderListener, LocationListener {
+public class user_parceltransaction extends FragmentActivity implements LocationListener, OnMapReadyCallback, DirectionFinderListener {
 
 	GoogleMap mMap;
 	private EditText etOrigin;
@@ -423,7 +423,11 @@ public class user_parceltransaction extends FragmentActivity implements OnMapRea
 	@Override
 	protected void onPause() {
 		super.onPause();
-		locationManager.removeUpdates(this);
+		try {
+			locationManager.removeUpdates(this);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
