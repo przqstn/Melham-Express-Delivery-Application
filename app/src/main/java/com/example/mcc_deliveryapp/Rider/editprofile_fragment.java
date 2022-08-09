@@ -45,9 +45,9 @@ import java.util.HashMap;
 
 public class editprofile_fragment extends AppCompatActivity {
 
-    public static final int CAMERA_REQUEST_CODE = 3;
-    public static final int CAMERA_PERM_CODE = 2;
     public static final int CHOOSE_PICTURE = 1;
+    public static final int CAMERA_PERM_CODE = 2;
+    public static final int CAMERA_REQUEST_CODE = 3;
 
     private Button btnCancel, btnSaveChanges;
     private ImageButton btnUpload;
@@ -55,17 +55,18 @@ public class editprofile_fragment extends AppCompatActivity {
     private TextView viewphoneNum, viewname, viewvehicleType, viewplateNum, viewAddress;
     private DatabaseReference root;
     private String phoneNum, imgName;
-    private Uri imageUri, contentUri;
-    private FirebaseStorage storage = FirebaseStorage.getInstance();
-    private StorageReference storageReference = storage.getReference();
-
-
-    String currentPhotoPath;
+    private Uri imageUri;
+    private FirebaseStorage storage;
+    private StorageReference storageReference;
+    private String currentPhotoPath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_editprofile_fragment);
+
+        storage = FirebaseStorage.getInstance();
+        storageReference = storage.getReference();
 
         btnUpload = findViewById(R.id.btn_upload);
         btnCancel = findViewById(R.id.btn_cancelChanges);
@@ -107,6 +108,7 @@ public class editprofile_fragment extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         choosePicture();
+                        dialog.dismiss();
                     }
                 });
 
@@ -114,6 +116,7 @@ public class editprofile_fragment extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         askCameraPermission();
+                        dialog.dismiss();
                     }
                 });
             }
@@ -125,7 +128,6 @@ public class editprofile_fragment extends AppCompatActivity {
                 root=FirebaseDatabase.getInstance().getReference().child("riders");
                 viewAddress = findViewById(R.id.riderAddress);
                 HashMap hashMap = new HashMap();
-
 
                 if(TextUtils.isEmpty(viewAddress.getEditableText().toString())&&imageUri==null){
                     final Dialog dialog = new Dialog(btnSaveChanges.getContext());
@@ -261,20 +263,12 @@ public class editprofile_fragment extends AppCompatActivity {
         if(requestCode==CHOOSE_PICTURE && resultCode==RESULT_OK && data!=null && data.getData()!=null){
             imageUri=data.getData();
             profilePic.setImageURI(imageUri);
-            System.out.println("choose "+imageUri);
 
         }
         if(requestCode==CAMERA_REQUEST_CODE && resultCode==RESULT_OK){
             File f = new File(currentPhotoPath);
             profilePic.setImageURI(Uri.fromFile(f));
             imageUri=Uri.fromFile(f);
-
-            /*Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
-            contentUri = Uri.fromFile(f);
-            mediaScanIntent.setData(contentUri);
-            this.sendBroadcast(mediaScanIntent);*/
-            System.out.println("take photo "+imageUri+"/"+f.getName());
-
         }
 
         imgName="profile_image.jpg";
