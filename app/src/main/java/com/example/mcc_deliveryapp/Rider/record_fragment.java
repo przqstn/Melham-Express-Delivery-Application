@@ -33,31 +33,16 @@ public class record_fragment extends Fragment {
 			adapter; // Create Object of the Adapter class
 	DatabaseReference mbase; // Create object of the
 	// Firebase Realtime Database
-
+	private TabLayout tabLayout;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 						 Bundle savedInstanceState)
 	{
+
 		View view =  inflater.inflate(R.layout.fragment_record_fragment, container, false);
+		tabLayout = view.findViewById(R.id.riderRecordTab);
 
-		TabLayout tabLayout = (TabLayout) view.findViewById(R.id.courier_tabs); // get the reference of TabLayout
-		tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-			@Override
-			public void onTabSelected(TabLayout.Tab tab) {
-// called when tab selected
-			}
-
-			@Override
-			public void onTabUnselected(TabLayout.Tab tab) {
-// called when tab unselected
-			}
-
-			@Override
-			public void onTabReselected(TabLayout.Tab tab) {
-// called when a tab is reselected
-			}
-		});
 
 		// Create a instance of the database and get
 		// its reference
@@ -105,14 +90,15 @@ public class record_fragment extends Fragment {
 					}
 				});
 
-		// It is a class provide by the FirebaseUI to make a
+
+// It is a class provide by the FirebaseUI to make a
 		// query in the database to fetch appropriate data
 		FirebaseRecyclerOptions<model> options
 				= new FirebaseRecyclerOptions.Builder<model>()
 				.setQuery(FirebaseDatabase.getInstance().getReference()
 						.child("userparcel").orderByChild("parcelstatus")
 						.equalTo("Completed"+riderPhoneNum), model.class)
-						.build();
+				.build();
 
 		// Connecting object of required Adapter class to
 		// the Adapter class itself
@@ -120,7 +106,36 @@ public class record_fragment extends Fragment {
 		adapter.getUserNum(riderPhoneNum);
 		adapter.getUserName(riderName);
 		// Connecting Adapter class with the Recycler view*/
-		recyclerView.setAdapter(adapter);
+		tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+			@Override
+			public void onTabSelected(TabLayout.Tab tab) {
+				int position = tab.getPosition();
+
+				if (position == 0)
+				{
+					recyclerView.setAdapter(adapter);
+					recyclerView.setVisibility(View.VISIBLE);
+
+				}
+				else if (position == 1)
+				{
+					recyclerView.setVisibility(View.GONE);
+				}
+
+			}
+
+			@Override
+			public void onTabUnselected(TabLayout.Tab tab) {
+			}
+
+			@Override
+			public void onTabReselected(TabLayout.Tab tab) {
+
+			}
+		});
+
+
+
 		return view;
 	}
 

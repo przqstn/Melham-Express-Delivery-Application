@@ -28,9 +28,9 @@ public class rider_ongoing_order extends AppCompatActivity {
 
     String name, phonenum, orderID, riderVehicle, senderName, senderLocation, senderContact,
             receiverName, receiverLocation, receiverContact, vehicleType, senderNote, orderPrice,
-            defaultUserNum, customerName;
+            defaultUserNum, customerName, orderPlaced;
     TextView senderloc, sendername, sendercontact, receiverloc, receivername, receivercontact,
-            order_id, vehicletype, usernote, parcelprice, customer_name;
+            order_id, vehicletype, usernote, parcelprice, customer_name, order_placed;
     Button btn_CompleteOrder, btn_cancelOrderRider, btn_MessageCustomer, btn_CallCustomer;
 
     @Override
@@ -55,6 +55,7 @@ public class rider_ongoing_order extends AppCompatActivity {
         usernote = findViewById(R.id.note_rider2);
         parcelprice = findViewById(R.id.txt_price2);
         customer_name = findViewById(R.id.customer_name);
+        order_placed = findViewById(R.id.order_placed);
         btn_MessageCustomer = findViewById(R.id.message_customer);
         btn_CallCustomer = findViewById(R.id.call_customer);
         btn_CompleteOrder = findViewById(R.id.btn_completeOrder);
@@ -78,6 +79,7 @@ public class rider_ongoing_order extends AppCompatActivity {
                         vehicleType = dataSnapshot.child("vehicletype").getValue(String.class);
                         senderNote = dataSnapshot.child("customernotes").getValue(String.class);
                         orderPrice = dataSnapshot.child("fee").getValue(String.class);
+                        orderPlaced = dataSnapshot.child("DatePlace").getValue(String.class);
                         defaultUserNum = dataSnapshot.child("defaultUserNum").getValue(String.class);
 
                         final FirebaseDatabase database2 = FirebaseDatabase.getInstance();
@@ -122,6 +124,7 @@ public class rider_ongoing_order extends AppCompatActivity {
                         vehicletype.setText(vehicleType);
                         usernote.setText(senderNote);
                         parcelprice.setText(orderPrice);
+                        order_placed.setText(orderPlaced);
                     }
 
                     @Override

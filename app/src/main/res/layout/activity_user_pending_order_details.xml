@@ -55,10 +55,293 @@
                 android:orientation="vertical">
 
                 <androidx.cardview.widget.CardView
+                android:layout_width="340dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                app:cardUseCompatPadding="true">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center_horizontal">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="#223272"
+                            android:fontFamily="@font/montserrat_bold"
+                            android:padding="10dp"
+                            android:text="Pending"
+                            android:textAlignment="textStart"
+                            android:textColor="@color/white"
+                            android:textSize="15dp" />
+
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <RelativeLayout
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal">
+
+                    <RelativeLayout
+                        android:id="@+id/sender_details"
+                        android:layout_width="300dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="50dp"
+                        android:padding="5dp">
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@drawable/pickup" />
+
+                        <TextView
+                            android:id="@+id/sender_loc2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:fontFamily="@font/montserrat_medium"
+                            android:text="Sender Location"
+                            android:textColor="@color/black" />
+
+                        <TextView
+                            android:id="@+id/sender_name_text2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/sender_loc2"
+                            android:layout_marginLeft="20dp"
+                            android:fontFamily="@font/montserrat_medium"
+                            android:text="Sender name: "
+                            android:textColor="@color/black"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/sender_name2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/sender_loc2"
+                            android:layout_toRightOf="@id/sender_name_text2"
+                            android:fontFamily="@font/montserrat_regular"
+                            android:text="Sender name"
+                            android:textColor="@color/black" />
+
+                        <TextView
+                            android:id="@+id/sender_contact_text2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/sender_name_text2"
+                            android:layout_marginLeft="20dp"
+                            android:fontFamily="@font/montserrat_medium"
+                            android:text="Sender Contact: "
+                            android:textColor="@color/black"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/sender_contact2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/sender_name2"
+                            android:layout_toRightOf="@id/sender_contact_text2"
+                            android:fontFamily="@font/montserrat_regular"
+                            android:text="Sender Contact"
+                            android:textColor="@color/black" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/receiver_details"
+                        android:layout_width="300dp"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/sender_details"
+                        android:layout_gravity="center_horizontal"
+                        android:padding="5dp">
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@drawable/location" />
+
+                        <TextView
+                            android:id="@+id/receiver_loc2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:fontFamily="@font/montserrat_medium"
+                            android:text="Receiver Location"
+                            android:textColor="@color/black" />
+
+                        <TextView
+                            android:id="@+id/receiver_name_text2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/receiver_loc2"
+                            android:layout_marginLeft="20dp"
+                            android:fontFamily="@font/montserrat_medium"
+                            android:text="Receiver Name: "
+                            android:textColor="@color/black"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/receiver_name2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/receiver_loc2"
+                            android:layout_toRightOf="@id/receiver_name_text2"
+                            android:fontFamily="@font/montserrat_regular"
+                            android:text="Receiver name"
+                            android:textColor="@color/black" />
+
+                        <TextView
+                            android:id="@+id/receiver_contact_text2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/receiver_name_text2"
+                            android:layout_marginLeft="20dp"
+                            android:fontFamily="@font/montserrat_medium"
+                            android:text="Receiver Contact: "
+                            android:textColor="@color/black"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/receiver_contact2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/receiver_name_text2"
+                            android:layout_toRightOf="@id/receiver_contact_text2"
+                            android:fontFamily="@font/montserrat_regular"
+                            android:text="Receiver Contact"
+                            android:textColor="@color/black" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/ID_price_separator"
+                        android:layout_width="match_parent"
+                        android:layout_height="5dp"
+                        android:layout_below="@+id/receiver_details"
+                        android:layout_marginTop="10dp">
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_gravity="center_horizontal">
+
+                            <LinearLayout
+                                android:layout_width="290dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="#9F9F9F"
+                                    android:fontFamily="@font/montserrat_bold"
+                                    android:textAlignment="center"
+                                    android:textColor="@color/white"
+                                    android:textSize="1dp" />
+
+                            </LinearLayout>
+                        </androidx.cardview.widget.CardView>
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/orderID_details"
+                        android:layout_width="300dp"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/ID_price_separator"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="10dp"
+                        android:padding="5dp">
+
+                        <TextView
+                            android:id="@+id/orderID_text2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/montserrat_medium"
+                            android:text="ORDER ID: "
+                            android:textColor="@color/black"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/parcelorder_ID2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/txt_receiver_loc"
+                            android:layout_toRightOf="@id/orderID_text2"
+                            android:fontFamily="@font/montserrat_regular"
+                            android:text="Parcel Order ID"
+                            android:textColor="@color/black" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/price_details"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/orderID_details"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="10dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:id="@+id/price_text"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:fontFamily="@font/montserrat_medium"
+                                    android:padding="10dp"
+                                    android:text="Order Total:"
+                                    android:textAlignment="center"
+                                    android:textColor="@color/black"
+                                    android:textSize="16dp" />
+
+                                <TextView
+                                    android:id="@+id/txt_price2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_toRightOf="@+id/price_text"
+                                    android:fontFamily="@font/montserrat_medium"
+                                    android:padding="10dp"
+                                    android:text="Price : 0.00"
+                                    android:textAlignment="center"
+                                    android:textColor="@color/black"
+                                    android:textSize="16dp" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </RelativeLayout>
+
+                </RelativeLayout>
+
+            </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
                     android:layout_width="340dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    app:cardCornerRadius="10dp"
+                    android:layout_marginTop="10dp"
                     app:cardUseCompatPadding="true">
 
                     <androidx.cardview.widget.CardView
@@ -77,8 +360,8 @@
                                 android:background="#223272"
                                 android:fontFamily="@font/montserrat_bold"
                                 android:padding="10dp"
-                                android:text="Ongoing Order"
-                                android:textAlignment="center"
+                                android:text="Courier Details"
+                                android:textAlignment="textStart"
                                 android:textColor="@color/white"
                                 android:textSize="15dp" />
 
@@ -89,216 +372,81 @@
                     <RelativeLayout
                         android:layout_width="300dp"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal">
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="45dp"
+                        android:layout_marginBottom="15dp"
+                        android:padding="5dp">
 
                         <RelativeLayout
-                            android:id="@+id/sender_details"
-                            android:layout_width="300dp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:layout_marginTop="50dp"
-                            android:padding="5dp">
-
-                            <ImageView
-                                android:layout_width="20dp"
-                                android:layout_height="20dp"
-                                android:src="@drawable/pickup" />
-
-                            <TextView
-                                android:id="@+id/sender_loc2"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="20dp"
-                                android:fontFamily="@font/montserrat_medium"
-                                android:text="Sender Location"
-                                android:textColor="@color/black" />
-
-                            <TextView
-                                android:id="@+id/sender_name_text2"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_below="@id/sender_loc2"
-                                android:fontFamily="@font/montserrat_medium"
-                                android:text="Sender name: "
-                                android:textColor="@color/black"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:id="@+id/sender_name2"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_below="@id/sender_loc2"
-                                android:layout_toRightOf="@id/sender_name_text2"
-                                android:fontFamily="@font/montserrat_regular"
-                                android:text="Sender name"
-                                android:textColor="@color/black" />
-
-                            <TextView
-                                android:id="@+id/sender_contact_text2"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_below="@id/sender_name_text2"
-                                android:fontFamily="@font/montserrat_medium"
-                                android:text="Sender Contact: "
-                                android:textColor="@color/black"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:id="@+id/sender_contact2"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_below="@id/sender_name2"
-                                android:layout_toRightOf="@id/sender_contact_text2"
-                                android:fontFamily="@font/montserrat_regular"
-                                android:text="Sender Contact"
-                                android:textColor="@color/black" />
-                        </RelativeLayout>
-
-                        <RelativeLayout
-                            android:id="@+id/receiver_details"
-                            android:layout_width="300dp"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@+id/sender_details"
-                            android:layout_gravity="center_horizontal"
-                            android:padding="5dp">
-
-                            <ImageView
-                                android:layout_width="20dp"
-                                android:layout_height="20dp"
-                                android:src="@drawable/location" />
-
-                            <TextView
-                                android:id="@+id/receiver_loc2"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="20dp"
-                                android:fontFamily="@font/montserrat_medium"
-                                android:text="Receiver Location"
-                                android:textColor="@color/black" />
-
-                            <TextView
-                                android:id="@+id/receiver_name_text2"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_below="@id/receiver_loc2"
-                                android:fontFamily="@font/montserrat_medium"
-                                android:text="Receiver Name: "
-                                android:textColor="@color/black"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:id="@+id/receiver_name2"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_below="@id/receiver_loc2"
-                                android:layout_toRightOf="@id/receiver_name_text2"
-                                android:fontFamily="@font/montserrat_regular"
-                                android:text="Receiver name"
-                                android:textColor="@color/black" />
-
-                            <TextView
-                                android:id="@+id/receiver_contact_text2"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_below="@id/receiver_name_text2"
-                                android:fontFamily="@font/montserrat_medium"
-                                android:text="Receiver Contact: "
-                                android:textColor="@color/black"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:id="@+id/receiver_contact2"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_below="@id/receiver_name_text2"
-                                android:layout_toRightOf="@id/receiver_contact_text2"
-                                android:fontFamily="@font/montserrat_regular"
-                                android:text="Receiver Contact"
-                                android:textColor="@color/black" />
-
-                        </RelativeLayout>
-
-                        <RelativeLayout
-                            android:id="@+id/orderID_details"
-                            android:layout_width="300dp"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@+id/receiver_details"
-                            android:layout_gravity="center_horizontal"
-                            android:layout_marginTop="10dp"
-                            android:padding="5dp">
-
-                            <TextView
-                                android:id="@+id/orderID_text2"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/montserrat_medium"
-                                android:text="Order ID: "
-                                android:textColor="@color/black"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:id="@+id/parcelorder_ID2"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_below="@id/txt_receiver_loc"
-                                android:layout_toRightOf="@id/orderID_text2"
-                                android:fontFamily="@font/montserrat_regular"
-                                android:text="Parcel Order ID"
-                                android:textColor="@color/black" />
-                        </RelativeLayout>
-
-                        <RelativeLayout
-                            android:id="@+id/ID_price_separator"
+                            android:id="@+id/courier_details"
                             android:layout_width="match_parent"
-                            android:layout_height="5dp"
-                            android:layout_below="@+id/orderID_details"
-                            android:layout_marginTop="5dp">
-
-                            <androidx.cardview.widget.CardView
-                                android:layout_width="match_parent"
-                                android:layout_height="40dp"
-                                android:layout_gravity="center_horizontal">
-
-                                <LinearLayout
-                                    android:layout_width="290dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center_horizontal">
-
-                                    <TextView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:background="#9F9F9F"
-                                        android:fontFamily="@font/montserrat_bold"
-                                        android:textAlignment="center"
-                                        android:textColor="@color/white"
-                                        android:textSize="5dp" />
-
-                                </LinearLayout>
-
-                            </androidx.cardview.widget.CardView>
-                        </RelativeLayout>
-
-                        <RelativeLayout
-                            android:id="@+id/price_details"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@id/ID_price_separator"
-                            android:layout_gravity="center_horizontal"
-                            android:layout_marginTop="5dp">
+                            android:layout_height="wrap_content">
 
                             <TextView
-                                android:id="@+id/txt_price2"
+                                android:id="@+id/rider_name"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_gravity="right"
-                                android:fontFamily="@font/montserrat_medium"
-                                android:padding="10dp"
-                                android:text="Price : 0.00"
+                                android:fontFamily="@font/montserrat_bold"
+                                android:text="Waiting for a Courier..."
                                 android:textAlignment="center"
                                 android:textColor="@color/black"
-                                android:textSize="15dp" />
+                                android:textSize="18dp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/vehicle_details"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/rider_name"
+                                android:fontFamily="@font/montserrat_regular"
+                                android:text="Vehicle Details Go Here"
+                                android:textAlignment="center"
+                                android:textColor="@color/black"
+                                android:textStyle="bold" />
 
                         </RelativeLayout>
+
+                    </RelativeLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="345dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="5dp"
+                    app:cardBackgroundColor="@android:color/transparent"
+                    app:cardCornerRadius="10dp"
+                    app:cardUseCompatPadding="true">
+
+
+                    <RelativeLayout
+                        android:layout_width="300dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:padding="5dp">
+
+                        <TextView
+                            android:id="@+id/order_placed_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/receiver_loc2"
+                            android:fontFamily="@font/montserrat_medium"
+                            android:text="Order Placed: "
+                            android:textColor="@color/black"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/order_placed"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/receiver_loc2"
+                            android:layout_toRightOf="@id/order_placed_text"
+                            android:fontFamily="@font/montserrat_regular"
+                            android:text="Date/Time Goes Here"
+                            android:textColor="@color/black" />
 
                     </RelativeLayout>
 
@@ -308,7 +456,6 @@
                     android:layout_width="340dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    app:cardCornerRadius="10dp"
                     app:cardUseCompatPadding="true">
 
                     <androidx.cardview.widget.CardView
@@ -328,7 +475,7 @@
                                 android:fontFamily="@font/montserrat_bold"
                                 android:padding="10dp"
                                 android:text="Remarks"
-                                android:textAlignment="center"
+                                android:textAlignment="textStart"
                                 android:textColor="@color/white"
                                 android:textSize="15dp" />
 
