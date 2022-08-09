@@ -29,6 +29,8 @@ import com.google.firebase.storage.StorageReference;
 
 import java.io.File;
 import java.io.IOException;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 
 public class profile_fragment extends Fragment {
 	TextView RiderName, RiderVehicle, RiderPlate, RiderAddress, RiderNumber, rating;
@@ -77,8 +79,11 @@ public class profile_fragment extends Fragment {
 						if (ds.child("rate_total").getValue(float.class) != null){
 							total = ds.child("rate_total").getValue(float.class);
 							count = ds.child("rate_count").getValue(float.class);
-							float final_rating = total/count;
-							String final_rating_string = String.valueOf(final_rating);
+							double final_rating = total/count;
+							DecimalFormat df = new DecimalFormat("#.##");
+							df.setRoundingMode(RoundingMode.CEILING);
+
+							String final_rating_string = df.format(final_rating);
 							if (final_rating_string == "NaN"){
 								rating.setText("N/A");
 							}
