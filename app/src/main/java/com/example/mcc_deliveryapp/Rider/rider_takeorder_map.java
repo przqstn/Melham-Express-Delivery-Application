@@ -2,10 +2,8 @@ package com.example.mcc_deliveryapp.Rider;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -19,14 +17,10 @@ import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.PowerManager;
-import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -38,9 +32,6 @@ import com.example.mcc_deliveryapp.R;
 import com.example.mcc_deliveryapp.User.Module.DirectionFinder;
 import com.example.mcc_deliveryapp.User.Module.DirectionFinderListener;
 import com.example.mcc_deliveryapp.User.Module.Route;
-import com.example.mcc_deliveryapp.User.user_navigation;
-import com.example.mcc_deliveryapp.User.user_parceltransaction;
-import com.example.mcc_deliveryapp.User.user_track_rider;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -53,8 +44,6 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -67,9 +56,9 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 
 public class rider_takeorder_map extends FragmentActivity implements OnMapReadyCallback, DirectionFinderListener {
     String name, phonenum, orderID, riderVehicle;
@@ -105,7 +94,7 @@ public class rider_takeorder_map extends FragmentActivity implements OnMapReadyC
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
-        mapFragment.getMapAsync((OnMapReadyCallback) this);
+        Objects.requireNonNull(mapFragment).getMapAsync((OnMapReadyCallback) this);
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, PackageManager.PERMISSION_GRANTED);
 
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("userparcel");
@@ -124,12 +113,12 @@ public class rider_takeorder_map extends FragmentActivity implements OnMapReadyC
         checkOrderID.addChildEventListener(
                 new ChildEventListener() {
                     @Override
-                    public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                    public void onChildAdded(@NonNull DataSnapshot dataSnapshot, String s) {
 
-                        String[] splitStart = dataSnapshot.child("startLocation").getValue(String.class).split(",");
+                        String[] splitStart = Objects.requireNonNull(dataSnapshot.child("startLocation").getValue(String.class)).split(",");
                         startLocation = new LatLng(Double.parseDouble(splitStart[0]),Double.parseDouble(splitStart[1]));
 
-                        String[] endStart = dataSnapshot.child("endLocation").getValue(String.class).split(",");
+                        String[] endStart = Objects.requireNonNull(dataSnapshot.child("endLocation").getValue(String.class)).split(",");
                         endLocation = new LatLng(Double.parseDouble(endStart[0]),Double.parseDouble(endStart[1]));
                     }
 
@@ -163,20 +152,20 @@ public class rider_takeorder_map extends FragmentActivity implements OnMapReadyC
 
                 mMap.clear();
                 for (DataSnapshot locationSnapshot : dataSnapshot.getChildren()) {
-                    if (locationSnapshot.child("riderphone").getValue().equals(phonenum)) {
-                        String latitude = locationSnapshot.child("latitude").getValue().toString();
+                    if (Objects.requireNonNull(locationSnapshot.child("riderphone").getValue()).equals(phonenum)) {
+                        String latitude = Objects.requireNonNull(locationSnapshot.child("latitude").getValue()).toString();
                         latitudes.add(latitude);
                     }
                 }
                 for (DataSnapshot locationSnapshot : dataSnapshot.getChildren()) {
-                    if (locationSnapshot.child("riderphone").getValue().equals(phonenum)) {
-                        String longitude = locationSnapshot.child("longitude").getValue().toString();
+                    if (Objects.requireNonNull(locationSnapshot.child("riderphone").getValue()).equals(phonenum)) {
+                        String longitude = Objects.requireNonNull(locationSnapshot.child("longitude").getValue()).toString();
                         longitudes.add(longitude);
                     }
                 }
                 for (DataSnapshot locationSnapshot : dataSnapshot.getChildren()) {
-                    if (locationSnapshot.child("riderphone").getValue().equals(phonenum)) {
-                        String riderphone = locationSnapshot.child("riderphone").getValue().toString();
+                    if (Objects.requireNonNull(locationSnapshot.child("riderphone").getValue()).equals(phonenum)) {
+                        String riderphone = Objects.requireNonNull(locationSnapshot.child("riderphone").getValue()).toString();
                         riderphonenum.add(riderphone);
                     }
                 }
@@ -348,7 +337,7 @@ public class rider_takeorder_map extends FragmentActivity implements OnMapReadyC
     }
 
     @Override
-    public void onMapReady(GoogleMap googleMap) {
+    public void onMapReady(@NonNull GoogleMap googleMap) {
         mMap = googleMap;
         mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(getApplicationContext(), R.raw.customize_maps_style));
 
