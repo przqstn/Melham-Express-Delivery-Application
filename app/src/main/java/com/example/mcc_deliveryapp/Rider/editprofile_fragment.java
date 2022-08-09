@@ -1,20 +1,18 @@
 package com.example.mcc_deliveryapp.Rider;
 
 import android.Manifest;
-import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -39,40 +37,38 @@ import com.google.firebase.storage.UploadTask;
 
 import java.io.File;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 
 public class editprofile_fragment extends AppCompatActivity {
 
-    public static final int CAMERA_REQUEST_CODE = 3;
-    public static final int CAMERA_PERM_CODE = 2;
     public static final int CHOOSE_PICTURE = 1;
+    public static final int CAMERA_PERM_CODE = 2;
+    public static final int CAMERA_REQUEST_CODE = 3;
 
     private Button btnCancel, btnSaveChanges;
     private ImageButton btnUpload;
     private ImageView profilePic;
-    private TextView viewphoneNum, viewname, viewvehicleType, viewplateNum, viewAddress;
+    private TextView viewphoneNum, viewname, viewvehicleType, viewplateNum;
+    private EditText editAddress;
     private DatabaseReference root;
     private String phoneNum, imgName;
     private Uri imageUri;
     private FirebaseStorage storage;
     private StorageReference storageReference;
-
-    private Bitmap bitmap;
-
-
-    String currentPhotoPath;
+    private String currentPhotoPath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_editprofile_fragment);
 
+        storage = FirebaseStorage.getInstance();
+        storageReference = storage.getReference();
+
         btnUpload = findViewById(R.id.btn_upload);
         btnCancel = findViewById(R.id.btn_cancelChanges);
         btnSaveChanges = findViewById(R.id.btn_saveChanges);
-        viewAddress = findViewById(R.id.riderAddress);
+        editAddress = findViewById(R.id.riderAddress);
         profilePic = findViewById(R.id.profile_user);
 
         Intent intent = getIntent();
@@ -95,10 +91,7 @@ public class editprofile_fragment extends AppCompatActivity {
         btnUpload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*storage=FirebaseStorage.getInstance();
-                storageReference=storage.getReference();
-                choosePicture();
-                System.out.println("hello");*/
+
                 final Dialog dialog = new Dialog(btnUpload.getContext());
                 dialog.setContentView(R.layout.upload_photo_fragment);
                 dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -111,9 +104,8 @@ public class editprofile_fragment extends AppCompatActivity {
                 btn_Upload.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        storage=FirebaseStorage.getInstance();
-                        storageReference=storage.getReference();
                         choosePicture();
+                        dialog.dismiss();
                     }
                 });
 
@@ -121,6 +113,7 @@ public class editprofile_fragment extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         askCameraPermission();
+                        dialog.dismiss();
                     }
                 });
             }
@@ -130,11 +123,10 @@ public class editprofile_fragment extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 root=FirebaseDatabase.getInstance().getReference().child("riders");
-                viewAddress = findViewById(R.id.riderAddress);
+                editAddress = findViewById(R.id.riderAddress);
                 HashMap hashMap = new HashMap();
 
-
-                if(TextUtils.isEmpty(viewAddress.getEditableText().toString())&&imageUri==null){
+                if(TextUtils.isEmpty(editAddress.getEditableText().toString())&&imageUri==null){
                     final Dialog dialog = new Dialog(btnSaveChanges.getContext());
                     dialog.setContentView(R.layout.saved_dialog);
                     dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -180,8 +172,8 @@ public class editprofile_fragment extends AppCompatActivity {
                             });
                 }
 
-                if(!TextUtils.isEmpty(viewAddress.getEditableText().toString())){
-                    hashMap.put("currentaddress", viewAddress.getEditableText().toString());
+                if(!TextUtils.isEmpty(editAddress.getEditableText().toString())){
+                    hashMap.put("currentaddress", editAddress.getEditableText().toString());
                     root.child(phoneNum).updateChildren(hashMap);
                 }
                 final Dialog dialog = new Dialog(btnSaveChanges.getContext());
@@ -204,7 +196,7 @@ public class editprofile_fragment extends AppCompatActivity {
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!TextUtils.isEmpty(viewAddress.getEditableText().toString())||imageUri!=null) {
+                if(!TextUtils.isEmpty(editAddress.getEditableText().toString())||imageUri!=null) {
                     final Dialog dialog = new Dialog(btnCancel.getContext());
                     dialog.setContentView(R.layout.cancel_edit_dialog);
                     dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -256,16 +248,10 @@ public class editprofile_fragment extends AppCompatActivity {
             if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
                 dispatchTakePictureIntent();
             }else{
+
             }
         }
     }
-    /*
-    private void openCamera() {
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        startActivityForResult(intent, 3);
-    }*/
-
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -273,26 +259,27 @@ public class editprofile_fragment extends AppCompatActivity {
         if(requestCode==CHOOSE_PICTURE && resultCode==RESULT_OK && data!=null && data.getData()!=null){
             imageUri=data.getData();
             profilePic.setImageURI(imageUri);
-        }
-        if(requestCode==CAMERA_REQUEST_CODE && resultCode==RESULT_OK && data!=null && data.getData()!=null){
-            File f = new File(currentPhotoPath);
-            imageUri = Uri.fromFile(f);
-            profilePic.setImageURI(imageUri);
 
         }
+        if(requestCode==CAMERA_REQUEST_CODE && resultCode==RESULT_OK){
+            File f = new File(currentPhotoPath);
+            profilePic.setImageURI(Uri.fromFile(f));
+            imageUri=Uri.fromFile(f);
+        }
+
         imgName="profile_image.jpg";
     }
 
 
     private File createImageFile() throws IOException{
         //Create an image file name
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        String imageFileName = "JPEG_" +timeStamp + "_";
-        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        //String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String imageFileName = "profile_image";
+        //File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         File image = File.createTempFile(
                 imageFileName, //prefix
-                ".jpg", //suffix
-                storageDir   //directory
+                ".jpg" //suffix
+               // storageDir   //directory
         );
 
         //Save a file: path for use with ACTION_VIEW  intents
@@ -313,10 +300,10 @@ public class editprofile_fragment extends AppCompatActivity {
 
             }
             if(photoFile != null){
-                Uri photoUri = FileProvider.getUriForFile(this,
+                Uri photoURI = FileProvider.getUriForFile(this,
                         "com.example.android.fileprovider",
                         photoFile);
-                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
+                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
                 startActivityForResult(takePictureIntent, CAMERA_REQUEST_CODE);
             }
         }

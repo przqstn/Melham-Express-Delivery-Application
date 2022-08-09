@@ -3,6 +3,7 @@ package com.example.mcc_deliveryapp.Rider;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -21,10 +22,10 @@ public class rider_completed_order extends AppCompatActivity {
 
 
     String name, phonenum, orderID, riderVehicle, senderName, senderLocation, senderContact,
-            receiverName, receiverLocation, receiverContact, vehicleType, senderNote, orderPrice;
+            receiverName, receiverLocation, receiverContact, vehicleType, senderNote, orderPrice,
+            defaultUserNum, customer_Name, orderPlaced;
     TextView senderloc, sendername, sendercontact, receiverloc, receivername, receivercontact,
-            order_id, vehicletype, usernote, parcelprice;
-    Button btn_takeOrder;
+            order_id, vehicletype, usernote, parcelprice, customerName, order_placed;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +48,8 @@ public class rider_completed_order extends AppCompatActivity {
         vehicletype = findViewById(R.id.vehicle2);
         usernote = findViewById(R.id.note_rider2);
         parcelprice = findViewById(R.id.txt_price2);
-        btn_takeOrder = findViewById(R.id.btn_completeOrder);
+        order_placed = findViewById(R.id.order_placed);
+        customerName = findViewById(R.id.customer_name);
 
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         final DatabaseReference dr = database.getReference().child("userparcel");
@@ -67,6 +69,42 @@ public class rider_completed_order extends AppCompatActivity {
                         vehicleType = dataSnapshot.child("vehicletype").getValue(String.class);
                         senderNote = dataSnapshot.child("customernotes").getValue(String.class);
                         orderPrice = dataSnapshot.child("fee").getValue(String.class);
+                        orderPlaced = dataSnapshot.child("DatePlace").getValue(String.class);
+                        defaultUserNum = dataSnapshot.child("defaultUserNum").getValue(String.class);
+
+                        final FirebaseDatabase database2 = FirebaseDatabase.getInstance();
+                        final DatabaseReference dr2 = database2.getReference().child("users");
+                        Query query = dr2.orderByChild("userPhone").equalTo(defaultUserNum);
+
+                        query.addChildEventListener(
+                                new ChildEventListener() {
+                                    @SuppressLint("SetTextI18n")
+                                    @Override
+                                    public void onChildAdded(@NonNull DataSnapshot dataSnapshot, String s) {
+                                        customer_Name = dataSnapshot.child("userFullname").getValue(String.class);
+                                        customerName.setText(customer_Name);
+                                    }
+
+                                    @Override
+                                    public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+                                    }
+
+                                    @Override
+                                    public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
+
+                                    }
+
+                                    @Override
+                                    public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                                    }
+                                });
+
+
                         sendername.setText(senderName);
                         senderloc.setText(senderLocation);
                         sendercontact.setText(senderContact);
@@ -77,6 +115,7 @@ public class rider_completed_order extends AppCompatActivity {
                         vehicletype.setText(vehicleType);
                         usernote.setText(senderNote);
                         parcelprice.setText(orderPrice);
+                        order_placed.setText(orderPlaced);
                     }
 
                     @Override

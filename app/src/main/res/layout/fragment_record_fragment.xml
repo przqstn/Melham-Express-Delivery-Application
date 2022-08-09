@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,273 +8,40 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Rider.record_fragment">
 
-    <RelativeLayout
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/riderRecordTab"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:ignore="MissingConstraints">
+        android:layout_height="wrap_content">
 
-        <LinearLayout
-            android:id="@+id/courier_tabs_layout"
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Completed" />
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cancelled" />
+
+    </com.google.android.material.tabs.TabLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="550dp"
+        android:layout_below="@+id/courier_tabs_layout"
+        android:layout_gravity="center|top"
+        android:layout_marginTop="50dp"
+        android:orientation="vertical">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_record"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <com.google.android.material.tabs.TabLayout
-                android:id="@+id/courier_tabs"
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent">
+    </LinearLayout>
 
-                <com.google.android.material.tabs.TabItem
-                    android:id="@+id/courier_tab1"
-                    android:text="Completed"
-                    android:layout_height="300dp"
-                    android:layout_width="match_parent"/>
-
-                <com.google.android.material.tabs.TabItem
-                    android:text="Canceled"
-                    android:layout_height="300dp"
-                    android:layout_width="match_parent"/>
-
-            </com.google.android.material.tabs.TabLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_below="@+id/courier_tabs_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler_record"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-        </LinearLayout>
-
-    </RelativeLayout>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
-
-
-<!--    <ScrollView-->
-<!--        android:layout_width="410dp"-->
-<!--        android:layout_height="598dp"-->
-<!--        android:layout_marginBottom="30dp"-->
-<!--        android:paddingBottom="20dp"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        app:layout_constraintVertical_bias="0.178">-->
-
-<!--        <LinearLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginLeft="30dp"-->
-<!--            android:layout_marginRight="30dp"-->
-<!--            android:orientation="vertical">-->
-
-<!--            <Button-->
-<!--                android:id="@+id/btn_pckup"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="48dp"-->
-<!--                android:backgroundTint="@color/button_color1"-->
-<!--                android:drawableRight="@drawable/questionmark"-->
-<!--                android:fontFamily="@font/montserrat_semibold"-->
-<!--                android:text="(KM) Go Pick Up Now"-->
-<!--                android:textColor="#FFFFFF"-->
-<!--                tools:layout_editor_absoluteX="0dp"-->
-<!--                tools:layout_editor_absoluteY="16dp" />-->
-
-<!--            <TextView-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="41dp"-->
-<!--                android:drawableLeft="@drawable/pckuppoint"-->
-<!--                android:fontFamily="@font/montserrat_medium"-->
-<!--                android:gravity="center_vertical"-->
-<!--                android:text="   Location"-->
-<!--                android:textColor="@color/black"-->
-<!--                android:textSize="15dp"-->
-<!--                tools:layout_editor_absoluteX="25dp"-->
-<!--                tools:layout_editor_absoluteY="329dp" />-->
-
-<!--            <TextView-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="43dp"-->
-<!--                android:drawableLeft="@drawable/locationpin"-->
-<!--                android:fontFamily="@font/montserrat_medium"-->
-<!--                android:gravity="center_vertical"-->
-<!--                android:text="   Location"-->
-<!--                android:textColor="@color/black"-->
-<!--                android:textSize="15dp"-->
-<!--                tools:layout_editor_absoluteX="2dp"-->
-<!--                tools:layout_editor_absoluteY="371dp" />-->
-
-<!--            <TextView-->
-<!--                android:layout_width="254dp"-->
-<!--                android:layout_height="43dp"-->
-<!--                android:fontFamily="@font/montserrat_medium"-->
-<!--                android:gravity=""-->
-<!--                android:text="Type of vehicle:"-->
-<!--                android:textColor="@color/black"-->
-<!--                android:textSize="15dp"-->
-<!--                tools:layout_editor_absoluteX="6dp"-->
-<!--                tools:layout_editor_absoluteY="410dp" />-->
-
-<!--            <TextView-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="42dp"-->
-<!--                android:layout_alignBottom="@+id/button"-->
-<!--                android:background="@drawable/borders03"-->
-<!--                android:fontFamily="@font/montserrat_medium"-->
-<!--                android:gravity="center"-->
-<!--                android:text="remarks"-->
-<!--                android:textColor="@color/black"-->
-<!--                android:textSize="15dp"-->
-<!--                tools:layout_editor_absoluteX="1dp"-->
-<!--                tools:layout_editor_absoluteY="189dp" />-->
-
-
-<!--            <TextView-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="45dp"-->
-<!--                android:fontFamily="@font/montserrat_medium"-->
-<!--                android:gravity=""-->
-<!--                android:paddingLeft="190dp"-->
-<!--                android:text="Price: Amount"-->
-<!--                android:textColor="@color/black"-->
-<!--                android:textSize="15dp"-->
-<!--                tools:layout_editor_absoluteX="1dp"-->
-<!--                tools:layout_editor_absoluteY="450dp" />-->
-
-<!--            <Button-->
-<!--                android:id="@+id/button1"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:backgroundTint="@color/button_color1"-->
-<!--                android:drawableRight="@drawable/questionmark"-->
-<!--                android:fontFamily="@font/montserrat_semibold"-->
-<!--                android:text="Recently pick up"-->
-<!--                android:textColor="#FFFFFF"-->
-<!--                tools:layout_editor_absoluteX="24dp"-->
-<!--                tools:layout_editor_absoluteY="282dp" />-->
-
-<!--            <TextView-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="41dp"-->
-<!--                android:drawableLeft="@drawable/pckuppoint"-->
-<!--                android:fontFamily="@font/montserrat_medium"-->
-<!--                android:gravity="center_vertical"-->
-<!--                android:text="   Location"-->
-<!--                android:textColor="@color/black"-->
-<!--                android:textSize="15dp"-->
-<!--                tools:layout_editor_absoluteX="25dp"-->
-<!--                tools:layout_editor_absoluteY="329dp" />-->
-
-<!--            <TextView-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="43dp"-->
-<!--                android:drawableLeft="@drawable/locationpin"-->
-<!--                android:fontFamily="@font/montserrat_medium"-->
-<!--                android:gravity="center_vertical"-->
-<!--                android:text="   Location"-->
-<!--                android:textColor="@color/black"-->
-<!--                android:textSize="15dp"-->
-<!--                tools:layout_editor_absoluteX="2dp"-->
-<!--                tools:layout_editor_absoluteY="371dp" />-->
-
-<!--            <TextView-->
-<!--                android:layout_width="254dp"-->
-<!--                android:layout_height="43dp"-->
-<!--                android:fontFamily="@font/montserrat_medium"-->
-<!--                android:gravity=""-->
-<!--                android:text="Type of vehicle:"-->
-<!--                android:textColor="@color/black"-->
-<!--                android:textSize="15dp"-->
-<!--                tools:layout_editor_absoluteX="6dp"-->
-<!--                tools:layout_editor_absoluteY="410dp" />-->
-
-<!--            <TextView-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="45dp"-->
-<!--                android:fontFamily="@font/montserrat_medium"-->
-<!--                android:gravity=""-->
-<!--                android:paddingLeft="190dp"-->
-<!--                android:text="Price: Amount"-->
-<!--                android:textColor="@color/black"-->
-<!--                android:textSize="15dp"-->
-<!--                tools:layout_editor_absoluteX="1dp"-->
-<!--                tools:layout_editor_absoluteY="450dp" />-->
-
-
-<!--            <Button-->
-<!--                android:id="@+id/button2"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:backgroundTint="@color/button_color1"-->
-<!--                android:drawableRight="@drawable/questionmark"-->
-<!--                android:fontFamily="@font/montserrat_semibold"-->
-<!--                android:text="Recently pick up"-->
-<!--                android:textColor="#FFFFFF"-->
-<!--                tools:layout_editor_absoluteX="24dp"-->
-<!--                tools:layout_editor_absoluteY="282dp" />-->
-
-<!--            <TextView-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="41dp"-->
-<!--                android:drawableLeft="@drawable/pckuppoint"-->
-<!--                android:fontFamily="@font/montserrat_medium"-->
-<!--                android:gravity="center_vertical"-->
-<!--                android:text="   Location"-->
-<!--                android:textColor="@color/black"-->
-<!--                android:textSize="15dp"-->
-<!--                tools:layout_editor_absoluteX="25dp"-->
-<!--                tools:layout_editor_absoluteY="329dp" />-->
-
-<!--            <TextView-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="43dp"-->
-<!--                android:drawableLeft="@drawable/locationpin"-->
-<!--                android:fontFamily="@font/montserrat_medium"-->
-<!--                android:gravity="center_vertical"-->
-<!--                android:text="   Location"-->
-<!--                android:textColor="@color/black"-->
-<!--                android:textSize="15dp"-->
-<!--                tools:layout_editor_absoluteX="2dp"-->
-<!--                tools:layout_editor_absoluteY="371dp" />-->
-
-<!--            <TextView-->
-<!--                android:layout_width="254dp"-->
-<!--                android:layout_height="43dp"-->
-<!--                android:fontFamily="@font/montserrat_medium"-->
-<!--                android:gravity=""-->
-<!--                android:text="Type of vehicle:"-->
-<!--                android:textColor="@color/black"-->
-<!--                android:textSize="15dp"-->
-<!--                tools:layout_editor_absoluteX="6dp"-->
-<!--                tools:layout_editor_absoluteY="410dp" />-->
-
-<!--            <TextView-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="45dp"-->
-<!--                android:layout_marginBottom="30dp"-->
-<!--                android:fontFamily="@font/montserrat_medium"-->
-<!--                android:gravity=""-->
-<!--                android:paddingLeft="190dp"-->
-<!--                android:text="Price: Amount"-->
-<!--                android:textColor="@color/black"-->
-<!--                android:textSize="15dp"-->
-<!--                tools:layout_editor_absoluteX="1dp"-->
-<!--                tools:layout_editor_absoluteY="450dp" />-->
-
-<!--        </LinearLayout>-->
-<!--    </ScrollView>-->
-
-
-
-
-
-<!--</androidx.constraintlayout.widget.ConstraintLayout>-->
+</FrameLayout>

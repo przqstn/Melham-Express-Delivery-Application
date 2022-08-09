@@ -3,7 +3,9 @@ package com.example.mcc_deliveryapp.Rider;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -25,10 +27,11 @@ import java.util.Objects;
 public class rider_ongoing_order extends AppCompatActivity {
 
     String name, phonenum, orderID, riderVehicle, senderName, senderLocation, senderContact,
-            receiverName, receiverLocation, receiverContact, vehicleType, senderNote, orderPrice;
+            receiverName, receiverLocation, receiverContact, vehicleType, senderNote, orderPrice,
+            defaultUserNum, customerName, orderPlaced;
     TextView senderloc, sendername, sendercontact, receiverloc, receivername, receivercontact,
-            order_id, vehicletype, usernote, parcelprice;
-    Button btn_takeOrder, btn_cancelOrderRider;
+            order_id, vehicletype, usernote, parcelprice, customer_name, order_placed;
+    Button btn_CompleteOrder, btn_cancelOrderRider, btn_MessageCustomer, btn_CallCustomer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +54,11 @@ public class rider_ongoing_order extends AppCompatActivity {
         vehicletype = findViewById(R.id.vehicle2);
         usernote = findViewById(R.id.note_rider2);
         parcelprice = findViewById(R.id.txt_price2);
-        btn_takeOrder = findViewById(R.id.btn_completeOrder);
+        customer_name = findViewById(R.id.customer_name);
+        order_placed = findViewById(R.id.order_placed);
+        btn_MessageCustomer = findViewById(R.id.message_customer);
+        btn_CallCustomer = findViewById(R.id.call_customer);
+        btn_CompleteOrder = findViewById(R.id.btn_completeOrder);
         btn_cancelOrderRider = findViewById(R.id.btn_cancelOrderRider);
 
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -72,6 +79,41 @@ public class rider_ongoing_order extends AppCompatActivity {
                         vehicleType = dataSnapshot.child("vehicletype").getValue(String.class);
                         senderNote = dataSnapshot.child("customernotes").getValue(String.class);
                         orderPrice = dataSnapshot.child("fee").getValue(String.class);
+                        orderPlaced = dataSnapshot.child("DatePlace").getValue(String.class);
+                        defaultUserNum = dataSnapshot.child("defaultUserNum").getValue(String.class);
+
+                        final FirebaseDatabase database2 = FirebaseDatabase.getInstance();
+                        final DatabaseReference dr2 = database2.getReference().child("users");
+                        Query query = dr2.orderByChild("userPhone").equalTo(defaultUserNum);
+
+                        query.addChildEventListener(
+                                new ChildEventListener() {
+                                    @SuppressLint("SetTextI18n")
+                                    @Override
+                                    public void onChildAdded(@NonNull DataSnapshot dataSnapshot, String s) {
+                                        customerName = dataSnapshot.child("userFullname").getValue(String.class);
+                                        customer_name.setText(customerName);
+                                    }
+
+                                    @Override
+                                    public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+                                    }
+
+                                    @Override
+                                    public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
+
+                                    }
+
+                                    @Override
+                                    public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                                    }
+                                });
+
                         sendername.setText(senderName);
                         senderloc.setText(senderLocation);
                         sendercontact.setText(senderContact);
@@ -82,6 +124,7 @@ public class rider_ongoing_order extends AppCompatActivity {
                         vehicletype.setText(vehicleType);
                         usernote.setText(senderNote);
                         parcelprice.setText(orderPrice);
+                        order_placed.setText(orderPlaced);
                     }
 
                     @Override
@@ -103,7 +146,30 @@ public class rider_ongoing_order extends AppCompatActivity {
                     }
                 });
 
-        btn_takeOrder.setOnClickListener(new View.OnClickListener() {
+        btn_MessageCustomer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String textnum = defaultUserNum;
+                Intent intent = new Intent(Intent.ACTION_SENDTO);
+                intent.setType("vnd.android-dir/mms-sms");
+                intent.setData(Uri.parse("sms:" + textnum));
+                startActivity(intent);
+            }
+        });
+
+
+        btn_CallCustomer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                System.out.println("Calling");
+                String callnum = defaultUserNum;
+                Intent intent = new Intent(Intent.ACTION_DIAL);
+                intent.setData(Uri.parse("tel:" + callnum));
+                startActivity(intent);
+            }
+        });
+
+        btn_CompleteOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 final FirebaseDatabase database = FirebaseDatabase.getInstance();

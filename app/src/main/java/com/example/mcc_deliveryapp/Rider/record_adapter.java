@@ -35,21 +35,14 @@ public class record_adapter extends FirebaseRecyclerAdapter<
     onBindViewHolder(@NonNull recordViewholder holder,
                      int position, @NonNull model model)
     {
-
-
-//        holder.OrderID.setText(model.getOrderID());
-        holder.customernotes.setText(model.getCustomerNotes());
-        holder.fee.setText(model.getFee());
-//        holder.parcelstatus.setText(model.getParcelstatus());
-//        holder.receivercontact.setText(model.getReceivercontact());
+        holder.receivercontact.setText(model.getReceivercontact());
+        holder.receivername.setText(model.getReceivername());
         holder.receiverlocation.setText(model.getReceiverlocation());
-//        holder.receivername.setText(model.getReceivername());
-//        holder.ridername.setText(model.getRidername());
-//        holder.ridernum.setText(model.getRidernum());
-//        holder.sendercontact.setText(model.getSendercontact());
+        holder.sendercontact.setText(model.getSendercontact());
+        holder.sendername.setText(model.getSendername());
         holder.senderlocation.setText(model.getSenderlocation());
-//        holder.sendername.setText(model.getSendername());
-        holder.vehicle.setText(model.getVehicletype());
+        holder.vehicletype.setText(model.getVehicletype());
+        holder.fee.setText(model.getFee());
         holder.orderID.setText(model.getOrderID());
     }
 
@@ -81,16 +74,20 @@ public class record_adapter extends FirebaseRecyclerAdapter<
     // view (here "person.xml")
     class recordViewholder
             extends RecyclerView.ViewHolder {
-        TextView senderlocation, receiverlocation, customernotes, fee, orderID, vehicle ;
+        TextView receivercontact,receiverlocation,receivername,sendercontact,senderlocation,
+                sendername, vehicletype, customernotes,fee, orderID;
         Context context;
         public recordViewholder(@NonNull View itemView)
         {
             super(itemView);
 
-            senderlocation = itemView.findViewById(R.id.pickupLocation);
-            receiverlocation = itemView.findViewById(R.id.dropOffLocation);
-            customernotes = itemView.findViewById(R.id.remarkRecord);
-            vehicle = itemView.findViewById(R.id.vehicleRecord);
+            receivercontact = itemView.findViewById(R.id.txt_receiver_contact);
+            receiverlocation = itemView.findViewById(R.id.txt_receiver_loc);
+            receivername = itemView.findViewById(R.id.txt_receiver_name);
+            sendercontact = itemView.findViewById(R.id.txt_sender_contact);
+            senderlocation = itemView.findViewById(R.id.txt_sender_loc);
+            sendername = itemView.findViewById(R.id.txt_sender_name);
+            vehicletype = itemView.findViewById(R.id.txt_vehicletype);
             fee = itemView.findViewById(R.id.priceRecord);
             orderID = itemView.findViewById(R.id.courier_record_orderID);
             CardView cv = (CardView) itemView.findViewById(R.id.courier_record_card);
@@ -105,7 +102,7 @@ public class record_adapter extends FirebaseRecyclerAdapter<
                     intent.putExtra("phonenum", userNum);
                     intent.putExtra("username", userName);
                     intent.putExtra("orderID", orderID.getText().toString());
-                    intent.putExtra("vehicle", vehicle.getText().toString());
+                    intent.putExtra("vehicle", vehicletype.getText().toString());
                     context.startActivity(intent);
                 }
             });
