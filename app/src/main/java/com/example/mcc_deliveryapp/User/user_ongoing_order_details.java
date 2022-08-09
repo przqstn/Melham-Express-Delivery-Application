@@ -133,7 +133,7 @@ public class user_ongoing_order_details extends AppCompatActivity {
                         receivercontact.setText(receiverContact);
                         order_id.setText(orderID);
                         usernote.setText(senderNote);
-                        parcelprice.setText(orderPrice);
+                        parcelprice.setText("₱"+orderPrice);
                         orderplaced.setText(orderPlaced);
                     }
 
