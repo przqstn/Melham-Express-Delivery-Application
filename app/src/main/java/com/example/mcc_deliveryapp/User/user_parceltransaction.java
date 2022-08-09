@@ -424,11 +424,10 @@ public class user_parceltransaction extends FragmentActivity implements Location
 	protected void onPause() {
 		super.onPause();
 		try {
-			locationManager.removeUpdates(user_parceltransaction.this);
+			locationManager.removeUpdates(this);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	@Override
