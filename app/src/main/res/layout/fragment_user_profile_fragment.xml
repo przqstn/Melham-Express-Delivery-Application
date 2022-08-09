@@ -24,9 +24,9 @@
 
             <LinearLayout
                 android:id="@+id/riderProfileLayout1"
-                android:layout_gravity="top"
                 android:layout_width="match_parent"
-                android:layout_height="287dp"
+                android:layout_height="234dp"
+                android:layout_gravity="top"
                 android:background="@drawable/background"
                 android:orientation="horizontal">
 
@@ -38,10 +38,10 @@
                     android:layout_gravity="bottom"
                     android:layout_marginStart="35dp"
                     android:layout_marginBottom="24dp"
-                    android:background="@drawable/borderbutton"
+                    android:background="@drawable/profile_ellipse"
                     android:contentDescription="@string/hi_user"
                     android:padding="1dp"
-                    android:src="@drawable/profilepic" />
+                    android:src="@drawable/rounded" />
 
                 <TextView
                     android:id="@+id/user_name"
