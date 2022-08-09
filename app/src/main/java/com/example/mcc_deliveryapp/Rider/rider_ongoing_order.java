@@ -17,6 +17,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
+import java.util.Objects;
+
 public class rider_ongoing_order extends AppCompatActivity {
 
     String name, phonenum, orderID, riderVehicle, senderName, senderLocation, senderContact,
@@ -108,8 +113,9 @@ public class rider_ongoing_order extends AppCompatActivity {
                 query.addChildEventListener(
                         new ChildEventListener() {
                             @Override
-                            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                                dr.child(dataSnapshot.getKey()).child("parcelstatus").setValue("Completed"+phonenum);
+                            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, String s) {
+                                dr.child(Objects.requireNonNull(dataSnapshot.getKey())).child("parcelstatus").setValue("Completed"+phonenum);
+                                dr.child(dataSnapshot.getKey()).child("dateCompleted").setValue(dateTime());
                             }
 
                             @Override
@@ -179,6 +185,22 @@ public class rider_ongoing_order extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    public static String dateTime(){
+        LocalDateTime myDateObj = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            myDateObj = LocalDateTime.now();
+        }
+        DateTimeFormatter myFormatObj = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            myFormatObj = DateTimeFormatter.ofPattern("MMM dd, yyyy HH:mm");
+        }
+        String formattedDate = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            formattedDate = myDateObj.format(myFormatObj);
+        }
+        return formattedDate;
     }
 
     @Override
