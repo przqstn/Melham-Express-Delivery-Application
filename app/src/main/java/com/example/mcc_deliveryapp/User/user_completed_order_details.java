@@ -120,7 +120,7 @@ public class user_completed_order_details extends AppCompatActivity {
                         receivercontact.setText(receiverContact);
                         order_id.setText(orderID);
                         usernote.setText(senderNote);
-                        parcelprice.setText(orderPrice);
+                        parcelprice.setText("₱"+orderPrice);
                         order_placed.setText(orderPlaced);
                         order_received.setText(orderReceived);
                     }

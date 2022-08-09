@@ -39,7 +39,7 @@ public class home_adapter extends FirebaseRecyclerAdapter<model, home_adapter.my
 		holder.sendername.setText(model.getSendername());
 		holder.senderlocation.setText(model.getSenderlocation());
 //		holder.vehicletype.setText(model.getVehicletype());
-		holder.fee.setText(model.getFee());
+		holder.fee.setText("₱"+model.getFee());
 		holder.orderID.setText(model.getOrderID());
 //		holder.customernotes.setText("Notes:" + model.getCustomerNotes());
 	}

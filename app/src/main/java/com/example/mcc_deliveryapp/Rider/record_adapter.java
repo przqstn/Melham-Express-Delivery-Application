@@ -42,7 +42,7 @@ public class record_adapter extends FirebaseRecyclerAdapter<
         holder.sendername.setText(model.getSendername());
         holder.senderlocation.setText(model.getSenderlocation());
         holder.vehicletype.setText(model.getVehicletype());
-        holder.fee.setText(model.getFee());
+        holder.fee.setText("₱"+model.getFee());
         holder.orderID.setText(model.getOrderID());
     }
 

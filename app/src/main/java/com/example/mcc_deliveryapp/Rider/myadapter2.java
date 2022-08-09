@@ -38,7 +38,7 @@ public class myadapter2 extends FirebaseRecyclerAdapter<model, myadapter2.myview
 		holder.sendername.setText(model.getSendername());
 		holder.senderlocation.setText(model.getSenderlocation());
 		holder.vehicletype.setText(model.getVehicletype());
-		holder.fee.setText(model.getFee());
+		holder.fee.setText("₱"+model.getFee());
 		holder.orderID.setText(model.getOrderID());
 //		holder.customernotes.setText("Notes:" + model.getCustomerNotes());
 	}

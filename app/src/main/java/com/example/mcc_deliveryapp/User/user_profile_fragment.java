@@ -23,7 +23,6 @@ import android.widget.TextView;
 
 import com.example.mcc_deliveryapp.MainActivity2;
 import com.example.mcc_deliveryapp.R;
-import com.example.mcc_deliveryapp.Rider.editprofile_fragment;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
@@ -51,7 +50,7 @@ public class user_profile_fragment extends Fragment {
 
     private ImageView profile_user;
 
-    private ImageButton btn_editProfile;
+    private ImageButton btn_UsereditProfile;
     private Button btnUser_Logout;
 
     @Override
@@ -62,7 +61,7 @@ public class user_profile_fragment extends Fragment {
         profile_user = view.findViewById(R.id.profile_user);
         userName = view.findViewById(R.id.txt_name);
         userPhone =  view.findViewById(R.id.user_number);
-        btn_editProfile = view.findViewById(R.id.btnUser_EditProfile);
+        btn_UsereditProfile = view.findViewById(R.id.btnUser_EditProfile);
         btnUser_Logout = view.findViewById(R.id.btnUser_Logout);
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
@@ -124,7 +123,8 @@ public class user_profile_fragment extends Fragment {
         }catch (IOException e){
             e.printStackTrace();
         }
-        btn_editProfile.setOnClickListener(new View.OnClickListener() {
+
+        btn_UsereditProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), user_editprofile_fragment.class);
