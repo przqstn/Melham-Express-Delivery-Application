@@ -19,11 +19,12 @@ import com.google.firebase.database.Query;
 
 public class user_completed_order_details extends AppCompatActivity {
 
-    String name, phonenum, orderID, riderName, riderBrandModel, riderPlateNumber,
-            riderVehicle, senderName, senderLocation, senderContact, ridernum,
+    String name, phonenum, orderID, riderName, riderBrandModel, riderPlateNumber, orderReceived,
+            riderVehicle, senderName, senderLocation, senderContact, ridernum, orderPlaced,
             receiverName, receiverLocation, receiverContact, vehicleType, senderNote, orderPrice;
     TextView senderloc, sendername, sendercontact, receiverloc, receivername, receivercontact,
-            order_id, rider_name, vehicletype, usernote, parcelprice, plate_number;
+            order_id, rider_name, vehicletype, usernote, parcelprice, plate_number, order_placed,
+            order_received;
     Button btn_cancelOrder;
 
     @Override
@@ -48,6 +49,8 @@ public class user_completed_order_details extends AppCompatActivity {
         usernote = findViewById(R.id.note_rider2);
         parcelprice = findViewById(R.id.txt_price2);
         plate_number = findViewById(R.id.plate_number);
+        order_placed = findViewById(R.id.order_placed);
+        order_received = findViewById(R.id.order_received);
         btn_cancelOrder = findViewById(R.id.btn_cancelOrder);
 
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -69,6 +72,8 @@ public class user_completed_order_details extends AppCompatActivity {
                         vehicleType = dataSnapshot.child("vehicletype").getValue(String.class);
                         senderNote = dataSnapshot.child("customernotes").getValue(String.class);
                         orderPrice = dataSnapshot.child("fee").getValue(String.class);
+                        orderPlaced = dataSnapshot.child("DatePlace").getValue(String.class);
+                        orderReceived = dataSnapshot.child("dateCompleted").getValue(String.class);
                         ridernum = dataSnapshot.child("ridernum").getValue(String.class);
 
                         final FirebaseDatabase database2 = FirebaseDatabase.getInstance();
@@ -116,6 +121,8 @@ public class user_completed_order_details extends AppCompatActivity {
                         order_id.setText(orderID);
                         usernote.setText(senderNote);
                         parcelprice.setText(orderPrice);
+                        order_placed.setText(orderPlaced);
+                        order_received.setText(orderReceived);
                     }
 
                     @Override

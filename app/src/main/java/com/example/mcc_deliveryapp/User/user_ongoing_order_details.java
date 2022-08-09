@@ -32,9 +32,9 @@ public class user_ongoing_order_details extends AppCompatActivity {
 
     String name, phonenum, orderID, riderName, ridernum, riderPlateNumber, riderBrandModel,
             senderName, senderLocation, senderContact, receiverName, receiverLocation,
-            receiverContact, vehicleType, senderNote, orderPrice;
+            receiverContact, vehicleType, senderNote, orderPrice, orderPlaced;
     TextView senderloc, sendername, sendercontact, receiverloc, receivername, receivercontact,
-            order_id, rider_name, vehicletype, usernote, parcelprice, plate_number;
+            order_id, rider_name, vehicletype, usernote, parcelprice, plate_number, orderplaced;
     Button btn_userOrderCompleted, btn_trackCourier, btn_message_courier, btn_call_courier;
 
     private static final int MY_PERMISSIONS_REQUEST_SEND_SMS =0 ;
@@ -60,6 +60,7 @@ public class user_ongoing_order_details extends AppCompatActivity {
         vehicletype = findViewById(R.id.vehicle_details);
         usernote = findViewById(R.id.note_rider2);
         parcelprice = findViewById(R.id.txt_price2);
+        orderplaced = findViewById(R.id.order_placed);
         btn_userOrderCompleted = findViewById(R.id.btn_userOrderCompleted);
         btn_trackCourier = findViewById(R.id.btn_trackCourier);
         plate_number = findViewById(R.id.plate_number);
@@ -85,6 +86,7 @@ public class user_ongoing_order_details extends AppCompatActivity {
                         vehicleType = dataSnapshot.child("vehicletype").getValue(String.class);
                         senderNote = dataSnapshot.child("customernotes").getValue(String.class);
                         orderPrice = dataSnapshot.child("fee").getValue(String.class);
+                        orderPlaced = dataSnapshot.child("DatePlace").getValue(String.class);
                         ridernum = dataSnapshot.child("ridernum").getValue(String.class);
 
                         final FirebaseDatabase database2 = FirebaseDatabase.getInstance();
@@ -132,6 +134,7 @@ public class user_ongoing_order_details extends AppCompatActivity {
                         order_id.setText(orderID);
                         usernote.setText(senderNote);
                         parcelprice.setText(orderPrice);
+                        orderplaced.setText(orderPlaced);
                     }
 
                     @Override
