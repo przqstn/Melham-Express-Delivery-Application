@@ -5,20 +5,25 @@ import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentSender;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.location.Address;
+import android.location.Criteria;
 import android.location.Geocoder;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.PowerManager;
 import android.preference.PreferenceManager;
+import android.provider.Settings;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -30,12 +35,15 @@ import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
 
 import com.example.mcc_deliveryapp.R;
-import com.example.mcc_deliveryapp.Rider.rider_ongoing_order;
-import com.example.mcc_deliveryapp.Rider.rider_takeorder_map;
 import com.example.mcc_deliveryapp.User.Module.DirectionFinder;
 import com.example.mcc_deliveryapp.User.Module.DirectionFinderListener;
 import com.example.mcc_deliveryapp.User.Module.Route;
+import com.google.android.gms.common.api.ResolvableApiException;
 import com.google.android.gms.common.api.Status;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationSettingsRequest;
+import com.google.android.gms.location.LocationSettingsResponse;
+import com.google.android.gms.location.SettingsClient;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -43,6 +51,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 
 import com.google.android.gms.maps.model.BitmapDescriptor;
+
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 
@@ -53,11 +62,10 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.libraries.places.api.Places;
-import com.google.android.libraries.places.api.model.LocationBias;
-import com.google.android.libraries.places.api.model.LocationRestriction;
 import com.google.android.libraries.places.api.model.Place;
-import com.google.android.libraries.places.api.model.RectangularBounds;
 import com.google.android.libraries.places.widget.Autocomplete;
 import com.google.android.libraries.places.widget.AutocompleteActivity;
 import com.google.android.libraries.places.widget.model.AutocompleteActivityMode;
@@ -71,18 +79,19 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 
-///////////////////
 import androidx.core.content.ContextCompat;
-import com.google.android.gms.location.FusedLocationProviderClient;
+
 import com.google.android.gms.tasks.Task;
+
 import android.location.Location;
-import com.google.android.gms.tasks.OnCompleteListener;
+
+
 import android.util.Log;
+
 import com.google.android.gms.location.LocationServices;
 
-//import androidx.core.app.ActivityCompat;
 
-public class user_parceltransaction extends FragmentActivity implements OnMapReadyCallback ,DirectionFinderListener{
+public class user_parceltransaction extends FragmentActivity implements OnMapReadyCallback, DirectionFinderListener, LocationListener {
 
 	GoogleMap mMap;
 	private EditText etOrigin;
@@ -91,6 +100,12 @@ public class user_parceltransaction extends FragmentActivity implements OnMapRea
 	private List<Marker> destinationMarkers = new ArrayList<>();
 	private List<Polyline> polylinePaths = new ArrayList<>();
 	private ProgressDialog progressDialog;
+	public LocationManager locationManager;
+	public double latitude;
+	public double longitude;
+	public Criteria criteria;
+	public String bestProvider;
+
 	Geocoder geocoder;
 	List<Address> addresses;
 
@@ -104,10 +119,9 @@ public class user_parceltransaction extends FragmentActivity implements OnMapRea
 	private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
 	private boolean locationPermissionGranted;
 	private static final String TAG = user_parceltransaction.class.getSimpleName();
-	private FusedLocationProviderClient fusedLocationProviderClient;
-	private Location lastKnownLocation;
+	private LatLng lastKnownLocation;
 	private static final int DEFAULT_ZOOM = 15;
-	private final LatLng defaultLocation = new LatLng(15.594197, 120.970414);
+	private final LatLng defaultLocation = new LatLng(14.5928, 120.9801);
 
 	@SuppressLint("WakelockTimeout")
 	@Override
@@ -115,37 +129,36 @@ public class user_parceltransaction extends FragmentActivity implements OnMapRea
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_user_parceltransaction);
 
-		Places.initialize(this,GOOGLE_API_KEY);
+		Places.initialize(this, GOOGLE_API_KEY);
 
 		Intent intent = getIntent();
 		String userNumber = intent.getStringExtra("phonenum");
 		String userName = intent.getStringExtra("username");
-		// Construct a FusedLocationProviderClient.
-		fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
+
 
 		SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-		.findFragmentById(R.id.map);
+				.findFragmentById(R.id.map);
 		assert mapFragment != null;
 		mapview = Objects.requireNonNull(mapFragment).getView();
 		mapFragment.getMapAsync(this);
 
 		locationButton = ((View) mapview.findViewById(Integer.parseInt("1")).getParent()).findViewById(Integer.parseInt("2"));
 		etOrigin = (EditText) findViewById(R.id.etOrigin);
-		etDestination =  (EditText) findViewById(R.id.etDestination);
+		etDestination = (EditText) findViewById(R.id.etDestination);
 		address_dialog = (Button) findViewById(R.id.img_addressbtndialog);
 
 		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
 
 		//prevent lock screen
-		PowerManager powerManager = (PowerManager)this.getSystemService(Context.POWER_SERVICE);
+		PowerManager powerManager = (PowerManager) this.getSystemService(Context.POWER_SERVICE);
 		@SuppressLint("InvalidWakeLockTag") PowerManager.WakeLock wakeLock = powerManager.newWakeLock(PowerManager.FULL_WAKE_LOCK, "My Lock");
-		wakeLock.acquire(10*60*1000L /*10 minutes*/);
+		wakeLock.acquire(10 * 60 * 1000L /*10 minutes*/);
 
 		// This callback will only be called when MyFragment is at least Started.
 		OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
 			@Override
 			public void handleOnBackPressed() {
-				Intent intent = new Intent(user_parceltransaction.this,user_permission.class);
+				Intent intent = new Intent(user_parceltransaction.this, user_permission.class);
 				intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 				intent.putExtra("username", userName);
 				intent.putExtra("phonenum", userNumber);
@@ -181,7 +194,7 @@ public class user_parceltransaction extends FragmentActivity implements OnMapRea
 				}
 
 				if (polylinePaths != null) {
-					for (Polyline polyline:polylinePaths ) {
+					for (Polyline polyline : polylinePaths) {
 						polyline.remove();
 					}
 				}
@@ -212,12 +225,12 @@ public class user_parceltransaction extends FragmentActivity implements OnMapRea
 			@Override
 			public void onClick(View view) {
 				final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(
-						user_parceltransaction.this,R.style.BottomSheetDialogTheme
+						user_parceltransaction.this, R.style.BottomSheetDialogTheme
 				);
-					String origin = etOrigin.getText().toString();
+				String origin = etOrigin.getText().toString();
 
 				View bottomSheetView = LayoutInflater.from(getApplicationContext())
-						.inflate(R.layout.user_adressdetail, (LinearLayout)findViewById(R.id.Sender_addressDetailsDialog)
+						.inflate(R.layout.user_adressdetail, (LinearLayout) findViewById(R.id.Sender_addressDetailsDialog)
 						);
 
 				senderloc = bottomSheetView.findViewById(R.id.sender_edTextAddress);
@@ -226,56 +239,53 @@ public class user_parceltransaction extends FragmentActivity implements OnMapRea
 				sendername = bottomSheetView.findViewById(R.id.sender_name);
 
 
-
-
 				bottomSheetView.findViewById(R.id.sender_btnConfirm).setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View view) {
 						//authentication of the sender dialog box
-						if(senderloc.length() == 0){
+						if (senderloc.length() == 0) {
 							sendercontact.setError("Required");
-						}else if (sendercontact.length()==0){
+						} else if (sendercontact.length() == 0) {
 							sendercontact.setError("Required");
-						}else if (sendername.length()==0 ){
+						} else if (sendername.length() == 0) {
 							sendername.setError("Required");
-						}else{
+						} else {
 							//getting and sharing the preferences of the data in the sender area
 							String sender_loc = senderloc.getText().toString();
-							String sender_contact=sendercontact.getText().toString();
-							String sender_name=sendername.getText().toString();
+							String sender_contact = sendercontact.getText().toString();
+							String sender_name = sendername.getText().toString();
 
 							SharedPreferences.Editor editor = sharedPref.edit();
-							editor.putString("key 1",sender_loc);
-							editor.putString("key 2",sender_contact);
-							editor.putString("key 3",sender_name);
+							editor.putString("key 1", sender_loc);
+							editor.putString("key 2", sender_contact);
+							editor.putString("key 3", sender_name);
 							editor.apply();
 						}
 						String destination = etDestination.getText().toString();
 						View bottomSheetView2 = LayoutInflater.from(getApplicationContext())
-								.inflate(R.layout.user_receiver_address_detail, (LinearLayout)findViewById(R.id.Receiver_addressDetailsDialog)
+								.inflate(R.layout.user_receiver_address_detail, (LinearLayout) findViewById(R.id.Receiver_addressDetailsDialog)
 								);
 						receiverloc = (EditText) bottomSheetView2.findViewById(R.id.receiver_edTextAddress);
 						receiverloc.setText(destination);
-						receivercontact=(EditText)bottomSheetView2.findViewById(R.id.receiver_edTextPhoneNumber);
-						receivername = (EditText)bottomSheetView2.findViewById(R.id.receiver_name);
-
+						receivercontact = (EditText) bottomSheetView2.findViewById(R.id.receiver_edTextPhoneNumber);
+						receivername = (EditText) bottomSheetView2.findViewById(R.id.receiver_name);
 
 
 						bottomSheetView2.findViewById(R.id.Receiver_btnConfirm).setOnClickListener(new View.OnClickListener() {
 							@Override
 							public void onClick(View view) {
 								//authentication of the receiver dialog box
-								if(receiverloc.length() == 0){
+								if (receiverloc.length() == 0) {
 									receiverloc.setError("Required");
-								}else if (receivercontact.length()==0){
+								} else if (receivercontact.length() == 0) {
 									receivercontact.setError("Required");
-								}else if (receivername.length()==0 ){
+								} else if (receivername.length() == 0) {
 									receivername.setError("Required");
-								}else{
+								} else {
 									//getting and sharing the preferences of the data in the receiver area
 									String receiver_loc = receiverloc.getText().toString();
-									String receiver_contact=receivercontact.getText().toString();
-									String receiver_name=receivername.getText().toString();
+									String receiver_contact = receivercontact.getText().toString();
+									String receiver_name = receivername.getText().toString();
 
 									SharedPreferences.Editor editor = sharedPref.edit();
 									editor.putString("key 4", receiver_loc);
@@ -286,7 +296,7 @@ public class user_parceltransaction extends FragmentActivity implements OnMapRea
 									editor.apply();
 								}
 
-								Intent intent = new Intent(user_parceltransaction.this,user_paymentmethod.class);
+								Intent intent = new Intent(user_parceltransaction.this, user_paymentmethod.class);
 								// release lock prevention
 								if (wakeLock.isHeld())
 									wakeLock.release();
@@ -306,30 +316,139 @@ public class user_parceltransaction extends FragmentActivity implements OnMapRea
 
 	}
 
+	public static boolean isLocationEnabled(Context context) {
+		int locationMode = 0;
+		String locationProviders;
+		if(android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O)
+		{
+			try
+			{
+				locationMode = Settings.Secure.getInt(context.getContentResolver(), Settings.Secure.LOCATION_MODE);
+			} catch (Settings.SettingNotFoundException e) {
+				e.printStackTrace();
+			}
+			return locationMode != Settings.Secure.LOCATION_MODE_OFF;
+		}
+		else
+		{
+			locationProviders = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.LOCATION_PROVIDERS_ALLOWED);
+			return !TextUtils.isEmpty(locationProviders);
+		}
+	}
 
-	private void getDeviceLocation() {
-		/*
-		 * Get the best and most recent location of the device, which may be null in rare
-		 * cases when a location is not available.
-		 */
-		try {
-			if (locationPermissionGranted) {
-				Task<Location> locationResult = fusedLocationProviderClient.getLastLocation();
-				locationResult.addOnCompleteListener(this, new OnCompleteListener<Location>() {
-					@Override
-					public void onComplete(@NonNull Task<Location> task) {
-						if (task.isSuccessful()) {
-							// Set the map's camera position to the current location of the device.
-							lastKnownLocation = task.getResult();
+	protected void getLocation() {
+		if (isLocationEnabled(this)) {
+			locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+			criteria = new Criteria();
+			bestProvider = String.valueOf(locationManager.getBestProvider(criteria, true)).toString();
 
-							if (lastKnownLocation != null) {
-								mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
-										new LatLng(lastKnownLocation.getLatitude(),
-												lastKnownLocation.getLongitude()), DEFAULT_ZOOM));
+			//You can still do this if you like, you might get lucky:
+			if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+				// TODO: Consider calling
+				//    ActivityCompat#requestPermissions
+				// here to request the missing permissions, and then overriding
+				//   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+				//                                          int[] grantResults)
+				// to handle the case where the user grants the permission. See the documentation
+				// for ActivityCompat#requestPermissions for more details.
+				return;
+			}
+			Location location = locationManager.getLastKnownLocation(bestProvider);
+			if (location != null) {
+				Log.e("TAG", "GPS is on");
+				latitude = location.getLatitude();
+				longitude = location.getLongitude();
+				lastKnownLocation = new LatLng(latitude, longitude);
+				requestLoc();
+			}
+			else{
+				Log.d(TAG, "Current location is null. Using defaults.");
+							mMap.moveCamera(CameraUpdateFactory
+									.newLatLngZoom(defaultLocation, DEFAULT_ZOOM));
+							mMap.getUiSettings().setMyLocationButtonEnabled(true);
+				locationManager.requestLocationUpdates(bestProvider, 1000, 0, this);
+			}
+		}
+		else
+		{
+			Log.d(TAG, "Current location is null. Using defaults.");
+			mMap.moveCamera(CameraUpdateFactory
+					.newLatLngZoom(defaultLocation, DEFAULT_ZOOM));
+			mMap.getUiSettings().setMyLocationButtonEnabled(true);
+			createLocationRequest();
+			LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder();
+			SettingsClient client = LocationServices.getSettingsClient(this);
+			Task<LocationSettingsResponse> task = client.checkLocationSettings(builder.build());
+			task.addOnSuccessListener(this, new OnSuccessListener<LocationSettingsResponse>() {
+				@Override
+				public void onSuccess(LocationSettingsResponse locationSettingsResponse) {
+					requestLoc();
+				}
+			});
+
+			task.addOnFailureListener(this, new OnFailureListener() {
+				private static final int REQUEST_CHECK_SETTINGS = 0x1;
+
+				@Override
+				public void onFailure(@NonNull Exception e) {
+					if (e instanceof ResolvableApiException) {
+						// Location settings are not satisfied, but this can be fixed
+						// by showing the user a dialog.
+						try {
+							// Show the dialog by calling startResolutionForResult(),
+							// and check the result in onActivityResult().
+							ResolvableApiException resolvable = (ResolvableApiException) e;
+							resolvable.startResolutionForResult(user_parceltransaction.this, REQUEST_CHECK_SETTINGS);
+						} catch (IntentSender.SendIntentException sendEx) {
+							// Ignore the error.
+						}
+					}
+				}
+			});
+		}
+	}
+
+	protected void createLocationRequest() {
+		LocationRequest locationRequest = LocationRequest.create();
+		locationRequest.setInterval(10000);
+		locationRequest.setFastestInterval(5000);
+		locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+	}
+
+	@Override
+	public void onLocationChanged(Location location) {
+		//Hey, a non null location! Sweet!
+
+		//remove location callback:
+		locationManager.removeUpdates(this);
+
+		//open the map:
+		latitude = location.getLatitude();
+		longitude = location.getLongitude();
+		lastKnownLocation = new LatLng(latitude, longitude);
+	}
+
+	@Override
+	public void onStatusChanged(String provider, int status, Bundle extras) {
+
+	}
+
+	@Override
+	public void onProviderEnabled(String provider) {
+
+	}
+
+	@Override
+	public void onProviderDisabled(String provider) {
+
+	}
+
+	public void requestLoc() {
+		if (lastKnownLocation != null) {
+								mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(lastKnownLocation, DEFAULT_ZOOM));
 								geocoder = new Geocoder(user_parceltransaction.this, Locale.getDefault());
 								try {
-									addresses = geocoder.getFromLocation(
-											lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude(), 1);
+									addresses = geocoder.getFromLocation(lastKnownLocation.latitude, lastKnownLocation.longitude, 1);
 								} catch (IOException e) {
 									e.printStackTrace();
 								}
@@ -337,38 +456,7 @@ public class user_parceltransaction extends FragmentActivity implements OnMapRea
 								String address = addresses.get(0).getAddressLine(0);
 								etOrigin.setText(address);
 							}
-						} else {
-							Log.d(TAG, "Current location is null. Using defaults.");
-							Log.e(TAG, "Exception: %s", task.getException());
-							mMap.moveCamera(CameraUpdateFactory
-									.newLatLngZoom(defaultLocation, DEFAULT_ZOOM));
-							mMap.getUiSettings().setMyLocationButtonEnabled(true);
-						}
-					}
-				});
-			}
-		} catch (SecurityException e)  {
-			Log.e("Exception: %s", e.getMessage(), e);
-		}
 	}
-
-	private void getLocationPermission() {
-		/*
-		 * Request location permission, so that we can get the location of the
-		 * device. The result of the permission request is handled by a callback,
-		 * onRequestPermissionsResult.
-		 */
-		if (ContextCompat.checkSelfPermission(this.getApplicationContext(),
-				android.Manifest.permission.ACCESS_FINE_LOCATION)
-				== PackageManager.PERMISSION_GRANTED) {
-			locationPermissionGranted = true;
-		} else {
-			ActivityCompat.requestPermissions(this,
-					new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
-					PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
-		}
-	}
-
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -418,18 +506,22 @@ public class user_parceltransaction extends FragmentActivity implements OnMapRea
 		String origin = etOrigin.getText().toString();
 		String destination = etDestination.getText().toString();
 		geocoder = new Geocoder(user_parceltransaction.this, Locale.getDefault());
-		try {
-			addresses = geocoder.getFromLocation(
-					lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude(), 1);
-		} catch (IOException e) {
-			e.printStackTrace();
+
+		if (lastKnownLocation != null) {
+			try {
+				addresses = geocoder.getFromLocation(
+						lastKnownLocation.latitude, lastKnownLocation.longitude, 1);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
+			String address = addresses.get(0).getAddressLine(0);
+
+			if (origin.equals(address)) {
+				origin = lastKnownLocation.latitude + "," + lastKnownLocation.longitude;
+			}
 		}
 
-		String address = addresses.get(0).getAddressLine(0);
-
-		if (origin.equals(address)) {
-			origin = lastKnownLocation.getLatitude() + "," +lastKnownLocation.getLongitude();
-		}
 		if (origin.isEmpty()) {
 			Toast.makeText(this, "Please enter origin address!", Toast.LENGTH_SHORT).show();
 			return;
@@ -499,7 +591,8 @@ public class user_parceltransaction extends FragmentActivity implements OnMapRea
 			@Override
 			public boolean onMyLocationButtonClick() {
 				if (mapview != null) {
-					getDeviceLocation();
+					getLocation();
+//					getDeviceLocation();
 					etDestination.setText("");
 					if (originMarkers != null) {
 						for (Marker marker : originMarkers) {
@@ -523,8 +616,8 @@ public class user_parceltransaction extends FragmentActivity implements OnMapRea
 			}
 		});
 
-		getLocationPermission();
-		getDeviceLocation();
+		getLocation();
+
 
 	}
 
@@ -611,4 +704,5 @@ public class user_parceltransaction extends FragmentActivity implements OnMapRea
 
 		}
 	}
+
 }
