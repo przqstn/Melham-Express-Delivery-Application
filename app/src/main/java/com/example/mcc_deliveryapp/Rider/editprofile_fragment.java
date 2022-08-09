@@ -55,11 +55,9 @@ public class editprofile_fragment extends AppCompatActivity {
     private TextView viewphoneNum, viewname, viewvehicleType, viewplateNum, viewAddress;
     private DatabaseReference root;
     private String phoneNum, imgName;
-    private Uri imageUri;
-    private FirebaseStorage storage;
-    private StorageReference storageReference;
-
-    private Bitmap bitmap;
+    private Uri imageUri, contentUri;
+    private FirebaseStorage storage = FirebaseStorage.getInstance();
+    private StorageReference storageReference = storage.getReference();
 
 
     String currentPhotoPath;
@@ -95,10 +93,7 @@ public class editprofile_fragment extends AppCompatActivity {
         btnUpload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*storage=FirebaseStorage.getInstance();
-                storageReference=storage.getReference();
-                choosePicture();
-                System.out.println("hello");*/
+
                 final Dialog dialog = new Dialog(btnUpload.getContext());
                 dialog.setContentView(R.layout.upload_photo_fragment);
                 dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -111,8 +106,6 @@ public class editprofile_fragment extends AppCompatActivity {
                 btn_Upload.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        storage=FirebaseStorage.getInstance();
-                        storageReference=storage.getReference();
                         choosePicture();
                     }
                 });
@@ -179,6 +172,7 @@ public class editprofile_fragment extends AppCompatActivity {
                                 }
                             });
                 }
+
 
                 if(!TextUtils.isEmpty(viewAddress.getEditableText().toString())){
                     hashMap.put("currentaddress", viewAddress.getEditableText().toString());
@@ -256,16 +250,10 @@ public class editprofile_fragment extends AppCompatActivity {
             if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
                 dispatchTakePictureIntent();
             }else{
+
             }
         }
     }
-    /*
-    private void openCamera() {
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        startActivityForResult(intent, 3);
-    }*/
-
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -273,26 +261,35 @@ public class editprofile_fragment extends AppCompatActivity {
         if(requestCode==CHOOSE_PICTURE && resultCode==RESULT_OK && data!=null && data.getData()!=null){
             imageUri=data.getData();
             profilePic.setImageURI(imageUri);
-        }
-        if(requestCode==CAMERA_REQUEST_CODE && resultCode==RESULT_OK && data!=null && data.getData()!=null){
-            File f = new File(currentPhotoPath);
-            imageUri = Uri.fromFile(f);
-            profilePic.setImageURI(imageUri);
+            System.out.println("choose "+imageUri);
 
         }
+        if(requestCode==CAMERA_REQUEST_CODE && resultCode==RESULT_OK){
+            File f = new File(currentPhotoPath);
+            profilePic.setImageURI(Uri.fromFile(f));
+            imageUri=Uri.fromFile(f);
+
+            /*Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+            contentUri = Uri.fromFile(f);
+            mediaScanIntent.setData(contentUri);
+            this.sendBroadcast(mediaScanIntent);*/
+            System.out.println("take photo "+imageUri+"/"+f.getName());
+
+        }
+
         imgName="profile_image.jpg";
     }
 
 
     private File createImageFile() throws IOException{
         //Create an image file name
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        String imageFileName = "JPEG_" +timeStamp + "_";
-        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        //String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String imageFileName = "profile_image";
+        //File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         File image = File.createTempFile(
                 imageFileName, //prefix
-                ".jpg", //suffix
-                storageDir   //directory
+                ".jpg" //suffix
+               // storageDir   //directory
         );
 
         //Save a file: path for use with ACTION_VIEW  intents
@@ -313,10 +310,10 @@ public class editprofile_fragment extends AppCompatActivity {
 
             }
             if(photoFile != null){
-                Uri photoUri = FileProvider.getUriForFile(this,
+                Uri photoURI = FileProvider.getUriForFile(this,
                         "com.example.android.fileprovider",
                         photoFile);
-                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
+                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
                 startActivityForResult(takePictureIntent, CAMERA_REQUEST_CODE);
             }
         }
