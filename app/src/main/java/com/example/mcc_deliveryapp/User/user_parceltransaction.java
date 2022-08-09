@@ -116,8 +116,6 @@ public class user_parceltransaction extends FragmentActivity implements OnMapRea
 
 	EditText receiverloc, receivercontact, receivername;
 
-	private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
-	private boolean locationPermissionGranted;
 	private static final String TAG = user_parceltransaction.class.getSimpleName();
 	private LatLng lastKnownLocation;
 	private static final int DEFAULT_ZOOM = 15;
@@ -228,88 +226,95 @@ public class user_parceltransaction extends FragmentActivity implements OnMapRea
 						user_parceltransaction.this, R.style.BottomSheetDialogTheme
 				);
 				String origin = etOrigin.getText().toString();
+				String destination = etDestination.getText().toString();
 
-				View bottomSheetView = LayoutInflater.from(getApplicationContext())
-						.inflate(R.layout.user_adressdetail, (LinearLayout) findViewById(R.id.Sender_addressDetailsDialog)
-						);
-
-				senderloc = bottomSheetView.findViewById(R.id.sender_edTextAddress);
-				senderloc.setText(origin);
-				sendercontact = bottomSheetView.findViewById(R.id.sender_edTextPhoneNumber);
-				sendername = bottomSheetView.findViewById(R.id.sender_name);
-
-
-				bottomSheetView.findViewById(R.id.sender_btnConfirm).setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View view) {
-						//authentication of the sender dialog box
-						if (senderloc.length() == 0) {
-							sendercontact.setError("Required");
-						} else if (sendercontact.length() == 0) {
-							sendercontact.setError("Required");
-						} else if (sendername.length() == 0) {
-							sendername.setError("Required");
-						} else {
-							//getting and sharing the preferences of the data in the sender area
-							String sender_loc = senderloc.getText().toString();
-							String sender_contact = sendercontact.getText().toString();
-							String sender_name = sendername.getText().toString();
-
-							SharedPreferences.Editor editor = sharedPref.edit();
-							editor.putString("key 1", sender_loc);
-							editor.putString("key 2", sender_contact);
-							editor.putString("key 3", sender_name);
-							editor.apply();
-						}
-						String destination = etDestination.getText().toString();
-						View bottomSheetView2 = LayoutInflater.from(getApplicationContext())
-								.inflate(R.layout.user_receiver_address_detail, (LinearLayout) findViewById(R.id.Receiver_addressDetailsDialog)
+				if (!origin.equals("")) {
+					if (!destination.equals("")) {
+						View bottomSheetView = LayoutInflater.from(getApplicationContext())
+								.inflate(R.layout.user_adressdetail, (LinearLayout) findViewById(R.id.Sender_addressDetailsDialog)
 								);
-						receiverloc = (EditText) bottomSheetView2.findViewById(R.id.receiver_edTextAddress);
-						receiverloc.setText(destination);
-						receivercontact = (EditText) bottomSheetView2.findViewById(R.id.receiver_edTextPhoneNumber);
-						receivername = (EditText) bottomSheetView2.findViewById(R.id.receiver_name);
+
+						senderloc = bottomSheetView.findViewById(R.id.sender_edTextAddress);
+						senderloc.setText(origin);
+						sendercontact = bottomSheetView.findViewById(R.id.sender_edTextPhoneNumber);
+						sendername = bottomSheetView.findViewById(R.id.sender_name);
 
 
-						bottomSheetView2.findViewById(R.id.Receiver_btnConfirm).setOnClickListener(new View.OnClickListener() {
+						bottomSheetView.findViewById(R.id.sender_btnConfirm).setOnClickListener(new View.OnClickListener() {
 							@Override
 							public void onClick(View view) {
-								//authentication of the receiver dialog box
-								if (receiverloc.length() == 0) {
-									receiverloc.setError("Required");
-								} else if (receivercontact.length() == 0) {
-									receivercontact.setError("Required");
-								} else if (receivername.length() == 0) {
-									receivername.setError("Required");
+								//authentication of the sender dialog box
+								if (senderloc.length() == 0) {
+									sendercontact.setError("Required");
+								} else if (sendercontact.length() == 0) {
+									sendercontact.setError("Required");
+								} else if (sendername.length() == 0) {
+									sendername.setError("Required");
 								} else {
-									//getting and sharing the preferences of the data in the receiver area
-									String receiver_loc = receiverloc.getText().toString();
-									String receiver_contact = receivercontact.getText().toString();
-									String receiver_name = receivername.getText().toString();
+									//getting and sharing the preferences of the data in the sender area
+									String sender_loc = senderloc.getText().toString();
+									String sender_contact = sendercontact.getText().toString();
+									String sender_name = sendername.getText().toString();
 
 									SharedPreferences.Editor editor = sharedPref.edit();
-									editor.putString("key 4", receiver_loc);
-									editor.putString("key 5", receiver_contact);
-									editor.putString("key 6", receiver_name);
-									editor.putString("key 9", userNumber);
-									editor.putString("key 10", userName);
+									editor.putString("key 1", sender_loc);
+									editor.putString("key 2", sender_contact);
+									editor.putString("key 3", sender_name);
 									editor.apply();
+
+									View bottomSheetView2 = LayoutInflater.from(getApplicationContext())
+											.inflate(R.layout.user_receiver_address_detail, (LinearLayout) findViewById(R.id.Receiver_addressDetailsDialog)
+											);
+									receiverloc = (EditText) bottomSheetView2.findViewById(R.id.receiver_edTextAddress);
+									receiverloc.setText(destination);
+									receivercontact = (EditText) bottomSheetView2.findViewById(R.id.receiver_edTextPhoneNumber);
+									receivername = (EditText) bottomSheetView2.findViewById(R.id.receiver_name);
+
+
+									bottomSheetView2.findViewById(R.id.Receiver_btnConfirm).setOnClickListener(new View.OnClickListener() {
+										@Override
+										public void onClick(View view) {
+											//authentication of the receiver dialog box
+											if (receiverloc.length() == 0) {
+												receiverloc.setError("Required");
+											} else if (receivercontact.length() == 0) {
+												receivercontact.setError("Required");
+											} else if (receivername.length() == 0) {
+												receivername.setError("Required");
+											} else {
+												//getting and sharing the preferences of the data in the receiver area
+												String receiver_loc = receiverloc.getText().toString();
+												String receiver_contact = receivercontact.getText().toString();
+												String receiver_name = receivername.getText().toString();
+
+												SharedPreferences.Editor editor = sharedPref.edit();
+												editor.putString("key 4", receiver_loc);
+												editor.putString("key 5", receiver_contact);
+												editor.putString("key 6", receiver_name);
+												editor.putString("key 9", userNumber);
+												editor.putString("key 10", userName);
+												editor.apply();
+												Intent intent = new Intent(user_parceltransaction.this, user_paymentmethod.class);
+												// release lock prevention
+												if (wakeLock.isHeld())
+													wakeLock.release();
+
+												startActivity(intent);
+											}
+										}
+									});
+
+
+									bottomSheetDialog.setContentView(bottomSheetView2);
+									bottomSheetDialog.show();
 								}
-
-								Intent intent = new Intent(user_parceltransaction.this, user_paymentmethod.class);
-								// release lock prevention
-								if (wakeLock.isHeld())
-									wakeLock.release();
-
-								startActivity(intent);
 							}
+
 						});
-						bottomSheetDialog.setContentView(bottomSheetView2);
+						bottomSheetDialog.setContentView(bottomSheetView);
 						bottomSheetDialog.show();
 					}
-				});
-				bottomSheetDialog.setContentView(bottomSheetView);
-				bottomSheetDialog.show();
+				}
 			}
 		});
 
@@ -416,6 +421,12 @@ public class user_parceltransaction extends FragmentActivity implements OnMapRea
 	}
 
 	@Override
+	protected void onPause() {
+		super.onPause();
+		locationManager.removeUpdates(this);
+	}
+
+	@Override
 	public void onLocationChanged(Location location) {
 		//Hey, a non null location! Sweet!
 
@@ -430,7 +441,7 @@ public class user_parceltransaction extends FragmentActivity implements OnMapRea
 
 	@Override
 	public void onStatusChanged(String provider, int status, Bundle extras) {
-
+		System.out.println("stat changed");
 	}
 
 	@Override
