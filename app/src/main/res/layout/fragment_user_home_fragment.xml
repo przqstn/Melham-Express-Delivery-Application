@@ -95,7 +95,7 @@
                 android:id="@+id/bookOrder"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="230dp"
+                android:layout_marginLeft="215dp"
                 android:layout_marginTop="590dp"
                 android:background="@drawable/round_corners"
                 android:backgroundTint="#223272"
@@ -103,19 +103,13 @@
                 android:fontFamily="@font/montserrat_medium"
                 android:paddingRight="5dp"
                 android:text="Book Order"
-                android:textColor="@color/white"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.943"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.904" />
+                android:textColor="@color/white" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_gravity="center">
 
