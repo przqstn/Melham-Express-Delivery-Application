@@ -1,14 +1,15 @@
 package com.example.mcc_deliveryapp.Rider;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.view.View;
@@ -24,6 +25,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
 
 import com.example.mcc_deliveryapp.R;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -35,10 +37,17 @@ import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
-import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 
 public class editprofile_fragment extends AppCompatActivity {
+
+    public static final int CAMERA_REQUEST_CODE = 3;
+    public static final int CAMERA_PERM_CODE = 2;
+    public static final int CHOOSE_PICTURE = 1;
 
     private Button btnCancel, btnSaveChanges;
     private ImageButton btnUpload;
@@ -51,6 +60,9 @@ public class editprofile_fragment extends AppCompatActivity {
     private StorageReference storageReference;
 
     private Bitmap bitmap;
+
+
+    String currentPhotoPath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,12 +92,6 @@ public class editprofile_fragment extends AppCompatActivity {
         viewplateNum=findViewById(R.id.riderPlate);
         viewplateNum.setText(plateNum);
 
-
-        if(ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA},
-                    100);
-        }
-
         btnUpload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -114,8 +120,7 @@ public class editprofile_fragment extends AppCompatActivity {
                 btn_takePhoto.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                        startActivityForResult(intent, 2);
+                        askCameraPermission();
                     }
                 });
             }
@@ -229,25 +234,92 @@ public class editprofile_fragment extends AppCompatActivity {
             }
         });
     }
-
     private void choosePicture() {
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(intent, 1);
+        startActivityForResult(intent, CHOOSE_PICTURE);
     }
+
+    private void askCameraPermission(){
+        if(ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.CAMERA}, CAMERA_PERM_CODE);
+        }else{
+            dispatchTakePictureIntent();
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if(requestCode == CAMERA_PERM_CODE){
+            if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                dispatchTakePictureIntent();
+            }else{
+            }
+        }
+    }
+    /*
+    private void openCamera() {
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(intent, 3);
+    }*/
+
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode==1 && resultCode==RESULT_OK && data!=null && data.getData()!=null){
+        if(requestCode==CHOOSE_PICTURE && resultCode==RESULT_OK && data!=null && data.getData()!=null){
             imageUri=data.getData();
             profilePic.setImageURI(imageUri);
-        }else if(requestCode==2 && resultCode==RESULT_OK && data!=null && data.getData()!=null){
-            Bitmap bitmap = (Bitmap) data.getExtras().get("data");
-            profilePic.setImageBitmap(bitmap);
+        }
+        if(requestCode==CAMERA_REQUEST_CODE && resultCode==RESULT_OK && data!=null && data.getData()!=null){
+            File f = new File(currentPhotoPath);
+            imageUri = Uri.fromFile(f);
+            profilePic.setImageURI(imageUri);
+
         }
         imgName="profile_image.jpg";
+    }
+
+
+    private File createImageFile() throws IOException{
+        //Create an image file name
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String imageFileName = "JPEG_" +timeStamp + "_";
+        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File image = File.createTempFile(
+                imageFileName, //prefix
+                ".jpg", //suffix
+                storageDir   //directory
+        );
+
+        //Save a file: path for use with ACTION_VIEW  intents
+        currentPhotoPath = image.getAbsolutePath();
+        return image;
+    }
+
+
+    private void dispatchTakePictureIntent(){
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+        if(takePictureIntent.resolveActivity(getPackageManager())!= null){
+            File photoFile = null;
+            try{
+                photoFile = createImageFile();
+
+            }catch (IOException e){
+
+            }
+            if(photoFile != null){
+                Uri photoUri = FileProvider.getUriForFile(this,
+                        "com.example.android.fileprovider",
+                        photoFile);
+                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
+                startActivityForResult(takePictureIntent, CAMERA_REQUEST_CODE);
+            }
+        }
     }
 
 }
