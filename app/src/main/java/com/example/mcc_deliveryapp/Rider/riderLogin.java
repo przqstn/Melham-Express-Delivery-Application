@@ -50,8 +50,8 @@ public class riderLogin extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rider_login);
-        numberRider = (EditText) findViewById(R.id.edtTextRiderNumber);
-        passRider = (EditText) findViewById(R.id.edtTextRiderPassword);
+        numberRider = findViewById(R.id.edtTextRiderNumber);
+        passRider = findViewById(R.id.edtTextRiderPassword);
         btnLogin = findViewById(R.id.btnLoginRider);
         btnRegister = findViewById(R.id.btnRegisterRider);
         mAuth = FirebaseAuth.getInstance();
@@ -108,11 +108,29 @@ public class riderLogin extends AppCompatActivity {
         forgotPassnext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                rootie = db.getReference("riders");
                 String riderNumF = getTextFromEditText(ForgotPW.findViewById(R.id.forgotNumber));
-                VerifyNum.show();
-                ForgotPW.dismiss();
-                sendVerificationCodeToUser(riderNumF);
+                Query accCheck = rootie.orderByChild("riderphone").equalTo(riderNumF);
+                accCheck.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot snapshot) {
+                        if (snapshot.exists()) {
+                            VerifyNum.show();
+                            ForgotPW.dismiss();
+                            sendVerificationCodeToUser(riderNumF);
+                        }
+
+                        else{
+                            Toast.makeText(forgotPassnext.getContext(), "Account does not exist.", Toast.LENGTH_SHORT).show();
+
+                        }
+
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
 
             }
 
@@ -200,7 +218,11 @@ public class riderLogin extends AppCompatActivity {
                     riderInfo.put("riderpass",password);
                     rootie.child("riders").child(riderNumF).updateChildren(riderInfo);
                     Toast.makeText(riderLogin.this,"Password Updated",Toast.LENGTH_SHORT).show();
+                    numberRider2.setText("");
+                    pwfield.setText("");
+                    pwconfirm.setText("");
                     UpdatePW.dismiss();
+
 
                 }
 
