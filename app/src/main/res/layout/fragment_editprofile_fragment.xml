@@ -23,7 +23,7 @@
             android:orientation="vertical">
 
             <LinearLayout
-                android:id="@+id/riderProfileLayout1"
+                android:id="@+id/ProfileLayout1"
                 android:layout_gravity="top"
                 android:layout_width="match_parent"
                 android:layout_height="287dp"
@@ -37,10 +37,10 @@
                     android:layout_gravity="bottom"
                     android:layout_marginStart="35dp"
                     android:layout_marginBottom="24dp"
-                    android:background="@drawable/borderbutton"
+                    android:background="@drawable/profile_ellipse"
                     android:contentDescription="@string/hi_user"
                     android:padding="1dp"
-                    android:src="@drawable/profilepic" />
+                    android:src="@drawable/rounded" />
 
                 <ImageButton
                     android:id="@+id/btn_upload"
@@ -70,7 +70,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/riderProfileLayout2"
+                android:id="@+id/ProfileLayout2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
@@ -152,7 +152,7 @@
                     android:padding="10dp">
 
                     <TextView
-                        android:id="@+id/textView112"
+                        android:id="@+id/txt_contact"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/montserrat_medium"

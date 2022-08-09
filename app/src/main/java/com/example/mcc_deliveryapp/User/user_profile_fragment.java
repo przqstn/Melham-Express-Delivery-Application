@@ -16,10 +16,12 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.mcc_deliveryapp.MainActivity2;
 import com.example.mcc_deliveryapp.R;
 import com.example.mcc_deliveryapp.Rider.editprofile_fragment;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -50,7 +52,7 @@ public class user_profile_fragment extends Fragment {
     private ImageView profile_user;
 
     private ImageButton btn_editProfile;
-
+    private Button btnUser_Logout;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -58,9 +60,10 @@ public class user_profile_fragment extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_user_profile_fragment, container, false);
         profile_user = view.findViewById(R.id.profile_user);
-        userName = view.findViewById(R.id.user_name);
+        userName = view.findViewById(R.id.txt_name);
         userPhone =  view.findViewById(R.id.user_number);
         btn_editProfile = view.findViewById(R.id.btnUser_EditProfile);
+        btnUser_Logout = view.findViewById(R.id.btnUser_Logout);
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
 
@@ -132,6 +135,16 @@ public class user_profile_fragment extends Fragment {
             }
         });
 
+        btnUser_Logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), MainActivity2.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|
+                                Intent.FLAG_ACTIVITY_CLEAR_TASK |
+                                Intent.FLAG_ACTIVITY_NEW_TASK);
+                view.getContext().startActivity(intent);
+            }
+        });
 
         return view;
     }

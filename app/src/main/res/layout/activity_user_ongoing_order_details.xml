@@ -433,7 +433,7 @@
 
                                 <LinearLayout
                                     android:id="@+id/contact_courier_message"
-                                    android:layout_width="100dp"
+                                    android:layout_width="115dp"
                                     android:layout_height="30dp"
                                     android:layout_gravity="center_horizontal">
 
@@ -442,6 +442,7 @@
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:background="#FFFFFF"
+                                        android:drawableLeft="@drawable/chat"
                                         android:fontFamily="@font/montserrat_bold"
                                         android:text="Message"
                                         android:textColor="@color/black"
@@ -451,7 +452,7 @@
 
                                 <LinearLayout
                                     android:id="@+id/contact_courier_call"
-                                    android:layout_width="100dp"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="30dp"
                                     android:layout_below="@id/courier_details"
                                     android:layout_gravity="center_horizontal"
@@ -460,10 +461,11 @@
 
                                     <Button
                                         android:id="@+id/call_courier"
-                                        android:layout_width="match_parent"
+                                        android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_toRightOf="@id/message_courier"
                                         android:background="#FFFFFF"
+                                        android:drawableLeft="@drawable/call"
                                         android:fontFamily="@font/montserrat_bold"
                                         android:text="Call"
                                         android:textColor="@color/black"
