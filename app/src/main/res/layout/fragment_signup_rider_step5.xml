@@ -15,12 +15,23 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/txtStepFive"
             android:layout_width="match_parent"
             android:layout_height="55dp"
-            android:layout_marginBottom="25dp"
+            android:layout_marginBottom="1dp"
             android:fontFamily="@font/montserrat_semibold"
             android:paddingTop="25dp"
+            android:text="Step 5 of 5"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="25dp"
+            android:fontFamily="@font/montserrat_semibold"
+            android:paddingTop="1dp"
             android:text="Last thing to verify"
             android:textColor="@color/black"
             android:textSize="20sp" />

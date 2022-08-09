@@ -16,10 +16,12 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.mcc_deliveryapp.R;
+import com.example.mcc_deliveryapp.Rider.editprofile_fragment;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
@@ -37,15 +39,18 @@ import java.io.File;
 import java.io.IOException;
 
 public class user_profile_fragment extends Fragment {
-    TextView userName, userPhone;
-    String phone, imgName;
-    View view;
-    //
-    Uri imageUri;
-    FirebaseStorage storage;
-    StorageReference storageReference, imageReference;
+    private TextView userName, userPhone;
+    private String phone, imgName;
+    private View view;
 
-    ImageView profile_user;
+    private Uri imageUri;
+    private FirebaseStorage storage;
+    private StorageReference storageReference, imageReference;
+
+    private ImageView profile_user;
+
+    private ImageButton btn_editProfile;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -55,8 +60,10 @@ public class user_profile_fragment extends Fragment {
         profile_user = view.findViewById(R.id.profile_user);
         userName = view.findViewById(R.id.user_name);
         userPhone =  view.findViewById(R.id.user_number);
+        btn_editProfile = view.findViewById(R.id.btnUser_EditProfile);
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
+
 
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users");
 
@@ -70,6 +77,7 @@ public class user_profile_fragment extends Fragment {
                     if (ds.child("userPhone").getValue().equals(phone)){
                         userName.setText(ds.child("userFullname").getValue(String.class));
                         userPhone.setText(ds.child("userPhone").getValue(String.class));
+
                     }
 
                 }
@@ -113,6 +121,17 @@ public class user_profile_fragment extends Fragment {
         }catch (IOException e){
             e.printStackTrace();
         }
+        btn_editProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), user_editprofile_fragment.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP);
+                intent.putExtra("userPhone", phone);
+                intent.putExtra("userFullname", userName.getText().toString());
+                view.getContext().startActivity(intent);
+            }
+        });
+
 
         return view;
     }

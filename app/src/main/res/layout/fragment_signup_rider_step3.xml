@@ -27,12 +27,23 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/txtStepThree"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:layout_marginBottom="1dp"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:paddingTop="25dp"
+                    android:text="Step 3 of 5"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+                <TextView
                     android:id="@+id/txtRiderVehicleInformation"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="25dp"
                     android:fontFamily="@font/montserrat_semibold"
-                    android:paddingTop="25dp"
+                    android:paddingTop="1dp"
                     android:text="Add Vehicle Information"
                     android:textColor="@color/black"
                     android:textSize="20sp" />
