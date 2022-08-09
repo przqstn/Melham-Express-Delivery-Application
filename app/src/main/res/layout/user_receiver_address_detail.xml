@@ -36,6 +36,7 @@
             android:hint="Receiver address"
             android:padding="12dp"
             android:textSize="15dp"
+            android:focusable="false"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.491"

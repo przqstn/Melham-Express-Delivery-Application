@@ -1,121 +1,307 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/user_record_card"
-    android:layout_width="match_parent"
+    android:layout_width="340dp"
     android:layout_height="wrap_content"
-    android:layout_marginHorizontal="10dp"
-    android:layout_marginTop="10dp"
-    android:layout_marginBottom="20dp"
-    android:scrollbars="vertical"
-    app:cardCornerRadius="20dp">
+    android:layout_gravity="center_horizontal"
+    app:cardUseCompatPadding="true">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="340dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        app:cardUseCompatPadding="true">
 
-        <RelativeLayout
-            android:layout_width="405dp"
-            android:layout_height="381dp"
-            android:padding="10dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_gravity="center_horizontal">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="30dp"
-                android:orientation="vertical">
-
-                <Button
-                    android:id="@+id/btn_complete"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:backgroundTint="@color/button_color1"
-                    android:drawableRight="@drawable/questionmark"
-                    android:fontFamily="@font/montserrat_semibold"
-                    android:text="Completed"
-                    android:textColor="#FFFFFF"
-                    tools:layout_editor_absoluteX="0dp"
-                    tools:layout_editor_absoluteY="16dp" />
+                android:layout_gravity="center_horizontal">
 
                 <TextView
-                    android:id="@+id/pickupLocation"
-                    android:layout_width="match_parent"
-                    android:layout_height="81dp"
-                    android:drawableLeft="@drawable/pckuppoint"
-                    android:fontFamily="@font/montserrat_medium"
-                    android:gravity="center_vertical"
-                    android:text="   Location"
-                    android:textColor="@color/black"
-                    android:textSize="15dp"
-                    tools:layout_editor_absoluteX="25dp"
-                    tools:layout_editor_absoluteY="329dp" />
-
-                <TextView
-                    android:id="@+id/dropOffLocation"
-                    android:layout_width="match_parent"
-                    android:layout_height="75dp"
-                    android:drawableLeft="@drawable/locationpin"
-                    android:fontFamily="@font/montserrat_medium"
-                    android:gravity="center_vertical"
-                    android:text="   Location"
-                    android:textColor="@color/black"
-                    android:textSize="15dp"
-                    tools:layout_editor_absoluteX="2dp"
-                    tools:layout_editor_absoluteY="371dp" />
-
-                <TextView
-                    android:id="@+id/user_record_orderID"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="TextView" />
-
-                <TextView
-                    android:id="@+id/vehicleRecord"
-                    android:layout_width="match_parent"
-                    android:layout_height="43dp"
-                    android:fontFamily="@font/montserrat_medium"
-                    android:gravity=""
-                    android:text="Type of vehicle:"
-                    android:textColor="@color/black"
-                    android:textSize="15dp"
-                    tools:layout_editor_absoluteX="6dp"
-                    tools:layout_editor_absoluteY="410dp" />
-
-                <TextView
-                    android:id="@+id/remarkRecord"
-                    android:layout_width="match_parent"
-                    android:layout_height="58dp"
-                    android:layout_alignBottom="@+id/button"
-                    android:background="@drawable/borders03"
-                    android:fontFamily="@font/montserrat_medium"
-                    android:gravity="center"
-                    android:text="remarks"
-                    android:textColor="@color/black"
-                    android:textSize="15dp"
-                    tools:layout_editor_absoluteX="1dp"
-                    tools:layout_editor_absoluteY="189dp" />
-
-
-                <TextView
-                    android:id="@+id/priceRecord"
-                    android:layout_width="match_parent"
-                    android:layout_height="56dp"
-                    android:fontFamily="@font/montserrat_medium"
-                    android:gravity=""
-                    android:paddingLeft="190dp"
-                    android:textAlignment="viewEnd"
-                    android:textColor="@color/black"
-                    android:textSize="15dp"
-                    tools:layout_editor_absoluteX="1dp"
-                    tools:layout_editor_absoluteY="450dp" />
+                    android:background="#223272"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:padding="10dp"
+                    android:text="Completed Order"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/white"
+                    android:textSize="15dp" />
 
             </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal">
+
+            <RelativeLayout
+                android:id="@+id/pickuplinearlayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:layout_marginBottom="5dp"
+                android:padding="5dp">
+
+                <ImageView
+                    android:id="@+id/sender_loc_icon"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:src="@drawable/pickup" />
+
+                <TextView
+                    android:id="@+id/txt_sender_loc"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@+id/sender_loc_icon"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:text="Sender Location"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:id="@+id/txtsendernameID"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txt_sender_loc"
+                    android:layout_marginLeft="50dp"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:text="Sender name: "
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txt_sender_name"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txt_sender_loc"
+                    android:layout_toRightOf="@+id/txtsendernameID"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:text="Sender name"
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtsendercontactID"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txtsendernameID"
+                    android:layout_marginLeft="50dp"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:text="Sender Contact: "
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txt_sender_contact"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txt_sender_name"
+                    android:layout_toRightOf="@+id/txtsendercontactID"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:text="Sender Contact"
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/dropofflinearlayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/pickuplinearlayout"
+                android:layout_marginBottom="5dp"
+                android:padding="5dp">
+
+                <ImageView
+                    android:id="@+id/receiver_loc_icon"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:src="@drawable/location" />
+
+                <TextView
+                    android:id="@+id/txt_receiver_loc"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@+id/receiver_loc_icon"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:text="Receiver Location"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:id="@+id/txtreceivernameID"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txt_receiver_loc"
+                    android:layout_marginLeft="50dp"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:text="Receiver name: "
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txt_receiver_name"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txt_receiver_loc"
+                    android:layout_toRightOf="@+id/txtreceivernameID"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:text="Receiver name"
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtreceivercontactID"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txtreceivernameID"
+                    android:layout_marginLeft="50dp"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:text="Receiver Contact: "
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txt_receiver_contact"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txt_receiver_name"
+                    android:layout_toRightOf="@+id/txtreceivercontactID"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:text="Receiver Contact"
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/separator"
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:layout_below="@+id/dropofflinearlayout"
+                android:layout_marginTop="10dp">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center_horizontal">
+
+                    <LinearLayout
+                        android:layout_width="290dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="#9F9F9F"
+                            android:fontFamily="@font/montserrat_bold"
+                            android:textAlignment="center"
+                            android:textColor="@color/white"
+                            android:textSize="1dp" />
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/orderID_details"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/separator"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:padding="5dp">
+
+                <TextView
+                    android:id="@+id/orderID_text2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:text="ORDER ID: "
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/user_home_orderID"
+                    android:layout_width="210dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txt_receiver_loc"
+                    android:layout_toRightOf="@id/orderID_text2"
+                    android:drawableEnd="@drawable/ic_baseline_content_copy_24"
+                    android:drawableTint="@color/textGray"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:text="Parcel Order ID"
+                    android:textColor="@color/black" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/price_details"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/orderID_details"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="1dp"
+                android:layout_marginBottom="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/price_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/montserrat_medium"
+                            android:padding="10dp"
+                            android:text="Order Total:"
+                            android:textAlignment="center"
+                            android:textColor="@color/black"
+                            android:textSize="16dp" />
+
+                        <TextView
+                            android:id="@+id/txt_price"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_toRightOf="@+id/price_text"
+                            android:fontFamily="@font/montserrat_medium"
+                            android:padding="10dp"
+                            android:text="Price : 0.00"
+                            android:textAlignment="center"
+                            android:textColor="@color/black"
+                            android:textSize="16dp" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
         </RelativeLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </RelativeLayout>
+
 </androidx.cardview.widget.CardView>

@@ -39,20 +39,16 @@ public class record_adapter2 extends FirebaseRecyclerAdapter<
     {
 
 
-//        holder.OrderID.setText(model.getOrderID());
-        holder.customernotes.setText(model.getCustomerNotes());
-        holder.fee.setText(model.getFee());
-//        holder.parcelstatus.setText(model.getParcelstatus());
-//        holder.receivercontact.setText(model.getReceivercontact());
+        holder.receivercontact.setText(model.getReceivercontact());
+        holder.receivername.setText(model.getReceivername());
         holder.receiverlocation.setText(model.getReceiverlocation());
-//        holder.receivername.setText(model.getReceivername());
-//        holder.ridername.setText(model.getRidername());
-//        holder.ridernum.setText(model.getRidernum());
-//        holder.sendercontact.setText(model.getSendercontact());
+        holder.sendercontact.setText(model.getSendercontact());
+        holder.sendername.setText(model.getSendername());
         holder.senderlocation.setText(model.getSenderlocation());
-//        holder.sendername.setText(model.getSendername());
-        holder.vehicle.setText(model.getVehicletype());
+//		holder.vehicletype.setText(model.getVehicletype());
+        holder.fee.setText(model.getFee());
         holder.orderID.setText(model.getOrderID());
+//		holder.customernotes.setText("Notes:" + model.getCustomerNotes());
     }
 
     // Function to tell the class about the Card view
@@ -82,18 +78,23 @@ public class record_adapter2 extends FirebaseRecyclerAdapter<
     // view (here "person.xml")
     class recordViewholder
             extends RecyclerView.ViewHolder {
-        TextView senderlocation, receiverlocation, customernotes, fee, orderID, vehicle ;
+        TextView receivercontact,receiverlocation,receivername,sendercontact,senderlocation,
+                sendername, vehicletype, customernotes,fee, orderID;
         Context context;
         public recordViewholder(@NonNull View itemView)
         {
             super(itemView);
 
-            senderlocation = itemView.findViewById(R.id.pickupLocation);
-            receiverlocation = itemView.findViewById(R.id.dropOffLocation);
-            customernotes = itemView.findViewById(R.id.remarkRecord);
-            vehicle = itemView.findViewById(R.id.vehicleRecord);
-            fee = itemView.findViewById(R.id.priceRecord);
-            orderID = itemView.findViewById(R.id.user_record_orderID);
+            receivercontact = itemView.findViewById(R.id.txt_receiver_contact);
+            receiverlocation = itemView.findViewById(R.id.txt_receiver_loc);
+            receivername = itemView.findViewById(R.id.txt_receiver_name);
+//			customernotes = itemView.findViewById(R.id.txt_note);
+            sendercontact = itemView.findViewById(R.id.txt_sender_contact);
+            senderlocation = itemView.findViewById(R.id.txt_sender_loc);
+            sendername = itemView.findViewById(R.id.txt_sender_name);
+//			vehicletype = itemView.findViewById(R.id.txt_vehicletype);
+            fee = itemView.findViewById(R.id.txt_price);
+            orderID = itemView.findViewById(R.id.user_home_orderID);
             CardView cv = (CardView) itemView.findViewById(R.id.user_record_card);
 
             context = itemView.getContext();
