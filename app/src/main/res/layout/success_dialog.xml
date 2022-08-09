@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:fontFamily="@font/montserrat_semibold"
-        android:text="Successfuly Registered!"
+        android:text="Successfully Registered!"
         android:textColor="@color/black"
         android:textSize="24sp"
         android:textStyle="bold"
@@ -37,12 +37,12 @@
         android:id="@+id/btnSuccessRegRider"
         android:layout_width="200dp"
         android:layout_height="65dp"
-        android:fontFamily="@font/montserrat_medium"
-        android:text="Okay"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
-        android:textColor="@color/white"
         android:background="@drawable/graphics_button_1"
+        android:fontFamily="@font/montserrat_medium"
+        android:text="Okay"
+        android:textColor="@color/white"
         android:textSize="20dp"
-        android:textStyle="bold"/>
+        android:textStyle="bold" />
 </LinearLayout>
