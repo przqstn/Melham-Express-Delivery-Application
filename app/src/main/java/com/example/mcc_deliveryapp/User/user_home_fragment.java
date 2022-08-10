@@ -152,6 +152,6 @@ public class user_home_fragment extends Fragment {
     @Override
     public void onStop() {
         super.onStop();
-        home_adapter.stopListening();
+//        home_adapter.stopListening();
     }
 }
