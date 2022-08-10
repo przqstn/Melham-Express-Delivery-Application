@@ -8,13 +8,16 @@ import androidx.core.content.ContextCompat;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.telephony.SmsManager;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -208,19 +211,6 @@ public class user_ongoing_order_details extends AppCompatActivity {
             }
         });
 
-        btn_trackCourier.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(user_ongoing_order_details.this, user_track_rider.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                intent.putExtra("orderID",  orderID);
-                intent.putExtra("phonenum", phonenum);
-                intent.putExtra("username", name);
-                intent.putExtra("ridername",  riderName);
-                startActivity(intent);
-            }
-        });
-
         btn_message_courier.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -295,9 +285,11 @@ public class user_ongoing_order_details extends AppCompatActivity {
     public void onBackPressed()
     {
         Intent intent = new Intent(user_ongoing_order_details.this, user_navigation.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         intent.putExtra("phonenum", phonenum);
         intent.putExtra("username", name);
         intent.putExtra("orderID", orderID);
         startActivity(intent);
     }
+
 }

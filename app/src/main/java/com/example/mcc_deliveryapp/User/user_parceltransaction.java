@@ -38,6 +38,8 @@ import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
 
 import com.example.mcc_deliveryapp.R;
+import com.example.mcc_deliveryapp.Rider.rider_dashboard;
+import com.example.mcc_deliveryapp.Rider.take_order;
 import com.example.mcc_deliveryapp.User.Module.DirectionFinder;
 import com.example.mcc_deliveryapp.User.Module.DirectionFinderListener;
 import com.example.mcc_deliveryapp.User.Module.Route;
@@ -119,6 +121,8 @@ public class user_parceltransaction extends FragmentActivity implements Location
 
 	EditText receiverloc, receivercontact, receivername;
 
+	String userNumber, userName;
+
 	private static final String TAG = user_parceltransaction.class.getSimpleName();
 	private LatLng lastKnownLocation;
 	private static final int DEFAULT_ZOOM = 15;
@@ -133,8 +137,8 @@ public class user_parceltransaction extends FragmentActivity implements Location
 		Places.initialize(this, GOOGLE_API_KEY);
 		requestPermission();
 		Intent intent = getIntent();
-		String userNumber = intent.getStringExtra("phonenum");
-		String userName = intent.getStringExtra("username");
+		userNumber = intent.getStringExtra("phonenum");
+		userName = intent.getStringExtra("username");
 
 
 		SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -155,18 +159,6 @@ public class user_parceltransaction extends FragmentActivity implements Location
 		@SuppressLint("InvalidWakeLockTag") PowerManager.WakeLock wakeLock = powerManager.newWakeLock(PowerManager.FULL_WAKE_LOCK, "My Lock");
 		wakeLock.acquire(10 * 60 * 1000L /*10 minutes*/);
 
-		// This callback will only be called when MyFragment is at least Started.
-		OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
-			@Override
-			public void handleOnBackPressed() {
-				Intent intent = new Intent(user_parceltransaction.this, user_permission.class);
-				intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-				intent.putExtra("username", userName);
-				intent.putExtra("phonenum", userNumber);
-				startActivity(intent);
-			}
-		};
-		this.getOnBackPressedDispatcher().addCallback(this, callback);
 
 		etOrigin.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -725,5 +717,13 @@ public class user_parceltransaction extends FragmentActivity implements Location
 
 		}
 	}
-
+	@Override
+	public void onBackPressed()
+	{
+		Intent intent = new Intent(user_parceltransaction.this, user_permission.class);
+		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+		intent.putExtra("username", userName);
+		intent.putExtra("phonenum", userNumber);
+		startActivity(intent);
+	}
 }
