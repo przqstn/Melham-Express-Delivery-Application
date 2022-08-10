@@ -95,14 +95,6 @@ public class user_profile_fragment extends Fragment {
 
 
         });
-
-        profile_user.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                choosePicture();
-            }
-        });
-
         //retrieved courier's profile picture from firebase storage
         imageReference = FirebaseStorage.getInstance().getReference().child("user/"+phone+"/profile_image.jpg");
         try{
@@ -147,56 +139,5 @@ public class user_profile_fragment extends Fragment {
         });
 
         return view;
-    }
-    //upload picture for user profile
-    private void choosePicture() {
-        Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(intent, 1);
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode==1 && resultCode==RESULT_OK && data!=null && data.getData()!=null){
-            imageUri=data.getData();
-            profile_user.setImageURI(imageUri);
-            imgName="profile_image.jpg";
-            uploadPicture();
-        }
-    }
-    //upload method
-    private void uploadPicture() {
-        final ProgressDialog pd= new ProgressDialog(view.getContext());
-        pd.setTitle("Uploading Image");
-        pd.show();
-
-        StorageReference riversRef=storageReference.child("user/"+phone+"/"+imgName);
-        riversRef.putFile(imageUri)
-                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        pd.dismiss();
-
-
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        pd.dismiss();
-
-                    }
-                })
-                .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
-                        double progressPercent = (100.00 * snapshot.getBytesTransferred() / snapshot.getTotalByteCount());
-                        pd.setMessage("Percentage: " + (int) progressPercent +"%");
-                    }
-                });
-
-
     }
 }
