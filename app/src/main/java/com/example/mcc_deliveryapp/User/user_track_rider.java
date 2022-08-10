@@ -411,11 +411,6 @@ public class user_track_rider extends FragmentActivity implements OnMapReadyCall
 
         for (Route route : routes) {
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(route.startLocation, 16));
-            originMarkers.add(mMap.addMarker(new MarkerOptions()
-                            .icon(bitmapDescriptorFromVector(user_track_rider.this, R.drawable.pickup))
-                            .title(route.startAddress)
-                            .position(route.startLocation)
-            ));
 
             destinationMarkers.add(mMap.addMarker(new MarkerOptions()
                     .icon(bitmapDescriptorFromVector(user_track_rider.this, R.drawable.location))
