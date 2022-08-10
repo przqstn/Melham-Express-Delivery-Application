@@ -44,6 +44,7 @@ public class myadapter2 extends FirebaseRecyclerAdapter<model, myadapter2.myview
 		holder.vehicletype.setText(model.getVehicletype());
 		holder.fee.setText("₱"+model.getFee());
 		holder.orderID.setText(model.getOrderID());
+		holder.defaultUserNum.setText(model.getDefaultUserNum());
 //		holder.customernotes.setText("Notes:" + model.getCustomerNotes());
 	}
 
@@ -69,7 +70,7 @@ public class myadapter2 extends FirebaseRecyclerAdapter<model, myadapter2.myview
 
 
 		TextView receivercontact,receiverlocation,receivername,sendercontact,senderlocation,
-				sendername, vehicletype, customernotes,fee, orderID;
+				sendername, vehicletype, customernotes,fee, orderID, defaultUserNum;
 		Button copyID;
 
 		//Database Realtime
@@ -90,6 +91,7 @@ public class myadapter2 extends FirebaseRecyclerAdapter<model, myadapter2.myview
 			sendername = itemView.findViewById(R.id.txt_sender_name);
 			vehicletype = itemView.findViewById(R.id.txt_vehicletype);
 			fee = itemView.findViewById(R.id.txt_price);
+			defaultUserNum = itemView.findViewById(R.id.inv_usernum);
 			orderID = itemView.findViewById(R.id.user_home_orderID);
 			copyID = itemView.findViewById(R.id.copyOrderID);
 
@@ -119,7 +121,7 @@ public class myadapter2 extends FirebaseRecyclerAdapter<model, myadapter2.myview
 					intent.putExtra("username", riderName);
 					intent.putExtra("vehicle", vehicletype.getText().toString());
 					intent.putExtra("orderID", orderID.getText().toString());
-					intent.putExtra("senderContact", sendercontact.getText().toString()); //line 103 Added intent.putExtra
+					intent.putExtra("senderContact", defaultUserNum.getText().toString()); //line 103 Added intent.putExtra
 					context.startActivity(intent);
 				}
 			});
