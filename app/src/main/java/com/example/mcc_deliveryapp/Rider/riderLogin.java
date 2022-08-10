@@ -40,7 +40,7 @@ public class riderLogin extends AppCompatActivity {
     EditText numberRider,passRider, numberRider2;
     Button btnLogin;
     Button btnRegister, forgotPassnext, btnVerify, updatePW;
-    TextView forgotPass;
+    TextView forgotPass, errorNumber, errorPass;
     FirebaseAuth mAuth;
     FirebaseDatabase db = FirebaseDatabase.getInstance();
     String verificationCodeBySystem;
@@ -54,6 +54,8 @@ public class riderLogin extends AppCompatActivity {
         passRider = findViewById(R.id.edtTextRiderPassword);
         btnLogin = findViewById(R.id.btnLoginRider);
         btnRegister = findViewById(R.id.btnRegisterRider);
+        errorNumber = findViewById(R.id.errorNumber);
+        errorPass = findViewById(R.id.errorPass);
         mAuth = FirebaseAuth.getInstance();
         forgotPass = findViewById(R.id.forgotPass);
 
@@ -245,15 +247,25 @@ public class riderLogin extends AppCompatActivity {
 
         if(TextUtils.isEmpty(number))
         {
-            numberRider.setError("Number Required");
+            errorNumber.setText("Number Required");
+            errorNumber.setVisibility(View.VISIBLE);
             numberRider.requestFocus();
             return;
         }
+        else
+        {
+            errorNumber.setVisibility(View.GONE);
+        }
         if(TextUtils.isEmpty(pass))
         {
-            passRider.setError("Password Required");
+            errorPass.setText("Password Required");
+            errorPass.setVisibility(View.VISIBLE);
             passRider.requestFocus();
             return;
+        }
+        else
+        {
+            errorPass.setVisibility(View.GONE);
         }
         String riderNumEntered = numberRider.getText().toString().trim();
         String riderpassEntered = passRider.getText().toString().trim();
@@ -264,7 +276,6 @@ public class riderLogin extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                 if (snapshot.exists()) {
-                    numberRider.setError(null);
                     String riderpass = snapshot.child(riderNumEntered).child("riderpass").getValue(String.class);
                     String ridervehicle = snapshot.child(riderNumEntered).child("vehicletype").getValue(String.class);
                     String ridername = snapshot.child(riderNumEntered).child("name").getValue(String.class);
@@ -281,15 +292,19 @@ public class riderLogin extends AppCompatActivity {
                     }
 
                     else {
-                        passRider.setError("Wrong Password");
-                        }
+                        errorPass.setText("Wrong Password");
+                        errorPass.setVisibility(View.VISIBLE);
 
+                        }
 
                 }
 
                 else{
-                numberRider.setError("This number is not registered yet");
-            }
+                    errorNumber.setText("Account does not exist");
+                    errorNumber.setVisibility(View.VISIBLE);
+                    errorPass.setVisibility(View.GONE);
+
+                }
             }
 
 

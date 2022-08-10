@@ -58,6 +58,16 @@
                         android:textSize="16sp" />
 
                     <TextView
+                        android:id="@+id/emptyName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:text="Required"
+                        android:textColor="#FF0033"
+                        android:textSize="12sp"
+                        android:visibility="gone" />
+
+                    <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/montserrat_medium"
@@ -84,6 +94,16 @@
                         android:paddingTop="15dp"
                         android:paddingBottom="15dp"
                         android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/emptyNum"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:text="Required"
+                        android:textColor="#FF0033"
+                        android:textSize="12sp"
+                        android:visibility="gone" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -122,6 +142,24 @@
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <TextView
+                        android:id="@+id/emptyPass"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:text="Password must have at least 6 characters, one uppercase, lowercase, and number."
+                        android:textColor="#FF0033"
+                        android:textSize="12sp"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/invalidPass"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="TextView"
+                        android:textColor="#FF0033"
+                        android:visibility="gone" />
+
+                    <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/montserrat_medium"
@@ -157,9 +195,22 @@
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <TextView
-                        android:id="@+id/Hashpassword"
+                        android:id="@+id/emptyConfirm"
                         android:layout_width="match_parent"
-                        android:layout_height="0dp" />
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:text="Passwords do not match"
+                        android:textColor="#FF0033"
+                        android:textSize="12sp"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/invalidConfirm"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="TextView"
+                        android:textColor="#FF0033"
+                        android:visibility="gone" />
 
                     <Button
                         android:id="@+id/btn_createAccount"

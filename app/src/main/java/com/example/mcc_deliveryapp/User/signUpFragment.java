@@ -45,7 +45,7 @@ public class signUpFragment extends Fragment {
     String verificationCodeBySystem_user;
     TextInputLayout textInputPassword;
     EditText etCode_user;
-    TextView userName, userNumber;
+    TextView userName, userNumber, emptyName, emptyNum, emptyPass, emptyConfirm, invalidPass, invalidConfirm;
     //Database Realtime
     FirebaseDatabase root;
     DatabaseReference DbRef;
@@ -64,6 +64,12 @@ public class signUpFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_sign_up, container, false);
 
         // Initialization of text
+        emptyName = view.findViewById(R.id.emptyName);
+        emptyNum = view.findViewById(R.id.emptyNum);
+        emptyPass = view.findViewById(R.id.emptyPass);
+        emptyConfirm = view.findViewById(R.id.emptyConfirm);
+        invalidPass = view.findViewById(R.id.invalidPass);
+        invalidConfirm = view.findViewById(R.id.invalidConfirm);
 
         editTxt_fullname = view.findViewById(R.id.edTextUserName);
         editTxt_phoneNum = view.findViewById(R.id.edTextPhoneNo);
@@ -71,6 +77,7 @@ public class signUpFragment extends Fragment {
         editTxt_Cpassword = view.findViewById(R.id.edTextConfirmPass);
         btn_createAcc= view.findViewById(R.id.btn_createAccount);
         textInputPassword = view.findViewById(R.id.edTextPassL);
+
         btn_createAcc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -79,32 +86,63 @@ public class signUpFragment extends Fragment {
 
                 if(TextUtils.isEmpty(editTxt_fullname.getText().toString()))
                 {
-                    editTxt_fullname.setError("Required");
+                    emptyName.setText("Required");
+                    emptyName.setVisibility(view.VISIBLE);
+
                     clear = false;
+
                     return;
+
                 }
-                else if(TextUtils.isEmpty(editTxt_phoneNum.getText().toString()))
+                 else if(TextUtils.isEmpty(editTxt_phoneNum.getText().toString()))
                 {
-                    editTxt_phoneNum.setError("Required");
+                    emptyNum.setText("Required");
+                    emptyNum.setVisibility(view.VISIBLE);
+
                     clear = false;
                     return;
                 }
                 else if(TextUtils.isEmpty(editTxt_password.getText().toString()))
                 {
-                    editTxt_password.setError("Required");
+                    emptyPass.setText("Required");
+                    emptyPass.setVisibility(view.VISIBLE);
+
                     clear = false;
                     return;
                 }
                 else if(TextUtils.isEmpty(editTxt_Cpassword.getText().toString()))
                 {
-                    editTxt_Cpassword.setError("Required");
+                    emptyConfirm.setText("Required");
+                    emptyConfirm.setVisibility(view.VISIBLE);
+
                     clear = false;
                     return;
                 }
 
                 else
                 {
+
                     clear = true;
+                }
+                if (editTxt_fullname.length()!=0)
+                {
+                    emptyName.setVisibility(view.GONE);
+
+                }
+                if (editTxt_phoneNum .length()!=0)
+                {
+                    emptyNum.setVisibility(view.GONE);
+
+                }
+                if (editTxt_password.length()!=0)
+                {
+                    emptyPass.setVisibility(view.GONE);
+
+                }
+                if (editTxt_Cpassword.length()!=0)
+                {
+                    emptyConfirm.setVisibility(view.GONE);
+
                 }
                 String password = editTxt_password.getText().toString();
                 String pwConfirm = editTxt_Cpassword.getText().toString();
@@ -124,15 +162,18 @@ public class signUpFragment extends Fragment {
                         upper++;
                     }
                 }
+
                 //check if password satisfies conditions
                 if(!uppercase || !lowercase || !min6 || digits == 0)
                 {
-                    editTxt_password.setError("Password most have at least 6 characters, one uppercase, lowercase, and number.");
+                    invalidPass.setText("Password most have at least 6 characters, one uppercase, lowercase, and number.");
+                    invalidPass.setVisibility(view.VISIBLE);
 
                 }
                 // add confirm password function
                 else if (min6 && uppercase && lowercase && digits >=1)
                 {
+                    invalidPass.setVisibility(view.GONE);
 
                     if (password.equals(pwConfirm))
                     {
@@ -140,7 +181,8 @@ public class signUpFragment extends Fragment {
                         PWgood = true;
                     }
                     else {
-                        editTxt_Cpassword.setError("Passwords do not match");
+                        invalidConfirm.setText("Passwords do not match.");
+                        invalidConfirm.setVisibility(view.VISIBLE);
 
                     }
 
