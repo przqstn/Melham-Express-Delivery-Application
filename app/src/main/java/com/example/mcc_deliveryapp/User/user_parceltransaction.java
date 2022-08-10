@@ -338,17 +338,17 @@ public class user_parceltransaction extends FragmentActivity implements Location
 						coarseLocationGranted = result.getOrDefault(
 										Manifest.permission.ACCESS_COARSE_LOCATION,false);
 					}
-					Boolean backgroundLocationGranted = null;
-					if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-						backgroundLocationGranted = result.getOrDefault(
-								Manifest.permission.ACCESS_BACKGROUND_LOCATION,false);
-					}
+//					Boolean backgroundLocationGranted = null;
+//					if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+//						backgroundLocationGranted = result.getOrDefault(
+//								Manifest.permission.ACCESS_BACKGROUND_LOCATION,false);
+//					}
 
 					if (fineLocationGranted != null && fineLocationGranted) {
 								// Precise location access granted.
 					} else if (coarseLocationGranted != null && coarseLocationGranted) {
 								// Only approximate location access granted.
-					} else if (backgroundLocationGranted != null && backgroundLocationGranted){
+//					} else if (backgroundLocationGranted != null && backgroundLocationGranted){
 
 								// only background location granted
 					} else {
@@ -365,8 +365,8 @@ public class user_parceltransaction extends FragmentActivity implements Location
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
 			locationPermissionRequest.launch(new String[] {
 					Manifest.permission.ACCESS_FINE_LOCATION,
-					Manifest.permission.ACCESS_COARSE_LOCATION,
-					Manifest.permission.ACCESS_BACKGROUND_LOCATION
+					Manifest.permission.ACCESS_COARSE_LOCATION
+//					Manifest.permission.ACCESS_BACKGROUND_LOCATION
 			});
 		}
 	}
