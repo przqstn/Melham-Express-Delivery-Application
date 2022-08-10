@@ -26,8 +26,8 @@ import java.util.Objects;
 
 public class myadapter2 extends FirebaseRecyclerAdapter<model, myadapter2.myviewholder> {
 
-	String riderNum;
-	String riderName;
+	private String riderNum;
+	private String riderName;
 
 	public myadapter2(@NonNull FirebaseRecyclerOptions<model> options) {
 		super(Objects.requireNonNull(options));
@@ -121,7 +121,7 @@ public class myadapter2 extends FirebaseRecyclerAdapter<model, myadapter2.myview
 					intent.putExtra("username", riderName);
 					intent.putExtra("vehicle", vehicletype.getText().toString());
 					intent.putExtra("orderID", orderID.getText().toString());
-					intent.putExtra("senderContact", defaultUserNum.getText().toString()); //line 103 Added intent.putExtra
+					intent.putExtra("defaultUserNum", defaultUserNum.getText().toString()); //line 103 Added intent.putExtra
 					context.startActivity(intent);
 				}
 			});

@@ -240,9 +240,7 @@ public class user_parceltransaction extends FragmentActivity implements Location
 						senderloc = bottomSheetView.findViewById(R.id.sender_edTextAddress);
 						senderloc.setText(origin);
 						sendercontact = bottomSheetView.findViewById(R.id.sender_edTextPhoneNumber);
-						sendercontact.setText(userNumber); // line 243 added temporarily
 						sendername = bottomSheetView.findViewById(R.id.sender_name);
-						sendername.setText(userName); // line 245 added temporarily
 
 
 						bottomSheetView.findViewById(R.id.sender_btnConfirm).setOnClickListener(new View.OnClickListener() {
@@ -432,46 +430,9 @@ public class user_parceltransaction extends FragmentActivity implements Location
 			mMap.moveCamera(CameraUpdateFactory
 					.newLatLngZoom(defaultLocation, DEFAULT_ZOOM));
 			mMap.getUiSettings().setMyLocationButtonEnabled(true);
-//			requestPermission();
-//			createLocationRequest();
-//			LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder();
-//			SettingsClient client = LocationServices.getSettingsClient(this);
-//			Task<LocationSettingsResponse> task = client.checkLocationSettings(builder.build());
-//			task.addOnSuccessListener(this, new OnSuccessListener<LocationSettingsResponse>() {
-//				@Override
-//				public void onSuccess(LocationSettingsResponse locationSettingsResponse) {
-//					requestLoc();
-//				}
-//			});
-//
-//			task.addOnFailureListener(this, new OnFailureListener() {
-//				private static final int REQUEST_CHECK_SETTINGS = 0x1;
-//
-//				@Override
-//				public void onFailure(@NonNull Exception e) {
-//					if (e instanceof ResolvableApiException) {
-//						// Location settings are not satisfied, but this can be fixed
-//						// by showing the user a dialog.
-//						try {
-//							// Show the dialog by calling startResolutionForResult(),
-//							// and check the result in onActivityResult().
-//							ResolvableApiException resolvable = (ResolvableApiException) e;
-//							resolvable.startResolutionForResult(user_parceltransaction.this, REQUEST_CHECK_SETTINGS);
-//						} catch (IntentSender.SendIntentException sendEx) {
-//							// Ignore the error.
-//						}
-//					}
-//				}
-//			});
 		}
 	}
-//
-//	protected void createLocationRequest() {
-//		LocationRequest locationRequest = LocationRequest.create();
-//		locationRequest.setInterval(10000);
-//		locationRequest.setFastestInterval(5000);
-//		locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-//	}
+
 
 	@Override
 	protected void onPause() {
