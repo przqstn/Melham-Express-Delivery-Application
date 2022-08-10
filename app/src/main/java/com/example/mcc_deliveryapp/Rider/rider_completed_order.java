@@ -51,7 +51,7 @@ public class rider_completed_order extends AppCompatActivity {
         phonenum = intent.getStringExtra("phonenum");
         orderID = intent.getStringExtra("orderID");
         riderVehicle = intent.getStringExtra("vehicle");
-        String getSenderContact = intent.getStringExtra("senderContact");
+        String getdefaultUserNum = intent.getStringExtra("defaultUserNum");
 
         senderloc = findViewById(R.id.sender_loc2);
         sendername = findViewById(R.id.sender_name2);
@@ -68,8 +68,8 @@ public class rider_completed_order extends AppCompatActivity {
 
         profilePic = findViewById(R.id.rider_profile_completed_order);
 
+        storageReference= FirebaseStorage.getInstance().getReference().child("user/"+getdefaultUserNum+"/profile_image.jpg");
 
-        storageReference= FirebaseStorage.getInstance().getReference().child("user/"+getSenderContact+"/profile_image.jpg");
         try{
             final File file= File.createTempFile("profile_image", "jpg");
             storageReference.getFile(file)
