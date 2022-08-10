@@ -240,7 +240,9 @@ public class user_parceltransaction extends FragmentActivity implements Location
 						senderloc = bottomSheetView.findViewById(R.id.sender_edTextAddress);
 						senderloc.setText(origin);
 						sendercontact = bottomSheetView.findViewById(R.id.sender_edTextPhoneNumber);
+						sendercontact.setText(userNumber); // line 243 added temporarily
 						sendername = bottomSheetView.findViewById(R.id.sender_name);
+						sendername.setText(userName); // line 245 added temporarily
 
 
 						bottomSheetView.findViewById(R.id.sender_btnConfirm).setOnClickListener(new View.OnClickListener() {
