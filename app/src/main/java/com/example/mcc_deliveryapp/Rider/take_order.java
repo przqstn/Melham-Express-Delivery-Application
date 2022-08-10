@@ -7,14 +7,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.mcc_deliveryapp.R;
 import com.google.firebase.database.ChildEventListener;
@@ -36,7 +41,6 @@ public class take_order extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_take_order);
-        requestPermission();
 
         Intent intent = getIntent();
         name = intent.getStringExtra("username");
@@ -44,6 +48,8 @@ public class take_order extends AppCompatActivity {
         orderID = intent.getStringExtra("orderID");
         riderVehicle = intent.getStringExtra("vehicle");
         System.out.println(name);
+
+        requestPermission();
 
         senderloc = findViewById(R.id.sender_loc);
         sendername = findViewById(R.id.sender_name);
@@ -62,10 +68,12 @@ public class take_order extends AppCompatActivity {
         Query query = dr.orderByChild("OrderID").equalTo(orderID);
         System.out.println(orderID);
 
+        if (isLocationEnabled(this)) {
         query.addChildEventListener(
                 new ChildEventListener() {
+                    @SuppressLint("SetTextI18n")
                     @Override
-                    public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                    public void onChildAdded(@NonNull DataSnapshot dataSnapshot, String s) {
                         senderName = dataSnapshot.child("sendername").getValue(String.class);
                         senderLocation = dataSnapshot.child("senderlocation").getValue(String.class);
                         senderContact = dataSnapshot.child("sendercontact").getValue(String.class);
@@ -84,7 +92,7 @@ public class take_order extends AppCompatActivity {
                         order_id.setText(orderID);
                         vehicletype.setText(vehicleType);
                         usernote.setText(senderNote);
-                        parcelprice.setText("₱"+orderPrice);
+                        parcelprice.setText("₱" + orderPrice);
                     }
 
                     @Override
@@ -117,11 +125,11 @@ public class take_order extends AppCompatActivity {
                         new ChildEventListener() {
                             @Override
                             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                                dr.child(dataSnapshot.getKey()).child("parcelstatus").setValue("Ongoing"+phonenum);
+                                dr.child(dataSnapshot.getKey()).child("parcelstatus").setValue("Ongoing" + phonenum);
                                 dr.child(dataSnapshot.getKey()).child("ridername").setValue(name);
                                 dr.child(dataSnapshot.getKey()).child("ridernum").setValue(phonenum);
                                 String userdefnum = dataSnapshot.child("defaultUserNum").getValue().toString();
-                                dr.child(dataSnapshot.getKey()).child("userParcelStatus").setValue("Ongoing"+userdefnum);
+                                dr.child(dataSnapshot.getKey()).child("userParcelStatus").setValue("Ongoing" + userdefnum);
                             }
 
                             @Override
@@ -142,15 +150,44 @@ public class take_order extends AppCompatActivity {
                             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
                             }
                         });
+
+
                 Intent intent = new Intent(take_order.this, rider_takeorder_map.class);
                 intent.putExtra("phonenum", phonenum);
                 intent.putExtra("username", name);
                 intent.putExtra("vehicle", riderVehicle);
                 intent.putExtra("orderID", orderID);
                 startActivity(intent);
+
             }
         });
+
+    } else {
+            onBackPressed();
+            Toast.makeText(getBaseContext(), "Please turn of Location Service and try again.", Toast.LENGTH_SHORT).show();
+        }
     }
+
+    public static boolean isLocationEnabled(Context context) {
+        int locationMode = 0;
+        String locationProviders;
+        if(android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O)
+        {
+            try
+            {
+                locationMode = Settings.Secure.getInt(context.getContentResolver(), Settings.Secure.LOCATION_MODE);
+            } catch (Settings.SettingNotFoundException e) {
+                e.printStackTrace();
+            }
+            return locationMode != Settings.Secure.LOCATION_MODE_OFF;
+        }
+        else
+        {
+            locationProviders = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.LOCATION_PROVIDERS_ALLOWED);
+            return !TextUtils.isEmpty(locationProviders);
+        }
+    }
+
 
     public void requestPermission(){
         ActivityResultLauncher<String[]> locationPermissionRequest =
@@ -194,6 +231,7 @@ public class take_order extends AppCompatActivity {
         Intent intent = new Intent(take_order.this, rider_dashboard.class);
         intent.putExtra("phonenum", phonenum);
         intent.putExtra("username", name);
+        intent.putExtra("name", name);
         intent.putExtra("vehicle", riderVehicle);
         startActivity(intent);
     }
