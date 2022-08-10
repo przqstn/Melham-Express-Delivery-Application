@@ -1,11 +1,15 @@
 package com.example.mcc_deliveryapp.Rider;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -22,8 +26,8 @@ import java.util.Objects;
 
 public class myadapter2 extends FirebaseRecyclerAdapter<model, myadapter2.myviewholder> {
 
-	String riderNum;
-	String riderName;
+	private String riderNum;
+	private String riderName;
 
 	public myadapter2(@NonNull FirebaseRecyclerOptions<model> options) {
 		super(Objects.requireNonNull(options));
@@ -40,6 +44,7 @@ public class myadapter2 extends FirebaseRecyclerAdapter<model, myadapter2.myview
 		holder.vehicletype.setText(model.getVehicletype());
 		holder.fee.setText("₱"+model.getFee());
 		holder.orderID.setText(model.getOrderID());
+		holder.defaultUserNum.setText(model.getDefaultUserNum());
 //		holder.customernotes.setText("Notes:" + model.getCustomerNotes());
 	}
 
@@ -65,7 +70,8 @@ public class myadapter2 extends FirebaseRecyclerAdapter<model, myadapter2.myview
 
 
 		TextView receivercontact,receiverlocation,receivername,sendercontact,senderlocation,
-				sendername, vehicletype, customernotes,fee, orderID;
+				sendername, vehicletype, customernotes,fee, orderID, defaultUserNum;
+		Button copyID;
 
 		//Database Realtime
 		FirebaseDatabase root;
@@ -85,7 +91,22 @@ public class myadapter2 extends FirebaseRecyclerAdapter<model, myadapter2.myview
 			sendername = itemView.findViewById(R.id.txt_sender_name);
 			vehicletype = itemView.findViewById(R.id.txt_vehicletype);
 			fee = itemView.findViewById(R.id.txt_price);
+			defaultUserNum = itemView.findViewById(R.id.inv_usernum);
 			orderID = itemView.findViewById(R.id.user_home_orderID);
+			copyID = itemView.findViewById(R.id.copyOrderID);
+
+			copyID.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View view) {
+					ClipboardManager clipboardManager = (ClipboardManager)
+							context.getSystemService(context.CLIPBOARD_SERVICE);
+					ClipData clipData = ClipData.newPlainText("nonsense_data",
+							orderID.getText().toString());
+					clipboardManager.setPrimaryClip(clipData);
+					Toast.makeText(context, "Order ID Copied", Toast.LENGTH_SHORT).show();
+				}
+			});
+
 			CardView cv = (CardView) itemView.findViewById(R.id.courier_home_card);
 
 			context = itemView.getContext();
@@ -100,7 +121,7 @@ public class myadapter2 extends FirebaseRecyclerAdapter<model, myadapter2.myview
 					intent.putExtra("username", riderName);
 					intent.putExtra("vehicle", vehicletype.getText().toString());
 					intent.putExtra("orderID", orderID.getText().toString());
-					intent.putExtra("senderContact", sendercontact.getText().toString()); //line 103 Added intent.putExtra
+					intent.putExtra("defaultUserNum", defaultUserNum.getText().toString());
 					context.startActivity(intent);
 				}
 			});

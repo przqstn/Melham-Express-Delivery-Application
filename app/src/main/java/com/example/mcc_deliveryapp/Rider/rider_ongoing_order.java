@@ -36,15 +36,15 @@ import java.util.Objects;
 
 public class rider_ongoing_order extends AppCompatActivity {
 
-    String name, phonenum, orderID, riderVehicle, senderName, senderLocation, senderContact,
+    private String name, phonenum, orderID, riderVehicle, senderName, senderLocation, senderContact,
             receiverName, receiverLocation, receiverContact, vehicleType, senderNote, orderPrice,
             defaultUserNum, customerName, orderPlaced;
-    TextView senderloc, sendername, sendercontact, receiverloc, receivername, receivercontact,
+    private TextView senderloc, sendername, sendercontact, receiverloc, receivername, receivercontact,
             order_id, vehicletype, usernote, parcelprice, customer_name, order_placed;
-    Button btn_CompleteOrder, btn_cancelOrderRider, btn_MessageCustomer, btn_CallCustomer;
+    private Button btn_CompleteOrder, btn_cancelOrderRider, btn_MessageCustomer, btn_CallCustomer;
 
-    StorageReference storageReference; // line 46 Storage Reference
-    ImageView profilePic; // Line 47 Added ImageView
+    private StorageReference storageReference;
+    private ImageView profilePic;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +56,7 @@ public class rider_ongoing_order extends AppCompatActivity {
         phonenum = intent.getStringExtra("phonenum");
         orderID = intent.getStringExtra("orderID");
         riderVehicle = intent.getStringExtra("vehicle");
-        String getSenderContact = intent.getStringExtra("senderContact"); // Added variable
+        String getdefaultUserNum = intent.getStringExtra("defaultUserNum");
 
         senderloc = findViewById(R.id.sender_loc2);
         sendername = findViewById(R.id.sender_name2);
@@ -75,10 +75,9 @@ public class rider_ongoing_order extends AppCompatActivity {
         btn_CompleteOrder = findViewById(R.id.btn_completeOrder);
         btn_cancelOrderRider = findViewById(R.id.btn_cancelOrderRider);
 
-        profilePic = findViewById(R.id.rider_profile_ongoing); // line 78 ImageView declaration
+        profilePic = findViewById(R.id.rider_profile_ongoing);
 
-        // line 80 - 100 image retrieved for profile picture
-        storageReference=FirebaseStorage.getInstance().getReference().child("user/"+getSenderContact+"/profile_image.jpg");
+        storageReference=FirebaseStorage.getInstance().getReference().child("user/"+getdefaultUserNum+"/profile_image.jpg");
         try{
             final File file= File.createTempFile("profile_image", "jpg");
             storageReference.getFile(file)

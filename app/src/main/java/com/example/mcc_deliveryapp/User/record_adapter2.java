@@ -1,11 +1,15 @@
 package com.example.mcc_deliveryapp.User;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -48,6 +52,7 @@ public class record_adapter2 extends FirebaseRecyclerAdapter<
 //		holder.vehicletype.setText(model.getVehicletype());
         holder.fee.setText("₱"+model.getFee());
         holder.orderID.setText(model.getOrderID());
+        holder.riderNum.setText(model.getRidernum());
 //		holder.customernotes.setText("Notes:" + model.getCustomerNotes());
     }
 
@@ -79,7 +84,8 @@ public class record_adapter2 extends FirebaseRecyclerAdapter<
     class recordViewholder
             extends RecyclerView.ViewHolder {
         TextView receivercontact,receiverlocation,receivername,sendercontact,senderlocation,
-                sendername, vehicletype, customernotes,fee, orderID;
+                sendername, vehicletype, customernotes,fee, orderID, riderNum;
+        Button copyID;
         Context context;
         public recordViewholder(@NonNull View itemView)
         {
@@ -94,7 +100,22 @@ public class record_adapter2 extends FirebaseRecyclerAdapter<
             sendername = itemView.findViewById(R.id.txt_sender_name);
 //			vehicletype = itemView.findViewById(R.id.txt_vehicletype);
             fee = itemView.findViewById(R.id.txt_price);
+            riderNum = itemView.findViewById(R.id.inv_ridernum);
             orderID = itemView.findViewById(R.id.user_home_orderID);
+            copyID = itemView.findViewById(R.id.copyOrderID);
+
+            copyID.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ClipboardManager clipboardManager = (ClipboardManager)
+                            context.getSystemService(context.CLIPBOARD_SERVICE);
+                    ClipData clipData = ClipData.newPlainText("nonsense_data",
+                            orderID.getText().toString());
+                    clipboardManager.setPrimaryClip(clipData);
+                    Toast.makeText(context, "Order ID Copied", Toast.LENGTH_SHORT).show();
+                }
+            });
+
             CardView cv = (CardView) itemView.findViewById(R.id.user_record_card);
 
             context = itemView.getContext();
@@ -108,6 +129,7 @@ public class record_adapter2 extends FirebaseRecyclerAdapter<
                     intent.putExtra("phonenum", userNum);
                     intent.putExtra("username", userName);
                     intent.putExtra("orderID", orderID.getText().toString());
+                    intent.putExtra("ridernum", riderNum.getText().toString());
                     context.startActivity(intent);
                 }
             });

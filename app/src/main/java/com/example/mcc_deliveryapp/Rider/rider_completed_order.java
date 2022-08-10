@@ -38,8 +38,8 @@ public class rider_completed_order extends AppCompatActivity {
     TextView senderloc, sendername, sendercontact, receiverloc, receivername, receivercontact,
             order_id, vehicletype, usernote, parcelprice, customerName, order_placed;
 
-    ImageView profilePic; // line 41 added variable
-    StorageReference storageReference; // line 42 added storageReference
+    ImageView profilePic;
+    StorageReference storageReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +51,7 @@ public class rider_completed_order extends AppCompatActivity {
         phonenum = intent.getStringExtra("phonenum");
         orderID = intent.getStringExtra("orderID");
         riderVehicle = intent.getStringExtra("vehicle");
-        String getSenderContact = intent.getStringExtra("senderContact"); // line 40 Added getSenderContact variable
+        String getdefaultUserNum = intent.getStringExtra("defaultUserNum");
 
         senderloc = findViewById(R.id.sender_loc2);
         sendername = findViewById(R.id.sender_name2);
@@ -66,10 +66,10 @@ public class rider_completed_order extends AppCompatActivity {
         order_placed = findViewById(R.id.order_placed);
         customerName = findViewById(R.id.customer_name);
 
-        profilePic = findViewById(R.id.rider_profile_completed_order); // line 69 ImageView declaration
+        profilePic = findViewById(R.id.rider_profile_completed_order);
 
-        // line 72 - 90 image retrieved for profile picture
-        storageReference= FirebaseStorage.getInstance().getReference().child("user/"+getSenderContact+"/profile_image.jpg");
+        storageReference= FirebaseStorage.getInstance().getReference().child("user/"+getdefaultUserNum+"/profile_image.jpg");
+
         try{
             final File file= File.createTempFile("profile_image", "jpg");
             storageReference.getFile(file)

@@ -338,35 +338,29 @@ public class user_parceltransaction extends FragmentActivity implements Location
 						coarseLocationGranted = result.getOrDefault(
 										Manifest.permission.ACCESS_COARSE_LOCATION,false);
 					}
-					Boolean backgroundLocationGranted = null;
-					if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-						backgroundLocationGranted = result.getOrDefault(
-								Manifest.permission.ACCESS_BACKGROUND_LOCATION,false);
-					}
+//					Boolean backgroundLocationGranted = null;
+//					if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+//						backgroundLocationGranted = result.getOrDefault(
+//								Manifest.permission.ACCESS_BACKGROUND_LOCATION,false);
+//					}
 
 					if (fineLocationGranted != null && fineLocationGranted) {
 								// Precise location access granted.
 					} else if (coarseLocationGranted != null && coarseLocationGranted) {
 								// Only approximate location access granted.
-					} else if (backgroundLocationGranted != null && backgroundLocationGranted){
-
-								// only background location granted
 					} else {
-						// No location access granted.
+						onBackPressed();
 					}
 				}
 				);
 
-// ...
-
-// Before you perform the actual permission request, check whether your app
-// already has the permissions, and whether your app needs to show a permission
-// rationale dialog. For more details, see Request permissions.
+		// Before you perform the actual permission request, check whether your app
+		// already has the permissions, and whether your app needs to show a permission
+		// rationale dialog. For more details, see Request permissions.
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
 			locationPermissionRequest.launch(new String[] {
 					Manifest.permission.ACCESS_FINE_LOCATION,
-					Manifest.permission.ACCESS_COARSE_LOCATION,
-					Manifest.permission.ACCESS_BACKGROUND_LOCATION
+					Manifest.permission.ACCESS_COARSE_LOCATION
 			});
 		}
 	}
@@ -426,50 +420,11 @@ public class user_parceltransaction extends FragmentActivity implements Location
 		}
 		else
 		{
-			Log.d(TAG, "Current location is null. Using defaults.");
-			mMap.moveCamera(CameraUpdateFactory
-					.newLatLngZoom(defaultLocation, DEFAULT_ZOOM));
-			mMap.getUiSettings().setMyLocationButtonEnabled(true);
-//			requestPermission();
-//			createLocationRequest();
-//			LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder();
-//			SettingsClient client = LocationServices.getSettingsClient(this);
-//			Task<LocationSettingsResponse> task = client.checkLocationSettings(builder.build());
-//			task.addOnSuccessListener(this, new OnSuccessListener<LocationSettingsResponse>() {
-//				@Override
-//				public void onSuccess(LocationSettingsResponse locationSettingsResponse) {
-//					requestLoc();
-//				}
-//			});
-//
-//			task.addOnFailureListener(this, new OnFailureListener() {
-//				private static final int REQUEST_CHECK_SETTINGS = 0x1;
-//
-//				@Override
-//				public void onFailure(@NonNull Exception e) {
-//					if (e instanceof ResolvableApiException) {
-//						// Location settings are not satisfied, but this can be fixed
-//						// by showing the user a dialog.
-//						try {
-//							// Show the dialog by calling startResolutionForResult(),
-//							// and check the result in onActivityResult().
-//							ResolvableApiException resolvable = (ResolvableApiException) e;
-//							resolvable.startResolutionForResult(user_parceltransaction.this, REQUEST_CHECK_SETTINGS);
-//						} catch (IntentSender.SendIntentException sendEx) {
-//							// Ignore the error.
-//						}
-//					}
-//				}
-//			});
+			onBackPressed();
+			Toast.makeText(getBaseContext(), "Please turn of Location Service and try again.", Toast.LENGTH_SHORT).show();
 		}
 	}
-//
-//	protected void createLocationRequest() {
-//		LocationRequest locationRequest = LocationRequest.create();
-//		locationRequest.setInterval(10000);
-//		locationRequest.setFastestInterval(5000);
-//		locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-//	}
+
 
 	@Override
 	protected void onPause() {

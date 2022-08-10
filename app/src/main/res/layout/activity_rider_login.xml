@@ -47,6 +47,17 @@
                 app:layout_constraintTop_toBottomOf="@+id/imageView9"
                 app:layout_constraintVertical_bias="0.063" />
 
+            <TextView
+                android:id="@+id/errorNumber"
+                android:layout_width="330dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/montserrat_medium"
+                android:text="TextView"
+                android:textColor="#FF0033"
+                android:textSize="12sp"
+                android:visibility="gone" />
+
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -73,6 +84,17 @@
                     tools:ignore="SpeakableTextPresentCheck" />
             </com.google.android.material.textfield.TextInputLayout>
 
+
+            <TextView
+                android:id="@+id/errorPass"
+                android:layout_width="330dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/montserrat_medium"
+                android:text="TextView"
+                android:textColor="#FF0033"
+                android:textSize="12sp"
+                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/forgotPass"
