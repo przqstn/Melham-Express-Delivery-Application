@@ -10,23 +10,34 @@ import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.telephony.SmsManager;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mcc_deliveryapp.R;
 import com.example.mcc_deliveryapp.Rider.RegisterRider;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.firebase.storage.FileDownloadTask;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
+import java.io.File;
+import java.io.IOException;
 
 public class user_ongoing_order_details extends AppCompatActivity {
 
@@ -37,7 +48,12 @@ public class user_ongoing_order_details extends AppCompatActivity {
             order_id, rider_name, vehicletype, usernote, parcelprice, plate_number, orderplaced;
     Button btn_userOrderCompleted, btn_trackCourier, btn_message_courier, btn_call_courier;
 
+    private ImageView profilePic; // line 51 added ImageView variable
+    private StorageReference storageReference; //line 52 added StorageReference
+    String riderContact;
+
     private static final int MY_PERMISSIONS_REQUEST_SEND_SMS =0 ;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +64,7 @@ public class user_ongoing_order_details extends AppCompatActivity {
         name = intent.getStringExtra("username");
         phonenum = intent.getStringExtra("phonenum");
         orderID = intent.getStringExtra("orderID");
+        String rider_num = intent.getStringExtra("ridernum");
 
         senderloc = findViewById(R.id.sender_loc2);
         sendername = findViewById(R.id.sender_name2);
@@ -66,6 +83,29 @@ public class user_ongoing_order_details extends AppCompatActivity {
         plate_number = findViewById(R.id.plate_number);
         btn_message_courier = findViewById(R.id.message_courier);
         btn_call_courier = findViewById(R.id.call_courier);
+
+        profilePic = findViewById(R.id.user_profile_ongoing);
+
+        storageReference= FirebaseStorage.getInstance().getReference().child("rider/"+rider_num+"/profile_image.jpg");
+
+        try{
+            final File file= File.createTempFile("profile_image", "jpg");
+            storageReference.getFile(file)
+                    .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                            Bitmap bitmap= BitmapFactory.decodeFile(file.getAbsolutePath());
+                            profilePic.setImageBitmap(bitmap);
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+
+                        }
+                    });
+        }catch (IOException e){
+            e.printStackTrace();
+        }
 
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         final DatabaseReference dr = database.getReference().child("userparcel");
@@ -92,7 +132,6 @@ public class user_ongoing_order_details extends AppCompatActivity {
                         final FirebaseDatabase database2 = FirebaseDatabase.getInstance();
                         final DatabaseReference dr2 = database2.getReference().child("riders");
                         Query query = dr2.orderByChild("riderphone").equalTo(ridernum);
-
                         query.addChildEventListener(
                                 new ChildEventListener() {
                                     @SuppressLint("SetTextI18n")

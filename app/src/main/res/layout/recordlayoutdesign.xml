@@ -243,15 +243,23 @@
 
                 <TextView
                     android:id="@+id/courier_record_orderID"
-                    android:layout_width="210dp"
+                    android:layout_width="180dp"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/txt_receiver_loc"
                     android:layout_toRightOf="@id/orderID_text2"
-                    android:drawableEnd="@drawable/ic_baseline_content_copy_24"
                     android:drawableTint="@color/textGray"
                     android:fontFamily="@font/montserrat_regular"
                     android:text="Parcel Order ID"
                     android:textColor="@color/black" />
+
+                <Button
+                    android:id="@+id/copyOrderID"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_toRightOf="@id/courier_record_orderID"
+                    android:drawableEnd="@drawable/ic_baseline_content_copy_24"></Button>
+
             </RelativeLayout>
 
             <RelativeLayout

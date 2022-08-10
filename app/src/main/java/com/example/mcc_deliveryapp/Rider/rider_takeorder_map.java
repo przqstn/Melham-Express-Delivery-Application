@@ -10,6 +10,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.location.Address;
+import android.location.Criteria;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
@@ -17,11 +18,16 @@ import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.PowerManager;
+import android.provider.Settings;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
@@ -72,11 +78,42 @@ public class rider_takeorder_map extends FragmentActivity implements OnMapReadyC
     Geocoder geocoder;
     private int locationStatus = 0;
 
+    public LocationManager locationManager;
+    public double latitude;
+    public double longitude;
+    public Criteria criteria;
+    public String bestProvider;
+    private final LatLng defaultLocation = new LatLng(14.5928, 120.9801);
+
     private LatLng riderLocation;
     private GoogleMap mMap;
     private DatabaseReference riderReference;
     private static final int DEFAULT_ZOOM = 18;
     Button back, pickedComplete;
+    private String TAG;
+
+    LocationListener locationListener = new LocationListener() {
+        @Override
+        public void onLocationChanged(Location location) {
+            riderReference.child(phonenum).child("latitude").setValue(location.getLatitude());
+            riderReference.child(phonenum).child("longitude").setValue(location.getLongitude());
+
+            riderLocation = new LatLng(location.getLatitude(), location.getLongitude());
+
+        }
+
+        @Override
+        public void onStatusChanged(String s, int i, Bundle bundle) {
+        }
+
+        @Override
+        public void onProviderEnabled(String s) {
+        }
+
+        @Override
+        public void onProviderDisabled(String s) {
+        }
+    };
 
 
     @SuppressLint("WakelockTimeout")
@@ -88,7 +125,7 @@ public class rider_takeorder_map extends FragmentActivity implements OnMapReadyC
         orderID = intent.getStringExtra("orderID");
         riderVehicle = intent.getStringExtra("vehicle");
 
-
+        requestPermission();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rider_trackmap);
 
@@ -336,6 +373,71 @@ public class rider_takeorder_map extends FragmentActivity implements OnMapReadyC
         }
     }
 
+    public static boolean isLocationEnabled(Context context) {
+        int locationMode = 0;
+        String locationProviders;
+        if(android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O)
+        {
+            try
+            {
+                locationMode = Settings.Secure.getInt(context.getContentResolver(), Settings.Secure.LOCATION_MODE);
+            } catch (Settings.SettingNotFoundException e) {
+                e.printStackTrace();
+            }
+            return locationMode != Settings.Secure.LOCATION_MODE_OFF;
+        }
+        else
+        {
+            locationProviders = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.LOCATION_PROVIDERS_ALLOWED);
+            return !TextUtils.isEmpty(locationProviders);
+        }
+    }
+
+    protected void getLocation() {
+        if (isLocationEnabled(this)) {
+            locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+            criteria = new Criteria();
+            bestProvider = String.valueOf(locationManager.getBestProvider(criteria, true));
+
+            //You can still do this if you like, you might get lucky:
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                // TODO: Consider calling
+                //    ActivityCompat#requestPermissions
+                // here to request the missing permissions, and then overriding
+                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                //                                          int[] grantResults)
+                // to handle the case where the user grants the permission. See the documentation
+                // for ActivityCompat#requestPermissions for more details.
+                return;
+            }
+            Location location = locationManager.getLastKnownLocation(bestProvider);
+            if (location != null) {
+//				Log.e("TAG", "GPS is on");
+                latitude = location.getLatitude();
+                longitude = location.getLongitude();
+                riderReference.child(phonenum).child("latitude").setValue(latitude);
+                riderReference.child(phonenum).child("longitude").setValue(longitude);
+//                lastKnownLocation = new LatLng(latitude, longitude);
+//                requestLoc();
+            }
+            else{
+                Log.d(TAG, "Current location is null. Using defaults.");
+                mMap.moveCamera(CameraUpdateFactory
+                        .newLatLngZoom(defaultLocation, DEFAULT_ZOOM));
+                mMap.getUiSettings().setMyLocationButtonEnabled(true);
+                locationManager.requestLocationUpdates(bestProvider, 1000, 0, locationListener);
+            }
+        }
+        else
+        {
+            Log.d(TAG, "Current location is null. Using defaults.");
+            mMap.moveCamera(CameraUpdateFactory
+                    .newLatLngZoom(defaultLocation, DEFAULT_ZOOM));
+            mMap.getUiSettings().setMyLocationButtonEnabled(true);
+        }
+    }
+
+
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
         mMap = googleMap;
@@ -366,29 +468,6 @@ public class rider_takeorder_map extends FragmentActivity implements OnMapReadyC
 
         mMap.getUiSettings().setZoomControlsEnabled(true);
 
-        LocationListener locationListener = new LocationListener() {
-            @Override
-            public void onLocationChanged(Location location) {
-                onDirectionFinderStart();
-                riderReference.child(phonenum).child("latitude").setValue(location.getLatitude());
-                riderReference.child(phonenum).child("longitude").setValue(location.getLongitude());
-
-                riderLocation = new LatLng(location.getLatitude(), location.getLongitude());
-
-            }
-
-            @Override
-            public void onStatusChanged(String s, int i, Bundle bundle) {
-            }
-
-            @Override
-            public void onProviderEnabled(String s) {
-            }
-
-            @Override
-            public void onProviderDisabled(String s) {
-            }
-        };
 
         LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 
@@ -407,7 +486,44 @@ public class rider_takeorder_map extends FragmentActivity implements OnMapReadyC
         catch (Exception e){
             e.printStackTrace();
         }
+        getLocation();
     }
+    public void requestPermission(){
+        ActivityResultLauncher<String[]> locationPermissionRequest =
+                registerForActivityResult(new ActivityResultContracts
+                                .RequestMultiplePermissions(), result -> {
+                            Boolean fineLocationGranted = null;
+                            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+                                fineLocationGranted = result.getOrDefault(
+                                        Manifest.permission.ACCESS_FINE_LOCATION, false);
+                            }
+                            Boolean coarseLocationGranted = null;
+                            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+                                coarseLocationGranted = result.getOrDefault(
+                                        Manifest.permission.ACCESS_COARSE_LOCATION,false);
+                            }
+
+
+                            if (fineLocationGranted != null && fineLocationGranted) {
+                                // Precise location access granted.
+                            } else if (coarseLocationGranted != null && coarseLocationGranted) {
+                                // Only approximate location access granted.
+//					} else if (backgroundLocationGranted != null && backgroundLocationGranted){
+
+                                // only background location granted
+                            } else {
+                                // No location access granted.
+                            }
+                        }
+                );
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            locationPermissionRequest.launch(new String[] {
+                    Manifest.permission.ACCESS_FINE_LOCATION,
+                    Manifest.permission.ACCESS_COARSE_LOCATION
+            });
+        }
+    }
+
 }
 
 

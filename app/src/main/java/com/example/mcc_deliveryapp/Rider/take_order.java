@@ -1,12 +1,16 @@
 package com.example.mcc_deliveryapp.Rider;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import android.Manifest;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -32,6 +36,7 @@ public class take_order extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_take_order);
+        requestPermission();
 
         Intent intent = getIntent();
         name = intent.getStringExtra("username");
@@ -145,6 +150,42 @@ public class take_order extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    public void requestPermission(){
+        ActivityResultLauncher<String[]> locationPermissionRequest =
+                registerForActivityResult(new ActivityResultContracts
+                                .RequestMultiplePermissions(), result -> {
+                            Boolean fineLocationGranted = null;
+                            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+                                fineLocationGranted = result.getOrDefault(
+                                        Manifest.permission.ACCESS_FINE_LOCATION, false);
+                            }
+                            Boolean coarseLocationGranted = null;
+                            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+                                coarseLocationGranted = result.getOrDefault(
+                                        Manifest.permission.ACCESS_COARSE_LOCATION,false);
+                            }
+
+
+                            if (fineLocationGranted != null && fineLocationGranted) {
+                                // Precise location access granted.
+                            } else if (coarseLocationGranted != null && coarseLocationGranted) {
+                                // Only approximate location access granted.
+//					} else if (backgroundLocationGranted != null && backgroundLocationGranted){
+
+                                // only background location granted
+                            } else {
+                                onBackPressed();
+                            }
+                        }
+                );
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            locationPermissionRequest.launch(new String[] {
+                    Manifest.permission.ACCESS_FINE_LOCATION,
+                    Manifest.permission.ACCESS_COARSE_LOCATION
+            });
+        }
     }
 
     @Override
