@@ -79,7 +79,7 @@
             android:fontFamily="@font/montserrat_medium"
             android:foregroundGravity="center_vertical"
             android:padding="10dp"
-            android:text="Cash/Cash On Delivery"
+            android:text="Cash On Delivery"
             android:textSize="18dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
