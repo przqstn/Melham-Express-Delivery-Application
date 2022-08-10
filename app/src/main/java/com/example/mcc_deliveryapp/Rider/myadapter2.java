@@ -121,7 +121,7 @@ public class myadapter2 extends FirebaseRecyclerAdapter<model, myadapter2.myview
 					intent.putExtra("username", riderName);
 					intent.putExtra("vehicle", vehicletype.getText().toString());
 					intent.putExtra("orderID", orderID.getText().toString());
-					intent.putExtra("defaultUserNum", defaultUserNum.getText().toString()); //line 103 Added intent.putExtra
+					intent.putExtra("defaultUserNum", defaultUserNum.getText().toString());
 					context.startActivity(intent);
 				}
 			});
