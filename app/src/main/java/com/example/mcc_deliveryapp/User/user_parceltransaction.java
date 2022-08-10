@@ -348,25 +348,19 @@ public class user_parceltransaction extends FragmentActivity implements Location
 								// Precise location access granted.
 					} else if (coarseLocationGranted != null && coarseLocationGranted) {
 								// Only approximate location access granted.
-//					} else if (backgroundLocationGranted != null && backgroundLocationGranted){
-
-								// only background location granted
 					} else {
-						// No location access granted.
+						onBackPressed();
 					}
 				}
 				);
 
-// ...
-
-// Before you perform the actual permission request, check whether your app
-// already has the permissions, and whether your app needs to show a permission
-// rationale dialog. For more details, see Request permissions.
+		// Before you perform the actual permission request, check whether your app
+		// already has the permissions, and whether your app needs to show a permission
+		// rationale dialog. For more details, see Request permissions.
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
 			locationPermissionRequest.launch(new String[] {
 					Manifest.permission.ACCESS_FINE_LOCATION,
 					Manifest.permission.ACCESS_COARSE_LOCATION
-//					Manifest.permission.ACCESS_BACKGROUND_LOCATION
 			});
 		}
 	}
@@ -426,10 +420,8 @@ public class user_parceltransaction extends FragmentActivity implements Location
 		}
 		else
 		{
-			Log.d(TAG, "Current location is null. Using defaults.");
-			mMap.moveCamera(CameraUpdateFactory
-					.newLatLngZoom(defaultLocation, DEFAULT_ZOOM));
-			mMap.getUiSettings().setMyLocationButtonEnabled(true);
+			onBackPressed();
+			Toast.makeText(getBaseContext(), "Please turn of Location Service and try again.", Toast.LENGTH_SHORT).show();
 		}
 	}
 
