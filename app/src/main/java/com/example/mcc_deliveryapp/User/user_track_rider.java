@@ -2,6 +2,8 @@ package com.example.mcc_deliveryapp.User;
 
 import static android.content.ContentValues.TAG;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -21,6 +23,8 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -29,7 +33,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mcc_deliveryapp.R;
+import com.example.mcc_deliveryapp.Rider.rider_dashboard;
 import com.example.mcc_deliveryapp.Rider.rider_takeorder_map;
+import com.example.mcc_deliveryapp.Rider.take_order;
 import com.example.mcc_deliveryapp.User.Module.DirectionFinder;
 import com.example.mcc_deliveryapp.User.Module.DirectionFinderListener;
 import com.example.mcc_deliveryapp.User.Module.Route;
@@ -91,6 +97,7 @@ public class user_track_rider extends FragmentActivity implements OnMapReadyCall
         phonenum = intent.getStringExtra("phonenum");
         riderName = intent.getStringExtra("ridername");
 
+        requestPermission();
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_track_rider);
@@ -110,142 +117,179 @@ public class user_track_rider extends FragmentActivity implements OnMapReadyCall
         riderNameUI.setText(riderName);
 
 
+        if (isLocationEnabled(this)) {
+            checkUser.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    for (DataSnapshot parcelSnapshot : snapshot.getChildren()) {
+                        if (parcelSnapshot.child("OrderID").getValue().equals(orderID))
+                        {
+                            riderNumber = parcelSnapshot.child("ridernum").getValue(String.class);
 
-
-
-        checkUser.addValueEventListener(new ValueEventListener() {
-        @Override
-        public void onDataChange(@NonNull DataSnapshot snapshot) {
-            for (DataSnapshot parcelSnapshot : snapshot.getChildren()) {
-                    if (parcelSnapshot.child("OrderID").getValue().equals(orderID))
-                    {
-                        riderNumber = parcelSnapshot.child("ridernum").getValue(String.class);
-
-                    }
-            }
-        }
-
-        @Override
-        public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
-        checkRider.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                List<String> latitudes = new ArrayList<>(Collections.emptyList());
-                List<String> longitudes = new ArrayList<>(Collections.emptyList());
-                List<String> riderphonenum = new ArrayList<>(Collections.emptyList());
-
-                mMap.clear();
-                for (DataSnapshot locationSnapshot : dataSnapshot.getChildren()) {
-                    if (locationSnapshot.child("riderphone").getValue().equals(riderNumber))
-                    {
-                        riderVehicleUI.setText(locationSnapshot.child("vehicletype").getValue().toString());
-                        riderPlateUI.setText(locationSnapshot.child("vehicleplatenumber").getValue().toString());
-                        riderVehicle = (locationSnapshot.child("vehicletype").getValue().toString());
-                        riderLatitude = locationSnapshot.child("latitude").getValue().toString();
-                        String riderphone = locationSnapshot.child("riderphone").getValue().toString();
-                        riderLongitude = locationSnapshot.child("longitude").getValue().toString();
-                        latitudes.add(riderLatitude);
-                        longitudes.add(riderLongitude);
-                        riderphonenum.add(riderphone);
-                        switch (riderVehicle) {
-                            case "Motorcycle":
-                                for (int i = 0; i < latitudes.size(); i++) {
-                                    LatLng latLng = new LatLng(Double.parseDouble(latitudes.get(i)), Double.parseDouble(longitudes.get(i)));
-                                    Marker marker = mMap.addMarker(new MarkerOptions()
-                                            .icon(bitmapDescriptorFromVector(user_track_rider.this, R.drawable.motorcycle))
-                                            .position(latLng)
-                                            .title(riderphonenum.get(i)));
-                                    markerMap.put(riderphonenum.get(i), marker);
-                                }
-
-                                break;
-                            case "Sedan":
-                                for (int i = 0; i < latitudes.size(); i++) {
-                                    LatLng latLng = new LatLng(Double.parseDouble(latitudes.get(i)), Double.parseDouble(longitudes.get(i)));
-                                    Marker marker = mMap.addMarker(new MarkerOptions()
-                                            .icon(bitmapDescriptorFromVector(user_track_rider.this, R.drawable.sedan))
-                                            .position(latLng)
-                                            .title(riderphonenum.get(i)));
-                                    markerMap.put(riderphonenum.get(i), marker);
-                                }
-
-                                break;
-                            case "SUV":
-                                for (int i = 0; i < latitudes.size(); i++) {
-                                    LatLng latLng = new LatLng(Double.parseDouble(latitudes.get(i)), Double.parseDouble(longitudes.get(i)));
-                                    Marker marker = mMap.addMarker(new MarkerOptions()
-                                            .icon(bitmapDescriptorFromVector(user_track_rider.this, R.drawable.suv))
-                                            .position(latLng)
-                                            .title(riderphonenum.get(i)));
-                                    markerMap.put(riderphonenum.get(i), marker);
-                                }
-
-                                break;
-                            case "MPV":
-                                for (int i = 0; i < latitudes.size(); i++) {
-                                    LatLng latLng = new LatLng(Double.parseDouble(latitudes.get(i)), Double.parseDouble(longitudes.get(i)));
-                                    Marker marker = mMap.addMarker(new MarkerOptions()
-                                            .icon(bitmapDescriptorFromVector(user_track_rider.this, R.drawable.mpv))
-                                            .position(latLng)
-                                            .title(riderphonenum.get(i)));
-                                    markerMap.put(riderphonenum.get(i), marker);
-                                }
-
-                                break;
-                            case "Small Truck":
-                                for (int i = 0; i < latitudes.size(); i++) {
-                                    LatLng latLng = new LatLng(Double.parseDouble(latitudes.get(i)), Double.parseDouble(longitudes.get(i)));
-                                    Marker marker = mMap.addMarker(new MarkerOptions()
-                                            .icon(bitmapDescriptorFromVector(user_track_rider.this, R.drawable.truck))
-                                            .position(latLng)
-                                            .title(riderphonenum.get(i)));
-                                    markerMap.put(riderphonenum.get(i), marker);
-                                }
-
-                                break;
                         }
-                        Marker marker = (Marker) markerMap.get(riderNumber);
-                        if (marker != null) {
-                            LatLng pos = marker.getPosition();
-                            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(pos, DEFAULT_ZOOM));
-                        }
-
                     }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
 
                 }
-}
+            });
 
-            private BitmapDescriptor bitmapDescriptorFromVector(user_track_rider user_track_rider, int vectorResId) {
-                Drawable vectorDrawable = ContextCompat.getDrawable(user_track_rider, vectorResId);
-                vectorDrawable.setBounds(0, 0, vectorDrawable.getIntrinsicWidth(), vectorDrawable.getIntrinsicHeight());
-                Bitmap bitmap = Bitmap.createBitmap(vectorDrawable.getIntrinsicWidth(), vectorDrawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
-                Canvas canvas = new Canvas(bitmap);
-                vectorDrawable.draw(canvas);
-                return BitmapDescriptorFactory.fromBitmap(bitmap);
-            }
+            checkRider.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    List<String> latitudes = new ArrayList<>(Collections.emptyList());
+                    List<String> longitudes = new ArrayList<>(Collections.emptyList());
+                    List<String> riderphonenum = new ArrayList<>(Collections.emptyList());
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+                    mMap.clear();
+                    for (DataSnapshot locationSnapshot : dataSnapshot.getChildren()) {
+                        if (locationSnapshot.child("riderphone").getValue().equals(riderNumber))
+                        {
+                            riderVehicleUI.setText(locationSnapshot.child("vehicletype").getValue().toString());
+                            riderPlateUI.setText(locationSnapshot.child("vehicleplatenumber").getValue().toString());
+                            riderVehicle = (locationSnapshot.child("vehicletype").getValue().toString());
+                            riderLatitude = locationSnapshot.child("latitude").getValue().toString();
+                            String riderphone = locationSnapshot.child("riderphone").getValue().toString();
+                            riderLongitude = locationSnapshot.child("longitude").getValue().toString();
+                            latitudes.add(riderLatitude);
+                            longitudes.add(riderLongitude);
+                            riderphonenum.add(riderphone);
+                            switch (riderVehicle) {
+                                case "Motorcycle":
+                                    for (int i = 0; i < latitudes.size(); i++) {
+                                        LatLng latLng = new LatLng(Double.parseDouble(latitudes.get(i)), Double.parseDouble(longitudes.get(i)));
+                                        Marker marker = mMap.addMarker(new MarkerOptions()
+                                                .icon(bitmapDescriptorFromVector(user_track_rider.this, R.drawable.motorcycle))
+                                                .position(latLng)
+                                                .title(riderphonenum.get(i)));
+                                        markerMap.put(riderphonenum.get(i), marker);
+                                    }
 
-            }
-        });
+                                    break;
+                                case "Sedan":
+                                    for (int i = 0; i < latitudes.size(); i++) {
+                                        LatLng latLng = new LatLng(Double.parseDouble(latitudes.get(i)), Double.parseDouble(longitudes.get(i)));
+                                        Marker marker = mMap.addMarker(new MarkerOptions()
+                                                .icon(bitmapDescriptorFromVector(user_track_rider.this, R.drawable.sedan))
+                                                .position(latLng)
+                                                .title(riderphonenum.get(i)));
+                                        markerMap.put(riderphonenum.get(i), marker);
+                                    }
 
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(user_track_rider.this, user_ongoing_order_details.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                intent.putExtra("orderID",  orderID);
-                intent.putExtra("phonenum", phonenum);
-                intent.putExtra("username", name);
-                startActivity(intent);
-            }
-        });
+                                    break;
+                                case "SUV":
+                                    for (int i = 0; i < latitudes.size(); i++) {
+                                        LatLng latLng = new LatLng(Double.parseDouble(latitudes.get(i)), Double.parseDouble(longitudes.get(i)));
+                                        Marker marker = mMap.addMarker(new MarkerOptions()
+                                                .icon(bitmapDescriptorFromVector(user_track_rider.this, R.drawable.suv))
+                                                .position(latLng)
+                                                .title(riderphonenum.get(i)));
+                                        markerMap.put(riderphonenum.get(i), marker);
+                                    }
 
+                                    break;
+                                case "MPV":
+                                    for (int i = 0; i < latitudes.size(); i++) {
+                                        LatLng latLng = new LatLng(Double.parseDouble(latitudes.get(i)), Double.parseDouble(longitudes.get(i)));
+                                        Marker marker = mMap.addMarker(new MarkerOptions()
+                                                .icon(bitmapDescriptorFromVector(user_track_rider.this, R.drawable.mpv))
+                                                .position(latLng)
+                                                .title(riderphonenum.get(i)));
+                                        markerMap.put(riderphonenum.get(i), marker);
+                                    }
+
+                                    break;
+                                case "Small Truck":
+                                    for (int i = 0; i < latitudes.size(); i++) {
+                                        LatLng latLng = new LatLng(Double.parseDouble(latitudes.get(i)), Double.parseDouble(longitudes.get(i)));
+                                        Marker marker = mMap.addMarker(new MarkerOptions()
+                                                .icon(bitmapDescriptorFromVector(user_track_rider.this, R.drawable.truck))
+                                                .position(latLng)
+                                                .title(riderphonenum.get(i)));
+                                        markerMap.put(riderphonenum.get(i), marker);
+                                    }
+
+                                    break;
+                            }
+                            Marker marker = (Marker) markerMap.get(riderNumber);
+                            if (marker != null) {
+                                LatLng pos = marker.getPosition();
+                                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(pos, DEFAULT_ZOOM));
+                            }
+
+                        }
+
+                    }
+                }
+
+                private BitmapDescriptor bitmapDescriptorFromVector(user_track_rider user_track_rider, int vectorResId) {
+                    Drawable vectorDrawable = ContextCompat.getDrawable(user_track_rider, vectorResId);
+                    vectorDrawable.setBounds(0, 0, vectorDrawable.getIntrinsicWidth(), vectorDrawable.getIntrinsicHeight());
+                    Bitmap bitmap = Bitmap.createBitmap(vectorDrawable.getIntrinsicWidth(), vectorDrawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+                    Canvas canvas = new Canvas(bitmap);
+                    vectorDrawable.draw(canvas);
+                    return BitmapDescriptorFactory.fromBitmap(bitmap);
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                }
+            });
+
+            back.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(user_track_rider.this, user_ongoing_order_details.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    intent.putExtra("orderID",  orderID);
+                    intent.putExtra("phonenum", phonenum);
+                    intent.putExtra("username", name);
+                    startActivity(intent);
+                }
+            });
+        } else {
+            onBackPressed();
+            Toast.makeText(getBaseContext(), "Please turn of Location Service and try again.", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void requestPermission(){
+        ActivityResultLauncher<String[]> locationPermissionRequest =
+                registerForActivityResult(new ActivityResultContracts
+                                .RequestMultiplePermissions(), result -> {
+                            Boolean fineLocationGranted = null;
+                            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+                                fineLocationGranted = result.getOrDefault(
+                                        Manifest.permission.ACCESS_FINE_LOCATION, false);
+                            }
+                            Boolean coarseLocationGranted = null;
+                            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+                                coarseLocationGranted = result.getOrDefault(
+                                        Manifest.permission.ACCESS_COARSE_LOCATION,false);
+                            }
+
+
+                            if (fineLocationGranted != null && fineLocationGranted) {
+                                // Precise location access granted.
+                            } else if (coarseLocationGranted != null && coarseLocationGranted) {
+                                // Only approximate location access granted.
+//					} else if (backgroundLocationGranted != null && backgroundLocationGranted){
+
+                                // only background location granted
+                            } else {
+                                onBackPressed();
+                                Toast.makeText(getBaseContext(), "Please turn of Location Service and try again.", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                );
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            locationPermissionRequest.launch(new String[] {
+                    Manifest.permission.ACCESS_FINE_LOCATION,
+                    Manifest.permission.ACCESS_COARSE_LOCATION
+            });
+        }
     }
 
     private void getDeviceLocation() {
@@ -275,6 +319,7 @@ public class user_track_rider extends FragmentActivity implements OnMapReadyCall
                             mMap.moveCamera(CameraUpdateFactory
                                     .newLatLngZoom(defaultLocation, DEFAULT_ZOOM));
                             mMap.getUiSettings().setMyLocationButtonEnabled(true);
+
                         }
                     }
                 });
@@ -434,6 +479,25 @@ public class user_track_rider extends FragmentActivity implements OnMapReadyCall
         }
     }
 
+        public static boolean isLocationEnabled(Context context) {
+            int locationMode = 0;
+            String locationProviders;
+            if(android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O)
+            {
+                try
+                {
+                    locationMode = Settings.Secure.getInt(context.getContentResolver(), Settings.Secure.LOCATION_MODE);
+                } catch (Settings.SettingNotFoundException e) {
+                    e.printStackTrace();
+                }
+                return locationMode != Settings.Secure.LOCATION_MODE_OFF;
+            }
+            else
+            {
+                locationProviders = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.LOCATION_PROVIDERS_ALLOWED);
+                return !TextUtils.isEmpty(locationProviders);
+            }
+        }
 
     public void sendRequest() {
         if (userLatitude != null) {
@@ -447,6 +511,17 @@ public class user_track_rider extends FragmentActivity implements OnMapReadyCall
                 e.printStackTrace();
             }
         }
+    }
+    @Override
+    public void onBackPressed()
+    {
+        Intent intent = new Intent(user_track_rider.this, user_navigation.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.putExtra("phonenum", phonenum);
+        intent.putExtra("username", name);
+        intent.putExtra("name", name);
+        intent.putExtra("vehicle", riderVehicle);
+        startActivity(intent);
     }
 
 }

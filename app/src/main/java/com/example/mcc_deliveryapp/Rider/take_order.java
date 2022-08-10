@@ -228,10 +228,10 @@ public class take_order extends AppCompatActivity {
     @Override
     public void onBackPressed()
     {
-        Intent intent = new Intent(take_order.this, rider_dashboard.class);
+        Intent intent = new Intent(this, rider_dashboard.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         intent.putExtra("phonenum", phonenum);
         intent.putExtra("username", name);
-        intent.putExtra("name", name);
         intent.putExtra("vehicle", riderVehicle);
         startActivity(intent);
     }
