@@ -1,9 +1,11 @@
 package com.example.mcc_deliveryapp.Rider;
 
+import android.Manifest;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.Image;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +14,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -52,7 +56,7 @@ public class courierHomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_courier_home, container, false);
-
+        requestPermission();
         recyclerView_pickup = view.findViewById(R.id.Recycleview_home);
         emptyCourier = view.findViewById(R.id.emptyCourier);
         emptyTextCourier = view.findViewById(R.id.emptyTextCourier);
@@ -185,6 +189,52 @@ public class courierHomeFragment extends Fragment {
         }
     });
  */
+
+    public void requestPermission(){
+        ActivityResultLauncher<String[]> locationPermissionRequest =
+                registerForActivityResult(new ActivityResultContracts
+                                .RequestMultiplePermissions(), result -> {
+                            Boolean fineLocationGranted = null;
+                            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+                                fineLocationGranted = result.getOrDefault(
+                                        Manifest.permission.ACCESS_FINE_LOCATION, false);
+                            }
+                            Boolean coarseLocationGranted = null;
+                            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+                                coarseLocationGranted = result.getOrDefault(
+                                        Manifest.permission.ACCESS_COARSE_LOCATION,false);
+                            }
+//					Boolean backgroundLocationGranted = null;
+//					if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+//						backgroundLocationGranted = result.getOrDefault(
+//								Manifest.permission.ACCESS_BACKGROUND_LOCATION,false);
+//					}
+
+                            if (fineLocationGranted != null && fineLocationGranted) {
+                                // Precise location access granted.
+                            } else if (coarseLocationGranted != null && coarseLocationGranted) {
+                                // Only approximate location access granted.
+
+                            } else {
+                                // No location access granted.
+                            }
+                        }
+                );
+
+// ...
+
+// Before you perform the actual permission request, check whether your app
+// already has the permissions, and whether your app needs to show a permission
+// rationale dialog. For more details, see Request permissions.
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            locationPermissionRequest.launch(new String[] {
+                    Manifest.permission.ACCESS_FINE_LOCATION,
+                    Manifest.permission.ACCESS_COARSE_LOCATION
+//					Manifest.permission.ACCESS_BACKGROUND_LOCATION
+            });
+        }
+    }
+
     public void getParcelInfo(String rnum, String orderID, String rname){
         this.riderNum = rnum;
         this.orderID = orderID;

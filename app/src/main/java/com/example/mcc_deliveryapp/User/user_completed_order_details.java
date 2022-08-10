@@ -21,7 +21,8 @@ public class user_completed_order_details extends AppCompatActivity {
 
     String name, phonenum, orderID, riderName, riderBrandModel, riderPlateNumber, orderReceived,
             riderVehicle, senderName, senderLocation, senderContact, ridernum, orderPlaced,
-            receiverName, receiverLocation, receiverContact, vehicleType, senderNote, orderPrice;
+            receiverName, receiverLocation, receiverContact, vehicleType, senderNote, orderPrice,
+            rider_num;
     TextView senderloc, sendername, sendercontact, receiverloc, receivername, receivercontact,
             order_id, rider_name, vehicletype, usernote, parcelprice, plate_number, order_placed,
             order_received;
@@ -36,6 +37,7 @@ public class user_completed_order_details extends AppCompatActivity {
         name = intent.getStringExtra("username");
         phonenum = intent.getStringExtra("phonenum");
         orderID = intent.getStringExtra("orderID");
+        rider_num = intent.getStringExtra("ridernum");
 
         senderloc = findViewById(R.id.sender_loc2);
         sendername = findViewById(R.id.sender_name2);
@@ -57,6 +59,7 @@ public class user_completed_order_details extends AppCompatActivity {
         final DatabaseReference dr = database.getReference().child("userparcel");
         Query query = dr.orderByChild("OrderID").equalTo(orderID);
         System.out.println(orderID);
+        System.out.println(rider_num+"Success");
 
         query.addChildEventListener(
                 new ChildEventListener() {

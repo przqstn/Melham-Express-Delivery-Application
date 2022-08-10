@@ -248,7 +248,6 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/txt_receiver_loc"
                     android:layout_toRightOf="@id/orderID_text2"
-                    android:drawableEnd="@drawable/ic_baseline_content_copy_24"
                     android:drawableTint="@color/textGray"
                     android:fontFamily="@font/montserrat_regular"
                     android:text="Parcel Order ID"

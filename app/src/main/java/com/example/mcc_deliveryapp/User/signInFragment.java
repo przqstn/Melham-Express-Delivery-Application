@@ -45,7 +45,7 @@ public class signInFragment extends Fragment {
     DatabaseReference root;
     EditText numberUser;
     Button forgotPassnext, btnVerify, updatePW;
-    TextView forgotPass;
+    TextView forgotPass, wrongNum, wrongPass;
     String verificationCodeBySystem;
     Dialog ForgotPW, VerifyNum, UpdatePW;
 
@@ -56,6 +56,8 @@ public class signInFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_sign_in, container, false);
+        wrongNum = view.findViewById(R.id.phoneError);
+        wrongPass = view.findViewById(R.id.passError);
         login_editTxt_phoneNum = view.findViewById(R.id.edTextPhoneNo);
         login_editTxt_password = view.findViewById(R.id.edTextPass);
         btn_Login = view.findViewById(R.id.btn_login);
@@ -90,14 +92,12 @@ public class signInFragment extends Fragment {
 
                 UserLogin();
                 if (TextUtils.isEmpty(login_editTxt_phoneNum.getEditText().getText().toString())) {
-                    login_editTxt_phoneNum.setError("Required");
-                    Toast.makeText(getContext(), "Number is required", Toast.LENGTH_SHORT).show();
+                    wrongNum.setVisibility(view.VISIBLE);
+                    wrongNum.setText("Phone number is required.");
 
                 }
-                if (TextUtils.isEmpty(login_editTxt_password.getEditText().getText().toString())) {
-                    login_editTxt_password.setError("Required");
-                    Toast.makeText(getContext(), "Password is required", Toast.LENGTH_SHORT).show();
-
+                else {
+                    wrongNum.setVisibility(view.GONE);
                 }
 
             }
@@ -189,7 +189,7 @@ public class signInFragment extends Fragment {
                 }
                 if(!uppercase || !lowercase || !min6 || digits == 0)
                 {
-                    pwfield.setError("Password most have at least 6 characters, one uppercase, lowercase, and number.", null);
+                    pwfield.setError("Password must have at least 6 characters, one uppercase, lowercase, and number.", null);
                     pwfield.setBackgroundResource(R.drawable.error_border_edittext);
 
                 }
@@ -254,22 +254,21 @@ public class signInFragment extends Fragment {
                     login_editTxt_phoneNum.setError(null);
                     login_editTxt_phoneNum.setErrorEnabled(false);
                     String userpassDB = snapshot.child(usernumEntered).child("userPass").getValue(String.class);
+
                     if(userpassDB.equals(userpassEntered)){
                         login_editTxt_phoneNum.setError(null);
                         login_editTxt_phoneNum.setErrorEnabled(false);
 
                         String nameFromDB = snapshot.child(usernumEntered).child("userFullname").getValue(String.class);
                         String usernumFromDB = snapshot.child(usernumEntered).child("userPhone").getValue(String.class);
-                        String passFromDB =snapshot.child(usernumEntered).child("userPass").getValue(String.class);
-                        String CpassFromDB = snapshot.child(usernumEntered).child("userCPass").getValue(String.class);
 
                         Dialog VerifyNum = new Dialog(getContext());
                         VerifyNum.setContentView(R.layout.fragment_user_phonenum_verify);
                         VerifyNum.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                         VerifyNum.setCancelable(false);
                         VerifyNum.getWindow().getAttributes().windowAnimations = R.style.animation;
-                        TextView name = (TextView) VerifyNum.findViewById(R.id.user_Fullname);
-                        TextView usernum = (TextView) VerifyNum.findViewById(R.id.user_ContactNo);
+                        TextView name = VerifyNum.findViewById(R.id.user_Fullname);
+                        TextView usernum = VerifyNum.findViewById(R.id.user_ContactNo);
 
                         name.setText(nameFromDB);
                         usernum.setText(usernumFromDB);
@@ -282,12 +281,23 @@ public class signInFragment extends Fragment {
 
                     }
                     else{
-                        login_editTxt_password.setError("Wrong Password");
 
+                        if (TextUtils.isEmpty(login_editTxt_password.getEditText().getText().toString())) {
+                            wrongPass.setVisibility(View.VISIBLE);
+                            wrongPass.setText("Password is required.");
+
+                        }
+                        else
+                        {
+                            wrongPass.setVisibility(View.VISIBLE);
+                            wrongPass.setText("Password is incorrect.");
+                        }
                     }
                 }
                 else{
-                    login_editTxt_phoneNum.setError("This number is not registered yet");
+                    wrongNum.setVisibility(View.VISIBLE);
+                    wrongNum.setText("Account does not exist");
+                    wrongPass.setVisibility(View.GONE);
                 }
 
             }
