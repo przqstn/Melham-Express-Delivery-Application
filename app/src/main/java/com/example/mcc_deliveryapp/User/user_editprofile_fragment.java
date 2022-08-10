@@ -175,7 +175,7 @@ public class user_editprofile_fragment extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         dialog.dismiss();
-                        onBackPressed();
+                        finish();
                     }
                 });
 
@@ -204,17 +204,51 @@ public class user_editprofile_fragment extends AppCompatActivity {
                         @Override
                         public void onClick(View view) {
                             dialog.dismiss();
-                            onBackPressed();
+                            finish();
                         }
                     });
 
                 }else{
-                    onBackPressed();
+                    finish();
                 }
             }
         });
 
     }
+
+    @Override
+    public void onBackPressed() {
+        if (imageUri != null) {
+            final Dialog dialog = new Dialog(btnCancel.getContext());
+            dialog.setContentView(R.layout.cancel_edit_dialog);
+            dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            dialog.getWindow().getAttributes().windowAnimations = R.style.animation;
+            dialog.setCancelable(false);
+            Button btnEdit = dialog.findViewById(R.id.btn_backToEdit);
+            Button btnCancel = dialog.findViewById(R.id.btn_cancelAll);
+            dialog.show();
+            btnEdit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    dialog.dismiss();
+                }
+            });
+
+            btnCancel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    dialog.dismiss();
+                    finish();
+                }
+            });
+
+        } else {
+            finish();
+
+        }
+
+    }
+
     private void choosePicture() {
         Intent intent = new Intent();
         intent.setType("image/*");

@@ -8,7 +8,9 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -68,7 +70,7 @@ public class editprofile_fragment extends AppCompatActivity {
         btnUpload = findViewById(R.id.btn_upload);
         btnCancel = findViewById(R.id.btn_cancelChanges);
         btnSaveChanges = findViewById(R.id.btn_saveChanges);
-        editAddress = findViewById(R.id.riderAddress);
+        btnSaveChanges.setVisibility(View.GONE);
         profilePic = findViewById(R.id.profile_user);
 
         Intent intent = getIntent();
@@ -88,13 +90,41 @@ public class editprofile_fragment extends AppCompatActivity {
         viewplateNum=findViewById(R.id.riderPlate);
         viewplateNum.setText(plateNum);
 
+        String address = intent.getStringExtra("address");
+        editAddress = findViewById(R.id.riderAddress);
+        editAddress.setText(address);
+
+
+        editAddress.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                //continue
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if(!editAddress.getEditableText().toString().equals(address)){
+                    btnSaveChanges.setVisibility(View.VISIBLE);
+                }else{
+                    btnSaveChanges.setVisibility(View.GONE);
+                }
+                if(TextUtils.isEmpty(editAddress.getEditableText().toString())){
+                    btnSaveChanges.setVisibility(View.GONE);
+                }
+            }
+            @Override
+            public void afterTextChanged(Editable editable) {
+                //continue
+            }
+        });
+
         btnUpload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 final Dialog dialog = new Dialog(btnUpload.getContext());
                 dialog.setContentView(R.layout.upload_photo_fragment);
-                dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+                dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                 dialog.getWindow().getAttributes().windowAnimations = R.style.animation;
                 dialog.setCancelable(true);
                 dialog.show();
@@ -122,14 +152,13 @@ public class editprofile_fragment extends AppCompatActivity {
         btnSaveChanges.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                root=FirebaseDatabase.getInstance().getReference().child("riders");
-                editAddress = findViewById(R.id.riderAddress);
+                root = FirebaseDatabase.getInstance().getReference().child("riders");
                 HashMap hashMap = new HashMap();
 
-                if(TextUtils.isEmpty(editAddress.getEditableText().toString())&&imageUri==null){
+                if (TextUtils.isEmpty(editAddress.getEditableText().toString()) && imageUri == null) {
                     final Dialog dialog = new Dialog(btnSaveChanges.getContext());
                     dialog.setContentView(R.layout.saved_dialog);
-                    dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+                    dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                     dialog.getWindow().getAttributes().windowAnimations = R.style.animation;
                     dialog.setCancelable(false);
                     dialog.show();
@@ -137,11 +166,11 @@ public class editprofile_fragment extends AppCompatActivity {
                     viewProfile.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            onBackPressed();
+                            finish();
                         }
                     });
                 }
-                if(imageUri!=null) {
+                if (imageUri != null) {
                     final ProgressDialog pd = new ProgressDialog(btnSaveChanges.getContext());
                     //pd.setTitle("Uploading Image");
                     //pd.show();
@@ -172,13 +201,13 @@ public class editprofile_fragment extends AppCompatActivity {
                             });
                 }
 
-                if(!TextUtils.isEmpty(editAddress.getEditableText().toString())){
+                if (!TextUtils.isEmpty(editAddress.getEditableText().toString())) {
                     hashMap.put("currentaddress", editAddress.getEditableText().toString());
                     root.child(phoneNum).updateChildren(hashMap);
                 }
                 final Dialog dialog = new Dialog(btnSaveChanges.getContext());
                 dialog.setContentView(R.layout.saved_dialog);
-                dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+                dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                 dialog.getWindow().getAttributes().windowAnimations = R.style.animation;
                 dialog.setCancelable(false);
                 Button viewProfile = dialog.findViewById(R.id.btn_viewProfile);
@@ -187,7 +216,7 @@ public class editprofile_fragment extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         dialog.dismiss();
-                        onBackPressed();
+                        finish();
                     }
                 });
 
@@ -197,7 +226,7 @@ public class editprofile_fragment extends AppCompatActivity {
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!TextUtils.isEmpty(editAddress.getEditableText().toString())||imageUri!=null) {
+                if (!TextUtils.isEmpty(editAddress.getEditableText().toString()) || imageUri != null) {
                     final Dialog dialog = new Dialog(btnCancel.getContext());
                     dialog.setContentView(R.layout.cancel_edit_dialog);
                     dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -217,16 +246,51 @@ public class editprofile_fragment extends AppCompatActivity {
                         @Override
                         public void onClick(View view) {
                             dialog.dismiss();
-                            onBackPressed();
+                            finish();
                         }
                     });
 
-                }else{
-                    onBackPressed();
+                } else {
+                    finish();
                 }
             }
         });
+
     }
+
+    @Override
+    public void onBackPressed() {
+        if (!TextUtils.isEmpty(editAddress.getEditableText().toString()) || imageUri != null) {
+            final Dialog dialog = new Dialog(btnCancel.getContext());
+            dialog.setContentView(R.layout.cancel_edit_dialog);
+            dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            dialog.getWindow().getAttributes().windowAnimations = R.style.animation;
+            dialog.setCancelable(false);
+            Button btnEdit = dialog.findViewById(R.id.btn_backToEdit);
+            Button btnCancel = dialog.findViewById(R.id.btn_cancelAll);
+            dialog.show();
+            btnEdit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    dialog.dismiss();
+                }
+            });
+
+            btnCancel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    dialog.dismiss();
+                    finish();
+                }
+            });
+
+        } else {
+            finish();
+
+        }
+
+    }
+
     private void choosePicture() {
         Intent intent = new Intent();
         intent.setType("image/*");
@@ -260,12 +324,17 @@ public class editprofile_fragment extends AppCompatActivity {
         if(requestCode==CHOOSE_PICTURE && resultCode==RESULT_OK && data!=null && data.getData()!=null){
             imageUri=data.getData();
             profilePic.setImageURI(imageUri);
-
+            if(TextUtils.isEmpty(editAddress.getEditableText().toString())){
+               btnSaveChanges.setVisibility(View.GONE);
+            }else{
+                btnSaveChanges.setVisibility(View.VISIBLE);
+            }
         }
         if(requestCode==CAMERA_REQUEST_CODE && resultCode==RESULT_OK){
             File f = new File(currentPhotoPath);
             profilePic.setImageURI(Uri.fromFile(f));
             imageUri=Uri.fromFile(f);
+            btnSaveChanges.setVisibility(View.VISIBLE);
         }
 
         imgName="profile_image.jpg";
