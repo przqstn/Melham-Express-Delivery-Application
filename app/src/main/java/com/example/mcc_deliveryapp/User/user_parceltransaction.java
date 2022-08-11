@@ -45,6 +45,7 @@ import com.example.mcc_deliveryapp.User.Module.DirectionFinderListener;
 import com.example.mcc_deliveryapp.User.Module.Route;
 import com.google.android.gms.common.api.ResolvableApiException;
 import com.google.android.gms.common.api.Status;
+import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationSettingsRequest;
 import com.google.android.gms.location.LocationSettingsResponse;
@@ -127,6 +128,7 @@ public class user_parceltransaction extends FragmentActivity implements Location
 	private LatLng lastKnownLocation;
 	private static final int DEFAULT_ZOOM = 15;
 	private final LatLng defaultLocation = new LatLng(14.5928, 120.9801);
+	private FusedLocationProviderClient fusedLocationClient;
 
 	@SuppressLint("WakelockTimeout")
 	@Override
@@ -139,6 +141,7 @@ public class user_parceltransaction extends FragmentActivity implements Location
 		Intent intent = getIntent();
 		userNumber = intent.getStringExtra("phonenum");
 		userName = intent.getStringExtra("username");
+		fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
 
 		SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -316,41 +319,41 @@ public class user_parceltransaction extends FragmentActivity implements Location
 
 	}
 
-	public void requestPermission(){
+	public void requestPermission() {
 		ActivityResultLauncher<String[]> locationPermissionRequest =
 				registerForActivityResult(new ActivityResultContracts
 								.RequestMultiplePermissions(), result -> {
-					Boolean fineLocationGranted = null;
-					if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-						fineLocationGranted = result.getOrDefault(
-								Manifest.permission.ACCESS_FINE_LOCATION, false);
-					}
-					Boolean coarseLocationGranted = null;
-					if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-						coarseLocationGranted = result.getOrDefault(
-										Manifest.permission.ACCESS_COARSE_LOCATION,false);
-					}
+							Boolean fineLocationGranted = null;
+							if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+								fineLocationGranted = result.getOrDefault(
+										Manifest.permission.ACCESS_FINE_LOCATION, false);
+							}
+							Boolean coarseLocationGranted = null;
+							if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+								coarseLocationGranted = result.getOrDefault(
+										Manifest.permission.ACCESS_COARSE_LOCATION, false);
+							}
 //					Boolean backgroundLocationGranted = null;
 //					if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
 //						backgroundLocationGranted = result.getOrDefault(
 //								Manifest.permission.ACCESS_BACKGROUND_LOCATION,false);
 //					}
 
-					if (fineLocationGranted != null && fineLocationGranted) {
+							if (fineLocationGranted != null && fineLocationGranted) {
 								// Precise location access granted.
-					} else if (coarseLocationGranted != null && coarseLocationGranted) {
+							} else if (coarseLocationGranted != null && coarseLocationGranted) {
 								// Only approximate location access granted.
-					} else {
-						onBackPressed();
-					}
-				}
+							} else {
+								onBackPressed();
+							}
+						}
 				);
 
 		// Before you perform the actual permission request, check whether your app
 		// already has the permissions, and whether your app needs to show a permission
 		// rationale dialog. For more details, see Request permissions.
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-			locationPermissionRequest.launch(new String[] {
+			locationPermissionRequest.launch(new String[]{
 					Manifest.permission.ACCESS_FINE_LOCATION,
 					Manifest.permission.ACCESS_COARSE_LOCATION
 			});
@@ -360,18 +363,14 @@ public class user_parceltransaction extends FragmentActivity implements Location
 	public static boolean isLocationEnabled(Context context) {
 		int locationMode = 0;
 		String locationProviders;
-		if(android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O)
-		{
-			try
-			{
+		if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+			try {
 				locationMode = Settings.Secure.getInt(context.getContentResolver(), Settings.Secure.LOCATION_MODE);
 			} catch (Settings.SettingNotFoundException e) {
 				e.printStackTrace();
 			}
 			return locationMode != Settings.Secure.LOCATION_MODE_OFF;
-		}
-		else
-		{
+		} else {
 			locationProviders = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.LOCATION_PROVIDERS_ALLOWED);
 			return !TextUtils.isEmpty(locationProviders);
 		}
@@ -383,8 +382,11 @@ public class user_parceltransaction extends FragmentActivity implements Location
 			criteria = new Criteria();
 			bestProvider = String.valueOf(locationManager.getBestProvider(criteria, true));
 
-			//You can still do this if you like, you might get lucky:
-			if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+			if (ActivityCompat.checkSelfPermission(this,
+					Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+					&& ActivityCompat.checkSelfPermission(this,
+					Manifest.permission.ACCESS_COARSE_LOCATION) !=
+					PackageManager.PERMISSION_GRANTED) {
 				// TODO: Consider calling
 				//    ActivityCompat#requestPermissions
 				// here to request the missing permissions, and then overriding
@@ -394,25 +396,80 @@ public class user_parceltransaction extends FragmentActivity implements Location
 				// for ActivityCompat#requestPermissions for more details.
 				return;
 			}
-			Location location = locationManager.getLastKnownLocation(bestProvider);
-			if (location != null) {
-				Log.e("TAG", "GPS is on");
-				latitude = location.getLatitude();
-				longitude = location.getLongitude();
-				lastKnownLocation = new LatLng(latitude, longitude);
-				requestLoc();
-			}
-			else{
-				Log.d(TAG, "Current location is null. Using defaults.");
-							mMap.moveCamera(CameraUpdateFactory
-									.newLatLngZoom(defaultLocation, DEFAULT_ZOOM));
-							mMap.getUiSettings().setMyLocationButtonEnabled(true);
-				locationManager.requestLocationUpdates(bestProvider, 1000, 0, this);
-			}
+
+			fusedLocationClient.getLastLocation().addOnSuccessListener(
+					this, new OnSuccessListener<Location>() {
+						@Override
+						public void onSuccess(Location location) {
+							// Got last known location. In some rare situations this can be null.
+							if (location != null) {
+								Log.e("TAG", "GPS is on");
+								Toast.makeText(getBaseContext(), "GPS is on", Toast.LENGTH_SHORT).show();
+								latitude = location.getLatitude();
+								longitude = location.getLongitude();
+								lastKnownLocation = new LatLng(latitude, longitude);
+								requestLoc();
+							} else {
+								Log.d(TAG, "Current location is null. Using defaults.");
+								Toast.makeText(getBaseContext(), "Current location is null. Using defaults.", Toast.LENGTH_SHORT).show();
+								mMap.moveCamera(CameraUpdateFactory
+										.newLatLngZoom(defaultLocation, DEFAULT_ZOOM));
+								mMap.getUiSettings().setMyLocationButtonEnabled(true);
+								if (ActivityCompat.checkSelfPermission(user_parceltransaction.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(user_parceltransaction.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+									// TODO: Consider calling
+									//    ActivityCompat#requestPermissions
+									// here to request the missing permissions, and then overriding
+									//   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+									//                                          int[] grantResults)
+									// to handle the case where the user grants the permission. See the documentation
+									// for ActivityCompat#requestPermissions for more details.
+									return;
+								}
+								locationManager.requestLocationUpdates(bestProvider, 1000, 0, user_parceltransaction.this);
+							}
+						}
+					});
+//
+//
+//
+//
+//			locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+//			criteria = new Criteria();
+//			bestProvider = String.valueOf(locationManager.getBestProvider(criteria, true));
+//
+//			//You can still do this if you like, you might get lucky:
+//			if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+//				// TODO: Consider calling
+//				//    ActivityCompat#requestPermissions
+//				// here to request the missing permissions, and then overriding
+//				//   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+//				//                                          int[] grantResults)
+//				// to handle the case where the user grants the permission. See the documentation
+//				// for ActivityCompat#requestPermissions for more details.
+//				return;
+//			}
+//			Location location = locationManager.getLastKnownLocation(bestProvider);
+//			if (location != null) {
+//				Log.e("TAG", "GPS is on");
+//				Toast.makeText(getBaseContext(), "GPS is on", Toast.LENGTH_SHORT).show();
+//				latitude = location.getLatitude();
+//				longitude = location.getLongitude();
+//				lastKnownLocation = new LatLng(latitude, longitude);
+//				requestLoc();
+//			}
+//			else{
+//				Log.d(TAG, "Current location is null. Using defaults.");
+//				Toast.makeText(getBaseContext(), "Current location is null. Using defaults.", Toast.LENGTH_SHORT).show();
+//							mMap.moveCamera(CameraUpdateFactory
+//									.newLatLngZoom(defaultLocation, DEFAULT_ZOOM));
+//							mMap.getUiSettings().setMyLocationButtonEnabled(true);
+//				locationManager.requestLocationUpdates(bestProvider, 1000, 0, this);
+//			}
 		}
 		else
 		{
 			Log.e("TAG", "GPS is off");
+			Toast.makeText(getBaseContext(), "GPS is off", Toast.LENGTH_SHORT).show();
 			onBackPressed();
 			Toast.makeText(getBaseContext(), "Please turn of Location Service and try again.", Toast.LENGTH_SHORT).show();
 		}
