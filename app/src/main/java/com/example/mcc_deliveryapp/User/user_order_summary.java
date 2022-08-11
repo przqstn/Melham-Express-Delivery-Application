@@ -1,6 +1,7 @@
 package com.example.mcc_deliveryapp.User;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -9,6 +10,7 @@ import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.mcc_deliveryapp.R;
@@ -26,6 +28,7 @@ public class user_order_summary extends AppCompatActivity {
     TextView pickUpAddress, sendName, sendNumber, delAddress, recName, recNumber, vehicleType, totalPrice;
     EditText notes;
     Button orderPlace;
+    ImageView vehicleIcon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +48,7 @@ public class user_order_summary extends AppCompatActivity {
         vehicleType = findViewById(R.id.vehicleType);
         totalPrice = findViewById(R.id.totalPrice);
         orderPlace = findViewById(R.id.orderPlace);
-
+        vehicleIcon = findViewById(R.id.vehicleTypeIcon);
 
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         //getting the save shared preference of sender
@@ -74,6 +77,25 @@ public class user_order_summary extends AppCompatActivity {
         recNumber.setText(receivercontact);
         vehicleType.setText(vehicletype);
         totalPrice.setText("₱" + fee);
+
+        switch (vehicletype)
+        {
+            case "Motorcycle":
+                vehicleIcon.setImageDrawable(ContextCompat.getDrawable(user_order_summary.this, R.drawable.motorcycle));
+                break;
+            case "Sedan":
+                vehicleIcon.setImageDrawable(ContextCompat.getDrawable(user_order_summary.this, R.drawable.sedan));
+                break;
+            case "SUV":
+                vehicleIcon.setImageDrawable(ContextCompat.getDrawable(user_order_summary.this, R.drawable.suv));
+                break;
+            case "MPV":
+                vehicleIcon.setImageDrawable(ContextCompat.getDrawable(user_order_summary.this, R.drawable.mpv));
+                break;
+            case "Small Truck":
+                vehicleIcon.setImageDrawable(ContextCompat.getDrawable(user_order_summary.this, R.drawable.truck));
+        }
+
 
         orderPlace.setOnClickListener(new View.OnClickListener() {
 
