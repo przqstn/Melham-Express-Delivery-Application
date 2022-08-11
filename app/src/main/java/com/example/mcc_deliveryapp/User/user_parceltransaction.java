@@ -396,7 +396,7 @@ public class user_parceltransaction extends FragmentActivity implements Location
 			}
 			Location location = locationManager.getLastKnownLocation(bestProvider);
 			if (location != null) {
-//				Log.e("TAG", "GPS is on");
+				Log.e("TAG", "GPS is on");
 				latitude = location.getLatitude();
 				longitude = location.getLongitude();
 				lastKnownLocation = new LatLng(latitude, longitude);
@@ -412,6 +412,7 @@ public class user_parceltransaction extends FragmentActivity implements Location
 		}
 		else
 		{
+			Log.e("TAG", "GPS is off");
 			onBackPressed();
 			Toast.makeText(getBaseContext(), "Please turn of Location Service and try again.", Toast.LENGTH_SHORT).show();
 		}
