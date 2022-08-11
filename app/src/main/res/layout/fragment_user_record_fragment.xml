@@ -8,25 +8,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".User.user_record_fragment">
 
-    <LinearLayout
-        android:layout_below="@+id/courier_tabs_layout"
-        android:layout_width="wrap_content"
-        android:layout_height="550dp"
-        android:layout_gravity="center|top"
-        android:layout_marginTop="50dp"
-        android:orientation="vertical">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_record2"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-    </LinearLayout>
-
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/userRecordTab"
         android:layout_width="match_parent"
@@ -47,5 +28,16 @@
             android:layout_height="wrap_content"
             android:text="Cancelled" />
     </com.google.android.material.tabs.TabLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="60dp">
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewPager2"
+            android:saveEnabled="false"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </ScrollView>
 
 </FrameLayout>

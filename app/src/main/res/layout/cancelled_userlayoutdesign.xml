@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/user_record_card"
+    android:id="@+id/cancelled_user_record_card"
     android:layout_width="340dp"
     android:layout_height="wrap_content"
     android:layout_gravity="center_horizontal"
     app:cardUseCompatPadding="true">
+
+    <TextView
+        android:id="@+id/inv_usernum"
+        android:layout_width="0dp"
+        android:layout_height="0dp" />
 
     <RelativeLayout
         android:layout_width="340dp"
@@ -29,7 +34,7 @@
                     android:background="#223272"
                     android:fontFamily="@font/montserrat_bold"
                     android:padding="10dp"
-                    android:text="Pending Order"
+                    android:text="Cancelled Order"
                     android:textAlignment="textStart"
                     android:textColor="@color/white"
                     android:textSize="15dp" />
@@ -67,11 +72,6 @@
                     android:fontFamily="@font/montserrat_medium"
                     android:text="Sender Location"
                     android:textColor="@color/black" />
-
-                <TextView
-                    android:id="@+id/inv_ridernum"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp" />
 
                 <TextView
                     android:id="@+id/txtsendernameID"
@@ -188,6 +188,12 @@
                     android:textColor="@color/black"
                     android:textStyle="bold" />
 
+                <TextView
+                    android:id="@+id/txt_vehicletype"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_below="@+id/txt_receiver_name" />
+
             </RelativeLayout>
 
             <RelativeLayout
@@ -241,7 +247,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/user_home_orderID"
+                    android:id="@+id/courier_record_orderID"
                     android:layout_width="180dp"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/txt_receiver_loc"
@@ -256,7 +262,7 @@
                     style="?android:attr/borderlessButtonStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="40dp"
-                    android:layout_toRightOf="@id/user_home_orderID"
+                    android:layout_toRightOf="@id/courier_record_orderID"
                     android:drawableEnd="@drawable/ic_baseline_content_copy_24"></Button>
 
             </RelativeLayout>
@@ -295,7 +301,7 @@
                             android:textSize="16dp" />
 
                         <TextView
-                            android:id="@+id/txt_price"
+                            android:id="@+id/priceRecord"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
