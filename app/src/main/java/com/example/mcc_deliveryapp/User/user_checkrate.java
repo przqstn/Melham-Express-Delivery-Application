@@ -99,11 +99,8 @@ public class user_checkrate extends AppCompatActivity {
 				bottomSheetView.findViewById(R.id.btnConfirm).setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View view) {
-						pushData(sendernotes, senderloc, sendercontact, sendername, receiverloc,
-								receivercontact, receivername ,"Motorcycle", convertFloat,
-								parcelstatus, ridername, ridernum, userDefaultNumber,
-								startLatLng, endLatLng);
-						Intent intent = new Intent(user_checkrate.this, user_navigation.class);
+						Intent intent = new Intent(user_checkrate.this, user_order_summary.class);
+						intent.putExtra("vehicle", "Motorcycle");
 						intent.putExtra("phonenum", userDefaultNumber);
 						intent.putExtra("username", userDefaultName);
 						startActivity(intent);
@@ -126,7 +123,7 @@ public class user_checkrate extends AppCompatActivity {
 				View bottomSheetView = LayoutInflater.from(getApplicationContext())
 						.inflate(
 								R.layout.sedan_dialog,
-								(LinearLayout)findViewById(R.id.sedan_sheet_dialog)
+								findViewById(R.id.sedan_sheet_dialog)
 						);
 
 				String convertFloat =String.valueOf(calculateFare(distance, 1));
@@ -142,11 +139,8 @@ public class user_checkrate extends AppCompatActivity {
 				bottomSheetView.findViewById(R.id.btnConfirm).setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View view) {
-						pushData(sendernotes, senderloc, sendercontact, sendername, receiverloc,
-								receivercontact, receivername ,"Sedan", convertFloat,
-								parcelstatus, ridername, ridernum, userDefaultNumber,
-								startLatLng, endLatLng);
-						Intent intent = new Intent(user_checkrate.this, user_navigation.class);
+						Intent intent = new Intent(user_checkrate.this, user_order_summary.class);
+						intent.putExtra("vehicle", "Sedan");
 						intent.putExtra("phonenum", userDefaultNumber);
 						intent.putExtra("username", userDefaultName);
 						startActivity(intent);
@@ -168,7 +162,7 @@ public class user_checkrate extends AppCompatActivity {
 				View bottomSheetView = LayoutInflater.from(getApplicationContext())
 						.inflate(
 								R.layout.suv_dialog,
-								(LinearLayout)findViewById(R.id.suv_sheet_dialog)
+								findViewById(R.id.suv_sheet_dialog)
 						);
 
 				String convertFloat =String.valueOf(calculateFare(distance, 2));
@@ -184,11 +178,8 @@ public class user_checkrate extends AppCompatActivity {
 				bottomSheetView.findViewById(R.id.btnConfirm).setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View view) {
-						pushData(sendernotes, senderloc, sendercontact, sendername, receiverloc,
-								receivercontact, receivername ,"SUV", convertFloat,
-								parcelstatus, ridername, ridernum, userDefaultNumber,
-								startLatLng, endLatLng);
-						Intent intent = new Intent(user_checkrate.this, user_navigation.class);
+						Intent intent = new Intent(user_checkrate.this, user_order_summary.class);
+						intent.putExtra("vehicle", "SUV");
 						intent.putExtra("phonenum", userDefaultNumber);
 						intent.putExtra("username", userDefaultName);
 						startActivity(intent);
@@ -226,11 +217,8 @@ public class user_checkrate extends AppCompatActivity {
 				bottomSheetView.findViewById(R.id.btnConfirm).setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View view) {
-						pushData(sendernotes, senderloc, sendercontact, sendername, receiverloc,
-								receivercontact, receivername ,"MPV", convertFloat,
-								parcelstatus, ridername, ridernum, userDefaultNumber,
-								startLatLng, endLatLng);
-						Intent intent = new Intent(user_checkrate.this, user_navigation.class);
+						Intent intent = new Intent(user_checkrate.this, user_order_summary.class);
+						intent.putExtra("vehicle", "MPV");
 						intent.putExtra("phonenum", userDefaultNumber);
 						intent.putExtra("username", userDefaultName);
 						startActivity(intent);
@@ -267,14 +255,10 @@ public class user_checkrate extends AppCompatActivity {
 				bottomSheetView.findViewById(R.id.btnConfirm).setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View view) {
-						pushData(sendernotes, senderloc, sendercontact, sendername, receiverloc,
-								receivercontact, receivername ,"Small Truck", convertFloat,
-								parcelstatus, ridername, ridernum, userDefaultNumber,
-								startLatLng, endLatLng);
-						Intent intent = new Intent(user_checkrate.this, user_navigation.class);
+						Intent intent = new Intent(user_checkrate.this, user_order_summary.class);
+						intent.putExtra("vehicle", "Small Truck");
 						intent.putExtra("phonenum", userDefaultNumber);
 						intent.putExtra("username", userDefaultName);
-
 						startActivity(intent);
 
 					}
@@ -285,7 +269,7 @@ public class user_checkrate extends AppCompatActivity {
 		});
 	}
 
-	public void pushData(String sendernotes, String senderLoc, String senderCon,
+/*	public void pushData(String sendernotes, String senderLoc, String senderCon,
 						 String senderName, String receiverLoc, String receiverCon,
 						 String receiverName, String vehicle, String fee, String parcelstatus,
 						 String ridername, String ridernum, String defaultNumber,
@@ -318,7 +302,7 @@ public class user_checkrate extends AppCompatActivity {
 		newroot.setValue(usermap);
 //		System.out.println(parcelId);
 	}
-
+*/
 	public static float calculateFare(String distance, int type){
 		float removekm = Float.parseFloat(distance.replaceAll("[^\\d.]", ""));
 		float finalFare = 0;
