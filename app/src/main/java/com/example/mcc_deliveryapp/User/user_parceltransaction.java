@@ -292,7 +292,7 @@ public class user_parceltransaction extends FragmentActivity implements Location
 												editor.putString("key 9", userNumber);
 												editor.putString("key 10", userName);
 												editor.apply();
-												Intent intent = new Intent(user_parceltransaction.this, user_paymentmethod.class);
+												Intent intent = new Intent(user_parceltransaction.this, user_checkrate.class);
 												// release lock prevention
 												if (wakeLock.isHeld())
 													wakeLock.release();

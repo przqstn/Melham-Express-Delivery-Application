@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.mcc_deliveryapp.R;
@@ -23,7 +24,9 @@ public class user_order_summary extends AppCompatActivity {
     FirebaseDatabase db =FirebaseDatabase.getInstance();
     DatabaseReference root = db.getReference().child("userparcel");
     TextView pickUpAddress, sendName, sendNumber, delAddress, recName, recNumber, vehicleType, totalPrice;
+    EditText notes;
     Button orderPlace;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +43,7 @@ public class user_order_summary extends AppCompatActivity {
         totalPrice = findViewById(R.id.totalPrice);
         orderPlace = findViewById(R.id.orderPlace);
 
+
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         //getting the save shared preference of sender
         String senderloc =sharedPref.getString("key 1","");
@@ -49,7 +53,7 @@ public class user_order_summary extends AppCompatActivity {
         String receiverloc =sharedPref.getString("key 4","");
         String receivercontact =sharedPref.getString("key 5","");
         String receivername =sharedPref.getString("key 6","");
-        String sendernotes =sharedPref.getString("key 7","");
+        //String sendernotes =sharedPref.getString("key 7","");
         String distance =sharedPref.getString("key 8","");
         String userDefaultNumber =sharedPref.getString("key 9","");
         String userDefaultName = sharedPref.getString("key 10","");
@@ -69,9 +73,13 @@ public class user_order_summary extends AppCompatActivity {
         //totalPrice.setText(fee);
 
         orderPlace.setOnClickListener(new View.OnClickListener() {
+
+
             @Override
             public void onClick(View view) {
-                pushData(sendernotes, senderloc, sendercontact, sendername, receiverloc,
+                notes = findViewById(R.id.editTextNotes);
+                String comment = notes.getText().toString();
+                pushData(comment, senderloc, sendercontact, sendername, receiverloc,
                         receivercontact, receivername ,vehicletype," 100",
                         parcelstatus, ridername, ridernum, userDefaultNumber,
                         startLatLng, endLatLng);
@@ -85,14 +93,14 @@ public class user_order_summary extends AppCompatActivity {
         });
     }
 
-    public void pushData(String sendernotes, String senderLoc, String senderCon,
+    public void pushData(String comment , String senderLoc, String senderCon,
                          String senderName, String receiverLoc, String receiverCon,
                          String receiverName, String vehicle, String fee, String parcelstatus,
                          String ridername, String ridernum, String defaultNumber,
                          String startLoc, String endLoc) {
 
         HashMap<String, String> usermap = new HashMap<>();
-        usermap.put("customernotes", sendernotes);
+        usermap.put("customernotes", comment);
         usermap.put("senderlocation", senderLoc);
         usermap.put("sendercontact", senderCon);
         usermap.put("sendername", senderName);
