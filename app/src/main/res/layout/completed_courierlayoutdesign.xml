@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/courier_record_card"
+    android:id="@+id/completed_courier_record_card"
     android:layout_width="340dp"
     android:layout_height="wrap_content"
     android:layout_gravity="center_horizontal"
@@ -34,7 +34,7 @@
                     android:background="#223272"
                     android:fontFamily="@font/montserrat_bold"
                     android:padding="10dp"
-                    android:text="Cancelled Order"
+                    android:text="Completed Order"
                     android:textAlignment="textStart"
                     android:textColor="@color/white"
                     android:textSize="15dp" />
