@@ -37,7 +37,10 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginLeft="24dp"
-        android:layout_marginRight="24dp">
+        android:layout_marginRight="24dp"
+        android:layout_marginBottom="100dp"
+        android:layout_alignParentBottom="true"
+        >
 
         <androidx.cardview.widget.CardView
             android:id="@+id/rider_cardview"
@@ -164,7 +167,7 @@
         android:layout_alignParentBottom="true"
         android:layout_marginStart="56dp"
         android:layout_marginEnd="57dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="30dp"
         android:backgroundTint="#223272"
         app:cardBackgroundColor="#fff"
         app:cardCornerRadius="8dp"
@@ -210,8 +213,8 @@
                 <LinearLayout
                     android:layout_width="1dp"
                     android:layout_height="30dp"
-                    android:backgroundTint="@color/white"
-                    android:background="@drawable/line"/>
+                    android:background="@drawable/line"
+                    android:backgroundTint="@color/white" />
 
 
                 <LinearLayout
@@ -243,15 +246,4 @@
 
     </androidx.cardview.widget.CardView>
 
-
-    <!--<ImageView
-        android:id="@+id/img_addressbtndialog"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/map_linearLayout"
-        android:src="@drawable/ic_baseline_horizontal_rule_24" />-->
-
-
-
-    <!--  <include layout="@layout/user_mapcontent" /> -->
 </RelativeLayout>
