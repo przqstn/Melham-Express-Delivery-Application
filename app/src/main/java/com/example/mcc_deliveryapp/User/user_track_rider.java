@@ -14,6 +14,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -21,6 +22,7 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -28,6 +30,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -54,6 +57,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -61,7 +66,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FileDownloadTask;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.Collections;
@@ -84,9 +93,10 @@ public class user_track_rider extends FragmentActivity implements OnMapReadyCall
     private Location lastKnownLocation;
     private final LatLng defaultLocation = new LatLng(15.594197, 120.970414);
     private FusedLocationProviderClient fusedLocationProviderClient;
-
+    private ImageView profilePic, riderVehicleIcon; // line 51 added ImageView variable
+    private StorageReference storageReference; //line 52 added StorageReference
     HashMap markerMap = new HashMap();
-    Button back;
+    Button back, btn_message_courier,btn_call_courier ;
     String riderNumber, orderID, phonenum, name, riderName, riderVehicle;
     TextView riderNameUI, riderVehicleUI, riderPlateUI;
     @Override
@@ -96,12 +106,12 @@ public class user_track_rider extends FragmentActivity implements OnMapReadyCall
         name = intent.getStringExtra("username");
         phonenum = intent.getStringExtra("phonenum");
         riderName = intent.getStringExtra("ridername");
-
         requestPermission();
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_track_rider);
-
+        btn_message_courier = findViewById(R.id.message_courier);
+        btn_call_courier = findViewById(R.id.call_courier);
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync((OnMapReadyCallback) this);
 
@@ -112,19 +122,41 @@ public class user_track_rider extends FragmentActivity implements OnMapReadyCall
         riderNameUI =  findViewById(R.id.RiderName);
         riderVehicleUI =  findViewById(R.id.RiderVehicle);
         riderPlateUI =  findViewById(R.id.RiderPlate);
-
         back = findViewById(R.id.backbutton);
         riderNameUI.setText(riderName);
 
 
         if (isLocationEnabled(this)) {
             checkUser.addValueEventListener(new ValueEventListener() {
+
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     for (DataSnapshot parcelSnapshot : snapshot.getChildren()) {
                         if (parcelSnapshot.child("OrderID").getValue().equals(orderID))
                         {
+                            profilePic = findViewById(R.id.user_profile_ongoing);
+
                             riderNumber = parcelSnapshot.child("ridernum").getValue(String.class);
+                            storageReference= FirebaseStorage.getInstance().getReference().child("rider/"+riderNumber+"/profile_image.jpg");
+                            try{
+                                final File file= File.createTempFile("profile_image", "jpg");
+                                storageReference.getFile(file)
+                                        .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                                            @Override
+                                            public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                                                Bitmap bitmap= BitmapFactory.decodeFile(file.getAbsolutePath());
+                                                profilePic.setImageBitmap(bitmap);
+                                            }
+                                        }).addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+
+                                            }
+                                        });
+                            }catch (IOException e){
+                                e.printStackTrace();
+                            }
+
 
                         }
                     }
@@ -133,6 +165,28 @@ public class user_track_rider extends FragmentActivity implements OnMapReadyCall
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
 
+                }
+            });
+            btn_message_courier.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    String textnum = riderNumber;
+                    Intent intent = new Intent(Intent.ACTION_SENDTO);
+                    intent.setType("vnd.android-dir/mms-sms");
+                    intent.setData(Uri.parse("sms:" + textnum));
+                    startActivity(intent);
+                }
+            });
+
+
+            btn_call_courier.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    System.out.println("Calling");
+                    String callnum = riderNumber;
+                    Intent intent = new Intent(Intent.ACTION_DIAL);
+                    intent.setData(Uri.parse("tel:" + callnum));
+                    startActivity(intent);
                 }
             });
 
@@ -153,6 +207,7 @@ public class user_track_rider extends FragmentActivity implements OnMapReadyCall
                             riderLatitude = locationSnapshot.child("latitude").getValue().toString();
                             String riderphone = locationSnapshot.child("riderphone").getValue().toString();
                             riderLongitude = locationSnapshot.child("longitude").getValue().toString();
+                            riderVehicleIcon = findViewById(R.id.riderVehicleIcon);
                             latitudes.add(riderLatitude);
                             longitudes.add(riderLongitude);
                             riderphonenum.add(riderphone);
@@ -165,6 +220,8 @@ public class user_track_rider extends FragmentActivity implements OnMapReadyCall
                                                 .position(latLng)
                                                 .title(riderphonenum.get(i)));
                                         markerMap.put(riderphonenum.get(i), marker);
+
+                                        riderVehicleIcon.setImageDrawable(ContextCompat.getDrawable(user_track_rider.this, R.drawable.motorcycle));
                                     }
 
                                     break;
@@ -176,6 +233,8 @@ public class user_track_rider extends FragmentActivity implements OnMapReadyCall
                                                 .position(latLng)
                                                 .title(riderphonenum.get(i)));
                                         markerMap.put(riderphonenum.get(i), marker);
+                                        riderVehicleIcon.setImageDrawable(ContextCompat.getDrawable(user_track_rider.this, R.drawable.sedan));
+
                                     }
 
                                     break;
@@ -187,6 +246,8 @@ public class user_track_rider extends FragmentActivity implements OnMapReadyCall
                                                 .position(latLng)
                                                 .title(riderphonenum.get(i)));
                                         markerMap.put(riderphonenum.get(i), marker);
+                                        riderVehicleIcon.setImageDrawable(ContextCompat.getDrawable(user_track_rider.this, R.drawable.suv));
+
                                     }
 
                                     break;
@@ -198,6 +259,8 @@ public class user_track_rider extends FragmentActivity implements OnMapReadyCall
                                                 .position(latLng)
                                                 .title(riderphonenum.get(i)));
                                         markerMap.put(riderphonenum.get(i), marker);
+                                        riderVehicleIcon.setImageDrawable(ContextCompat.getDrawable(user_track_rider.this, R.drawable.mpv));
+
                                     }
 
                                     break;
@@ -209,6 +272,8 @@ public class user_track_rider extends FragmentActivity implements OnMapReadyCall
                                                 .position(latLng)
                                                 .title(riderphonenum.get(i)));
                                         markerMap.put(riderphonenum.get(i), marker);
+                                        riderVehicleIcon.setImageDrawable(ContextCompat.getDrawable(user_track_rider.this, R.drawable.truck));
+
                                     }
 
                                     break;
@@ -238,18 +303,9 @@ public class user_track_rider extends FragmentActivity implements OnMapReadyCall
                 }
             });
 
-            back.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent(user_track_rider.this, user_ongoing_order_details.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    intent.putExtra("orderID",  orderID);
-                    intent.putExtra("phonenum", phonenum);
-                    intent.putExtra("username", name);
-                    startActivity(intent);
-                }
-            });
-        } else {
+
+        }
+        else {
             onBackPressed();
             Toast.makeText(getBaseContext(), "Please turn of Location Service and try again.", Toast.LENGTH_SHORT).show();
         }
