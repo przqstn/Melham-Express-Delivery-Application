@@ -206,7 +206,7 @@
         <entry key="..\:/Users/DELL/StudioProjects/MCC_Delivery_App/app/src/main/res/layout/activity_main2.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/DELL/StudioProjects/MCC_Delivery_App/app/src/main/res/layout/activity_main_user.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/DELL/StudioProjects/MCC_Delivery_App/app/src/main/res/layout/activity_register_rider.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/DELL/StudioProjects/MCC_Delivery_App/app/src/main/res/layout/activity_rider_cancel_order.xml" value="0.1" />
+        <entry key="..\:/Users/DELL/StudioProjects/MCC_Delivery_App/app/src/main/res/layout/activity_rider_cancel_order.xml" value="0.25" />
         <entry key="..\:/Users/DELL/StudioProjects/MCC_Delivery_App/app/src/main/res/layout/activity_rider_completed_order.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/DELL/StudioProjects/MCC_Delivery_App/app/src/main/res/layout/activity_rider_dashboard.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/DELL/StudioProjects/MCC_Delivery_App/app/src/main/res/layout/activity_rider_login.xml" value="0.20416666666666666" />
@@ -216,7 +216,8 @@
         <entry key="..\:/Users/DELL/StudioProjects/MCC_Delivery_App/app/src/main/res/layout/activity_user_checkrate.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/DELL/StudioProjects/MCC_Delivery_App/app/src/main/res/layout/activity_user_completed_order_details.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/DELL/StudioProjects/MCC_Delivery_App/app/src/main/res/layout/activity_user_navigation.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/DELL/StudioProjects/MCC_Delivery_App/app/src/main/res/layout/activity_user_ongoing_order_details.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/DELL/StudioProjects/MCC_Delivery_App/app/src/main/res/layout/activity_user_ongoing_order_details.xml" value="0.22" />
+        <entry key="..\:/Users/DELL/StudioProjects/MCC_Delivery_App/app/src/main/res/layout/activity_user_order_summary.xml" value="0.33" />
         <entry key="..\:/Users/DELL/StudioProjects/MCC_Delivery_App/app/src/main/res/layout/activity_user_parceltransaction.xml" value="0.33" />
         <entry key="..\:/Users/DELL/StudioProjects/MCC_Delivery_App/app/src/main/res/layout/activity_user_paymentmethod.xml" value="0.5" />
         <entry key="..\:/Users/DELL/StudioProjects/MCC_Delivery_App/app/src/main/res/layout/activity_user_pending_order_details.xml" value="0.25" />
