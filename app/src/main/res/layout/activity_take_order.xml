@@ -291,85 +291,86 @@
 
                 </androidx.cardview.widget.CardView>
 
-                <androidx.cardview.widget.CardView
+
+                <RelativeLayout
                     android:layout_width="340dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginBottom="10dp"
-                    app:cardBackgroundColor="@android:color/transparent"
-                    app:cardCornerRadius="10dp"
-                    app:strokeColor="@color/black"
-                    app:strokeWidth="1dp">
+                    android:background="@drawable/borders">
 
                     <RelativeLayout
+                        android:id="@+id/vehicle_deets_layout"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:padding="15dp">
 
-                        <RelativeLayout
-                            android:id="@+id/vehicle_deets_layout"
-                            android:layout_width="match_parent"
+                        <ImageView
+                            android:id="@+id/vehicleIconTake"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_marginLeft="10dp"
+                            android:background="@drawable/bg_icons"
+                            android:padding="5dp"
+                            app:srcCompat="@drawable/motorcycle" />
+
+                        <TextView
+                            android:id="@+id/vehicle_typetext"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:layout_marginTop="10dp">
+                            android:layout_marginLeft="10dp"
+                            android:layout_toRightOf="@+id/vehicleIconTake"
+                            android:fontFamily="@font/montserrat_medium"
+                            android:text="Vehicle Type"
+                            android:textColor="@color/black"
+                            android:textStyle="bold" />
 
-                            <TextView
-                                android:id="@+id/vehicle_typetext"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="25dp"
-                                android:fontFamily="@font/montserrat_medium"
-                                android:text="Requested Vehicle: "
-                                android:textColor="@color/black"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:id="@+id/vehicle"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_toRightOf="@id/vehicle_typetext"
-                                android:fontFamily="@font/montserrat_regular"
-                                android:text="Vehicle Type"
-                                android:textColor="@color/black" />
-
-                            <ImageView
-                                android:id="@+id/vehicleIconTake"
-                                android:layout_width="50dp"
-                                android:layout_height="wrap_content"
-                                app:srcCompat="@drawable/motorcycle" />
-
-                        </RelativeLayout>
-
-                        <RelativeLayout
-                            android:layout_width="match_parent"
+                        <TextView
+                            android:id="@+id/vehicle"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_below="@+id/vehicle_deets_layout"
-                            android:layout_gravity="center_horizontal"
-                            android:layout_marginBottom="10dp">
+                            android:layout_below="@+id/vehicle_typetext"
+                            android:layout_marginLeft="10dp"
+                            android:layout_toRightOf="@+id/vehicleIconTake"
+                            android:fontFamily="@font/montserrat_regular"
+                            android:text="Vehicle Type"
+                            android:textColor="@color/black" />
 
-                            <TextView
-                                android:id="@+id/order_placed_text"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="25dp"
-                                android:fontFamily="@font/montserrat_medium"
-                                android:text="Order Placed: "
-                                android:textColor="@color/black"
-                                android:textStyle="bold" />
+                        <ImageView
+                            android:id="@+id/lineeee"
+                            android:layout_width="3dp"
+                            android:layout_height="50dp"
+                            android:layout_marginLeft="10dp"
+                            android:tint="#9F9F9F"
+                            android:layout_toRightOf="@+id/vehicle_typetext"
+                            app:srcCompat="@drawable/line" />
 
-                            <TextView
-                                android:id="@+id/order_placed"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_toRightOf="@id/order_placed_text"
-                                android:fontFamily="@font/montserrat_regular"
-                                android:text="Date/Time Goes Here"
-                                android:textColor="@color/black" />
+                        <TextView
+                            android:id="@+id/order_placed_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_toRightOf="@+id/lineeee"
+                            android:fontFamily="@font/montserrat_medium"
+                            android:text="Order Placed"
+                            android:textColor="@color/black"
+                            android:textStyle="bold" />
 
-                        </RelativeLayout>
+                        <TextView
+                            android:id="@+id/order_placed"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/order_placed_text"
+                            android:layout_marginLeft="10dp"
+                            android:layout_toRightOf="@+id/lineeee"
+                            android:fontFamily="@font/montserrat_regular"
+                            android:text="Date/Time Goes Here"
+                            android:textColor="@color/black" />
 
                     </RelativeLayout>
 
-                </androidx.cardview.widget.CardView>
+                </RelativeLayout>
+
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="340dp"
