@@ -55,14 +55,15 @@ public class record_fragment extends Fragment {
 		tabLayout = view.findViewById(R.id.riderRecordTab);
 		viewPager2 = view.findViewById(R.id.viewPager2);
 
-		FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-		rideradapter = new RiderFragmentAdapter(fragmentManager, getLifecycle());
+//		FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+		rideradapter = new RiderFragmentAdapter(getChildFragmentManager(), getLifecycle());
 		viewPager2.setAdapter(rideradapter);
 
 		tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
 			@Override
 			public void onTabSelected(TabLayout.Tab tab) {
 				viewPager2.setCurrentItem(tab.getPosition());
+				viewPager2.setEnabled(false);
 			}
 
 			@Override

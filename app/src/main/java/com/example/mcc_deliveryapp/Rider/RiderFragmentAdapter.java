@@ -12,8 +12,8 @@ import com.example.mcc_deliveryapp.User.signUpFragment;
 public class RiderFragmentAdapter extends FragmentStateAdapter {
 
 
-    public RiderFragmentAdapter(FragmentManager fragmentManager, Lifecycle lifecycle) {
-        super(fragmentManager, lifecycle);
+    public RiderFragmentAdapter(FragmentManager childFragmentManager, Lifecycle lifecycle) {
+        super(childFragmentManager, lifecycle);
     }
 
     @NonNull
