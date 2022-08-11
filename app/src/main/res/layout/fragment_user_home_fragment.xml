@@ -93,27 +93,29 @@
 
         </ScrollView>
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:gravity="end">
+            android:layout_alignParentBottom="true">
 
             <Button
                 android:id="@+id/bookOrder"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginRight="30dp"
+                android:layout_marginBottom="80dp"
                 android:background="@drawable/round_corners"
                 android:backgroundTint="#223272"
-                android:layout_marginEnd="25dp"
-                android:layout_marginTop="590dp"
                 android:drawableRight="@drawable/ic_baseline_add_24"
                 android:fontFamily="@font/montserrat_medium"
                 android:paddingRight="5dp"
                 android:text="Book Order"
                 android:textColor="@color/white" />
 
-        </LinearLayout>
+        </RelativeLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -125,7 +127,7 @@
                 android:id="@+id/user_home_recycler"
                 android:layout_width="match_parent"
                 android:layout_height="395dp"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="25dp"
                 android:layout_gravity="center"
                 tools:visibility="visible"/>
 
