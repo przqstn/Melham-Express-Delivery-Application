@@ -313,9 +313,6 @@ public class rider_takeorder_map extends FragmentActivity implements OnMapReadyC
 
     @Override
     public void onDirectionFinderSuccess(List<Route> routes) {
-        polylinePaths = new ArrayList<>();
-        originMarkers = new ArrayList<>();
-        destinationMarkers = new ArrayList<>();
 
         for (Route route : routes) {
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(route.startLocation, 16));
