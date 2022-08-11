@@ -1,23 +1,19 @@
 package com.example.mcc_deliveryapp.User;
 //~~~~~~~~~~~~~~NEED TO PUSH AND COMMIT~~~~~~~~~~~~~//
 public class UserHelperClass {
-	String userFullname,UserPhone,UserPass,UserCPass;
+	String userFullname,UserPhone,UserPass;
 
-	String passwordHash;
+
 
 	public UserHelperClass() {
 
 	}
 
-	public UserHelperClass(String passwordHash) {
-		this.passwordHash = passwordHash;
-	}
-
-	public UserHelperClass(String userFullname, String userPhone, String userPass, String userCPass) {
+	public UserHelperClass(String userFullname, String userPhone, String userPass) {
 		this.userFullname = userFullname;
 		UserPhone = userPhone;
 		UserPass = userPass;
-		UserCPass = userCPass;
+
 	}
 
 	public String getUserFullname() {
@@ -44,20 +40,7 @@ public class UserHelperClass {
 		UserPass = userPass;
 	}
 
-	public String getUserCPass() {
-		return UserCPass;
-	}
 
-	public void setUserCPass(String userCPass) {
-		UserCPass = userCPass;
-	}
 
-	public String getPasswordHash() {
-		return passwordHash;
-	}
-
-	public void setPasswordHash(String passwordHash) {
-		this.passwordHash = passwordHash;
-	}
 
 }

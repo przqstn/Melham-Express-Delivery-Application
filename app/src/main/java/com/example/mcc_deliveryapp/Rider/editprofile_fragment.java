@@ -53,7 +53,7 @@ public class editprofile_fragment extends AppCompatActivity {
     private TextView viewphoneNum, viewname, viewvehicleType, viewplateNum;
     private EditText editAddress;
     private DatabaseReference root;
-    private String phoneNum, imgName;
+    private String phoneNum, imgName, address;
     private Uri imageUri;
     private FirebaseStorage storage;
     private StorageReference storageReference;
@@ -90,7 +90,7 @@ public class editprofile_fragment extends AppCompatActivity {
         viewplateNum=findViewById(R.id.riderPlate);
         viewplateNum.setText(plateNum);
 
-        String address = intent.getStringExtra("address");
+        address = intent.getStringExtra("address");
         editAddress = findViewById(R.id.riderAddress);
         editAddress.setText(address);
 
@@ -155,21 +155,6 @@ public class editprofile_fragment extends AppCompatActivity {
                 root = FirebaseDatabase.getInstance().getReference().child("riders");
                 HashMap hashMap = new HashMap();
 
-                if (TextUtils.isEmpty(editAddress.getEditableText().toString()) && imageUri == null) {
-                    final Dialog dialog = new Dialog(btnSaveChanges.getContext());
-                    dialog.setContentView(R.layout.saved_dialog);
-                    dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                    dialog.getWindow().getAttributes().windowAnimations = R.style.animation;
-                    dialog.setCancelable(false);
-                    dialog.show();
-                    Button viewProfile = dialog.findViewById(R.id.btn_viewProfile);
-                    viewProfile.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            finish();
-                        }
-                    });
-                }
                 if (imageUri != null) {
                     final ProgressDialog pd = new ProgressDialog(btnSaveChanges.getContext());
                     //pd.setTitle("Uploading Image");
@@ -223,49 +208,17 @@ public class editprofile_fragment extends AppCompatActivity {
             }
         });
 
-        btnCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (!TextUtils.isEmpty(editAddress.getEditableText().toString()) || imageUri != null) {
-                    final Dialog dialog = new Dialog(btnCancel.getContext());
-                    dialog.setContentView(R.layout.cancel_edit_dialog);
-                    dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                    dialog.getWindow().getAttributes().windowAnimations = R.style.animation;
-                    dialog.setCancelable(false);
-                    Button btnEdit = dialog.findViewById(R.id.btn_backToEdit);
-                    Button btnCancel = dialog.findViewById(R.id.btn_cancelAll);
-                    dialog.show();
-                    btnEdit.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            dialog.dismiss();
-                        }
-                    });
-
-                    btnCancel.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            dialog.dismiss();
-                            finish();
-                        }
-                    });
-
-                } else {
-                    finish();
-                }
-            }
-        });
-
     }
 
     @Override
     public void onBackPressed() {
-        if (!TextUtils.isEmpty(editAddress.getEditableText().toString()) || imageUri != null) {
+        if (TextUtils.isEmpty(editAddress.getEditableText().toString())
+                || (!editAddress.getEditableText().toString().equals(address))
+                || imageUri != null) {
             final Dialog dialog = new Dialog(btnCancel.getContext());
             dialog.setContentView(R.layout.cancel_edit_dialog);
             dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             dialog.getWindow().getAttributes().windowAnimations = R.style.animation;
-            dialog.setCancelable(false);
             Button btnEdit = dialog.findViewById(R.id.btn_backToEdit);
             Button btnCancel = dialog.findViewById(R.id.btn_cancelAll);
             dialog.show();
