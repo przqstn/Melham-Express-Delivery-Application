@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_height="wrap_content"
-    android:background="@drawable/prompt_dialog_radius"
+    android:background="@color/background_color"
     android:paddingVertical="25dp"
     android:paddingHorizontal="50dp">
 
