@@ -415,8 +415,6 @@ public class rider_takeorder_map extends FragmentActivity implements OnMapReadyC
                         public void onSuccess(Location location) {
                             // Got last known location. In some rare situations this can be null.
                             if (location != null) {
-                                Log.e("TAG", "GPS is on");
-                                Toast.makeText(getBaseContext(), "GPS is on", Toast.LENGTH_SHORT).show();
                                 latitude = location.getLatitude();
                                 longitude = location.getLongitude();
                                 riderReference.child(phonenum).child("latitude").setValue(latitude);
@@ -424,7 +422,6 @@ public class rider_takeorder_map extends FragmentActivity implements OnMapReadyC
 //                                lastKnownLocation = new LatLng(latitude, longitude);
 //                                requestLoc();
                             } else {
-                                Log.d(TAG, "Current location is null. Using defaults.");
                                 mMap.moveCamera(CameraUpdateFactory
                                         .newLatLngZoom(defaultLocation, DEFAULT_ZOOM));
                                 mMap.getUiSettings().setMyLocationButtonEnabled(true);
@@ -449,7 +446,6 @@ public class rider_takeorder_map extends FragmentActivity implements OnMapReadyC
         }
         else
         {
-            Log.d(TAG, "Current location is null. Using defaults.");
             mMap.moveCamera(CameraUpdateFactory
                     .newLatLngZoom(defaultLocation, DEFAULT_ZOOM));
             mMap.getUiSettings().setMyLocationButtonEnabled(true);

@@ -403,15 +403,11 @@ public class user_parceltransaction extends FragmentActivity implements Location
 						public void onSuccess(Location location) {
 							// Got last known location. In some rare situations this can be null.
 							if (location != null) {
-								Log.e("TAG", "GPS is on");
-								Toast.makeText(getBaseContext(), "GPS is on", Toast.LENGTH_SHORT).show();
 								latitude = location.getLatitude();
 								longitude = location.getLongitude();
 								lastKnownLocation = new LatLng(latitude, longitude);
 								requestLoc();
 							} else {
-								Log.d(TAG, "Current location is null. Using defaults.");
-								Toast.makeText(getBaseContext(), "Current location is null. Using defaults.", Toast.LENGTH_SHORT).show();
 								mMap.moveCamera(CameraUpdateFactory
 										.newLatLngZoom(defaultLocation, DEFAULT_ZOOM));
 								mMap.getUiSettings().setMyLocationButtonEnabled(true);
@@ -432,10 +428,7 @@ public class user_parceltransaction extends FragmentActivity implements Location
 		}
 		else
 		{
-			Log.e("TAG", "GPS is off");
-			Toast.makeText(getBaseContext(), "GPS is off", Toast.LENGTH_SHORT).show();
 			onBackPressed();
-			Toast.makeText(getBaseContext(), "Please turn of Location Service and try again.", Toast.LENGTH_SHORT).show();
 		}
 	}
 

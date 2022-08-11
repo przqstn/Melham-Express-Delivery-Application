@@ -4,6 +4,7 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.Manifest;
@@ -18,10 +19,12 @@ import android.provider.Settings;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mcc_deliveryapp.R;
+import com.example.mcc_deliveryapp.User.user_order_summary;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -32,10 +35,11 @@ import com.google.firebase.database.Query;
 public class take_order extends AppCompatActivity {
 
     String name, phonenum, orderID, riderVehicle, senderName, senderLocation, senderContact,
-            receiverName, receiverLocation, receiverContact, vehicleType, senderNote, orderPrice;
+            receiverName, receiverLocation, receiverContact, vehicleType, senderNote, orderPrice, orderPlaced;
     TextView senderloc, sendername, sendercontact, receiverloc, receivername, receivercontact,
-                order_id, vehicletype, usernote, parcelprice;
+                order_id, vehicletype, usernote, parcelprice, order_placed;
     Button btn_takeOrder;
+    ImageView vehicleIcon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +66,26 @@ public class take_order extends AppCompatActivity {
         usernote = findViewById(R.id.note_rider);
         parcelprice = findViewById(R.id.txt_price);
         btn_takeOrder = findViewById(R.id.btn_takeOrder3);
+        order_placed = findViewById(R.id.order_placed);
+        vehicleIcon = findViewById(R.id.vehicleIconTake);
+
+        switch (riderVehicle)
+        {
+            case "Motorcycle":
+                vehicleIcon.setImageDrawable(ContextCompat.getDrawable(take_order.this, R.drawable.motorcycle));
+                break;
+            case "Sedan":
+                vehicleIcon.setImageDrawable(ContextCompat.getDrawable(take_order.this, R.drawable.sedan));
+                break;
+            case "SUV":
+                vehicleIcon.setImageDrawable(ContextCompat.getDrawable(take_order.this, R.drawable.suv));
+                break;
+            case "MPV":
+                vehicleIcon.setImageDrawable(ContextCompat.getDrawable(take_order.this, R.drawable.mpv));
+                break;
+            case "Small Truck":
+                vehicleIcon.setImageDrawable(ContextCompat.getDrawable(take_order.this, R.drawable.truck));
+        }
 
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         final DatabaseReference dr = database.getReference().child("userparcel");
@@ -83,6 +107,8 @@ public class take_order extends AppCompatActivity {
                         vehicleType = dataSnapshot.child("vehicletype").getValue(String.class);
                         senderNote = dataSnapshot.child("customernotes").getValue(String.class);
                         orderPrice = dataSnapshot.child("fee").getValue(String.class);
+                        orderPlaced = dataSnapshot.child("DatePlace").getValue(String.class);
+
                         sendername.setText(senderName);
                         senderloc.setText(senderLocation);
                         sendercontact.setText(senderContact);
@@ -92,6 +118,7 @@ public class take_order extends AppCompatActivity {
                         order_id.setText(orderID);
                         vehicletype.setText(vehicleType);
                         usernote.setText(senderNote);
+                        order_placed.setText(orderPlaced);
                         parcelprice.setText("₱" + orderPrice);
                     }
 

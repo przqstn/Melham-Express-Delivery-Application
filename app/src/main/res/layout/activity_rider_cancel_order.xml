@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Rider.rider_cancel_order">
+
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="1dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/textView21"
+            android:layout_width="match_parent"
+            android:layout_height="49dp"
+            android:text="Reason of Cancellation"
+            android:textAlignment="center" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RadioButton
+                    android:id="@+id/systemError"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="48dp"
+                    android:onClick="onRadioButtonClicked"
+                    android:text="System Error" />
+
+                <RadioButton
+                    android:id="@+id/duplicateOrder"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="48dp"
+                    android:onClick="onRadioButtonClicked"
+                    android:text="Customer requested due to duplicate order" />
+
+                <RadioButton
+                    android:id="@+id/incorrectAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="48dp"
+                    android:onClick="onRadioButtonClicked"
+                    android:text="Customer requested due to change of mind" />
+
+                <RadioButton
+                    android:id="@+id/changeOfMind"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="48dp"
+                    android:onClick="onRadioButtonClicked"
+                    android:text="Customer shipping address is incorrect/incomplete" />
+
+                <RadioButton
+                    android:id="@+id/customerUnreachable"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="48dp"
+                    android:onClick="onRadioButtonClicked"
+                    android:text="Customer unreachable" />
+
+                <RadioButton
+                    android:id="@+id/otherOpt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="48dp"
+                    android:onClick="onRadioButtonClicked"
+                    android:text="Others (Please specify)" />
+
+            </RadioGroup>
+
+            <EditText
+                android:id="@+id/reasonOthers"
+                android:layout_width="match_parent"
+                android:layout_height="188dp"
+                android:hint="If other, input other cancellation reason..." />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/confirmCancellation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Confirm Cancellation" />
+
+            <Button
+                android:id="@+id/goBack"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Go Back" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

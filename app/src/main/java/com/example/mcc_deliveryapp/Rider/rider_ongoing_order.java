@@ -243,6 +243,7 @@ public class rider_ongoing_order extends AppCompatActivity {
                             }
                         });
                 Intent intent = new Intent(rider_ongoing_order.this, rider_dashboard.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 intent.putExtra("phonenum", phonenum);
                 intent.putExtra("username", name);
                 intent.putExtra("vehicle", riderVehicle);
@@ -253,41 +254,13 @@ public class rider_ongoing_order extends AppCompatActivity {
         btn_cancelOrderRider.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final FirebaseDatabase database = FirebaseDatabase.getInstance();
-                final DatabaseReference dr = database.getReference().child("userparcel");
-                Query query = dr.orderByChild("OrderID").equalTo(orderID);
-
-                query.addChildEventListener(
-                        new ChildEventListener() {
-                            @Override
-                            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                                dr.child(dataSnapshot.getKey()).child("parcelstatus").setValue("Cancelled"+phonenum);
-                                String userdefnum = dataSnapshot.child("defaultUserNum").getValue().toString();
-                                dr.child(dataSnapshot.getKey()).child("userParcelStatus").setValue("Cancelled"+userdefnum);
-                            }
-
-                            @Override
-                            public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-                            }
-
-                            @Override
-                            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-                            }
-
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError error) {
-
-                            }
-
-                            @Override
-                            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-                            }
-                        });
-                Intent intent = new Intent(rider_ongoing_order.this, rider_dashboard.class);
+                Intent intent = new Intent(rider_ongoing_order.this, rider_cancel_order.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                intent.putExtra("orderID", orderID);
                 intent.putExtra("phonenum", phonenum);
                 intent.putExtra("username", name);
                 intent.putExtra("vehicle", riderVehicle);
+                intent.putExtra("defaultUserNum", defaultUserNum);
                 startActivity(intent);
             }
         });

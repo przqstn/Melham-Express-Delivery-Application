@@ -59,7 +59,7 @@
                                     android:background="#223272"
                                     android:fontFamily="@font/montserrat_bold"
                                     android:padding="10dp"
-                                    android:text="Ongoing Order"
+                                    android:text="Pending Order"
                                     android:textAlignment="textStart"
                                     android:textColor="@color/white"
                                     android:textSize="15dp" />
@@ -330,6 +330,12 @@
                                 android:fontFamily="@font/montserrat_regular"
                                 android:text="Vehicle Type"
                                 android:textColor="@color/black" />
+
+                            <ImageView
+                                android:id="@+id/vehicleIconTake"
+                                android:layout_width="50dp"
+                                android:layout_height="wrap_content"
+                                app:srcCompat="@drawable/motorcycle" />
 
                         </RelativeLayout>
 
