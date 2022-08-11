@@ -57,6 +57,17 @@
                     android:paddingLeft="15dp"
                     android:textSize="16sp" />
 
+                <TextView
+                    android:id="@+id/phoneErrorRider"
+                    android:layout_width="350dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:text="TextView"
+                    android:textColor="#FF0033"
+                    android:textSize="12sp"
+                    android:visibility="gone" />
+
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/edTextPassL"
                     android:layout_width="match_parent"
@@ -82,6 +93,28 @@
                         tools:ignore="SpeakableTextPresentCheck" />
                 </com.google.android.material.textfield.TextInputLayout>
 
+                <TextView
+                    android:id="@+id/passErrorRider"
+                    android:layout_width="350dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:text="TextView"
+                    android:textColor="#FF0033"
+                    android:textSize="12sp"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/invalidPassRider"
+                    android:layout_width="350dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:text="TextView"
+                    android:textColor="#FF0033"
+                    android:textSize="12sp"
+                    android:visibility="gone" />
+
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -106,6 +139,28 @@
                         tools:ignore="SpeakableTextPresentCheck" />
                 </com.google.android.material.textfield.TextInputLayout>
 
+                <TextView
+                    android:id="@+id/confirmErrorRider"
+                    android:layout_width="350dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:text="TextView"
+                    android:textColor="#FF0033"
+                    android:textSize="12sp"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/invalidConfirmRider"
+                    android:layout_width="350dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:text="TextView"
+                    android:textColor="#FF0033"
+                    android:textSize="12sp"
+                    android:visibility="gone" />
+
                 <Spinner
                     android:id="@+id/spinnerCityDriver"
                     android:layout_width="354dp"
@@ -115,6 +170,17 @@
                     android:background="@drawable/borders"
                     android:contentDescription="City"
                     android:spinnerMode="dropdown" />
+
+                <TextView
+                    android:id="@+id/cityError"
+                    android:layout_width="350dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:text="TextView"
+                    android:textColor="#FF0033"
+                    android:textSize="12sp"
+                    android:visibility="gone" />
 
                 <Spinner
                     android:id="@+id/spinnerVehicleDriver"
@@ -167,6 +233,17 @@
                     android:ems="10"
                     android:hint="Specify Model"
                     android:paddingLeft="15dp"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/vehicleError"
+                    android:layout_width="350dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:text="TextView"
+                    android:textColor="#FF0033"
+                    android:textSize="12sp"
                     android:visibility="gone" />
 
                 <CheckBox

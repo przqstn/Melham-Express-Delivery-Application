@@ -140,6 +140,7 @@ public class profile_fragment extends Fragment {
 				intent.putExtra("name", RiderName.getText().toString());
 				intent.putExtra("vehicletype", RiderVehicle.getText().toString());
 				intent.putExtra("platenumber", RiderPlate.getText().toString());
+				intent.putExtra("address", RiderAddress.getText().toString());
 				view.getContext().startActivity(intent);
 			}
 		});

@@ -68,6 +68,8 @@ public class RegisterRider extends AppCompatActivity {
     private ImageView frontImg, sideImg, backImg, certRegImg, profImg, clearanceImg;
     private Boolean frontImgClicked =false, sideImgClicked =false, backImgClicked =false,
             certRegImgClicked =false, profImgClicked=false, clearanceImgClicked =false;
+    TextView emptyNum, emptyPass, emptyConfirm, invalidPass, invalidConfirm, emptyCity, emptyVehicle;
+
     private Uri imageUri;
     private FirebaseStorage storage;
     private StorageReference storageReference;
@@ -84,6 +86,13 @@ public class RegisterRider extends AppCompatActivity {
         password = findViewById(R.id.pwfield);
         pwConfirm = findViewById(R.id.pwConfirm);
         Button btnReg = findViewById(R.id.btnRegRider);
+        emptyNum = findViewById(R.id.phoneErrorRider);
+        emptyPass = findViewById(R.id.passErrorRider);
+        emptyConfirm = findViewById(R.id.confirmErrorRider);
+        invalidPass = findViewById(R.id.invalidPassRider);
+        invalidConfirm = findViewById(R.id.invalidConfirmRider);
+        emptyCity = findViewById(R.id.cityError);
+        emptyVehicle = findViewById(R.id.vehicleError);
         CheckBox checkRider = findViewById(R.id.checkBoxAgreeRider);
         Spinner spinCity = findViewById(R.id.spinnerCityDriver);
         Spinner spinVehicle = findViewById(R.id.spinnerVehicleDriver);
@@ -242,7 +251,8 @@ public class RegisterRider extends AppCompatActivity {
                 boolean clear = true;
                 if(TextUtils.isEmpty(etPhoneNum.getText().toString()))
                 {
-                    etPhoneNum.setError("Required");
+                    emptyNum.setText("Required");
+                    emptyNum.setVisibility(view.VISIBLE);
                     etPhoneNum.setBackgroundResource(R.drawable.error_border_edittext);
                     clear = false;
                     return;
@@ -250,6 +260,8 @@ public class RegisterRider extends AppCompatActivity {
                 }
                 else  if(spinCity.getSelectedItemId() == 0)
                 {
+                    emptyCity.setText("Required");
+                    emptyCity.setVisibility(view.VISIBLE);
                     spinCity.setBackgroundResource(R.drawable.error_border_edittext);
                     clear = false;
                     return;
@@ -257,6 +269,8 @@ public class RegisterRider extends AppCompatActivity {
                 }
                 else  if(spinVehicle.getSelectedItemId() == 0)
                 {
+                    emptyVehicle.setText("Required");
+                    emptyVehicle.setVisibility(view.VISIBLE);
                     spinVehicle.setBackgroundResource(R.drawable.error_border_edittext);
                     clear = false;
                     return;
@@ -285,12 +299,16 @@ public class RegisterRider extends AppCompatActivity {
                 }
                 if (password.length() == 0)
                 {
-                    ((EditText)findViewById(R.id.pwfield)).setError("Required", null);
+                    emptyPass.setText("Required");
+                    emptyPass.setVisibility(view.VISIBLE);
+
                     findViewById(R.id.pwfield).setBackgroundResource(R.drawable.error_border_edittext);
                 }
                 if (pwConfirm.length() == 0)
                 {
-                    ((EditText)findViewById(R.id.pwConfirm)).setError("Required", null);
+                    emptyConfirm.setText("Required");
+                    emptyConfirm.setVisibility(view.VISIBLE);
+
                     findViewById(R.id.pwConfirm).setBackgroundResource(R.drawable.error_border_edittext);
                 }
                 else
@@ -302,6 +320,10 @@ public class RegisterRider extends AppCompatActivity {
                     etBrandVehicle.setBackgroundResource(R.drawable.graphics_edittext_1);
                     findViewById(R.id.pwConfirm).setBackgroundResource(R.drawable.graphics_edittext_1);
                     findViewById(R.id.pwfield).setBackgroundResource(R.drawable.graphics_edittext_1);
+                    emptyNum.setVisibility(view.GONE);
+                    emptyPass.setVisibility(view.GONE);
+                    emptyCity.setVisibility(view.GONE);
+                    emptyConfirm.setVisibility(view.GONE);
                     clear = true;
                 }
 
@@ -334,7 +356,9 @@ public class RegisterRider extends AppCompatActivity {
                 //check if password satisfies conditions
                 if(!uppercase || !lowercase || !min6 || digits == 0)
                 {
-                    ((EditText)findViewById(R.id.pwfield)).setError("Password most have at least 6 characters, one uppercase, lowercase, and number.", null);
+                    invalidPass.setText("Password must have at least 6 characters, one uppercase, lowercase, and number.");
+                    invalidPass.setVisibility(view.VISIBLE);
+
                     findViewById(R.id.pwfield).setBackgroundResource(R.drawable.error_border_edittext);
 
                 }
@@ -342,15 +366,20 @@ public class RegisterRider extends AppCompatActivity {
                 // add confirm password function
                 else if (min6 && uppercase && lowercase && digits >=1)
                 {
+                    invalidPass.setVisibility(view.GONE);
 
                     if (password.equals(pwConfirm))
                     {
+
                         findViewById(R.id.pwfield).setBackgroundResource(R.drawable.graphics_edittext_1);
                         findViewById(R.id.pwConfirm).setBackgroundResource(R.drawable.graphics_edittext_1);
                         PWgood = true;
                     }
                     else {
-                        ((EditText)findViewById(R.id.pwConfirm)).setError("Passwords do not match", null);
+                        invalidConfirm.setVisibility(view.VISIBLE);
+                        invalidConfirm.setText("Passwords do not match");
+                        emptyConfirm.setVisibility(view.GONE);
+
                         findViewById(R.id.pwfield).setBackgroundResource(R.drawable.error_border_edittext);
                         findViewById(R.id.pwConfirm).setBackgroundResource(R.drawable.error_border_edittext);
                     }

@@ -85,7 +85,6 @@ public class user_paymentmethod extends AppCompatActivity {
 
 						Intent intent = new Intent(user_paymentmethod.this,user_checkrate.class);
 						startActivity(intent);
-						Toast.makeText(user_paymentmethod.this, "Place Order test", Toast.LENGTH_SHORT).show();
 						bottomSheetDialog.dismiss();
 					}
 				});

@@ -130,8 +130,8 @@ public class user_editprofile_fragment extends AppCompatActivity {
                 }
                 if(imageUri!=null) {
                     final ProgressDialog pd = new ProgressDialog(btnSaveChanges.getContext());
-                    pd.setTitle("Uploading Image");
-                    pd.show();
+                    //pd.setTitle("Uploading Image");
+                    //pd.show();
 
                     StorageReference riversRef = storageReference.child("user/" + phoneNum + "/" + imgName);
 
@@ -139,15 +139,15 @@ public class user_editprofile_fragment extends AppCompatActivity {
                             .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                                 @Override
                                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                                    pd.dismiss();
+                                   // pd.dismiss();
 
                                 }
                             })
                             .addOnFailureListener(new OnFailureListener() {
                                 @Override
                                 public void onFailure(@NonNull Exception e) {
-                                    pd.dismiss();
-                                    Toast.makeText(getApplicationContext(), "Failed to Upload", Toast.LENGTH_LONG).show();
+                                    //pd.dismiss();
+                                    //Toast.makeText(getApplicationContext(), "Failed to Upload", Toast.LENGTH_LONG).show();
                                 }
                             })
                             .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
@@ -174,7 +174,8 @@ public class user_editprofile_fragment extends AppCompatActivity {
                 viewProfile.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        onBackPressed();
+                        dialog.dismiss();
+                        finish();
                     }
                 });
 
@@ -203,17 +204,51 @@ public class user_editprofile_fragment extends AppCompatActivity {
                         @Override
                         public void onClick(View view) {
                             dialog.dismiss();
-                            onBackPressed();
+                            finish();
                         }
                     });
 
                 }else{
-                    onBackPressed();
+                    finish();
                 }
             }
         });
 
     }
+
+    @Override
+    public void onBackPressed() {
+        if (imageUri != null) {
+            final Dialog dialog = new Dialog(btnCancel.getContext());
+            dialog.setContentView(R.layout.cancel_edit_dialog);
+            dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            dialog.getWindow().getAttributes().windowAnimations = R.style.animation;
+            dialog.setCancelable(false);
+            Button btnEdit = dialog.findViewById(R.id.btn_backToEdit);
+            Button btnCancel = dialog.findViewById(R.id.btn_cancelAll);
+            dialog.show();
+            btnEdit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    dialog.dismiss();
+                }
+            });
+
+            btnCancel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    dialog.dismiss();
+                    finish();
+                }
+            });
+
+        } else {
+            finish();
+
+        }
+
+    }
+
     private void choosePicture() {
         Intent intent = new Intent();
         intent.setType("image/*");
