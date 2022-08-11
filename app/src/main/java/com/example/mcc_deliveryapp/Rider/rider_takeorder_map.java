@@ -25,6 +25,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -38,6 +39,8 @@ import com.example.mcc_deliveryapp.R;
 import com.example.mcc_deliveryapp.User.Module.DirectionFinder;
 import com.example.mcc_deliveryapp.User.Module.DirectionFinderListener;
 import com.example.mcc_deliveryapp.User.Module.Route;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -50,6 +53,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -84,6 +88,8 @@ public class rider_takeorder_map extends FragmentActivity implements OnMapReadyC
     public Criteria criteria;
     public String bestProvider;
     private final LatLng defaultLocation = new LatLng(14.5928, 120.9801);
+    private FusedLocationProviderClient fusedLocationClient;
+
 
     private LatLng riderLocation;
     private GoogleMap mMap;
@@ -124,6 +130,7 @@ public class rider_takeorder_map extends FragmentActivity implements OnMapReadyC
         phonenum = intent.getStringExtra("phonenum");
         orderID = intent.getStringExtra("orderID");
         riderVehicle = intent.getStringExtra("vehicle");
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
         requestPermission();
         super.onCreate(savedInstanceState);
@@ -153,10 +160,10 @@ public class rider_takeorder_map extends FragmentActivity implements OnMapReadyC
                     public void onChildAdded(@NonNull DataSnapshot dataSnapshot, String s) {
 
                         String[] splitStart = Objects.requireNonNull(dataSnapshot.child("startLocation").getValue(String.class)).split(",");
-                        startLocation = new LatLng(Double.parseDouble(splitStart[0]),Double.parseDouble(splitStart[1]));
+                        startLocation = new LatLng(Double.parseDouble(splitStart[0]), Double.parseDouble(splitStart[1]));
 
                         String[] endStart = Objects.requireNonNull(dataSnapshot.child("endLocation").getValue(String.class)).split(",");
-                        endLocation = new LatLng(Double.parseDouble(endStart[0]),Double.parseDouble(endStart[1]));
+                        endLocation = new LatLng(Double.parseDouble(endStart[0]), Double.parseDouble(endStart[1]));
                     }
 
                     @Override
@@ -247,11 +254,11 @@ public class rider_takeorder_map extends FragmentActivity implements OnMapReadyC
             @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View view) {
-                if (locationStatus == 0){
+                if (locationStatus == 0) {
                     locationStatus = 1;
                     pickedComplete.setText("Parcel Delivered");
                     sendRequest();
-                } else if (locationStatus == 1){
+                } else if (locationStatus == 1) {
                     Intent intent = new Intent(rider_takeorder_map.this, rider_ongoing_order.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     intent.putExtra("phonenum", phonenum);
@@ -298,7 +305,7 @@ public class rider_takeorder_map extends FragmentActivity implements OnMapReadyC
         }
 
         if (polylinePaths != null) {
-            for (Polyline polyline:polylinePaths ) {
+            for (Polyline polyline : polylinePaths) {
                 polyline.remove();
             }
         }
@@ -339,7 +346,6 @@ public class rider_takeorder_map extends FragmentActivity implements OnMapReadyC
             polylinePaths.add(mMap.addPolyline(polylineOptions));
 
 
-
         }
     }
 
@@ -363,7 +369,7 @@ public class rider_takeorder_map extends FragmentActivity implements OnMapReadyC
                 } catch (UnsupportedEncodingException e) {
                     e.printStackTrace();
                 }
-            } else if((locationStatus == 1)){
+            } else if ((locationStatus == 1)) {
                 try {
                     new DirectionFinder(this, test1, test3).execute();
                 } catch (UnsupportedEncodingException e) {
@@ -376,18 +382,14 @@ public class rider_takeorder_map extends FragmentActivity implements OnMapReadyC
     public static boolean isLocationEnabled(Context context) {
         int locationMode = 0;
         String locationProviders;
-        if(android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O)
-        {
-            try
-            {
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            try {
                 locationMode = Settings.Secure.getInt(context.getContentResolver(), Settings.Secure.LOCATION_MODE);
             } catch (Settings.SettingNotFoundException e) {
                 e.printStackTrace();
             }
             return locationMode != Settings.Secure.LOCATION_MODE_OFF;
-        }
-        else
-        {
+        } else {
             locationProviders = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.LOCATION_PROVIDERS_ALLOWED);
             return !TextUtils.isEmpty(locationProviders);
         }
@@ -410,23 +412,43 @@ public class rider_takeorder_map extends FragmentActivity implements OnMapReadyC
                 // for ActivityCompat#requestPermissions for more details.
                 return;
             }
-            Location location = locationManager.getLastKnownLocation(bestProvider);
-            if (location != null) {
-//				Log.e("TAG", "GPS is on");
-                latitude = location.getLatitude();
-                longitude = location.getLongitude();
-                riderReference.child(phonenum).child("latitude").setValue(latitude);
-                riderReference.child(phonenum).child("longitude").setValue(longitude);
-//                lastKnownLocation = new LatLng(latitude, longitude);
-//                requestLoc();
-            }
-            else{
-                Log.d(TAG, "Current location is null. Using defaults.");
-                mMap.moveCamera(CameraUpdateFactory
-                        .newLatLngZoom(defaultLocation, DEFAULT_ZOOM));
-                mMap.getUiSettings().setMyLocationButtonEnabled(true);
-                locationManager.requestLocationUpdates(bestProvider, 1000, 0, locationListener);
-            }
+            fusedLocationClient.getLastLocation().addOnSuccessListener(
+                    this, new OnSuccessListener<Location>() {
+                        @Override
+                        public void onSuccess(Location location) {
+                            // Got last known location. In some rare situations this can be null.
+                            if (location != null) {
+                                Log.e("TAG", "GPS is on");
+                                Toast.makeText(getBaseContext(), "GPS is on", Toast.LENGTH_SHORT).show();
+                                latitude = location.getLatitude();
+                                longitude = location.getLongitude();
+                                riderReference.child(phonenum).child("latitude").setValue(latitude);
+                                riderReference.child(phonenum).child("longitude").setValue(longitude);
+//                                lastKnownLocation = new LatLng(latitude, longitude);
+//                                requestLoc();
+                            } else {
+                                Log.d(TAG, "Current location is null. Using defaults.");
+                                mMap.moveCamera(CameraUpdateFactory
+                                        .newLatLngZoom(defaultLocation, DEFAULT_ZOOM));
+                                mMap.getUiSettings().setMyLocationButtonEnabled(true);
+                                if (ActivityCompat.checkSelfPermission(rider_takeorder_map.this,
+                                        Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                                        && ActivityCompat.checkSelfPermission(rider_takeorder_map.this,
+                                        Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                                    // TODO: Consider calling
+                                    //    ActivityCompat#requestPermissions
+                                    // here to request the missing permissions, and then overriding
+                                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                                    //                                          int[] grantResults)
+                                    // to handle the case where the user grants the permission. See the documentation
+                                    // for ActivityCompat#requestPermissions for more details.
+                                    return;
+                                }
+                                locationManager.requestLocationUpdates(bestProvider, 1000,
+                                        0, (LocationListener) rider_takeorder_map.this);
+                            }
+                        }
+                    });
         }
         else
         {
@@ -436,7 +458,6 @@ public class rider_takeorder_map extends FragmentActivity implements OnMapReadyC
             mMap.getUiSettings().setMyLocationButtonEnabled(true);
         }
     }
-
 
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
