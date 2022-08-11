@@ -32,7 +32,10 @@ public class user_order_summary extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_order_summary);
         Intent intent = getIntent();
+        String userNumber = intent.getStringExtra("phonenum");
+        String userName = intent.getStringExtra("username");
         String vehicletype = intent.getStringExtra("vehicle");
+        String fee = intent.getStringExtra("fee");
         pickUpAddress = findViewById(R.id.pickUpAddress);
         sendName = findViewById(R.id.sendName);
         sendNumber = findViewById(R.id.sendNumber);
@@ -70,7 +73,7 @@ public class user_order_summary extends AppCompatActivity {
         recName.setText(receivername);
         recNumber.setText(receivercontact);
         vehicleType.setText(vehicletype);
-        //totalPrice.setText(fee);
+        totalPrice.setText("₱" + fee);
 
         orderPlace.setOnClickListener(new View.OnClickListener() {
 
@@ -80,7 +83,7 @@ public class user_order_summary extends AppCompatActivity {
                 notes = findViewById(R.id.editTextNotes);
                 String comment = notes.getText().toString();
                 pushData(comment, senderloc, sendercontact, sendername, receiverloc,
-                        receivercontact, receivername ,vehicletype," 100",
+                        receivercontact, receivername ,vehicletype,fee,
                         parcelstatus, ridername, ridernum, userDefaultNumber,
                         startLatLng, endLatLng);
                 Intent intent = new Intent(user_order_summary.this, user_navigation.class);

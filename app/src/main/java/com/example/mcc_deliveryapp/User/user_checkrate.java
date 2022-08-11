@@ -103,6 +103,7 @@ public class user_checkrate extends AppCompatActivity {
 						intent.putExtra("vehicle", "Motorcycle");
 						intent.putExtra("phonenum", userDefaultNumber);
 						intent.putExtra("username", userDefaultName);
+						intent.putExtra("fee", convertFloat);
 						startActivity(intent);
 					}
 				});
@@ -143,6 +144,7 @@ public class user_checkrate extends AppCompatActivity {
 						intent.putExtra("vehicle", "Sedan");
 						intent.putExtra("phonenum", userDefaultNumber);
 						intent.putExtra("username", userDefaultName);
+						intent.putExtra("fee", convertFloat);
 						startActivity(intent);
 					}
 				});
@@ -182,6 +184,7 @@ public class user_checkrate extends AppCompatActivity {
 						intent.putExtra("vehicle", "SUV");
 						intent.putExtra("phonenum", userDefaultNumber);
 						intent.putExtra("username", userDefaultName);
+						intent.putExtra("fee", convertFloat);
 						startActivity(intent);
 					}
 				});
@@ -221,6 +224,7 @@ public class user_checkrate extends AppCompatActivity {
 						intent.putExtra("vehicle", "MPV");
 						intent.putExtra("phonenum", userDefaultNumber);
 						intent.putExtra("username", userDefaultName);
+						intent.putExtra("fee", convertFloat);
 						startActivity(intent);
 					}
 				});
@@ -259,6 +263,7 @@ public class user_checkrate extends AppCompatActivity {
 						intent.putExtra("vehicle", "Small Truck");
 						intent.putExtra("phonenum", userDefaultNumber);
 						intent.putExtra("username", userDefaultName);
+						intent.putExtra("fee", convertFloat);
 						startActivity(intent);
 
 					}
