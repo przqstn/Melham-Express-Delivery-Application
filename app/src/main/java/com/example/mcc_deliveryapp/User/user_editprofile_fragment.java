@@ -46,10 +46,9 @@ public class user_editprofile_fragment extends AppCompatActivity {
 
     private TextView viewPhoneNum, viewFullName;
     private String phoneNum, currentPhotoPath, imgName;
-    private ImageButton btnUpload;
+    private ImageButton btnSaveChanges, btnUpload;
     private Uri imageUri;
     private ImageView profilePic;
-    private Button btnSaveChanges, btnCancel;
     private DatabaseReference root;
     private FirebaseStorage storage;
     private StorageReference storageReference;
@@ -65,7 +64,6 @@ public class user_editprofile_fragment extends AppCompatActivity {
         btnUpload = findViewById(R.id.btn_Upload);
         profilePic = findViewById(R.id.profile_user);
         btnSaveChanges = findViewById(R.id.btn_saveChanges);
-        btnCancel = findViewById(R.id.btn_cancelChanges);
 
         Intent intent = getIntent();
         phoneNum = intent.getStringExtra("userPhone");
@@ -181,7 +179,7 @@ public class user_editprofile_fragment extends AppCompatActivity {
 
             }
         });
-        btnCancel.setOnClickListener(new View.OnClickListener() {
+        /*btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(imageUri!=null) {
@@ -212,11 +210,11 @@ public class user_editprofile_fragment extends AppCompatActivity {
                     finish();
                 }
             }
-        });
+        });*/
 
     }
 
-    @Override
+    /*@Override
     public void onBackPressed() {
         if (imageUri != null) {
             final Dialog dialog = new Dialog(btnCancel.getContext());
@@ -247,7 +245,7 @@ public class user_editprofile_fragment extends AppCompatActivity {
 
         }
 
-    }
+    }*/
 
     private void choosePicture() {
         Intent intent = new Intent();

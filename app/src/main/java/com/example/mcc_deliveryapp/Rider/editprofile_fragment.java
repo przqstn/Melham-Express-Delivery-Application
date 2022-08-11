@@ -47,8 +47,8 @@ public class editprofile_fragment extends AppCompatActivity {
     public static final int CAMERA_PERM_CODE = 2;
     public static final int CAMERA_REQUEST_CODE = 3;
 
-    private Button btnCancel, btnSaveChanges;
-    private ImageButton btnUpload;
+    private Button btnCancel;
+    private ImageButton btnUpload, btnSaveChanges;
     private ImageView profilePic;
     private TextView viewphoneNum, viewname, viewvehicleType, viewplateNum;
     private EditText editAddress;
@@ -68,7 +68,7 @@ public class editprofile_fragment extends AppCompatActivity {
         storageReference = storage.getReference();
 
         btnUpload = findViewById(R.id.btn_upload);
-        btnCancel = findViewById(R.id.btn_cancelChanges);
+        //btnCancel = findViewById(R.id.btn_cancelChanges);
         btnSaveChanges = findViewById(R.id.btn_saveChanges);
         btnSaveChanges.setVisibility(View.GONE);
         profilePic = findViewById(R.id.profile_user);

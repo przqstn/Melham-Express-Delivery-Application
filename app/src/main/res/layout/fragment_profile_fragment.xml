@@ -92,7 +92,7 @@
                             android:layout_alignParentEnd="true"
                             android:layout_alignParentBottom="true"
                             android:background="@drawable/rectangle"
-                            android:gravity="center_vertical"
+                            android:gravity="center"
                             android:orientation="vertical"
                             android:padding="10dp">
 
