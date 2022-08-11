@@ -35,7 +35,7 @@ public class user_pending_fragment extends Fragment {
 						 Bundle savedInstanceState)
 	{
 
-		View view =  inflater.inflate(R.layout.fragment_completed_fragment, container, false);
+		View view =  inflater.inflate(R.layout.fragment_user_pending_fragment, container, false);
 
 		System.out.println("Pending view");
 		// Create a instance of the database and get
@@ -43,7 +43,7 @@ public class user_pending_fragment extends Fragment {
 		mbase = FirebaseDatabase.getInstance().getReference().child("userparcel");
 
 		System.out.println(mbase);
-		recyclerView = view.findViewById(R.id.recycler_courier_completed);
+		recyclerView = view.findViewById(R.id.recycler_user_pending);
 
 		// To display the Recycler view linearly
 		recyclerView.setLayoutManager(
