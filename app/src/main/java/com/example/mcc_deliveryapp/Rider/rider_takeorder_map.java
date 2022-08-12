@@ -362,13 +362,14 @@ public class rider_takeorder_map extends FragmentActivity implements OnMapReadyC
 
             if (locationStatus == 0) {
                 try {
-                    new DirectionFinder(this, test1, test2).execute();
+                    Log.e("TAG", riderVehicle);
+                    new DirectionFinder(this, test1, test2, riderVehicle).execute();
                 } catch (UnsupportedEncodingException e) {
                     e.printStackTrace();
                 }
             } else if ((locationStatus == 1)) {
                 try {
-                    new DirectionFinder(this, test1, test3).execute();
+                    new DirectionFinder(this, test1, test3, riderVehicle).execute();
                 } catch (UnsupportedEncodingException e) {
                     e.printStackTrace();
                 }
