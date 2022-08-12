@@ -77,6 +77,10 @@
             android:exported="true"
             android:windowSoftInputMode="stateHidden" />
         <activity
+            android:name=".User.user_editprofile_changePass"
+            android:exported="true"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
             android:name=".User.user_editprofile_fragment"
             android:exported="true"
             android:windowSoftInputMode="stateHidden" />
