@@ -25,7 +25,7 @@ import com.google.firebase.database.Query;
 
 public class user_completed_fragment extends Fragment {
 	private RecyclerView recyclerView;
-	private String userNum, userName;
+	private String userNum, userName, riderNum;
 
 	user_completed_adapter adapter; // Create Object of the Adapter class
 	DatabaseReference mbase; // Create object of the
@@ -52,6 +52,7 @@ public class user_completed_fragment extends Fragment {
 		Intent intent = getActivity().getIntent();
 		userNum = intent.getStringExtra("phonenum");
 		userName = intent.getStringExtra("username");
+		riderNum = intent.getStringExtra("ridernum");
 
 
 		Query query = mbase.orderByChild("defaultUserNum").equalTo(userNum);
