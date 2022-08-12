@@ -3,6 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="#EEEFFA"
+    android:backgroundTint="@color/background_color"
     android:layout_height="wrap_content">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -31,8 +33,7 @@
                     android:id="@+id/txtRegDriveTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginLeft="16dp"
+                    android:padding="5dp"
                     android:layout_marginTop="12dp"
                     android:fontFamily="@font/montserrat_medium"
                     android:text="Become a courier"
@@ -40,14 +41,27 @@
                     android:textSize="20sp"
                     android:textStyle="bold" />
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Phone Number"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:layout_marginTop="20dp"
+                    android:padding="5dp"
+
+                    />
+
                 <EditText
                     android:id="@+id/editTextPhoneNumDriver"
-                    android:layout_width="350dp"
-                    android:layout_height="60dp"
+                    android:layout_width="411dp"
+                    android:layout_height="59dp"
                     android:layout_gravity="center"
-                    android:layout_marginTop="13dp"
-                    android:background="@drawable/borders"
-                    android:drawableStart="@drawable/ic_baseline_phone_in_talk_24"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/edit_text_round"
+                    android:drawableStart="@drawable/ic_baseline_local_phone_24"
                     android:drawableLeft="@drawable/ic_baseline_phone_in_talk_24"
                     android:drawablePadding="16dp"
                     android:fontFamily="@font/montserrat_regular"
@@ -56,6 +70,18 @@
                     android:inputType="phone"
                     android:paddingLeft="15dp"
                     android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Password"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:layout_marginTop="5dp"
+                    android:padding="5dp"
+                    />
 
                 <TextView
                     android:id="@+id/phoneErrorRider"
@@ -76,10 +102,10 @@
 
                     <EditText
                         android:id="@+id/pwfield"
-                        android:layout_width="350dp"
+                        android:layout_width="408dp"
                         android:layout_height="60dp"
                         android:layout_gravity="center"
-                        android:background="@drawable/borders"
+                        android:background="@drawable/edit_text_round"
                         android:drawableStart="@drawable/ic_baseline_lock_24"
                         android:drawableLeft="@drawable/ic_baseline_lock_24"
                         android:drawablePadding="15dp"
@@ -115,6 +141,18 @@
                     android:textSize="12sp"
                     android:visibility="gone" />
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Confirm Password"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:layout_marginTop="5dp"
+                    android:padding="5dp"
+                    />
+
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -122,10 +160,10 @@
 
                     <EditText
                         android:id="@+id/pwConfirm"
-                        android:layout_width="350dp"
+                        android:layout_width="411dp"
                         android:layout_height="60dp"
                         android:layout_gravity="center"
-                        android:background="@drawable/borders"
+                        android:background="@drawable/edit_text_round"
                         android:drawableStart="@drawable/ic_baseline_lock_24"
                         android:drawableLeft="@drawable/ic_baseline_lock_24"
                         android:drawablePadding="15dp"
@@ -163,13 +201,25 @@
 
                 <Spinner
                     android:id="@+id/spinnerCityDriver"
-                    android:layout_width="354dp"
+                    android:layout_width="413dp"
                     android:layout_height="60dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="24dp"
-                    android:background="@drawable/borders"
+                    android:background="@drawable/edit_text_round"
                     android:contentDescription="City"
                     android:spinnerMode="dropdown" />
+
+<!--                <ImageView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_gravity="end|bottom"-->
+<!--                    android:layout_marginBottom="@dimen/spinner"-->
+<!--                    android:contentDescription="@null"-->
+<!--                    android:src="@drawable/spinner_background" />-->
+
+
+
+
 
                 <TextView
                     android:id="@+id/cityError"
@@ -184,11 +234,11 @@
 
                 <Spinner
                     android:id="@+id/spinnerVehicleDriver"
-                    android:layout_width="352dp"
+                    android:layout_width="411dp"
                     android:layout_height="60dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="20dp"
-                    android:background="@drawable/borders"
+                    android:background="@drawable/edit_text_round"
                     android:contentDescription="Vehicle"
                     android:spinnerMode="dropdown" />
 
@@ -199,7 +249,6 @@
                     android:layout_gravity="center"
                     android:layout_marginTop="20dp"
                     android:background="@drawable/graphics_edittext_1"
-
                     android:contentDescription="Vehicle"
                     android:spinnerMode="dropdown"
                     android:visibility="gone" />
