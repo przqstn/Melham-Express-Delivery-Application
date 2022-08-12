@@ -201,8 +201,6 @@
         <entry key="..\:/Users/DELL/StudioProjects/MCC-Delivery-Repository/app/src/main/res/layout/user_mapcontent.xml" value="0.25" />
         <entry key="..\:/Users/DELL/StudioProjects/MCC-Delivery-Repository/app/src/main/res/layout/user_paymentdialog.xml" value="0.5" />
         <entry key="..\:/Users/DELL/StudioProjects/MCC-Delivery-Repository/app/src/main/res/layout/user_receiver_address_detail.xml" value="0.5" />
-        <entry key="..\:/Users/DELL/StudioProjects/MCC_Delivery_App/app/src/main/res/drawable/graphics_button_1.xml" value="0.165" />
-        <entry key="..\:/Users/DELL/StudioProjects/MCC_Delivery_App/app/src/main/res/drawable/graphis_button_cancel.xml" value="0.165" />
         <entry key="..\:/Users/DELL/StudioProjects/MCC_Delivery_App/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.1" />
         <entry key="..\:/Users/DELL/StudioProjects/MCC_Delivery_App/app/src/main/res/layout/activity_main.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/DELL/StudioProjects/MCC_Delivery_App/app/src/main/res/layout/activity_main2.xml" value="0.20416666666666666" />
@@ -213,7 +211,7 @@
         <entry key="..\:/Users/DELL/StudioProjects/MCC_Delivery_App/app/src/main/res/layout/activity_rider_dashboard.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/DELL/StudioProjects/MCC_Delivery_App/app/src/main/res/layout/activity_rider_login.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/DELL/StudioProjects/MCC_Delivery_App/app/src/main/res/layout/activity_rider_ongoing_order.xml" value="0.33" />
-        <entry key="..\:/Users/DELL/StudioProjects/MCC_Delivery_App/app/src/main/res/layout/activity_rider_trackmap.xml" value="0.33" />
+        <entry key="..\:/Users/DELL/StudioProjects/MCC_Delivery_App/app/src/main/res/layout/activity_rider_trackmap.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/DELL/StudioProjects/MCC_Delivery_App/app/src/main/res/layout/activity_take_order.xml" value="0.25" />
         <entry key="..\:/Users/DELL/StudioProjects/MCC_Delivery_App/app/src/main/res/layout/activity_user_checkrate.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/DELL/StudioProjects/MCC_Delivery_App/app/src/main/res/layout/activity_user_completed_order_details.xml" value="0.20416666666666666" />
@@ -224,7 +222,7 @@
         <entry key="..\:/Users/DELL/StudioProjects/MCC_Delivery_App/app/src/main/res/layout/activity_user_paymentmethod.xml" value="0.5" />
         <entry key="..\:/Users/DELL/StudioProjects/MCC_Delivery_App/app/src/main/res/layout/activity_user_pending_order_details.xml" value="0.25" />
         <entry key="..\:/Users/DELL/StudioProjects/MCC_Delivery_App/app/src/main/res/layout/activity_user_permission.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/DELL/StudioProjects/MCC_Delivery_App/app/src/main/res/layout/activity_user_track_rider.xml" value="0.5" />
+        <entry key="..\:/Users/DELL/StudioProjects/MCC_Delivery_App/app/src/main/res/layout/activity_user_track_rider.xml" value="0.5228426395939086" />
         <entry key="..\:/Users/DELL/StudioProjects/MCC_Delivery_App/app/src/main/res/layout/cancel_edit_dialog.xml" value="0.5" />
         <entry key="..\:/Users/DELL/StudioProjects/MCC_Delivery_App/app/src/main/res/layout/courier_record_header_cancelled.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/DELL/StudioProjects/MCC_Delivery_App/app/src/main/res/layout/courier_record_header_completed.xml" value="0.20416666666666666" />
@@ -288,6 +286,7 @@
         <entry key="..\:/Users/PC/AndroidStudioProjects/MCC_Delivery_App/app/src/main/res/menu/drawer_menu.xml" value="0.17916666666666667" />
         <entry key="..\:/Users/PC/AndroidStudioProjects/MCC_Delivery_App/app/src/main/res/menu/main.xml" value="0.17916666666666667" />
         <entry key="..\:/Users/PC/AndroidStudioProjects/MCC_Delivery_App/app/src/main/res/menu/main_menu.xml" value="0.17916666666666667" />
+        <entry key="..\:/Users/hmdmr/AndroidStudioProjects/MCC_Delivery_App/app/src/main/res/layout/activity_changepassword.xml" value="0.13703703703703704" />
         <entry key="..\:/Users/hmdmr/AndroidStudioProjects/MCC_Delivery_App/app/src/main/res/layout/activity_rider_completed_order.xml" value="0.14074074074074075" />
         <entry key="..\:/Users/hmdmr/AndroidStudioProjects/MCC_Delivery_App/app/src/main/res/layout/activity_rider_ongoing_order.xml" value="0.2" />
         <entry key="..\:/Users/hmdmr/AndroidStudioProjects/MCC_Delivery_App/app/src/main/res/layout/activity_rider_trackmap.xml" value="0.1" />
@@ -306,6 +305,7 @@
         <entry key="..\:/Users/hmdmr/AndroidStudioProjects/MCC_Delivery_App/app/src/main/res/layout/fragment_user_profile_fragment.xml" value="0.14074074074074075" />
         <entry key="..\:/Users/hmdmr/AndroidStudioProjects/MCC_Delivery_App/app/src/main/res/layout/ongoing_courierlayoutdesign.xml" value="0.25" />
         <entry key="..\:/Users/hmdmr/AndroidStudioProjects/MCC_Delivery_App/app/src/main/res/layout/ongoing_userlayoutdesign.xml" value="0.2" />
+        <entry key="..\:/Users/hmdmr/AndroidStudioProjects/MCC_Delivery_App/app/src/main/res/layout/passwordchanged_dialog.xml" value="0.22" />
         <entry key="..\:/Users/hmdmr/AndroidStudioProjects/MCC_Delivery_App/app/src/main/res/layout/pickuplayoutdesign.xml" value="0.2" />
         <entry key="..\:/Users/hmdmr/AndroidStudioProjects/MCC_Delivery_App/app/src/main/res/layout/user_adressdetail.xml" value="0.22" />
         <entry key="..\:/Users/hmdmr/AndroidStudioProjects/MCC_Delivery_App/app/src/main/res/layout/user_paymentdialog.xml" value="0.25" />
