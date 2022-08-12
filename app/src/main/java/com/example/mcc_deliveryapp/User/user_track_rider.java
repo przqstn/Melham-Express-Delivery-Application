@@ -564,7 +564,7 @@ public class user_track_rider extends FragmentActivity implements OnMapReadyCall
             System.out.println(test1 + test2);
 
             try {
-                new DirectionFinder(this, test2, test1).execute();
+                new DirectionFinder(this, test2, test1, riderVehicle.toLowerCase()).execute();
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             }

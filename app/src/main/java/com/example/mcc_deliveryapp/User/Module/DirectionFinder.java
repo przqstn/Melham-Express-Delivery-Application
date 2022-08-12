@@ -1,6 +1,7 @@
 package com.example.mcc_deliveryapp.User.Module;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.google.android.gms.maps.model.LatLng;
 
@@ -27,11 +28,14 @@ public class DirectionFinder {
 	private DirectionFinderListener listener;
 	private String origin;
 	private String destination;
+	private String mode;
+	private String avoid;
 
-	public DirectionFinder(DirectionFinderListener listener, String origin, String destination) {
+	public DirectionFinder(DirectionFinderListener listener, String origin, String destination, String mode) {
 		this.listener = listener;
 		this.origin = origin;
 		this.destination = destination;
+		this.mode = mode;
 	}
 
 	public void execute() throws UnsupportedEncodingException {
@@ -42,8 +46,16 @@ public class DirectionFinder {
 	private String createUrl() throws UnsupportedEncodingException {
 		String urlOrigin = URLEncoder.encode(origin, "utf-8");
 		String urlDestination = URLEncoder.encode(destination, "utf-8");
+		String urlMode = URLEncoder.encode(mode, "utf-8");
+		if (!mode.equals("Motorcycle")) {
+			mode = "Driving";
+			avoid = "";
+		} else {
+			avoid = "&avoid=tolls|highways";
+		}
+		Log.e("URL", DIRECTION_URL_API + "origin=" + urlOrigin + "&mode=" + mode + avoid + "&destination=" + urlDestination + "&region=ph" + "&key=" + GOOGLE_API_KEY);
 
-		return DIRECTION_URL_API + "origin=" + urlOrigin + "&destination=" + urlDestination + "&key=" + GOOGLE_API_KEY;
+		return DIRECTION_URL_API + "origin=" + urlOrigin + "&mode=" + mode + avoid + "&destination=" + urlDestination + "&region=ph" + "&key=" + GOOGLE_API_KEY;
 	}
 // this is the part where the android studio download the raw data file that set in the guideline here are the link that references
 	// the guideline https://developers.google.com/maps/documentation/directions/get-directions
