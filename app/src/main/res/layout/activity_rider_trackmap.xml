@@ -41,15 +41,15 @@
             android:textSize="14sp"/>
 
         <Button
-            android:layout_marginTop="10dp"
             android:id="@+id/backbutton"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="BACK"
-            android:background="@drawable/graphics_button_1"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/graphis_button_cancel"
             android:fontFamily="@font/montserrat_medium"
+            android:text="BACK"
             android:textColor="@color/white"
-            android:textSize="14sp"/>
+            android:textSize="14sp" />
     </LinearLayout>
 
     <LinearLayout

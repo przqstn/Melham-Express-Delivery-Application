@@ -518,7 +518,7 @@
                         android:id="@+id/btn_cancelOrder"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/graphics_button_1"
+                        android:background="@drawable/graphis_button_cancel"
                         android:fontFamily="@font/montserrat_medium"
                         android:text="Cancel Order"
                         android:textColor="@color/white"
