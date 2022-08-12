@@ -51,7 +51,7 @@ public class user_editprofile_fragment extends AppCompatActivity {
 
     private TextView viewPhoneNum, viewFullName, changePass;
     private String phoneNum, currentPhotoPath, imgName, mainAdd, secondaryAdd;
-    private ImageButton btnSaveChanges, btnUpload;
+    private ImageButton btnSaveChanges, btnUpload, btnDeleteSecondaryAddress;
     private Uri imageUri;
     private ImageView profilePic;
     private DatabaseReference root;
@@ -71,9 +71,7 @@ public class user_editprofile_fragment extends AppCompatActivity {
         profilePic = findViewById(R.id.profile_user);
         btnSaveChanges = findViewById(R.id.btn_saveChanges);
         changePass = findViewById(R.id.user_changePW);
-
-
-
+        btnDeleteSecondaryAddress = findViewById(R.id.btndelete_secondary);
 
         Intent intent = getIntent();
         phoneNum = intent.getStringExtra("userPhone");
@@ -185,6 +183,17 @@ public class user_editprofile_fragment extends AppCompatActivity {
             }
         });
 
+        btnDeleteSecondaryAddress.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                root= FirebaseDatabase.getInstance().getReference().child("users");
+                HashMap hashMap = new HashMap();
+                hashMap.put("secondaryAdd", "");
+                secondaryAddress.setText("");
+                root.child(phoneNum).updateChildren(hashMap);
+                btnSaveChanges.setVisibility(View.VISIBLE);
+            }
+        });
         changePass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
