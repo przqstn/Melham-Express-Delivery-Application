@@ -456,6 +456,7 @@
                     android:layout_width="340dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="8dp"
                     app:cardUseCompatPadding="true">
 
                     <androidx.cardview.widget.CardView
