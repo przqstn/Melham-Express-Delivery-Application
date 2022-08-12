@@ -128,25 +128,16 @@ public class user_editprofile_fragment extends AppCompatActivity {
                 }
                 if(imageUri!=null) {
                     final ProgressDialog pd = new ProgressDialog(btnSaveChanges.getContext());
-                    //pd.setTitle("Uploading Image");
-                    //pd.show();
-
                     StorageReference riversRef = storageReference.child("user/" + phoneNum + "/" + imgName);
 
                     riversRef.putFile(imageUri)
                             .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                                 @Override
-                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                                   // pd.dismiss();
-
-                                }
+                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {}
                             })
                             .addOnFailureListener(new OnFailureListener() {
                                 @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    //pd.dismiss();
-                                    //Toast.makeText(getApplicationContext(), "Failed to Upload", Toast.LENGTH_LONG).show();
-                                }
+                                public void onFailure(@NonNull Exception e) {}
                             })
                             .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
                                 @Override

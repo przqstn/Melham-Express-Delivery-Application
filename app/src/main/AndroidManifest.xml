@@ -65,7 +65,10 @@
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
-
+        <activity
+            android:name=".Rider.editprofile_changePass"
+            android:exported="true"
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".Rider.editprofile_fragment"
             android:exported="true"

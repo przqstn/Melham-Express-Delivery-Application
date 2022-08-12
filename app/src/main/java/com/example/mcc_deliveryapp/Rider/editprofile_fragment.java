@@ -97,12 +97,11 @@ public class editprofile_fragment extends AppCompatActivity {
 
         editAddress.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                //continue
-            }
-
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
             @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+            @Override
+            public void afterTextChanged(Editable editable) {
                 if(!editAddress.getEditableText().toString().equals(address)){
                     btnSaveChanges.setVisibility(View.VISIBLE);
                 }else{
@@ -111,10 +110,6 @@ public class editprofile_fragment extends AppCompatActivity {
                 if(TextUtils.isEmpty(editAddress.getEditableText().toString())){
                     btnSaveChanges.setVisibility(View.GONE);
                 }
-            }
-            @Override
-            public void afterTextChanged(Editable editable) {
-                //continue
             }
         });
 
@@ -158,25 +153,15 @@ public class editprofile_fragment extends AppCompatActivity {
 
                 if (imageUri != null) {
                     final ProgressDialog pd = new ProgressDialog(btnSaveChanges.getContext());
-                    //pd.setTitle("Uploading Image");
-                    //pd.show();
-
                     StorageReference riversRef = storageReference.child("rider/" + phoneNum + "/" + imgName);
-
                     riversRef.putFile(imageUri)
                             .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                                 @Override
-                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                                    //pd.dismiss();
-
-                                }
+                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {}
                             })
                             .addOnFailureListener(new OnFailureListener() {
                                 @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    //pd.dismiss();
-                                    //Toast.makeText(getApplicationContext(), "Failed to Upload", Toast.LENGTH_LONG).show();
-                                }
+                                public void onFailure(@NonNull Exception e) {}
                             })
                             .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
                                 @Override
@@ -212,7 +197,7 @@ public class editprofile_fragment extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(changePass.getContext(), editprofile_changePass.class);
-                intent.putExtra("riderrphone", phoneNum);
+                intent.putExtra("riderphone", phoneNum);
                 intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP);
                 startActivity(intent);
             }
