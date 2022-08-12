@@ -120,7 +120,7 @@ public class user_cancelled_adapter extends FirebaseRecyclerAdapter<
             cv.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(context, user_completed_order_details.class);
+                    Intent intent = new Intent(context, user_cancelled_order_details.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     intent.putExtra("phonenum", userNum);
                     intent.putExtra("username", userName);
