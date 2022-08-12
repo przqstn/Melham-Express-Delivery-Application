@@ -112,10 +112,6 @@ public class editprofile_changePass extends AppCompatActivity {
                                         FirebaseAuth mAuth = FirebaseAuth.getInstance();
                                         FirebaseDatabase db = FirebaseDatabase.getInstance();
                                         DatabaseReference rootie = db.getReference("riders");
-                                        FirebaseUser userCurrent = mAuth.getCurrentUser();
-
-                                        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder().setDisplayName(String.valueOf(phoneNum)).build();
-                                        userCurrent.updateProfile(profileUpdates);
                                         rootie = db.getReference();
 
                                         HashMap riderInfo = new HashMap();
