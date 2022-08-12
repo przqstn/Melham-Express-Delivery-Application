@@ -41,7 +41,7 @@ public class rider_ongoing_order extends AppCompatActivity {
             defaultUserNum, customerName, orderPlaced;
     private TextView senderloc, sendername, sendercontact, receiverloc, receivername, receivercontact,
             order_id, vehicletype, usernote, parcelprice, customer_name, order_placed;
-    private Button btn_CompleteOrder, btn_cancelOrderRider, btn_MessageCustomer, btn_CallCustomer;
+    private Button btn_CompleteOrder, btn_cancelOrderRider, btn_MessageCustomer, btn_CallCustomer, btn_trackCustomer;
 
     private StorageReference storageReference;
     private ImageView profilePic;
@@ -74,6 +74,7 @@ public class rider_ongoing_order extends AppCompatActivity {
         btn_CallCustomer = findViewById(R.id.call_customer);
         btn_CompleteOrder = findViewById(R.id.btn_completeOrder);
         btn_cancelOrderRider = findViewById(R.id.btn_cancelOrderRider);
+        btn_trackCustomer = findViewById(R.id.btn_trackCustomer);
 
         profilePic = findViewById(R.id.rider_profile_ongoing);
 
@@ -264,6 +265,19 @@ public class rider_ongoing_order extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        btn_trackCustomer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(rider_ongoing_order.this, rider_takeorder_map.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                intent.putExtra("phonenum", phonenum);
+                intent.putExtra("username", name);
+                intent.putExtra("vehicle", riderVehicle);
+                intent.putExtra("orderID", orderID);
+                startActivity(intent);
+            }
+        });
     }
 
     public static String dateTime(){
@@ -286,6 +300,7 @@ public class rider_ongoing_order extends AppCompatActivity {
     public void onBackPressed()
     {
         Intent intent = new Intent(rider_ongoing_order.this, rider_dashboard.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         intent.putExtra("phonenum", phonenum);
         intent.putExtra("username", name);
         intent.putExtra("vehicle", riderVehicle);

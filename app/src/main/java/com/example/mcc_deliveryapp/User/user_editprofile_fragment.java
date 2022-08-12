@@ -25,6 +25,7 @@ import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 
 import com.example.mcc_deliveryapp.R;
+import com.example.mcc_deliveryapp.Rider.editprofile_changePass;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
@@ -44,7 +45,7 @@ public class user_editprofile_fragment extends AppCompatActivity {
     public static final int CAMERA_PERM_CODE = 2;
     public static final int CAMERA_REQUEST_CODE = 3;
 
-    private TextView viewPhoneNum, viewFullName;
+    private TextView viewPhoneNum, viewFullName, changePass;
     private String phoneNum, currentPhotoPath, imgName;
     private ImageButton btnSaveChanges, btnUpload;
     private Uri imageUri;
@@ -64,6 +65,7 @@ public class user_editprofile_fragment extends AppCompatActivity {
         btnUpload = findViewById(R.id.btn_Upload);
         profilePic = findViewById(R.id.profile_user);
         btnSaveChanges = findViewById(R.id.btn_saveChanges);
+        changePass = findViewById(R.id.user_changePW);
 
         Intent intent = getIntent();
         phoneNum = intent.getStringExtra("userPhone");
@@ -105,6 +107,7 @@ public class user_editprofile_fragment extends AppCompatActivity {
             }
         });
 
+        btnSaveChanges.setVisibility(View.GONE);
         btnSaveChanges.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -171,6 +174,16 @@ public class user_editprofile_fragment extends AppCompatActivity {
             }
         });
 
+        changePass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(changePass.getContext(), user_editprofile_changePass.class);
+                intent.putExtra("usernum", phoneNum);
+                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP);
+                startActivity(intent);
+            }
+        });
+
 
     }
 
@@ -199,10 +212,8 @@ public class user_editprofile_fragment extends AppCompatActivity {
                     finish();
                 }
             });
-
         } else {
             finish();
-
         }
 
     }
@@ -240,12 +251,13 @@ public class user_editprofile_fragment extends AppCompatActivity {
         if(requestCode==CHOOSE_PICTURE && resultCode==RESULT_OK && data!=null && data.getData()!=null){
             imageUri=data.getData();
             profilePic.setImageURI(imageUri);
-
+            btnSaveChanges.setVisibility(View.VISIBLE);
         }
         if(requestCode==CAMERA_REQUEST_CODE && resultCode==RESULT_OK){
             File f = new File(currentPhotoPath);
             profilePic.setImageURI(Uri.fromFile(f));
             imageUri=Uri.fromFile(f);
+            btnSaveChanges.setVisibility(View.VISIBLE);
         }
 
         imgName="profile_image.jpg";

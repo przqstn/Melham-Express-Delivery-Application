@@ -79,21 +79,11 @@ public class user_profile_fragment extends Fragment {
                     if (ds.child("userPhone").getValue().equals(phone)){
                         userName.setText(ds.child("userFullname").getValue(String.class));
                         userPhone.setText(ds.child("userPhone").getValue(String.class));
-
                     }
-
                 }
-
             }
-
-
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-
-
-
+            public void onCancelled(@NonNull DatabaseError error) {}
         });
         //retrieved courier's profile picture from firebase storage
         imageReference = FirebaseStorage.getInstance().getReference().child("user/"+phone+"/profile_image.jpg");
