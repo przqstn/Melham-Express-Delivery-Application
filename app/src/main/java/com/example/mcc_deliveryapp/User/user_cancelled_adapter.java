@@ -50,7 +50,7 @@ public class user_cancelled_adapter extends FirebaseRecyclerAdapter<
         holder.vehicletype.setText(model.getVehicletype());
         holder.fee.setText("₱"+model.getFee());
         holder.orderID.setText(model.getOrderID());
-        holder.defaultUserNum.setText(model.getDefaultUserNum());
+        holder.ridernum.setText(model.getRidernum());
     }
 
     // Function to tell the class about the Card view
@@ -82,7 +82,7 @@ public class user_cancelled_adapter extends FirebaseRecyclerAdapter<
     class recordViewholder
             extends RecyclerView.ViewHolder {
         TextView receivercontact,receiverlocation,receivername,sendercontact,senderlocation,
-                sendername, vehicletype, customernotes,fee, orderID, defaultUserNum;
+                sendername, vehicletype, customernotes,fee, orderID, ridernum;
         Button copyID;
         Context context;
         public recordViewholder(@NonNull View itemView)
@@ -98,7 +98,7 @@ public class user_cancelled_adapter extends FirebaseRecyclerAdapter<
             vehicletype = itemView.findViewById(R.id.txt_vehicletype);
             fee = itemView.findViewById(R.id.priceRecord);
             orderID = itemView.findViewById(R.id.courier_record_orderID);
-            defaultUserNum = itemView.findViewById(R.id.inv_usernum);
+            ridernum = itemView.findViewById(R.id.inv_usernum);
             copyID = itemView.findViewById(R.id.copyOrderID);
 
             copyID.setOnClickListener(new View.OnClickListener() {
@@ -126,7 +126,7 @@ public class user_cancelled_adapter extends FirebaseRecyclerAdapter<
                     intent.putExtra("username", userName);
                     intent.putExtra("orderID", orderID.getText().toString());
                     intent.putExtra("vehicle", vehicletype.getText().toString());
-                    intent.putExtra("defaultUserNum", defaultUserNum.getText().toString());
+                    intent.putExtra("ridernum", ridernum.getText().toString());
                     context.startActivity(intent);
                 }
             });
