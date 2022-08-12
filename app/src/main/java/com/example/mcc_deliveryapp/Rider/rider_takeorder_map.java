@@ -71,7 +71,7 @@ import java.util.Locale;
 import java.util.Objects;
 
 public class rider_takeorder_map extends FragmentActivity implements OnMapReadyCallback, DirectionFinderListener {
-    String name, phonenum, orderID, riderVehicle;
+    String name, phonenum, orderID, riderVehicle, parcelState;
     View mapview, locationButton;
     private LatLng startLocation;
     private LatLng endLocation;
@@ -80,7 +80,7 @@ public class rider_takeorder_map extends FragmentActivity implements OnMapReadyC
     private List<Polyline> polylinePaths = new ArrayList<>();
     List<Address> addressesRider, addressesStart, addressesEnd;
     Geocoder geocoder;
-    private int locationStatus = 0;
+//    private int locationStatus = 0;
 
     public LocationManager locationManager;
     public double latitude;
@@ -93,10 +93,9 @@ public class rider_takeorder_map extends FragmentActivity implements OnMapReadyC
 
     private LatLng riderLocation;
     private GoogleMap mMap;
-    private DatabaseReference riderReference;
+    private DatabaseReference riderReference, databaseReference;
     private static final int DEFAULT_ZOOM = 18;
     Button back, pickedComplete;
-    private String TAG;
 
     LocationListener locationListener = new LocationListener() {
         @Override
@@ -141,7 +140,7 @@ public class rider_takeorder_map extends FragmentActivity implements OnMapReadyC
         Objects.requireNonNull(mapFragment).getMapAsync((OnMapReadyCallback) this);
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, PackageManager.PERMISSION_GRANTED);
 
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("userparcel");
+        databaseReference = FirebaseDatabase.getInstance().getReference("userparcel");
         riderReference = FirebaseDatabase.getInstance().getReference("riders");
         Query checkOrderID = databaseReference.orderByChild("OrderID").equalTo(orderID);
         Query checkRider = riderReference.orderByChild("riderphone");
@@ -164,6 +163,9 @@ public class rider_takeorder_map extends FragmentActivity implements OnMapReadyC
 
                         String[] endStart = Objects.requireNonNull(dataSnapshot.child("endLocation").getValue(String.class)).split(",");
                         endLocation = new LatLng(Double.parseDouble(endStart[0]), Double.parseDouble(endStart[1]));
+
+                        parcelState = dataSnapshot.child("parcelState").getValue(String.class);
+
                     }
 
                     @Override
@@ -193,6 +195,24 @@ public class rider_takeorder_map extends FragmentActivity implements OnMapReadyC
                 List<String> latitudes = new ArrayList<>(Collections.emptyList());
                 List<String> longitudes = new ArrayList<>(Collections.emptyList());
                 List<String> riderphonenum = new ArrayList<>(Collections.emptyList());
+
+                if (originMarkers != null) {
+                    for (Marker marker : originMarkers) {
+                        marker.remove();
+                    }
+                }
+
+                if (destinationMarkers != null) {
+                    for (Marker marker : destinationMarkers) {
+                        marker.remove();
+                    }
+                }
+
+                if (polylinePaths != null) {
+                    for (Polyline polyline : polylinePaths) {
+                        polyline.remove();
+                    }
+                }
 
                 mMap.clear();
                 for (DataSnapshot locationSnapshot : dataSnapshot.getChildren()) {
@@ -238,8 +258,6 @@ public class rider_takeorder_map extends FragmentActivity implements OnMapReadyC
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 intent.putExtra("phonenum", phonenum);
                 intent.putExtra("username", name);
-                intent.putExtra("vehicle", riderVehicle);
-                intent.putExtra("orderID", orderID);
 
                 //release lock screen prevention
                 if (wakeLock.isHeld())
@@ -254,11 +272,80 @@ public class rider_takeorder_map extends FragmentActivity implements OnMapReadyC
             @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View view) {
-                if (locationStatus == 0) {
-                    locationStatus = 1;
+                if (parcelState.equals("pending")) {
+//                    locationStatus = 1;
+                    Log.e("TAG", parcelState);
+                    Log.e("TAG", orderID);
                     pickedComplete.setText("Parcel Delivered");
+                    parcelState = "parcelPicked";
+
+                    final FirebaseDatabase database = FirebaseDatabase.getInstance();
+                    final DatabaseReference dr = database.getReference().child("userparcel");
+                    Query query = dr.orderByChild("OrderID").equalTo(orderID);
+
+                    query.addChildEventListener(
+                            new ChildEventListener() {
+                                @Override
+                                public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                                    dr.child(dataSnapshot.getKey()).child("parcelState").setValue("parcelPicked");
+                                }
+
+                                @Override
+                                public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+                                }
+
+                                @Override
+                                public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                }
+
+                                @Override
+                                public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                                }
+                            });
+
+
+
                     sendRequest();
-                } else if (locationStatus == 1) {
+                } else if (parcelState.equals("parcelPicked")) {
+
+//                    final FirebaseDatabase database = FirebaseDatabase.getInstance();
+//                    final DatabaseReference dr = database.getReference().child("userparcel");
+//                    Query query = dr.orderByChild("OrderID").equalTo(orderID);
+//
+//                    query.addChildEventListener(
+//                            new ChildEventListener() {
+//                                @Override
+//                                public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+////                                    dr.child(dataSnapshot.getKey()).child("parcelState").setValue("delivered");
+//                                }
+//
+//                                @Override
+//                                public void onChildRemoved(DataSnapshot dataSnapshot) {
+//
+//                                }
+//
+//                                @Override
+//                                public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+//                                }
+//
+//                                @Override
+//                                public void onCancelled(@NonNull DatabaseError error) {
+//
+//                                }
+//
+//                                @Override
+//                                public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+//                                }
+//                            });
+
+//                    Log.e("TAG", parcelState);
+//                    parcelState = "parcelPicked";
                     Intent intent = new Intent(rider_takeorder_map.this, rider_ongoing_order.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     intent.putExtra("phonenum", phonenum);
@@ -269,7 +356,7 @@ public class rider_takeorder_map extends FragmentActivity implements OnMapReadyC
                     //release lock screen prevention
                     if (wakeLock.isHeld())
                         wakeLock.release();
-                    locationStatus = 0;
+//                    locationStatus = 0;
                     pickedComplete.setText("Parcel Picked Up");
                     startActivity(intent);
                 }
@@ -360,14 +447,16 @@ public class rider_takeorder_map extends FragmentActivity implements OnMapReadyC
             String test2 = startLocation.latitude + "," + startLocation.longitude;
             String test3 = endLocation.latitude + "," + endLocation.longitude;
 
-            if (locationStatus == 0) {
+            if (parcelState.equals("pending")) {
+                pickedComplete.setText("Parcel Picked Up");
                 try {
                     Log.e("TAG", riderVehicle);
                     new DirectionFinder(this, test1, test2, riderVehicle).execute();
                 } catch (UnsupportedEncodingException e) {
                     e.printStackTrace();
                 }
-            } else if ((locationStatus == 1)) {
+            } else if ((parcelState.equals("parcelPicked"))) {
+                pickedComplete.setText("Parcel Delivered");
                 try {
                     new DirectionFinder(this, test1, test3, riderVehicle).execute();
                 } catch (UnsupportedEncodingException e) {
