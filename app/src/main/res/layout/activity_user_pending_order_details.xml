@@ -456,6 +456,7 @@
                     android:layout_width="340dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="8dp"
                     app:cardUseCompatPadding="true">
 
                     <androidx.cardview.widget.CardView
@@ -518,7 +519,7 @@
                         android:id="@+id/btn_cancelOrder"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/graphics_button_1"
+                        android:background="@drawable/graphis_button_cancel"
                         android:fontFamily="@font/montserrat_medium"
                         android:text="Cancel Order"
                         android:textColor="@color/white"

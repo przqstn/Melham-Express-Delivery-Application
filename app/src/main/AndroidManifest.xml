@@ -25,6 +25,9 @@
             android:name=".Rider.rider_cancel_order"
             android:exported="false" />
         <activity
+            android:name=".User.user_cancelled_order_details"
+            android:exported="false" />
+        <activity
             android:name=".User.user_pending_order_details"
             android:exported="false" />
         <activity
@@ -65,7 +68,10 @@
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
-
+        <activity
+            android:name=".Rider.editprofile_changePass"
+            android:exported="true"
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".Rider.editprofile_fragment"
             android:exported="true"
@@ -80,9 +86,6 @@
         <activity
             android:name=".User.user_parceltransaction"
             android:exported="true" />
-        <activity
-            android:name=".User.user_paymentmethod"
-            android:exported="false" />
         <activity
             android:name=".User.user_permission"
             android:exported="false" />

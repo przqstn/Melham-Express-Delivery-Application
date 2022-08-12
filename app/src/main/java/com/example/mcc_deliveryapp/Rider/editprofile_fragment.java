@@ -11,6 +11,7 @@ import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -40,6 +41,7 @@ import com.google.firebase.storage.UploadTask;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.zip.Inflater;
 
 public class editprofile_fragment extends AppCompatActivity {
 
@@ -47,10 +49,9 @@ public class editprofile_fragment extends AppCompatActivity {
     public static final int CAMERA_PERM_CODE = 2;
     public static final int CAMERA_REQUEST_CODE = 3;
 
-    private Button btnCancel, btnSaveChanges;
-    private ImageButton btnUpload;
+    private ImageButton btnUpload, btnSaveChanges;
     private ImageView profilePic;
-    private TextView viewphoneNum, viewname, viewvehicleType, viewplateNum;
+    private TextView viewphoneNum, viewname, viewvehicleType, viewplateNum, changePass;
     private EditText editAddress;
     private DatabaseReference root;
     private String phoneNum, imgName, address;
@@ -67,10 +68,9 @@ public class editprofile_fragment extends AppCompatActivity {
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
 
+        changePass = findViewById(R.id.txt_changePW);
         btnUpload = findViewById(R.id.btn_upload);
-        btnCancel = findViewById(R.id.btn_cancelChanges);
         btnSaveChanges = findViewById(R.id.btn_saveChanges);
-        btnSaveChanges.setVisibility(View.GONE);
         profilePic = findViewById(R.id.profile_user);
 
         Intent intent = getIntent();
@@ -97,12 +97,11 @@ public class editprofile_fragment extends AppCompatActivity {
 
         editAddress.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                //continue
-            }
-
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
             @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+            @Override
+            public void afterTextChanged(Editable editable) {
                 if(!editAddress.getEditableText().toString().equals(address)){
                     btnSaveChanges.setVisibility(View.VISIBLE);
                 }else{
@@ -111,10 +110,6 @@ public class editprofile_fragment extends AppCompatActivity {
                 if(TextUtils.isEmpty(editAddress.getEditableText().toString())){
                     btnSaveChanges.setVisibility(View.GONE);
                 }
-            }
-            @Override
-            public void afterTextChanged(Editable editable) {
-                //continue
             }
         });
 
@@ -149,6 +144,7 @@ public class editprofile_fragment extends AppCompatActivity {
             }
         });
 
+        btnSaveChanges.setVisibility(View.GONE);
         btnSaveChanges.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -157,25 +153,15 @@ public class editprofile_fragment extends AppCompatActivity {
 
                 if (imageUri != null) {
                     final ProgressDialog pd = new ProgressDialog(btnSaveChanges.getContext());
-                    //pd.setTitle("Uploading Image");
-                    //pd.show();
-
                     StorageReference riversRef = storageReference.child("rider/" + phoneNum + "/" + imgName);
-
                     riversRef.putFile(imageUri)
                             .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                                 @Override
-                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                                    //pd.dismiss();
-
-                                }
+                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {}
                             })
                             .addOnFailureListener(new OnFailureListener() {
                                 @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    //pd.dismiss();
-                                    //Toast.makeText(getApplicationContext(), "Failed to Upload", Toast.LENGTH_LONG).show();
-                                }
+                                public void onFailure(@NonNull Exception e) {}
                             })
                             .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
                                 @Override
@@ -204,9 +190,19 @@ public class editprofile_fragment extends AppCompatActivity {
                         finish();
                     }
                 });
-
             }
         });
+
+        changePass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(changePass.getContext(), editprofile_changePass.class);
+                intent.putExtra("riderphone", phoneNum);
+                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP);
+                startActivity(intent);
+            }
+        });
+
 
     }
 
@@ -215,7 +211,7 @@ public class editprofile_fragment extends AppCompatActivity {
         if (TextUtils.isEmpty(editAddress.getEditableText().toString())
                 || (!editAddress.getEditableText().toString().equals(address))
                 || imageUri != null) {
-            final Dialog dialog = new Dialog(btnCancel.getContext());
+            final Dialog dialog = new Dialog(this);
             dialog.setContentView(R.layout.cancel_edit_dialog);
             dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             dialog.getWindow().getAttributes().windowAnimations = R.style.animation;

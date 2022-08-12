@@ -201,13 +201,15 @@ public class user_track_rider extends FragmentActivity implements OnMapReadyCall
                     for (DataSnapshot locationSnapshot : dataSnapshot.getChildren()) {
                         if (locationSnapshot.child("riderphone").getValue().equals(riderNumber))
                         {
-                            riderVehicleUI.setText(locationSnapshot.child("vehicletype").getValue().toString());
+                            String riderBrandModel = locationSnapshot.child("vehiclebrandandmodel").getValue(String.class);
                             riderPlateUI.setText(locationSnapshot.child("vehicleplatenumber").getValue().toString());
                             riderVehicle = (locationSnapshot.child("vehicletype").getValue().toString());
                             riderLatitude = locationSnapshot.child("latitude").getValue().toString();
                             String riderphone = locationSnapshot.child("riderphone").getValue().toString();
                             riderLongitude = locationSnapshot.child("longitude").getValue().toString();
                             riderVehicleIcon = findViewById(R.id.riderVehicleIcon);
+                            riderVehicleUI.setText(riderVehicle + " ("+ riderBrandModel + ")");
+
                             latitudes.add(riderLatitude);
                             longitudes.add(riderLongitude);
                             riderphonenum.add(riderphone);

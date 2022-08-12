@@ -22,9 +22,9 @@ public class user_pending_order_details extends AppCompatActivity {
 
     String name, phonenum, orderID,
             senderName, senderLocation, senderContact, receiverName, receiverLocation,
-            receiverContact, vehicleType, senderNote, orderPrice;
+            receiverContact, vehicleType, senderNote, orderPrice, orderPlaced;
     TextView senderloc, sendername, sendercontact, receiverloc, receivername, receivercontact,
-            order_id, vehicletype, usernote, parcelprice;
+            order_id, vehicletype, usernote, parcelprice, order_placed;
     Button btn_cancelOrder;
 
     @Override
@@ -48,6 +48,7 @@ public class user_pending_order_details extends AppCompatActivity {
         usernote = findViewById(R.id.note_rider2);
         parcelprice = findViewById(R.id.txt_price2);
         btn_cancelOrder = findViewById(R.id.btn_cancelOrder);
+        order_placed = findViewById(R.id.order_placed);
 
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         final DatabaseReference dr = database.getReference().child("userparcel");
@@ -67,6 +68,7 @@ public class user_pending_order_details extends AppCompatActivity {
                         vehicleType = dataSnapshot.child("vehicletype").getValue(String.class);
                         senderNote = dataSnapshot.child("customernotes").getValue(String.class);
                         orderPrice = dataSnapshot.child("fee").getValue(String.class);
+                        orderPlaced = dataSnapshot.child("DatePlace").getValue(String.class);
 
                         sendername.setText(senderName);
                         senderloc.setText(senderLocation);
@@ -77,6 +79,7 @@ public class user_pending_order_details extends AppCompatActivity {
                         order_id.setText(orderID);
                         usernote.setText(senderNote);
                         parcelprice.setText(orderPrice);
+                        order_placed.setText(orderPlaced);
                     }
 
                     @Override
@@ -109,9 +112,7 @@ public class user_pending_order_details extends AppCompatActivity {
                         new ChildEventListener() {
                             @Override
                             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                                dr.child(dataSnapshot.getKey()).child("parcelstatus").setValue("Cancelled"+phonenum);
-                                String userdefnum = dataSnapshot.child("defaultUserNum").getValue().toString();
-                                dr.child(dataSnapshot.getKey()).child("userParcelStatus").setValue("Cancelled"+userdefnum);
+                                openConfirmCancelDialog();
                             }
 
                             @Override
@@ -132,13 +133,18 @@ public class user_pending_order_details extends AppCompatActivity {
                             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
                             }
                         });
-                Intent intent = new Intent(user_pending_order_details.this, user_navigation.class);
-                intent.putExtra("phonenum", phonenum);
-                intent.putExtra("username", name);
-//                intent.putExtra("orderID", orderID);
-                startActivity(intent);
+//                Intent intent = new Intent(user_pending_order_details.this, user_navigation.class);
+//                intent.putExtra("phonenum", phonenum);
+//                intent.putExtra("username", name);
+////                intent.putExtra("orderID", orderID);
+//                startActivity(intent);
             }
         });
+    }
+
+    public void openConfirmCancelDialog() {
+        ConfirmCancelDialog confirmCancelDialog = new ConfirmCancelDialog();
+        confirmCancelDialog.show(getSupportFragmentManager(), "Confirm Cancel Dialog");
     }
 
     @Override

@@ -3,10 +3,10 @@ package com.example.mcc_deliveryapp.Rider;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.WindowManager;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 
 import com.example.mcc_deliveryapp.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -19,13 +19,13 @@ public class rider_dashboard extends AppCompatActivity {
 	DatabaseReference databaseReference;
 
 	BottomNavigationView bottomNavigationView;
-
+	FragmentManager manager;
 	pickup_fragment pickupFragment = new pickup_fragment();
 	profile_fragment profile_fragment = new profile_fragment();
 	record_fragment record_fragment = new record_fragment();
 	courierHomeFragment courierHomeFragment = new courierHomeFragment();
 	private long pressedTime;
-
+	MenuItem menuItem;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +39,8 @@ public class rider_dashboard extends AppCompatActivity {
 		bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
 			@Override
 			public boolean onNavigationItemSelected(MenuItem item) {
+				menuItem = item;
+
 				switch (item.getItemId()) {
 					case R.id.iconhome:
 						getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, courierHomeFragment).commit();
@@ -62,11 +64,25 @@ public class rider_dashboard extends AppCompatActivity {
 	@Override
 	public void onBackPressed() {
 		if (pressedTime + 2000 > System.currentTimeMillis()) {
-			super.onBackPressed();
-			finishAffinity();
-		} else {
+			if (menuItem.getItemId() == R.id.iconhome) {
+				super.onBackPressed();
+					finishAffinity();
+			}
+		}else {
 			Toast.makeText(getBaseContext(), "Press back again to exit", Toast.LENGTH_SHORT).show();
 		}
 		pressedTime = System.currentTimeMillis();
+		if(menuItem.getItemId()==R.id.iconpickup
+			|| menuItem.getItemId()==R.id.iconrecord
+			|| menuItem.getItemId()==R.id.iconprofile){
+			//
+			Intent intent = getIntent();
+			intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+			finish();
+			overridePendingTransition(0, 0);
+			startActivity(intent);
+			overridePendingTransition(0, 0);
+		}
+
 	}
 }

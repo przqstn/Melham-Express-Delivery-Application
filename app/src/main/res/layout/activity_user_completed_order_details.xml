@@ -76,7 +76,7 @@
                                 android:background="#223272"
                                 android:fontFamily="@font/montserrat_bold"
                                 android:padding="10dp"
-                                android:text="Order Details"
+                                android:text="Completed Order Details"
                                 android:textAlignment="textStart"
                                 android:textColor="@color/white"
                                 android:textSize="15dp" />
