@@ -1,4 +1,4 @@
-package com.example.mcc_deliveryapp.Rider;
+package com.example.mcc_deliveryapp.User;
 
 import android.app.Dialog;
 import android.content.Intent;
@@ -18,6 +18,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.mcc_deliveryapp.R;
+import com.example.mcc_deliveryapp.Rider.editprofile_changePass;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseException;
@@ -37,12 +38,12 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
-public class editprofile_changePass extends AppCompatActivity {
+public class user_editprofile_changePass extends AppCompatActivity {
 
+    private String phoneNum, verificationCodeBySystem;
     private EditText oldPass, newPass, confirmPass;
     private TextView forgotPass;
     private ImageButton btnSaveChanges;
-    private String phoneNum, verificationCodeBySystem;
     private Dialog VerifyNum, UpdatePW, ForgotPW;
     private DatabaseReference root;
 
@@ -52,7 +53,7 @@ public class editprofile_changePass extends AppCompatActivity {
         setContentView(R.layout.activity_changepassword);
 
         Intent intent=getIntent();
-        phoneNum=intent.getStringExtra("riderphone");
+        phoneNum=intent.getStringExtra("usernum");
 
         btnSaveChanges=findViewById(R.id.btn_saveChanges);
         oldPass=findViewById(R.id.enter_oldPW);
@@ -60,12 +61,12 @@ public class editprofile_changePass extends AppCompatActivity {
         confirmPass=findViewById(R.id.confirm_newPW);
         forgotPass=findViewById(R.id.forgotPass);
 
+        root = FirebaseDatabase.getInstance().getReference("users");
+        Query check=root.orderByChild("userPhone").equalTo(phoneNum);
+
         oldPass.addTextChangedListener(new GenericTextWatcher(oldPass));
         newPass.addTextChangedListener(new GenericTextWatcher(newPass));
         confirmPass.addTextChangedListener(new GenericTextWatcher(confirmPass));
-
-        root = FirebaseDatabase.getInstance().getReference("riders");
-        Query check=root.orderByChild("riderphone").equalTo(phoneNum);
 
         btnSaveChanges.setVisibility(View.GONE);
         btnSaveChanges.setOnClickListener(new View.OnClickListener() {
@@ -75,8 +76,8 @@ public class editprofile_changePass extends AppCompatActivity {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         if(snapshot.exists()){
-                            String riderpass=snapshot.child(phoneNum).child("riderpass").getValue(String.class);
-                            if(oldPass.getEditableText().toString().equals(riderpass)) {
+                            String usernum=snapshot.child(phoneNum).child("userPass").getValue(String.class);
+                            if(oldPass.getEditableText().toString().equals(usernum)) {
                                 String password = newPass.getEditableText().toString();
                                 String pwConfirm = confirmPass.getEditableText().toString();
                                 if (!oldPass.getEditableText().toString().equals(password)) {
@@ -108,12 +109,12 @@ public class editprofile_changePass extends AppCompatActivity {
                                     if (PWgood) {
                                         FirebaseAuth mAuth = FirebaseAuth.getInstance();
                                         FirebaseDatabase db = FirebaseDatabase.getInstance();
-                                        DatabaseReference rootie = db.getReference("riders");
+                                        DatabaseReference rootie = db.getReference("users");
                                         rootie = db.getReference();
 
-                                        HashMap riderInfo = new HashMap();
-                                        riderInfo.put("riderpass", password);
-                                        rootie.child("riders").child(phoneNum).updateChildren(riderInfo);
+                                        HashMap userInfo = new HashMap();
+                                        userInfo.put("userPass", password);
+                                        rootie.child("users").child(phoneNum).updateChildren(userInfo);
 
                                         final Dialog dialog = new Dialog(btnSaveChanges.getContext());
                                         dialog.setContentView(R.layout.passwordchanged_dialog);
@@ -143,7 +144,6 @@ public class editprofile_changePass extends AppCompatActivity {
                 });
             }
         });
-
         //for forgot password
         ForgotPW = new Dialog(this);
         ForgotPW.setContentView(R.layout.fragment_forgot_password);
@@ -178,16 +178,16 @@ public class editprofile_changePass extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 FirebaseDatabase db = FirebaseDatabase.getInstance();
-                DatabaseReference rootie = db.getReference("riders");
-                String riderNumF = getTextFromEditText(ForgotPW.findViewById(R.id.forgotNumber));
-                Query accCheck = rootie.orderByChild("riderphone").equalTo(riderNumF);
+                DatabaseReference rootie = db.getReference("users");
+                String userNumF = getTextFromEditText(ForgotPW.findViewById(R.id.forgotNumber));
+                Query accCheck = rootie.orderByChild("userPhone").equalTo(userNumF);
                 accCheck.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot snapshot) {
                         if (snapshot.exists()) {
                             VerifyNum.show();
                             ForgotPW.dismiss();
-                            sendVerificationCodeToUser(riderNumF);
+                            sendVerificationCodeToUser(userNumF);
                         }
 
                         else{
@@ -217,7 +217,7 @@ public class editprofile_changePass extends AppCompatActivity {
                 if(TextUtils.isEmpty(etVerifyCode.getText().toString()))
                 {
                     etVerifyCode.setError("Required");
-                    Toast.makeText(editprofile_changePass.this,"Please Enter The Code.",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(user_editprofile_changePass.this,"Please Enter The Code.",Toast.LENGTH_SHORT).show();
                     return;
                 }
                 verifyCode(code);
@@ -276,18 +276,18 @@ public class editprofile_changePass extends AppCompatActivity {
                 {
                     FirebaseAuth mAuth = FirebaseAuth.getInstance();
                     FirebaseDatabase db = FirebaseDatabase.getInstance();
-                    DatabaseReference rootie = db.getReference("riders");
+                    DatabaseReference rootie = db.getReference("users");
                     db = FirebaseDatabase.getInstance();
-                    rootie = db.getReference("riders");
+                    rootie = db.getReference("users");
                     FirebaseUser userCurrent = mAuth.getCurrentUser();
 
                     UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder().setDisplayName(String.valueOf(riderNumF)).build();
                     userCurrent.updateProfile(profileUpdates);
                     rootie = db.getReference();
 
-                    HashMap riderInfo = new HashMap();
-                    riderInfo.put("riderpass",password);
-                    rootie.child("riders").child(riderNumF).updateChildren(riderInfo);
+                    HashMap userInfo = new HashMap();
+                    userInfo.put("userPass",password);
+                    rootie.child("users").child(riderNumF).updateChildren(userInfo);
                     UpdatePW.dismiss();
 
                     final Dialog dialog = new Dialog(btnSaveChanges.getContext());
@@ -341,7 +341,7 @@ public class editprofile_changePass extends AppCompatActivity {
             finish();
         }
     }
-    private class GenericTextWatcher implements TextWatcher{
+    private class GenericTextWatcher implements TextWatcher {
         private View view;
         private GenericTextWatcher(View view) {
             this.view = view;
@@ -351,9 +351,9 @@ public class editprofile_changePass extends AppCompatActivity {
         public void afterTextChanged(Editable editable) {
             String text = editable.toString();
             if(!TextUtils.isEmpty(oldPass.getText().toString())&&
-                !TextUtils.isEmpty(newPass.getText().toString())&&
-                !TextUtils.isEmpty(confirmPass.getText().toString())){
-                    btnSaveChanges.setVisibility(View.VISIBLE);
+                    !TextUtils.isEmpty(newPass.getText().toString())&&
+                    !TextUtils.isEmpty(confirmPass.getText().toString())){
+                btnSaveChanges.setVisibility(View.VISIBLE);
             }else{
                 btnSaveChanges.setVisibility(View.GONE);
             }
@@ -369,7 +369,7 @@ public class editprofile_changePass extends AppCompatActivity {
         public void onCodeSent(@NonNull String s, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
             super.onCodeSent(s, forceResendingToken);
             verificationCodeBySystem = s;
-            Toast.makeText(editprofile_changePass.this,"Code Sent.",Toast.LENGTH_SHORT).show();
+            Toast.makeText(user_editprofile_changePass.this,"Code Sent.",Toast.LENGTH_SHORT).show();
         }
 
         @Override
@@ -383,7 +383,7 @@ public class editprofile_changePass extends AppCompatActivity {
 
         @Override
         public void onVerificationFailed(@NonNull FirebaseException e) {
-            Toast.makeText(editprofile_changePass.this,e.getMessage(),Toast.LENGTH_LONG).show();
+            Toast.makeText(user_editprofile_changePass.this,e.getMessage(),Toast.LENGTH_LONG).show();
         }
     };
 

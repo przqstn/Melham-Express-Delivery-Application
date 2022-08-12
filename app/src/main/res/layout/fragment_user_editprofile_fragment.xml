@@ -166,29 +166,29 @@
                         android:textSize="14sp"
                         tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
                 </LinearLayout>
+
                 <LinearLayout
-                    android:id="@+id/change_pass"
                     android:layout_width="match_parent"
                     android:layout_height="75dp"
-                    android:gravity="center_vertical"
                     android:layout_marginBottom="35dp"
                     android:background="@drawable/borders"
+                    android:gravity="center_vertical"
                     android:orientation="vertical"
                     android:padding="10dp">
 
                     <TextView
-                        android:id="@+id/textView113"
+                        android:id="@+id/txt_changePW"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:paddingVertical="5dp"
-                        android:paddingEnd="10dp"
-                        android:drawablePadding="10dp"
                         android:drawableEnd="@drawable/forward_arrow"
+                        android:drawablePadding="10dp"
                         android:drawableTint="@color/edit"
                         android:fontFamily="@font/montserrat_mediumitalic"
+                        android:gravity="end"
+                        android:paddingVertical="5dp"
+                        android:paddingEnd="10dp"
                         android:text="Change Password"
                         android:textColor="@color/app_color"
-                        android:gravity="end"
                         tools:ignore="TextContrastCheck" />
                 </LinearLayout>
             </LinearLayout>
