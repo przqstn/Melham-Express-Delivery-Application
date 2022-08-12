@@ -112,9 +112,7 @@ public class user_pending_order_details extends AppCompatActivity {
                         new ChildEventListener() {
                             @Override
                             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                                dr.child(dataSnapshot.getKey()).child("parcelstatus").setValue("Cancelled"+phonenum);
-                                String userdefnum = dataSnapshot.child("defaultUserNum").getValue().toString();
-                                dr.child(dataSnapshot.getKey()).child("userParcelStatus").setValue("Cancelled"+userdefnum);
+                                openConfirmCancelDialog();
                             }
 
                             @Override
@@ -135,13 +133,18 @@ public class user_pending_order_details extends AppCompatActivity {
                             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
                             }
                         });
-                Intent intent = new Intent(user_pending_order_details.this, user_navigation.class);
-                intent.putExtra("phonenum", phonenum);
-                intent.putExtra("username", name);
-//                intent.putExtra("orderID", orderID);
-                startActivity(intent);
+//                Intent intent = new Intent(user_pending_order_details.this, user_navigation.class);
+//                intent.putExtra("phonenum", phonenum);
+//                intent.putExtra("username", name);
+////                intent.putExtra("orderID", orderID);
+//                startActivity(intent);
             }
         });
+    }
+
+    public void openConfirmCancelDialog() {
+        ConfirmCancelDialog confirmCancelDialog = new ConfirmCancelDialog();
+        confirmCancelDialog.show(getSupportFragmentManager(), "Confirm Cancel Dialog");
     }
 
     @Override

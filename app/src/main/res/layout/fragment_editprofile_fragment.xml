@@ -108,6 +108,10 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/montserrat_medium"
                             android:padding="5dp"
+                            android:singleLine="true"
+                            android:ellipsize="end"
+                            android:maxLines="1"
+                            android:scrollHorizontally="true"
                             android:textColor="@color/strokes" />
 
                     </LinearLayout>
@@ -134,6 +138,10 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/montserrat_medium"
                             android:padding="5dp"
+                            android:singleLine="true"
+                            android:ellipsize="end"
+                            android:maxLines="1"
+                            android:scrollHorizontally="true"
                             android:textColor="@color/strokes" />
 
                     </LinearLayout>
@@ -189,11 +197,16 @@
                         android:background="@color/color_transparent"
                         android:drawableEnd="@drawable/edit_icon2"
                         android:drawableTint="@color/edit"
+                        android:drawablePadding="10dp"
                         android:fontFamily="@font/montserrat_medium"
                         android:paddingVertical="5dp"
                         android:paddingEnd="10dp"
                         android:textColor="@color/strokes"
                         android:textSize="14sp"
+                        android:singleLine="true"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:scrollHorizontally="true"
                         tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
                 </LinearLayout>
                 <LinearLayout

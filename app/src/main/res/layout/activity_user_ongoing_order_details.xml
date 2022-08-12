@@ -447,7 +447,8 @@
                                     android:id="@+id/contact_courier_message"
                                     android:layout_width="115dp"
                                     android:layout_height="30dp"
-                                    android:layout_gravity="center_horizontal">
+                                    android:layout_gravity="center_horizontal"
+                                    android:layout_marginRight="5dp">
 
                                     <Button
                                         android:id="@+id/message_courier"
@@ -461,6 +462,12 @@
                                         android:textSize="15dp" />
 
                                 </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="1dp"
+                                    android:layout_height="30dp"
+                                    android:layout_marginRight="5dp"
+                                    android:background="@drawable/line_2" />
 
                                 <LinearLayout
                                     android:id="@+id/contact_courier_call"

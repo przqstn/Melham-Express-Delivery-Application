@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal">
+
+    <RelativeLayout
+        android:id="@+id/rate_courier_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:orientation="vertical"
+        android:layout_gravity="center_vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_bold"
+            android:text="Are you sure you want to cancel this order?"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="20dp"></TextView>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rate_courier_text"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="40dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="30dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/user_confirm_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/btn_cancelOrderUser"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/graphics_button_1"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:text="Confirm"
+                    android:textColor="@color/white"
+                    android:visibility="visible" />
+
+            </LinearLayout>
+
+            <!--            <LinearLayout-->
+            <!--                android:id="@+id/cancel_layout"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_alignParentEnd="true">-->
+
+            <!--                <Button-->
+            <!--                    android:id="@+id/btn_cancelOrderCancelUser"-->
+            <!--                    android:layout_width="120dp"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:background="@drawable/graphis_button_cancel"-->
+            <!--                    android:fontFamily="@font/montserrat_medium"-->
+            <!--                    android:text="Cancel"-->
+            <!--                    android:textColor="@color/white"-->
+            <!--                    android:visibility="visible" />-->
+
+            <!--            </LinearLayout>-->
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>

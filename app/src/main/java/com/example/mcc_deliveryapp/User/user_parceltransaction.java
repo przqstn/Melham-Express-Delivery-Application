@@ -560,7 +560,7 @@ public class user_parceltransaction extends FragmentActivity implements Location
 		}
 
 		try {
-			new DirectionFinder( this, origin, destination).execute();
+			new DirectionFinder( this, origin, destination, "Driving").execute();
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}

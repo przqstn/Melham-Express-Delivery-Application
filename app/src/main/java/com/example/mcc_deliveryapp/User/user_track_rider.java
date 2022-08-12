@@ -97,7 +97,7 @@ public class user_track_rider extends FragmentActivity implements OnMapReadyCall
     private StorageReference storageReference; //line 52 added StorageReference
     HashMap markerMap = new HashMap();
     Button back, btn_message_courier,btn_call_courier ;
-    String riderNumber, orderID, phonenum, name, riderName, riderVehicle;
+    String riderNumber, orderID, phonenum, name, riderName, riderVehicle, riderNum;
     TextView riderNameUI, riderVehicleUI, riderPlateUI;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,6 +106,7 @@ public class user_track_rider extends FragmentActivity implements OnMapReadyCall
         name = intent.getStringExtra("username");
         phonenum = intent.getStringExtra("phonenum");
         riderName = intent.getStringExtra("ridername");
+        riderNum = intent.getStringExtra("ridernum");
         requestPermission();
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         super.onCreate(savedInstanceState);
@@ -564,7 +565,7 @@ public class user_track_rider extends FragmentActivity implements OnMapReadyCall
             System.out.println(test1 + test2);
 
             try {
-                new DirectionFinder(this, test2, test1).execute();
+                new DirectionFinder(this, test2, test1, riderVehicle.toLowerCase()).execute();
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             }
@@ -573,12 +574,13 @@ public class user_track_rider extends FragmentActivity implements OnMapReadyCall
     @Override
     public void onBackPressed()
     {
-        Intent intent = new Intent(user_track_rider.this, user_navigation.class);
+        Intent intent = new Intent(user_track_rider.this, user_ongoing_order_details.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         intent.putExtra("phonenum", phonenum);
         intent.putExtra("username", name);
         intent.putExtra("name", name);
-        intent.putExtra("vehicle", riderVehicle);
+        intent.putExtra("orderID",  orderID);
+        intent.putExtra("ridernum", riderNum);
         startActivity(intent);
     }
 

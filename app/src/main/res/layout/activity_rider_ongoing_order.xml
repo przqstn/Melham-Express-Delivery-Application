@@ -426,6 +426,7 @@
                                     android:id="@+id/contact_customer_message"
                                     android:layout_width="115dp"
                                     android:layout_height="30dp"
+                                    android:layout_marginRight="5dp"
                                     android:layout_gravity="center_horizontal">
 
                                     <Button
@@ -440,6 +441,12 @@
                                         android:textSize="15dp" />
 
                                 </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="1dp"
+                                    android:layout_height="30dp"
+                                    android:layout_marginRight="5dp"
+                                    android:background="@drawable/line_2" />
 
                                 <LinearLayout
                                     android:id="@+id/contact_customer_call"
@@ -491,7 +498,7 @@
                                     android:layout_height="wrap_content"
                                     android:background="@drawable/graphics_button_1"
                                     android:fontFamily="@font/montserrat_medium"
-                                    android:text="Track Customer"
+                                    android:text="Navigate"
                                     android:textColor="@color/white" />
 
                             </LinearLayout>
@@ -633,7 +640,7 @@
                 </androidx.cardview.widget.CardView>
 
                 <RelativeLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="340dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="25dp"
@@ -642,7 +649,8 @@
                     <LinearLayout
                         android:id="@+id/delivered_layout"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true">
 
                         <Button
                             android:id="@+id/btn_completeOrder"
@@ -660,8 +668,7 @@
                         android:id="@+id/cancel_layout"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
-                        android:layout_toRightOf="@+id/delivered_layout">
+                        android:layout_alignParentEnd="true">
 
                         <Button
                             android:id="@+id/btn_cancelOrderRider"

@@ -128,15 +128,20 @@
                         android:background="@color/color_transparent"
                         android:drawableEnd="@drawable/edit_icon2"
                         android:drawableTint="@color/strokes"
+                        android:drawablePadding="10dp"
                         android:fontFamily="@font/montserrat_medium"
                         android:paddingVertical="5dp"
                         android:paddingEnd="10dp"
                         android:textColor="@color/strokes"
                         android:textSize="14sp"
+                        android:singleLine="true"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:scrollHorizontally="true"
                         tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
                 </LinearLayout>
 
-                <LinearLayout
+                <RelativeLayout
                     android:id="@+id/edit3"
                     android:layout_width="match_parent"
                     android:layout_height="75dp"
@@ -148,47 +153,67 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_toStartOf="@+id/btndelete_secondary"
                         android:fontFamily="@font/montserrat_medium"
                         android:text="Secondary Address:"
                         tools:ignore="TextContrastCheck" />
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/edit_secondary"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginBottom="5dp"
+                        android:layout_toStartOf="@+id/btndelete_secondary"
                         android:background="@color/color_transparent"
                         android:drawableEnd="@drawable/edit_icon2"
+                        android:drawablePadding="10dp"
                         android:drawableTint="@color/strokes"
+                        android:ellipsize="end"
                         android:fontFamily="@font/montserrat_medium"
+                        android:maxLines="1"
                         android:paddingVertical="5dp"
                         android:paddingEnd="10dp"
+                        android:scrollHorizontally="true"
+                        android:singleLine="true"
                         android:textColor="@color/strokes"
                         android:textSize="14sp"
                         tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
-                </LinearLayout>
 
+                    <ImageButton
+                        android:id="@+id/btndelete_secondary"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:background="@color/color_transparent"
+                        android:backgroundTint="@color/strokes"
+                        android:src="@drawable/icon_delete" />
+                </RelativeLayout>
                 <LinearLayout
+                    android:id="@+id/change_pass"
                     android:layout_width="match_parent"
                     android:layout_height="75dp"
+                    android:gravity="center_vertical"
                     android:layout_marginBottom="35dp"
                     android:background="@drawable/borders"
-                    android:gravity="center_vertical"
                     android:orientation="vertical"
                     android:padding="10dp">
 
                     <TextView
-                        android:id="@+id/txt_changePW"
+                        android:id="@+id/textView113"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:drawableEnd="@drawable/forward_arrow"
-                        android:drawablePadding="10dp"
-                        android:drawableTint="@color/edit"
-                        android:fontFamily="@font/montserrat_mediumitalic"
-                        android:gravity="end"
                         android:paddingVertical="5dp"
                         android:paddingEnd="10dp"
+                        android:drawablePadding="10dp"
+                        android:drawableEnd="@drawable/forward_arrow"
+                        android:drawableTint="@color/strokes"
+                        android:fontFamily="@font/montserrat_mediumitalic"
                         android:text="Change Password"
                         android:textColor="@color/app_color"
+                        android:gravity="end"
                         tools:ignore="TextContrastCheck" />
                 </LinearLayout>
             </LinearLayout>

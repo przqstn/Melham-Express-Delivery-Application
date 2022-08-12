@@ -60,13 +60,15 @@
 
                     <TextView
                         android:id="@+id/hi_user_2"
-                        android:layout_width="264dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentTop="true"
                         android:layout_marginLeft="111dp"
                         android:layout_marginTop="46dp"
                         android:gravity="center_horizontal|top|left"
+                        android:maxLines="1"
+                        android:ellipsize="none"
                         android:lineSpacingExtra="2sp"
                         android:text="@string/hi_user"
                         android:textAppearance="@style/hi_user" />
