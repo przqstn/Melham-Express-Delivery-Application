@@ -176,6 +176,7 @@ public class editprofile_fragment extends AppCompatActivity {
                     hashMap.put("currentaddress", editAddress.getEditableText().toString());
                     root.child(phoneNum).updateChildren(hashMap);
                 }
+
                 final Dialog dialog = new Dialog(btnSaveChanges.getContext());
                 dialog.setContentView(R.layout.saved_dialog);
                 dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);

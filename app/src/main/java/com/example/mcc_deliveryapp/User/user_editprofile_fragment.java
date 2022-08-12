@@ -8,10 +8,13 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -30,6 +33,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -46,13 +50,14 @@ public class user_editprofile_fragment extends AppCompatActivity {
     public static final int CAMERA_REQUEST_CODE = 3;
 
     private TextView viewPhoneNum, viewFullName, changePass;
-    private String phoneNum, currentPhotoPath, imgName;
+    private String phoneNum, currentPhotoPath, imgName, mainAdd, secondaryAdd;
     private ImageButton btnSaveChanges, btnUpload;
     private Uri imageUri;
     private ImageView profilePic;
     private DatabaseReference root;
     private FirebaseStorage storage;
     private StorageReference storageReference;
+    private EditText mainAddress, secondaryAddress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,14 +72,30 @@ public class user_editprofile_fragment extends AppCompatActivity {
         btnSaveChanges = findViewById(R.id.btn_saveChanges);
         changePass = findViewById(R.id.user_changePW);
 
+
+
+
         Intent intent = getIntent();
         phoneNum = intent.getStringExtra("userPhone");
         viewPhoneNum=findViewById(R.id.user_number);
         viewPhoneNum.setText(phoneNum);
 
+        mainAdd = intent.getStringExtra("mainAdd");
+        mainAddress = findViewById(R.id.edit_primary);
+        mainAddress.setText(mainAdd);
+
+        secondaryAdd = intent.getStringExtra("secondaryAdd");
+        secondaryAddress = findViewById(R.id.edit_secondary);
+        secondaryAddress.setText(secondaryAdd);
+
+        mainAddress.addTextChangedListener(new GenericTextWatcher(mainAddress));
+        secondaryAddress.addTextChangedListener(new GenericTextWatcher(secondaryAddress));
+
         String fullName = intent.getStringExtra("userFullname");
         viewFullName=findViewById(R.id.txt_name);
         viewFullName.setText(fullName);
+
+
 
         btnUpload.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -107,28 +128,14 @@ public class user_editprofile_fragment extends AppCompatActivity {
             }
         });
 
+
         btnSaveChanges.setVisibility(View.GONE);
         btnSaveChanges.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //root= FirebaseDatabase.getInstance().getReference().child("riders");
-                //HashMap hashMap = new HashMap();
+                root= FirebaseDatabase.getInstance().getReference().child("users");
+                HashMap hashMap = new HashMap();
 
-                if(imageUri==null){
-                    final Dialog dialog = new Dialog(btnSaveChanges.getContext());
-                    dialog.setContentView(R.layout.saved_dialog);
-                    dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
-                    dialog.getWindow().getAttributes().windowAnimations = R.style.animation;
-                    dialog.setCancelable(false);
-                    dialog.show();
-                    Button viewProfile = dialog.findViewById(R.id.btn_viewProfile);
-                    viewProfile.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            onBackPressed();
-                        }
-                    });
-                }
                 if(imageUri!=null) {
                     final ProgressDialog pd = new ProgressDialog(btnSaveChanges.getContext());
                     StorageReference riversRef = storageReference.child("user/" + phoneNum + "/" + imgName);
@@ -151,10 +158,14 @@ public class user_editprofile_fragment extends AppCompatActivity {
                             });
                 }
 
-                /*if(!TextUtils.isEmpty(editAddress.getEditableText().toString())){
-                    hashMap.put("currentaddress", editAddress.getEditableText().toString());
+                if(!TextUtils.isEmpty(mainAddress.getEditableText().toString())){
+                    hashMap.put("mainAdd", mainAddress.getEditableText().toString());
                     root.child(phoneNum).updateChildren(hashMap);
-                }*/
+                }
+                if(!TextUtils.isEmpty(secondaryAddress.getEditableText().toString())){
+                    hashMap.put("secondaryAdd", secondaryAddress.getEditableText().toString());
+                    root.child(phoneNum).updateChildren(hashMap);
+                }
 
                 final Dialog dialog = new Dialog(btnSaveChanges.getContext());
                 dialog.setContentView(R.layout.saved_dialog);
@@ -184,12 +195,15 @@ public class user_editprofile_fragment extends AppCompatActivity {
             }
         });
 
-
     }
 
     @Override
     public void onBackPressed() {
-        if (imageUri != null) {
+        if ((imageUri != null)
+                ||TextUtils.isEmpty(mainAddress.getEditableText().toString())
+                ||!mainAddress.getEditableText().toString().equals(mainAdd)
+                ||TextUtils.isEmpty(secondaryAddress.getEditableText().toString())
+                ||!secondaryAddress.getEditableText().toString().equals(secondaryAdd)) {
             final Dialog dialog = new Dialog(this);
             dialog.setContentView(R.layout.cancel_edit_dialog);
             dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -215,7 +229,29 @@ public class user_editprofile_fragment extends AppCompatActivity {
         } else {
             finish();
         }
+    }
 
+    private class GenericTextWatcher implements TextWatcher {
+        private View view;
+        private GenericTextWatcher(View view) {
+            this.view = view;
+        }
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+        public void afterTextChanged(Editable editable) {
+            String text = editable.toString();
+            if((!mainAddress.getEditableText().toString().equals(mainAdd))
+                    || (!secondaryAddress.getEditableText().toString().equals(secondaryAdd))){
+                btnSaveChanges.setVisibility(View.VISIBLE);
+            }else{
+                btnSaveChanges.setVisibility(View.GONE);
+            }
+            if((TextUtils.isEmpty(mainAddress.getEditableText().toString()))
+            ||(TextUtils.isEmpty(secondaryAddress.getEditableText().toString()))){
+                btnSaveChanges.setVisibility(View.GONE);
+            }
+
+        }
     }
 
     private void choosePicture() {
@@ -251,13 +287,19 @@ public class user_editprofile_fragment extends AppCompatActivity {
         if(requestCode==CHOOSE_PICTURE && resultCode==RESULT_OK && data!=null && data.getData()!=null){
             imageUri=data.getData();
             profilePic.setImageURI(imageUri);
-            btnSaveChanges.setVisibility(View.VISIBLE);
+            if(TextUtils.isEmpty(mainAddress.getEditableText().toString())
+                    ||TextUtils.isEmpty(secondaryAddress.getEditableText().toString())){
+                btnSaveChanges.setVisibility(View.GONE);
+            }else{
+                btnSaveChanges.setVisibility(View.VISIBLE);
+            }
+
         }
         if(requestCode==CAMERA_REQUEST_CODE && resultCode==RESULT_OK){
             File f = new File(currentPhotoPath);
             profilePic.setImageURI(Uri.fromFile(f));
             imageUri=Uri.fromFile(f);
-            btnSaveChanges.setVisibility(View.VISIBLE);
+            //btnSaveChanges.setVisibility(View.VISIBLE);
         }
 
         imgName="profile_image.jpg";
@@ -279,7 +321,6 @@ public class user_editprofile_fragment extends AppCompatActivity {
         currentPhotoPath = image.getAbsolutePath();
         return image;
     }
-
 
     private void dispatchTakePictureIntent(){
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);

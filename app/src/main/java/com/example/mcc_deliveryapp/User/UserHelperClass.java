@@ -1,7 +1,7 @@
 package com.example.mcc_deliveryapp.User;
 //~~~~~~~~~~~~~~NEED TO PUSH AND COMMIT~~~~~~~~~~~~~//
 public class UserHelperClass {
-	String userFullname,UserPhone,UserPass;
+	String userFullname,UserPhone,UserPass, mainAdd, secondaryAdd;
 
 
 
@@ -9,11 +9,13 @@ public class UserHelperClass {
 
 	}
 
-	public UserHelperClass(String userFullname, String userPhone, String userPass) {
+	public UserHelperClass(String userFullname, String userPhone, String userPass,
+						   String mainAdd, String secondaryAdd) {
 		this.userFullname = userFullname;
 		UserPhone = userPhone;
 		UserPass = userPass;
-
+		this.mainAdd = mainAdd;
+		this.secondaryAdd = secondaryAdd;
 	}
 
 	public String getUserFullname() {
@@ -36,9 +38,16 @@ public class UserHelperClass {
 		return UserPass;
 	}
 
-	public void setUserPass(String userPass) {
-		UserPass = userPass;
-	}
+	public void setUserPass(String userPass) {UserPass = userPass;}
+
+	public String getMainAdd(){ return mainAdd;}
+
+	public void setMainAdd(String mainAdd){ this.mainAdd = mainAdd;}
+
+	public String getSecondaryAdd(){ return secondaryAdd;}
+
+	public void setSecondaryAdd(String secondaryAdd){ this.secondaryAdd = secondaryAdd;}
+
 
 
 

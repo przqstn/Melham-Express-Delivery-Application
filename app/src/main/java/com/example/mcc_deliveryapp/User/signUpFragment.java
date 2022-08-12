@@ -305,7 +305,7 @@ public class signUpFragment extends Fragment {
                 {
 
                    //user helper class in order to store the the given info in sign up form
-                  UserHelperClass userHelperClass = new UserHelperClass(fullname, phoneNum, pass);
+                  UserHelperClass userHelperClass = new UserHelperClass(fullname, phoneNum, pass, "", "");
                   DbRef.child(phoneNum).setValue(userHelperClass);
                   Toast.makeText(getContext(), "Account Successfully Created", Toast.LENGTH_SHORT).show();
                   //Implementing the Clear Section in Sign up after the Creation of Account

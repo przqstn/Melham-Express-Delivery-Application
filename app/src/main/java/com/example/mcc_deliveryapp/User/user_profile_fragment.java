@@ -40,7 +40,7 @@ import java.io.File;
 import java.io.IOException;
 
 public class user_profile_fragment extends Fragment {
-    private TextView userName, userPhone;
+    private TextView userName, userPhone, mainAdd, secondaryAdd;
     private String phone, imgName;
     private View view;
 
@@ -61,6 +61,8 @@ public class user_profile_fragment extends Fragment {
         profile_user = view.findViewById(R.id.profile_user);
         userName = view.findViewById(R.id.txt_name);
         userPhone =  view.findViewById(R.id.user_number);
+        mainAdd = view.findViewById(R.id.user_primary_add);
+        secondaryAdd = view.findViewById(R.id.user_secondary_address);
         btn_UsereditProfile = view.findViewById(R.id.btnUser_EditProfile);
         btnUser_Logout = view.findViewById(R.id.btnUser_Logout);
         storage = FirebaseStorage.getInstance();
@@ -79,6 +81,8 @@ public class user_profile_fragment extends Fragment {
                     if (ds.child("userPhone").getValue().equals(phone)){
                         userName.setText(ds.child("userFullname").getValue(String.class));
                         userPhone.setText(ds.child("userPhone").getValue(String.class));
+                        mainAdd.setText(ds.child("mainAdd").getValue(String.class));
+                        secondaryAdd.setText(ds.child("secondaryAdd").getValue(String.class));
                     }
                 }
             }
@@ -113,6 +117,8 @@ public class user_profile_fragment extends Fragment {
                 intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP);
                 intent.putExtra("userPhone", phone);
                 intent.putExtra("userFullname", userName.getText().toString());
+                intent.putExtra("mainAdd", mainAdd.getText().toString());
+                intent.putExtra("secondaryAdd", secondaryAdd.getText().toString());
                 view.getContext().startActivity(intent);
             }
         });
