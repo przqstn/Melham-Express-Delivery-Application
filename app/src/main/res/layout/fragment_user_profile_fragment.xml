@@ -133,6 +133,10 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/montserrat_medium"
                         android:padding="5dp"
+                        android:singleLine="true"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:scrollHorizontally="true"
                         android:textColor="@color/strokes" />
                 </LinearLayout>
                 <LinearLayout
@@ -157,6 +161,10 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/montserrat_medium"
                         android:padding="5dp"
+                        android:singleLine="true"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:scrollHorizontally="true"
                         android:textColor="@color/strokes" />
                 </LinearLayout>
 
