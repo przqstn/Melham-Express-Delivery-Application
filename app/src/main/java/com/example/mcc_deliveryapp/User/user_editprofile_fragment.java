@@ -65,7 +65,7 @@ public class user_editprofile_fragment extends AppCompatActivity {
         btnUpload = findViewById(R.id.btn_Upload);
         profilePic = findViewById(R.id.profile_user);
         btnSaveChanges = findViewById(R.id.btn_saveChanges);
-        changePass = findViewById(R.id.txt_changePW);
+        changePass = findViewById(R.id.user_changePW);
 
         Intent intent = getIntent();
         phoneNum = intent.getStringExtra("userPhone");
