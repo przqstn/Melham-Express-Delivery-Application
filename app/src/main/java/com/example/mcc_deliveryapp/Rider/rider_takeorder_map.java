@@ -23,6 +23,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -95,7 +96,8 @@ public class rider_takeorder_map extends FragmentActivity implements OnMapReadyC
     private GoogleMap mMap;
     private DatabaseReference riderReference, databaseReference;
     private static final int DEFAULT_ZOOM = 18;
-    Button back, pickedComplete;
+    ImageButton back;
+    Button pickedComplete;
 
     LocationListener locationListener = new LocationListener() {
         @Override

@@ -8,92 +8,118 @@
     tools:context=".User.user_parceltransaction">
 
     <LinearLayout
+        android:id="@+id/header_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:background="@color/app_color"
+        android:gravity="bottom"
+        android:orientation="horizontal"
+        android:paddingHorizontal="5dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="3dp">
+
+        <ImageButton
+            android:id="@+id/backbutton"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@color/color_transparent"
+            android:src="@drawable/icon_back_arrow" />
+
+        <TextView
+            android:id="@+id/txt_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="10dp"
+            android:fontFamily="@font/montserrat_bolditalic"
+            android:text="Proceeding to location points"
+            android:textColor="@color/white" />
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/map_linearLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="50dp"
+        android:layout_below="@id/header_layout"
+        android:layout_above="@+id/layout_for_buttons"
         android:orientation="vertical">
 
         <fragment
             android:id="@+id/map"
             android:name="com.google.android.gms.maps.SupportMapFragment"
             android:layout_width="match_parent"
-            android:layout_height="641dp" />
+            android:layout_height="match_parent" />
 
     </LinearLayout>
 
 
     <LinearLayout
+        android:id="@+id/layout_for_buttons"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:elevation="5dp"
-        android:orientation="vertical">
+        android:layout_alignParentBottom="true">
 
         <Button
             android:id="@+id/pickedComplete"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/app_color"
+            android:fontFamily="@font/montserrat_medium"
             android:text="Parcel Picked Up"
-            android:background="@drawable/graphics_button_1"
-            android:fontFamily="@font/montserrat_medium"
-            android:textColor="@color/white"
-            android:textSize="14sp"/>
-
-        <Button
-            android:id="@+id/backbutton"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/graphis_button_cancel"
-            android:fontFamily="@font/montserrat_medium"
-            android:text="BACK"
             android:textColor="@color/white"
             android:textSize="14sp" />
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/distance_credentials_layout"
-        android:background="@color/opaque_appcolor"
-        android:layout_below="@id/search_loc_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_below="@id/header_layout"
+        android:background="@color/background_color"
         android:gravity="center"
         android:orientation="horizontal"
-        android:paddingVertical="1dp">
+        android:paddingVertical="1dp"
+        android:elevation="5dp"
+        android:translationZ="10dp">
+
         <Button
-            android:visibility="gone"
+            android:id="@+id/btnFindPath"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat_medium"
             android:text="Find path"
-            android:id="@+id/btnFindPath" />
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@drawable/ic_distance"/>
-        <TextView
-            android:layout_marginLeft="5dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/montserrat_medium"
-            android:text="0 km"
-            android:id="@+id/tvDistance" />
+            android:visibility="gone" />
 
         <ImageView
-            android:layout_marginLeft="20dp"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:padding="5dp"
-            android:src="@drawable/ic_clock"/>
+            android:src="@drawable/ic_distance" />
+
         <TextView
-            android:layout_marginLeft="5dp"
+            android:id="@+id/tvDistance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
             android:fontFamily="@font/montserrat_medium"
-            android:text="0 min"
-            android:id="@+id/tvDuration" />
+            android:text="0 km" />
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="20dp"
+            android:padding="5dp"
+            android:src="@drawable/ic_clock" />
+
+        <TextView
+            android:id="@+id/tvDuration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:fontFamily="@font/montserrat_medium"
+            android:text="0 min" />
 
     </LinearLayout>
 
