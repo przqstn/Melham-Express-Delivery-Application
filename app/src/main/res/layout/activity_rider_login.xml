@@ -30,7 +30,7 @@
                 app:srcCompat="@drawable/topimage" />
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="370dp"
                 android:layout_height="wrap_content"
                 android:text="Phone Number"
                 android:textColor="@color/black"
@@ -43,7 +43,7 @@
 
             <EditText
                 android:id="@+id/edtTextRiderNumber"
-                android:layout_width="411dp"
+                android:layout_width="370dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:background="@drawable/edit_text_round"
@@ -75,7 +75,7 @@
                 android:visibility="gone" />
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="370dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/montserrat_medium"
                 android:padding="5dp"
@@ -96,7 +96,7 @@
 
                 <EditText
                     android:id="@+id/edtTextRiderPassword"
-                    android:layout_width="411dp"
+                    android:layout_width="370dp"
                     android:layout_height="55dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="0dp"
