@@ -445,7 +445,7 @@
                 android:fontFamily="@font/montserrat_semibold"
                 android:text="Small Truck"
                 android:textColor="@color/black"
-                android:textSize="18dp"
+                android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@+id/btnTruck"
                 app:layout_constraintEnd_toEndOf="@+id/btnTruck"
