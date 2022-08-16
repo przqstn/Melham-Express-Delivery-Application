@@ -24,7 +24,7 @@ import java.util.List;
 //https://developers.google.com/maps/documentation/directions/get-directions
 public class DirectionFinder {
 	private static final String DIRECTION_URL_API = "https://maps.googleapis.com/maps/api/directions/json?";
-	private static final String GOOGLE_API_KEY = "AIzaSyDFYoFiFN4xRMjixR8LQ5ve3nnDiJioj_Y";
+	private static final String GOOGLE_API_KEY = "AIzaSyD5glPPR-FTV888MG4YDIXldF-SpuwR7YQ";
 	private DirectionFinderListener listener;
 	private String origin;
 	private String destination;

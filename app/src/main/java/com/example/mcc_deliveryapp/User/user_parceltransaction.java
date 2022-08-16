@@ -117,7 +117,7 @@ public class user_parceltransaction extends FragmentActivity implements Location
 
 	Button address_dialog;
 	View mapview, locationButton;
-	String GOOGLE_API_KEY = "AIzaSyDFYoFiFN4xRMjixR8LQ5ve3nnDiJioj_Y";
+	String GOOGLE_API_KEY = "AIzaSyD5glPPR-FTV888MG4YDIXldF-SpuwR7YQ";
 	EditText senderloc, sendercontact, sendername;
 
 	EditText receiverloc, receivercontact, receivername;
