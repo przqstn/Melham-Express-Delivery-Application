@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "922256700616",
-    "project_id": "mcc-delivery-app-f1462",
-    "storage_bucket": "mcc-delivery-app-f1462.appspot.com"
+    "project_number": "64985444039",
+    "project_id": "melham-express",
+    "storage_bucket": "melham-express.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:922256700616:android:277aec4a76f21f635621fd",
+        "mobilesdk_app_id": "1:64985444039:android:16de386a6dd054d46518e2",
         "android_client_info": {
           "package_name": "com.example.mcc_deliveryapp"
         }
       },
       "oauth_client": [
         {
-          "client_id": "922256700616-bk206o5l7g77jdtk9b08gj41c9k0s8qf.apps.googleusercontent.com",
+          "client_id": "64985444039-dr332mee57s48ip23rjljfg3p8bhqiih.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyADnt7-904XLjZ__TK3phh0uacfzAkoWho"
+          "current_key": "AIzaSyC0yQI2bpC3E8RiebwND23vhoacRNX0B2o"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "922256700616-bk206o5l7g77jdtk9b08gj41c9k0s8qf.apps.googleusercontent.com",
+              "client_id": "64985444039-dr332mee57s48ip23rjljfg3p8bhqiih.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
