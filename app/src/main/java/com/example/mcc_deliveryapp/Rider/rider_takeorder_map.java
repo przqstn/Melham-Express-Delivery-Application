@@ -235,12 +235,13 @@ public class rider_takeorder_map extends FragmentActivity implements OnMapReadyC
                         riderphonenum.add(riderphone);
                     }
                 }
-                for (int i = 0; i < latitudes.size(); i++) {
-                    LatLng latLng = new LatLng(Double.parseDouble(latitudes.get(i)), Double.parseDouble(longitudes.get(i)));
-                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, DEFAULT_ZOOM));
+                if (latitudes.isEmpty()) {
+                    for (int i = 0; i < latitudes.size(); i++) {
+                        LatLng latLng = new LatLng(Double.parseDouble(latitudes.get(i)), Double.parseDouble(longitudes.get(i)));
+                        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, DEFAULT_ZOOM));
 
+                    }
                 }
-
                 sendRequest();
 
 
@@ -509,6 +510,7 @@ public class rider_takeorder_map extends FragmentActivity implements OnMapReadyC
                             if (location != null) {
                                 latitude = location.getLatitude();
                                 longitude = location.getLongitude();
+                                Log.e("Location:", latitude + " " + longitude);
                                 riderReference.child(phonenum).child("latitude").setValue(latitude);
                                 riderReference.child(phonenum).child("longitude").setValue(longitude);
 //                                lastKnownLocation = new LatLng(latitude, longitude);
