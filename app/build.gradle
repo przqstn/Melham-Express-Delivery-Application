@@ -82,6 +82,8 @@ dependencies {
     //implementation 'com.google.android.gms:play-services:12.0.1'
     //Google Maps SDK
     implementation 'com.google.android.gms:play-services-maps:18.1.0'
+    // Also declare the dependency for the Google Play services library and specify its version
+    implementation 'com.google.android.gms:play-services-auth:20.2.0'
 
     // Dexter For Permission dialog
     implementation 'com.karumi:dexter:6.2.3'
