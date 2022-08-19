@@ -134,13 +134,40 @@
                 android:layout_width="320dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="30dp"
                 android:background="@drawable/graphics_button_1"
                 android:backgroundTint="@color/button_color1"
                 android:fontFamily="@font/montserrat_medium"
                 android:text="Sign In"
                 android:textAllCaps="false"
                 android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/sign_in_with"
+                android:layout_width="409dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/montserrat_medium"
+                android:text="Or Sign In With"
+                android:textAlignment="center"/>
+
+            <Button
+                android:id="@+id/btn_sign_with_google"
+                android:layout_width="320dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="15dp"
+                android:paddingLeft="12"
+                android:background="@drawable/graphics_button_1"
+                android:drawableLeft="@drawable/google"
+                android:backgroundTint="@color/white"
+                android:fontFamily="@font/montserrat_medium"
+                android:text="Sign In with Google"
+                android:textAllCaps="false"
+                android:textColor="@color/black" />
+
+
+
 
         </LinearLayout>
 
