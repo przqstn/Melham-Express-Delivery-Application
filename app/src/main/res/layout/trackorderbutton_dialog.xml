@@ -16,7 +16,7 @@
         android:layout_height="match_parent"
         android:layout_marginVertical="18dp"
         android:fontFamily="@font/montserrat_bold"
-        android:paddingLeft="45"
+        android:paddingLeft="45dp"
         android:text="Enter Order ID"
         android:textColor="@color/black"
         android:textSize="14sp" />
@@ -59,6 +59,7 @@
             android:textSize="15sp"
             android:textStyle="bold"
             android:layout_marginTop="30dp"
+            android:layout_marginBottom="40dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
