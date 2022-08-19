@@ -40,6 +40,8 @@ public class MainActivity2 extends AppCompatActivity {
 	EditText orderID;
 	String userDefaultNumber, ridernum;
 	private long pressedTime;
+	private DatabaseReference getRiderRef;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -114,49 +116,54 @@ public class MainActivity2 extends AppCompatActivity {
 								findViewById(R.id.trackorder_button)
 						);
 
-				orderID = bottomSheetView.findViewById(R.id.OrderID);
-
-
-				final FirebaseDatabase database = FirebaseDatabase.getInstance();
-				final DatabaseReference dr = database.getReference().child("userparcel");
-				Query query = dr.orderByChild("OrderID").equalTo(orderID.getText().toString());
-				System.out.println(orderID);
-
-				query.addChildEventListener(
-						new ChildEventListener() {
-							@Override
-							public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-								userDefaultNumber = dataSnapshot.child("defaultUserNum").getValue(String.class);
-								ridernum = dataSnapshot.child("ridernum").getValue(String.class);
-							}
-
-							@Override
-							public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-							}
-
-							@Override
-							public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-							}
-
-							@Override
-							public void onCancelled(@NonNull DatabaseError error) {
-
-							}
-
-							@Override
-							public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-							}
-						});
+				orderID = (EditText) bottomSheetView.findViewById(R.id.OrderID);
 
 				bottomSheetView.findViewById(R.id.btnConfirm).setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View view) {
-						Intent intent = new Intent(MainActivity2.this, user_ongoing_order_details2.class);
-						intent.putExtra("phonenum", userDefaultNumber);
-						intent.putExtra("orderID", orderID.getText().toString());
-						intent.putExtra("ridernum", ridernum);
-						startActivity(intent);
+						final FirebaseDatabase database = FirebaseDatabase.getInstance();
+						final DatabaseReference dr = database.getReference().child("userparcel");
+						Query query = dr.orderByChild("OrderID").equalTo(orderID.getText().toString());
+
+						System.out.println(orderID);
+
+						query.addChildEventListener(
+								new ChildEventListener() {
+									@Override
+									public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+										userDefaultNumber = dataSnapshot.child("defaultUserNum").getValue(String.class);
+										ridernum = dataSnapshot.child("parcelstatus").getValue(String.class);
+									}
+
+									@Override
+									public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+									}
+
+									@Override
+									public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+									}
+
+									@Override
+									public void onCancelled(@NonNull DatabaseError error) {
+
+									}
+
+									@Override
+									public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+									}
+								});
+
+						if (ridernum != null) {
+							Log.e("UserNUm", userDefaultNumber);
+							Log.e("RiderNUm", ridernum);
+
+							Intent intent = new Intent(MainActivity2.this, user_ongoing_order_details2.class);
+							intent.putExtra("phonenum", userDefaultNumber);
+							intent.putExtra("orderID", orderID.getText().toString());
+							intent.putExtra("ridernum", ridernum);
+							startActivity(intent);
+						}
 					}
 				});
 				bottomSheetDialog.setContentView(bottomSheetView);
