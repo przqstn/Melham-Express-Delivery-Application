@@ -51,6 +51,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
@@ -82,7 +83,8 @@ import java.util.Locale;
 
 public class user_track_rider extends FragmentActivity implements OnMapReadyCallback, DirectionFinderListener {
     private GoogleMap mMap;
-    private static final int DEFAULT_ZOOM = 18;
+    private float DEFAULT_ZOOM = 18;
+    private boolean isZooming = false;
     View mapview, locationButton;
     String userLatitude, userLongitude, riderLatitude, riderLongitude;
     private List<Marker> originMarkers = new ArrayList<>();
@@ -436,6 +438,7 @@ public class user_track_rider extends FragmentActivity implements OnMapReadyCall
             return;
         }
         mMap.getUiSettings().setZoomControlsEnabled(true);
+        mMap.setOnCameraChangeListener(getCameraChangeListener());
 
         LocationListener locationListener = new LocationListener() {
             @Override
@@ -477,6 +480,28 @@ public class user_track_rider extends FragmentActivity implements OnMapReadyCall
             e.printStackTrace();
         }
     }
+
+    public GoogleMap.OnCameraChangeListener getCameraChangeListener()
+    {
+        return new GoogleMap.OnCameraChangeListener()
+        {
+            @Override
+            public void onCameraChange(@NonNull CameraPosition position)
+            {
+                Log.d("Zoom", "Zoom: " + position.zoom);
+
+                if(DEFAULT_ZOOM != position.zoom)
+                {
+                    isZooming = true;
+                }
+
+                DEFAULT_ZOOM = position.zoom;
+
+                Log.e("ZOOM", String.valueOf(DEFAULT_ZOOM));
+            }
+        };
+    }
+
     private BitmapDescriptor bitmapDescriptorFromVector(Context context, int vectorResId) {
         Drawable vectorDrawable = ContextCompat.getDrawable(context, vectorResId);
         assert vectorDrawable != null;

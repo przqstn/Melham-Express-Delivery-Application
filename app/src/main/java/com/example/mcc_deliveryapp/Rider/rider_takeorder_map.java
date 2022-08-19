@@ -48,6 +48,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
@@ -95,7 +96,8 @@ public class rider_takeorder_map extends FragmentActivity implements OnMapReadyC
     private LatLng riderLocation;
     private GoogleMap mMap;
     private DatabaseReference riderReference, databaseReference;
-    private static final int DEFAULT_ZOOM = 18;
+    private float DEFAULT_ZOOM = 18;
+    private boolean isZooming = false;
     ImageButton back;
     Button pickedComplete;
 
@@ -575,7 +577,7 @@ public class rider_takeorder_map extends FragmentActivity implements OnMapReadyC
         }
 
         mMap.getUiSettings().setZoomControlsEnabled(true);
-
+        mMap.setOnCameraChangeListener(getCameraChangeListener());
 
         LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 
@@ -596,6 +598,28 @@ public class rider_takeorder_map extends FragmentActivity implements OnMapReadyC
         }
         getLocation();
     }
+
+    public GoogleMap.OnCameraChangeListener getCameraChangeListener()
+    {
+        return new GoogleMap.OnCameraChangeListener()
+        {
+            @Override
+            public void onCameraChange(@NonNull CameraPosition position)
+            {
+                Log.d("Zoom", "Zoom: " + position.zoom);
+
+                if(DEFAULT_ZOOM != position.zoom)
+                {
+                    isZooming = true;
+                }
+
+                DEFAULT_ZOOM = position.zoom;
+
+                Log.e("ZOOM", String.valueOf(DEFAULT_ZOOM));
+            }
+        };
+    }
+
     public void requestPermission(){
         ActivityResultLauncher<String[]> locationPermissionRequest =
                 registerForActivityResult(new ActivityResultContracts

@@ -62,6 +62,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 
 
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
@@ -126,7 +127,8 @@ public class user_parceltransaction extends FragmentActivity implements Location
 
 	private static final String TAG = user_parceltransaction.class.getSimpleName();
 	private LatLng lastKnownLocation;
-	private static final int DEFAULT_ZOOM = 15;
+	private float DEFAULT_ZOOM = 15;
+	private boolean isZooming = false;
 	private final LatLng defaultLocation = new LatLng(14.5928, 120.9801);
 	private FusedLocationProviderClient fusedLocationClient;
 
@@ -586,6 +588,7 @@ public class user_parceltransaction extends FragmentActivity implements Location
 		}
 
 		mMap.getUiSettings().setZoomControlsEnabled(true);
+		mMap.setOnCameraChangeListener(getCameraChangeListener());
 
 // this is for customize map
 		try {
@@ -647,6 +650,27 @@ public class user_parceltransaction extends FragmentActivity implements Location
 		getLocation();
 
 
+	}
+
+	public GoogleMap.OnCameraChangeListener getCameraChangeListener()
+	{
+		return new GoogleMap.OnCameraChangeListener()
+		{
+			@Override
+			public void onCameraChange(@NonNull CameraPosition position)
+			{
+				Log.d("Zoom", "Zoom: " + position.zoom);
+
+				if(DEFAULT_ZOOM != position.zoom)
+				{
+					isZooming = true;
+				}
+
+				DEFAULT_ZOOM = position.zoom;
+
+				Log.e("ZOOM", String.valueOf(DEFAULT_ZOOM));
+			}
+		};
 	}
 
 	@Override
