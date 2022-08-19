@@ -45,8 +45,8 @@
 
                     <ImageView
                         android:id="@+id/imageView"
-                        android:layout_width="317dp"
-                        android:layout_height="358dp"
+                        android:layout_width="270dp"
+                        android:layout_height="310dp"
                         android:layout_gravity="center"
                         app:srcCompat="@drawable/melogo" />
 
@@ -90,7 +90,18 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/graphics_button_1"
                         android:fontFamily="@font/montserrat_medium"
+                        android:layout_marginBottom="10dp"
                         android:text="User"
+                        android:textColor="@color/white" />
+
+                    <Button
+                        android:id="@+id/btn_trackorder"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/graphics_button_1"
+                        android:backgroundTint="#878181"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:text="Track Order"
                         android:textColor="@color/white" />
 
                 </LinearLayout>
