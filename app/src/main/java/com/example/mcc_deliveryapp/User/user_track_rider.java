@@ -30,6 +30,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -96,7 +97,8 @@ public class user_track_rider extends FragmentActivity implements OnMapReadyCall
     private ImageView profilePic, riderVehicleIcon; // line 51 added ImageView variable
     private StorageReference storageReference; //line 52 added StorageReference
     HashMap markerMap = new HashMap();
-    Button back, btn_message_courier,btn_call_courier ;
+    Button btn_message_courier,btn_call_courier ;
+    ImageButton back;
     String riderNumber, orderID, phonenum, name, riderName, riderVehicle, riderNum;
     TextView riderNameUI, riderVehicleUI, riderPlateUI;
     @Override
