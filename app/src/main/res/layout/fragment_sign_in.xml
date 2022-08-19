@@ -157,7 +157,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="15dp"
-                android:paddingLeft="12"
+                android:paddingLeft="12dp"
                 android:background="@drawable/graphics_button_1"
                 android:drawableLeft="@drawable/google"
                 android:backgroundTint="@color/white"
