@@ -366,4 +366,5 @@ public class signInFragment extends Fragment {
         });
 
     }
+    public void onCancelled(@NonNull DatabaseError databaseError) { throw databaseError.toException(); }
 }
