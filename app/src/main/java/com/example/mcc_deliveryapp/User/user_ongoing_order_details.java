@@ -208,6 +208,7 @@ public class user_ongoing_order_details extends AppCompatActivity {
                 intent.putExtra("username", name);
                 intent.putExtra("ridername",  riderName);
                 intent.putExtra("ridernum",  rider_num);
+                intent.putExtra("vehicleType", vehicleType);
                 startActivity(intent);
             }
         });

@@ -95,7 +95,7 @@ public class user_track_rider2 extends FragmentActivity implements OnMapReadyCal
     HashMap markerMap = new HashMap();
     Button btn_message_courier,btn_call_courier ;
     ImageButton back;
-    String riderNumber, orderID, phonenum, name, riderName, riderVehicle, riderNum;
+    String riderNumber, orderID, phonenum, name, riderName, riderVehicle, riderNum, vehicleType;
     TextView riderNameUI, riderVehicleUI, riderPlateUI;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,6 +104,7 @@ public class user_track_rider2 extends FragmentActivity implements OnMapReadyCal
         phonenum = intent.getStringExtra("phonenum");
         riderName = intent.getStringExtra("ridername");
         riderNum = intent.getStringExtra("ridernum");
+        vehicleType = intent.getStringExtra("vehicleType");
         requestPermission();
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         super.onCreate(savedInstanceState);
@@ -562,7 +563,7 @@ public class user_track_rider2 extends FragmentActivity implements OnMapReadyCal
             System.out.println(test1 + test2);
 
             try {
-                new DirectionFinder(this, test2, test1, riderVehicle.toLowerCase()).execute();
+                new DirectionFinder(this, test2, test1, vehicleType).execute();
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             }

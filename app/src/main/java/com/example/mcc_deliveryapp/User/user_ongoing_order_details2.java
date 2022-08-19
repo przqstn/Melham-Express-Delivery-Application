@@ -57,6 +57,7 @@ public class user_ongoing_order_details2 extends AppCompatActivity {
         orderID = intent.getStringExtra("orderID");
         String rider_num = intent.getStringExtra("ridernum");
 
+
         senderloc = findViewById(R.id.sender_loc2);
         sendername = findViewById(R.id.sender_name2);
         sendercontact = findViewById(R.id.sender_contact2);
@@ -194,6 +195,7 @@ public class user_ongoing_order_details2 extends AppCompatActivity {
                 intent.putExtra("phonenum", phonenum);
                 intent.putExtra("ridername",  riderName);
                 intent.putExtra("ridernum",  rider_num);
+                intent.putExtra("vehicleType", vehicleType);
                 startActivity(intent);
             }
         });
