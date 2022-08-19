@@ -35,7 +35,7 @@ public class user_ongoing_order_details2 extends AppCompatActivity {
 
     String name, phonenum, orderID, riderName, ridernum, riderPlateNumber, riderBrandModel,
             senderName, senderLocation, senderContact, receiverName, receiverLocation,
-            receiverContact, vehicleType, senderNote, orderPrice, orderPlaced;
+            receiverContact, vehicleType, senderNote, orderPrice, orderPlaced, rider_num;
     TextView senderloc, sendername, sendercontact, receiverloc, receivername, receivercontact,
             order_id, rider_name, vehicletype, usernote, parcelprice, plate_number, orderplaced;
     Button btn_userOrderCompleted, btn_trackCourier, btn_message_courier, btn_call_courier;
@@ -55,7 +55,7 @@ public class user_ongoing_order_details2 extends AppCompatActivity {
         Intent intent = getIntent();
         phonenum = intent.getStringExtra("phonenum");
         orderID = intent.getStringExtra("orderID");
-        String rider_num = intent.getStringExtra("ridernum");
+        rider_num = intent.getStringExtra("ridernum");
 
 
         senderloc = findViewById(R.id.sender_loc2);
