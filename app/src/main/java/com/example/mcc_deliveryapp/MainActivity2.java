@@ -132,7 +132,7 @@ public class MainActivity2 extends AppCompatActivity {
 									@Override
 									public void onChildAdded(DataSnapshot dataSnapshot, String s) {
 										userDefaultNumber = dataSnapshot.child("defaultUserNum").getValue(String.class);
-										ridernum = dataSnapshot.child("parcelstatus").getValue(String.class);
+										ridernum = dataSnapshot.child("ridernum").getValue(String.class);
 									}
 
 									@Override
