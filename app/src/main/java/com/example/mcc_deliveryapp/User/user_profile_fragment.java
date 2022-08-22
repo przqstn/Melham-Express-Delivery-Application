@@ -23,8 +23,13 @@ import android.widget.TextView;
 
 import com.example.mcc_deliveryapp.MainActivity2;
 import com.example.mcc_deliveryapp.R;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -38,6 +43,7 @@ import com.google.firebase.storage.UploadTask;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Objects;
 
 public class user_profile_fragment extends Fragment {
     private TextView userName, userPhone, mainAdd, secondaryAdd;
@@ -52,6 +58,9 @@ public class user_profile_fragment extends Fragment {
 
     private ImageButton btn_UsereditProfile;
     private Button btnUser_Logout;
+
+    private GoogleSignInOptions googleSignInOptions;
+    private GoogleSignInClient googleSignInClient;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -68,6 +77,8 @@ public class user_profile_fragment extends Fragment {
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
 
+        googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
+        googleSignInClient = GoogleSignIn.getClient(requireActivity(), googleSignInOptions);
 
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users");
 
@@ -126,6 +137,17 @@ public class user_profile_fragment extends Fragment {
         btnUser_Logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                signOut();
+            }
+        });
+
+        return view;
+    }
+
+    void signOut(){
+        googleSignInClient.signOut().addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(Task<Void> task) {
                 Intent intent = new Intent(view.getContext(), MainActivity2.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|
                                 Intent.FLAG_ACTIVITY_CLEAR_TASK |
@@ -133,7 +155,5 @@ public class user_profile_fragment extends Fragment {
                 view.getContext().startActivity(intent);
             }
         });
-
-        return view;
     }
 }

@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -99,6 +100,13 @@ public class signInFragment extends Fragment {
 
         googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
         googleSignInClient = GoogleSignIn.getClient(requireActivity(), googleSignInOptions);
+
+        GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(requireContext());
+        if(acct!=null){
+            Log.e("Google2", acct.getEmail());
+            navigateToSecondActivity();
+        }
+
 
         btn_sign_with_google.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -272,7 +280,11 @@ public class signInFragment extends Fragment {
 
             try {
                 task.getResult(ApiException.class);
-                navigateToSecondActivity();
+                GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(requireContext());
+                if(acct!=null){
+                    Log.e("Google1", acct.getEmail());
+                    navigateToSecondActivity();
+                }
             } catch (ApiException e) {
                 Toast.makeText(requireContext().getApplicationContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
             }
