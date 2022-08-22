@@ -16,6 +16,11 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.example.mcc_deliveryapp.R;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
@@ -34,6 +39,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 
@@ -50,7 +56,10 @@ public class signInFragment extends Fragment {
     Dialog ForgotPW, VerifyNum, UpdatePW;
 
     TextInputLayout login_editTxt_phoneNum, login_editTxt_password;
-    Button btn_Login;
+    Button btn_Login, btn_sign_with_google;
+
+    private GoogleSignInOptions googleSignInOptions;
+    private GoogleSignInClient googleSignInClient;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -61,6 +70,8 @@ public class signInFragment extends Fragment {
         login_editTxt_phoneNum = view.findViewById(R.id.edTextPhoneNo);
         login_editTxt_password = view.findViewById(R.id.edTextPass);
         btn_Login = view.findViewById(R.id.btn_login);
+        btn_sign_with_google = view.findViewById(R.id.btn_sign_with_google);
+
         forgotPass = view.findViewById(R.id.forgotPassUser);
         ForgotPW = new Dialog(getActivity());
         ForgotPW.setContentView(R.layout.fragment_forgot_password);
@@ -85,6 +96,17 @@ public class signInFragment extends Fragment {
         forgotPassnext = ForgotPW.findViewById(R.id.forgotPassnext);
         numberUser = ForgotPW.findViewById(R.id.forgotNumber);
         updatePW = UpdatePW.findViewById(R.id.updatePW);
+
+        googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
+        googleSignInClient = GoogleSignIn.getClient(requireActivity(), googleSignInOptions);
+
+        btn_sign_with_google.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                signIn();
+            }
+        });
+
 
         btn_Login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -236,6 +258,33 @@ public class signInFragment extends Fragment {
         return view;
 
     }
+
+    private void signIn(){
+        Intent signInIntent = googleSignInClient.getSignInIntent();
+        startActivityForResult(signInIntent, 0);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 0){
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+
+            try {
+                task.getResult(ApiException.class);
+                navigateToSecondActivity();
+            } catch (ApiException e) {
+                Toast.makeText(requireContext().getApplicationContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
+            }
+        }
+
+    }
+
+    void navigateToSecondActivity(){
+        Intent intent = new Intent(getContext(), user_navigation.class);
+        startActivity(intent);
+    }
+
     private void UserLogin(){
 
         String usernumEntered = login_editTxt_phoneNum.getEditText().getText().toString().trim();

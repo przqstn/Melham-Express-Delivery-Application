@@ -80,7 +80,8 @@
                 android:id="@+id/edTextPass"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:passwordToggleEnabled="true">
+                app:passwordToggleEnabled="true"
+                android:autofillHints="password">
 
                 <com.google.android.material.textfield.TextInputEditText
 
@@ -98,7 +99,8 @@
                     android:paddingBottom="25dp"
                     android:textColor="@color/black"
                     android:textSize="16sp"
-                    app:passwordToggleEnabled="false" />
+                    app:passwordToggleEnabled="false"
+                    android:autofillHints="password"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
