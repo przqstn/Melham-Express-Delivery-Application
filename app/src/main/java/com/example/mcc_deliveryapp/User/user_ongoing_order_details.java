@@ -8,6 +8,8 @@ import androidx.core.content.ContextCompat;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -49,7 +51,8 @@ public class user_ongoing_order_details extends AppCompatActivity {
             receiverContact, vehicleType, senderNote, orderPrice, orderPlaced;
     TextView senderloc, sendername, sendercontact, receiverloc, receivername, receivercontact,
             order_id, rider_name, vehicletype, usernote, parcelprice, plate_number, orderplaced;
-    Button btn_userOrderCompleted, btn_trackCourier, btn_message_courier, btn_call_courier;
+    Button btn_userOrderCompleted, btn_trackCourier, btn_message_courier, btn_call_courier,
+            copyID;
 
     private ImageView profilePic; // line 51 added ImageView variable
     private StorageReference storageReference; //line 52 added StorageReference
@@ -86,6 +89,7 @@ public class user_ongoing_order_details extends AppCompatActivity {
         plate_number = findViewById(R.id.plate_number);
         btn_message_courier = findViewById(R.id.message_courier);
         btn_call_courier = findViewById(R.id.call_courier);
+        copyID = findViewById(R.id.copyOrderID);
 
         profilePic = findViewById(R.id.user_profile_ongoing);
 
@@ -198,6 +202,19 @@ public class user_ongoing_order_details extends AppCompatActivity {
                     }
                 });
 
+
+        copyID.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ClipboardManager clipboardManager = (ClipboardManager)
+                        user_ongoing_order_details.this.getSystemService(user_ongoing_order_details.this.CLIPBOARD_SERVICE);
+                ClipData clipData = ClipData.newPlainText("nonsense_data",
+                        order_id.getText().toString());
+                clipboardManager.setPrimaryClip(clipData);
+                Toast.makeText(user_ongoing_order_details.this, "Order ID Copied", Toast.LENGTH_SHORT).show();
+            }
+        });
+
         btn_trackCourier.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -208,6 +225,7 @@ public class user_ongoing_order_details extends AppCompatActivity {
                 intent.putExtra("username", name);
                 intent.putExtra("ridername",  riderName);
                 intent.putExtra("ridernum",  rider_num);
+                intent.putExtra("vehicleType", vehicleType);
                 startActivity(intent);
             }
         });

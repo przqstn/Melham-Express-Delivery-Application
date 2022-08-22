@@ -154,16 +154,67 @@ public class MainActivity2 extends AppCompatActivity {
 									}
 								});
 
-						if (ridernum != null) {
-							Log.e("UserNUm", userDefaultNumber);
-							Log.e("RiderNUm", ridernum);
+						if (ridernum == null) {
+							query.addChildEventListener(
+									new ChildEventListener() {
+										@Override
+										public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+											userDefaultNumber = dataSnapshot.child("defaultUserNum").getValue(String.class);
+											ridernum = dataSnapshot.child("ridernum").getValue(String.class);
+										}
 
-							Intent intent = new Intent(MainActivity2.this, user_ongoing_order_details2.class);
-							intent.putExtra("phonenum", userDefaultNumber);
-							intent.putExtra("orderID", orderID.getText().toString());
-							intent.putExtra("ridernum", ridernum);
-							startActivity(intent);
+										@Override
+										public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+										}
+
+										@Override
+										public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+										}
+
+										@Override
+										public void onCancelled(@NonNull DatabaseError error) {
+
+										}
+
+										@Override
+										public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+										}
+									});
 						}
+						else if (userDefaultNumber == null) {
+							query.addChildEventListener(
+									new ChildEventListener() {
+										@Override
+										public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+											userDefaultNumber = dataSnapshot.child("defaultUserNum").getValue(String.class);
+											ridernum = dataSnapshot.child("ridernum").getValue(String.class);
+										}
+
+										@Override
+										public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+										}
+
+										@Override
+										public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+										}
+
+										@Override
+										public void onCancelled(@NonNull DatabaseError error) {
+
+										}
+
+										@Override
+										public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+										}
+									});
+						}
+						Intent intent = new Intent(MainActivity2.this, user_ongoing_order_details2.class);
+						intent.putExtra("phonenum", userDefaultNumber);
+						intent.putExtra("orderID", orderID.getText().toString());
+						intent.putExtra("ridernum", ridernum);
+						startActivity(intent);
 					}
 				});
 				bottomSheetDialog.setContentView(bottomSheetView);
