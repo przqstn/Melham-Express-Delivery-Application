@@ -18,8 +18,13 @@ import androidx.fragment.app.Fragment;
 
 import com.example.mcc_deliveryapp.MainActivity2;
 import com.example.mcc_deliveryapp.R;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -33,6 +38,7 @@ import java.io.File;
 import java.io.IOException;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
+import java.util.Objects;
 
 public class profile_fragment extends Fragment {
 	TextView RiderName, RiderVehicle, RiderPlate, RiderAddress, RiderNumber, rating;
@@ -45,6 +51,9 @@ public class profile_fragment extends Fragment {
 
     private ImageButton btn_editProfile;
 	private Button btnRider_Logout;
+
+	private GoogleSignInOptions googleSignInOptions;
+	private GoogleSignInClient googleSignInClient;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -61,6 +70,9 @@ public class profile_fragment extends Fragment {
 		btn_editProfile = view.findViewById(R.id.btnRider_EditProfile);
 		btnRider_Logout = view.findViewById(R.id.btnRider_Logout);
 		rating = view.findViewById(R.id.txt_ratings);
+
+		googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
+		googleSignInClient = GoogleSignIn.getClient(requireActivity(), googleSignInOptions);
 
 		DatabaseReference ref = FirebaseDatabase.getInstance().getReference("riders");
 		//FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -148,16 +160,26 @@ public class profile_fragment extends Fragment {
 		btnRider_Logout.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				Intent intent = new Intent(view.getContext(), MainActivity2.class);
-				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|
-								Intent.FLAG_ACTIVITY_CLEAR_TASK |
-								Intent.FLAG_ACTIVITY_NEW_TASK);
-				view.getContext().startActivity(intent);
+				signOut();
+
 			}
 		});
 
 		return view;
 
+	}
+
+	void signOut(){
+		googleSignInClient.signOut().addOnCompleteListener(new OnCompleteListener<Void>() {
+			@Override
+			public void onComplete(Task<Void> task) {
+				Intent intent = new Intent(getContext(), MainActivity2.class);
+				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|
+						Intent.FLAG_ACTIVITY_CLEAR_TASK |
+						Intent.FLAG_ACTIVITY_NEW_TASK);
+				requireContext().startActivity(intent);
+			}
+		});
 	}
 
 
