@@ -298,23 +298,31 @@ public class user_completed_order_details extends AppCompatActivity {
         title.setTextAlign(Paint.Align.LEFT);
         canvas.drawText("Completed Order Details", 100, 240, title);
         title.setTextAlign(Paint.Align.LEFT);
-        title.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
         canvas.drawText("Sender Details", 100, 280, title);
+        title.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
         canvas.drawText("Sender Location: " + senderloc.getText().toString(), 100, 300, title);
         canvas.drawText("Sender Name: " + sendername.getText().toString(), 100, 320, title);
 
+        title.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
         canvas.drawText("Receiver Details", 100, 360, title);
+        title.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
         canvas.drawText("Receiver Location: " + receiverloc.getText().toString(), 100, 380, title);
         canvas.drawText("Receiver Name: " + receivername.getText().toString(), 100, 400, title);
 
+        title.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
         canvas.drawText("Order Remarks", 100, 440, title);
+        title.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
         canvas.drawText(usernote.getText().toString(), 100, 460, title);
 
+        title.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
         canvas.drawText("Time Details", 100, 500, title);
+        title.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
         canvas.drawText("Order Placed: " + order_placed.getText().toString(), 100, 520, title);
         canvas.drawText("Order Completed: " + order_received.getText().toString(), 100, 540, title);
 
+        title.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
         canvas.drawText("Courier Details", 100, 580, title);
+        title.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
         canvas.drawText("Courier Name: " + rider_name.getText().toString(), 100, 600, title);
         canvas.drawText("Courier Vehicle: " + vehicletype.getText().toString() + " | " + plate_number.getText().toString(), 100, 620, title);
 
@@ -322,9 +330,9 @@ public class user_completed_order_details extends AppCompatActivity {
         title.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
         canvas.drawText("Price Breakdown", 396, 700, title);
         title.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
-        canvas.drawText("--------------------------------------------------------------------------------------------------------", 396, 720, title);
+        canvas.drawText("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -", 396, 720, title);
         canvas.drawText("Base Price: " + parcelprice.getText().toString(), 396, 740, title);
-        canvas.drawText("--------------------------------------------------------------------------------------------------------", 396, 760, title);
+        canvas.drawText("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -", 396, 760, title);
         title.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
         canvas.drawText("Total Price: " + parcelprice.getText().toString() , 396, 780, title);
 
