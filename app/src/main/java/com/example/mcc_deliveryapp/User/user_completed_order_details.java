@@ -266,11 +266,11 @@ public class user_completed_order_details extends AppCompatActivity {
 
         // below line is used for adding typeface for
         // our text which we will be adding in our PDF file.
-        title.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.NORMAL));
+        title.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
 
         // below line is used for setting text size
         // which we will be displaying in our PDF file.
-        title.setTextSize(20);
+        title.setTextSize(15);
 
         // below line is sued for setting color
         // of our text inside our PDF file.
@@ -286,7 +286,7 @@ public class user_completed_order_details extends AppCompatActivity {
 
         // similarly we are creating another text and in this
         // we are aligning this text to center of our PDF file.
-        title.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
+        title.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
         title.setColor(ContextCompat.getColor(this, R.color.black));
         title.setTextSize(15);
 
@@ -297,6 +297,8 @@ public class user_completed_order_details extends AppCompatActivity {
 
         title.setTextAlign(Paint.Align.LEFT);
         canvas.drawText("Completed Order Details", 100, 240, title);
+        title.setTextAlign(Paint.Align.LEFT);
+        title.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
         canvas.drawText("Sender Details", 100, 280, title);
         canvas.drawText("Sender Location: " + senderloc.getText().toString(), 100, 300, title);
         canvas.drawText("Sender Name: " + sendername.getText().toString(), 100, 320, title);
@@ -317,10 +319,13 @@ public class user_completed_order_details extends AppCompatActivity {
         canvas.drawText("Courier Vehicle: " + vehicletype.getText().toString() + " | " + plate_number.getText().toString(), 100, 620, title);
 
         title.setTextAlign(Paint.Align.CENTER);
+        title.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
         canvas.drawText("Price Breakdown", 396, 700, title);
-        canvas.drawText("----------------------------------------------------", 396, 720, title);
+        title.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
+        canvas.drawText("--------------------------------------------------------------------------------------------------------", 396, 720, title);
         canvas.drawText("Base Price: " + parcelprice.getText().toString(), 396, 740, title);
-        canvas.drawText("----------------------------------------------------", 396, 760, title);
+        canvas.drawText("--------------------------------------------------------------------------------------------------------", 396, 760, title);
+        title.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
         canvas.drawText("Total Price: " + parcelprice.getText().toString() , 396, 780, title);
 
         // after adding all attributes to our
