@@ -10,6 +10,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.graphics.pdf.PdfDocument;
@@ -214,8 +215,8 @@ public class user_completed_order_details extends AppCompatActivity {
         btn_getReceipt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                bmp = BitmapFactory.decodeResource(getResources(), R.drawable.newsplashscreen);
-                scaledbmp = Bitmap.createScaledBitmap(bmp, 140, 140, false);
+                bmp = BitmapFactory.decodeResource(getResources(), R.drawable.melham_express_logo_bg_blue);
+                scaledbmp = Bitmap.createScaledBitmap(bmp, 110, 110, false);
 
                 // below code is used for
                 // checking our permissions.
@@ -269,29 +270,58 @@ public class user_completed_order_details extends AppCompatActivity {
 
         // below line is used for setting text size
         // which we will be displaying in our PDF file.
-        title.setTextSize(15);
+        title.setTextSize(20);
 
         // below line is sued for setting color
         // of our text inside our PDF file.
-        title.setColor(ContextCompat.getColor(this, R.color.purple_200));
+        title.setColor(ContextCompat.getColor(this, R.color.black));
 
         // below line is used to draw text in our PDF file.
         // the first parameter is our text, second parameter
         // is position from start, third parameter is position from top
         // and then we are passing our variable of paint which is title.
-        canvas.drawText("Melham Express - Receipt", 209, 100, title);
-        canvas.drawText("Order ID: " + order_id.getText().toString(), 209, 80, title);
+        canvas.drawText("Melham Express", 209, 80, title);
+        canvas.drawText("\"Always Going the Extra Mile, Just for You!\"", 209, 100, title);
+        canvas.drawText("Order ID: " + order_id.getText().toString(), 209, 120, title);
 
         // similarly we are creating another text and in this
         // we are aligning this text to center of our PDF file.
         title.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
-        title.setColor(ContextCompat.getColor(this, R.color.purple_200));
+        title.setColor(ContextCompat.getColor(this, R.color.black));
         title.setTextSize(15);
 
         // below line is used for setting
         // our text to center of PDF.
         title.setTextAlign(Paint.Align.CENTER);
-        canvas.drawText("This is sample document which we have created.", 396, 560, title);
+        canvas.drawText("THIS SERVES AS YOUR DELIVERY RECEIPT", 396, 200, title);
+
+        title.setTextAlign(Paint.Align.LEFT);
+        canvas.drawText("Completed Order Details", 100, 240, title);
+        canvas.drawText("Sender Details", 100, 280, title);
+        canvas.drawText("Sender Location: " + senderloc.getText().toString(), 100, 300, title);
+        canvas.drawText("Sender Name: " + sendername.getText().toString(), 100, 320, title);
+
+        canvas.drawText("Receiver Details", 100, 360, title);
+        canvas.drawText("Receiver Location: " + receiverloc.getText().toString(), 100, 380, title);
+        canvas.drawText("Receiver Name: " + receivername.getText().toString(), 100, 400, title);
+
+        canvas.drawText("Order Remarks", 100, 440, title);
+        canvas.drawText(usernote.getText().toString(), 100, 460, title);
+
+        canvas.drawText("Time Details", 100, 500, title);
+        canvas.drawText("Order Placed: " + order_placed.getText().toString(), 100, 520, title);
+        canvas.drawText("Order Completed: " + order_received.getText().toString(), 100, 540, title);
+
+        canvas.drawText("Courier Details", 100, 580, title);
+        canvas.drawText("Courier Name: " + rider_name.getText().toString(), 100, 600, title);
+        canvas.drawText("Courier Vehicle: " + vehicletype.getText().toString() + " | " + plate_number.getText().toString(), 100, 620, title);
+
+        title.setTextAlign(Paint.Align.CENTER);
+        canvas.drawText("Price Breakdown", 396, 700, title);
+        canvas.drawText("----------------------------------------------------", 396, 720, title);
+        canvas.drawText("Base Price: " + parcelprice.getText().toString(), 396, 740, title);
+        canvas.drawText("----------------------------------------------------", 396, 760, title);
+        canvas.drawText("Total Price: " + parcelprice.getText().toString() , 396, 780, title);
 
         // after adding all attributes to our
         // PDF file we will be finishing our page.
