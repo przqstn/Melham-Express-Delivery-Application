@@ -32,6 +32,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -39,7 +40,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
@@ -104,7 +108,40 @@ public class signInFragment extends Fragment {
         GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(requireContext());
         if(acct!=null){
             Log.e("Google2", acct.getEmail());
-            navigateToSecondActivity();
+            String inEmail = acct.getEmail();
+            final FirebaseDatabase database = FirebaseDatabase.getInstance();
+            final DatabaseReference dr = database.getReference().child("users");
+            Query query = dr.orderByChild("userEmail").equalTo(inEmail);
+
+            query.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    Log.e("GetEmail", String.valueOf(dataSnapshot));
+                    List<String> phone = new ArrayList<>(Collections.emptyList());
+                    List<String> name = new ArrayList<>(Collections.emptyList());
+
+                    for (DataSnapshot locationSnapshot : dataSnapshot.getChildren()) {
+                        if (Objects.requireNonNull(locationSnapshot.child("userEmail").getValue()).equals(inEmail)) {
+                            String getPhone = Objects.requireNonNull(locationSnapshot.child("userPhone").getValue()).toString();
+                            phone.add(getPhone);
+                        }
+                    }
+
+                    for (DataSnapshot locationSnapshot : dataSnapshot.getChildren()) {
+                        if (Objects.requireNonNull(locationSnapshot.child("userEmail").getValue()).equals(inEmail)) {
+                            String getName = Objects.requireNonNull(locationSnapshot.child("userFullname").getValue()).toString();
+                            name.add(getName);
+                        }
+                    }
+
+                    navigateToSecondActivity(name.get(0), phone.get(0));
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    // ...
+                }
+            });
         }
 
 
@@ -283,7 +320,43 @@ public class signInFragment extends Fragment {
                 GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(requireContext());
                 if(acct!=null){
                     Log.e("Google1", acct.getEmail());
-                    navigateToSecondActivity();
+                    String inEmail = acct.getEmail();
+                    final FirebaseDatabase database = FirebaseDatabase.getInstance();
+                    final DatabaseReference dr = database.getReference().child("users");
+                    Query query = dr.orderByChild("userEmail").equalTo(inEmail);
+
+                    query.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            Log.e("GetEmail", String.valueOf(dataSnapshot));
+                            List<String> phone = new ArrayList<>(Collections.emptyList());
+                            List<String> name = new ArrayList<>(Collections.emptyList());
+
+                            for (DataSnapshot locationSnapshot : dataSnapshot.getChildren()) {
+                                if (Objects.requireNonNull(locationSnapshot.child("userEmail").getValue()).equals(inEmail)) {
+                                    String getPhone = Objects.requireNonNull(locationSnapshot.child("userPhone").getValue()).toString();
+                                    phone.add(getPhone);
+                                }
+                            }
+
+                            for (DataSnapshot locationSnapshot : dataSnapshot.getChildren()) {
+                                if (Objects.requireNonNull(locationSnapshot.child("userEmail").getValue()).equals(inEmail)) {
+                                    String getName = Objects.requireNonNull(locationSnapshot.child("userFullname").getValue()).toString();
+                                    name.add(getName);
+                                }
+                            }
+
+                            navigateToSecondActivity(name.get(0), phone.get(0));
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+                            // ...
+                        }
+                    });
+
+
+
                 }
             } catch (ApiException e) {
                 Toast.makeText(requireContext().getApplicationContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
@@ -292,8 +365,11 @@ public class signInFragment extends Fragment {
 
     }
 
-    void navigateToSecondActivity(){
+
+    void navigateToSecondActivity(String userName, String userPhone){
         Intent intent = new Intent(getContext(), user_navigation.class);
+        intent.putExtra("username", userName);
+        intent.putExtra("phonenum", userPhone);
         startActivity(intent);
     }
 
