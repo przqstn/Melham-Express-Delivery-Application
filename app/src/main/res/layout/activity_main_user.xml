@@ -14,7 +14,6 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingHorizontal="20dp"
     android:paddingTop="20dp">
 
     <Button
@@ -66,14 +65,15 @@
         app:tabSelectedTextColor="@color/black"
         android:layout_marginTop="5dp"/>
 
-  <ScrollView
-      android:layout_width="match_parent"
-      android:layout_height="match_parent">
-      <androidx.viewpager2.widget.ViewPager2
-          android:id="@+id/viewPager2"
-          android:layout_width="match_parent"
-          android:layout_height="match_parent" />
-  </ScrollView>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewPager2"
+            android:layout_width="300dp"
+            android:layout_height="match_parent" />
+    </ScrollView>
 
 
 </LinearLayout>

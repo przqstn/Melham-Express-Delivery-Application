@@ -39,7 +39,6 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
-
                     android:layout_height="wrap_content"
                     android:background="@drawable/edit_text_round"
                     android:drawableStart="@drawable/ic_baseline_local_phone_24"
@@ -60,7 +59,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/montserrat_regular"
-                android:text="Erorr Message for phone"
+                android:paddingLeft="190dp"
+                android:paddingTop="5dp"
+                android:text="Error Message for phone"
                 android:textColor="#FF0033"
                 android:visibility="gone" />
 
@@ -108,6 +109,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/montserrat_regular"
+                android:paddingLeft="190dp"
+                android:paddingTop="5dp"
                 android:text="Error message for PW"
                 android:textColor="#FF0033"
                 android:visibility="gone" />

@@ -59,8 +59,10 @@
 
                     <TextView
                         android:id="@+id/emptyName"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="280dp"
+                        android:layout_marginTop="2dp"
                         android:fontFamily="@font/montserrat_medium"
                         android:text="Required"
                         android:textColor="#FF0033"
@@ -99,6 +101,8 @@
                         android:id="@+id/emptyNum"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="280dp"
+                        android:layout_marginTop="2dp"
                         android:fontFamily="@font/montserrat_medium"
                         android:text="Required"
                         android:textColor="#FF0033"
@@ -137,6 +141,8 @@
                         android:id="@+id/emptyEmail"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="280dp"
+                        android:layout_marginTop="2dp"
                         android:fontFamily="@font/montserrat_medium"
                         android:text="Required"
                         android:textColor="#FF0033"
@@ -149,7 +155,6 @@
                         android:fontFamily="@font/montserrat_medium"
                         android:paddingLeft="5dp"
                         android:paddingTop="20dp"
-                        android:paddingBottom="10dp"
                         android:text="Password"
                         android:textColor="@color/black"
                         android:textSize="16sp"
@@ -176,6 +181,7 @@
                             android:paddingTop="15dp"
                             android:paddingBottom="15dp"
                             android:textSize="16sp"
+                            android:visibility="visible"
                             tools:ignore="SpeakableTextPresentCheck" />
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -184,6 +190,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/montserrat_medium"
+                        android:paddingStart="10dp"
+                        android:paddingTop="5dp"
                         android:text="Password must have at least 6 characters, one uppercase, lowercase, and number."
                         android:textColor="#FF0033"
                         android:textSize="12sp"
@@ -195,7 +203,7 @@
                         android:layout_height="wrap_content"
                         android:text="TextView"
                         android:textColor="#FF0033"
-                        android:visibility="gone" />
+                        android:visibility="invisible" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -203,7 +211,6 @@
                         android:fontFamily="@font/montserrat_medium"
                         android:paddingLeft="5dp"
                         android:paddingTop="20dp"
-                        android:paddingBottom="10dp"
                         android:text="Confirm Password"
                         android:textColor="@color/black"
                         android:textSize="16sp"
@@ -236,6 +243,8 @@
                         android:id="@+id/emptyConfirm"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="190dp"
+                        android:layout_marginTop="2dp"
                         android:fontFamily="@font/montserrat_medium"
                         android:text="Passwords do not match"
                         android:textColor="#FF0033"
