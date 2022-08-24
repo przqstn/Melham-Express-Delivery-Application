@@ -66,10 +66,22 @@
                     android:drawablePadding="16dp"
                     android:fontFamily="@font/montserrat_regular"
                     android:hint="Enter Your Phone Number"
-
                     android:inputType="phone"
                     android:paddingLeft="15dp"
                     android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/phoneErrorRider"
+                    android:layout_width="350dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:paddingLeft="285dp"
+                    android:paddingTop="5dp"
+                    android:text="TextView"
+                    android:textColor="#FF0033"
+                    android:textSize="12sp"
+                    android:visibility="gone" />
 
                 <TextView
                     android:layout_width="370dp"
@@ -83,16 +95,6 @@
                     android:padding="5dp"
                     />
 
-                <TextView
-                    android:id="@+id/phoneErrorRider"
-                    android:layout_width="350dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:fontFamily="@font/montserrat_medium"
-                    android:text="TextView"
-                    android:textColor="#FF0033"
-                    android:textSize="12sp"
-                    android:visibility="gone" />
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/edTextPassL"
@@ -125,6 +127,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:fontFamily="@font/montserrat_medium"
+                    android:paddingLeft="270dp"
+                    android:paddingTop="5dp"
                     android:text="TextView"
                     android:textColor="#FF0033"
                     android:textSize="12sp"
@@ -136,6 +140,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:fontFamily="@font/montserrat_medium"
+                    android:paddingTop="5dp"
                     android:text="TextView"
                     android:textColor="#FF0033"
                     android:textSize="12sp"
@@ -183,6 +188,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:fontFamily="@font/montserrat_medium"
+                    android:paddingLeft="200dp"
+                    android:paddingTop="5dp"
                     android:text="TextView"
                     android:textColor="#FF0033"
                     android:textSize="12sp"
@@ -194,6 +201,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:fontFamily="@font/montserrat_medium"
+                    android:paddingLeft="185dp"
+                    android:paddingTop="5dp"
                     android:text="TextView"
                     android:textColor="#FF0033"
                     android:textSize="12sp"
@@ -239,6 +248,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:fontFamily="@font/montserrat_medium"
+                    android:paddingLeft="285dp"
+                    android:paddingTop="5dp"
                     android:text="TextView"
                     android:textColor="#FF0033"
                     android:textSize="12sp"
@@ -275,6 +286,19 @@
                     android:spinnerMode="dropdown"
                     android:visibility="gone" />
 
+                <TextView
+                    android:id="@+id/vehicleError"
+                    android:layout_width="350dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:paddingLeft="285dp"
+                    android:paddingTop="5dp"
+                    android:text="TextView"
+                    android:textColor="#FF0033"
+                    android:textSize="12sp"
+                    android:visibility="gone" />
+
                 <EditText
                     android:id="@+id/editTextVehicleBrand"
                     android:layout_width="352dp"
@@ -306,17 +330,6 @@
                     android:ems="10"
                     android:hint="Specify Model"
                     android:paddingLeft="15dp"
-                    android:visibility="gone" />
-
-                <TextView
-                    android:id="@+id/vehicleError"
-                    android:layout_width="350dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:fontFamily="@font/montserrat_medium"
-                    android:text="TextView"
-                    android:textColor="#FF0033"
-                    android:textSize="12sp"
                     android:visibility="gone" />
 
                 <CheckBox
