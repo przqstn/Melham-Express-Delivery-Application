@@ -134,7 +134,15 @@ public class signInFragment extends Fragment {
                         }
                     }
 
-                    navigateToSecondActivity(name.get(0), phone.get(0));
+                    try{
+                        navigateToSecondActivity(name.get(0), phone.get(0));
+                    }
+                    catch (Exception e) {
+                        Toast.makeText(getActivity(),"Sign Up First",Toast.LENGTH_LONG).show();
+                        googleSignInClient.signOut();
+                    }
+
+
                 }
 
                 @Override
@@ -346,7 +354,13 @@ public class signInFragment extends Fragment {
                                 }
                             }
 
-                            navigateToSecondActivity(name.get(0), phone.get(0));
+                            try{
+                                navigateToSecondActivity(name.get(0), phone.get(0));
+                            }
+                            catch (Exception e) {
+                                Toast.makeText(getActivity(),"Sign Up First",Toast.LENGTH_LONG).show();
+                                googleSignInClient.signOut();
+                            }
                         }
 
                         @Override

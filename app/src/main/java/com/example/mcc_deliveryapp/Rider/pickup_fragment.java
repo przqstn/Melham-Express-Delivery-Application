@@ -36,7 +36,7 @@ public class pickup_fragment extends Fragment {
 							 Bundle savedInstanceState) {
 		// Inflate the layout for this fragment
 		View view =  inflater.inflate(R.layout.fragment_pickup_fragment, container, false);
-		// ...
+		// ....
 		mDatabase = FirebaseDatabase.getInstance().getReference();
 
 		recyclerView_pickup = view.findViewById(R.id.Recycleview_pickup);

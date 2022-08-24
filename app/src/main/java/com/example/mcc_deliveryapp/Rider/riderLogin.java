@@ -39,7 +39,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 public class riderLogin extends AppCompatActivity {
@@ -101,7 +105,56 @@ public class riderLogin extends AppCompatActivity {
         GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
         if(acct!=null){
             Log.e("Google2", acct.getEmail());
-            navigateToSecondActivity();
+            String inEmail = acct.getEmail();
+            final FirebaseDatabase database = FirebaseDatabase.getInstance();
+            final DatabaseReference dr = database.getReference().child("riders");
+            Query query = dr.orderByChild("email").equalTo(inEmail);
+
+            query.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    Log.e("GetEmail", String.valueOf(dataSnapshot));
+                    List<String> phone = new ArrayList<>(Collections.emptyList());
+                    List<String> name = new ArrayList<>(Collections.emptyList());
+                    List<String> vehicle = new ArrayList<>(Collections.emptyList());
+
+                    for (DataSnapshot locationSnapshot : dataSnapshot.getChildren()) {
+                        if (Objects.requireNonNull(locationSnapshot.child("email").getValue()).equals(inEmail)) {
+                            String getPhone = Objects.requireNonNull(locationSnapshot.child("riderphone").getValue()).toString();
+                            phone.add(getPhone);
+                        }
+                    }
+
+                    for (DataSnapshot locationSnapshot : dataSnapshot.getChildren()) {
+                        if (Objects.requireNonNull(locationSnapshot.child("email").getValue()).equals(inEmail)) {
+                            String getName = Objects.requireNonNull(locationSnapshot.child("name").getValue()).toString();
+                            name.add(getName);
+                        }
+                    }
+
+                    for (DataSnapshot locationSnapshot : dataSnapshot.getChildren()) {
+                        if (Objects.requireNonNull(locationSnapshot.child("email").getValue()).equals(inEmail)) {
+                            String getVehicle = Objects.requireNonNull(locationSnapshot.child("vehicletype").getValue()).toString();
+                            vehicle.add(getVehicle);
+                        }
+                    }
+
+                    try{
+                        navigateToSecondActivity(phone.get(0),vehicle.get(0), name.get(0));
+                    }
+                    catch (Exception e) {
+                        Toast.makeText(riderLogin.this,"Sign Up First",Toast.LENGTH_LONG).show();
+                        googleSignInClient.signOut();
+                    }
+
+
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    // ...
+                }
+            });
         }
 
         btn_sign_with_google2.setOnClickListener(new View.OnClickListener() {
@@ -286,18 +339,74 @@ public class riderLogin extends AppCompatActivity {
                 GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
                 if(acct!=null){
                     Log.e("Google1", acct.getEmail());
-                    navigateToSecondActivity();
+                    String inEmail = acct.getEmail();
+                    final FirebaseDatabase database = FirebaseDatabase.getInstance();
+                    final DatabaseReference dr = database.getReference().child("riders");
+                    Query query = dr.orderByChild("email").equalTo(inEmail);
+
+                    query.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            Log.e("GetEmail", String.valueOf(dataSnapshot));
+                            List<String> phone = new ArrayList<>(Collections.emptyList());
+                            List<String> name = new ArrayList<>(Collections.emptyList());
+                            List<String> vehicle = new ArrayList<>(Collections.emptyList());
+
+                            for (DataSnapshot locationSnapshot : dataSnapshot.getChildren()) {
+                                if (Objects.requireNonNull(locationSnapshot.child("email").getValue()).equals(inEmail)) {
+                                    String getPhone = Objects.requireNonNull(locationSnapshot.child("riderphone").getValue()).toString();
+                                    phone.add(getPhone);
+                                }
+                            }
+
+                            for (DataSnapshot locationSnapshot : dataSnapshot.getChildren()) {
+                                if (Objects.requireNonNull(locationSnapshot.child("email").getValue()).equals(inEmail)) {
+                                    String getName = Objects.requireNonNull(locationSnapshot.child("name").getValue()).toString();
+                                    name.add(getName);
+                                }
+                            }
+
+                            for (DataSnapshot locationSnapshot : dataSnapshot.getChildren()) {
+                                if (Objects.requireNonNull(locationSnapshot.child("email").getValue()).equals(inEmail)) {
+                                    String getVehicle = Objects.requireNonNull(locationSnapshot.child("vehicletype").getValue()).toString();
+                                    vehicle.add(getVehicle);
+                                }
+                            }
+
+                            try{
+                                navigateToSecondActivity(phone.get(0),vehicle.get(0), name.get(0));
+                            }
+                            catch (Exception e) {
+                                Toast.makeText(riderLogin.this,"Sign Up First",Toast.LENGTH_LONG).show();
+                                googleSignInClient.signOut();
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+                            // ...
+                        }
+                    });
+
+
+
                 }
             } catch (ApiException e) {
-                Toast.makeText(this, "Something went wrong", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this.getApplicationContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
             }
         }
 
     }
 
-    void navigateToSecondActivity(){
-        Intent intent = new Intent(this, rider_dashboard.class);
+
+    void navigateToSecondActivity(String riderNum, String ridervehicle, String ridername){
+        Intent intent = new Intent(riderLogin.this, rider_dashboard.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.putExtra("phonenum", riderNum);
+        intent.putExtra("vehicle", ridervehicle);
+        intent.putExtra("name", ridername);
         startActivity(intent);
+
     }
 
     private void loginRider()
