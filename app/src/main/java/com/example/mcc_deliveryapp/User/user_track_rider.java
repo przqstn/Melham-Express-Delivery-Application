@@ -83,7 +83,7 @@ import java.util.Locale;
 
 public class user_track_rider extends FragmentActivity implements OnMapReadyCallback, DirectionFinderListener {
     private GoogleMap mMap;
-    private float DEFAULT_ZOOM = 18;
+    float DEFAULT_ZOOM = 18;
     private boolean isZooming = false;
     View mapview, locationButton;
     String userLatitude, userLongitude, riderLatitude, riderLongitude;
@@ -518,6 +518,7 @@ public class user_track_rider extends FragmentActivity implements OnMapReadyCall
 
         if (originMarkers != null) {
             for (Marker marker : originMarkers) {
+
                 marker.remove();
             }
         }
@@ -537,9 +538,13 @@ public class user_track_rider extends FragmentActivity implements OnMapReadyCall
 
     @Override
     public void onDirectionFinderSuccess(List<Route> routes) {
-        polylinePaths = new ArrayList<>();
-        originMarkers = new ArrayList<>();
-        destinationMarkers = new ArrayList<>();
+//        polylinePaths = new ArrayList<>();
+//        originMarkers = new ArrayList<>();
+//        destinationMarkers = new ArrayList<>();
+
+        // uncomment if polyline is not updating or something else ^^
+
+
 
         for (Route route : routes) {
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(route.startLocation, 16));
