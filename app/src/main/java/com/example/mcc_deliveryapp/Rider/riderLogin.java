@@ -63,40 +63,6 @@ public class riderLogin extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_rider_login);
-        numberRider = findViewById(R.id.edtTextRiderNumber);
-        passRider = findViewById(R.id.edtTextRiderPassword);
-        btnLogin = findViewById(R.id.btnLoginRider);
-        btn_sign_with_google2 = findViewById(R.id.btn_sign_with_google2);
-        btnRegister = findViewById(R.id.btnRegisterRider);
-        errorNumber = findViewById(R.id.errorNumber);
-        errorPass = findViewById(R.id.errorPass);
-        mAuth = FirebaseAuth.getInstance();
-        forgotPass = findViewById(R.id.forgotPass);
-
-        ForgotPW = new Dialog(riderLogin.this);
-        ForgotPW.setContentView(R.layout.fragment_forgot_password);
-        ForgotPW.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
-        ForgotPW.setCancelable(true);
-        ForgotPW.getWindow().getAttributes().windowAnimations = R.style.animation;
-
-        VerifyNum = new Dialog(riderLogin.this);
-        VerifyNum.setContentView(R.layout.fragment_rider_phonenum_verify);
-        VerifyNum.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
-        VerifyNum.setCancelable(true);
-        VerifyNum.getWindow().getAttributes().windowAnimations = R.style.animation;
-
-        UpdatePW = new Dialog(riderLogin.this);
-        UpdatePW.setContentView(R.layout.fragment_update_password);
-        UpdatePW.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
-        UpdatePW.setCancelable(true);
-        UpdatePW.getWindow().getAttributes().windowAnimations = R.style.animation;
-        EditText etVerifyCode =  VerifyNum.findViewById(R.id.etVerify);
-
-        btnVerify = VerifyNum.findViewById(R.id.btnVerify);
-        forgotPassnext = ForgotPW.findViewById(R.id.forgotPassnext);
-        numberRider2 = ForgotPW.findViewById(R.id.forgotNumber);
-        updatePW = UpdatePW.findViewById(R.id.updatePW);
 
         // google sign in
         googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
@@ -156,6 +122,41 @@ public class riderLogin extends AppCompatActivity {
                 }
             });
         }
+
+        setContentView(R.layout.activity_rider_login);
+        numberRider = findViewById(R.id.edtTextRiderNumber);
+        passRider = findViewById(R.id.edtTextRiderPassword);
+        btnLogin = findViewById(R.id.btnLoginRider);
+        btn_sign_with_google2 = findViewById(R.id.btn_sign_with_google2);
+        btnRegister = findViewById(R.id.btnRegisterRider);
+        errorNumber = findViewById(R.id.errorNumber);
+        errorPass = findViewById(R.id.errorPass);
+        mAuth = FirebaseAuth.getInstance();
+        forgotPass = findViewById(R.id.forgotPass);
+
+        ForgotPW = new Dialog(riderLogin.this);
+        ForgotPW.setContentView(R.layout.fragment_forgot_password);
+        ForgotPW.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+        ForgotPW.setCancelable(true);
+        ForgotPW.getWindow().getAttributes().windowAnimations = R.style.animation;
+
+        VerifyNum = new Dialog(riderLogin.this);
+        VerifyNum.setContentView(R.layout.fragment_rider_phonenum_verify);
+        VerifyNum.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+        VerifyNum.setCancelable(true);
+        VerifyNum.getWindow().getAttributes().windowAnimations = R.style.animation;
+
+        UpdatePW = new Dialog(riderLogin.this);
+        UpdatePW.setContentView(R.layout.fragment_update_password);
+        UpdatePW.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+        UpdatePW.setCancelable(true);
+        UpdatePW.getWindow().getAttributes().windowAnimations = R.style.animation;
+        EditText etVerifyCode =  VerifyNum.findViewById(R.id.etVerify);
+
+        btnVerify = VerifyNum.findViewById(R.id.btnVerify);
+        forgotPassnext = ForgotPW.findViewById(R.id.forgotPassnext);
+        numberRider2 = ForgotPW.findViewById(R.id.forgotNumber);
+        updatePW = UpdatePW.findViewById(R.id.updatePW);
 
         btn_sign_with_google2.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -400,8 +401,7 @@ public class riderLogin extends AppCompatActivity {
 
 
     void navigateToSecondActivity(String riderNum, String ridervehicle, String ridername){
-        Intent intent = new Intent(riderLogin.this, rider_dashboard.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        Intent intent = new Intent(this, rider_dashboard.class);
         intent.putExtra("phonenum", riderNum);
         intent.putExtra("vehicle", ridervehicle);
         intent.putExtra("name", ridername);
@@ -485,9 +485,6 @@ public class riderLogin extends AppCompatActivity {
 
 
         });
-
-
-
 
     }
     private void sendVerificationCodeToUser(String phoneNo)
