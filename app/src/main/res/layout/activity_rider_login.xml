@@ -69,6 +69,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:fontFamily="@font/montserrat_medium"
+                android:paddingLeft="270dp"
+                android:paddingTop="5dp"
                 android:text="TextView"
                 android:textColor="#FF0033"
                 android:textSize="12sp"
@@ -122,6 +124,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:fontFamily="@font/montserrat_medium"
+                android:paddingLeft="270dp"
+                android:paddingTop="5dp"
                 android:text="TextView"
                 android:textColor="#FF0033"
                 android:textSize="12sp"
@@ -203,7 +207,10 @@
                 android:fontFamily="@font/montserrat_medium"
                 android:text="Sign In with Google"
                 android:textAllCaps="false"
-                android:textColor="@color/black" />
+                android:layout_marginBottom="60dp"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="@+id/sign_in_with2"
+                />
 
         </LinearLayout>
     </ScrollView>
