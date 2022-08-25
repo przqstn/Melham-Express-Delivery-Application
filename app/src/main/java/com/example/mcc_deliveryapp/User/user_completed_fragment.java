@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -21,11 +23,14 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 
 public class user_completed_fragment extends Fragment {
 	private RecyclerView recyclerView;
 	private String userNum, userName, riderNum;
+	private ImageView emptyCompleted;
+	private TextView emptyText;
 
 	user_completed_adapter adapter; // Create Object of the Adapter class
 	DatabaseReference mbase; // Create object of the
@@ -44,6 +49,8 @@ public class user_completed_fragment extends Fragment {
 
 		System.out.println(mbase);
 		recyclerView = view.findViewById(R.id.recycler_user_completed);
+		emptyCompleted = view.findViewById(R.id.emptyImage);
+		emptyText = view.findViewById(R.id.emptyText);
 
 		// To display the Recycler view linearly
 		recyclerView.setLayoutManager(
@@ -99,6 +106,29 @@ public class user_completed_fragment extends Fragment {
 		adapter.getUserNum(userNum);
 		adapter.getUserName(userName);
 		recyclerView.setAdapter(adapter);
+
+		query.addValueEventListener(new ValueEventListener() {
+			@Override
+			public void onDataChange(@NonNull DataSnapshot snapshot) {
+				for (DataSnapshot parcelSnapshot : snapshot.getChildren()) {
+					if (parcelSnapshot.child("defaultUserNum").getValue().equals(userNum))
+					{
+						if (parcelSnapshot.child("userParcelStatus").getValue().equals("Completed"+userNum))
+						{
+							emptyCompleted.setVisibility(View.GONE);
+							emptyText.setVisibility(View.GONE);
+							recyclerView.setVisibility(View.VISIBLE);
+						}
+					}
+				}
+			}
+
+			@Override
+			public void onCancelled(@NonNull DatabaseError error) {
+
+			}
+		});
+
 
 		return view;
 	}
