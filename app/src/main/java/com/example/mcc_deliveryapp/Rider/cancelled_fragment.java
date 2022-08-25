@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -19,11 +21,14 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 
 public class cancelled_fragment extends Fragment {
 	private RecyclerView recyclerView;
 	private String riderPhoneNum, riderName;
+	private TextView emptyTextCourier;
+	private ImageView emptyCancelled;
 
 	record_adapter adapter; // Create Object of the Adapter class
 	DatabaseReference mbase; // Create object of the
@@ -42,6 +47,8 @@ public class cancelled_fragment extends Fragment {
 
 		System.out.println(mbase);
 		recyclerView = view.findViewById(R.id.recycler_courier_completed);
+		emptyCancelled = view.findViewById(R.id.emptyCourier);
+		emptyTextCourier = view.findViewById(R.id.emptyTextCourier);
 
 		// To display the Recycler view linearly
 		recyclerView.setLayoutManager(
@@ -99,6 +106,31 @@ public class cancelled_fragment extends Fragment {
 		adapter.getUserNum(riderPhoneNum);
 		adapter.getUserName(riderName);
 		recyclerView.setAdapter(adapter);
+
+		DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("userparcel");
+		Query checkRider = databaseReference.orderByChild("ridernum");
+
+		checkRider.addValueEventListener(new ValueEventListener() {
+			@Override
+			public void onDataChange(@NonNull DataSnapshot snapshot) {
+				for (DataSnapshot parcelSnapshot : snapshot.getChildren()) {
+					if (parcelSnapshot.child("ridernum").getValue().equals(riderPhoneNum))
+					{
+						if (parcelSnapshot.child("parcelstatus").getValue().equals("Cancelled"+riderPhoneNum))
+						{
+							emptyCancelled.setVisibility(View.GONE);
+							emptyTextCourier.setVisibility(View.GONE);
+							recyclerView.setVisibility(View.VISIBLE);
+						}
+					}
+				}
+			}
+
+			@Override
+			public void onCancelled(@NonNull DatabaseError error) {
+
+			}
+		});
 
 		return view;
 	}
