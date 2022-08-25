@@ -64,7 +64,6 @@ public class riderLogin extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // google sign in
         googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
         googleSignInClient = GoogleSignIn.getClient(this, googleSignInOptions);
 
@@ -118,7 +117,7 @@ public class riderLogin extends AppCompatActivity {
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
-                    // ...
+
                 }
             });
         }
@@ -165,7 +164,7 @@ public class riderLogin extends AppCompatActivity {
             }
         });
 
-        // ...
+
 
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
@@ -385,7 +384,7 @@ public class riderLogin extends AppCompatActivity {
 
                         @Override
                         public void onCancelled(DatabaseError databaseError) {
-                            // ...
+
                         }
                     });
 

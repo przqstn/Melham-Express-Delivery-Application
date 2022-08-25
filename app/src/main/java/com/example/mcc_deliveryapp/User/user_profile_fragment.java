@@ -65,7 +65,7 @@ public class user_profile_fragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
         view = inflater.inflate(R.layout.fragment_user_profile_fragment, container, false);
         profile_user = view.findViewById(R.id.profile_user);
         userName = view.findViewById(R.id.txt_name);
@@ -100,7 +100,7 @@ public class user_profile_fragment extends Fragment {
             @Override
             public void onCancelled(@NonNull DatabaseError error) {}
         });
-        //retrieved courier's profile picture from firebase storage
+
         imageReference = FirebaseStorage.getInstance().getReference().child("user/"+phone+"/profile_image.jpg");
         try{
             final File file= File.createTempFile("profile_image", "jpg");

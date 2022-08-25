@@ -308,7 +308,7 @@ public class user_editprofile_fragment extends AppCompatActivity {
             File f = new File(currentPhotoPath);
             profilePic.setImageURI(Uri.fromFile(f));
             imageUri=Uri.fromFile(f);
-            //btnSaveChanges.setVisibility(View.VISIBLE);
+
         }
 
         imgName="profile_image.jpg";
@@ -316,17 +316,15 @@ public class user_editprofile_fragment extends AppCompatActivity {
 
 
     private File createImageFile() throws IOException {
-        //Create an image file name
-        //String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+
         String imageFileName = "profile_image";
-        //File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+
         File image = File.createTempFile(
-                imageFileName, //prefix
-                ".jpg" //suffix
-                // storageDir   //directory
+                imageFileName,
+                ".jpg"
         );
 
-        //Save a file: path for use with ACTION_VIEW  intents
+
         currentPhotoPath = image.getAbsolutePath();
         return image;
     }

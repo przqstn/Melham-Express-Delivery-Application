@@ -44,16 +44,16 @@ public class user_checkrate extends AppCompatActivity {
 		ImageButton btnMPV = findViewById(R.id.btnMPV);
 		ImageButton btnTruck = findViewById(R.id.btnTruck);
 
-		//
+
 		EditText editText = findViewById(R.id.editTextPickUp);
 		EditText editText2 = findViewById(R.id.editTextDestination);
 
 		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
-		//getting the save shared preference of sender
+
 		String senderloc =sharedPref.getString("key 1","");
 		String sendercontact =sharedPref.getString("key 2","");
 		String sendername =sharedPref.getString("key 3","");
-		//getting the save shared preference of receiver
+
 		String receiverloc =sharedPref.getString("key 4","");
 		String receivercontact =sharedPref.getString("key 5","");
 		String receivername =sharedPref.getString("key 6","");
@@ -70,7 +70,7 @@ public class user_checkrate extends AppCompatActivity {
 		editText.setText(senderloc);
 		editText2.setText(receiverloc);
 
-		// motorcycle
+
 		btnMotorcycle.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
@@ -82,11 +82,10 @@ public class user_checkrate extends AppCompatActivity {
 								R.layout.motorcycle_dialog,
 								(LinearLayout)findViewById(R.id.motorcycle_sheet_dialog)
 						);
-				// Specify the layout you are using.
-//				setContentView(R.layout.motorcycle_dialog);
+
 				String convertFloat =String.valueOf(calculateFare(distance, 0));
 
-//				// Load and use views afterwards
+
 				TextView tv1 = bottomSheetView.findViewById(R.id.txtFeeMotorcycle);
 				TextView tv2 = bottomSheetView.findViewById(R.id.txtPickUpAdd);
 				TextView tv3 = bottomSheetView.findViewById(R.id.txtDropOffAdd);
@@ -113,7 +112,7 @@ public class user_checkrate extends AppCompatActivity {
 			}
 		});
 
-		//Sedan
+
 		btnSedan.setOnClickListener(new View.OnClickListener() {
 			@SuppressLint("SetTextI18n")
 			@Override
@@ -153,7 +152,7 @@ public class user_checkrate extends AppCompatActivity {
 			}
 		});
 
-		//SUV
+
 		btnSUV.setOnClickListener(new View.OnClickListener() {
 			@SuppressLint("SetTextI18n")
 			@Override
@@ -193,7 +192,7 @@ public class user_checkrate extends AppCompatActivity {
 			}
 		});
 
-		//MPV
+
 		btnMPV.setOnClickListener(new View.OnClickListener() {
 			@SuppressLint("SetTextI18n")
 			@Override
@@ -233,7 +232,7 @@ public class user_checkrate extends AppCompatActivity {
 			}
 		});
 
-		// Truck
+
 		btnTruck.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
@@ -279,7 +278,7 @@ public class user_checkrate extends AppCompatActivity {
 		float finalFare = 0;
 		float greatFive;
 
-		// motorcycle
+
 		if (type == 0) {
 			float base = 49;
 			if (removekm > 5){
@@ -290,7 +289,7 @@ public class user_checkrate extends AppCompatActivity {
 				finalFare = base + (6 * removekm);
 			}
 
-		// Sedan
+
 		} else if (type == 1) {
 			float base = 100;
 			if (removekm > 5){
@@ -301,17 +300,16 @@ public class user_checkrate extends AppCompatActivity {
 				finalFare = base + (18 * removekm);
 			}
 
-		// SUV
+
 		} else if (type == 2) {
 			float base = 115;
 			finalFare = base + (removekm * 20);
 
-		// MPV
 		} else if (type == 3) {
 			float base = 250;
 			finalFare = base + (removekm * 25);
 
-		// Small Truck
+
 		} else if (type == 4) {
 			float base = 340;
 			finalFare = base + (25 * removekm);
@@ -321,7 +319,7 @@ public class user_checkrate extends AppCompatActivity {
 
 	}
 	public static String orderID(){
-		//generate random UUIDs
+
 		UUID idOne = UUID.randomUUID();
 		return String.valueOf(idOne);
 	}

@@ -27,7 +27,6 @@ public class user_navigation extends AppCompatActivity {
         setContentView(R.layout.activity_user_navigation);
 
 
-//        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         bottomNavigationView = findViewById(R.id.bottomNav_user2);
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container2,user_home_fragment).commit();
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {

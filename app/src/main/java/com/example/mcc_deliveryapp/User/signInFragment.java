@@ -104,53 +104,8 @@ public class signInFragment extends Fragment {
 
         googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
         googleSignInClient = GoogleSignIn.getClient(requireActivity(), googleSignInOptions);
+        verifyEmail();
 
-        GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(requireContext());
-        if(acct!=null){
-            Log.e("Google2", acct.getEmail());
-            String inEmail = acct.getEmail();
-            final FirebaseDatabase database = FirebaseDatabase.getInstance();
-            final DatabaseReference dr = database.getReference().child("users");
-            Query query = dr.orderByChild("userEmail").equalTo(inEmail);
-
-            query.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    Log.e("GetEmail", String.valueOf(dataSnapshot));
-                    List<String> phone = new ArrayList<>(Collections.emptyList());
-                    List<String> name = new ArrayList<>(Collections.emptyList());
-
-                    for (DataSnapshot locationSnapshot : dataSnapshot.getChildren()) {
-                        if (Objects.requireNonNull(locationSnapshot.child("userEmail").getValue()).equals(inEmail)) {
-                            String getPhone = Objects.requireNonNull(locationSnapshot.child("userPhone").getValue()).toString();
-                            phone.add(getPhone);
-                        }
-                    }
-
-                    for (DataSnapshot locationSnapshot : dataSnapshot.getChildren()) {
-                        if (Objects.requireNonNull(locationSnapshot.child("userEmail").getValue()).equals(inEmail)) {
-                            String getName = Objects.requireNonNull(locationSnapshot.child("userFullname").getValue()).toString();
-                            name.add(getName);
-                        }
-                    }
-
-                    try{
-                        navigateToSecondActivity(name.get(0), phone.get(0));
-                    }
-                    catch (Exception e) {
-                        Toast.makeText(getActivity(),"Sign Up First",Toast.LENGTH_LONG).show();
-                        googleSignInClient.signOut();
-                    }
-
-
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-                    // ...
-                }
-            });
-        }
 
 
         btn_sign_with_google.setOnClickListener(new View.OnClickListener() {
@@ -325,53 +280,7 @@ public class signInFragment extends Fragment {
 
             try {
                 task.getResult(ApiException.class);
-                GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(requireContext());
-                if(acct!=null){
-                    Log.e("Google1", acct.getEmail());
-                    String inEmail = acct.getEmail();
-                    final FirebaseDatabase database = FirebaseDatabase.getInstance();
-                    final DatabaseReference dr = database.getReference().child("users");
-                    Query query = dr.orderByChild("userEmail").equalTo(inEmail);
-
-                    query.addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            Log.e("GetEmail", String.valueOf(dataSnapshot));
-                            List<String> phone = new ArrayList<>(Collections.emptyList());
-                            List<String> name = new ArrayList<>(Collections.emptyList());
-
-                            for (DataSnapshot locationSnapshot : dataSnapshot.getChildren()) {
-                                if (Objects.requireNonNull(locationSnapshot.child("userEmail").getValue()).equals(inEmail)) {
-                                    String getPhone = Objects.requireNonNull(locationSnapshot.child("userPhone").getValue()).toString();
-                                    phone.add(getPhone);
-                                }
-                            }
-
-                            for (DataSnapshot locationSnapshot : dataSnapshot.getChildren()) {
-                                if (Objects.requireNonNull(locationSnapshot.child("userEmail").getValue()).equals(inEmail)) {
-                                    String getName = Objects.requireNonNull(locationSnapshot.child("userFullname").getValue()).toString();
-                                    name.add(getName);
-                                }
-                            }
-
-                            try{
-                                navigateToSecondActivity(name.get(0), phone.get(0));
-                            }
-                            catch (Exception e) {
-                                Toast.makeText(getActivity(),"Sign Up First",Toast.LENGTH_LONG).show();
-                                googleSignInClient.signOut();
-                            }
-                        }
-
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
-                            // ...
-                        }
-                    });
-
-
-
-                }
+                verifyEmail();
             } catch (ApiException e) {
                 Toast.makeText(requireContext().getApplicationContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
             }
@@ -387,11 +296,56 @@ public class signInFragment extends Fragment {
         startActivity(intent);
     }
 
+    private void verifyEmail(){
+        GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(requireContext());
+        if(acct!=null) {
+            Log.e("Google2", acct.getEmail());
+            String inEmail = acct.getEmail();
+            final FirebaseDatabase database = FirebaseDatabase.getInstance();
+            final DatabaseReference dr = database.getReference().child("users");
+            Query query = dr.orderByChild("userEmail").equalTo(inEmail);
+
+            query.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    Log.e("GetEmail", String.valueOf(dataSnapshot));
+                    List<String> phone = new ArrayList<>(Collections.emptyList());
+                    List<String> name = new ArrayList<>(Collections.emptyList());
+
+                    for (DataSnapshot locationSnapshot : dataSnapshot.getChildren()) {
+                        if (Objects.requireNonNull(locationSnapshot.child("userEmail").getValue()).equals(inEmail)) {
+                            String getPhone = Objects.requireNonNull(locationSnapshot.child("userPhone").getValue()).toString();
+                            phone.add(getPhone);
+                        }
+                    }
+
+                    for (DataSnapshot locationSnapshot : dataSnapshot.getChildren()) {
+                        if (Objects.requireNonNull(locationSnapshot.child("userEmail").getValue()).equals(inEmail)) {
+                            String getName = Objects.requireNonNull(locationSnapshot.child("userFullname").getValue()).toString();
+                            name.add(getName);
+                        }
+                    }
+
+                    try {
+                        navigateToSecondActivity(name.get(0), phone.get(0));
+                    } catch (Exception e) {
+                        Toast.makeText(getActivity(), "Sign Up First", Toast.LENGTH_LONG).show();
+                        googleSignInClient.signOut();
+                    }
+
+
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                }
+            });
+        }
+    };
     private void UserLogin(){
 
         String usernumEntered = login_editTxt_phoneNum.getEditText().getText().toString().trim();
         String userpassEntered = login_editTxt_password.getEditText().getText().toString().trim();
-        //Bundle bundle = new Bundle();
 
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users");
 

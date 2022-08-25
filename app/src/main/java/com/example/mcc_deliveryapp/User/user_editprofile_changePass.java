@@ -144,7 +144,7 @@ public class user_editprofile_changePass extends AppCompatActivity {
                 });
             }
         });
-        //for forgot password
+
         ForgotPW = new Dialog(this);
         ForgotPW.setContentView(R.layout.fragment_forgot_password);
         ForgotPW.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);

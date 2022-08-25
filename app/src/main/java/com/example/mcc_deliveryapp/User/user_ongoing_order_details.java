@@ -54,8 +54,8 @@ public class user_ongoing_order_details extends AppCompatActivity {
     Button btn_userOrderCompleted, btn_trackCourier, btn_message_courier, btn_call_courier,
             copyID;
 
-    private ImageView profilePic; // line 51 added ImageView variable
-    private StorageReference storageReference; //line 52 added StorageReference
+    private ImageView profilePic;
+    private StorageReference storageReference;
     String riderContact;
 
     private static final int MY_PERMISSIONS_REQUEST_SEND_SMS =0 ;
@@ -286,11 +286,7 @@ public class user_ongoing_order_details extends AppCompatActivity {
                             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
                             }
                         });
-//                Intent intent = new Intent(user_ongoing_order_details.this, user_navigation.class);
-//                intent.putExtra("phonenum", phonenum);
-//                intent.putExtra("username", name);
-//                intent.putExtra("orderID", orderID);
-//                startActivity(intent);
+
             }
         });
     }

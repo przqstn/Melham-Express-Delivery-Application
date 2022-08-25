@@ -54,7 +54,7 @@ public class courierHomeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
         View view =  inflater.inflate(R.layout.fragment_courier_home, container, false);
         requestPermission();
         recyclerView_pickup = view.findViewById(R.id.Recycleview_home);
@@ -136,7 +136,7 @@ public class courierHomeFragment extends Fragment {
             }
         });
 
-        //retrieved courier's profile picture from firebase storage
+
         storageReference= FirebaseStorage.getInstance().getReference().child("rider/"+riderPhoneNum+"/profile_image.jpg");
         try{
             final File file= File.createTempFile("profile_image", "jpg");
@@ -161,34 +161,6 @@ public class courierHomeFragment extends Fragment {
         return view;
 
     }
-/*
-     checkUser.addValueEventListener(new ValueEventListener() {
-        @Override
-        public void onDataChange(@NonNull DataSnapshot snapshot) {
-            for (DataSnapshot parcelSnapshot : snapshot.getChildren()) {
-                if (parcelSnapshot.child("defaultUserNum").getValue().equals(userPhoneNum))
-                {
-                    if (parcelSnapshot.child("userParcelStatus").getValue().equals("Ongoing"+userPhoneNum))
-                    {
-                        emptyHome.setVisibility(View.GONE);
-                        emptyText.setVisibility(View.GONE);
-                        recyclerView_pickup.setVisibility(View.VISIBLE);
-                    }
-                }
-                else
-                {
-                    emptyHome.setVisibility(View.VISIBLE);
-                    emptyText.setVisibility(View.VISIBLE);
-                    recyclerView_pickup.setVisibility(View.GONE);
-                }
-            }
-        }
-
-        @Override
-        public void onCancelled(@NonNull DatabaseError error) {
-        }
-    });
- */
 
     public void requestPermission(){
         ActivityResultLauncher<String[]> locationPermissionRequest =
@@ -204,33 +176,25 @@ public class courierHomeFragment extends Fragment {
                                 coarseLocationGranted = result.getOrDefault(
                                         Manifest.permission.ACCESS_COARSE_LOCATION,false);
                             }
-//					Boolean backgroundLocationGranted = null;
-//					if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-//						backgroundLocationGranted = result.getOrDefault(
-//								Manifest.permission.ACCESS_BACKGROUND_LOCATION,false);
-//					}
+
 
                             if (fineLocationGranted != null && fineLocationGranted) {
-                                // Precise location access granted.
+
                             } else if (coarseLocationGranted != null && coarseLocationGranted) {
-                                // Only approximate location access granted.
+
 
                             } else {
-                                // No location access granted.
+
                             }
                         }
                 );
 
-// ...
 
-// Before you perform the actual permission request, check whether your app
-// already has the permissions, and whether your app needs to show a permission
-// rationale dialog. For more details, see Request permissions.
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             locationPermissionRequest.launch(new String[] {
                     Manifest.permission.ACCESS_FINE_LOCATION,
                     Manifest.permission.ACCESS_COARSE_LOCATION
-//					Manifest.permission.ACCESS_BACKGROUND_LOCATION
+
             });
         }
     }

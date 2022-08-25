@@ -48,8 +48,6 @@ public class RateDialog extends AppCompatDialogFragment {
         submit_rating.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                System.out.println("Clicked"+name+orderID);
-//                System.out.println(ratingbar.getRating());
 
                 final FirebaseDatabase database = FirebaseDatabase.getInstance();
                 final DatabaseReference dr = database.getReference().child("userparcel");
