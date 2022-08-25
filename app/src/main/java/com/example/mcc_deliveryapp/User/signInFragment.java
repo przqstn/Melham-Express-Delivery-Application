@@ -338,7 +338,6 @@ public class signInFragment extends Fragment {
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
-                    // ...
                 }
             });
         }
@@ -347,7 +346,6 @@ public class signInFragment extends Fragment {
 
         String usernumEntered = login_editTxt_phoneNum.getEditText().getText().toString().trim();
         String userpassEntered = login_editTxt_password.getEditText().getText().toString().trim();
-        //Bundle bundle = new Bundle();
 
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users");
 

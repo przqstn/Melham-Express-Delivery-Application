@@ -1,5 +1,4 @@
 package com.example.mcc_deliveryapp.User;
-//~~~~~~~~~~~~~~NEED TO PUSH AND COMMIT~~~~~~~~~~~~~//
 public class UserHelperClass {
 	String userFullname,UserPhone,userEmail,UserPass, mainAdd, secondaryAdd;
 

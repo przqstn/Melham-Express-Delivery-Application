@@ -21,9 +21,6 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 
 
-// FirebaseRecyclerAdapter is a class provided by
-// FirebaseUI. it provides functions to bind, adapt and show
-// database contents in a Recycler View
 public class record_adapter2 extends FirebaseRecyclerAdapter<
         model, record_adapter2.recordViewholder> {
 
@@ -33,9 +30,7 @@ public class record_adapter2 extends FirebaseRecyclerAdapter<
             @NonNull FirebaseRecyclerOptions<model> options) {
         super(options);
     }
-    // Function to bind the view in Card view(here
-    // "person.xml") iwth data in
-    // model class(here "person.class")
+
     @Override
     protected void
     onBindViewHolder(@NonNull recordViewholder holder,
@@ -49,15 +44,12 @@ public class record_adapter2 extends FirebaseRecyclerAdapter<
         holder.sendercontact.setText(model.getSendercontact());
         holder.sendername.setText(model.getSendername());
         holder.senderlocation.setText(model.getSenderlocation());
-//		holder.vehicletype.setText(model.getVehicletype());
         holder.fee.setText("₱"+model.getFee());
         holder.orderID.setText(model.getOrderID());
         holder.riderNum.setText(model.getRidernum());
-//		holder.customernotes.setText("Notes:" + model.getCustomerNotes());
     }
 
-    // Function to tell the class about the Card view
-    // which the data will be shown
+
     @NonNull
     @Override
     public recordViewholder onCreateViewHolder(@NonNull ViewGroup parent,
@@ -79,8 +71,6 @@ public class record_adapter2 extends FirebaseRecyclerAdapter<
         return userName;
     }
 
-    // Sub Class to create references of the views in Crad
-    // view (here "person.xml")
     class recordViewholder
             extends RecyclerView.ViewHolder {
         TextView receivercontact,receiverlocation,receivername,sendercontact,senderlocation,
@@ -94,11 +84,9 @@ public class record_adapter2 extends FirebaseRecyclerAdapter<
             receivercontact = itemView.findViewById(R.id.txt_receiver_contact);
             receiverlocation = itemView.findViewById(R.id.txt_receiver_loc);
             receivername = itemView.findViewById(R.id.txt_receiver_name);
-//			customernotes = itemView.findViewById(R.id.txt_note);
             sendercontact = itemView.findViewById(R.id.txt_sender_contact);
             senderlocation = itemView.findViewById(R.id.txt_sender_loc);
             sendername = itemView.findViewById(R.id.txt_sender_name);
-//			vehicletype = itemView.findViewById(R.id.txt_vehicletype);
             fee = itemView.findViewById(R.id.txt_price);
             riderNum = itemView.findViewById(R.id.inv_ridernum);
             orderID = itemView.findViewById(R.id.user_home_orderID);

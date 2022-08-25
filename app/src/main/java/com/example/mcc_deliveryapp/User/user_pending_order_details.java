@@ -133,11 +133,7 @@ public class user_pending_order_details extends AppCompatActivity {
                             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
                             }
                         });
-//                Intent intent = new Intent(user_pending_order_details.this, user_navigation.class);
-//                intent.putExtra("phonenum", phonenum);
-//                intent.putExtra("username", name);
-////                intent.putExtra("orderID", orderID);
-//                startActivity(intent);
+
             }
         });
     }
@@ -153,7 +149,7 @@ public class user_pending_order_details extends AppCompatActivity {
         Intent intent = new Intent(user_pending_order_details.this, user_navigation.class);
         intent.putExtra("phonenum", phonenum);
         intent.putExtra("username", name);
-//        intent.putExtra("orderID", orderID);
+
         startActivity(intent);
     }
 }

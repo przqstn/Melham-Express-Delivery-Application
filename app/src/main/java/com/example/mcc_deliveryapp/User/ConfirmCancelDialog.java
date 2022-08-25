@@ -39,7 +39,6 @@ public class ConfirmCancelDialog extends AppCompatDialogFragment {
         View view = inflater.inflate(R.layout.user_cancel_dialog, null);
 
         cancel_order = view.findViewById(R.id.btn_cancelOrderUser);
-//        cancel_cancel_order = view.findViewById(R.id.btn_cancelOrderCancelUser);
 
         cancel_order.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,13 +81,6 @@ public class ConfirmCancelDialog extends AppCompatDialogFragment {
                 startActivity(intent);
             }
         });
-
-//        cancel_order.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                dismiss();
-//            }
-//        });
 
         builder.setView(view);
         return builder.create();

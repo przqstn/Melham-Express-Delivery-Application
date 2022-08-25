@@ -40,8 +40,8 @@ public class user_ongoing_order_details2 extends AppCompatActivity {
             order_id, rider_name, vehicletype, usernote, parcelprice, plate_number, orderplaced;
     Button btn_userOrderCompleted, btn_trackCourier, btn_message_courier, btn_call_courier;
 
-    private ImageView profilePic; // line 51 added ImageView variable
-    private StorageReference storageReference; //line 52 added StorageReference
+    private ImageView profilePic;
+    private StorageReference storageReference;
     String riderContact;
 
     private static final int MY_PERMISSIONS_REQUEST_SEND_SMS =0 ;

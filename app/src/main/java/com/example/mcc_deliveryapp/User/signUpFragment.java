@@ -39,7 +39,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 
 public class signUpFragment extends Fragment {
-    //setting the value of the given edit_text
+
     EditText editTxt_fullname,editTxt_phoneNum, editTxt_userEmail,editTxt_password,editTxt_Cpassword;
     Button btn_createAcc;
     String verificationCodeBySystem_user;
@@ -47,7 +47,7 @@ public class signUpFragment extends Fragment {
     EditText etCode_user;
     TextView userName, userNumber, userEmail, emptyName, emptyNum, emptyEmail, emptyPass,
             emptyConfirm, invalidPass, invalidConfirm;
-    //Database Realtime
+
     FirebaseDatabase root;
     DatabaseReference DbRef;
     FirebaseAuth fAuth;
@@ -62,10 +62,10 @@ public class signUpFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
         View view = inflater.inflate(R.layout.fragment_sign_up, container, false);
 
-        // Initialization of text
+
         emptyName = view.findViewById(R.id.emptyName);
         emptyEmail = view.findViewById(R.id.emptyEmail);
         emptyNum = view.findViewById(R.id.emptyNum);
@@ -180,14 +180,14 @@ public class signUpFragment extends Fragment {
                     }
                 }
 
-                //check if password satisfies conditions
+
                 if(!uppercase || !lowercase || !min6 || digits == 0)
                 {
                     invalidPass.setText("Password must have at least 6 characters, one uppercase, lowercase, and number.");
                     invalidPass.setVisibility(view.VISIBLE);
 
                 }
-                // add confirm password function
+
                 else if (min6 && uppercase && lowercase && digits >=1)
                 {
                     invalidPass.setVisibility(view.GONE);
@@ -209,7 +209,7 @@ public class signUpFragment extends Fragment {
                 if(PWgood && clear){
                     root = FirebaseDatabase.getInstance();
                     DbRef = root.getReference("users");
-                    // Getting the value of The given info in sign up to store in firebase
+
                     fullname = editTxt_fullname.getEditableText().toString();
                     phoneNum = editTxt_phoneNum.getEditableText().toString();
                     useremail = editTxt_userEmail.getEditableText().toString();
@@ -217,7 +217,6 @@ public class signUpFragment extends Fragment {
                     Cpass = editTxt_Cpassword.getEditableText().toString();
 
 
-                    // To check if the user already exists
                     Query accCheck = DbRef.orderByChild("userPhone").equalTo(phoneNum);
                     accCheck.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
@@ -267,7 +266,7 @@ public class signUpFragment extends Fragment {
         return view;
     }
 
-    // Clear the Sign up Section
+
     private void Clear(){
 
         editTxt_fullname.setText("");
@@ -323,11 +322,11 @@ public class signUpFragment extends Fragment {
                 if(task.isSuccessful())
                 {
 
-                   //user helper class in order to store the the given info in sign up form
+
                   UserHelperClass userHelperClass = new UserHelperClass(fullname, phoneNum, useremail, pass, "", "");
                   DbRef.child(phoneNum).setValue(userHelperClass);
                   Toast.makeText(getContext(), "Account Successfully Created", Toast.LENGTH_SHORT).show();
-                  //Implementing the Clear Section in Sign up after the Creation of Account
+
                   Intent intent = new Intent(getActivity(), MainActivity2.class);
                   intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                   startActivity(intent);

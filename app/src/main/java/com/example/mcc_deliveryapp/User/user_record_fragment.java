@@ -27,12 +27,12 @@ public class user_record_fragment extends Fragment {
         userNum = intent.getStringExtra("phonenum");
         userName = intent.getStringExtra("username");
 
-        // Inflate the layout for this fragment
+
         View view = inflater.inflate(R.layout.fragment_user_record_fragment, container, false);
         tabLayout = view.findViewById(R.id.userRecordTab);
         viewPager2 = view.findViewById(R.id.viewPager2);
 
-//		FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+
         useradapter = new UserFragmentAdapter(getChildFragmentManager(), getLifecycle());
         viewPager2.setAdapter(useradapter);
 

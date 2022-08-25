@@ -96,8 +96,8 @@ public class user_track_rider extends FragmentActivity implements OnMapReadyCall
     private Location lastKnownLocation;
     private final LatLng defaultLocation = new LatLng(15.594197, 120.970414);
     private FusedLocationProviderClient fusedLocationProviderClient;
-    private ImageView profilePic, riderVehicleIcon; // line 51 added ImageView variable
-    private StorageReference storageReference; //line 52 added StorageReference
+    private ImageView profilePic, riderVehicleIcon;
+    private StorageReference storageReference;
     HashMap markerMap = new HashMap();
     Button btn_message_courier,btn_call_courier ;
     ImageButton back;
@@ -336,12 +336,9 @@ public class user_track_rider extends FragmentActivity implements OnMapReadyCall
 
 
                             if (fineLocationGranted != null && fineLocationGranted) {
-                                // Precise location access granted.
-                            } else if (coarseLocationGranted != null && coarseLocationGranted) {
-                                // Only approximate location access granted.
-//					} else if (backgroundLocationGranted != null && backgroundLocationGranted){
 
-                                // only background location granted
+                            } else if (coarseLocationGranted != null && coarseLocationGranted) {
+
                             } else {
                                 onBackPressed();
                                 Toast.makeText(getBaseContext(), "Please turn of Location Service and try again.", Toast.LENGTH_SHORT).show();
@@ -368,7 +365,7 @@ public class user_track_rider extends FragmentActivity implements OnMapReadyCall
                     @Override
                     public void onComplete(@NonNull Task<Location> task) {
                         if (task.isSuccessful()) {
-                            // Set the map's camera position to the current location of the device.
+
                             lastKnownLocation = task.getResult();
 
                             if (lastKnownLocation != null) {
@@ -416,26 +413,19 @@ public class user_track_rider extends FragmentActivity implements OnMapReadyCall
         mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(getApplicationContext(), R.raw.customize_maps_style));
         getLocationPermission();
         getDeviceLocation();
-        // this is for location button position
+
         if (mapview != null &&
                 mapview.findViewById(Integer.parseInt("1")) != null) {
-            // Get the button view
-            // and next place it, on bottom right (as Google Maps app)
+
             RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams)
                     locationButton.getLayoutParams();
-            // position on right bottom
+
             layoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP, 0);
             layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
         }
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
+
             return;
         }
         mMap.getUiSettings().setZoomControlsEnabled(true);
@@ -538,11 +528,6 @@ public class user_track_rider extends FragmentActivity implements OnMapReadyCall
 
     @Override
     public void onDirectionFinderSuccess(List<Route> routes) {
-//        polylinePaths = new ArrayList<>();
-//        originMarkers = new ArrayList<>();
-//        destinationMarkers = new ArrayList<>();
-
-        // uncomment if polyline is not updating or something else ^^
 
 
 
@@ -559,7 +544,6 @@ public class user_track_rider extends FragmentActivity implements OnMapReadyCall
                     color(Color.BLUE).
                     width(10);
 
-//            polylineOptions.add(riderLocation);
             for (int i = 0; i < route.points.size(); i++)
                 polylineOptions.add(route.points.get(i));
 

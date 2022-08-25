@@ -46,7 +46,7 @@ public class user_home_fragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
         View view = inflater.inflate(R.layout.fragment_user_home_fragment, container, false);
 
         recyclerView_pickup = view.findViewById(R.id.user_home_recycler);
@@ -62,7 +62,7 @@ public class user_home_fragment extends Fragment {
         emptyText = view.findViewById(R.id.emptyText);
         welcomeText.setText("Hi, "+ userName);
 
-        // These lines of code calls the database
+
 
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
 
@@ -92,12 +92,7 @@ public class user_home_fragment extends Fragment {
                             recyclerView_pickup.setVisibility(View.VISIBLE);
                         }
                     }
-//                    else
-//                    {
-//                        emptyHome.setVisibility(View.VISIBLE);
-//                        emptyText.setVisibility(View.VISIBLE);
-//                        recyclerView_pickup.setVisibility(View.GONE);
-//                    }
+
                 }
             }
 
@@ -118,7 +113,7 @@ public class user_home_fragment extends Fragment {
             }
         });
 
-        //retrieved courier's profile picture from firebase storage
+
         storageReference= FirebaseStorage.getInstance().getReference().child("user/"+userPhoneNum+"/profile_image.jpg");
         try{
             final File file= File.createTempFile("profile_image", "jpg");
@@ -152,6 +147,6 @@ public class user_home_fragment extends Fragment {
     @Override
     public void onStop() {
         super.onStop();
-//        home_adapter.stopListening();
+
     }
 }
