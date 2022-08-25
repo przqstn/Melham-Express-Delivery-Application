@@ -30,8 +30,8 @@ public class cancelled_fragment extends Fragment {
 	private TextView emptyTextCourier;
 	private ImageView emptyCancelled;
 
-	record_adapter adapter; // Create Object of the Adapter class
-	DatabaseReference mbase; // Create object of the
+	record_adapter adapter;
+	DatabaseReference mbase;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -41,8 +41,8 @@ public class cancelled_fragment extends Fragment {
 		View view =  inflater.inflate(R.layout.fragment_completed_fragment, container, false);
 
 		System.out.println("Completed view");
-		// Create a instance of the database and get
-		// its reference
+
+
 		mbase = FirebaseDatabase.getInstance().getReference().child("userparcel");
 
 		System.out.println(mbase);
@@ -50,13 +50,12 @@ public class cancelled_fragment extends Fragment {
 		emptyCancelled = view.findViewById(R.id.emptyCourier);
 		emptyTextCourier = view.findViewById(R.id.emptyTextCourier);
 
-		// To display the Recycler view linearly
 		recyclerView.setLayoutManager(
 				new LinearLayoutManager(getContext()));
 
 		Intent intent = getActivity().getIntent();
 		riderPhoneNum = intent.getStringExtra("phonenum");
-//		riderName = intent.getStringExtra("username");
+
 		System.out.println(riderPhoneNum);
 
 
@@ -91,8 +90,7 @@ public class cancelled_fragment extends Fragment {
 				});
 
 
-// It is a class provide by the FirebaseUI to make a
-		// query in the database to fetch appropriate data
+
 		FirebaseRecyclerOptions<model> options
 				= new FirebaseRecyclerOptions.Builder<model>()
 				.setQuery(FirebaseDatabase.getInstance().getReference()
@@ -100,8 +98,6 @@ public class cancelled_fragment extends Fragment {
 						.equalTo("Cancelled"+riderPhoneNum), model.class)
 				.build();
 
-		// Connecting object of required Adapter class to
-		// the Adapter class itself
 		adapter = new record_adapter(options);
 		adapter.getUserNum(riderPhoneNum);
 		adapter.getUserName(riderName);
@@ -135,8 +131,7 @@ public class cancelled_fragment extends Fragment {
 		return view;
 	}
 
-	// Function to tell the app to start getting
-	// data from database on starting of the activity
+
 	@Override
 	public void onStart()
 	{
@@ -144,8 +139,7 @@ public class cancelled_fragment extends Fragment {
 		adapter.startListening();
 	}
 
-	// Function to tell the app to stop getting
-	// data from database on stopping of the activity
+
 	@Override
 	public void onStop()
 	{

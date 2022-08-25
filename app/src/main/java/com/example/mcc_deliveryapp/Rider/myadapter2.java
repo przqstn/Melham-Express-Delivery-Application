@@ -45,7 +45,6 @@ public class myadapter2 extends FirebaseRecyclerAdapter<model, myadapter2.myview
 		holder.fee.setText("₱"+model.getFee());
 		holder.orderID.setText(model.getOrderID());
 		holder.defaultUserNum.setText(model.getDefaultUserNum());
-//		holder.customernotes.setText("Notes:" + model.getCustomerNotes());
 	}
 
 	@NonNull
@@ -73,7 +72,6 @@ public class myadapter2 extends FirebaseRecyclerAdapter<model, myadapter2.myview
 				sendername, vehicletype, customernotes,fee, orderID, defaultUserNum;
 		Button copyID;
 
-		//Database Realtime
 		FirebaseDatabase root;
 		DatabaseReference DbRef;
 		FirebaseAuth mAuth;
@@ -85,7 +83,6 @@ public class myadapter2 extends FirebaseRecyclerAdapter<model, myadapter2.myview
 			receivercontact = itemView.findViewById(R.id.txt_receiver_contact);
 			receiverlocation = itemView.findViewById(R.id.txt_receiver_loc);
 			receivername = itemView.findViewById(R.id.txt_receiver_name);
-//			customernotes = itemView.findViewById(R.id.txt_note);
 			sendercontact = itemView.findViewById(R.id.txt_sender_contact);
 			senderlocation = itemView.findViewById(R.id.txt_sender_loc);
 			sendername = itemView.findViewById(R.id.txt_sender_name);

@@ -36,9 +36,7 @@ public class pickup_fragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
-		// Inflate the layout for this fragment
 		View view =  inflater.inflate(R.layout.fragment_pickup_fragment, container, false);
-		// ....
 		mDatabase = FirebaseDatabase.getInstance().getReference();
 
 		recyclerView_pickup = view.findViewById(R.id.Recycleview_pickup);
@@ -55,7 +53,6 @@ public class pickup_fragment extends Fragment {
 				new FirebaseRecyclerOptions.Builder<model>()
 						.setQuery(FirebaseDatabase.getInstance().getReference()
 										.child("userparcel").orderByChild("parcelstatus").equalTo("Pending"+riderVehicle)
-//								.child("userparcel").orderByChild("parcelstatus").equalTo("Pending")
 								,model.class ).build();
 
 		myadapter = new myadapter(options);
@@ -123,10 +120,6 @@ public class pickup_fragment extends Fragment {
 					public void onCancelled(@NonNull DatabaseError error) {
 
 					}
-
-//					@Override
-//					public void onCancelled(FirebaseError firebaseError) {
-//					}
 
 					@Override
 					public void onChildChanged(DataSnapshot dataSnapshot, String s) {

@@ -33,7 +33,7 @@ public class rider_dashboard extends AppCompatActivity {
 		setContentView(R.layout.activity_rider_dashboard);
 
 
-//		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
 		bottomNavigationView = findViewById(R.id.bottomNav_rider);
 		getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, courierHomeFragment).commit();
 		bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
@@ -75,7 +75,6 @@ public class rider_dashboard extends AppCompatActivity {
 		if(menuItem.getItemId()==R.id.iconpickup
 			|| menuItem.getItemId()==R.id.iconrecord
 			|| menuItem.getItemId()==R.id.iconprofile){
-			//
 			Intent intent = getIntent();
 			intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
 			finish();
