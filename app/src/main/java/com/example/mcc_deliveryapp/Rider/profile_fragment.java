@@ -58,7 +58,6 @@ public class profile_fragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
-		// Inflate the layout for this fragment
 		View view  =  inflater.inflate(R.layout.fragment_profile_fragment, container, false);
 
 		RiderName = view.findViewById(R.id.txt_name);
@@ -75,13 +74,10 @@ public class profile_fragment extends Fragment {
 		googleSignInClient = GoogleSignIn.getClient(requireActivity(), googleSignInOptions);
 
 		DatabaseReference ref = FirebaseDatabase.getInstance().getReference("riders");
-		//FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
 		Intent intent = getActivity().getIntent();
 		phone = intent.getStringExtra("phonenum");
 
-		//rework to get current user id instead of using for loop
-		//authenticate current user if method is implemented in the rider log in page
 		ref.addValueEventListener(new ValueEventListener() {
 			@Override
 			public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -122,7 +118,6 @@ public class profile_fragment extends Fragment {
 
 		});
 
-		//retrieved courier's profile picture from firebase storage
 		storageReference= FirebaseStorage.getInstance().getReference().child("rider/"+phone+"/profile_image.jpg");
 		try{
 			final File file= File.createTempFile("profile_image", "jpg");

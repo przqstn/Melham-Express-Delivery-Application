@@ -19,9 +19,7 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 
 
-// FirebaseRecyclerAdapter is a class provided by
-// FirebaseUI. it provides functions to bind, adapt and show
-// database contents in a Recycler View
+
 public class completed_adapter extends FirebaseRecyclerAdapter<
         model, completed_adapter.recordViewholder> {
 
@@ -31,9 +29,7 @@ public class completed_adapter extends FirebaseRecyclerAdapter<
             @NonNull FirebaseRecyclerOptions<model> options) {
         super(options);
     }
-    // Function to bind the view in Card view(here
-    // "person.xml") iwth data in
-    // model class(here "person.class")
+
     @Override
     protected void
     onBindViewHolder(@NonNull recordViewholder holder,
@@ -51,8 +47,7 @@ public class completed_adapter extends FirebaseRecyclerAdapter<
         holder.defaultUserNum.setText(model.getDefaultUserNum());
     }
 
-    // Function to tell the class about the Card view
-    // which the data will be shown
+
     @NonNull
     @Override
     public recordViewholder onCreateViewHolder(@NonNull ViewGroup parent,
@@ -75,8 +70,7 @@ public class completed_adapter extends FirebaseRecyclerAdapter<
     }
 
 
-    // Sub Class to create references of the views in Crad
-    // view (here "person.xml")
+
     class recordViewholder
             extends RecyclerView.ViewHolder {
         TextView receivercontact,receiverlocation,receivername,sendercontact,senderlocation,

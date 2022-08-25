@@ -233,12 +233,9 @@ public class take_order extends AppCompatActivity {
 
 
                             if (fineLocationGranted != null && fineLocationGranted) {
-                                // Precise location access granted.
-                            } else if (coarseLocationGranted != null && coarseLocationGranted) {
-                                // Only approximate location access granted.
-//					} else if (backgroundLocationGranted != null && backgroundLocationGranted){
 
-                                // only background location granted
+                            } else if (coarseLocationGranted != null && coarseLocationGranted) {
+
                             } else {
                                 onBackPressed();
                             }

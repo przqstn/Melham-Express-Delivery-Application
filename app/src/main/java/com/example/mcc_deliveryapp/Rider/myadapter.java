@@ -42,7 +42,6 @@ public class myadapter extends FirebaseRecyclerAdapter<model,myadapter.myviewhol
 		holder.vehicletype.setText(model.getVehicletype());
 		holder.fee.setText("₱"+model.getFee());
 		holder.orderID.setText(model.getOrderID());
-//		holder.customernotes.setText("Notes:" + model.getCustomerNotes());
 	}
 
 	@NonNull
@@ -69,7 +68,6 @@ public class myadapter extends FirebaseRecyclerAdapter<model,myadapter.myviewhol
 		TextView receivercontact,receiverlocation,receivername,sendercontact,senderlocation,
 				sendername, vehicletype, customernotes, fee, btn_takeOrder, orderID;
 
-		//Database Realtime
 		FirebaseDatabase root;
 		DatabaseReference DbRef;
 		FirebaseAuth mAuth;
@@ -81,7 +79,6 @@ public class myadapter extends FirebaseRecyclerAdapter<model,myadapter.myviewhol
 			receivercontact = itemView.findViewById(R.id.txt_receiver_contact);
 			receiverlocation = itemView.findViewById(R.id.txt_receiver_loc);
 			receivername = itemView.findViewById(R.id.txt_receiver_name);
-//			customernotes = itemView.findViewById(R.id.txt_note);
 			sendercontact = itemView.findViewById(R.id.txt_sender_contact);
 			senderlocation = itemView.findViewById(R.id.txt_sender_loc);
 			sendername = itemView.findViewById(R.id.txt_sender_name);
