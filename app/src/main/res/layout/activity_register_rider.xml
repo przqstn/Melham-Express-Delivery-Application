@@ -234,14 +234,6 @@
                     android:contentDescription="City"
                     android:spinnerMode="dropdown" />
 
-<!--                <ImageView-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_gravity="end|bottom"-->
-<!--                    android:layout_marginBottom="@dimen/spinner"-->
-<!--                    android:contentDescription="@null"-->
-<!--                    android:src="@drawable/spinner_background" />-->
-
                 <TextView
                     android:id="@+id/cityError"
                     android:layout_width="350dp"
