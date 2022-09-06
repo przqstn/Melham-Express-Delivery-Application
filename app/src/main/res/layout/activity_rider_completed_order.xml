@@ -19,30 +19,24 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal">
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="55dp"
                     android:layout_gravity="center_horizontal">
 
-                    <LinearLayout
+                    <TextView
+                        android:id="@+id/proceeding"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal">
-
-                        <TextView
-                            android:id="@+id/proceeding"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/montserrat_bold"
-                            android:padding="15dp"
-                            android:text="Delivery Details"
-                            android:textAlignment="center"
-                            android:textColor="#191D31"
-                            android:textSize="20dp" />
-
-                    </LinearLayout>
+                        android:fontFamily="@font/montserrat_bold"
+                        android:padding="15dp"
+                        android:text="Delivery Details"
+                        android:textAlignment="center"
+                        android:textColor="#191D31"
+                        android:textSize="20dp" />
 
                 </androidx.cardview.widget.CardView>
 
