@@ -41,10 +41,10 @@
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:background="@color/color_transparent"
+                        android:contentDescription="settings"
                         android:padding="10dp"
-                        android:src="@drawable/edit_icon"
-                        tools:ignore="SpeakableTextPresentCheck"
-                        android:contentDescription="Edit" />
+                        android:src="@drawable/ic_outline_settings_24"
+                        tools:ignore="HardcodedText,SpeakableTextPresentCheck" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -82,7 +82,7 @@
             <LinearLayout
                 android:id="@+id/ProfileLayout2"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="388dp"
                 android:orientation="vertical"
                 android:paddingHorizontal="30dp"
                 android:paddingVertical="30dp">
@@ -90,11 +90,11 @@
                 <LinearLayout
                     android:id="@+id/edit1"
                     android:layout_width="match_parent"
-                    android:layout_height="75dp"
+                    android:layout_height="250dp"
                     android:layout_marginBottom="15dp"
                     android:background="@drawable/borders"
                     android:orientation="vertical"
-                    android:padding="10dp">
+                    android:padding="15dp">
 
                     <TextView
                         android:layout_width="match_parent"
@@ -108,9 +108,15 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/montserrat_medium"
-                        android:padding="5dp"
+                        android:padding="10dp"
                         android:textColor="@color/strokes" />
-                </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#000000" />
+
+                    <!--  </LinearLayout>
                 <LinearLayout
                     android:id="@+id/edit2"
                     android:layout_width="match_parent"
@@ -118,12 +124,12 @@
                     android:layout_marginBottom="15dp"
                     android:background="@drawable/borders"
                     android:orientation="vertical"
-                    android:padding="10dp">
-
+                    android:padding="10dp"> -->
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/montserrat_medium"
+                        android:padding="10dp"
                         android:text="Primary Address:"
                         tools:ignore="TextContrastCheck" />
 
@@ -131,14 +137,19 @@
                         android:id="@+id/user_primary_add"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/montserrat_medium"
-                        android:padding="5dp"
-                        android:singleLine="true"
                         android:ellipsize="end"
+                        android:fontFamily="@font/montserrat_medium"
                         android:maxLines="1"
+                        android:padding="10dp"
                         android:scrollHorizontally="true"
+                        android:singleLine="true"
                         android:textColor="@color/strokes" />
-                </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#000000" />
+                    <!--</LinearLayout>
                 <LinearLayout
                     android:id="@+id/edit3"
                     android:layout_width="match_parent"
@@ -146,29 +157,30 @@
                     android:layout_marginBottom="15dp"
                     android:background="@drawable/borders"
                     android:orientation="vertical"
-                    android:padding="10dp">
+                    android:padding="10dp"> -->
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/montserrat_medium"
+                        android:padding="10dp"
                         android:text="Secondary Address:"
-                        tools:ignore="TextContrastCheck"/>
+                        tools:ignore="TextContrastCheck" />
 
                     <TextView
                         android:id="@+id/user_secondary_address"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/montserrat_medium"
-                        android:padding="5dp"
-                        android:singleLine="true"
                         android:ellipsize="end"
+                        android:fontFamily="@font/montserrat_medium"
                         android:maxLines="1"
+                        android:padding="10dp"
                         android:scrollHorizontally="true"
+                        android:singleLine="true"
                         android:textColor="@color/strokes" />
                 </LinearLayout>
 
-                <Button
+                <!--  <Button
                     android:id="@+id/btnUser_Logout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -181,7 +193,7 @@
                     android:text="Log Out"
                     android:textAllCaps="false"
                     android:textColor="@color/white"
-                    android:layout_marginBottom="50dp"/>
+                    android:layout_marginBottom="50dp"/> -->
 
 
             </LinearLayout>
