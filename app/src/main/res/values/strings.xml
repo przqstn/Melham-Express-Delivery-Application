@@ -88,4 +88,12 @@
     <string name="welcome_">Welcome!</string>
 
     <string name="hi_user">Hi User!</string>
+
+    <string name="complain_prompt">Choose a subject</string>
+
+    <string-array name="complain_arrays">
+        <item>Complain1</item>
+        <item>Complain2</item>
+        <item>Complain3</item>
+    </string-array>
 </resources>
