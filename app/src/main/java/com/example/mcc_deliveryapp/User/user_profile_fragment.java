@@ -56,7 +56,7 @@ public class user_profile_fragment extends Fragment {
 
     private ImageView profile_user;
 
-    private ImageButton btn_UsereditProfile;
+    private ImageButton btn_settings;
     private Button btnUser_Logout;
 
     private GoogleSignInOptions googleSignInOptions;
@@ -72,7 +72,7 @@ public class user_profile_fragment extends Fragment {
         userPhone =  view.findViewById(R.id.user_number);
         mainAdd = view.findViewById(R.id.user_primary_add);
         secondaryAdd = view.findViewById(R.id.user_secondary_address);
-        btn_UsereditProfile = view.findViewById(R.id.btnUser_EditProfile);
+        btn_settings = view.findViewById(R.id.btnUser_EditProfile);
         btnUser_Logout = view.findViewById(R.id.btnUser_Logout);
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
@@ -121,19 +121,32 @@ public class user_profile_fragment extends Fragment {
             e.printStackTrace();
         }
 
-        btn_UsereditProfile.setOnClickListener(new View.OnClickListener() {
+        // Settings onClick view
+        btn_settings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), user_editprofile_fragment.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP);
-                intent.putExtra("userPhone", phone);
-                intent.putExtra("userFullname", userName.getText().toString());
-                intent.putExtra("mainAdd", mainAdd.getText().toString());
-                intent.putExtra("secondaryAdd", secondaryAdd.getText().toString());
-                view.getContext().startActivity(intent);
+                user_profile_settings user_settings = new user_profile_settings();
+                user_settings.showPopupSettings(view);
             }
         });
 
+
+        // TODO: Move edit profile in user_profile_settings
+//        btn_UsereditProfile.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(view.getContext(), user_editprofile_fragment.class);
+//                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP);
+//                intent.putExtra("userPhone", phone);
+//                intent.putExtra("userFullname", userName.getText().toString());
+//                intent.putExtra("mainAdd", mainAdd.getText().toString());
+//                intent.putExtra("secondaryAdd", secondaryAdd.getText().toString());
+//                view.getContext().startActivity(intent);
+//            }
+//        });
+
+
+        // TODO: Move logout in user_profile_settings w/ signOut() method
         btnUser_Logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
