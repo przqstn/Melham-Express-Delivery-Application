@@ -32,8 +32,6 @@
                     android:orientation="vertical"
                     android:padding="20dp">
 
-
-
                     <ImageView
                         android:id="@+id/imageView"
                         android:layout_width="250dp"
@@ -41,7 +39,6 @@
                         android:layout_gravity="center"
                         android:layout_marginTop="50dp"
                         app:srcCompat="@drawable/newsplashscreen" />
-
 
                     <TextView
                         android:id="@+id/textView23"
@@ -57,28 +54,28 @@
                         android:textSize="16sp" />
 
                     <Button
-                        android:id="@+id/btn_riderform"
-                        android:layout_gravity="center"
-                        android:layout_width="250dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginBottom="15dp"
-                        android:background="@drawable/graphics_button_1"
-                        android:backgroundTint="#B3878181"
-                        android:fontFamily="@font/montserrat_medium"
-                        android:text="Courier"
-                        android:textColor="@color/white" />
-
-                    <Button
                         android:id="@+id/btn_userform"
                         android:layout_gravity="center"
                         android:layout_width="250dp"
                         android:layout_height="wrap_content"
                         android:background="@drawable/graphics_button_1"
-                        android:backgroundTint="#B3878181"
+                        android:backgroundTint="#3B4E8E"
                         android:fontFamily="@font/montserrat_medium"
+                        android:layout_marginTop="20dp"
                         android:layout_marginBottom="15dp"
-                        android:text="User"
+                        android:text="Client"
+                        android:textColor="@color/white" />
+
+                    <Button
+                        android:id="@+id/btn_riderform"
+                        android:layout_gravity="center"
+                        android:layout_width="250dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="15dp"
+                        android:background="@drawable/graphics_button_1"
+                        android:backgroundTint="#3B4E8E"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:text="Courier"
                         android:textColor="@color/white" />
 
                     <Button
