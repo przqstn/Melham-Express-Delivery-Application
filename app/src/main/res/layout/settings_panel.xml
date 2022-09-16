@@ -6,14 +6,13 @@
     android:orientation="vertical"
     android:layout_height="wrap_content"
     android:paddingVertical="1dp"
-    android:background="@drawable/borders">
+    android:background="@drawable/bg_panel">
 
     <LinearLayout
         android:id="@+id/change_pass"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:gravity="center_vertical"
-
         android:orientation="vertical"
         android:padding="10dp">
 
@@ -38,7 +37,6 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:gravity="center_vertical"
-
         android:orientation="vertical"
         android:padding="10dp">
 
