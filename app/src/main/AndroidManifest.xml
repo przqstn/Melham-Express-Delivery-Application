@@ -43,6 +43,8 @@
         <activity
             android:name=".User.user_ongoing_order_details2"
             android:exported="false" />
+        <activity android:name=".User.user_reportBug"
+            android:exported="false"/>
         <activity
             android:name=".User.user_track_rider"
             android:exported="false" />

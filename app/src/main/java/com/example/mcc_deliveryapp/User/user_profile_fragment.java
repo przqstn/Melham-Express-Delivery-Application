@@ -2,6 +2,7 @@ package com.example.mcc_deliveryapp.User;
 
 import static android.app.Activity.RESULT_OK;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -11,7 +12,9 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -121,17 +124,17 @@ public class user_profile_fragment extends Fragment {
             e.printStackTrace();
         }
 
-        // Settings onClick view
+        // Settings Button Click
         btn_settings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                user_profile_settings user_settings = new user_profile_settings();
-                user_settings.showPopupSettings(view);
+                DialogFragment settingFrag = new user_profile_settings();
+                settingFrag.show(getChildFragmentManager(), "what");
             }
         });
 
 
-        // TODO: Move edit profile in user_profile_settings
+        // TODO: Move edit profile to settings
 //        btn_UsereditProfile.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
@@ -146,7 +149,7 @@ public class user_profile_fragment extends Fragment {
 //        });
 
 
-        // TODO: Move logout in user_profile_settings w/ signOut() method
+        // TODO: Move logout to settings w/ signOut() method
         btnUser_Logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
