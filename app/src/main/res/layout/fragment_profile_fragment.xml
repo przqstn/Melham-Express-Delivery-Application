@@ -42,7 +42,7 @@
                         android:layout_height="70dp"
                         android:background="@color/color_transparent"
                         android:padding="10dp"
-                        android:src="@drawable/edit_icon"
+                        android:src="@drawable/ic_outline_settings_24"
                         tools:ignore="SpeakableTextPresentCheck"
                         android:contentDescription="Edit" />
                 </LinearLayout>
