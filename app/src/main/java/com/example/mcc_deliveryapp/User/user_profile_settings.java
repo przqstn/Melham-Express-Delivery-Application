@@ -1,90 +1,105 @@
 package com.example.mcc_deliveryapp.User;
 
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.vcn.VcnUnderlyingNetworkTemplate;
+import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 
 import com.example.mcc_deliveryapp.R;
 
-public class user_profile_settings extends AppCompatActivity {
+public class user_profile_settings extends DialogFragment {
     TextView changePassword, editProfile, logout, faqs, reportBug;
 
-    public void showPopupSettings(final View view) {
-        LayoutInflater inflater = (LayoutInflater) view.getContext().getSystemService(view.getContext().LAYOUT_INFLATER_SERVICE);
-        View popupView = inflater.inflate(R.layout.settings_panel, null);
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        super.onCreateView(inflater, container, savedInstanceState);
+        View view = inflater.inflate(R.layout.settings_panel, container, false);
 
-        int width = LinearLayout.LayoutParams.WRAP_CONTENT;
-        int height = LinearLayout.LayoutParams.WRAP_CONTENT;
+        changePassword = view.findViewById(R.id.txt_changePW);
+        editProfile = view.findViewById(R.id.txt_editProfile);
+        logout = view.findViewById(R.id.txt_logout);
+        faqs = view.findViewById(R.id.txt_faqs);
+        reportBug = view.findViewById(R.id.txt_reportBug);
 
-        boolean focus = true;
+        Window window = getDialog().getWindow();
+        // To make popup fully transparent
+        window.setBackgroundDrawableResource(R.color.color_transparent);
+        window.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
 
-        final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focus);
+        // Gravity with X and Y position of settings popup
+        window.setGravity(Gravity.TOP|Gravity.RIGHT);
+        WindowManager.LayoutParams params = window.getAttributes();
+        params.x = 50;
+        params.y = 170;
+        window.setAttributes(params);
 
-        // Settings panel shows in upper-right corner
-        popupWindow.showAtLocation(view, Gravity.TOP | Gravity.RIGHT, 50, 260);
+        // Popup dismisses when clicked outside
+        getDialog().setCanceledOnTouchOutside(true);
 
-        changePassword = popupView.findViewById(R.id.txt_changePW);
-        editProfile = popupView.findViewById(R.id.txt_editProfile);
-        logout = popupView.findViewById(R.id.txt_logout);
-        faqs = popupView.findViewById(R.id.txt_faqs);
-        reportBug = popupView.findViewById(R.id.txt_reportBug);
-
-
-        // TODO: Set onClick to activities
         changePassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Remove toast then add activity
-                Toast.makeText(view.getContext(), "Change Password", Toast.LENGTH_SHORT).show();
+                // COPY ONCLICK LISTENER OF REPORT BUG (except if class is fragment)
+                // THEN, DELETE TOAST AND COMMENTS
+                Toast.makeText(getActivity(), "Change Password", Toast.LENGTH_SHORT).show();
             }
         });
 
         editProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Remove toast then add activity
-                Toast.makeText(view.getContext(), "Edit Profile", Toast.LENGTH_SHORT).show();
+                // COPY ONCLICK LISTENER OF REPORT BUG (except if class is fragment)
+                // THEN, DELETE TOAST AND COMMENTS
+                Toast.makeText(getActivity(), "Edit Profile", Toast.LENGTH_SHORT).show();
             }
         });
 
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Remove toast then add activity
-                Toast.makeText(view.getContext(), "Logout", Toast.LENGTH_SHORT).show();
+                // COPY ONCLICK LISTENER OF REPORT BUG (except if class is fragment)
+                // THEN, DELETE TOAST AND COMMENTS
+                Toast.makeText(getActivity(), "Logout", Toast.LENGTH_SHORT).show();
             }
         });
 
         faqs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Remove toast then add activity
-                Toast.makeText(view.getContext(), "FAQs", Toast.LENGTH_SHORT).show();
+                // COPY ONCLICK LISTENER OF REPORT BUG (except if class is fragment)
+                // THEN, DELETE TOAST AND COMMENTS
+                Toast.makeText(getActivity(), "FAQs", Toast.LENGTH_SHORT).show();
             }
         });
 
         reportBug.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Remove toast then add activity
-                Toast.makeText(view.getContext(), "Report A Bug", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getContext(), user_reportBug.class);
+                getContext().startActivity(intent);
             }
         });
 
-        popupView.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                popupWindow.dismiss();
-                return true;
-            }
-        });
+        return view;
     }
+
 }
