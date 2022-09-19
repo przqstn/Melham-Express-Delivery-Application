@@ -49,7 +49,7 @@ public class user_profile_settings extends DialogFragment {
         window.setGravity(Gravity.TOP|Gravity.RIGHT);
         WindowManager.LayoutParams params = window.getAttributes();
         params.x = 50;
-        params.y = 170;
+        params.y = 160;
         window.setAttributes(params);
 
         // Popup dismisses when clicked outside
