@@ -85,9 +85,8 @@ public class user_profile_settings extends DialogFragment {
         faqs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // COPY ONCLICK LISTENER OF REPORT BUG (except if class is fragment)
-                // THEN, DELETE TOAST AND COMMENTS
-                Toast.makeText(getActivity(), "FAQs", Toast.LENGTH_SHORT).show();
+                Intent goFAQs = new Intent(getContext(), frequentlyAskedQuestions.class);
+                getContext().startActivity(goFAQs);
             }
         });
 

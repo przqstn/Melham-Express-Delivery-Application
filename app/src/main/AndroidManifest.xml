@@ -13,9 +13,9 @@
 
     <application
         android:allowBackup="true"
-        android:requestLegacyExternalStorage="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MCC_DeliveryApp">
@@ -43,7 +43,11 @@
         <activity
             android:name=".User.user_ongoing_order_details2"
             android:exported="false" />
-        <activity android:name=".User.user_reportBug"
+        <activity
+            android:name=".User.user_reportBug"
+            android:exported="false" />
+        <activity
+            android:name=".User.frequentlyAskedQuestions"
             android:exported="false"/>
         <activity
             android:name=".User.user_track_rider"
@@ -77,6 +81,7 @@
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+
         <activity
             android:name=".Rider.editprofile_changePass"
             android:exported="true"

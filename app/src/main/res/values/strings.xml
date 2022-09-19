@@ -96,4 +96,5 @@
         <item>Complain2</item>
         <item>Complain3</item>
     </string-array>
+    <string name="title_activity_frequently_asked_questions">frequentlyAskedQuestions</string>
 </resources>
