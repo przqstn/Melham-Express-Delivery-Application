@@ -23,17 +23,29 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
+import com.example.mcc_deliveryapp.MainActivity2;
 import com.example.mcc_deliveryapp.R;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 
 public class user_profile_settings extends DialogFragment {
     TextView changePassword, editProfile, logout, faqs, reportBug;
+
+    private GoogleSignInClient googlesignInClient;
+    private GoogleSignInOptions googlesignInOptions;
+    private View view;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        View view = inflater.inflate(R.layout.settings_panel, container, false);
+        view = inflater.inflate(R.layout.settings_panel, container, false);
 
+        googlesignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
+        googlesignInClient = GoogleSignIn.getClient(requireActivity(), googlesignInOptions);
         changePassword = view.findViewById(R.id.txt_changePW);
         editProfile = view.findViewById(R.id.txt_editProfile);
         logout = view.findViewById(R.id.txt_logout);
@@ -49,11 +61,12 @@ public class user_profile_settings extends DialogFragment {
         window.setGravity(Gravity.TOP|Gravity.RIGHT);
         WindowManager.LayoutParams params = window.getAttributes();
         params.x = 50;
-        params.y = 170;
+        params.y = 160;
         window.setAttributes(params);
 
         // Popup dismisses when clicked outside
         getDialog().setCanceledOnTouchOutside(true);
+
 
         changePassword.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,30 +89,42 @@ public class user_profile_settings extends DialogFragment {
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // COPY ONCLICK LISTENER OF REPORT BUG (except if class is fragment)
-                // THEN, DELETE TOAST AND COMMENTS
-                Toast.makeText(getActivity(), "Logout", Toast.LENGTH_SHORT).show();
+                leavePage();
             }
         });
 
         faqs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // COPY ONCLICK LISTENER OF REPORT BUG (except if class is fragment)
-                // THEN, DELETE TOAST AND COMMENTS
-                Toast.makeText(getActivity(), "FAQs", Toast.LENGTH_SHORT).show();
+                Intent goFAQs = new Intent(getContext(), frequentlyAskedQuestions.class);
+                getContext().startActivity(goFAQs);
             }
         });
 
         reportBug.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getContext(), user_reportBug.class);
-                getContext().startActivity(intent);
+                Intent goReportBug = new Intent(getContext(), user_reportBug.class);
+                getContext().startActivity(goReportBug);
             }
         });
 
         return view;
     }
+
+    void leavePage(){
+        googlesignInClient.signOut().addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(Task<Void> task) {
+                Intent goExit = new Intent(getContext(), MainActivity2.class);
+                goExit.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|
+                        Intent.FLAG_ACTIVITY_CLEAR_TASK |
+                        Intent.FLAG_ACTIVITY_NEW_TASK);
+                view.getContext().startActivity(goExit);
+            }
+        });
+    }
+
+
 
 }

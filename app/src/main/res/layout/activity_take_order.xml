@@ -21,7 +21,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:background="#223272"
-                android:scaleType="fitXY"/>
+                android:scaleType="fitXY" />
 
             <LinearLayout
                 android:id="@+id/take_order_details"
@@ -35,6 +35,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginBottom="10dp"
+                    app:cardCornerRadius="5dp"
                     app:cardUseCompatPadding="true">
 
                     <RelativeLayout
@@ -43,7 +44,7 @@
                         android:layout_gravity="center_horizontal"
                         app:cardUseCompatPadding="true">
 
-                        <androidx.cardview.widget.CardView
+                        <!--androidx.cardview.widget.CardView
                             android:layout_width="match_parent"
                             android:layout_height="40dp"
                             android:layout_gravity="center_horizontal">
@@ -66,7 +67,7 @@
 
                             </LinearLayout>
 
-                        </androidx.cardview.widget.CardView>
+                        </androidx.cardview.widget.CardView-->
 
                         <RelativeLayout
                             android:layout_width="match_parent"
@@ -77,7 +78,7 @@
                                 android:id="@+id/pickuplinearlayout"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="50dp"
+                                android:layout_marginTop="10dp"
                                 android:layout_marginBottom="5dp"
                                 android:padding="5dp">
 
@@ -341,8 +342,8 @@
                             android:layout_width="3dp"
                             android:layout_height="50dp"
                             android:layout_marginLeft="10dp"
-                            android:tint="#9F9F9F"
                             android:layout_toRightOf="@+id/vehicle_typetext"
+                            android:tint="#9F9F9F"
                             app:srcCompat="@drawable/line" />
 
                         <TextView
@@ -371,15 +372,33 @@
 
                 </RelativeLayout>
 
+                <LinearLayout
+                    android:layout_width="340dp"
+                    android:layout_height="25dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="10dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_bold"
+                        android:padding="3dp"
+                        android:text="Notes to Rider:"
+                        android:textAlignment="textStart"
+                        android:textColor="#223272"
+                        android:textSize="15dp" />
+
+                </LinearLayout>
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="340dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginBottom="10dp"
+                    app:cardBackgroundColor="@color/background_color"
                     app:cardUseCompatPadding="true">
 
-                    <androidx.cardview.widget.CardView
+                    <!--androidx.cardview.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:layout_gravity="center_horizontal">
@@ -402,9 +421,41 @@
 
                         </LinearLayout>
 
-                    </androidx.cardview.widget.CardView>
+                    </androidx.cardview.widget.CardView-->
 
                     <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/borders02">
+
+                        <RelativeLayout
+                            android:layout_width="300dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginEnd="20dp"
+                            android:layout_marginBottom="20dp"
+                            android:padding="15dp">
+
+                            <TextView
+                                android:id="@+id/note_rider"
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                android:layout_below="@+id/vehicle_text"
+                                android:fontFamily="@font/montserrat_medium"
+                                android:gravity="center"
+                                android:text="Note to Rider Goes Here"
+                                android:textColor="@color/black"
+                                android:textSize="15dp"
+                                tools:layout_editor_absoluteX="1dp"
+                                tools:layout_editor_absoluteY="189dp" />
+
+                        </RelativeLayout>
+
+                    </RelativeLayout>
+
+                    <!--RelativeLayout
                         android:layout_width="300dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
@@ -423,7 +474,7 @@
                             android:textSize="15dp"
                             tools:layout_editor_absoluteX="1dp"
                             tools:layout_editor_absoluteY="189dp" />
-                    </RelativeLayout>
+                    </RelativeLayout-->
 
                 </androidx.cardview.widget.CardView>
 
