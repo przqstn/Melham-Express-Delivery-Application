@@ -117,7 +117,7 @@
                         android:layout_marginTop="5dp"
                         android:padding="5dp">
 
-                        <TextView
+                        <EditText
                             android:id="@+id/desc_content"
                             android:layout_width="match_parent"
                             android:layout_height="190dp"
@@ -173,6 +173,7 @@
                             android:text="Add Files"
                             android:textAllCaps="false"
                             android:textSize="20sp" />
+
 
                     </RelativeLayout>
 

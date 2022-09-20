@@ -91,9 +91,11 @@
 
     <string name="complain_prompt">Choose a subject</string>
 
+<!-- TODO: Change types of complaints -->
     <string-array name="complain_arrays">
         <item>Complain1</item>
         <item>Complain2</item>
         <item>Complain3</item>
     </string-array>
+    <string name="title_activity_frequently_asked_questions">frequentlyAskedQuestions</string>
 </resources>
