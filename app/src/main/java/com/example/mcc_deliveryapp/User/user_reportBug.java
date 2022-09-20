@@ -53,7 +53,7 @@ public class user_reportBug extends AppCompatActivity implements AdapterView.OnI
         message = findViewById(R.id.desc_content);
         btn_submit = findViewById(R.id.btn_reportSubmit);
         btn_upload = findViewById(R.id.btn_file_upload);
-        header = findViewById(R.id.txt_header);
+        header = findViewById(R.id.header_title);
 
         btn_submit.setOnClickListener(new View.OnClickListener() {
             @Override
