@@ -606,7 +606,7 @@
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/borders03">
+                        android:background="@drawable/borders02">
 
                         <RelativeLayout
                             android:layout_width="300dp"

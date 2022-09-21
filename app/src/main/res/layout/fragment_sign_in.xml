@@ -24,9 +24,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/montserrat_medium"
-                android:paddingLeft="15dp"
+                android:paddingLeft="5dp"
                 android:paddingTop="20dp"
-                android:paddingBottom="10dp"
                 android:text="Phone Number"
                 android:textColor="@color/black"
                 android:textSize="16sp"
@@ -35,11 +34,12 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/edTextPhoneNo"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:gravity="center">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                <EditText
+                    android:layout_width="370dp"
+                    android:layout_height="60dp"
                     android:background="@drawable/edit_text_round"
                     android:drawableStart="@drawable/ic_baseline_local_phone_24"
                     android:drawableLeft="@drawable/ic_baseline_local_phone_24"
@@ -47,9 +47,7 @@
                     android:fontFamily="@font/montserrat_regular"
                     android:hint="Enter your number"
                     android:inputType="phone"
-                    android:paddingLeft="15dp"
-                    android:paddingTop="25dp"
-                    android:paddingBottom="25dp"
+                    android:padding="15dp"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -69,9 +67,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/montserrat_medium"
-                android:paddingLeft="15dp"
+                android:paddingLeft="5dp"
                 android:paddingTop="20dp"
-                android:paddingBottom="10dp"
                 android:text="Password"
                 android:textColor="@color/black"
                 android:textSize="16sp"
@@ -81,13 +78,13 @@
                 android:id="@+id/edTextPass"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 app:passwordToggleEnabled="true"
                 android:autofillHints="password">
 
-                <com.google.android.material.textfield.TextInputEditText
-
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                <EditText
+                    android:layout_width="370dp"
+                    android:layout_height="60dp"
                     android:background="@drawable/edit_text_round"
                     android:drawableStart="@drawable/ic_baseline_lock_24"
                     android:drawableLeft="@drawable/ic_baseline_lock_24"
@@ -95,9 +92,7 @@
                     android:fontFamily="@font/montserrat_regular"
                     android:hint="Enter your password"
                     android:inputType="textPassword"
-                    android:paddingLeft="15dp"
-                    android:paddingTop="25dp"
-                    android:paddingBottom="25dp"
+                    android:padding="15dp"
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     app:passwordToggleEnabled="false"
@@ -120,6 +115,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
                 android:fontFamily="@font/montserrat_medium"
                 android:paddingBottom="10dp"
                 android:text="Forgot Password"
