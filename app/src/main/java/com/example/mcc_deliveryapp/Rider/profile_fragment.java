@@ -1,5 +1,6 @@
 package com.example.mcc_deliveryapp.Rider;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -14,10 +15,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+import static android.app.Activity.RESULT_OK;
 
 import com.example.mcc_deliveryapp.MainActivity2;
 import com.example.mcc_deliveryapp.R;
+import com.example.mcc_deliveryapp.User.user_profile_settings;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -46,10 +51,12 @@ public class profile_fragment extends Fragment {
 	String phone;
 	float total, count;
 
+	private View view;
+
 	private StorageReference storageReference;
 	private ImageView profile_rider;
 
-    private ImageButton btn_editProfile;
+    private ImageButton btn_Settings;
 	private Button btnRider_Logout;
 
 	private GoogleSignInOptions googleSignInOptions;
@@ -58,7 +65,7 @@ public class profile_fragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
-		View view  =  inflater.inflate(R.layout.fragment_profile_fragment, container, false);
+		view = inflater.inflate(R.layout.fragment_profile_fragment, container, false);
 
 		RiderName = view.findViewById(R.id.txt_name);
 		RiderVehicle =  view.findViewById(R.id.riderVehicle);
@@ -66,7 +73,7 @@ public class profile_fragment extends Fragment {
 		RiderAddress =  view.findViewById(R.id.riderAddress);
 		RiderNumber =  view.findViewById(R.id.riderNumber);
 		profile_rider = view.findViewById(R.id.profile_user);
-		btn_editProfile = view.findViewById(R.id.btnRider_EditProfile);
+		btn_Settings = view.findViewById(R.id.btnRider_Settings);
 		btnRider_Logout = view.findViewById(R.id.btnRider_Logout);
 		rating = view.findViewById(R.id.txt_ratings);
 
@@ -138,20 +145,15 @@ public class profile_fragment extends Fragment {
 			e.printStackTrace();
 		}
 
-		btn_editProfile.setOnClickListener(new View.OnClickListener() {
+		btn_Settings.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				Intent intent = new Intent(view.getContext(), editprofile_fragment.class);
-				intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP);
-				intent.putExtra("riderphone", phone);
-				intent.putExtra("name", RiderName.getText().toString());
-				intent.putExtra("vehicletype", RiderVehicle.getText().toString());
-				intent.putExtra("platenumber", RiderPlate.getText().toString());
-				intent.putExtra("address", RiderAddress.getText().toString());
-				view.getContext().startActivity(intent);
+				DialogFragment riderSettingFrag = new rider_profile_settings();
+				riderSettingFrag.show(getChildFragmentManager(), "what");
 			}
 		});
 
+		// TODO: Move logout to settings w/ signOut() method
 		btnRider_Logout.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
@@ -176,6 +178,20 @@ public class profile_fragment extends Fragment {
 			}
 		});
 	}
+
+//		btn_Settings.setOnClickListener(new View.OnClickListener() {
+//			@Override
+//			public void onClick(View view) {
+//				Intent intent = new Intent(view.getContext(), editprofile_fragment.class);
+//				intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP);
+//				intent.putExtra("riderphone", phone);
+//				intent.putExtra("name", RiderName.getText().toString());
+//				intent.putExtra("vehicletype", RiderVehicle.getText().toString());
+//				intent.putExtra("platenumber", RiderPlate.getText().toString());
+//				intent.putExtra("address", RiderAddress.getText().toString());
+//				view.getContext().startActivity(intent);
+//			}
+//		});
 
 
 }

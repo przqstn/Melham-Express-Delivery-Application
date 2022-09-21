@@ -128,8 +128,8 @@ public class user_profile_fragment extends Fragment {
         btn_settings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DialogFragment settingFrag = new user_profile_settings();
-                settingFrag.show(getChildFragmentManager(), "what");
+                DialogFragment SettingFrag = new user_profile_settings();
+                SettingFrag.show(getChildFragmentManager(), "what");
             }
         });
 
