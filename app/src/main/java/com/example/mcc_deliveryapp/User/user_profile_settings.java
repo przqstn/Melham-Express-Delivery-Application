@@ -25,6 +25,7 @@ import androidx.fragment.app.DialogFragment;
 
 import com.example.mcc_deliveryapp.MainActivity2;
 import com.example.mcc_deliveryapp.R;
+import com.example.mcc_deliveryapp.Rider.riderReportPage;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -71,18 +72,16 @@ public class user_profile_settings extends DialogFragment {
         changePassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // COPY ONCLICK LISTENER OF REPORT BUG (except if class is fragment)
-                // THEN, DELETE TOAST AND COMMENTS
-                Toast.makeText(getActivity(), "Change Password", Toast.LENGTH_SHORT).show();
+                Intent goChangepass = new Intent(getContext(), user_editprofile_changePass.class);
+                getContext().startActivity(goChangepass);
             }
         });
 
         editProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // COPY ONCLICK LISTENER OF REPORT BUG (except if class is fragment)
-                // THEN, DELETE TOAST AND COMMENTS
-                Toast.makeText(getActivity(), "Edit Profile", Toast.LENGTH_SHORT).show();
+                Intent goEdit = new Intent(getContext(), user_editprofile_fragment.class);
+                getContext().startActivity(goEdit);
             }
         });
 
