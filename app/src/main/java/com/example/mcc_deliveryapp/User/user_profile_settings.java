@@ -80,8 +80,8 @@ public class user_profile_settings extends DialogFragment {
         editProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent goEdit = new Intent(getContext(), user_editprofile_fragment.class);
-                getContext().startActivity(goEdit);
+                Intent goEditProfile = new Intent(getContext(), user_editprofile_fragment.class);
+                getContext().startActivity(goEditProfile);
             }
         });
 

@@ -65,8 +65,8 @@ public class rider_profile_settings extends DialogFragment {
         changePassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent goChangepass = new Intent(getContext(), editprofile_changePass.class);
-                getContext().startActivity(goChangepass);
+                Intent gochangepass = new Intent(getContext(), editprofile_changePass.class);
+                getContext().startActivity(gochangepass);
             }
         });
 
