@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,11 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.example.mcc_deliveryapp.R;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
@@ -26,6 +32,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -33,7 +40,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 
@@ -50,7 +61,10 @@ public class signInFragment extends Fragment {
     Dialog ForgotPW, VerifyNum, UpdatePW;
 
     TextInputLayout login_editTxt_phoneNum, login_editTxt_password;
-    Button btn_Login;
+    Button btn_Login, btn_sign_with_google;
+
+    private GoogleSignInOptions googleSignInOptions;
+    private GoogleSignInClient googleSignInClient;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -61,6 +75,8 @@ public class signInFragment extends Fragment {
         login_editTxt_phoneNum = view.findViewById(R.id.edTextPhoneNo);
         login_editTxt_password = view.findViewById(R.id.edTextPass);
         btn_Login = view.findViewById(R.id.btn_login);
+        btn_sign_with_google = view.findViewById(R.id.btn_sign_with_google);
+
         forgotPass = view.findViewById(R.id.forgotPassUser);
         ForgotPW = new Dialog(getActivity());
         ForgotPW.setContentView(R.layout.fragment_forgot_password);
@@ -85,6 +101,20 @@ public class signInFragment extends Fragment {
         forgotPassnext = ForgotPW.findViewById(R.id.forgotPassnext);
         numberUser = ForgotPW.findViewById(R.id.forgotNumber);
         updatePW = UpdatePW.findViewById(R.id.updatePW);
+
+        googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
+        googleSignInClient = GoogleSignIn.getClient(requireActivity(), googleSignInOptions);
+        verifyEmail();
+
+
+
+        btn_sign_with_google.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                signIn();
+            }
+        });
+
 
         btn_Login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -236,11 +266,86 @@ public class signInFragment extends Fragment {
         return view;
 
     }
+
+    private void signIn(){
+        Intent signInIntent = googleSignInClient.getSignInIntent();
+        startActivityForResult(signInIntent, 0);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 0){
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+
+            try {
+                task.getResult(ApiException.class);
+                verifyEmail();
+            } catch (ApiException e) {
+                Toast.makeText(requireContext().getApplicationContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
+            }
+        }
+
+    }
+
+
+    void navigateToSecondActivity(String userName, String userPhone){
+        Intent intent = new Intent(getContext(), user_navigation.class);
+        intent.putExtra("username", userName);
+        intent.putExtra("phonenum", userPhone);
+        startActivity(intent);
+    }
+
+    private void verifyEmail(){
+        GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(requireContext());
+        if(acct!=null) {
+            Log.e("Google2", acct.getEmail());
+            String inEmail = acct.getEmail();
+            final FirebaseDatabase database = FirebaseDatabase.getInstance();
+            final DatabaseReference dr = database.getReference().child("users");
+            Query query = dr.orderByChild("userEmail").equalTo(inEmail);
+
+            query.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    Log.e("GetEmail", String.valueOf(dataSnapshot));
+                    List<String> phone = new ArrayList<>(Collections.emptyList());
+                    List<String> name = new ArrayList<>(Collections.emptyList());
+
+                    for (DataSnapshot locationSnapshot : dataSnapshot.getChildren()) {
+                        if (Objects.requireNonNull(locationSnapshot.child("userEmail").getValue()).equals(inEmail)) {
+                            String getPhone = Objects.requireNonNull(locationSnapshot.child("userPhone").getValue()).toString();
+                            phone.add(getPhone);
+                        }
+                    }
+
+                    for (DataSnapshot locationSnapshot : dataSnapshot.getChildren()) {
+                        if (Objects.requireNonNull(locationSnapshot.child("userEmail").getValue()).equals(inEmail)) {
+                            String getName = Objects.requireNonNull(locationSnapshot.child("userFullname").getValue()).toString();
+                            name.add(getName);
+                        }
+                    }
+
+                    try {
+                        navigateToSecondActivity(name.get(0), phone.get(0));
+                    } catch (Exception e) {
+                        Toast.makeText(getActivity(), "Sign Up First", Toast.LENGTH_LONG).show();
+                        googleSignInClient.signOut();
+                    }
+
+
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                }
+            });
+        }
+    };
     private void UserLogin(){
 
         String usernumEntered = login_editTxt_phoneNum.getEditText().getText().toString().trim();
         String userpassEntered = login_editTxt_password.getEditText().getText().toString().trim();
-        //Bundle bundle = new Bundle();
 
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users");
 
@@ -366,4 +471,6 @@ public class signInFragment extends Fragment {
         });
 
     }
+    public void onCancelled(@NonNull DatabaseError databaseError) { throw databaseError.toException(); }
+
 }

@@ -54,13 +54,147 @@
                 android:layout_marginTop="80dp"
                 android:orientation="vertical">
 
+                <LinearLayout
+                    android:layout_width="340dp"
+                    android:layout_height="25dp"
+                    android:layout_gravity="center_horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/background_color"
+                        android:fontFamily="@font/montserrat_bold"
+                        android:padding="1dp"
+                        android:text="Courier Details"
+                        android:textAlignment="textStart"
+                        android:textColor="#223272"
+                        android:textSize="15dp" />
+
+                </LinearLayout>
+
                 <androidx.cardview.widget.CardView
                     android:layout_width="340dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
+                    app:cardCornerRadius="10dp"
                     app:cardUseCompatPadding="true">
 
-                    <androidx.cardview.widget.CardView
+                    <!--androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center_horizontal">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="#223272"
+                            android:fontFamily="@font/montserrat_bold"
+                            android:padding="10dp"
+                            android:text="Courier Details"
+                            android:textAlignment="textStart"
+                            android:textColor="@color/white"
+                            android:textSize="15dp" />
+
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView-->
+
+                    <RelativeLayout
+                        android:layout_width="300dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:padding="5dp">
+
+                        <RelativeLayout
+                            android:id="@+id/courier_details"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <de.hdodenhof.circleimageview.CircleImageView
+                                android:id="@+id/user_profile_completed_order"
+                                android:layout_width="65dp"
+                                android:layout_height="65dp"
+                                android:layout_marginBottom="12dp"
+                                android:background="@drawable/profile_ellipse"
+                                android:padding="1dp"
+                                android:src="@drawable/rounded" />
+
+                            <TextView
+                                android:id="@+id/rider_name"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/montserrat_bold"
+                                android:paddingStart="70dp"
+                                android:text="Rider Name N/A"
+                                android:textAlignment="textStart"
+                                android:textColor="@color/black"
+                                android:textSize="18dp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/vehicle_details"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/rider_name"
+                                android:fontFamily="@font/montserrat_regular"
+                                android:paddingStart="70dp"
+                                android:text="Vehicle Details N/A"
+                                android:textAlignment="textStart"
+                                android:textColor="@color/black"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/plate_number"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/vehicle_details"
+                                android:fontFamily="@font/montserrat_regular"
+                                android:paddingStart="70dp"
+                                android:text="Plate Number N/A"
+                                android:textAlignment="textStart"
+                                android:textColor="@color/black"
+                                android:textStyle="bold" />
+                        </RelativeLayout>
+
+
+                    </RelativeLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <LinearLayout
+                    android:layout_width="340dp"
+                    android:layout_height="25dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="10dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/background_color"
+                        android:fontFamily="@font/montserrat_bold"
+                        android:padding="1dp"
+                        android:text="Cancelled Order Details"
+                        android:textAlignment="textStart"
+                        android:textColor="#223272"
+                        android:textSize="15dp" />
+
+                </LinearLayout>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="340dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    app:cardCornerRadius="10dp"
+                    app:cardUseCompatPadding="true">
+
+                    <!--androidx.cardview.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:layout_gravity="center_horizontal">
@@ -83,7 +217,7 @@
 
                         </LinearLayout>
 
-                    </androidx.cardview.widget.CardView>
+                    </androidx.cardview.widget.CardView-->
 
                     <RelativeLayout
                         android:layout_width="300dp"
@@ -95,7 +229,7 @@
                             android:layout_width="300dp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
-                            android:layout_marginTop="50dp"
+                            android:layout_marginTop="10dp"
                             android:padding="5dp">
 
                             <ImageView
@@ -338,102 +472,6 @@
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
-                    android:layout_width="340dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="10dp"
-                    app:cardUseCompatPadding="true">
-
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:layout_gravity="center_horizontal">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:background="#223272"
-                                android:fontFamily="@font/montserrat_bold"
-                                android:padding="10dp"
-                                android:text="Courier Details"
-                                android:textAlignment="textStart"
-                                android:textColor="@color/white"
-                                android:textSize="15dp" />
-
-                        </LinearLayout>
-
-                    </androidx.cardview.widget.CardView>
-
-                    <RelativeLayout
-                        android:layout_width="300dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="45dp"
-                        android:layout_marginBottom="10dp"
-                        android:padding="5dp">
-
-                        <RelativeLayout
-                            android:id="@+id/courier_details"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-
-                            <de.hdodenhof.circleimageview.CircleImageView
-                                android:id="@+id/user_profile_completed_order"
-                                android:layout_width="65dp"
-                                android:layout_height="65dp"
-                                android:layout_marginBottom="12dp"
-                                android:background="@drawable/profile_ellipse"
-                                android:padding="1dp"
-                                android:src="@drawable/rounded" />
-
-                            <TextView
-                                android:id="@+id/rider_name"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/montserrat_bold"
-                                android:paddingStart="70dp"
-                                android:text="Rider Name N/A"
-                                android:textAlignment="textStart"
-                                android:textColor="@color/black"
-                                android:textSize="18dp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:id="@+id/vehicle_details"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_below="@id/rider_name"
-                                android:fontFamily="@font/montserrat_regular"
-                                android:paddingStart="70dp"
-                                android:text="Vehicle Details N/A"
-                                android:textAlignment="textStart"
-                                android:textColor="@color/black"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:id="@+id/plate_number"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_below="@id/vehicle_details"
-                                android:fontFamily="@font/montserrat_regular"
-                                android:paddingStart="70dp"
-                                android:text="Plate Number N/A"
-                                android:textAlignment="textStart"
-                                android:textColor="@color/black"
-                                android:textStyle="bold" />
-                        </RelativeLayout>
-
-
-                    </RelativeLayout>
-
-                </androidx.cardview.widget.CardView>
-
-                <androidx.cardview.widget.CardView
                     android:layout_width="345dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
@@ -494,7 +532,67 @@
 
                 </androidx.cardview.widget.CardView>
 
+                <LinearLayout
+                    android:layout_width="340dp"
+                    android:layout_height="25dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="10dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/background_color"
+                        android:fontFamily="@font/montserrat_bold"
+                        android:padding="1dp"
+                        android:text="Remarks:"
+                        android:textAlignment="textStart"
+                        android:textColor="#223272"
+                        android:textSize="15dp" />
+
+                </LinearLayout>
+
                 <androidx.cardview.widget.CardView
+                    android:layout_width="340dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="40dp"
+                    app:cardBackgroundColor="@color/background_color"
+                    app:cardUseCompatPadding="true">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/borders02">
+
+                        <RelativeLayout
+                            android:layout_width="300dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginEnd="20dp"
+                            android:layout_marginBottom="20dp"
+                            android:padding="15dp">
+
+                            <TextView
+                                android:id="@+id/note_rider2"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/vehicle_text2"
+                                android:fontFamily="@font/montserrat_medium"
+                                android:gravity="center"
+                                android:text="Note to Rider"
+                                android:textColor="@color/black"
+                                android:textSize="15dp"
+                                tools:layout_editor_absoluteX="1dp"
+                                tools:layout_editor_absoluteY="189dp" />
+
+                        </RelativeLayout>
+
+                    </RelativeLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <!--androidx.cardview.widget.CardView
                     android:layout_width="340dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
@@ -549,13 +647,12 @@
                             tools:layout_editor_absoluteY="189dp" />
                     </RelativeLayout>
 
-                </androidx.cardview.widget.CardView>
+                </androidx.cardview.widget.CardView-->
 
             </LinearLayout>
 
-
         </RelativeLayout>
-    </androidx.core.widget.NestedScrollView>
 
+    </androidx.core.widget.NestedScrollView>
 
 </FrameLayout>

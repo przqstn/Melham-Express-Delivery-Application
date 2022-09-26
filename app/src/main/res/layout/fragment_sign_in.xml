@@ -24,9 +24,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/montserrat_medium"
-                android:paddingLeft="15dp"
+                android:paddingLeft="5dp"
                 android:paddingTop="20dp"
-                android:paddingBottom="10dp"
                 android:text="Phone Number"
                 android:textColor="@color/black"
                 android:textSize="16sp"
@@ -35,12 +34,12 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/edTextPhoneNo"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:gravity="center">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-
-                    android:layout_height="wrap_content"
+                <EditText
+                    android:layout_width="370dp"
+                    android:layout_height="60dp"
                     android:background="@drawable/edit_text_round"
                     android:drawableStart="@drawable/ic_baseline_local_phone_24"
                     android:drawableLeft="@drawable/ic_baseline_local_phone_24"
@@ -48,9 +47,7 @@
                     android:fontFamily="@font/montserrat_regular"
                     android:hint="Enter your number"
                     android:inputType="phone"
-                    android:paddingLeft="15dp"
-                    android:paddingTop="25dp"
-                    android:paddingBottom="25dp"
+                    android:padding="15dp"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -60,7 +57,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/montserrat_regular"
-                android:text="Erorr Message for phone"
+                android:paddingLeft="190dp"
+                android:paddingTop="5dp"
+                android:text="Error Message for phone"
                 android:textColor="#FF0033"
                 android:visibility="gone" />
 
@@ -68,9 +67,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/montserrat_medium"
-                android:paddingLeft="15dp"
+                android:paddingLeft="5dp"
                 android:paddingTop="20dp"
-                android:paddingBottom="10dp"
                 android:text="Password"
                 android:textColor="@color/black"
                 android:textSize="16sp"
@@ -80,12 +78,13 @@
                 android:id="@+id/edTextPass"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:passwordToggleEnabled="true">
+                android:gravity="center"
+                app:passwordToggleEnabled="true"
+                android:autofillHints="password">
 
-                <com.google.android.material.textfield.TextInputEditText
-
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                <EditText
+                    android:layout_width="370dp"
+                    android:layout_height="60dp"
                     android:background="@drawable/edit_text_round"
                     android:drawableStart="@drawable/ic_baseline_lock_24"
                     android:drawableLeft="@drawable/ic_baseline_lock_24"
@@ -93,12 +92,11 @@
                     android:fontFamily="@font/montserrat_regular"
                     android:hint="Enter your password"
                     android:inputType="textPassword"
-                    android:paddingLeft="15dp"
-                    android:paddingTop="25dp"
-                    android:paddingBottom="25dp"
+                    android:padding="15dp"
                     android:textColor="@color/black"
                     android:textSize="16sp"
-                    app:passwordToggleEnabled="false" />
+                    app:passwordToggleEnabled="false"
+                    android:autofillHints="password"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
@@ -106,6 +104,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/montserrat_regular"
+                android:paddingLeft="190dp"
+                android:paddingTop="5dp"
                 android:text="Error message for PW"
                 android:textColor="#FF0033"
                 android:visibility="gone" />
@@ -115,6 +115,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
                 android:fontFamily="@font/montserrat_medium"
                 android:paddingBottom="10dp"
                 android:text="Forgot Password"
@@ -134,13 +135,42 @@
                 android:layout_width="320dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="30dp"
                 android:background="@drawable/graphics_button_1"
                 android:backgroundTint="@color/button_color1"
                 android:fontFamily="@font/montserrat_medium"
                 android:text="Sign In"
                 android:textAllCaps="false"
                 android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/sign_in_with"
+                android:layout_width="409dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/montserrat_medium"
+                android:text="Or Sign In With"
+                android:textAlignment="center"/>
+
+            <Button
+                android:id="@+id/btn_sign_with_google"
+                android:layout_width="320dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="60dp"
+                android:paddingLeft="15dp"
+                android:background="@drawable/graphics_button_1"
+                android:drawableLeft="@drawable/google"
+                android:backgroundTint="@color/white"
+                android:fontFamily="@font/montserrat_medium"
+                android:text="Sign In with Google"
+                android:textAllCaps="false"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="@+id/sign_in_with"/>
+
+
+
 
         </LinearLayout>
 

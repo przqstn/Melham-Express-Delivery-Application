@@ -61,24 +61,6 @@
 
             </LinearLayout>
 
-            <!--            <LinearLayout-->
-            <!--                android:id="@+id/cancel_layout"-->
-            <!--                android:layout_width="wrap_content"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:layout_alignParentEnd="true">-->
-
-            <!--                <Button-->
-            <!--                    android:id="@+id/btn_cancelOrderCancelUser"-->
-            <!--                    android:layout_width="120dp"-->
-            <!--                    android:layout_height="wrap_content"-->
-            <!--                    android:background="@drawable/graphis_button_cancel"-->
-            <!--                    android:fontFamily="@font/montserrat_medium"-->
-            <!--                    android:text="Cancel"-->
-            <!--                    android:textColor="@color/white"-->
-            <!--                    android:visibility="visible" />-->
-
-            <!--            </LinearLayout>-->
-
         </LinearLayout>
 
     </RelativeLayout>

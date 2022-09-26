@@ -1,5 +1,6 @@
 package com.example.mcc_deliveryapp.Rider;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -14,12 +15,21 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+import static android.app.Activity.RESULT_OK;
 
 import com.example.mcc_deliveryapp.MainActivity2;
 import com.example.mcc_deliveryapp.R;
+import com.example.mcc_deliveryapp.User.user_profile_settings;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -33,6 +43,7 @@ import java.io.File;
 import java.io.IOException;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
+import java.util.Objects;
 
 public class profile_fragment extends Fragment {
 	TextView RiderName, RiderVehicle, RiderPlate, RiderAddress, RiderNumber, rating;
@@ -40,17 +51,21 @@ public class profile_fragment extends Fragment {
 	String phone;
 	float total, count;
 
+	private View view;
+
 	private StorageReference storageReference;
 	private ImageView profile_rider;
 
-    private ImageButton btn_editProfile;
+    private ImageButton btn_Settings;
 	private Button btnRider_Logout;
+
+	private GoogleSignInOptions googleSignInOptions;
+	private GoogleSignInClient googleSignInClient;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
-		// Inflate the layout for this fragment
-		View view  =  inflater.inflate(R.layout.fragment_profile_fragment, container, false);
+		view = inflater.inflate(R.layout.fragment_profile_fragment, container, false);
 
 		RiderName = view.findViewById(R.id.txt_name);
 		RiderVehicle =  view.findViewById(R.id.riderVehicle);
@@ -58,18 +73,18 @@ public class profile_fragment extends Fragment {
 		RiderAddress =  view.findViewById(R.id.riderAddress);
 		RiderNumber =  view.findViewById(R.id.riderNumber);
 		profile_rider = view.findViewById(R.id.profile_user);
-		btn_editProfile = view.findViewById(R.id.btnRider_EditProfile);
+		btn_Settings = view.findViewById(R.id.btnRider_Settings);
 		btnRider_Logout = view.findViewById(R.id.btnRider_Logout);
 		rating = view.findViewById(R.id.txt_ratings);
 
+		googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
+		googleSignInClient = GoogleSignIn.getClient(requireActivity(), googleSignInOptions);
+
 		DatabaseReference ref = FirebaseDatabase.getInstance().getReference("riders");
-		//FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
 		Intent intent = getActivity().getIntent();
 		phone = intent.getStringExtra("phonenum");
 
-		//rework to get current user id instead of using for loop
-		//authenticate current user if method is implemented in the rider log in page
 		ref.addValueEventListener(new ValueEventListener() {
 			@Override
 			public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -110,7 +125,6 @@ public class profile_fragment extends Fragment {
 
 		});
 
-		//retrieved courier's profile picture from firebase storage
 		storageReference= FirebaseStorage.getInstance().getReference().child("rider/"+phone+"/profile_image.jpg");
 		try{
 			final File file= File.createTempFile("profile_image", "jpg");
@@ -131,34 +145,53 @@ public class profile_fragment extends Fragment {
 			e.printStackTrace();
 		}
 
-		btn_editProfile.setOnClickListener(new View.OnClickListener() {
+		btn_Settings.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				Intent intent = new Intent(view.getContext(), editprofile_fragment.class);
-				intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP);
-				intent.putExtra("riderphone", phone);
-				intent.putExtra("name", RiderName.getText().toString());
-				intent.putExtra("vehicletype", RiderVehicle.getText().toString());
-				intent.putExtra("platenumber", RiderPlate.getText().toString());
-				intent.putExtra("address", RiderAddress.getText().toString());
-				view.getContext().startActivity(intent);
+				DialogFragment riderSettingFrag = new rider_profile_settings();
+				riderSettingFrag.show(getChildFragmentManager(), "what");
 			}
 		});
 
+		// TODO: Move logout to settings w/ signOut() method
 		btnRider_Logout.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				Intent intent = new Intent(view.getContext(), MainActivity2.class);
-				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|
-								Intent.FLAG_ACTIVITY_CLEAR_TASK |
-								Intent.FLAG_ACTIVITY_NEW_TASK);
-				view.getContext().startActivity(intent);
+				signOut();
+
 			}
 		});
 
 		return view;
 
 	}
+
+	void signOut(){
+		googleSignInClient.signOut().addOnCompleteListener(new OnCompleteListener<Void>() {
+			@Override
+			public void onComplete(Task<Void> task) {
+				Intent intent = new Intent(getContext(), MainActivity2.class);
+				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|
+						Intent.FLAG_ACTIVITY_CLEAR_TASK |
+						Intent.FLAG_ACTIVITY_NEW_TASK);
+				requireContext().startActivity(intent);
+			}
+		});
+	}
+
+//		btn_Settings.setOnClickListener(new View.OnClickListener() {
+//			@Override
+//			public void onClick(View view) {
+//				Intent intent = new Intent(view.getContext(), editprofile_fragment.class);
+//				intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP);
+//				intent.putExtra("riderphone", phone);
+//				intent.putExtra("name", RiderName.getText().toString());
+//				intent.putExtra("vehicletype", RiderVehicle.getText().toString());
+//				intent.putExtra("platenumber", RiderPlate.getText().toString());
+//				intent.putExtra("address", RiderAddress.getText().toString());
+//				view.getContext().startActivity(intent);
+//			}
+//		});
 
 
 }

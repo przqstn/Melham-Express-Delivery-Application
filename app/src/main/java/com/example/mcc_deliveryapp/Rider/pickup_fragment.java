@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -19,83 +21,66 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.StorageReference;
 
 public class pickup_fragment extends Fragment {
 	RecyclerView recyclerView_pickup;
 	myadapter myadapter;
-	String riderPhoneNum;
-	String riderNum;
-	String riderName;
-	String riderVehicle;
-	String orderID;
+	String riderPhoneNum, riderNum, riderName, riderVehicle, orderID;
 	private DatabaseReference mDatabase;
+	TextView emptyTextCourier;
+	ImageView emptyPickup;
 
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
-		// Inflate the layout for this fragment
 		View view =  inflater.inflate(R.layout.fragment_pickup_fragment, container, false);
-		// ...
 		mDatabase = FirebaseDatabase.getInstance().getReference();
 
 		recyclerView_pickup = view.findViewById(R.id.Recycleview_pickup);
+		emptyPickup = view.findViewById(R.id.emptyCourier);
+		emptyTextCourier = view.findViewById(R.id.emptyTextCourier);
 		recyclerView_pickup.setLayoutManager(new LinearLayoutManager(getContext()));
 
 		Intent intent = getActivity().getIntent();
 		riderPhoneNum = intent.getStringExtra("phonenum");
 		riderVehicle = intent.getStringExtra("vehicle");
 		riderName = intent.getStringExtra("name");
-		System.out.println(riderVehicle + "aaaaaaaaaa");
-
-		FirebaseDatabase database = FirebaseDatabase.getInstance();
-		DatabaseReference dr = database.getReference().child("riders");
-		Query query = dr.orderByChild("riderphone").equalTo(riderPhoneNum);
-
-
-		query.addChildEventListener(
-				new ChildEventListener() {
-					@Override
-					public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-						DatabaseReference ddf = dr.child(dataSnapshot.getKey()).child("parcelstatus");
-//						riderVehicle = dataSnapshot.child("vehicletype").getValue(String.class);
-//						riderName = dataSnapshot.child("name").getValue(String.class);
-//						System.out.println("Vehicle: " + riderVehicle);
-//						System.out.println("Name of Rider: " + riderName);
-					}
-
-					@Override
-					public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-					}
-
-					@Override
-					public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-					}
-
-					@Override
-					public void onCancelled(@NonNull DatabaseError error) {
-
-					}
-
-					@Override
-					public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-					}
-				});
-
-		System.out.println(riderName + "--" + riderVehicle);
 
 		FirebaseRecyclerOptions<model> options =
 				new FirebaseRecyclerOptions.Builder<model>()
 						.setQuery(FirebaseDatabase.getInstance().getReference()
 										.child("userparcel").orderByChild("parcelstatus").equalTo("Pending"+riderVehicle)
-//								.child("userparcel").orderByChild("parcelstatus").equalTo("Pending")
 								,model.class ).build();
 
 		myadapter = new myadapter(options);
 		myadapter.getRiderNum(riderPhoneNum);
 		myadapter.getRiderName(riderName);
 		recyclerView_pickup.setAdapter(myadapter);
+
+		DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("userparcel");
+		Query checkRider = databaseReference.orderByChild("ridernum");
+
+		checkRider.addValueEventListener(new ValueEventListener() {
+			@Override
+			public void onDataChange(@NonNull DataSnapshot snapshot) {
+				for (DataSnapshot parcelSnapshot : snapshot.getChildren()) {
+					if (parcelSnapshot.child("parcelstatus").getValue().equals("Pending"+riderVehicle))
+						{
+							emptyPickup.setVisibility(View.GONE);
+							emptyTextCourier.setVisibility(View.GONE);
+							recyclerView_pickup.setVisibility(View.VISIBLE);
+						}
+				}
+			}
+
+			@Override
+			public void onCancelled(@NonNull DatabaseError error) {
+
+			}
+		});
 
 		return view;
 
@@ -135,10 +120,6 @@ public class pickup_fragment extends Fragment {
 					public void onCancelled(@NonNull DatabaseError error) {
 
 					}
-
-//					@Override
-//					public void onCancelled(FirebaseError firebaseError) {
-//					}
 
 					@Override
 					public void onChildChanged(DataSnapshot dataSnapshot, String s) {

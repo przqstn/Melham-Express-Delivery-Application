@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.telephony.CellInfoGsm;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -16,6 +17,12 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.mcc_deliveryapp.R;
+import com.example.mcc_deliveryapp.User.user_navigation;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseException;
@@ -32,13 +39,17 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 public class riderLogin extends AppCompatActivity {
     DatabaseReference rootie;
     EditText numberRider,passRider, numberRider2;
-    Button btnLogin;
+    Button btnLogin, btn_sign_with_google2;
     Button btnRegister, forgotPassnext, btnVerify, updatePW;
     TextView forgotPass, errorNumber, errorPass;
     FirebaseAuth mAuth;
@@ -46,13 +57,76 @@ public class riderLogin extends AppCompatActivity {
     String verificationCodeBySystem;
     Dialog ForgotPW, VerifyNum, UpdatePW;
 
+    private GoogleSignInOptions googleSignInOptions;
+    private GoogleSignInClient googleSignInClient;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
+        googleSignInClient = GoogleSignIn.getClient(this, googleSignInOptions);
+
+        GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
+        if(acct!=null){
+            Log.e("Google2", acct.getEmail());
+            String inEmail = acct.getEmail();
+            final FirebaseDatabase database = FirebaseDatabase.getInstance();
+            final DatabaseReference dr = database.getReference().child("riders");
+            Query query = dr.orderByChild("email").equalTo(inEmail);
+
+            query.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    Log.e("GetEmail", String.valueOf(dataSnapshot));
+                    List<String> phone = new ArrayList<>(Collections.emptyList());
+                    List<String> name = new ArrayList<>(Collections.emptyList());
+                    List<String> vehicle = new ArrayList<>(Collections.emptyList());
+
+                    for (DataSnapshot locationSnapshot : dataSnapshot.getChildren()) {
+                        if (Objects.requireNonNull(locationSnapshot.child("email").getValue()).equals(inEmail)) {
+                            String getPhone = Objects.requireNonNull(locationSnapshot.child("riderphone").getValue()).toString();
+                            phone.add(getPhone);
+                        }
+                    }
+
+                    for (DataSnapshot locationSnapshot : dataSnapshot.getChildren()) {
+                        if (Objects.requireNonNull(locationSnapshot.child("email").getValue()).equals(inEmail)) {
+                            String getName = Objects.requireNonNull(locationSnapshot.child("name").getValue()).toString();
+                            name.add(getName);
+                        }
+                    }
+
+                    for (DataSnapshot locationSnapshot : dataSnapshot.getChildren()) {
+                        if (Objects.requireNonNull(locationSnapshot.child("email").getValue()).equals(inEmail)) {
+                            String getVehicle = Objects.requireNonNull(locationSnapshot.child("vehicletype").getValue()).toString();
+                            vehicle.add(getVehicle);
+                        }
+                    }
+
+                    try{
+                        navigateToSecondActivity(phone.get(0),vehicle.get(0), name.get(0));
+                    }
+                    catch (Exception e) {
+                        Toast.makeText(riderLogin.this,"Sign Up First",Toast.LENGTH_LONG).show();
+                        googleSignInClient.signOut();
+                    }
+
+
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+        }
+
         setContentView(R.layout.activity_rider_login);
         numberRider = findViewById(R.id.edtTextRiderNumber);
         passRider = findViewById(R.id.edtTextRiderPassword);
         btnLogin = findViewById(R.id.btnLoginRider);
+        btn_sign_with_google2 = findViewById(R.id.btn_sign_with_google2);
         btnRegister = findViewById(R.id.btnRegisterRider);
         errorNumber = findViewById(R.id.errorNumber);
         errorPass = findViewById(R.id.errorPass);
@@ -82,6 +156,16 @@ public class riderLogin extends AppCompatActivity {
         forgotPassnext = ForgotPW.findViewById(R.id.forgotPassnext);
         numberRider2 = ForgotPW.findViewById(R.id.forgotNumber);
         updatePW = UpdatePW.findViewById(R.id.updatePW);
+
+        btn_sign_with_google2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                signIn();
+            }
+        });
+
+
+
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -239,6 +323,91 @@ public class riderLogin extends AppCompatActivity {
 
     }
 
+    private void signIn(){
+        Intent signInIntent = googleSignInClient.getSignInIntent();
+        startActivityForResult(signInIntent, 0);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 0){
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+
+            try {
+                task.getResult(ApiException.class);
+                GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
+                if(acct!=null){
+                    Log.e("Google1", acct.getEmail());
+                    String inEmail = acct.getEmail();
+                    final FirebaseDatabase database = FirebaseDatabase.getInstance();
+                    final DatabaseReference dr = database.getReference().child("riders");
+                    Query query = dr.orderByChild("email").equalTo(inEmail);
+
+                    query.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            Log.e("GetEmail", String.valueOf(dataSnapshot));
+                            List<String> phone = new ArrayList<>(Collections.emptyList());
+                            List<String> name = new ArrayList<>(Collections.emptyList());
+                            List<String> vehicle = new ArrayList<>(Collections.emptyList());
+
+                            for (DataSnapshot locationSnapshot : dataSnapshot.getChildren()) {
+                                if (Objects.requireNonNull(locationSnapshot.child("email").getValue()).equals(inEmail)) {
+                                    String getPhone = Objects.requireNonNull(locationSnapshot.child("riderphone").getValue()).toString();
+                                    phone.add(getPhone);
+                                }
+                            }
+
+                            for (DataSnapshot locationSnapshot : dataSnapshot.getChildren()) {
+                                if (Objects.requireNonNull(locationSnapshot.child("email").getValue()).equals(inEmail)) {
+                                    String getName = Objects.requireNonNull(locationSnapshot.child("name").getValue()).toString();
+                                    name.add(getName);
+                                }
+                            }
+
+                            for (DataSnapshot locationSnapshot : dataSnapshot.getChildren()) {
+                                if (Objects.requireNonNull(locationSnapshot.child("email").getValue()).equals(inEmail)) {
+                                    String getVehicle = Objects.requireNonNull(locationSnapshot.child("vehicletype").getValue()).toString();
+                                    vehicle.add(getVehicle);
+                                }
+                            }
+
+                            try{
+                                navigateToSecondActivity(phone.get(0),vehicle.get(0), name.get(0));
+                            }
+                            catch (Exception e) {
+                                Toast.makeText(riderLogin.this,"Sign Up First",Toast.LENGTH_LONG).show();
+                                googleSignInClient.signOut();
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+
+
+
+                }
+            } catch (ApiException e) {
+                Toast.makeText(this.getApplicationContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
+            }
+        }
+
+    }
+
+
+    void navigateToSecondActivity(String riderNum, String ridervehicle, String ridername){
+        Intent intent = new Intent(this, rider_dashboard.class);
+        intent.putExtra("phonenum", riderNum);
+        intent.putExtra("vehicle", ridervehicle);
+        intent.putExtra("name", ridername);
+        startActivity(intent);
+
+    }
+
     private void loginRider()
     {
         String number = numberRider.getText().toString();
@@ -315,9 +484,6 @@ public class riderLogin extends AppCompatActivity {
 
 
         });
-
-
-
 
     }
     private void sendVerificationCodeToUser(String phoneNo)

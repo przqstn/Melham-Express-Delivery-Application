@@ -62,6 +62,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 
 
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
@@ -126,7 +127,8 @@ public class user_parceltransaction extends FragmentActivity implements Location
 
 	private static final String TAG = user_parceltransaction.class.getSimpleName();
 	private LatLng lastKnownLocation;
-	private static final int DEFAULT_ZOOM = 15;
+	private float DEFAULT_ZOOM = 15;
+	private boolean isZooming = false;
 	private final LatLng defaultLocation = new LatLng(14.5928, 120.9801);
 	private FusedLocationProviderClient fusedLocationClient;
 
@@ -157,7 +159,7 @@ public class user_parceltransaction extends FragmentActivity implements Location
 
 		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
 
-		//prevent lock screen
+
 		PowerManager powerManager = (PowerManager) this.getSystemService(Context.POWER_SERVICE);
 		@SuppressLint("InvalidWakeLockTag") PowerManager.WakeLock wakeLock = powerManager.newWakeLock(PowerManager.FULL_WAKE_LOCK, "My Lock");
 		wakeLock.acquire(10 * 60 * 1000L /*10 minutes*/);
@@ -166,16 +168,15 @@ public class user_parceltransaction extends FragmentActivity implements Location
 		etOrigin.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				// Set the fields to specify which types of place data to
-				// return after the user has made a selection.
+
 				List<Place.Field> field = Arrays.asList(Place.Field.ID, Place.Field.ADDRESS);
 
-				// Start the autocomplete intent.
+
 				Intent intent = new Autocomplete.IntentBuilder(AutocompleteActivityMode.FULLSCREEN, field)
 						.setCountry("PH")
 						.build(user_parceltransaction.this);
 				intent.putExtra("Initial Location", lastKnownLocation);
-				//start activity result
+
 				etDestination.setText("");
 				if (originMarkers != null) {
 					for (Marker marker : originMarkers) {
@@ -199,19 +200,18 @@ public class user_parceltransaction extends FragmentActivity implements Location
 
 			}
 		});
-// this is for drop off location listener
+
 		etDestination.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				// Set the fields to specify which types of place data to
-				// return after the user has made a selection.
+
 				List<Place.Field> field = Arrays.asList(Place.Field.ID, Place.Field.ADDRESS);
 
-				// Start the autocomplete intent.
+
 				Intent intent = new Autocomplete.IntentBuilder(AutocompleteActivityMode.FULLSCREEN, field)
 						.setCountry("PH")
 						.build(user_parceltransaction.this);
-				//start activity result
+
 				startActivityForResult(intent, 2);
 
 			}
@@ -241,7 +241,7 @@ public class user_parceltransaction extends FragmentActivity implements Location
 						bottomSheetView.findViewById(R.id.sender_btnConfirm).setOnClickListener(new View.OnClickListener() {
 							@Override
 							public void onClick(View view) {
-								//authentication of the sender dialog box
+
 								if (senderloc.length() == 0) {
 									sendercontact.setError("Required");
 								} else if (sendercontact.length() == 0) {
@@ -249,7 +249,7 @@ public class user_parceltransaction extends FragmentActivity implements Location
 								} else if (sendername.length() == 0) {
 									sendername.setError("Required");
 								} else {
-									//getting and sharing the preferences of the data in the sender area
+
 									String sender_loc = senderloc.getText().toString();
 									String sender_contact = sendercontact.getText().toString();
 									String sender_name = sendername.getText().toString();
@@ -272,7 +272,7 @@ public class user_parceltransaction extends FragmentActivity implements Location
 									bottomSheetView2.findViewById(R.id.Receiver_btnConfirm).setOnClickListener(new View.OnClickListener() {
 										@Override
 										public void onClick(View view) {
-											//authentication of the receiver dialog box
+
 											if (receiverloc.length() == 0) {
 												receiverloc.setError("Required");
 											} else if (receivercontact.length() == 0) {
@@ -280,7 +280,7 @@ public class user_parceltransaction extends FragmentActivity implements Location
 											} else if (receivername.length() == 0) {
 												receivername.setError("Required");
 											} else {
-												//getting and sharing the preferences of the data in the receiver area
+
 												String receiver_loc = receiverloc.getText().toString();
 												String receiver_contact = receivercontact.getText().toString();
 												String receiver_name = receivername.getText().toString();
@@ -293,7 +293,7 @@ public class user_parceltransaction extends FragmentActivity implements Location
 												editor.putString("key 10", userName);
 												editor.apply();
 												Intent intent = new Intent(user_parceltransaction.this, user_checkrate.class);
-												// release lock prevention
+
 												if (wakeLock.isHeld())
 													wakeLock.release();
 
@@ -333,25 +333,18 @@ public class user_parceltransaction extends FragmentActivity implements Location
 								coarseLocationGranted = result.getOrDefault(
 										Manifest.permission.ACCESS_COARSE_LOCATION, false);
 							}
-//					Boolean backgroundLocationGranted = null;
-//					if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-//						backgroundLocationGranted = result.getOrDefault(
-//								Manifest.permission.ACCESS_BACKGROUND_LOCATION,false);
-//					}
+
 
 							if (fineLocationGranted != null && fineLocationGranted) {
-								// Precise location access granted.
+
 							} else if (coarseLocationGranted != null && coarseLocationGranted) {
-								// Only approximate location access granted.
+
 							} else {
 								onBackPressed();
 							}
 						}
 				);
 
-		// Before you perform the actual permission request, check whether your app
-		// already has the permissions, and whether your app needs to show a permission
-		// rationale dialog. For more details, see Request permissions.
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
 			locationPermissionRequest.launch(new String[]{
 					Manifest.permission.ACCESS_FINE_LOCATION,
@@ -387,13 +380,7 @@ public class user_parceltransaction extends FragmentActivity implements Location
 					&& ActivityCompat.checkSelfPermission(this,
 					Manifest.permission.ACCESS_COARSE_LOCATION) !=
 					PackageManager.PERMISSION_GRANTED) {
-				// TODO: Consider calling
-				//    ActivityCompat#requestPermissions
-				// here to request the missing permissions, and then overriding
-				//   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-				//                                          int[] grantResults)
-				// to handle the case where the user grants the permission. See the documentation
-				// for ActivityCompat#requestPermissions for more details.
+
 				return;
 			}
 
@@ -401,7 +388,7 @@ public class user_parceltransaction extends FragmentActivity implements Location
 					this, new OnSuccessListener<Location>() {
 						@Override
 						public void onSuccess(Location location) {
-							// Got last known location. In some rare situations this can be null.
+
 							if (location != null) {
 								latitude = location.getLatitude();
 								longitude = location.getLongitude();
@@ -412,13 +399,7 @@ public class user_parceltransaction extends FragmentActivity implements Location
 										.newLatLngZoom(defaultLocation, DEFAULT_ZOOM));
 								mMap.getUiSettings().setMyLocationButtonEnabled(true);
 								if (ActivityCompat.checkSelfPermission(user_parceltransaction.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(user_parceltransaction.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-									// TODO: Consider calling
-									//    ActivityCompat#requestPermissions
-									// here to request the missing permissions, and then overriding
-									//   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-									//                                          int[] grantResults)
-									// to handle the case where the user grants the permission. See the documentation
-									// for ActivityCompat#requestPermissions for more details.
+
 									return;
 								}
 								locationManager.requestLocationUpdates(bestProvider, 1000, 0, user_parceltransaction.this);
@@ -445,12 +426,10 @@ public class user_parceltransaction extends FragmentActivity implements Location
 
 	@Override
 	public void onLocationChanged(Location location) {
-		//Hey, a non null location! Sweet!
 
-		//remove location callback:
 		locationManager.removeUpdates(this);
 
-		//open the map:
+
 		latitude = location.getLatitude();
 		longitude = location.getLongitude();
 		lastKnownLocation = new LatLng(latitude, longitude);
@@ -490,39 +469,38 @@ public class user_parceltransaction extends FragmentActivity implements Location
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 
-		// this code is for pick up and drop off places if request code == 1 the pick up edit text area will set the first places
-		// if request code == 2 this means that the edit text is for destination area.
+
 
 		if (requestCode == 1) {
 			if (resultCode == RESULT_OK) {
-				//When success initialize place
+
 				Place place = Autocomplete.getPlaceFromIntent(data);
-				//set address on edittext
+
 				etOrigin.setText(place.getAddress());
 			}
 			else if (resultCode == AutocompleteActivity.RESULT_ERROR) {
-				// TODO: Handle the error.
+
 				Status status = Autocomplete.getStatusFromIntent(data);
-				//Log.i(TAG, status.getStatusMessage());
+
 			}
 			else if (resultCode == RESULT_CANCELED) {
-				// The user canceled the operation.
+
 				etOrigin.setText("");
 			}
 		}
 		if (requestCode == 2) {
 			if (resultCode == RESULT_OK) {
-				//When success initialize place
+
 				Place place2 = Autocomplete.getPlaceFromIntent(data);
-				//set address on edittext
+
 				etDestination.setText(place2.getAddress());
 				sendRequest();
 			} else if (resultCode == AutocompleteActivity.RESULT_ERROR) {
-				// TODO: Handle the error.
+
 				Status status = Autocomplete.getStatusFromIntent(data);
-				//Log.i(TAG, status.getStatusMessage());
+
 			} else if (resultCode == RESULT_CANCELED) {
-				// The user canceled the operation.
+
 				etDestination.setText("");
 			}
 
@@ -570,14 +548,13 @@ public class user_parceltransaction extends FragmentActivity implements Location
 	public void onMapReady(@NonNull GoogleMap googleMap) {
 		mMap = googleMap;
 
-		// this is for location button position
+
 		if (mapview != null &&
 				mapview.findViewById(Integer.parseInt("1")) != null) {
-			// Get the button view
-			// and next place it, on bottom right (as Google Maps app)
+
 			RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams)
 					locationButton.getLayoutParams();
-			// position on right bottom
+
 			layoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP, 0);
 			layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
 			layoutParams.setMargins(0, 0, 30, 400);
@@ -586,8 +563,9 @@ public class user_parceltransaction extends FragmentActivity implements Location
 		}
 
 		mMap.getUiSettings().setZoomControlsEnabled(true);
+		mMap.setOnCameraChangeListener(getCameraChangeListener());
 
-// this is for customize map
+
 		try {
 			boolean success = mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(getApplicationContext(), R.raw.customize_maps_style));
 			if (!success)
@@ -601,15 +579,9 @@ public class user_parceltransaction extends FragmentActivity implements Location
 		mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(ncr, 20));
 
 
-		// if this is for permission check if the user denied the permission there will be no map appear
+
 		if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-			// TODO: Consider calling
-			//    ActivityCompat#requestPermissions
-			// here to request the missing permissions, and then overriding
-			//   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-			//                                          int[] grantResults)
-			// to handle the case where the user grants the permission. See the documentation
-			// for ActivityCompat#requestPermissions for more details.
+
 			return;
 		}
 		mMap.setMyLocationEnabled(true);
@@ -620,7 +592,6 @@ public class user_parceltransaction extends FragmentActivity implements Location
 			public boolean onMyLocationButtonClick() {
 				if (mapview != null) {
 					getLocation();
-//					getDeviceLocation();
 					etDestination.setText("");
 					if (originMarkers != null) {
 						for (Marker marker : originMarkers) {
@@ -647,6 +618,27 @@ public class user_parceltransaction extends FragmentActivity implements Location
 		getLocation();
 
 
+	}
+
+	public GoogleMap.OnCameraChangeListener getCameraChangeListener()
+	{
+		return new GoogleMap.OnCameraChangeListener()
+		{
+			@Override
+			public void onCameraChange(@NonNull CameraPosition position)
+			{
+				Log.d("Zoom", "Zoom: " + position.zoom);
+
+				if(DEFAULT_ZOOM != position.zoom)
+				{
+					isZooming = true;
+				}
+
+				DEFAULT_ZOOM = position.zoom;
+
+				Log.e("ZOOM", String.valueOf(DEFAULT_ZOOM));
+			}
+		};
 	}
 
 	@Override

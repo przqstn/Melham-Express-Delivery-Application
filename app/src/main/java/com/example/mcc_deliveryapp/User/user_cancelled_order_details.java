@@ -107,7 +107,6 @@ public class user_cancelled_order_details extends AppCompatActivity {
                         receiverName = dataSnapshot.child("receivername").getValue(String.class);
                         receiverLocation = dataSnapshot.child("receiverlocation").getValue(String.class);
                         receiverContact = dataSnapshot.child("receivercontact").getValue(String.class);
-//                        riderName = dataSnapshot.child("ridername").getValue(String.class);
                         vehicleType = dataSnapshot.child("vehicletype").getValue(String.class);
                         senderNote = dataSnapshot.child("customernotes").getValue(String.class);
                         orderPrice = dataSnapshot.child("fee").getValue(String.class);

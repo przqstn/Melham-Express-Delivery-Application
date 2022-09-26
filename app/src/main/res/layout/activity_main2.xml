@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/backgroundreg"
     android:orientation="vertical"
     tools:context=".MainActivity2">
 
@@ -31,67 +32,62 @@
                     android:orientation="vertical"
                     android:padding="20dp">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="5dp"
-                        android:fontFamily="@font/montserrat_bold"
-                        android:padding="20dp"
-                        android:text="MELHAM EXPRESS"
-                        android:textColor="@color/black"
-                        android:textSize="28sp"
-                        android:textStyle="bold" />
-
                     <ImageView
                         android:id="@+id/imageView"
-                        android:layout_width="317dp"
-                        android:layout_height="358dp"
+                        android:layout_width="250dp"
+                        android:layout_height="300dp"
                         android:layout_gravity="center"
-                        app:srcCompat="@drawable/melogo" />
-
-                    <TextView
-                        android:id="@+id/textView22"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:fontFamily="@font/montserrat_semibold"
-                        android:paddingTop="20dp"
-                        android:paddingBottom="5dp"
-                        android:text="Cash on Delivery"
-                        android:textColor="#000000"
-                        android:textSize="20sp" />
+                        android:layout_marginTop="50dp"
+                        app:srcCompat="@drawable/newsplashscreen" />
 
                     <TextView
                         android:id="@+id/textView23"
-                        android:layout_width="319dp"
+                        android:layout_width="325dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:fontFamily="@font/montserrat_medium"
-                        android:text="Our delivery will ensure your items are delivered right to the door steps."
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="50dp"
+                        android:fontFamily="@font/montserrat_italic"
+                        android:text="ALWAYS GOING THE EXTRA MILE,\n JUST FOR YOU"
                         android:textAlignment="center"
-                        android:textColor="#777777"
+                        android:textColor="#FFFFFF"
                         android:textSize="16sp" />
 
                     <Button
-                        android:id="@+id/btn_riderform"
-                        android:layout_width="match_parent"
+                        android:id="@+id/btn_userform"
+                        android:layout_gravity="center"
+                        android:layout_width="250dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginBottom="10dp"
                         android:background="@drawable/graphics_button_1"
+                        android:backgroundTint="#3B4E8E"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="15dp"
+                        android:text="Client"
+                        android:textColor="@color/white" />
+
+                    <Button
+                        android:id="@+id/btn_riderform"
+                        android:layout_gravity="center"
+                        android:layout_width="250dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="15dp"
+                        android:background="@drawable/graphics_button_1"
+                        android:backgroundTint="#3B4E8E"
                         android:fontFamily="@font/montserrat_medium"
                         android:text="Courier"
                         android:textColor="@color/white" />
 
                     <Button
-                        android:id="@+id/btn_userform"
-                        android:layout_width="match_parent"
+                        android:id="@+id/btn_trackorder"
+                        android:layout_gravity="center"
+                        android:layout_width="250dp"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/graphics_button_1"
+                        android:background="@drawable/outline_button"
                         android:fontFamily="@font/montserrat_medium"
-                        android:text="User"
-                        android:textColor="@color/white" />
+                        android:text="Track Order"
+                        android:textColor="@color/white"
+                        />
 
                 </LinearLayout>
 

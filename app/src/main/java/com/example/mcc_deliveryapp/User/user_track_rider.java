@@ -30,6 +30,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -50,6 +51,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
@@ -81,7 +83,8 @@ import java.util.Locale;
 
 public class user_track_rider extends FragmentActivity implements OnMapReadyCallback, DirectionFinderListener {
     private GoogleMap mMap;
-    private static final int DEFAULT_ZOOM = 18;
+    float DEFAULT_ZOOM = 18;
+    private boolean isZooming = false;
     View mapview, locationButton;
     String userLatitude, userLongitude, riderLatitude, riderLongitude;
     private List<Marker> originMarkers = new ArrayList<>();
@@ -93,11 +96,12 @@ public class user_track_rider extends FragmentActivity implements OnMapReadyCall
     private Location lastKnownLocation;
     private final LatLng defaultLocation = new LatLng(15.594197, 120.970414);
     private FusedLocationProviderClient fusedLocationProviderClient;
-    private ImageView profilePic, riderVehicleIcon; // line 51 added ImageView variable
-    private StorageReference storageReference; //line 52 added StorageReference
+    private ImageView profilePic, riderVehicleIcon;
+    private StorageReference storageReference;
     HashMap markerMap = new HashMap();
-    Button back, btn_message_courier,btn_call_courier ;
-    String riderNumber, orderID, phonenum, name, riderName, riderVehicle, riderNum;
+    Button btn_message_courier,btn_call_courier ;
+    ImageButton back;
+    String riderNumber, orderID, phonenum, name, riderName, riderVehicle, riderNum, vehicleType;
     TextView riderNameUI, riderVehicleUI, riderPlateUI;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,6 +111,7 @@ public class user_track_rider extends FragmentActivity implements OnMapReadyCall
         phonenum = intent.getStringExtra("phonenum");
         riderName = intent.getStringExtra("ridername");
         riderNum = intent.getStringExtra("ridernum");
+        vehicleType = intent.getStringExtra("vehicleType");
         requestPermission();
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         super.onCreate(savedInstanceState);
@@ -331,12 +336,9 @@ public class user_track_rider extends FragmentActivity implements OnMapReadyCall
 
 
                             if (fineLocationGranted != null && fineLocationGranted) {
-                                // Precise location access granted.
-                            } else if (coarseLocationGranted != null && coarseLocationGranted) {
-                                // Only approximate location access granted.
-//					} else if (backgroundLocationGranted != null && backgroundLocationGranted){
 
-                                // only background location granted
+                            } else if (coarseLocationGranted != null && coarseLocationGranted) {
+
                             } else {
                                 onBackPressed();
                                 Toast.makeText(getBaseContext(), "Please turn of Location Service and try again.", Toast.LENGTH_SHORT).show();
@@ -363,7 +365,7 @@ public class user_track_rider extends FragmentActivity implements OnMapReadyCall
                     @Override
                     public void onComplete(@NonNull Task<Location> task) {
                         if (task.isSuccessful()) {
-                            // Set the map's camera position to the current location of the device.
+
                             lastKnownLocation = task.getResult();
 
                             if (lastKnownLocation != null) {
@@ -411,29 +413,23 @@ public class user_track_rider extends FragmentActivity implements OnMapReadyCall
         mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(getApplicationContext(), R.raw.customize_maps_style));
         getLocationPermission();
         getDeviceLocation();
-        // this is for location button position
+
         if (mapview != null &&
                 mapview.findViewById(Integer.parseInt("1")) != null) {
-            // Get the button view
-            // and next place it, on bottom right (as Google Maps app)
+
             RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams)
                     locationButton.getLayoutParams();
-            // position on right bottom
+
             layoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP, 0);
             layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
         }
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
+
             return;
         }
         mMap.getUiSettings().setZoomControlsEnabled(true);
+        mMap.setOnCameraChangeListener(getCameraChangeListener());
 
         LocationListener locationListener = new LocationListener() {
             @Override
@@ -475,6 +471,28 @@ public class user_track_rider extends FragmentActivity implements OnMapReadyCall
             e.printStackTrace();
         }
     }
+
+    public GoogleMap.OnCameraChangeListener getCameraChangeListener()
+    {
+        return new GoogleMap.OnCameraChangeListener()
+        {
+            @Override
+            public void onCameraChange(@NonNull CameraPosition position)
+            {
+                Log.d("Zoom", "Zoom: " + position.zoom);
+
+                if(DEFAULT_ZOOM != position.zoom)
+                {
+                    isZooming = true;
+                }
+
+                DEFAULT_ZOOM = position.zoom;
+
+                Log.e("ZOOM", String.valueOf(DEFAULT_ZOOM));
+            }
+        };
+    }
+
     private BitmapDescriptor bitmapDescriptorFromVector(Context context, int vectorResId) {
         Drawable vectorDrawable = ContextCompat.getDrawable(context, vectorResId);
         assert vectorDrawable != null;
@@ -490,6 +508,7 @@ public class user_track_rider extends FragmentActivity implements OnMapReadyCall
 
         if (originMarkers != null) {
             for (Marker marker : originMarkers) {
+
                 marker.remove();
             }
         }
@@ -509,9 +528,8 @@ public class user_track_rider extends FragmentActivity implements OnMapReadyCall
 
     @Override
     public void onDirectionFinderSuccess(List<Route> routes) {
-        polylinePaths = new ArrayList<>();
-        originMarkers = new ArrayList<>();
-        destinationMarkers = new ArrayList<>();
+
+
 
         for (Route route : routes) {
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(route.startLocation, 16));
@@ -526,7 +544,6 @@ public class user_track_rider extends FragmentActivity implements OnMapReadyCall
                     color(Color.BLUE).
                     width(10);
 
-//            polylineOptions.add(riderLocation);
             for (int i = 0; i < route.points.size(); i++)
                 polylineOptions.add(route.points.get(i));
 
@@ -565,7 +582,7 @@ public class user_track_rider extends FragmentActivity implements OnMapReadyCall
             System.out.println(test1 + test2);
 
             try {
-                new DirectionFinder(this, test2, test1, riderVehicle.toLowerCase()).execute();
+                new DirectionFinder(this, test2, test1, vehicleType).execute();
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             }

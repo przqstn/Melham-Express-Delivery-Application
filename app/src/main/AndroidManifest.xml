@@ -11,10 +11,12 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MCC_DeliveryApp">
@@ -40,11 +42,29 @@
             android:name=".User.user_ongoing_order_details"
             android:exported="false" />
         <activity
+            android:name=".User.user_ongoing_order_details2"
+            android:exported="false" />
+        <activity
+            android:name=".User.user_reportBug"
+            android:exported="false" />
+        <activity
+            android:name=".User.frequentlyAskedQuestions"
+            android:exported="false"/>
+        <activity
             android:name=".User.user_track_rider"
+            android:exported="false" />
+        <activity
+            android:name=".User.user_track_rider2"
             android:exported="false" />
         <activity
             android:name=".Rider.rider_takeorder_map"
             android:exported="false" />
+        <activity
+            android:name=".Rider.faqs_rider"
+            android:exported="false"/>
+        <activity
+            android:name=".Rider.riderReportPage"
+            android:exported="false"/>
         <activity
             android:name=".Rider.rider_ongoing_order"
             android:exported="false" />
@@ -68,6 +88,7 @@
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+
         <activity
             android:name=".Rider.editprofile_changePass"
             android:exported="true"

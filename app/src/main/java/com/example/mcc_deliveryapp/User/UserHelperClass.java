@@ -1,21 +1,27 @@
 package com.example.mcc_deliveryapp.User;
-//~~~~~~~~~~~~~~NEED TO PUSH AND COMMIT~~~~~~~~~~~~~//
 public class UserHelperClass {
-	String userFullname,UserPhone,UserPass, mainAdd, secondaryAdd;
-
+	String userFullname,UserPhone,userEmail,UserPass, mainAdd, secondaryAdd;
 
 
 	public UserHelperClass() {
 
 	}
 
-	public UserHelperClass(String userFullname, String userPhone, String userPass,
+	public UserHelperClass(String userFullname, String userPhone, String userEmail, String userPass,
 						   String mainAdd, String secondaryAdd) {
 		this.userFullname = userFullname;
+		this.userEmail = userEmail;
 		UserPhone = userPhone;
 		UserPass = userPass;
 		this.mainAdd = mainAdd;
 		this.secondaryAdd = secondaryAdd;
+	}
+	public String getUserEmail() {
+		return userEmail;
+	}
+
+	public void setUserEmail(String userEmail) {
+		this.userEmail = userEmail;
 	}
 
 	public String getUserFullname() {

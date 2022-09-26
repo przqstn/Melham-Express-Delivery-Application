@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -21,14 +23,17 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 
 public class user_completed_fragment extends Fragment {
 	private RecyclerView recyclerView;
 	private String userNum, userName, riderNum;
+	private ImageView emptyCompleted;
+	private TextView emptyText;
 
-	user_completed_adapter adapter; // Create Object of the Adapter class
-	DatabaseReference mbase; // Create object of the
+	user_completed_adapter adapter;
+	DatabaseReference mbase;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -38,14 +43,14 @@ public class user_completed_fragment extends Fragment {
 		View view =  inflater.inflate(R.layout.fragment_user_completed_fragment, container, false);
 
 		System.out.println("Completed view");
-		// Create a instance of the database and get
-		// its reference
+
 		mbase = FirebaseDatabase.getInstance().getReference().child("userparcel");
 
 		System.out.println(mbase);
 		recyclerView = view.findViewById(R.id.recycler_user_completed);
+		emptyCompleted = view.findViewById(R.id.emptyImage);
+		emptyText = view.findViewById(R.id.emptyText);
 
-		// To display the Recycler view linearly
 		recyclerView.setLayoutManager(
 				new LinearLayoutManager(getContext()));
 
@@ -83,8 +88,7 @@ public class user_completed_fragment extends Fragment {
 					}
 				});
 
-		// It is a class provide by the FirebaseUI to make a
-		// query in the database to fetch appropriate data
+
 		FirebaseRecyclerOptions<model> options
 				= new FirebaseRecyclerOptions.Builder<model>()
 				.setQuery(FirebaseDatabase.getInstance().getReference()
@@ -92,19 +96,40 @@ public class user_completed_fragment extends Fragment {
 						.equalTo("Completed"+userNum), model.class)
 				.build();
 
-		// Connecting object of required Adapter class to
-		// the Adapter class itself
+
 		adapter = new user_completed_adapter(options);
-		// Connecting Adapter class with the Recycler view*/
+
 		adapter.getUserNum(userNum);
 		adapter.getUserName(userName);
 		recyclerView.setAdapter(adapter);
 
+		query.addValueEventListener(new ValueEventListener() {
+			@Override
+			public void onDataChange(@NonNull DataSnapshot snapshot) {
+				for (DataSnapshot parcelSnapshot : snapshot.getChildren()) {
+					if (parcelSnapshot.child("defaultUserNum").getValue().equals(userNum))
+					{
+						if (parcelSnapshot.child("userParcelStatus").getValue().equals("Completed"+userNum))
+						{
+							emptyCompleted.setVisibility(View.GONE);
+							emptyText.setVisibility(View.GONE);
+							recyclerView.setVisibility(View.VISIBLE);
+						}
+					}
+				}
+			}
+
+			@Override
+			public void onCancelled(@NonNull DatabaseError error) {
+
+			}
+		});
+
+
 		return view;
 	}
 
-	// Function to tell the app to start getting
-	// data from database on starting of the activity
+
 	@Override
 	public void onStart()
 	{
@@ -112,8 +137,7 @@ public class user_completed_fragment extends Fragment {
 		adapter.startListening();
 	}
 
-	// Function to tell the app to stop getting
-	// data from database on stopping of the activity
+
 	@Override
 	public void onStop()
 	{

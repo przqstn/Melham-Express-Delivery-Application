@@ -48,6 +48,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
@@ -81,7 +82,7 @@ public class rider_takeorder_map extends FragmentActivity implements OnMapReadyC
     private List<Polyline> polylinePaths = new ArrayList<>();
     List<Address> addressesRider, addressesStart, addressesEnd;
     Geocoder geocoder;
-//    private int locationStatus = 0;
+
 
     public LocationManager locationManager;
     public double latitude;
@@ -95,7 +96,8 @@ public class rider_takeorder_map extends FragmentActivity implements OnMapReadyC
     private LatLng riderLocation;
     private GoogleMap mMap;
     private DatabaseReference riderReference, databaseReference;
-    private static final int DEFAULT_ZOOM = 18;
+    private float DEFAULT_ZOOM = 18;
+    private boolean isZooming = false;
     ImageButton back;
     Button pickedComplete;
 
@@ -150,7 +152,7 @@ public class rider_takeorder_map extends FragmentActivity implements OnMapReadyC
         back = findViewById(R.id.backbutton);
         pickedComplete = findViewById(R.id.pickedComplete);
 
-        //prevent lock screen
+
         PowerManager powerManager = (PowerManager) this.getSystemService(Context.POWER_SERVICE);
         @SuppressLint("InvalidWakeLockTag") PowerManager.WakeLock wakeLock = powerManager.newWakeLock(PowerManager.FULL_WAKE_LOCK, "My Lock");
         wakeLock.acquire();
@@ -235,12 +237,13 @@ public class rider_takeorder_map extends FragmentActivity implements OnMapReadyC
                         riderphonenum.add(riderphone);
                     }
                 }
-                for (int i = 0; i < latitudes.size(); i++) {
-                    LatLng latLng = new LatLng(Double.parseDouble(latitudes.get(i)), Double.parseDouble(longitudes.get(i)));
-                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, DEFAULT_ZOOM));
+                if (latitudes.isEmpty()) {
+                    for (int i = 0; i < latitudes.size(); i++) {
+                        LatLng latLng = new LatLng(Double.parseDouble(latitudes.get(i)), Double.parseDouble(longitudes.get(i)));
+                        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, DEFAULT_ZOOM));
 
+                    }
                 }
-
                 sendRequest();
 
 
@@ -261,7 +264,7 @@ public class rider_takeorder_map extends FragmentActivity implements OnMapReadyC
                 intent.putExtra("phonenum", phonenum);
                 intent.putExtra("username", name);
 
-                //release lock screen prevention
+
                 if (wakeLock.isHeld())
                     wakeLock.release();
 
@@ -275,7 +278,7 @@ public class rider_takeorder_map extends FragmentActivity implements OnMapReadyC
             @Override
             public void onClick(View view) {
                 if (parcelState.equals("pending")) {
-//                    locationStatus = 1;
+
                     Log.e("TAG", parcelState);
                     Log.e("TAG", orderID);
                     pickedComplete.setText("Parcel Delivered");
@@ -316,38 +319,7 @@ public class rider_takeorder_map extends FragmentActivity implements OnMapReadyC
                     sendRequest();
                 } else if (parcelState.equals("parcelPicked")) {
 
-//                    final FirebaseDatabase database = FirebaseDatabase.getInstance();
-//                    final DatabaseReference dr = database.getReference().child("userparcel");
-//                    Query query = dr.orderByChild("OrderID").equalTo(orderID);
-//
-//                    query.addChildEventListener(
-//                            new ChildEventListener() {
-//                                @Override
-//                                public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-////                                    dr.child(dataSnapshot.getKey()).child("parcelState").setValue("delivered");
-//                                }
-//
-//                                @Override
-//                                public void onChildRemoved(DataSnapshot dataSnapshot) {
-//
-//                                }
-//
-//                                @Override
-//                                public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-//                                }
-//
-//                                @Override
-//                                public void onCancelled(@NonNull DatabaseError error) {
-//
-//                                }
-//
-//                                @Override
-//                                public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-//                                }
-//                            });
 
-//                    Log.e("TAG", parcelState);
-//                    parcelState = "parcelPicked";
                     Intent intent = new Intent(rider_takeorder_map.this, rider_ongoing_order.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     intent.putExtra("phonenum", phonenum);
@@ -355,10 +327,10 @@ public class rider_takeorder_map extends FragmentActivity implements OnMapReadyC
                     intent.putExtra("vehicle", riderVehicle);
                     intent.putExtra("orderID", orderID);
 
-                    //release lock screen prevention
+
                     if (wakeLock.isHeld())
                         wakeLock.release();
-//                    locationStatus = 0;
+
                     pickedComplete.setText("Parcel Picked Up");
                     startActivity(intent);
                 }
@@ -490,29 +462,21 @@ public class rider_takeorder_map extends FragmentActivity implements OnMapReadyC
             criteria = new Criteria();
             bestProvider = String.valueOf(locationManager.getBestProvider(criteria, true));
 
-            //You can still do this if you like, you might get lucky:
             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                // TODO: Consider calling
-                //    ActivityCompat#requestPermissions
-                // here to request the missing permissions, and then overriding
-                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                //                                          int[] grantResults)
-                // to handle the case where the user grants the permission. See the documentation
-                // for ActivityCompat#requestPermissions for more details.
+
                 return;
             }
             fusedLocationClient.getLastLocation().addOnSuccessListener(
                     this, new OnSuccessListener<Location>() {
                         @Override
                         public void onSuccess(Location location) {
-                            // Got last known location. In some rare situations this can be null.
+
                             if (location != null) {
                                 latitude = location.getLatitude();
                                 longitude = location.getLongitude();
+                                Log.e("Location:", latitude + " " + longitude);
                                 riderReference.child(phonenum).child("latitude").setValue(latitude);
                                 riderReference.child(phonenum).child("longitude").setValue(longitude);
-//                                lastKnownLocation = new LatLng(latitude, longitude);
-//                                requestLoc();
                             } else {
                                 mMap.moveCamera(CameraUpdateFactory
                                         .newLatLngZoom(defaultLocation, DEFAULT_ZOOM));
@@ -521,13 +485,6 @@ public class rider_takeorder_map extends FragmentActivity implements OnMapReadyC
                                         Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
                                         && ActivityCompat.checkSelfPermission(rider_takeorder_map.this,
                                         Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                                    // TODO: Consider calling
-                                    //    ActivityCompat#requestPermissions
-                                    // here to request the missing permissions, and then overriding
-                                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                                    //                                          int[] grantResults)
-                                    // to handle the case where the user grants the permission. See the documentation
-                                    // for ActivityCompat#requestPermissions for more details.
                                     return;
                                 }
                                 locationManager.requestLocationUpdates(bestProvider, 1000,
@@ -549,31 +506,23 @@ public class rider_takeorder_map extends FragmentActivity implements OnMapReadyC
         mMap = googleMap;
         mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(getApplicationContext(), R.raw.customize_maps_style));
 
-        // this is for location button position
+
         if (mapview != null &&
                 mapview.findViewById(Integer.parseInt("1")) != null) {
-            // Get the button view
-            // and next place it, on bottom right (as Google Maps app)
+
             RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams)
                     locationButton.getLayoutParams();
-            // position on right bottom
             layoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP, 0);
             layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
         }
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
+
             return;
         }
 
         mMap.getUiSettings().setZoomControlsEnabled(true);
-
+        mMap.setOnCameraChangeListener(getCameraChangeListener());
 
         LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 
@@ -594,6 +543,28 @@ public class rider_takeorder_map extends FragmentActivity implements OnMapReadyC
         }
         getLocation();
     }
+
+    public GoogleMap.OnCameraChangeListener getCameraChangeListener()
+    {
+        return new GoogleMap.OnCameraChangeListener()
+        {
+            @Override
+            public void onCameraChange(@NonNull CameraPosition position)
+            {
+                Log.d("Zoom", "Zoom: " + position.zoom);
+
+                if(DEFAULT_ZOOM != position.zoom)
+                {
+                    isZooming = true;
+                }
+
+                DEFAULT_ZOOM = position.zoom;
+
+                Log.e("ZOOM", String.valueOf(DEFAULT_ZOOM));
+            }
+        };
+    }
+
     public void requestPermission(){
         ActivityResultLauncher<String[]> locationPermissionRequest =
                 registerForActivityResult(new ActivityResultContracts
@@ -611,14 +582,11 @@ public class rider_takeorder_map extends FragmentActivity implements OnMapReadyC
 
 
                             if (fineLocationGranted != null && fineLocationGranted) {
-                                // Precise location access granted.
-                            } else if (coarseLocationGranted != null && coarseLocationGranted) {
-                                // Only approximate location access granted.
-//					} else if (backgroundLocationGranted != null && backgroundLocationGranted){
 
-                                // only background location granted
+                            } else if (coarseLocationGranted != null && coarseLocationGranted) {
+
                             } else {
-                                // No location access granted.
+
                             }
                         }
                 );
@@ -631,5 +599,3 @@ public class rider_takeorder_map extends FragmentActivity implements OnMapReadyC
     }
 
 }
-
-

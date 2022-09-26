@@ -83,7 +83,7 @@
                 <LinearLayout
                     android:id="@+id/edit1"
                     android:layout_width="match_parent"
-                    android:layout_height="75dp"
+                    android:layout_height="60dp"
                     android:layout_marginBottom="15dp"
                     android:background="@drawable/borders"
                     android:orientation="vertical"
@@ -108,7 +108,7 @@
                 <LinearLayout
                     android:id="@+id/edit2"
                     android:layout_width="match_parent"
-                    android:layout_height="75dp"
+                    android:layout_height="60dp"
                     android:layout_marginBottom="15dp"
                     android:background="@drawable/borders"
                     android:orientation="vertical"
@@ -144,7 +144,7 @@
                 <RelativeLayout
                     android:id="@+id/edit3"
                     android:layout_width="match_parent"
-                    android:layout_height="75dp"
+                    android:layout_height="60dp"
                     android:layout_marginBottom="15dp"
                     android:background="@drawable/borders"
                     android:orientation="vertical"
@@ -194,7 +194,7 @@
                 <LinearLayout
                     android:id="@+id/change_pass"
                     android:layout_width="match_parent"
-                    android:layout_height="75dp"
+                    android:layout_height="60dp"
                     android:gravity="center_vertical"
                     android:layout_marginBottom="35dp"
                     android:background="@drawable/borders"
@@ -210,10 +210,10 @@
                         android:drawablePadding="10dp"
                         android:drawableEnd="@drawable/forward_arrow"
                         android:drawableTint="@color/strokes"
-                        android:fontFamily="@font/montserrat_mediumitalic"
+                        android:fontFamily="@font/montserrat_semibolditalic"
                         android:text="Change Password"
-                        android:textColor="@color/app_color"
-                        android:gravity="end"
+                        android:textColor="#000000"
+                        android:gravity="start"
                         tools:ignore="TextContrastCheck" />
                 </LinearLayout>
             </LinearLayout>

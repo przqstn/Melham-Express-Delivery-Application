@@ -122,16 +122,4 @@
             android:text="0 min" />
 
     </LinearLayout>
-
-
-    <!--<ImageView
-        android:id="@+id/img_addressbtndialog"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/map_linearLayout"
-        android:src="@drawable/ic_baseline_horizontal_rule_24" />-->
-
-
-
-    <!--  <include layout="@layout/user_mapcontent" /> -->
 </RelativeLayout>

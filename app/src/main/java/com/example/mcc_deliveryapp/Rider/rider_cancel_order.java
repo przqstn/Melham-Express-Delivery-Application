@@ -125,10 +125,9 @@ public class rider_cancel_order extends AppCompatActivity {
 
     @SuppressLint("NonConstantResourceId")
     public void onRadioButtonClicked(View view) {
-        // Is the button now checked?
+
         boolean checked = ((RadioButton) view).isChecked();
 
-        // Check which checkbox was clicked
         switch(view.getId()) {
             case R.id.systemError:
                 if (checked) {

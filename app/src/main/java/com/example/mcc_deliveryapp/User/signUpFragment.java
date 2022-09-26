@@ -39,20 +39,22 @@ import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 
 public class signUpFragment extends Fragment {
-    //setting the value of the given edit_text
-    EditText editTxt_fullname,editTxt_phoneNum,editTxt_password,editTxt_Cpassword;
+
+    EditText editTxt_fullname,editTxt_phoneNum, editTxt_userEmail,editTxt_password,editTxt_Cpassword;
     Button btn_createAcc;
     String verificationCodeBySystem_user;
     TextInputLayout textInputPassword;
     EditText etCode_user;
-    TextView userName, userNumber, emptyName, emptyNum, emptyPass, emptyConfirm, invalidPass, invalidConfirm;
-    //Database Realtime
+    TextView userName, userNumber, userEmail, emptyName, emptyNum, emptyEmail, emptyPass,
+            emptyConfirm, invalidPass, invalidConfirm;
+
     FirebaseDatabase root;
     DatabaseReference DbRef;
     FirebaseAuth fAuth;
 
     String fullname;
     String phoneNum;
+    String useremail;
     String pass;
     String Cpass;
 
@@ -60,11 +62,12 @@ public class signUpFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
         View view = inflater.inflate(R.layout.fragment_sign_up, container, false);
 
-        // Initialization of text
+
         emptyName = view.findViewById(R.id.emptyName);
+        emptyEmail = view.findViewById(R.id.emptyEmail);
         emptyNum = view.findViewById(R.id.emptyNum);
         emptyPass = view.findViewById(R.id.emptyPass);
         emptyConfirm = view.findViewById(R.id.emptyConfirm);
@@ -73,6 +76,7 @@ public class signUpFragment extends Fragment {
 
         editTxt_fullname = view.findViewById(R.id.edTextUserName);
         editTxt_phoneNum = view.findViewById(R.id.edTextPhoneNo);
+        editTxt_userEmail = view.findViewById(R.id.edUserEmail);
         editTxt_password = view.findViewById(R.id.edTextPass);
         editTxt_Cpassword = view.findViewById(R.id.edTextConfirmPass);
         btn_createAcc= view.findViewById(R.id.btn_createAccount);
@@ -98,6 +102,14 @@ public class signUpFragment extends Fragment {
                 {
                     emptyNum.setText("Required");
                     emptyNum.setVisibility(view.VISIBLE);
+
+                    clear = false;
+                    return;
+                }
+                else if(TextUtils.isEmpty(editTxt_userEmail.getText().toString()))
+                {
+                    emptyEmail.setText("Required");
+                    emptyEmail.setVisibility(view.VISIBLE);
 
                     clear = false;
                     return;
@@ -134,6 +146,11 @@ public class signUpFragment extends Fragment {
                     emptyNum.setVisibility(view.GONE);
 
                 }
+                if (editTxt_userEmail .length()!=0)
+                {
+                    emptyEmail.setVisibility(view.GONE);
+
+                }
                 if (editTxt_password.length()!=0)
                 {
                     emptyPass.setVisibility(view.GONE);
@@ -163,14 +180,14 @@ public class signUpFragment extends Fragment {
                     }
                 }
 
-                //check if password satisfies conditions
+
                 if(!uppercase || !lowercase || !min6 || digits == 0)
                 {
-                    invalidPass.setText("Password most have at least 6 characters, one uppercase, lowercase, and number.");
+                    invalidPass.setText("Password must have at least 6 characters, one uppercase, lowercase, and number.");
                     invalidPass.setVisibility(view.VISIBLE);
 
                 }
-                // add confirm password function
+
                 else if (min6 && uppercase && lowercase && digits >=1)
                 {
                     invalidPass.setVisibility(view.GONE);
@@ -192,14 +209,14 @@ public class signUpFragment extends Fragment {
                 if(PWgood && clear){
                     root = FirebaseDatabase.getInstance();
                     DbRef = root.getReference("users");
-                    // Getting the value of The given info in sign up to store in firebase
+
                     fullname = editTxt_fullname.getEditableText().toString();
                     phoneNum = editTxt_phoneNum.getEditableText().toString();
+                    useremail = editTxt_userEmail.getEditableText().toString();
                     pass = editTxt_password.getEditableText().toString();
                     Cpass = editTxt_Cpassword.getEditableText().toString();
 
 
-                    // To check if the user already exists
                     Query accCheck = DbRef.orderByChild("userPhone").equalTo(phoneNum);
                     accCheck.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
@@ -249,11 +266,12 @@ public class signUpFragment extends Fragment {
         return view;
     }
 
-    // Clear the Sign up Section
+
     private void Clear(){
 
         editTxt_fullname.setText("");
         editTxt_phoneNum.setText("");
+        editTxt_userEmail.setText("");
         editTxt_password.setText("");
         editTxt_Cpassword.setText("");
     }
@@ -304,11 +322,11 @@ public class signUpFragment extends Fragment {
                 if(task.isSuccessful())
                 {
 
-                   //user helper class in order to store the the given info in sign up form
-                  UserHelperClass userHelperClass = new UserHelperClass(fullname, phoneNum, pass, "", "");
+
+                  UserHelperClass userHelperClass = new UserHelperClass(fullname, phoneNum, useremail, pass, "", "");
                   DbRef.child(phoneNum).setValue(userHelperClass);
                   Toast.makeText(getContext(), "Account Successfully Created", Toast.LENGTH_SHORT).show();
-                  //Implementing the Clear Section in Sign up after the Creation of Account
+
                   Intent intent = new Intent(getActivity(), MainActivity2.class);
                   intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                   startActivity(intent);

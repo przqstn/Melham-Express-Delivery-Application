@@ -98,17 +98,16 @@ public class RegisterRider extends AppCompatActivity {
         Spinner spinVehicle = findViewById(R.id.spinnerVehicleDriver);
         Spinner spinBrand =  findViewById(R.id.spinnerVehicleBrand);
 
-        //Getting City Rider Item List
+
         ArrayAdapter<CharSequence> adapterCity = ArrayAdapter.createFromResource(this, R.array.cityRider,R.layout.spinner_items_1);
         adapterCity.setDropDownViewResource(R.layout.spinner_items_1);
         spinCity.setAdapter(adapterCity);
 
-        //Getting Vehicle Rider Type Item List
+
         ArrayAdapter<CharSequence> adapterVehicle = ArrayAdapter.createFromResource (this,R.array.ridervehicletype,R.layout.spinner_items_1);
         adapterVehicle.setDropDownViewResource(R.layout.spinner_items_1);
         spinVehicle.setAdapter(adapterVehicle);
 
-        //Spinner City
         spinCity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -137,7 +136,7 @@ public class RegisterRider extends AppCompatActivity {
             }
         });
 
-        //Spinner Rider Vehicle Type
+
         spinVehicle.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -201,7 +200,7 @@ public class RegisterRider extends AppCompatActivity {
 
         EditText etModelVehicle = findViewById(R.id.editTextVehicleModel);
         EditText etBrandVehicle = findViewById(R.id.editTextVehicleBrand);
-        //Spinner Vehicle Brand
+
         spinBrand.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -353,7 +352,7 @@ public class RegisterRider extends AppCompatActivity {
                         upper++;
                     }
                 }
-                //check if password satisfies conditions
+
                 if(!uppercase || !lowercase || !min6 || digits == 0)
                 {
                     invalidPass.setText("Password must have at least 6 characters, one uppercase, lowercase, and number.");
@@ -363,7 +362,7 @@ public class RegisterRider extends AppCompatActivity {
 
                 }
 
-                // add confirm password function
+
                 else if (min6 && uppercase && lowercase && digits >=1)
                 {
                     invalidPass.setVisibility(view.GONE);
@@ -391,10 +390,10 @@ public class RegisterRider extends AppCompatActivity {
 
                     db = FirebaseDatabase.getInstance();
                     rootie = db.getReference("riders");
-                    // Getting the value of The given info in sign up to store in firebase
+
                     String phoneNum = etPhoneNum.getEditableText().toString();
                     Query accCheck = rootie.orderByChild("riderphone").equalTo(phoneNum);
-                    // To check if the rider already exists
+
                     accCheck.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot snapshot) {
@@ -490,8 +489,6 @@ public class RegisterRider extends AppCompatActivity {
         Button nextstep3 = regRiderStep3.findViewById(R.id.nextstep3);
         Button nextstep4 = regRiderStep4.findViewById(R.id.nextstep4);
         Button register = regRiderStep5.findViewById(R.id.register);
-        //for image upload
-        //vehicle front button
         frontImg = regRiderStep5.findViewById(R.id.imgfront);
         frontImg.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -500,7 +497,7 @@ public class RegisterRider extends AppCompatActivity {
                 frontImgClicked =true;
             }
         });
-        //vehicle side button
+
         sideImg = regRiderStep5.findViewById(R.id.imgside);
         sideImg.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -509,7 +506,7 @@ public class RegisterRider extends AppCompatActivity {
                 sideImgClicked =true;
             }
         });
-        //vehicle back button
+
         backImg = regRiderStep5.findViewById(R.id.imgback);
         backImg.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -518,7 +515,7 @@ public class RegisterRider extends AppCompatActivity {
                 backImgClicked =true;
             }
         });
-        //vehicle cert reg button
+
         certRegImg = regRiderStep5.findViewById(R.id.imgcert);
         certRegImg.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -527,7 +524,7 @@ public class RegisterRider extends AppCompatActivity {
                 certRegImgClicked =true;
             }
         });
-        //vehicle profile photo button
+
         profImg = regRiderStep5.findViewById(R.id.imgprofile);
         profImg.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -536,7 +533,7 @@ public class RegisterRider extends AppCompatActivity {
                 profImgClicked =true;
             }
         });
-        //vehicle police clearance button
+
         clearanceImg = regRiderStep5.findViewById(R.id.imgclearance);
         clearanceImg.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -707,14 +704,14 @@ public class RegisterRider extends AppCompatActivity {
 
     }
 
-    //to set image
+
     private void choosePicture() {
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(intent, 1);
     }
-    //get image data
+
     String imgName;
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -754,7 +751,7 @@ public class RegisterRider extends AppCompatActivity {
             }
         }
     }
-    //upload method
+
     private void uploadPicture() {
         final ProgressDialog pd= new ProgressDialog(this);
         pd.setTitle("Uploading Image");

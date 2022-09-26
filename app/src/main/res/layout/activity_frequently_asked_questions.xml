@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:orientation="horizontal"
+            tools:ignore="UselessParent">
+
+            <ImageButton
+                android:id="@+id/btnBack"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:background="@color/color_transparent"
+                android:contentDescription="Back"
+                android:padding="10dp"
+                android:src="@drawable/icon_arrow_back"
+                tools:ignore="HardcodedText,SpeakableTextPresentCheck" />
+
+            <TextView
+                android:id="@+id/str_FAQs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_bold"
+                android:padding="25dp"
+                android:text="FREQUENTLY ASKED QUESTIONS (FAQs)"
+                android:textColor="@color/strokes"
+                android:textSize="36px" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="start"
+            android:orientation="vertical"
+            tools:ignore="UselessParent">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#000000" />
+
+            <TextView
+                android:id="@+id/question"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:fontFamily="@font/montserrat_bold"
+                android:paddingTop="25dp"
+                android:text="How do I update my mobile number?"
+                android:textColor="#223272" />
+
+            <TextView
+                android:id="@+id/answer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="50dp"
+                android:fontFamily="@font/montserrat_light"
+                android:paddingTop="20dp"
+                android:text="In case of updating or changing your mobile number, please contact the costumer service of our company using the hotline 28-9960854 or email us at &quot;melhamexpress@gmail.com&quot;."
+                android:textColor="@color/strokes" />
+
+            <TextView
+                android:id="@+id/question2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:fontFamily="@font/montserrat_bold"
+                android:paddingTop="25dp"
+                android:text="How do I update my vehicle information?"
+                android:textColor="#223272" />
+
+            <TextView
+                android:id="@+id/answer2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="50dp"
+                android:fontFamily="@font/montserrat_light"
+                android:paddingTop="20dp"
+                android:text="In case of updating or changing your vehicle information, please proceed to Melham Construction Corporation office."
+                android:textColor="@color/strokes" />
+
+            <TextView
+                android:id="@+id/question3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:fontFamily="@font/montserrat_bold"
+                android:paddingTop="25dp"
+                android:text="How do I contact the customer?"
+                android:textColor="#223272" />
+
+            <TextView
+                android:id="@+id/answer3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="50dp"
+                android:fontFamily="@font/montserrat_light"
+                android:paddingTop="20dp"
+                android:text="In contacting, messaging, or calling the costumer, use the phone number provided on the parcel details of the sender."
+                android:textColor="@color/strokes" />
+
+            <TextView
+                android:id="@+id/question4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:fontFamily="@font/montserrat_bold"
+                android:paddingTop="25dp"
+                android:text="Can I charge the customer for parking charges and toll fee?"
+                android:textColor="#223272" />
+
+            <TextView
+                android:id="@+id/answer4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="50dp"
+                android:fontFamily="@font/montserrat_light"
+                android:paddingTop="20dp"
+                android:text="Yes, you can. However, before doing so, the rider must inform the costumer about the charges for arrangement and must present receipts as proof of fees."
+                android:textColor="@color/strokes" />
+
+            <TextView
+                android:id="@+id/question5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:fontFamily="@font/montserrat_bold"
+                android:paddingTop="25dp"
+                android:text="What should I do if the recipient is not ready to receive the delivery?"
+                android:textColor="#223272" />
+
+            <TextView
+                android:id="@+id/answer5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="50dp"
+                android:fontFamily="@font/montserrat_light"
+                android:paddingTop="20dp"
+                android:text="In case that the parcel recipient is not ready, please call the costumer service of our company using the hotline 28-9960854 or email us at &quot;melhamexpress@gmail.com&quot;. "
+                android:textColor="@color/strokes" />
+
+            <TextView
+                android:id="@+id/question6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:fontFamily="@font/montserrat_bold"
+                android:paddingTop="25dp"
+                android:text="What should I do if the parcel is not ready for delivery?"
+                android:textColor="#223272" />
+
+            <TextView
+                android:id="@+id/answer6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="50dp"
+                android:fontFamily="@font/montserrat_light"
+                android:paddingTop="20dp"
+                android:text="In case that the parcel is not ready for delivery, please call the costumer service of our company using the hotline 28-9960854 or email us at &quot;melhamexpress@gmail.com&quot;."
+                android:textColor="@color/strokes" />
+
+            <TextView
+                android:id="@+id/question7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:fontFamily="@font/montserrat_bold"
+                android:paddingTop="25dp"
+                android:text="How to book an order using Melham Express?"
+                android:textColor="#223272" />
+
+            <TextView
+                android:id="@+id/answer7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="50dp"
+                android:fontFamily="@font/montserrat_light"
+                android:paddingTop="20dp"
+                android:text="Simply sign-in using your User account, make sure that your &quot;Location&quot; settings is turned on, and click the &quot;Book Order +&quot; on your Home page. Enter the pick-up location and package destination of your parcel and pick and type all the information needed to confirm your order. "
+                android:textColor="@color/strokes" />
+
+            <TextView
+                android:id="@+id/question8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:fontFamily="@font/montserrat_bold"
+                android:paddingTop="25dp"
+                android:text="What are the size and weight limits of my delivery items?"
+                android:textColor="#223272" />
+
+            <TextView
+                android:id="@+id/answer8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="50dp"
+                android:fontFamily="@font/montserrat_light"
+                android:paddingTop="20dp"
+                android:text="It depends on the type of vehicle you chose upon booking an order."
+                android:textColor="@color/strokes" />
+
+            <TextView
+                android:id="@+id/question9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:fontFamily="@font/montserrat_bold"
+                android:paddingTop="25dp"
+                android:text="How much does Melham Express charge?"
+                android:textColor="#223272" />
+
+            <TextView
+                android:id="@+id/answer9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="50dp"
+                android:fontFamily="@font/montserrat_light"
+                android:paddingTop="20dp"
+                android:text="The charge depends on the order requirements such as distance between pick-up and package destination, type of vehicle, and other add-on services. "
+                android:textColor="@color/strokes" />
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

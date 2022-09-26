@@ -18,7 +18,7 @@
             <ScrollView
                 android:id="@+id/scrollView2"
                 android:layout_width="0dp"
-                android:layout_height="600dp"
+                android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -59,8 +59,10 @@
 
                     <TextView
                         android:id="@+id/emptyName"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="280dp"
+                        android:layout_marginTop="2dp"
                         android:fontFamily="@font/montserrat_medium"
                         android:text="Required"
                         android:textColor="#FF0033"
@@ -99,6 +101,8 @@
                         android:id="@+id/emptyNum"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="280dp"
+                        android:layout_marginTop="2dp"
                         android:fontFamily="@font/montserrat_medium"
                         android:text="Required"
                         android:textColor="#FF0033"
@@ -112,6 +116,45 @@
                         android:paddingLeft="5dp"
                         android:paddingTop="20dp"
                         android:paddingBottom="10dp"
+                        android:text="Email Address"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/edUserEmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="65dp"
+                        android:background="@drawable/edit_text_round"
+                        android:drawableStart="@drawable/ic_baseline_local_phone_24"
+                        android:drawableLeft="@drawable/ic_baseline_local_phone_24"
+                        android:drawablePadding="15dp"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:hint="Enter your email address"
+                        android:inputType="textEmailAddress"
+                        android:paddingLeft="15dp"
+                        android:paddingTop="15dp"
+                        android:paddingBottom="15dp"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/emptyEmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="280dp"
+                        android:layout_marginTop="2dp"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:text="Required"
+                        android:textColor="#FF0033"
+                        android:textSize="12sp"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:paddingLeft="5dp"
+                        android:paddingTop="20dp"
                         android:text="Password"
                         android:textColor="@color/black"
                         android:textSize="16sp"
@@ -138,6 +181,7 @@
                             android:paddingTop="15dp"
                             android:paddingBottom="15dp"
                             android:textSize="16sp"
+                            android:visibility="visible"
                             tools:ignore="SpeakableTextPresentCheck" />
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -146,6 +190,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/montserrat_medium"
+                        android:paddingStart="10dp"
+                        android:paddingTop="5dp"
                         android:text="Password must have at least 6 characters, one uppercase, lowercase, and number."
                         android:textColor="#FF0033"
                         android:textSize="12sp"
@@ -157,7 +203,7 @@
                         android:layout_height="wrap_content"
                         android:text="TextView"
                         android:textColor="#FF0033"
-                        android:visibility="gone" />
+                        android:visibility="invisible" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -165,7 +211,6 @@
                         android:fontFamily="@font/montserrat_medium"
                         android:paddingLeft="5dp"
                         android:paddingTop="20dp"
-                        android:paddingBottom="10dp"
                         android:text="Confirm Password"
                         android:textColor="@color/black"
                         android:textSize="16sp"
@@ -198,6 +243,8 @@
                         android:id="@+id/emptyConfirm"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="190dp"
+                        android:layout_marginTop="2dp"
                         android:fontFamily="@font/montserrat_medium"
                         android:text="Passwords do not match"
                         android:textColor="#FF0033"
@@ -218,6 +265,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginTop="30dp"
+                        android:layout_marginBottom="60dp"
                         android:background="@drawable/graphics_button_1"
                         android:backgroundTint="@color/button_color1"
                         android:fontFamily="@font/montserrat_medium"

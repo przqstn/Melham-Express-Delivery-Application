@@ -2,6 +2,7 @@ package com.example.mcc_deliveryapp.User;
 
 import static android.app.Activity.RESULT_OK;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -11,7 +12,9 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,8 +26,13 @@ import android.widget.TextView;
 
 import com.example.mcc_deliveryapp.MainActivity2;
 import com.example.mcc_deliveryapp.R;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -38,6 +46,7 @@ import com.google.firebase.storage.UploadTask;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Objects;
 
 public class user_profile_fragment extends Fragment {
     private TextView userName, userPhone, mainAdd, secondaryAdd;
@@ -50,24 +59,29 @@ public class user_profile_fragment extends Fragment {
 
     private ImageView profile_user;
 
-    private ImageButton btn_UsereditProfile;
+    private ImageButton btn_settings;
     private Button btnUser_Logout;
+
+    private GoogleSignInOptions googleSignInOptions;
+    private GoogleSignInClient googleSignInClient;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
         view = inflater.inflate(R.layout.fragment_user_profile_fragment, container, false);
         profile_user = view.findViewById(R.id.profile_user);
         userName = view.findViewById(R.id.txt_name);
         userPhone =  view.findViewById(R.id.user_number);
         mainAdd = view.findViewById(R.id.user_primary_add);
         secondaryAdd = view.findViewById(R.id.user_secondary_address);
-        btn_UsereditProfile = view.findViewById(R.id.btnUser_EditProfile);
+        btn_settings = view.findViewById(R.id.btnUser_EditProfile);
         btnUser_Logout = view.findViewById(R.id.btnUser_Logout);
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
 
+        googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
+        googleSignInClient = GoogleSignIn.getClient(requireActivity(), googleSignInOptions);
 
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users");
 
@@ -89,7 +103,7 @@ public class user_profile_fragment extends Fragment {
             @Override
             public void onCancelled(@NonNull DatabaseError error) {}
         });
-        //retrieved courier's profile picture from firebase storage
+
         imageReference = FirebaseStorage.getInstance().getReference().child("user/"+phone+"/profile_image.jpg");
         try{
             final File file= File.createTempFile("profile_image", "jpg");
@@ -110,22 +124,46 @@ public class user_profile_fragment extends Fragment {
             e.printStackTrace();
         }
 
-        btn_UsereditProfile.setOnClickListener(new View.OnClickListener() {
+        // Settings Button Click
+        btn_settings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), user_editprofile_fragment.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP);
-                intent.putExtra("userPhone", phone);
-                intent.putExtra("userFullname", userName.getText().toString());
-                intent.putExtra("mainAdd", mainAdd.getText().toString());
-                intent.putExtra("secondaryAdd", secondaryAdd.getText().toString());
-                view.getContext().startActivity(intent);
+                DialogFragment SettingFrag = new user_profile_settings();
+                SettingFrag.show(getChildFragmentManager(), "what");
             }
         });
 
+
+        // TODO: Move edit profile to settings
+//        btn_UsereditProfile.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(view.getContext(), user_editprofile_fragment.class);
+//                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP);
+//                intent.putExtra("userPhone", phone);
+//                intent.putExtra("userFullname", userName.getText().toString());
+//                intent.putExtra("mainAdd", mainAdd.getText().toString());
+//                intent.putExtra("secondaryAdd", secondaryAdd.getText().toString());
+//                view.getContext().startActivity(intent);
+//            }
+//        });
+
+
+        // TODO: Move logout to settings w/ signOut() method
         btnUser_Logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                signOut();
+            }
+        });
+
+        return view;
+    }
+
+    void signOut(){
+        googleSignInClient.signOut().addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(Task<Void> task) {
                 Intent intent = new Intent(view.getContext(), MainActivity2.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|
                                 Intent.FLAG_ACTIVITY_CLEAR_TASK |
@@ -133,7 +171,5 @@ public class user_profile_fragment extends Fragment {
                 view.getContext().startActivity(intent);
             }
         });
-
-        return view;
     }
 }
