@@ -1,6 +1,8 @@
 package com.example.mcc_deliveryapp.Rider;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -32,6 +34,8 @@ public class rider_profile_settings extends DialogFragment {
     private GoogleSignInOptions googlesignInOptions;
     private View view;
 
+    SharedPreferences sharedPreferences;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -46,6 +50,8 @@ public class rider_profile_settings extends DialogFragment {
         faqs = view.findViewById(R.id.txt_faqs);
         reportBug = view.findViewById(R.id.txt_reportBug);
 
+        sharedPreferences = getActivity().getSharedPreferences("autoLogin", Context.MODE_PRIVATE);
+
         Window window = getDialog().getWindow();
         // To make popup fully transparent
         window.setBackgroundDrawableResource(R.color.color_transparent);
@@ -57,6 +63,7 @@ public class rider_profile_settings extends DialogFragment {
         params.x = 50;
         params.y = 160;
         window.setAttributes(params);
+
 
         // Popup dismisses when clicked outside
         getDialog().setCanceledOnTouchOutside(true);
@@ -73,14 +80,21 @@ public class rider_profile_settings extends DialogFragment {
         editProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent goEdit = new Intent(getContext(), editprofile_fragment.class);
-                getContext().startActivity(goEdit);
+                Intent intent = new Intent(getActivity().getBaseContext(), editprofile_fragment.class);
+                getActivity().startActivity(intent);
             }
         });
 
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putInt("key", 0);
+                editor.apply();
+                Intent activity = new Intent(getContext(), riderLogin.class);
+
+                startActivity(activity);
+
                 leavePage();
             }
         });

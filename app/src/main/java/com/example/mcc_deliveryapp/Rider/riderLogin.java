@@ -1,7 +1,9 @@
 package com.example.mcc_deliveryapp.Rider;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.telephony.CellInfoGsm;
 import android.text.TextUtils;
@@ -16,6 +18,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.mcc_deliveryapp.MainActivity;
 import com.example.mcc_deliveryapp.R;
 import com.example.mcc_deliveryapp.User.user_navigation;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -56,6 +59,9 @@ public class riderLogin extends AppCompatActivity {
     FirebaseDatabase db = FirebaseDatabase.getInstance();
     String verificationCodeBySystem;
     Dialog ForgotPW, VerifyNum, UpdatePW;
+
+    SharedPreferences sharedPreferences;
+    int autoSave;
 
     private GoogleSignInOptions googleSignInOptions;
     private GoogleSignInClient googleSignInClient;
@@ -156,6 +162,15 @@ public class riderLogin extends AppCompatActivity {
         forgotPassnext = ForgotPW.findViewById(R.id.forgotPassnext);
         numberRider2 = ForgotPW.findViewById(R.id.forgotNumber);
         updatePW = UpdatePW.findViewById(R.id.updatePW);
+
+        //Used for auto login
+        sharedPreferences = getSharedPreferences("autoLogin",Context.MODE_PRIVATE);
+        int j = sharedPreferences.getInt("key",0);
+
+        if (j>0) {
+            Intent activity = new Intent(getApplicationContext(), rider_dashboard.class);
+            startActivity(activity);
+        }
 
         btn_sign_with_google2.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -440,6 +455,7 @@ public class riderLogin extends AppCompatActivity {
         String riderpassEntered = passRider.getText().toString().trim();
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("riders");
         Query checkRider = ref.orderByChild("riderphone").equalTo(riderNumEntered);
+
         checkRider.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -451,13 +467,18 @@ public class riderLogin extends AppCompatActivity {
 
                     if (riderpass.equals(riderpassEntered))
                     {
-
                         Intent intent = new Intent(riderLogin.this, rider_dashboard.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         intent.putExtra("phonenum", riderNumEntered);
                         intent.putExtra("vehicle", ridervehicle);
                         intent.putExtra("name", ridername);
                         startActivity(intent);
+
+                        //Need to work on saving the data of the user currently logged in
+                        autoSave = 1;
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putInt("key", autoSave);
+                        editor.commit();
                     }
 
                     else {

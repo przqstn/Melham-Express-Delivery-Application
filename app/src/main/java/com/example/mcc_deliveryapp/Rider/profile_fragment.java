@@ -1,10 +1,13 @@
 package com.example.mcc_deliveryapp.Rider;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,9 +20,11 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import static android.app.Activity.RESULT_OK;
 
+import com.example.mcc_deliveryapp.MainActivity;
 import com.example.mcc_deliveryapp.MainActivity2;
 import com.example.mcc_deliveryapp.R;
 import com.example.mcc_deliveryapp.User.user_profile_settings;
@@ -62,10 +67,14 @@ public class profile_fragment extends Fragment {
 	private GoogleSignInOptions googleSignInOptions;
 	private GoogleSignInClient googleSignInClient;
 
+	SharedPreferences sharedPreferences;
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
 		view = inflater.inflate(R.layout.fragment_profile_fragment, container, false);
+
+		sharedPreferences = getActivity().getSharedPreferences("autoLogin", Context.MODE_PRIVATE);
 
 		RiderName = view.findViewById(R.id.txt_name);
 		RiderVehicle =  view.findViewById(R.id.riderVehicle);
@@ -149,14 +158,20 @@ public class profile_fragment extends Fragment {
 			@Override
 			public void onClick(View view) {
 				DialogFragment riderSettingFrag = new rider_profile_settings();
-				riderSettingFrag.show(getChildFragmentManager(), "what");
+				riderSettingFrag.show(getChildFragmentManager(),"what");
 			}
 		});
 
-		// TODO: Move logout to settings w/ signOut() method
 		btnRider_Logout.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
+				SharedPreferences.Editor editor = sharedPreferences.edit();
+				editor.putInt("key", 0);
+				editor.apply();
+				Intent activity = new Intent(getContext(), riderLogin.class);
+
+				startActivity(activity);
+
 				signOut();
 
 			}
