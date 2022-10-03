@@ -3,6 +3,7 @@ package com.example.mcc_deliveryapp.User;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.vcn.VcnUnderlyingNetworkTemplate;
 import android.os.Bundle;
 import android.util.Log;
@@ -25,6 +26,7 @@ import androidx.fragment.app.DialogFragment;
 
 import com.example.mcc_deliveryapp.MainActivity2;
 import com.example.mcc_deliveryapp.R;
+import com.example.mcc_deliveryapp.Rider.riderLogin;
 import com.example.mcc_deliveryapp.Rider.riderReportPage;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -39,6 +41,8 @@ public class user_profile_settings extends DialogFragment {
     private GoogleSignInOptions googlesignInOptions;
     private View view;
 
+    SharedPreferences sharedPreferences;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -52,6 +56,8 @@ public class user_profile_settings extends DialogFragment {
         logout = view.findViewById(R.id.txt_logout);
         faqs = view.findViewById(R.id.txt_faqs);
         reportBug = view.findViewById(R.id.txt_reportBug);
+
+        sharedPreferences = getActivity().getSharedPreferences("autoLogin", Context.MODE_PRIVATE);
 
         Window window = getDialog().getWindow();
         // To make popup fully transparent
@@ -88,6 +94,11 @@ public class user_profile_settings extends DialogFragment {
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putInt("key", 0);
+                editor.apply();
+                Intent activity = new Intent(getContext(), MainUserActivity.class);
+
                 leavePage();
             }
         });

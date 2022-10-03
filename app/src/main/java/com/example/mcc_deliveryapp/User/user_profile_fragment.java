@@ -135,19 +135,19 @@ public class user_profile_fragment extends Fragment {
 
 
         // TODO: Move edit profile to settings
-//        btn_UsereditProfile.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(view.getContext(), user_editprofile_fragment.class);
-//                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP);
-//                intent.putExtra("userPhone", phone);
-//                intent.putExtra("userFullname", userName.getText().toString());
-//                intent.putExtra("mainAdd", mainAdd.getText().toString());
-//                intent.putExtra("secondaryAdd", secondaryAdd.getText().toString());
-//                view.getContext().startActivity(intent);
-//            }
-//        });
-
+/*        btn_UsereditProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), user_editprofile_fragment.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP);
+                intent.putExtra("userPhone", phone);
+                intent.putExtra("userFullname", userName.getText().toString());
+                intent.putExtra("mainAdd", mainAdd.getText().toString());
+                intent.putExtra("secondaryAdd", secondaryAdd.getText().toString());
+                view.getContext().startActivity(intent);
+            }
+        });
+*/
 
         // TODO: Move logout to settings w/ signOut() method
         btnUser_Logout.setOnClickListener(new View.OnClickListener() {
