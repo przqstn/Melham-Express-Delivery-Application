@@ -16,6 +16,7 @@ import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -128,8 +129,12 @@ public class user_profile_fragment extends Fragment {
         btn_settings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Bundle args = new Bundle();
+                args.putString("userPhone",phone);
                 DialogFragment SettingFrag = new user_profile_settings();
-                SettingFrag.show(getChildFragmentManager(), "what");
+                SettingFrag.setArguments(args);
+                SettingFrag.show(getActivity().getSupportFragmentManager(), "Tag");
+
             }
         });
 

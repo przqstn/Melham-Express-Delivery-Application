@@ -31,9 +31,12 @@ import com.example.mcc_deliveryapp.R;
 import com.example.mcc_deliveryapp.Rider.editprofile_changePass;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -73,7 +76,12 @@ public class user_editprofile_fragment extends AppCompatActivity {
         changePass = findViewById(R.id.user_changePW);
         btnDeleteSecondaryAddress = findViewById(R.id.btndelete_secondary);
 
-        Intent intent = getIntent();
+        viewPhoneNum=findViewById(R.id.user_number);
+        mainAddress = findViewById(R.id.edit_primary);
+        secondaryAddress = findViewById(R.id.edit_secondary);
+        viewFullName=findViewById(R.id.txt_name);
+
+/*        Intent intent = getIntent();
         phoneNum = intent.getStringExtra("userPhone");
         viewPhoneNum=findViewById(R.id.user_number);
         viewPhoneNum.setText(phoneNum);
@@ -92,7 +100,31 @@ public class user_editprofile_fragment extends AppCompatActivity {
         String fullName = intent.getStringExtra("userFullname");
         viewFullName=findViewById(R.id.txt_name);
         viewFullName.setText(fullName);
+*/
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users");
+        Intent intent = getIntent();
+        phoneNum = intent.getStringExtra("userPhone");
+        viewPhoneNum=findViewById(R.id.user_number);
+        viewPhoneNum.setText(phoneNum);
 
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot ds: snapshot.getChildren()){
+                    if (ds.child("userPhone").getValue().equals(phoneNum)){
+                        viewFullName.setText(ds.child("userFullname").getValue(String.class));
+                        viewPhoneNum.setText(ds.child("userPhone").getValue(String.class));
+                        mainAddress.setText(ds.child("mainAdd").getValue(String.class));
+                        secondaryAddress.setText(ds.child("secondaryAdd").getValue(String.class));
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
 
         btnUpload.setOnClickListener(new View.OnClickListener() {
@@ -127,7 +159,7 @@ public class user_editprofile_fragment extends AppCompatActivity {
         });
 
 
-        btnSaveChanges.setVisibility(View.GONE);
+        btnSaveChanges.setVisibility(View.VISIBLE);
         btnSaveChanges.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

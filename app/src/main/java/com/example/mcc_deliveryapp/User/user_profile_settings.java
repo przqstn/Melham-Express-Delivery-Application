@@ -57,6 +57,9 @@ public class user_profile_settings extends DialogFragment {
         faqs = view.findViewById(R.id.txt_faqs);
         reportBug = view.findViewById(R.id.txt_reportBug);
 
+        Bundle mArgs =getArguments();
+        String phoneNum = mArgs.getString("userPhone");
+
         sharedPreferences = getActivity().getSharedPreferences("autoLogin", Context.MODE_PRIVATE);
 
         Window window = getDialog().getWindow();
@@ -87,6 +90,8 @@ public class user_profile_settings extends DialogFragment {
             @Override
             public void onClick(View view) {
                 Intent goEditProfile = new Intent(getContext(), user_editprofile_fragment.class);
+                goEditProfile.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP);
+                goEditProfile.putExtra("userPhone",phoneNum);
                 getContext().startActivity(goEditProfile);
             }
         });
