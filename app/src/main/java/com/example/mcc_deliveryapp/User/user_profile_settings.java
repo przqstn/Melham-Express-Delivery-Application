@@ -82,6 +82,8 @@ public class user_profile_settings extends DialogFragment {
             @Override
             public void onClick(View view) {
                 Intent goChangepass = new Intent(getContext(), user_editprofile_changePass.class);
+                goChangepass.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP);
+                goChangepass.putExtra("userPhone",phoneNum);
                 getContext().startActivity(goChangepass);
             }
         });

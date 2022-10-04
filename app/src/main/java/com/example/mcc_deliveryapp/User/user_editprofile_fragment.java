@@ -230,7 +230,7 @@ public class user_editprofile_fragment extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(changePass.getContext(), user_editprofile_changePass.class);
-                intent.putExtra("usernum", phoneNum);
+                intent.putExtra("userPhone", phoneNum);
                 intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP);
                 startActivity(intent);
             }

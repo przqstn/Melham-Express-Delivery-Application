@@ -53,7 +53,7 @@ public class user_editprofile_changePass extends AppCompatActivity {
         setContentView(R.layout.activity_changepassword);
 
         Intent intent=getIntent();
-        phoneNum=intent.getStringExtra("usernum");
+        phoneNum=intent.getStringExtra("userPhone");
 
         btnSaveChanges=findViewById(R.id.btn_saveChanges);
         oldPass=findViewById(R.id.enter_oldPW);
