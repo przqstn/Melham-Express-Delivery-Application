@@ -157,8 +157,11 @@ public class profile_fragment extends Fragment {
 		btn_Settings.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				DialogFragment riderSettingFrag = new rider_profile_settings();
-				riderSettingFrag.show(getChildFragmentManager(),"what");
+				Bundle args = new Bundle();
+				args.putString("riderphone",phone);
+				DialogFragment SettingFrag = new rider_profile_settings();
+				SettingFrag.setArguments(args);
+				SettingFrag.show(getActivity().getSupportFragmentManager(), "Tag");
 			}
 		});
 

@@ -31,8 +31,11 @@ import androidx.core.content.FileProvider;
 import com.example.mcc_deliveryapp.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -73,7 +76,12 @@ public class editprofile_fragment extends AppCompatActivity {
         btnSaveChanges = findViewById(R.id.btn_saveChanges);
         profilePic = findViewById(R.id.profile_user);
 
-        Intent intent = getIntent();
+        viewname=findViewById(R.id.txt_name);
+        viewvehicleType=findViewById(R.id.riderVehicle);
+        viewplateNum=findViewById(R.id.riderPlate);
+        editAddress=findViewById(R.id.riderAddress);
+
+  /*      Intent intent = getIntent();
         phoneNum = intent.getStringExtra("riderphone");
         viewphoneNum=findViewById(R.id.riderNumber);
         viewphoneNum.setText(phoneNum);
@@ -93,7 +101,31 @@ public class editprofile_fragment extends AppCompatActivity {
         address = intent.getStringExtra("address");
         editAddress = findViewById(R.id.riderAddress);
         editAddress.setText(address);
+*/
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("riders");
+        Intent intent = getIntent();
+        phoneNum = intent.getStringExtra("riderphone");
+        viewphoneNum=findViewById(R.id.riderNumber);
+        viewphoneNum.setText(phoneNum);
 
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot ds: snapshot.getChildren()){
+                    if (ds.child("riderphone").getValue().equals(phoneNum)){
+                        viewname.setText(ds.child("name").getValue(String.class));
+                        viewvehicleType.setText(ds.child("vehicletype").getValue(String.class));
+                        viewplateNum.setText(ds.child("vehicleplatenumber").getValue(String.class));
+                        editAddress.setText(ds.child("currentaddress").getValue(String.class));
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
         editAddress.addTextChangedListener(new TextWatcher() {
             @Override
